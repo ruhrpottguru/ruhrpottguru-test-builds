@@ -82,3 +82,27 @@ if ($projection->invoke($backend,$row) === null) throw new RuntimeException('Ver
 echo "$count real WordPress REST / wpdb / MySQL search cases passed.\n";
 echo "Existing golf admission rejects absent access and accepts in-memory customer-access evidence. No production change.\n";
 echo 'WordPress '.get_bloginfo('version').'; MySQL '.$wpdb->db_version().'; PHP '.PHP_VERSION."\n";
+
+// Validate the temporary diagnostic tool with no database mutations and no public route.
+require __DIR__.'/../tools/rpg-topgolf-diagnostics/rpg-topgolf-diagnostics.php';
+$admin = get_user_by('login','fixture'); wp_set_current_user($admin->ID);
+$wpdb->insert($wpdb->prefix.'rg_place_overrides',array('place_id'=>8577,'override_data'=>wp_json_encode(array('access'=>'customers','private_note'=>'DO_NOT_EXPORT_PRIVATE_MARKER')),'created_at'=>$now,'updated_at'=>$now));
+$read_only = function ($sql) {
+    if (!preg_match('/^\s*(SELECT|SHOW)\b/i',$sql)) throw new RuntimeException('Diagnostic attempted database write');
+    return $sql;
+};
+add_filter('query',$read_only,PHP_INT_MAX);
+$report = RPG_Topgolf_Diagnostics::report();
+remove_filter('query',$read_only,PHP_INT_MAX);
+if (count($report['places']) !== 3 || $report['errors']) throw new RuntimeException('Diagnostic did not resolve three target rows');
+if ($report['backend']['sha256'] !== hash_file('sha256',__DIR__.'/../wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php')) throw new RuntimeException('Diagnostic source hash mismatch');
+if (strpos(wp_json_encode($report),'DO_NOT_EXPORT_PRIVATE_MARKER') !== false) throw new RuntimeException('Diagnostic leaked private note');
+if (has_action('admin_post_nopriv_rpg_topgolf_report')) throw new RuntimeException('Unexpected unauthenticated download hook');
+wp_set_current_user(0);
+$die_handler = function () { return function () { throw new RuntimeException('EXPECTED_FORBIDDEN'); }; };
+add_filter('wp_die_handler',$die_handler);
+$denied = false;
+try { RPG_Topgolf_Diagnostics::report(); } catch (RuntimeException $e) { $denied = $e->getMessage() === 'EXPECTED_FORBIDDEN'; }
+remove_filter('wp_die_handler',$die_handler);
+if (!$denied) throw new RuntimeException('Diagnostic permission guard failed');
+echo "Diagnostic checks passed: administrator only, SELECT/SHOW only, three IDs, exact code hash, private-note exclusion, no unauthenticated hook.\n";
