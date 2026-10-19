@@ -2885,6 +2885,26 @@ final class RuhrpottGuru_Places_Backend {
         return is_array($decoded)?$decoded:null;
     }
 
+    /**
+     * Match every whitespace-separated Place search term across the existing
+     * searchable fields. A single word retains the original LIKE behaviour.
+     * In particular, "Top Golf Oberhausen" matches Topgolf in Oberhausen.
+     * This does not change admission, category projection, ordering or limits.
+     */
+    private function global_search_place_terms_sql($query) {
+        global $wpdb;
+        $terms = preg_split('/\s+/u', trim((string)$query), -1, PREG_SPLIT_NO_EMPTY);
+        if (!$terms) $terms = array((string)$query);
+        $clauses = array();
+        $args = array();
+        foreach (array_unique($terms) as $term) {
+            $like = '%' . $wpdb->esc_like($term) . '%';
+            $clauses[] = '(p.name LIKE %s OR p.city LIKE %s OR p.district LIKE %s OR p.street LIKE %s OR p.primary_subcategory LIKE %s OR p.raw_tags LIKE %s)';
+            foreach (range(1, 6) as $_) $args[] = $like;
+        }
+        return array('sql' => '(' . implode(' AND ', $clauses) . ')', 'args' => $args);
+    }
+
     public function rest_global_search(WP_REST_Request $request) {
         global $wpdb;
         $data = $request->get_method() === 'GET' ? $request->get_params() : (array)$request->get_json_params();
@@ -2966,14 +2986,16 @@ final class RuhrpottGuru_Places_Backend {
                 )
             " : '';
 
+        $place_terms = $this->global_search_place_terms_sql($q);
+        $place_terms_sql = $place_terms['sql'];
         $place_rows = (array)$wpdb->get_results($wpdb->prepare(
             "SELECT p.*, pm.id image_media_id,pm.url image_url,pm.source image_source,pm.source_url image_source_url,pm.credit image_credit,pm.license image_license
              FROM $places p
              LEFT JOIN $media pm ON pm.id=(SELECT pm2.id FROM $media pm2 WHERE pm2.place_id=p.id AND pm2.relation_type='place' AND pm2.moderation_status='active' ORDER BY CASE WHEN pm2.source='editorial-place-upload' THEN 0 ELSE 1 END ASC, pm2.is_primary DESC, pm2.id ASC LIMIT 1)
              WHERE p.active=1 AND p.lifecycle_status='active'
-               AND (p.name LIKE %s OR p.city LIKE %s OR p.district LIKE %s OR p.street LIKE %s OR p.primary_subcategory LIKE %s OR p.raw_tags LIKE %s $skate_alias_sql)
+               AND ($place_terms_sql $skate_alias_sql)
              ORDER BY p.quality_score DESC,p.name ASC LIMIT %d",
-            $like,$like,$like,$like,$like,$like,max($limit*4,40)
+            array_merge($place_terms['args'], array(max($limit*4,40)))
         ), ARRAY_A);
         // 1.10.157: global search used to serialize raw place columns directly.
         // That bypassed category intelligence and the media resolver, so e.g. a

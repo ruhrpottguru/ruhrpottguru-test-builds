@@ -1,0 +1,20 @@
+name: Place search regression
+on:
+  push:
+    branches: [fix/topgolf-place-search]
+  pull_request:
+    paths:
+      - 'wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php'
+      - 'tests/place-search-terms.php'
+      - '.github/workflows/place-search-tests.yml'
+permissions:
+  contents: read
+jobs:
+  php-sql:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP syntax
+        run: php -l wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php
+      - name: SQL regression
+        run: php tests/place-search-terms.php
