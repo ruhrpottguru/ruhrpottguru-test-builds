@@ -5,12 +5,8 @@ if (!$root || !file_exists($root.'/wp-load.php')) throw new RuntimeException('Di
 require $root.'/wp-load.php';
 if (DB_NAME !== 'rpg_search_test') throw new RuntimeException('Refusing non-test database');
 add_filter('pre_http_request', function () { return new WP_Error('fixture_network_disabled','No external data during fixture tests'); }, PHP_INT_MAX);
-// Load the exact complete class, without bootstrapping import workers or add-on singletons.
-$source = file_get_contents(__DIR__.'/../wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php');
-$start = strpos($source, 'final class RuhrpottGuru_Places_Backend {');
-$end = strpos($source, "require_once __DIR__ . '/includes/intelligence/class-rpg-iga-intelligence.php';", $start);
-if ($start === false || $end === false) throw new RuntimeException('Class boundary not found');
-eval(substr($source,$start,$end-$start));
+// Load the complete archived plugin after WP init/wp_loaded; no import cron is run.
+require __DIR__.'/../wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php';
 $reflection = new ReflectionClass('RuhrpottGuru_Places_Backend');
 $backend = $reflection->newInstanceWithoutConstructor();
 $backend->install_schema();
