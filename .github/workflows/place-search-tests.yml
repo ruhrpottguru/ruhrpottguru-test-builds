@@ -1,0 +1,49 @@
+name: Place search regression
+on:
+  push:
+    branches: [fix/topgolf-place-search]
+  pull_request:
+    paths:
+      - 'wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php'
+      - 'tests/place-search-terms.php'
+      - 'tests/place-search-wordpress.php'
+      - 'tools/rpg-topgolf-diagnostics/**'
+      - '.github/workflows/place-search-tests.yml'
+permissions:
+  contents: read
+jobs:
+  php-sql:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP syntax
+        run: php -l wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php
+      - name: SQL regression
+        run: php tests/place-search-terms.php
+  wordpress-mysql:
+    runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: fixture-only
+          MYSQL_DATABASE: rpg_search_test
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="mysqladmin ping -h localhost -pfixture-only"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install disposable WordPress
+        run: |
+          curl -fsSL https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp-cli.phar
+          php /tmp/wp-cli.phar core download --path=/tmp/rpg-wp --version=latest
+          php /tmp/wp-cli.phar config create --path=/tmp/rpg-wp --dbname=rpg_search_test --dbuser=root --dbpass=fixture-only --dbhost=127.0.0.1:3306
+          php /tmp/wp-cli.phar config set DISABLE_WP_CRON true --raw --path=/tmp/rpg-wp
+          php /tmp/wp-cli.phar core install --path=/tmp/rpg-wp --url=http://rpg-fixture.test --title=Fixture --admin_user=fixture --admin_password=fixture-only-ci --admin_email=fixture@example.invalid --skip-email
+      - name: Actual REST handler with real wpdb and MySQL
+        env:
+          RPG_TEST_WP_ROOT: /tmp/rpg-wp
+        run: php tests/place-search-wordpress.php
