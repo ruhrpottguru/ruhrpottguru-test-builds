@@ -26,7 +26,7 @@ $common = array('name'=>'Topgolf','sport'=>'golf','website'=>'https://topgolfobe
 fixture(8577,'Topgolf','Oberhausen',array_merge($common,array('building'=>'sports_centre','golf'=>'clubhouse')),array('quality_score'=>.8,'street'=>'Brammenring','house_number'=>'30','postcode'=>'46047','primary_osm_type'=>'w','primary_osm_id'=>1051311896));
 fixture(8274,'Topgolf','Oberhausen',array_merge($common,array('leisure'=>'sports_centre')),array('primary_osm_id'=>10225168937));
 fixture(8576,'Topgolf','Oberhausen',array_merge($common,array('building'=>'sports_centre','golf'=>'driving_range')),array('primary_osm_type'=>'w','primary_osm_id'=>1051311895));
-fixture(9001,'Topgolf','Essen',$common);
+fixture(9001,'Topgolf','Essen',array_merge($common,array('website'=>'https://topgolf-essen.example.invalid/')));
 fixture(9002,'Topgolf','Oberhausen',$common,array('active'=>0));
 fixture(9003,'Topgolf','Oberhausen',$common,array('lifecycle_status'=>'closed'));
 fixture(9004,'100% Spaß','Essen',array('leisure'=>'miniature_golf'));
