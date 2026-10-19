@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RuhrpottGuru Places Backend
  * Description: Persistenter Places-Katalog für Food, Highlights, Kultur und Aktivitäten sowie Spezial-Inventare für Büdchen und „Hier geht’s um die Wurst“ in der Metropole Ruhr. OSM wird nur für Import/Sync verwendet; Besucher lesen aus MySQL. Mit automatischem OSM-Rollback bis der Katalog vollständig validiert ist.
- * Version: 1.10.169
+ * Version: 1.10.170
  * Author: RuhrpottGuru
  * License: GPL-2.0-or-later
  */
@@ -179,7 +179,7 @@ final class RuhrpottGuru_Places_Backend {
     // 0-14 Tage alle 4 Stunden, 0-90 Tage taeglich, kompletter 0-365-Tage-
     // Master woechentlich. Laufende Master-/Supplemental-Wellen werden nie
     // abgebrochen; der Dispatcher wartet, bis der Event-Importpfad frei ist.
-    const VERSION = '1.10.169';
+    const VERSION = '1.10.170';
     const ACTIVITY_V2_SPEC_VERSION = '1.4';
     const SCHEMA_VERSION = '1.10.129';
     const OPTION_STATUS = 'rg_places_status';
