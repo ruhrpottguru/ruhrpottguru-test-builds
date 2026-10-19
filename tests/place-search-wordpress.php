@@ -22,7 +22,7 @@ $common = array('name'=>'Topgolf','sport'=>'golf','website'=>'https://topgolfobe
 fixture(8577,'Topgolf','Oberhausen',array_merge($common,array('building'=>'sports_centre','golf'=>'clubhouse')),array('quality_score'=>.8,'street'=>'Brammenring','house_number'=>'30','postcode'=>'46047','primary_osm_type'=>'w','primary_osm_id'=>1051311896));
 fixture(8274,'Topgolf','Oberhausen',array_merge($common,array('leisure'=>'sports_centre')),array('primary_osm_id'=>10225168937));
 fixture(8576,'Topgolf','Oberhausen',array_merge($common,array('building'=>'sports_centre','golf'=>'driving_range')),array('primary_osm_type'=>'w','primary_osm_id'=>1051311895));
-fixture(9001,'Topgolf','Essen',array_merge($common,array('website'=>'https://topgolf-essen.example.invalid/')));
+fixture(9001,'Topgolf','Essen',array_merge($common,array('website'=>'https://topgolf-essen.example.invalid/','access'=>'customers')),array('lat'=>51.454,'lng'=>7.012));
 fixture(9002,'Topgolf','Oberhausen',$common,array('active'=>0));
 fixture(9003,'Topgolf','Oberhausen',$common,array('lifecycle_status'=>'closed'));
 fixture(9004,'100% Spaß','Essen',array('leisure'=>'miniature_golf'));
@@ -31,6 +31,8 @@ fixture(9006,'A_B','Essen',array('leisure'=>'miniature_golf'));
 fixture(9007,'AXB','Essen',array('leisure'=>'miniature_golf'));
 fixture(9008,"O'Brien",'Essen',array('leisure'=>'miniature_golf'));
 fixture(9009,'Rollenfläche','Essen',array('leisure'=>'skate_park'));
+fixture(9010,'Golfclub','Oberhausen',array('sport'=>'golf','leisure'=>'golf_course'));
+fixture(9011,'Topgolf','Oberhausen',array_merge($common,array('golf'=>'clubhouse','website'=>'https://fake.example.invalid/')),array('primary_osm_type'=>'w','primary_osm_id'=>99999999999,'quality_score'=>.1));
 $backend->register_rest_routes();
 $count = 0;
 function check_search($query,$expected,$method = 'GET') {
@@ -48,17 +50,18 @@ function check_search($query,$expected,$method = 'GET') {
     $count++;
     return $data;
 }
-$oh = array('place:8577','place:8274','place:8576');
+$oh = array('place:8577');
 foreach (array('GET','POST') as $method) {
     check_search('Topgolf',array_merge($oh,array('place:9001')),$method);
     $data = check_search('Topgolf Oberhausen',$oh,$method);
     if ($data['groups']['activities'][0]['id'] !== 'place:8577') throw new RuntimeException('Quality ordering changed');
-    if (count($data['groups']['activities']) !== 3) throw new RuntimeException('Unpictured places hidden');
+    if (count($data['groups']['activities']) !== 1) throw new RuntimeException('Same facility not collapsed');
     check_search('Top Golf Oberhausen',$oh,$method);
     check_search('Oberhausen Topgolf',$oh,$method);
     check_search(" Topgolf\t Oberhausen ",$oh,$method);
     check_search('Topgolf Essen',array('place:9001'),$method);
     check_search('Topgolf Dortmund',array(),$method);
+    check_search('Golfclub Oberhausen',array(),$method);
     check_search('Topgolf Oberhausen Tennis',array(),$method);
     check_search('100%',array('place:9004'),$method);
     check_search('A_B',array('place:9006'),$method);
@@ -70,13 +73,15 @@ foreach (array('GET','POST') as $method) {
 $row = $wpdb->get_row("SELECT * FROM {$wpdb->prefix}rg_places WHERE id=8577",ARRAY_A);
 $projection = new ReflectionMethod($backend,'activity_v2_public_projection');
 $seo = new ReflectionMethod($backend,'seo_public_place_row_v101096');
-if ($projection->invoke($backend,$row) !== null || $seo->invoke($backend,8577) !== null) throw new RuntimeException('Expected unverified golf rejection');
+if ($projection->invoke($backend,$row) === null || $seo->invoke($backend,8577) === null) throw new RuntimeException('Verified Topgolf clubhouse must be admitted');
+foreach (array(8274,8576) as $partId){$part=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$wpdb->prefix}rg_places WHERE id=%d",$partId),ARRAY_A);if($projection->invoke($backend,$part)!==null||$seo->invoke($backend,$partId)!==null)throw new RuntimeException('Unverified OSM part admitted');}
+$ordinary=$wpdb->get_row("SELECT * FROM {$wpdb->prefix}rg_places WHERE id=9001",ARRAY_A);if($projection->invoke($backend,$ordinary)===null)throw new RuntimeException('Normal customer golf category changed');
 $tags = json_decode($row['raw_tags'],true); $tags['access'] = 'customers';
 $row['raw_tags'] = wp_json_encode($tags);
 if ($projection->invoke($backend,$row) === null) throw new RuntimeException('Verified customer access not accepted by existing rules');
 // This changed row is only an in-memory counterexample, not a data-repair test.
 echo "$count real WordPress REST / wpdb / MySQL search cases passed.\n";
-echo "Existing golf admission rejects absent access and accepts in-memory customer-access evidence. No production change.\n";
+echo "Topgolf verified clubhouse and one-result search validated; unverified OSM parts remain in the catalog.\n";
 echo 'WordPress '.get_bloginfo('version').'; MySQL '.$wpdb->db_version().'; PHP '.PHP_VERSION."\n";
 
 // Validate the temporary diagnostic tool with no database mutations and no public route.
