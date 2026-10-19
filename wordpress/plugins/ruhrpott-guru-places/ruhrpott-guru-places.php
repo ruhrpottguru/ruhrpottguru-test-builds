@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RuhrpottGuru Places Backend
  * Description: Persistenter Places-Katalog für Food, Highlights, Kultur und Aktivitäten sowie Spezial-Inventare für Büdchen und „Hier geht’s um die Wurst“ in der Metropole Ruhr. OSM wird nur für Import/Sync verwendet; Besucher lesen aus MySQL. Mit automatischem OSM-Rollback bis der Katalog vollständig validiert ist.
- * Version: 1.10.170
+ * Version: 1.10.171
  * Author: RuhrpottGuru
  * License: GPL-2.0-or-later
  */
@@ -179,7 +179,7 @@ final class RuhrpottGuru_Places_Backend {
     // 0-14 Tage alle 4 Stunden, 0-90 Tage taeglich, kompletter 0-365-Tage-
     // Master woechentlich. Laufende Master-/Supplemental-Wellen werden nie
     // abgebrochen; der Dispatcher wartet, bis der Event-Importpfad frei ist.
-    const VERSION = '1.10.170';
+    const VERSION = '1.10.171';
     const ACTIVITY_V2_SPEC_VERSION = '1.4';
     const SCHEMA_VERSION = '1.10.129';
     const OPTION_STATUS = 'rg_places_status';
@@ -3003,19 +3003,17 @@ final class RuhrpottGuru_Places_Backend {
         // its normal category/detail representation was an Industriekultur anchor with media.
         $map=array('food'=>'food','highlights'=>'highlights','culture'=>'culture','activities'=>'activities','aktiv'=>'activities','buedchen'=>'buedchen');
         $projectedPlaceRows=array();$projectedPlaceCategory=array();
-        // Search results follow the already-established Activities visitor
-        // admission and same-site criteria without changing category feeds.
+        // Honor the existing public admission + the Activities name/150m
+        // same-site equivalence. Search SQL quality order stays unchanged.
         $searchActivitySeen=array();
         foreach($place_rows as $r){
             $cat=$map[(string)($r['primary_category']??'')]??(string)($r['primary_category']??'');
             if(!in_array($cat,array('food','highlights','culture','activities','buedchen'),true))continue;
             $r=$this->global_search_place_projection_v101157($r,$cat);
             if($cat==='activities'){
-                // Do not link to an Activities detail URL that cannot pass
-                // the category's authoritative public admission (404).
+                // Reject candidate details whose category visitor admission
+                // would be missing, resulting in a broken public 404.
                 if((string)($r['_rg_activity_v2_admission']??'')!=='rein')continue;
-                // Same name/prefix + <=150m: existing rank_activity_rows()
-                // equivalence rule. Preserve search's SQL quality-score order.
                 $nameA=trim($this->normalize_text((string)($r['name']??'')));
                 $duplicate=false;
                 foreach($searchActivitySeen as $kept){
@@ -3564,10 +3562,9 @@ final class RuhrpottGuru_Places_Backend {
         $verified_model_flying = (bool)preg_match('/\bmodellflugplatz r c club bottrop\b/u',$name);
         $verified_jump_academy = (bool)preg_match('/\bjump academy\b/u',$name);
         $verified_activity_landscape = (bool)preg_match('/\bspiel und sportlandschaft jacobi\b/u',$name);
-        // 2026-10-19: Official visitor offer checked for exactly the Topgolf
-        // Oberhausen clubhouse (OSM way 1051311896). The site's own booking
-        // information permits advance booking and walk-ins. This must NOT turn
-        // neighboring OSM parts or generic golf courses into visitor entries.
+        // Visitor evidence for exactly the Topgolf Oberhausen clubhouse from
+        // the verified operator website (booking + walk-ins). Do not broaden
+        // admission to the other OSM components or generic golf locations.
         $topgolf_website = trim((string)($tags['website']??($row['website']??'')));
         $topgolf_host = strtolower((string)(parse_url($topgolf_website, PHP_URL_HOST) ?: ''));
         $verified_topgolf_oberhausen = $name === 'topgolf'
