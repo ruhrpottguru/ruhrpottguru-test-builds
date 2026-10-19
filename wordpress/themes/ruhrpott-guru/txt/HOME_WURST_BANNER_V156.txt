@@ -1,0 +1,7 @@
+RuhrpottGuru v156 – Home Imbissbuden banner
+
+- Adds a dedicated “Hier geht's um die Wurst” magazine banner to Home.
+- Placement: directly below the existing Büdchen-Radar banner, before Events.
+- Links to /imbissbuden/ via the existing wurstPageUrl setting.
+- Uses the already packaged daylight Wurst hero asset.
+- Existing Büdchen banner, category modules, header, footer, location and radius logic remain unchanged.

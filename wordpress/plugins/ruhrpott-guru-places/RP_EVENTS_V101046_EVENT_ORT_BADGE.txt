@@ -1,0 +1,7 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.46 – EVENT-ORT BADGE
+
+ÄNDERUNG
+- API-Medienlabel für source=venue-commons-context lautet jetzt exakt: Event-Ort.
+- Pexels bleibt Symbolfoto.
+- ET4/ODF, destination.one, redaktionelle Overrides und freigegebene offizielle Bilder bleiben unverändert.
+- Keine Datenbank-, Rechte-, Cache-, Worker-, Filter-, Event-REST- oder Sortierlogik wurde geändert.

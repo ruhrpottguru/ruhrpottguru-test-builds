@@ -1,0 +1,23 @@
+RuhrpottGuru Events v1.10.30 – ET4 Address Image
+
+Verified root cause
+- ET2014A explicitly defines Address.image in addition to event media_objects.
+- RuhrpottGuru event_feed_media_candidate() previously inspected event/subitem/occurrence media_objects only.
+- event_et4_addresses() also dropped the image field.
+- Therefore an ET4 record whose visible artwork is supplied through addresses[].image reached RuhrpottGuru without image and rendered the red ticket fallback.
+
+Pragmatic rule
+1. Keep one owner source per event (v1.10.29).
+2. For an ET4-owned event, use media_objects from that same object first.
+3. If absent, use addresses/address.image from the same ET4 object.
+4. Organizer/contact/provider address images are rejected.
+5. No cross-source image inheritance, no web search, no external media resolver and no reimport are required for this fallback.
+
+Verification
+- PHP syntax PASS.
+- Fixture: top-level media_objects wins over address.image.
+- Fixture: venue address.image is accepted when media_objects is empty.
+- Fixture: organizer address.image is rejected.
+- Fixture: address.image without file extension is accepted because the ET2014A field is semantically an image.
+- Visitor path already calls event_feed_media_candidate(raw_payload) on every request, so existing rich ET4 rows benefit immediately without a backfill.
+- Opening-hours audit code and state are untouched.

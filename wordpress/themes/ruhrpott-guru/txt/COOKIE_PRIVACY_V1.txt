@@ -1,0 +1,30 @@
+RUHRPOTT GURU – SINGLE CONSENT / PRIVACY CLEANUP V1
+Generated: 2026-08-20
+
+BASE
+- Built directly on Infinite Scroll + Smart Location V1 / PEXELS-CONFIGURED.
+- Scroll/location/media/provider logic intentionally unchanged.
+
+CHANGES
+- Removed the former React/AI-Studio CookieConsentBanner runtime.
+- Removed the former React/AI-Studio CookieModal consent state and localStorage key.
+- SureCookie is now the single consent authority.
+- React header/footer Cookie Settings actions now open SureCookie re-consent.
+- PHP footer/mobile Cookie Settings actions now open the same SureCookie re-consent modal.
+- Uses SureCookie's official free [surecookie_reconsent_button] shortcode as an off-screen integration bridge.
+- Removed the obsolete local alert claiming only essential session cookies / no third-party tracking.
+- Removed Google Fonts network loading from frontend, editor setup and compiled CSS.
+- Ruhrpott Guru now uses a system font stack, avoiding a Google Fonts request.
+
+SURECOOKIE ADMIN SETTINGS TO VERIFY AFTER INSTALL
+- Banner enabled.
+- GDPR/EU rule uses opt-in.
+- Resource Blocking enabled for non-essential third-party resources.
+- Consent Logging enabled if desired for audit evidence.
+- Run a fresh SureCookie scan after deployment and review every detected resource/category.
+- Re-request consent once if the privacy/cookie setup materially changed.
+
+IMPORTANT
+- Browser geolocation permission is independent from cookie consent and remains controlled by the browser.
+- Local app storage used for requested features (favorites/theme/cache/location bootstrap) remains part of the app architecture and must be described accurately in the privacy notice.
+- This build does not change the 6-hour Smart Location cache or background movement thresholds.

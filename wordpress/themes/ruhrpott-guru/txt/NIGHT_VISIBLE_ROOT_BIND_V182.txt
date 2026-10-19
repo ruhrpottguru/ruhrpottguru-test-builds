@@ -1,0 +1,5 @@
+Night visible-root binding v182
+- Critical fix: night runtime never binds the hidden #ruhrpott-wp-page-content-source copy.
+- It waits exclusively for [data-rg-night] inside #ruhrpott-guru-root.
+- MutationObserver/poll stay active until React PlainWpView has committed the visible clone.
+- Location, radius, filters, detail gallery and upload handlers are then attached to the actual visible DOM.

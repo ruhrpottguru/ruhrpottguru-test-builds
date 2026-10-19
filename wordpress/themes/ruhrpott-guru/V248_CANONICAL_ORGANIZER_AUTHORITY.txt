@@ -1,0 +1,12 @@
+RuhrpottGuru Theme v248
+
+Canonical Organizer Authority
+
+- Fixes the verified frontend re-merge regression from v247.
+- If rpg_event_details exists, its server-side organizer list is authoritative.
+- Raw ET4 organizer/contact data may only enrich an organizer with the SAME normalized identity.
+- Raw data can no longer add a second organizer identity such as image author, data partner or provider.
+- If the canonical backend returns no organizer, the detail UI shows no organizer instead of guessing one from raw metadata.
+- Pure live-feed fallback without rpg_event_details retains the existing structured ET4 fallback behavior.
+- Event series logic from v247 is unchanged.
+- Event count, sorting, media, timing, analytics and all other UI logic are unchanged.

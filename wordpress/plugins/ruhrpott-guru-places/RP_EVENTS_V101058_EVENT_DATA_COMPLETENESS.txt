@@ -1,0 +1,24 @@
+RuhrpottGuru Places Backend 1.10.58 – ET4 Eventdaten-Vollständigkeit
+
+Ziel
+- Vorhandene ET4/Open-Data-Finder-Felder vollständig und sicher bis in den Besucherpfad übernehmen.
+- Keine zusätzlichen lokalen Eventquellen aktivieren und keine neuen Rechteannahmen einführen.
+
+Änderungen
+- ET4-Rich-Text bleibt als sicheres Plaintext mit Absatz-/Listenstruktur lesbar.
+- ET2014A media_objects rel=booking wird auch in verschachtelten Subitems/Occurrences als Ticket-/Buchungslink erkannt.
+- ET2014A media_objects rel=homepage wird als öffentliche Event-Webseite erkannt.
+- destination.one/eT4/Open-Data-Finder Provider-/Verzeichnis-URLs bleiben aus öffentlichen Website-/Ticket-Buttons ausgeschlossen.
+- Zusätzliche explizite Preisfelder (priceFrom/priceTo/minPrice/maxPrice/admissionPrice) werden übernommen, falls vorhanden; ein „kostenlos“-Flag wird nur bei explizit positivem Quellwert verwendet.
+- Strukturierte Mitwirkendenrollen wurden um Person/Besetzung/Line-up/Organist/Solist/Gesang/Chor/Orchester erweitert.
+- Veranstalter werden aus den ET4-Address-Relationen und expliziten organizer/organizers-Feldern übernommen.
+- Backend-Adresse füllt fehlende Venue-Felder aus verschachtelten Daten und verwirft Organizer-/Kontaktadressen als Veranstaltungsort.
+- Venue-Name wird aus expliziten Venue-/Location-Feldern oder passenden Event-/Venue-Address-Relationen übernommen, ohne Kontaktadressen als Venue zu missbrauchen.
+- Bestehende ET4-Zeitlogik bleibt unverändert: konkrete occurrence/start/end-Werte und Zeitzonen werden weiter verwendet. Der v1.10.58-Test deckt ET4 timeIntervals mit Europe/Berlin ab.
+- Ein lokaler One-shot-Backfill aktualisiert bestehende ET4 raw_payload-Datensätze in 150er Batches. Er erzeugt keine externen Requests und wartet auf laufenden Master-/Supplemental-/Enrichment-Sync, um Schreibkonflikte zu vermeiden.
+- Der Backfill ist in RP Redaktion -> Events unter „ET4 Eventdaten-Backfill“ sichtbar.
+
+Unverändert
+- Eventanzahl, Event-Sortierung und Sichtbarkeit.
+- ET4-Bildzuordnung und v242/v243 Darstellungslogik.
+- Lokale Tourismus-/Marketingquellen bleiben bis Rechtefreigabe deaktiviert.

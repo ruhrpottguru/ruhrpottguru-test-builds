@@ -1,0 +1,7 @@
+RuhrpottGuru v170 – Pott-Quiz Renderer Restore
+
+- [ruhrpott-pottquiz] remains the canonical shortcode.
+- Restores the source-owned Pott-Quiz view (10 questions, answer feedback, ranks, highscore, sharing).
+- main.js now routes data-view="quiz" and /pott-quiz/ to QuizView.
+- No GPS/location request is needed for the quiz page.
+- Legacy [ruhrpott_pott_quiz] alias remains supported.

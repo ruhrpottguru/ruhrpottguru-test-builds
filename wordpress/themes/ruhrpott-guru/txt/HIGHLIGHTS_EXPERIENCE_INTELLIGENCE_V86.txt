@@ -1,0 +1,10 @@
+RuhrpottGuru v86 – Highlights Experience Intelligence
+
+- Highlights are ranked as destinations worth a detour, not by raw distance.
+- Backend 1.1.8 hard-excludes weak memorial/park/museum signals and ordinary low-value POIs.
+- Profiles: industrial_icon, visual_landmark, urban_art, viewpoint_sunset, hidden_hotspot, heritage_vibe.
+- Weighted score: experience 40%, visual 20%, Ruhr identity 15%, usability 10%, budget 10%, distance 5% (+ small cross-category combination bonus).
+- Natural visible tags, no hashtag slang: Industriekultur, Ruhrpott Vibes, Fotospot, Aussicht, Sunset, Urban Art, Architektur, Geschichte, Kostenlos, Entdecken.
+- Home renders up to 4 diverse highlight buckets.
+- Home-only soft radius expansion: current radius -> 5 -> 10 -> max 25 km until 4 qualified highlights are found. Persisted radius is unchanged.
+- Broad Highlights category pages also use the read-time intelligence; no re-import/schema migration.

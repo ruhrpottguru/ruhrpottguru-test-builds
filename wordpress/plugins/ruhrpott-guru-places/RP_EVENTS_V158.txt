@@ -1,0 +1,18 @@
+RuhrpottGuru Places Backend v1.5.8
+
+Neu:
+- Top-Level-Menü „RP Events“ direkt unter „RP Redaktion“.
+- Eigene Event-Cache-Struktur in MySQL:
+  - wp_rg_events
+  - wp_rg_event_sources
+  - wp_rg_event_media
+  - wp_rg_event_enrichment
+- Admin-Dashboard mit Kennzahlen zu gespeicherten, zukünftigen, adresslosen, bildlosen und noch anzureichernden Events.
+- Vorbereitung auf globalen ET4/Open-Data-Finder-Sync und Event-Enrichment.
+
+Unverändert:
+- Bestehender Live-Eventfeed im Theme.
+- Places-, Büdchen-, Wurst-, Standort-, Radius- und Redaktionslogik.
+
+Hinweis:
+Dieser Build legt bewusst zuerst die persistente Event-Basis an. Der Import/Sync in diese Tabellen wird im nächsten Schritt angeschlossen, damit der bestehende Event-Datenfluss nicht gleichzeitig mit der Datenbankmigration verändert wird.

@@ -1,0 +1,9 @@
+RuhrpottGuru Places Backend 1.10.1
+
+Labor-only Fixes:
+- OSM opening_hours mit offenem Ende (z. B. Mo-Sa 08:30+; Su, PH 09:00+) werden konservativ als ab Startzeit geoeffnet / Ende unbekannt erkannt.
+- Gemischte Wochentag-/PH-Selektoren werden im Labor ausgewertet.
+- Outdoor-Erkennung fuer frei besichtigbare Highlights erweitert: u. a. historic=city_gate, oeffentliche Kunst/Friese, viewpoints, artworks, Plaetze.
+- Zeitgebundene Einrichtungen wie Baeder bleiben ohne belastbare Oeffnungszeiten bewusst unsicher.
+- Labor zeigt seine Plugin-Version sichtbar an.
+- Keine Homepage-, Theme-, REST- oder oeffentliche Ranking-Aenderung.

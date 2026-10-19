@@ -1,0 +1,59 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.95
+CENTRAL REPROCESSING / ALT-BESTAND STANDARD
+
+PURPOSE
+- Replace future scattered one-off migration flags with one versioned registry/worker contract.
+- A parser/resolver change declares a stable job key + semantic fingerprint.
+- Same key + same fingerprint never runs twice.
+- Changed fingerprint queues exactly one new resumable pass.
+- Browser may be closed; WP-Cron continues queued/running jobs.
+
+JOB CONTRACT
+- key: stable migration identity
+- fingerprint: semantic parser/resolver/input version
+- scope: system | active_places | active_events | trusted custom selector
+- processor: trusted idempotent method
+- batch_size: 1..50
+- conflicts: worker lanes that must be idle before writes start
+- cursor: monotonic primary ID, persisted after every processed entity
+- state: queued/running/waiting/complete/error with processed/changed/skipped/errors
+
+SAFE DEFAULTS
+- active_places without explicit conflicts defaults to place_media + municipality + opening_hours.
+- active_events without explicit conflicts defaults to events_external.
+- job state uses a persistent option and a global transient lock.
+- failed entities are recorded; any job with errors is NOT marked complete.
+- no automatic destructive rollback or mass reset exists in the framework.
+
+HISTORICAL MIGRATIONS MIRRORED READ-ONLY
+- Places quality / primary source refresh 1.10.80
+- Opening-hours date-fragment safety revalidation 1.10.93
+- Place media coverage 1.10.94
+These are not restarted by 1.10.95. Existing hook/state names remain unchanged.
+
+BASELINE SELF-CHECK
+- reprocess-framework-baseline-v1095 runs once.
+- It validates registry + cron handoff only.
+- It writes no Places, Events, schedules, media, categories or public data.
+
+REGRESSION GUARANTEES
+- Theme unchanged.
+- Public REST routes/contracts unchanged.
+- Activities V2 unchanged.
+- Existing 1.10.94 media coverage hook/state/done option unchanged.
+- Existing opening-hours audit hook/state unchanged.
+- Existing municipality refresh hooks/state unchanged.
+- Schema version unchanged (no DB migration required).
+
+VERIFICATION
+- PHP syntax: PASS
+- Version header + VERSION constant = 1.10.95: PASS
+- REPROCESS_HOOK registered and cleared on deactivation: PASS
+- Stable filter rg_places_reprocess_jobs present: PASS
+- Fingerprint mismatch resets managed job to queued/pending: PASS (static path verification)
+- Same fingerprint preserves completed state: PASS (static path verification)
+- Historical 1.10.80/1.10.93/1.10.94 jobs are read-only: PASS
+- Default conflict lanes for active_places / active_events: PASS
+- Cursor is persisted monotonically by entity id: PASS
+- Jobs with processing errors cannot finish as complete: PASS
+- 1.10.94 media worker code/hook/state retained: PASS

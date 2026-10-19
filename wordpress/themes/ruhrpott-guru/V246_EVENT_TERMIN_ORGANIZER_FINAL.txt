@@ -1,0 +1,6 @@
+RuhrpottGuru Theme v246
+- Detailansicht zeigt nur noch den verständlichen Termin; der technische Serien-Zeitraum wird nicht mehr separat ausgegeben.
+- Veranstalterliste wird im Frontend defensiv aus der aktuellen ET4-Rohstruktur kanonisiert.
+- Support/Author/Contact-Organisationen können nicht als Veranstalterkarte erscheinen.
+- Gleichnamige Veranstalterzeilen werden zusammengeführt; Kontaktdaten derselben Identität dürfen ergänzt werden.
+- Keine Änderungen an Eventauswahl, Sortierung, Bildlogik oder Eventtyp-Badges.

@@ -1,0 +1,85 @@
+RUHRPOTTGURU – EVENTS 1.10.41 – VERIFICATION
+=============================================
+Stand: 10.09.2026
+
+PRODUKTIONS-BASIS
+-----------------
+Aus der echten Essen-5-km-/events-Antwort:
+- 253 ausgegebene Karten
+- 152 eindeutige global_id
+- 20 eindeutige open_data_finder Events
+  - 13 mediaStatus=verified / enrichmentStatus=complete
+  - 7 mediaStatus=pending / enrichmentStatus=checked_no_media
+- 132 eindeutige destination_one_open_data Events
+  - 22 mediaStatus=verified / enrichmentStatus=complete
+  - 104 mediaStatus=pending / enrichmentStatus=checked_no_media
+  - 6 mediaStatus=pending / enrichmentStatus=complete
+
+Konkreter Regression-Witness aus Produktion:
+- Kinderflohmarkt
+- global_id e_101350419
+- eventId 16608
+- provider_source destination_one_open_data
+- mediaStatus verified / enrichmentStatus complete
+- in v1.10.40 trotzdem kein image/imageUrl in der finalen REST-Antwort
+
+ROOT CAUSE
+----------
+PASS: destination.one rich same-object media wird bereits als source=et4-feed persistiert.
+PASS: v1.10.40 lokalisierte nur Master source=et4-global-id.
+PASS: der defensive REST-Handoff entfernte externe ET4/destination.one Bildfelder.
+PASS: der v1.10.40 exact-local-Handoff konnte nur Masterbilder rehydrieren.
+Damit konnte ein bereits verifiziertes destination.one event-owned Bild im Browser fehlen.
+
+1.10.41 INVARIANTEN
+-------------------
+PASS: zwei getrennte Source-Owner im lokalen Cache: master + supplemental.
+PASS: Master = current open_data_finder/et4 + media source et4-global-id.
+PASS: Supplemental = destination_one_open_data + media source et4-feed.
+PASS: aktueller Master gewinnt bei gleicher global_id; Supplemental hat NOT-EXISTS-Overlap-Sperre.
+PASS: Propagation/Retry/Failure bleiben innerhalb des jeweiligen Source-Owners.
+PASS: Cache-Hit erfordert global_id-Dateistamm UND source_hash der konkreten Upstream-URL.
+PASS: et4-feed wird auf pending gesetzt, wenn noch kein local_path existiert.
+PASS: Supplemental-Ingest und Raw-Feed-Backfill wecken den lokalen Cache-Worker automatisch.
+PASS: exact-local-Map liest Master zuerst und Supplemental nur für fehlende IDs.
+PASS: REST-Meta trennt matchedMasterGlobalIds / matchedSupplementalGlobalIds.
+PASS: Global Search, DB-Enrichment und Besucher-Batch priorisieren lokale et4-global-id/et4-feed Medien.
+PASS: keine Cross-Source-Bildvererbung.
+PASS: keine Titel-/Venue-Heuristik.
+PASS: keine Webbildsuche.
+PASS: kein Frontend-/Theme-Umbau erforderlich.
+
+STATISCHE REGRESSIONSCHECKS
+---------------------------
+38 / 38 PASS
+- Version/header/bootstrap
+- et4-feed persistence + local reset
+- source-owner queue/lookup/propagation/failure
+- overlap guard
+- worker wake-up
+- exact map + REST meta
+- local ET4 media priority
+- source-hash cache safety
+- alte master-only Helper vollständig entfernt
+- Produktionsklassifikation + Kinderflohmarkt-Witness
+- README / Release Notes
+
+SYNTAX
+------
+PASS: php -l ruhrpott-guru-places.php
+PASS: alle PHP-Dateien des Plugins ohne Syntaxfehler
+
+RUNTIME-ENTSCHEIDUNGSGRENZE
+---------------------------
+Nach Installation zeigt WP Admin -> RP Redaktion -> Events getrennt:
+- Master ready / total
+- destination.one Zusatzfeed ready / total
+
+Wenn destination.one Zusatzfeed total > 0 ist, werden diese exakten same-object Bilder automatisch lokalisiert.
+Wenn der Zusatzfeed total = 0 ist, besitzt der aktuelle gespeicherte destination.one-Bestand keine et4-feed-Medienzeilen; dann darf v1.10.41 auch kein Bild erfinden.
+
+Der Besucher-Endpoint zeigt zusätzlich:
+visitorModel = canonical-cluster-v1041-multi-owner-local-handoff
+et4ExactImageHandoff.version = 1.10.41
+matchedMasterGlobalIds
+matchedSupplementalGlobalIds

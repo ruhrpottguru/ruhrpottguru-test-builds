@@ -1,0 +1,8 @@
+RuhrpottGuru Theme v287 – Global Event Media Quality Gate FINAL
+
+- Keeps v286 DB-backed rights-aware Event media handoff unchanged.
+- Wikimedia Commons Event-Ort candidates now use Commons metadata + dimensions to reject logos, posters, flyers, signs, maps/diagrams, document scans, typography/emblems and extreme aspect/small images before caching.
+- Venue-context resolver cache namespace bumped to v287 so old bad candidates cannot survive the deployment transient.
+- Event media resolver cache namespace bumped to v287 for the same reason.
+- Good licensed Event-Ort images remain preferred; if none survive, the established symbolic fallback path remains available.
+- No Selm-specific branch and no layout changes.

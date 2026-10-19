@@ -1,0 +1,12 @@
+RuhrpottGuru Theme v162 – Global strict event-image identity
+
+Invariant: no event-specific exceptions.
+
+- Event cards only accept media attached to the event record itself.
+- Shared venue/location media is never treated as event artwork.
+- Event detail/archive pages are accepted only when title/H1/OG/JSON-LD Event identity strongly matches the requested event.
+- City/date are independent contextual anchors, not substitutes for event-title identity.
+- Generic page <img> candidates require event-title evidence in their own attributes/context.
+- Venue photos are no longer used as photographic fallbacks for events.
+- When no clearly verified event photo exists, the branded generated event graphic is used instead of a potentially wrong photograph.
+- Address enrichment from v161 remains unchanged and global.

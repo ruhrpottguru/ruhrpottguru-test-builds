@@ -1,0 +1,26 @@
+RUHRPOTTGURU THEME v241 – REVERSIBLE EVENT MEDIA DIVERSITY
+
+Goal
+- Keep every event visible on Home and category pages.
+- Never replace exact/original ET4/ODF images.
+- Reduce repeated Event-Ort context images in the visible event list.
+
+Display rule
+1. Exact/original event image: unchanged.
+2. Existing Symbolfoto: unchanged.
+3. Event-Ort image used once: unchanged.
+4. Same Event-Ort image repeated: first card stays unchanged; later repetitions may receive a person-filtered Pexels Symbolfoto for card display only.
+5. If no suitable symbol image is available: keep the Event-Ort image.
+6. No event is filtered, reordered or deleted.
+7. Event detail and stored rpg_event_media assignment remain unchanged.
+
+Performance guardrails
+- Non-blocking: event list renders before the diversity request.
+- Only first 36 cards are inspected.
+- Max 24 duplicate cards per request.
+- Max 4 unique symbolic search groups per batch.
+- Existing Pexels pools are cached by the established v233 media chain.
+
+Rollback
+RP Redaktion -> Event-Bilder -> uncheck “Wiederholte Event-Ort-Bilder reduzieren” -> save.
+This instantly restores v240 card behavior without import, DB changes or reinstall.

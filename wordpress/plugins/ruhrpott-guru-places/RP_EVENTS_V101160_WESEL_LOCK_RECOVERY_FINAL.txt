@@ -1,0 +1,37 @@
+RuhrpottGuru Places Backend 1.10.160
+WeselMarketing Worker-Lock-Recovery – Final Verification
+Date: 2026-10-06
+
+LIVE ROOT CAUSE VERIFIED BEFORE BUILD
+- WeselMarketing state: waiting_lock, page 0, 0 processed.
+- Reported blocker: destination.one / 53-Staedte-Zusatzfeed.
+- Supplemental state still said status=running at city 21/53.
+- Supplemental last_progress_at: 2026-10-04 23:09:15; no inflight city.
+- Global event import lock option was absent.
+- Therefore the blocker was a stale persisted worker status, not a currently held import lock.
+
+FIX
+1. Supplemental concurrency is now determined by the actual global import lock, not status=running alone.
+2. A current WeselMarketing run/request gets the next serial import slot; the resumable 53-city supplemental wave yields between city batches and keeps its city cursor.
+3. When the supplemental worker is only waiting for Places, it releases the global event lock before returning.
+4. An existing Wesel waiting_lock from 1.10.159 is automatically woken when the corrected gate is free; no second manual click is required.
+5. ET4 remains the base source. Event matching, Dedupe, lifecycle, radius, sorting and frontend rendering are unchanged.
+
+FUNCTIONAL ACCEPTANCE
+PASS stale supplemental status=running + no import lock => Wesel gate allowed.
+PASS actual supplemental import lock => Wesel remains blocked (serial safety retained).
+PASS unrelated external-heavy worker => still blocks as before.
+PASS recent Wesel waiting request => supplemental yields its next resumable slot.
+PASS stale/old Wesel wait cannot starve supplemental forever.
+PASS active Wesel run retains priority until completion.
+PASS finished Wesel run releases priority.
+PASS Places-wait branch releases supplemental import lock.
+
+REGRESSION
+PASS PHP syntax: all plugin PHP files.
+PASS Wesel list parser unchanged.
+PASS Wesel detail parser unchanged.
+PASS Wesel canonical candidate/upsert processing unchanged.
+PASS destination.one supplemental event fetch/ingest function unchanged.
+PASS no theme/frontend files changed.
+PASS v1.10.159 -> v1.10.160 diff is limited to version metadata and worker arbitration/recovery.

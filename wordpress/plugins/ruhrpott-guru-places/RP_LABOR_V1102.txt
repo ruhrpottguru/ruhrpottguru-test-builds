@@ -1,0 +1,9 @@
+RuhrpottGuru Places Backend 1.10.2 - Labor Auswahlintelligenz
+
+- Keine Homepage-, Theme-, REST- oder oeffentliche Ranking-Aenderung.
+- Was geht JETZT? zeigt zusaetzlich eine interne Empfehlungs-Vorschau mit 6, 8 oder 10 Treffern.
+- Zuerst wird je verfuegbarer Kategorie ein starker belastbarer Anker beruecksichtigt.
+- Danach wird nach JETZT-Score aufgefuellt, regulär maximal zwei Treffer je Kategorie.
+- Nur wenn die lokale Auswahl sonst nicht voll wird, darf eine Kategorie bis zu drei Treffer liefern.
+- Unsichere Kandidaten werden nur als sichtbar markierter Fallback verwendet, wenn weniger als sechs belastbare Treffer existieren.
+- Rohdiagnose und alle bisherigen 1.10.1-Parser-/Outdoor-Fixes bleiben unveraendert sichtbar.

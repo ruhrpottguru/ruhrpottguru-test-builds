@@ -1,0 +1,12 @@
+RuhrpottGuru Places Backend 1.10.82 – IGA 2027 Dark Launch Live-Abnahmefix
+
+Verifizierte Ursache des 1.10.81-Livefehlers:
+- wp_json_encode() erhielt beim Schreiben von value_json den String "JSON_UNESCAPED_UNICODE" als Flags-Argument.
+- Unter PHP 8 ist das zweite Argument int; dadurch entstand fuer jeden Event ein TypeError.
+- Ergebnis im Admin: verarbeitet 0, Fehler 6000.
+
+Fix:
+- JSON_UNESCAPED_UNICODE wird als Integer-Konstante uebergeben.
+- Der vorhandene Worker-last_error wird im IGA-Cockpit sichtbar ausgegeben.
+- Schema bleibt 1.10.17.
+- ET4-Importer, Event-Besucher-REST, Ranking, Oeffnungszeiten und Theme bleiben unveraendert.

@@ -1,0 +1,32 @@
+RuhrpottGuru – Food Mobile UX V22
+
+BASE
+- Built from V21 share-fragment release.
+- Event/Wesel, calendar and share deep-link logic intentionally unchanged.
+
+FOOD OVERVIEW
+- On the Food category overview only, the redundant "Gastronomie →" badge is replaced.
+- Exact price tiers (€ / €€ / €€€) are shown when present.
+- If no exact price tier exists, the food subcategory is shown instead; no price tier is fabricated.
+- Food tags are shown without # and limited to 3 visible pills.
+- Active food tag filter is also shown without #.
+- Route and Details share the full card width in a 2-column layout.
+- Both Food action buttons have a minimum 44 px touch target.
+
+FOOD DETAIL
+- Red "X Schließen" control replaced by a top-left "← Zurück" control.
+- Back closes the detail overlay and preserves the underlying filtered result list.
+- Missing Food price copy changed to:
+  "Keine Preisinfos vorhanden (Schau am besten kurz in die Karte vor Ort!)"
+- Technical source/trust badges are hidden from the upper action area for Food.
+- Food source/trust information is rendered near the bottom after travel information.
+- Photo attribution on the hero image remains available via the existing overlay.
+
+REGRESSION INTENT
+- Non-Food category-card category badges remain unchanged.
+- Non-Food hashtag presentation remains unchanged.
+- Non-Food compact Route/Details controls remain unchanged.
+- Event calendar, Wesel multisource event loading and V21 fragment sharing are untouched.
+
+V23 CORRECTION
+- The V22 "← Zurück" detail control is superseded: ItemDetailModal is an overlay, so V23 restores "× Schließen" at the top right.

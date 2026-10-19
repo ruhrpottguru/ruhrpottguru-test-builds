@@ -1,0 +1,15 @@
+RuhrpottGuru v126 – Büdchen- & Trinkhallen-Radar
+
+Shortcode:
+[ruhrpott_buedchen_radar]
+
+Rules:
+- Existing RuhrpottGuru header/footer remain unchanged.
+- No Home banner in this release.
+- Page is reachable directly through the WordPress page containing the shortcode.
+- Reuses the existing GPS/manual city and radius state.
+- Public selection: Tier A by default; Tier B only fills local gaps up to 12 results.
+- Tier C never appears unless manually verified by Places Backend overrides.
+- No external map/tile SDK is loaded. The first beta uses a privacy-friendly geometric radar based on place coordinates.
+- Missing opening hours are displayed as unknown, never as closed.
+- Detail page offers moderated community/operator corrections through Places Backend 1.2.8.

@@ -1,0 +1,10 @@
+RuhrpottGuru v158 – Community-Formular Runtime-Fix
+
+Fehlerursache:
+- ContributionForm verwendete den JSX/Helfer p(...), ohne dass p in components.js definiert war.
+- Beim Öffnen von „Daten ergänzen oder Bild hochladen“ entstand deshalb ein JavaScript ReferenceError und der React-Bereich wurde leer.
+
+Fix:
+- p-Helfer ergänzt.
+- Formular-/Upload-/Copyright-/Slider-Logik unverändert.
+- Standort, Radius, Kategorien, Ranking, Header, Footer und übrige Datenlogik unverändert.

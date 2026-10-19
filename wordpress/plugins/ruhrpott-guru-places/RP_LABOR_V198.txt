@@ -1,0 +1,8 @@
+RuhrpottGuru Places Backend 1.9.8 - RP Redaktion Labor
+
+- Neuer Unterpunkt RP Redaktion -> Labor.
+- Reine interne Testumgebung; keine Homepage- oder Frontend-Aenderung.
+- Dauerhafte Modulplaetze fuer Was geht JETZT?, Heute, Fuer lau, Szene & Trends, Mit Family und Indoor / Draussen.
+- Gemeinsamer Testkontext mit Stadt, Radius, GPS-Koordinaten und simulierter Uhrzeit.
+- Was geht JETZT? startet als Diagnose-Geruest; Kandidaten-Pool und Scoring werden im naechsten Schritt dort aufgebaut.
+- Bestehende Kultur-, Event-, Share- und Places-Logik aus 1.9.7 bleibt unveraendert.

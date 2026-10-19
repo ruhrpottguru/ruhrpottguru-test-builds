@@ -1,0 +1,33 @@
+RUHRPOTT GURU – HOME SINGLE OSM V46
+Generated: 2026-08-21
+
+Observed mobile failure in V45:
+- Events (ET4) eventually loaded.
+- Food (OSM) loaded only after roughly 15–20 seconds.
+- Highlights and Culture failed.
+- The Home magazine page still triggered one full canonical OSM loader per OSM category.
+
+V46 architecture:
+- GPS remains authoritative and resolves before live Home data starts.
+- Events remain on the established ET4 canonical snapshot path.
+- Food + Highlights + Culture no longer invoke three independent canonical OSM jobs on the magazine Home.
+- All three Home POI sections share ONE compact OSM payload and are split client-side.
+- New same-origin endpoint: /wp-json/ruhrpottguru/v6/home-pois.
+- Home endpoint uses one upstream attempt capped at 5 s and a 6 h coarse-location cache.
+- Existing warm canonical WordPress OSM transients are reused before any upstream request.
+- Browser performs one concurrent direct recovery request; first usable combined payload wins.
+- Exact Haversine filtering is still done against the real GPS coordinates and requested radius.
+- Category pages and [ruhrpott_home_categories] remain on their established loaders and are unchanged by this Home-only data path.
+
+Static verification:
+- js/app.js node --check: PASS
+- js/ruhrpott-app.js node --check: PASS
+- functions.php php -l: PASS
+- New Home OSM route present: PASS
+- Home settings expose homePoisUrl: PASS
+- Magazine Home uses one shared homePoiPromise for food/highlights/culture: PASS
+- Events still call canonical loadSnapshot: PASS
+- Old three Home OSM delayedSnapshot calls removed from execution path: PASS
+
+Environment note:
+- The build container cannot resolve overpass-api.de, so a real external Overpass latency test cannot be executed from this environment.

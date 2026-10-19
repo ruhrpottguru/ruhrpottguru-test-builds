@@ -1,0 +1,8 @@
+RuhrpottGuru Places Backend v1.5.5
+
+Änderung:
+- Neuer eigener WordPress-Hauptmenüpunkt „RP Medien“ auf derselben Navigationsebene wie „Werkzeuge“.
+- Die Verwaltung freigegebener Bilder und Löschanfragen wurde aus „Werkzeuge → RuhrpottGuru Places“ dorthin verschoben.
+- Suche, Filter, Deaktivieren, Reaktivieren, endgültiges Löschen und Löschprotokoll bleiben unverändert.
+- Community-Daten/Bild-Freigaben sowie Import-/Sync-/Places-Funktionen bleiben unter „Werkzeuge → RuhrpottGuru Places“.
+- Keine Frontend-, Ranking-, Standort-, Radius-, Kategorie- oder Medienlogik geändert.

@@ -1,0 +1,18 @@
+RuhrpottGuru Places Backend 1.7.5
+
+Event-Quellen-Audit
+- RP Redaktion -> Events zeigt den aktiven Eventbestand getrennt nach dem letzten Metropole-Ruhr-Master und Beständen außerhalb dieses Masters.
+- Quellen werden gruppiert: open_data_finder, destination_one_open_data, essen_emg_export, verified-official-wesel und weitere Alt-/Sonderquellen.
+- Alte open_data_finder-Zeilen außerhalb des letzten Masters werden bewusst als unklar markiert, weil der öffentliche destination.one-Fallback in älteren Themes dieselbe Quellenkennung verwendete.
+- Neue Filter im Event-Bestand: Quelle und Masterbezug (Letzter Master / Außerhalb Master).
+- Jede Tabellenzeile zeigt direkt, ob sie zum letzten Master gehört.
+- Potenzielle Doppelzeilen werden nur gezählt, nicht automatisch gelöscht.
+
+Self-Ingest-Fix
+- DB-first Antworten des Besucher-Endpunkts /ruhrpottguru/v1/events werden nicht länger zurück in rg_events upgesertet.
+- Dadurch werden last_seen_at/last_synced_at nicht mehr nur durch einen normalen Frontend-Aufruf künstlich erneuert.
+- Bestehende historische Zeitstempel vor v1.7.5 bleiben deshalb als Quellfrische ungeeignet; last_master_run bleibt belastbar.
+
+Wichtig
+- Kein Event wird durch dieses Update gelöscht oder deaktiviert.
+- Der laufende/abgeschlossene Masterimport und das Enrichment müssen nicht neu gestartet werden.

@@ -1,0 +1,16 @@
+RUHRPOTTGURU THEME v251 – EVENT-FINALPASS – FINALVERIFIKATION
+Stand: 14.09.2026
+
+- Ganztag: Karten, Home, Suche, Detail, Share und Eventreihe zeigen keine erfundene 00:00-Uhrzeit.
+- Termin ohne Endzeit: Kalenderlogik erfindet keine 2-Stunden-Dauer; ICS lässt DTEND weg, Google erhält einen Null-Dauer-Termin.
+- Programm & Downloads: eigener Block aus Backend-Dokumentlinks; keine Dateikopie, nur Original-Link.
+- Ticket/Event-Webseite: getrennte CTAs; identische URL wird nicht doppelt gezeigt.
+- Direktlink/Share: canonicalUrl hat Vorrang.
+- Eventreihe: Klick auf weitere Termine tauscht nur den Inhalt desselben Detail-Layers; Hintergrundseite bleibt stehen.
+- Auf einen Blick, Eventtyp-Badges, Bildvielfalt und Analytics bleiben erhalten.
+
+TESTS
+- PHP-Syntax aller Theme-PHP-Dateien: PASS
+- JavaScript-Syntax aller Theme-JS-Dateien: PASS
+- Calendar-Fixture: Ganztag date-only PASS; echter 19:30-Termin PASS; fehlende Endzeit bleibt null PASS; explizites allDay=false gewinnt PASS.
+- ZIP-Integrität wird nach dem Packen separat geprüft.

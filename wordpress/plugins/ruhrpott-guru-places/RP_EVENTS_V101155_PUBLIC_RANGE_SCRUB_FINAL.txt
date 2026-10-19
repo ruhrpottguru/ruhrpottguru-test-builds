@@ -1,0 +1,10 @@
+RuhrpottGuru Places Backend 1.10.155 – Public Event Range Scrub
+
+Ziel
+- Abschluss der Event-Datums-Plausibilitaet aus 1.10.154.
+- Kanonische DB-Werte bleiben 1.10.154-konform.
+- raw_payload bleibt unveraendert als Quellenprovenienz erhalten.
+- Oeffentliche Visitor-/Share-/REST-Payloads entfernen ausschliesslich unplausible verschachtelte Endwerte (Ende vor Start oder >5 Jahre nach Start).
+- ET4 interval_*_end-Metadaten werden nach derselben Regel nur in der oeffentlichen Kopie entfernt.
+- Echte Langlaeufer von 371/443 Tagen bleiben unangetastet.
+- Keine Aenderung an Radius, Sortierung, 4-Event-Fallback, Quellenprioritaet oder Missing-Lifecycle.

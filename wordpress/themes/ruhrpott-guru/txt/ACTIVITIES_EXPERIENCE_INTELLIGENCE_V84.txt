@@ -1,0 +1,10 @@
+RuhrpottGuru v84 – Activities Experience Intelligence
+
+- Aktiv/Home is no longer a distance-only directory.
+- Standard fitness studios, yoga/pilates/EMS/personal-training and generic sports infrastructure are suppressed by Places Backend 1.1.7.
+- Strong leisure experiences receive a score from OSM semantics + data quality; distance is only a secondary factor.
+- Home Activities enforces bucket diversity (Action, Wasser, Wildlife, Indoor/Group, Outdoor/Sunset, etc.).
+- Response-only experience tags are shown as compact natural-language chips without hashtags.
+- Home may blend selected viewpoint/park/industrial-vibe candidates from the existing Highlights catalogue; no stored category is rewritten.
+- Full Activities category remains broader than Home but uses the same hard exclusions.
+- No DB reimport or schema migration.

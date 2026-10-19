@@ -1,0 +1,8 @@
+RuhrpottGuru Theme v254
+
+Desktop-only typography adjustment for Home highlight/activity cards:
+- label pills (e.g. Geschichte, Besonderer Ort): 0.70rem
+- city/distance/date meta: 0.78rem
+- slightly roomier pill padding and meta spacing
+- mobile/tablet up to 820px unchanged
+- no card dimensions, data, sorting or interaction logic changed

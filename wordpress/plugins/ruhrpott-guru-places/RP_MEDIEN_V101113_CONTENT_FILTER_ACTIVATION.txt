@@ -1,0 +1,12 @@
+RuhrpottGuru Places Backend 1.10.113
+
+Fix:
+- Der in 1.10.112 eingefuehrte GET-Filter media_content wurde in media_admin_has_filter() nicht als aktiver Filter gezaehlt.
+- Dadurch brach die Medienansicht bei einer reinen Auswahl von "Bildinhalt" vor der eigentlichen DB-Suche ab und zeigte "Kein Filter gesetzt".
+- 1.10.113 nimmt media_content in exakt diese Aktivierungspruefung auf.
+
+Unveraendert:
+- Klassifikationslogik und Hintergrundworker 1.10.112
+- Medien-/Copyright-/Rechteakte
+- Moderation und Loeschlogik
+- Event-/Place-Resolver und Besucher-Frontend

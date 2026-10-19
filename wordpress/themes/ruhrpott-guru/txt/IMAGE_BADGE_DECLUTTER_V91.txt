@@ -1,0 +1,9 @@
+RuhrpottGuru v91 — Image badge declutter
+
+- Orange/amber distance pill on result-card images removed; distance remains visible as plain text.
+- Orange Event/Food category badges on result images changed to neutral dark styling.
+- Orange "Veranstaltungsort" media badge removed.
+- Orange "Möglw. zu" badge reduced to plain status text.
+- Orange category badge in the detail hero changed to neutral dark styling.
+- Orange Route-Industriekultur hero badge and orange Szene image badge hidden.
+- Buttons/actions and non-image controls remain unchanged.

@@ -1,0 +1,2928 @@
+{
+  "date": "2026-10-19",
+  "status": "archive_import_not_live_confirmation",
+  "archives": [
+    {
+      "filename": "RuhrpottGuru-Places-Backend-v1.10.169-Gemeinsame-Detailseiten-LIVE-TEST.zip",
+      "sha256": "a61ceb3c93ba70a438c23ef7515b967c9591e033eb6810effff716591380138b",
+      "files": [
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/COMMUNITY_STORIES_V1109.txt",
+          "bytes": 769,
+          "sha256": "9bbeaf962a97be59bd1d20ba96f1b0dce67fbc6c59f96f69c09c8457ca4674ec"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/COMMUNITY_UGC_V101151.txt",
+          "bytes": 894,
+          "sha256": "5896332915b7f8c325d85390c3497cb3925024898fe84ec82e468136336c9dcd"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/README.txt",
+          "bytes": 42463,
+          "sha256": "5762e076be6668e03e839265a47e5834fb30b053b26b9cf34f69984d7935cb45"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_ACTIVITIES_V101083_SKATEPARK_PITCH_EXCEPTION.txt",
+          "bytes": 923,
+          "sha256": "bd9d5dd606ba8bedb8a0badf921a11fd81ee4efb50a0b5474ffbaa33bca1c702"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_ACTIVITIES_V101142_VERIFICATION.txt",
+          "bytes": 2237,
+          "sha256": "7ffcd7e6f78ddeffdfce8bef8bbcd65f658c2d79a438e025c498d4637af89c31"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_ACTIVITIES_V2_SPEC_V1.md",
+          "bytes": 6543,
+          "sha256": "2914fb2db5b06dfb949981e5e1ef32518a029d66136d15c8d1c701e9af1def6a"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_ACTIVITIES_V2_V101086_DARK_LAUNCH_VERIFICATION.txt",
+          "bytes": 2333,
+          "sha256": "517e2d59305e04ee0d92c10a98eb8d640d6ba03fd71135407728c6b2d5a707a1"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_ACTIVITIES_V2_V101087_DIAGNOSTIC_CALIBRATION.txt",
+          "bytes": 2651,
+          "sha256": "4b973f2c57188e8d101ea30d45101e1194abacc424ab82f4235f153fdfbd4803"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_ACTIVITIES_V2_V101088_SOURCE_COVERAGE_VERIFICATION.txt",
+          "bytes": 2794,
+          "sha256": "6d98ec154cd6fbd98a0b27f186e1a16fe7d0f25e8659a455b5b7cf76cbd2b46d"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_ACTIVITIES_V2_V101089_SOURCE_COVERAGE_ADMIN_UX_VERIFICATION.txt",
+          "bytes": 2004,
+          "sha256": "c0b59cd18fb46f62c5052695688a695744ef21f818a973713baeeb79bb620413"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_ACTIVITIES_V2_V101090_WORKER_CONTROL_VERIFICATION.txt",
+          "bytes": 2137,
+          "sha256": "ffcd6a478e1cc1965469acdb581babe000f4377caa9d45692df28a9359aa81ac"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_ACTIVITIES_V2_V101091_PHASE2B_CALIBRATION.txt",
+          "bytes": 2165,
+          "sha256": "fadb2e44855dcf9271037a41ac8370fb892e902ccad5be786a406ad392bbe029"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_ACTIVITIES_V2_V101092_PHASE2C_ACTIVATION.txt",
+          "bytes": 2675,
+          "sha256": "65086e3db48e24591023cdb880122824986004d4cc62a65f5440d645dbcf3e94"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_COMMUNITY_V101152_MOBILE_MEDIA_VERIFICATION.txt",
+          "bytes": 1178,
+          "sha256": "d73f8661fc5b9e6b1fbd70ff984653c94fe6608815c9d8c9f1d13e6df3265d97"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_DATA_HYGIENE_V101156_FINAL.txt",
+          "bytes": 2554,
+          "sha256": "536e1e6545b312c03eedf9a7ae51d689c7cef2717ead4ea3dd73f223431ea868"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101019_TIMEZONE_FIX.txt",
+          "bytes": 926,
+          "sha256": "f17d230841ffd136866d1afbfe3f4cc9466936dfd0fce79c50c8fd7616a4231e"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101020_ET4_IMAGE_AUTHORITY.txt",
+          "bytes": 522,
+          "sha256": "ad381f72a7d40cb040210ff573f9ab7f7459d04a83449d0f04d40087f02b39c5"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101021_ET4_MEDIA_NORMALIZED.txt",
+          "bytes": 881,
+          "sha256": "cf23175338b0daab98398f877dc86ce50a1913a0d5a748633f530beebb4eb294"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101022_ET4_CATALOG_MEDIA.txt",
+          "bytes": 1256,
+          "sha256": "5105eef8ee3caa6479e931b50026c85b1b9284d1752362e86fe7c989552e48c4"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101023_ET4_HASHLINK_MEDIA.txt",
+          "bytes": 1080,
+          "sha256": "f1b8a95b188d53a67ea5c1fa2b914ea11f1afb22482134eae0954e093a72e167"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101024_ET4_CANONICAL_MEDIA.txt",
+          "bytes": 3171,
+          "sha256": "10dedb16d5bb9f416305c55387b46e1fb0733b056fb79009ca1ea7619b1f0525"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101028_DIRECT_FEED_MEDIA.txt",
+          "bytes": 2281,
+          "sha256": "a19309cb4f00fb728be0389a7dc02da6cf6a1935596865410fed01692e8d81bb"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101029_SOURCE_OWNERSHIP.txt",
+          "bytes": 1521,
+          "sha256": "4fd3d055a6f46f6a881c90ee630d613dcec2e74181092e50aec256848acee9af"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101030_ET4_ADDRESS_IMAGE.txt",
+          "bytes": 1396,
+          "sha256": "23a107e420e129cef91e094dd455b1f35028dcb1167f8dd844810871137ccf57"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101033_ET4_DB_REST_HANDOFF.txt",
+          "bytes": 1405,
+          "sha256": "3f81d8183bce450f6a02ef18d227f3d9aaf406fa8587d73d3009929aa8080a2a"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101034_DB_FRESHNESS_MEDIA.txt",
+          "bytes": 1219,
+          "sha256": "d6653dce2bd55f94d22e9aece43449d9daa9087aa1b55284ddae342c257d2ddd"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101036_BROWSER_IMAGE_TRANSPORT.txt",
+          "bytes": 2319,
+          "sha256": "2235ee9e911d3bcae3760566fbb41c591f5654b7f733bd6a4813447a186fb3f5"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101038_ET4_BROWSER_TRANSPORT_FINAL.txt",
+          "bytes": 1245,
+          "sha256": "f5b83934a75e46213db99d4ee02c8098e3db4f406dc23ce7b7bfa43920c854ca"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101039_ET4_LOCAL_STATIC_MEDIA.txt",
+          "bytes": 6233,
+          "sha256": "400694907339f84e7d0b1cfd6c8e612b43c29ce8cc84dccd81083fae34924e92"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101040_GLOBAL_ID_LOCAL_HANDOFF.txt",
+          "bytes": 3324,
+          "sha256": "0a9f2f5972cd21556c3c9639f81045abbdca504bc66a8a63cf0ff26feadeb554"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101041_DESTINATION_ONE_LOCAL_MEDIA.txt",
+          "bytes": 3224,
+          "sha256": "55775595285837e9e9fe40ef0e6e1b35cf4197b8ae96c23b3fea04a04c3d8664"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101041_VERIFICATION.txt",
+          "bytes": 3634,
+          "sha256": "0a36a6f87b12bc24a8e92332217b9399e0a6833d58f392df98335dfad96440f3"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101042_RIGHTS_AWARE_MEDIA.txt",
+          "bytes": 1718,
+          "sha256": "5d71cc0b217acd92cbf7b15c069043acc6a2a2db1053eeb09885777364160f47"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101043_REST_REGRESSION_FIX.txt",
+          "bytes": 2245,
+          "sha256": "361db0db38ecf15fc544c110adc99db7a977b67e5524dcbcd258b160f7757389"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101044_FALLBACK_AUDIT.txt",
+          "bytes": 2129,
+          "sha256": "cd498644bef983082d708946f19126d9e14fa08425a7848ef83ab587632d748c"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101045_RIGHTS_WORKFLOW.txt",
+          "bytes": 2831,
+          "sha256": "9dce7b8c056c845d124a930bb2c39dd91c431b77db1ddfd586dfc11208ae27e4"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101046_EVENT_ORT_BADGE.txt",
+          "bytes": 389,
+          "sha256": "9e9b57e569621a7bd6bcde1ca13b01dc1fe404e3c332b04fca15254da5fa551b"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101047_RIGHTS_STATUS_BADGES.txt",
+          "bytes": 467,
+          "sha256": "5691d4a227bc9657af2023cc9b0e8b87e64aadb8bf498453b7437f80633e7a09"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101048_EVENT_ORT_UPGRADE.txt",
+          "bytes": 501,
+          "sha256": "4cc6ed573f390482a457b947bbb4f254e5c361b292e59db099351defbc0ed4a4"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101049_IMAGE_RIGHTS_DEDUP.txt",
+          "bytes": 3104,
+          "sha256": "0ae305c68e7c750e0710a44adceeca9b14aed36bf2d4be5f6939645ca4589dcf"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101050_WORKER_COVERAGE_GATE.txt",
+          "bytes": 1040,
+          "sha256": "010ca555bbc2d542328147a32c13ec7fd1dac88a720cf9f9b37d64afe71ff9ba"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101051_COVERAGE_Wesel.txt",
+          "bytes": 1626,
+          "sha256": "208ad3e7990c178b4f18ffba65754576b42face6ebbad9d2fe0cd8c8c76742d2"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101052_53_CITY_COVERAGE_ARCH.txt",
+          "bytes": 1388,
+          "sha256": "e542cc5fda467b8862df808129c539a19bbc466fdce4cd6de121e38fb6964afa"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101053_COVERAGE_GATE_RESEARCH.txt",
+          "bytes": 1581,
+          "sha256": "79a47452529d3b7439c04343ee51ac6b05a6f2232b3eed9b1b4367b813b1605e"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101054_53CITY_SOURCE_MATRIX.txt",
+          "bytes": 769,
+          "sha256": "eb08971336c5a006c6246a884ebc7375bf0fd7752241d0a88293a5517bed714e"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101055_WORKER_WATCHDOG_RIGHTS_GATE.txt",
+          "bytes": 2792,
+          "sha256": "0e09bda6ab5818d28499254d95736a80ecbdb030beb786bc96c3dc96178a3bf9"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101056_ET4_FOCUS.txt",
+          "bytes": 1566,
+          "sha256": "aa386bc18542c29075b07505cbab6587249b28b56c4a846cf6d453f3724f9939"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101057_ET4_FINAL_PASS.txt",
+          "bytes": 470,
+          "sha256": "b494a71b7f98bbd7dffe55e960a74b30d082ac6cdd475ba0c1dfdbde3a488f84"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101058_EVENT_DATA_COMPLETENESS.txt",
+          "bytes": 2148,
+          "sha256": "3bae0b07005fe084dfaf319394da9761bd08dde212144faa8c2a6877b4295b7d"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101059_TIME_ORGANIZER_SEMANTICS.txt",
+          "bytes": 562,
+          "sha256": "c4861a7573716fae51a11fb48ee7f3e08fbb4e6f0e71b25df880cef96bad9144"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101060_VISITOR_ORGANIZER_CANONICAL.txt",
+          "bytes": 626,
+          "sha256": "8663aa572cf4d15ee374746bde63ab0ffcdbaf33ab50015b6851b26e9eee2bbf"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101061_GLOBAL_SERIES.txt",
+          "bytes": 636,
+          "sha256": "db8814d8bb8d4ff454e722f9b1d8573998ebcd34d5172b9823e4b21c64a13fb2"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101062_ORGANIZER_RELATION_AUTHORITY.txt",
+          "bytes": 711,
+          "sha256": "9fdf3a72f8348b94be3978d96b0cec266db654c6849de81f8c516fb784a10ec0"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101063_EVENT_FINAL_8POINT.txt",
+          "bytes": 898,
+          "sha256": "5c94db081c88fc236dc75df78c2cd1aaa21701b63c9e32cd4a02784469ca4e3f"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101063_FINAL_VERIFICATION.txt",
+          "bytes": 2387,
+          "sha256": "de6eed4f9f49bf9da550cf1cae1846ab1457b68e83d8f31f87bcbf3c5f86d947"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101064_FINAL_VERIFICATION.txt",
+          "bytes": 1371,
+          "sha256": "60e1427cf7430751e1051f44f80e6697bb6617384ef2ec50b33e790d7689797b"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101064_ORGANIZER_AUDIT_FIX.txt",
+          "bytes": 832,
+          "sha256": "c2eadb95cac0b2da202756c567d8728e49a2451c7a6787992c6d2a15d476c8ed"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101065_ORGANIZER_LIVE_AUDIT.txt",
+          "bytes": 2130,
+          "sha256": "d6d24df9b7346da8e60b043dae9b943996d4ab1260ef7d3f28c849577a17104e"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101066_ORGANIZER_CONFLICT_RESOLVER.txt",
+          "bytes": 718,
+          "sha256": "95c8152e44469b38c2951ed0d0bbdc620e815a113be002c7339e973c7f6dbd57"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101074_ET4_END_TO_END_FINAL.txt",
+          "bytes": 1476,
+          "sha256": "83d62ce764a5d58f5712ddf3272202bdb08f023bbb1f143984061004573491e1"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101075_EVENT_VISIBILITY_RESTORE_FINAL.txt",
+          "bytes": 792,
+          "sha256": "d54822bfdd7fa5d37c2f7eb4ef7570264ff004e19fb1a33351f25b095d219280"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101078_DIRECT_SHARE_PARITY_FINAL.txt",
+          "bytes": 1155,
+          "sha256": "f69df1a2e1efa48ea8dc7b497c8b18f91d90e2ae37750bbe3516f6a805051e23"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101079_FINALCHECK_SOURCE_PARITY.txt",
+          "bytes": 2332,
+          "sha256": "8dec22538b6983184a91623229ece9735959f782695e767d587cf905455cb435"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101085_RADIUS_MONOTONIE.txt",
+          "bytes": 1814,
+          "sha256": "914fe9f88b3e137f589dfe4d03d963799e84207cf696fc3335695b6511be2f58"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101097_HALLOWEEN_COVERAGE.txt",
+          "bytes": 1326,
+          "sha256": "f9f2790c491912d8b087f19feb517b996d150585581f36c416c90f8b3389fad9"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101098_BROAD_RADIUS_REST_FINAL.txt",
+          "bytes": 1910,
+          "sha256": "42a07fb964ff74611dda7e65c8a6094f9a92aa870f40f72d418f3fac35372398"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101099_HALLOWEEN_53_COVERAGE.txt",
+          "bytes": 726,
+          "sha256": "54ffa7c3d4743aa12b32c89ebc7eeff58e788273dd1b8e3d61644be7e616fbb4"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101100_HALLOWEEN_GEO_FIX.txt",
+          "bytes": 4040,
+          "sha256": "6af0452ff97420830b17b85307781b9ef9ccfaa576cf866bf1191d65d4fc96a0"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101101_TIERED_SYNC_VERIFICATION.txt",
+          "bytes": 1966,
+          "sha256": "2f9a717835ebfe6ffefbe7896ab2009363f1f140d4fd693c23f50b6f352fbf40"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101102_SELM_CALENDAR_PILOT_FINAL.txt",
+          "bytes": 2625,
+          "sha256": "b671781187c9ef6645c3dcd4e9b158053886ce5a0331a0b2a9b4a0cb0120e938"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101103_SELM_LISTING_PARSER_FIX_FINAL.txt",
+          "bytes": 1464,
+          "sha256": "f9ce793581cafe406ff5d927f56a494ecd4dc1e715065efaa8ffda58fa6eda15"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101105_GLOBAL_MEDIA_PATH.txt",
+          "bytes": 603,
+          "sha256": "310bdf8d1c4c5e9777794c31da406b92c9588321161cbe307e4cdfb38eb3946a"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101106_GLOBAL_MEDIA_RIGHTS_FALLBACK.txt",
+          "bytes": 745,
+          "sha256": "12a0497ed3b599c4c7d7248adb7b0031f08150e0295ccde785f7983e6ba851d9"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101107_GLOBAL_FALLBACK_MEDIA_QUALITY_GATE.txt",
+          "bytes": 1250,
+          "sha256": "bb120dfd165e88b6dd6a24927c8808e2e0de46982d4630b2e8e09bff74200724"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101108_QUALITY_GATE_WORKER_UNBLOCK.txt",
+          "bytes": 1454,
+          "sha256": "9e8acc9ed517474701d72dacefcb6d88bcdac1b3b63b9c1787be4d7b43df941d"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101110_FINAL_AUTO_MEDIA_QUALITY.txt",
+          "bytes": 3303,
+          "sha256": "1f8f60aee382ce840711d2611a1a2b9f78ef52d9504c837bf120c6716767d852"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101111_SURGICAL_WALDSCHULE_MEDIA_BLOCK.txt",
+          "bytes": 1285,
+          "sha256": "24349190bae9fbc94eb462146a2bce5d84f2885db0c690e282e91ef25a0f5f93"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101124_SEMANTIC_SYMBOL_REPROCESS.txt",
+          "bytes": 775,
+          "sha256": "a0a73769ad65e2e6fe39e9471fc90424c4512cec39cd00c362ce5a4f4afd1ff9"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101125_LIFECYCLE_FINAL.txt",
+          "bytes": 4461,
+          "sha256": "19dacc6a250d2d1e526e9e68f7e77325c69d62eb2f309bc3bed81c8ba1093b48"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101132_BROAD_RADIUS_MEMORY_FIX.txt",
+          "bytes": 1333,
+          "sha256": "c0fc12bd2e56e63779276315781773f6e55b2959068e190cab9e2667c1831032"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101154_DATE_PLAUSIBILITY_FINAL.txt",
+          "bytes": 2437,
+          "sha256": "13895793015fbb9e5e0b4fa8d648ba7732fe236a1784df96139b539c51b445ac"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101155_PUBLIC_RANGE_SCRUB_FINAL.txt",
+          "bytes": 655,
+          "sha256": "6256748015ed0eebb19fdb844fb49ac42a0ecbca1b922e7125013b95e3874fc3"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101159_WESEL_MARKETING_FINAL.txt",
+          "bytes": 4186,
+          "sha256": "c864d397d6a8e9494cff412ea12c1d93c3f985d85b2cc997415fec7a45aa2355"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101160_WESEL_LOCK_RECOVERY_FINAL.txt",
+          "bytes": 2146,
+          "sha256": "04a54d36e6a0b0f7a6d0dd3d1cf698d38b63a0ada8cac43a0a95911df14b7369"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101161_WESEL_AUDIT_REPROCESS_FINAL.txt",
+          "bytes": 4474,
+          "sha256": "eee37c6cee6a0286389d2ed8c0727f4a37a9bd52e96be17bcc54580a9f2779cc"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101162_WESEL_MARKETING_DISCOVERY_SOURCE_FINAL.txt",
+          "bytes": 979,
+          "sha256": "b658c8140e0b88c4d54be4204425c5a45ec8c46945cb7529537f5180b98ec462"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101163_WESEL_VENUE_ADDRESS_RESOLVER_FINAL.txt",
+          "bytes": 5094,
+          "sha256": "a129ccab36787d9aceb65a0de2e5bc97e00ab2ef21397739d513fbc0efd9ee3f"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101164_WESEL_VENUE_CITY_RESOLVER_FINAL.txt",
+          "bytes": 3878,
+          "sha256": "4897077ba28f72a561691badf072f086d92bf5b9877d200dc42086a37fabd922"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V101165_WESEL_OFFICIAL_FUTURE_CITY_SCOPE_FINAL.txt",
+          "bytes": 968,
+          "sha256": "d935b5c87d9af38813905e371de975168b88d87b745a7bdb24fab87801a8da47"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V1014_BULLI_MEDIA.txt",
+          "bytes": 637,
+          "sha256": "564dcc2ad2f55894d84210273054241033b3ec5c67f05fb68ad73051dde9bbc2"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V1015_PUBLIC_WEBSITE_FILTER.txt",
+          "bytes": 764,
+          "sha256": "1f5469a18bfab6b6153c48547797b3f1f7bee2f7781504557bb5aed9bf2e7fa6"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V1016_REST_LINK_FIX.txt",
+          "bytes": 646,
+          "sha256": "5d9a6e4e6f1373984664187d41bb38815a95d15b60c460ae97d1d8957b3a470b"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V1017_CANONICAL_VISITOR_MODEL.txt",
+          "bytes": 723,
+          "sha256": "deb8af0ebfe8b053fef951061df5be5daee94247a34fe7273978d62a9a493a96"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V1027_RICH_SUPPLEMENTAL_MEDIA.txt",
+          "bytes": 1816,
+          "sha256": "234724ecaa242f9b43ab8ff4c61dcdbbcf677e1370c8921a3ebbf3438abbef60"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V158.txt",
+          "bytes": 810,
+          "sha256": "b07f2e7560143b0f3e2bcafad9622486fa2fc2a7ea3bc961121a3172bbfa265f"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V159.txt",
+          "bytes": 1061,
+          "sha256": "37b72405d97ebd69e687f83a1d9a6973b1f0dbd8cb49cd16b6f38f2f579bb33d"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V160.txt",
+          "bytes": 986,
+          "sha256": "3f449685ae6bccbb502dfc3a6864829b69567b298e8f6e1889c7b047f6151f14"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V161.txt",
+          "bytes": 362,
+          "sha256": "188d83881d04422bcfdb11f50aec3a5118ad051975326a2f6a94da959595db74"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V1610.txt",
+          "bytes": 503,
+          "sha256": "93f213afe7668b2abbedfa15f18a65e9789a889e9029176ebb4088d698c8d309"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V1615.txt",
+          "bytes": 662,
+          "sha256": "2991c26674bd810bb7b1b5e364d94dae9845e4e733b9bfc710c2d56381a69c9b"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V1616.txt",
+          "bytes": 533,
+          "sha256": "00b58d6878920b9f9b83825c922d49932cab879fc81f70906f5335292e1df898"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V162.txt",
+          "bytes": 1240,
+          "sha256": "6135764ac19647db63010adf679bedadd8ab467d64eac6ff7d22ed4f4ef07687"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V163.txt",
+          "bytes": 583,
+          "sha256": "53a32cc1ec3f9438212581a3e78f1677774ab1e3f5da9c791caba6382f77610c"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V164.txt",
+          "bytes": 228,
+          "sha256": "c105b397804958c4ca0b7960857ff7d56335b18cfcc7eb002beab54035d47ee0"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V166.txt",
+          "bytes": 588,
+          "sha256": "48c634c8a74f8f89c7b44303320af74f043aea074745166450daa38f2fe45e82"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V170.txt",
+          "bytes": 1153,
+          "sha256": "5dad1907713df0a7ccecc5f9affca68a75a883b7ca892f29dbf41056053a4f2f"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V171.txt",
+          "bytes": 1508,
+          "sha256": "c91c2083e59bba5544e50fdfc75328713674a0d2964c9559938cddd1902e6d97"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V172.txt",
+          "bytes": 1724,
+          "sha256": "2d070c125ec6fec4616495dc212bd9033ace0bd5bcd85f4f37efcf6d99b4a708"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V173.txt",
+          "bytes": 846,
+          "sha256": "fc608a33e3c232b0a12910fb10b52f611f74e0c44b3a2f3c6e78dd45b8bc89a5"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V174.txt",
+          "bytes": 1277,
+          "sha256": "e882c5c049baff7c26cae799836e43ef7b873eed520ef514e1ad8ff571b72bd3"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V175.txt",
+          "bytes": 1345,
+          "sha256": "10841ca836328416d3af08bb0becdb2ecf581d1ce78dc7c9e2e1cb7a11bc5a4c"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V176.txt",
+          "bytes": 91,
+          "sha256": "6b924bd2f4185954f990965b128d8746911e776a62af5c4a0255e25407285c5c"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V177.txt",
+          "bytes": 366,
+          "sha256": "24274467a8c3e38f0c37178d6e42ab15a784a8e43a702c645c87867f514dfa70"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V178.txt",
+          "bytes": 860,
+          "sha256": "ca5ad7aeabde8bbc78ba0657b8b9bd735fba053f7afcd03c8c433eaa032cf1df"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V179.txt",
+          "bytes": 146,
+          "sha256": "b99719a36d3acc0fb6883cd84c507277dc67c645c296fccb644dadffcb98574d"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V180.txt",
+          "bytes": 729,
+          "sha256": "7f128eb3e02fd1d8026fb8320ec516e019193cb99aa30d8bd9746b3867817c48"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V181.txt",
+          "bytes": 1442,
+          "sha256": "f46d3aab9e3cda356b70d64ba8acb2765a4949facbae7749faa9e20b5c8607da"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V182.txt",
+          "bytes": 609,
+          "sha256": "a09d5d306e77922319f12ddbdf77583513b5117855a4f32f2c6771e9c6796c1b"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V185.txt",
+          "bytes": 182,
+          "sha256": "47b9d64e5b9e46524fef1e63c1e76d7af24f2a6de73bbb15412d666221cc12d2"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V186.txt",
+          "bytes": 234,
+          "sha256": "6678dc9718060a7ec0ea3d0f7f23c3998aeefbff33e3ff567144cb50c03f8a70"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V187.txt",
+          "bytes": 576,
+          "sha256": "aa2888282a558aa680a2737f8da4f583f14de114d61d55d0ca385793d110f69c"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_EVENTS_V188.txt",
+          "bytes": 737,
+          "sha256": "c9c2a65ece22b715a4a90ad017840fc0eb344313db3636d1dc5ce146b250c368"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_FOOD_RUNTIME_V1013_VERIFICATION.txt",
+          "bytes": 405,
+          "sha256": "84a7e64550925658caf69076089711d63919a797bbdeac7b678496404cf5f32e"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_FOOD_V101143_VERIFICATION.txt",
+          "bytes": 1956,
+          "sha256": "2bda21ef0ad0aee70ca4c03c74fc8f57d91547ca9de533ad0251da6a865a9584"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_GLOBAL_SEARCH_V1614.txt",
+          "bytes": 312,
+          "sha256": "25cc577c11aab9a9af6cf12af73fd9de0b080a544e414e8f9342e45e01418f49"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_HIGHLIGHTS_V101141_CLUSTER_VERIFICATION.txt",
+          "bytes": 2206,
+          "sha256": "c8afb0a902a6f30c3685e7baa0d2fc3bc7dcdc14746a13fddc29246495640b6f"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_IGA_V101081_DARK_LAUNCH.txt",
+          "bytes": 1652,
+          "sha256": "f064bff0c9e5831bb5d6a3220ce4b037410c9dd739107619076f305f2a5809e4"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_IGA_V101082_LIVE_ACCEPTANCE_FIX.txt",
+          "bytes": 643,
+          "sha256": "b9efc3cfeb91632016273d51e85508cdf46f3275d3da17684edf15eaf082206d"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_LABOR_V1100.txt",
+          "bytes": 975,
+          "sha256": "1636cd56c536b89c40234eb873d00cd6eef73bf287c9e49c1d5eb974f913173b"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_LABOR_V1101.txt",
+          "bytes": 632,
+          "sha256": "8fcdc2acc584381a1cc0633979a0a8433a51664e1d501f20acdcb0815d30d01a"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_LABOR_V1102.txt",
+          "bytes": 733,
+          "sha256": "a8b1ce1b5d3ace0366a1efa6f14ce8a3840162407e87f5ee3cbab842d448e994"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_LABOR_V1103.txt",
+          "bytes": 1304,
+          "sha256": "b162f50d785d4588f31f535bb9ce848fe795519b38e43df8040fa212477bc13d"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_LABOR_V1104.txt",
+          "bytes": 1389,
+          "sha256": "45d7fee418d151cc11c3719177de9cdf3b3766bc1c9ff20ea6f23cc68fc36de2"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_LABOR_V1104_VERIFICATION.txt",
+          "bytes": 975,
+          "sha256": "1bb4756752e278ded848cc1c049a672127ec6bf2839fb6550c5dffd77cd4fd00"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_LABOR_V1105.txt",
+          "bytes": 1101,
+          "sha256": "7b3b59c47236e6b2147fe9d854dfddf7abf8e7fbd9e34307570bf9b9b8e40999"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_LABOR_V1105_VERIFICATION.txt",
+          "bytes": 678,
+          "sha256": "a3900444db3c9daf3085f3644ce13b20274ece96e3867b14d111a3ecaa3cd325"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_LABOR_V1106.txt",
+          "bytes": 1074,
+          "sha256": "54537ef475976434b84c5fb7135213b4f478562ced835e99fd4c3343f51853df"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_LABOR_V1106_VERIFICATION.txt",
+          "bytes": 650,
+          "sha256": "ca3ab3557f9426aa5021df9290f564071036df4db3fcbc4b81b7dc3da1f93a23"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_LABOR_V198.txt",
+          "bytes": 575,
+          "sha256": "6670d0703b64505a3975284ccdb8a5aab4b07f985a1907e3507855358e8954e3"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_LABOR_V199.txt",
+          "bytes": 1105,
+          "sha256": "a0485031c9cded5bcf29702aaa12cf477841a8e04776ba513df689b8d5368e77"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_MEDIA_V101112_MASTER_CROP_FINAL.txt",
+          "bytes": 517,
+          "sha256": "c6c91445eb641ceef91e24e0167e11918144ae94bc3e7cd355a15a733db4782d"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_MEDIA_V101112_VERIFICATION.txt",
+          "bytes": 1430,
+          "sha256": "1e1518a21d36321aa13d3b7f5551829cb938f6b92808f2802e280864360f42ab"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_MEDIA_V101115_UNIFIED_EDITOR_FINAL.txt",
+          "bytes": 661,
+          "sha256": "4561da58fbb3375d46bdb8d672b46d1a446b975ab6e9b9ed80bc5ead94743a13"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_MEDIA_V101115_VERIFICATION.txt",
+          "bytes": 1078,
+          "sha256": "4c7022065db86c1fdeb324c3d4f5d6b233423dcbecf85370bea8041e20d516a0"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_MEDIA_V101116_ZOOM_OUT_FINAL.txt",
+          "bytes": 447,
+          "sha256": "ef4d498f0640a02704b122cb0d245c64b9f547b27ba9f5cc991f642d7cea5922"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_MEDIA_V101117_FOCUS_PREVIEW_FINAL.txt",
+          "bytes": 1864,
+          "sha256": "ff3eb0e300804971759ae704b3ba8eb0afc95d1731f9b7d933efc47e21355e66"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_MEDIA_V101118_DIRECT_ID_CROP_FINAL.txt",
+          "bytes": 2929,
+          "sha256": "40eea96166038c7f10459615c75ea76407a9e448e30f809d7fba9864c7282de2"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_MEDIA_V101120_INLINE_DIRECT_ID_FINAL.txt",
+          "bytes": 1742,
+          "sha256": "40ebdfcd531d37ea1d34fff56ea72882735ce4117eadcb4dff289b3e21e50e02"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_MEDIA_V101121_CARD_SOURCE_LOCK_FINAL.txt",
+          "bytes": 1622,
+          "sha256": "1692cd04a45a02627418f30cf107732687a342f4d97c4e699a0f3e98dd081410"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_MEDIA_V101122_CANONICAL_CROP_VERIFICATION.txt",
+          "bytes": 3278,
+          "sha256": "d39691dd2c5a955385c71e3cb84ea2c974154f54d32ac17b5966fc7e2760398d"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_MEDIA_V101123_VISITOR_SAFE_CROP_RUNTIME.txt",
+          "bytes": 1306,
+          "sha256": "8dad539983cb4f598382b5b07e677568242a5842dcf3f99c7849543a6167f222"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_MEDIEN_V101112_TEXT_FILTER.txt",
+          "bytes": 1119,
+          "sha256": "33cb271659b8ae295113a0e68939344018eb5fd27ae2ae2170d23a60cef2844f"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_MEDIEN_V101113_CONTENT_FILTER_ACTIVATION.txt",
+          "bytes": 559,
+          "sha256": "045b003886723c7503d8f346f8aafdc03ec97c6090c88676488020be9906c12d"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_MEDIEN_V101114_UNIFIED_EVENT_SEARCH.txt",
+          "bytes": 2190,
+          "sha256": "202703e38f9b636b753c794debf1751b13969a0c7a1e695d73d0bfe6c894fd72"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_MEDIEN_V155.txt",
+          "bytes": 607,
+          "sha256": "b52671e6b2624741c18b0bfe996ec3e27cd0263e1984701d2a8264040d7e5c47"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_NIGHT_V183.txt",
+          "bytes": 496,
+          "sha256": "c83a2ebb6e5f5d956c5e38cab92bfe28d06e488aa3ded5900d122f074cfac7e6"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_NIGHT_V184.txt",
+          "bytes": 388,
+          "sha256": "81bf212dea31609ac436ef983f13918e1b902575aac1867ddca5bc55d176af08"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OPENING_EVENTS_V101068_FINAL_VERIFICATION.txt",
+          "bytes": 1843,
+          "sha256": "ed026b1b3758a6b1a4689400d928156e7303e24f739b68727c0e58e98337c462"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OPENING_HOURS_V1107_VERIFICATION.txt",
+          "bytes": 1646,
+          "sha256": "620675079304be19dd950252f6f1a988d3655237877e85a1764c3045385e04b7"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OPENING_HOURS_V1108_VERIFICATION.txt",
+          "bytes": 3192,
+          "sha256": "e8814cda6850000c63c9539869fc3afd29e539b7d7cd08f6f82b7a4ccecfbb49"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OPENING_HOURS_V1110_VERIFICATION.txt",
+          "bytes": 1772,
+          "sha256": "ee5dcac2c51e1b5acc64f1db51861e7c9adacc3098f12ca6fab44d2cd0ec9c04"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OPENING_HOURS_V1111_VERIFICATION.txt",
+          "bytes": 2393,
+          "sha256": "a6ada06b60673f9ff016da2fc968123234a5386395b785da959387a5aab5f387"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OPENING_HOURS_V1112_VERIFICATION.txt",
+          "bytes": 1861,
+          "sha256": "bee38c4389798a2c307809d1765dd1b188e37c6d286864227508a09629a74705"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OPENING_HOURS_V1125_VERIFICATION.txt",
+          "bytes": 2891,
+          "sha256": "cc0db647a09916848c5e7da0a38b465cc434a26cbf94f3170787115eb71d992d"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OPENING_HOURS_V1126_VERIFICATION.txt",
+          "bytes": 2987,
+          "sha256": "24d354b465a5883304b8ede7197d8e0dfd3c2e048bea46b0461553be8018f655"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OPENING_HOURS_V1127_VERIFICATION.txt",
+          "bytes": 1838,
+          "sha256": "097459a905c4fb03af1d703ea8a6202ed8ed28df0f66347ab609cafb23e9829b"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OPENING_HOURS_V1129_VERIFICATION.txt",
+          "bytes": 2600,
+          "sha256": "dd1b8a25dfbbf344d31beaefc18a70a930b1ef8c46930a982a11ef0c03d18cc8"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OPENING_HOURS_V1130_VERIFICATION.txt",
+          "bytes": 4102,
+          "sha256": "4e8ab59e084d659b0949b38ed12e0a013fdbe2db090ef63a14df6f97ced66d28"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OPENING_HOURS_V1131_FINAL_SALVAGE_VERIFICATION.txt",
+          "bytes": 2361,
+          "sha256": "6f2119b15528086c4b854e6fa4e79b129471353ed192e40a6dcfedccf48ea7d0"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OPENING_HOURS_V1132_VERIFICATION.txt",
+          "bytes": 1895,
+          "sha256": "f07851203ce8af394ee882d8379ec5494105507080dd76a949feb2e889132bf7"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OPENING_HOURS_V1133_UNKNOWN_DELTA_VERIFICATION.txt",
+          "bytes": 2222,
+          "sha256": "d4d8c772e82264655d61ff671766e56f9ccc0b3eea6e6f196989b501c1ee9e4a"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OUTDOOR_V101130_DARK_LAUNCH_VERIFICATION.txt",
+          "bytes": 1532,
+          "sha256": "5c5a5e0d084b322234f0bcdf60d1cfb0913696f6affecccf3f91d25326dab9ae"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OUTDOOR_V101131_53CITY_COVERAGE_RUNNER.txt",
+          "bytes": 607,
+          "sha256": "f5ae5bdf28a6bf8232c0e751e404831774b62963c1d46cf25798802403198475"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OUTDOOR_V101133_BOUNDARY_PREFLIGHT_FIX.txt",
+          "bytes": 1026,
+          "sha256": "5cad0c6e3a61898cffae16ce012cb1a0765735272acdb333700e3577db7d0914"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OUTDOOR_V101134_PROVIDER_TRANSPORT_FIX.txt",
+          "bytes": 1177,
+          "sha256": "9d8e61550ec986c2b96752e09735cc48fb6df7db2e23ac07c575ef055f53faa9"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OUTDOOR_V101135_PROVIDER_AFFINITY_FIX.txt",
+          "bytes": 937,
+          "sha256": "fbccbc5e6d6fe82c089669c5d23f7e1031c1ea2f1462f4058036358c21229110"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OUTDOOR_V101136_PHASE_A_SPLIT_FIX.txt",
+          "bytes": 910,
+          "sha256": "40c46b6a3878a9ab84f551fc414f4b8e6ccc01bcf1b71eb635513999ce0c980b"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OUTDOOR_V101137_NATURE_ID_DEDUPE_SPLIT.txt",
+          "bytes": 1375,
+          "sha256": "55247f9114210b43fe3bcaa93709746f93f1b78fcdf301b69a85e9ffede74802"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OUTDOOR_V101138_SINGLE_AREA_REUSE_FINAL.txt",
+          "bytes": 1028,
+          "sha256": "8626176ec998213bb995142e44d05247b4c0b3e5b2e676115840519bcc07d6e6"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_OUTDOOR_V101139_RESUMABLE_COVERAGE_RUNNER_FINAL.txt",
+          "bytes": 1334,
+          "sha256": "3041729ea79805e1e76fa4de1a99a6e22c1e8ce7bb5f0864e52d7051e3f3fd83"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_PLACES_V101076_EDITORIAL_IMAGE_POOL.txt",
+          "bytes": 1123,
+          "sha256": "7da299a372e49530d9040fec4a3f08c5590c80cd88af88ebc83f984006b18c4b"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_PLACES_V101077_ADMIN_WORKSPACE.txt",
+          "bytes": 1287,
+          "sha256": "2a859dd0ff8c41a6c37bd94b04092a994766f9d7dd61e69d3b6409cfc71fc26d"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_PLACES_V101080_DATA_QUALITY_FINAL.txt",
+          "bytes": 4020,
+          "sha256": "9a5918ea26be73a8ab31969996a9c8a4d3e4a54ca91773e52866027c9235f80f"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_PLACES_V101093_DATA_QUALITY_FINAL.txt",
+          "bytes": 1414,
+          "sha256": "d62827e863a425ab81da113b5486b2091bae00670bd78e29c289d23582a70cc2"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_PLACES_V101094_PLACE_MEDIA_COVERAGE.txt",
+          "bytes": 1693,
+          "sha256": "8fefb4fe3970272535b532280fb8da9aaebdba840413229d28740eb6a914199d"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_PLACES_V101095_REPROCESSING_STANDARD.txt",
+          "bytes": 2756,
+          "sha256": "1378fe7d572416814336399ab542d14242e9c093bf3506c0828c2516c8b51f82"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_PLACES_V101126_REPROCESSING_FINAL.txt",
+          "bytes": 2869,
+          "sha256": "55ab87afcba1ab48aad85903d05a67d489dc2cb25a03953171f4d94a78514240"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_PLACES_V101127_53CITY_FINAL_AUDIT.txt",
+          "bytes": 1236,
+          "sha256": "a043c1d5889be3e2ef971606f8e5f31b04e51922073303848cfe9cdbffe0c90a"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_PLACES_V101127_VERIFICATION.txt",
+          "bytes": 1729,
+          "sha256": "a452f15ceb986b337c96be28cc6007e63a935a62c661b6c65628c5d0d413372d"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_PLACES_V101128_SCHEMA_CONTRACT_REPAIR.txt",
+          "bytes": 1327,
+          "sha256": "bd0e5ae8e25bbaafe0572c2817d374fa9636b45b3a218872ce2f3b889298b28c"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_PLACES_V101128_VERIFICATION.txt",
+          "bytes": 1386,
+          "sha256": "43413bec7a3651873a6c44d16b6b789cfb097ab2db10fae2e6e3e9e857daf7c5"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_PLACES_V101129_PLACE_MEDIA_CONTRACT_REPAIR.txt",
+          "bytes": 2899,
+          "sha256": "acf9bfe76ebf1bc33dd2a9cdddb3f8d13a6b8815a72243601350a594a38d8bac"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_PLACES_V101129_VERIFICATION.txt",
+          "bytes": 688,
+          "sha256": "ee1b275e7027bde767bac2bdfb3b1962df2f3355ab473baca98e89ddbbe325a0"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_PLACES_V101150_VERIFICATION.txt",
+          "bytes": 5354,
+          "sha256": "c348d171e971901c63dcc2ddf45665a89ec98a712fd71b33cd8ca3d210f623ea"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_PLACES_V101157_ZOLLVEREIN_SEARCH_PARITY_FINAL.txt",
+          "bytes": 2175,
+          "sha256": "4d89b8d6706e37b2501e68798e473f212435d5edd63943e91d3737225b754389"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_PLACES_V101158_SEARCH_DETAIL_LOCATION_PARITY_FINAL.txt",
+          "bytes": 1443,
+          "sha256": "50c5071f4cd48e6f84476e9388a163c001d358ef5a08e91a6a354c7f7d917a08"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_REDAKTION_V101109_ADMIN_UX.txt",
+          "bytes": 1552,
+          "sha256": "e2ff83128d6c7f6979ea358304adb7ae72ff78b0634d135084a20e6569716bf0"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_REDAKTION_V156.txt",
+          "bytes": 810,
+          "sha256": "7659061c0a71004d74e00b41c1ef0d09436b38edb17f14b9e35aabb6cb1f99c5"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_RELEASE_V101086_MERGE_VERIFICATION.txt",
+          "bytes": 1676,
+          "sha256": "07d17f3116b58f865d0c8e2093d065da6c9ddfc8ca7c193acf42d17d7bf8c385"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_RELEASE_V101153_WEBSITE_AUDIT_FIXES.txt",
+          "bytes": 647,
+          "sha256": "a8d8e2fadbbc6498ecbefe467a2f3b7c67c0c55509961834ce3cadb313591127"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_SEARCH_V101084_SKATE_SYNONYM.txt",
+          "bytes": 1284,
+          "sha256": "2d309317ad4521835543db5db079802e5ba0df6d4e683be3369dbe82fc863872"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_SEO_GEO_V101140_PLACE_RENDERER_FINAL.txt",
+          "bytes": 1032,
+          "sha256": "b69dd62260662f1b423da3e5de5170452b0b6e5bed425e5df4d109576affcde8"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_SEO_GEO_V101144_VERIFICATION.txt",
+          "bytes": 1744,
+          "sha256": "71ab3868135644768c4c9feb72682ad8e5514b60de6f44c4268f7a561278a34a"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_SEO_GEO_V101145_DEEPLINK_URL_VERIFICATION.txt",
+          "bytes": 1645,
+          "sha256": "2d201cd92b3ee1a0083cbbdb06837ef4f14e1ca6cda73d77e363985d20dde790"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_SEO_GEO_V101146_DYNAMIC_DETAIL_VERIFICATION.txt",
+          "bytes": 1444,
+          "sha256": "8df303766eae8d3003e7793643593324bdf7e19aa1c8b29e60ef159386ebb581"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/RP_SEO_V101096_INDEXABLE_DEEPLINKS.txt",
+          "bytes": 1753,
+          "sha256": "394ae32f5cff995cdccc0621d4cc23c59961a13d8f03bfb6f28c6f6f3351d2f1"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/assets/bootstrap.js",
+          "bytes": 7299,
+          "sha256": "cf6850642b60d0a15fa618a07dfbc47e6df37660cad0b35eb0aa00ec50ace9ca"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/includes/intelligence/class-rpg-iga-intelligence.php",
+          "bytes": 18272,
+          "sha256": "a85e077883efbf9a01bfc89f0a74e652f7ab6bb302dd1c91e878caa06f02d952"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/includes/intelligence/class-rpg-outdoor-coverage.php",
+          "bytes": 28305,
+          "sha256": "7c462101db90c4193c08b9515030f23c30fa648ae1fb76132386c45822cb4573"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/includes/intelligence/class-rpg-outdoor-intelligence.php",
+          "bytes": 24573,
+          "sha256": "2197b8b88b8d30226ffedc4ca8fc07f46c2da5a9b9a91185c9ed02bacae679cb"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php",
+          "bytes": 1953421,
+          "sha256": "dc6d447f1baa4710b08a00d0a3ffb6c4e274505d16e90ac258446ff63fa1bce0"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/txt/EVENT_ET4_GLOBAL_ID_MEDIA_V1031.txt",
+          "bytes": 1815,
+          "sha256": "d2716c5f21a57d0dc133bca464c1d18118ce17cb6f3969de6c16428aa1aa71bb"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/txt/EVENT_ET4_MEDIA_PROGRESS_V1032.txt",
+          "bytes": 569,
+          "sha256": "1c1fc0ae6a61bd0ca9cc9f805810852d286b90972cb1d48452c3d088701fdb8e"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/txt/WURST_ADMIN_V151_MEHR_LADEN.txt",
+          "bytes": 584,
+          "sha256": "f7603629bf9b9550297ce8988a0eeaaaf028855472f3af019149bf36b502f69b"
+        },
+        {
+          "path": "wordpress/plugins/ruhrpott-guru-places/txt/WURST_FRONTEND_V152_TIER_B.txt",
+          "bytes": 497,
+          "sha256": "a00d851a22bf0abd74af78b1b99117a25134849c085ab1893ec84208e4e225fb"
+        }
+      ]
+    },
+    {
+      "filename": "RuhrpottGuru-Theme-v345-Komm-rum-Trinkhallen-OFFLINE-GEPRUEFT-INSTALLATION.zip",
+      "sha256": "46b7f1fbbd5ea228f1e89fe4f3089053fec3f498c319f6cbaf751d5be3f46215",
+      "files": [
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V255_DESKTOP_READABILITY_PASS.txt",
+          "bytes": 115,
+          "sha256": "eca7f3c6a1b399a33e0192e76a8b22df54e30e27aa67b84a7264e0e0e60e8b7d"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V261_EVENT_VISIBILITY_RESTORE.txt",
+          "bytes": 582,
+          "sha256": "f8f56807436c395c0f1372eb8d39d12d60f657423bbba8a9cfc0178925d3a28e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V276_SEO_DEEPLINK_HANDOFF.txt",
+          "bytes": 524,
+          "sha256": "b90f7baf05f6dcfd3dd278bfe2f3e20008dc5516f5f14938c2d551376edf53dd"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V322_GLOBAL_ADDRESS_FORM_FINAL.txt",
+          "bytes": 892,
+          "sha256": "80294eebb6a29627c041bb2500aca5109d841a155dd4d161247ef2642a493664"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V316_EVENT_DETAIL_FACTS_BOX_FINAL.txt",
+          "bytes": 700,
+          "sha256": "8e94cc0af704bbfebe3a4e384e177e681f99fa475ea4e6e0e57b79732ff6a424"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V324_ADDRESS_GEOCODER_VIEWPORT_FIX_FINAL.txt",
+          "bytes": 565,
+          "sha256": "e97af61e0499132b7364a0e0547ce5bdb75ca5766fdfa8e549b42e323fb9e554"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/DEVELOPER.md",
+          "bytes": 4199,
+          "sha256": "30a42fcf1e851b61bc52ba625b0998c32b77abec35e4e67b77232ff38f3e6a76"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V277_COMMUNITY_UGC_FINAL.txt",
+          "bytes": 935,
+          "sha256": "3cb5d474cb34da9e4e4e0ac822de1b816f3a4a4c4ab51ec3f500cb05c1f05503"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/RP_THEME_V251_FINAL_VERIFICATION.txt",
+          "bytes": 1047,
+          "sha256": "d40d0e5d0f4c69b6389d1669042025729e5e891fca54f7e2e736b8bbe7cc65ff"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V212_FIXED_HEADER.txt",
+          "bytes": 342,
+          "sha256": "519e7d5383830ba00efd3bfbaaa43da08e2c601648e50002651e3b903ae2d428"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V243_EVENT_TYPE_SCAN_BADGES.txt",
+          "bytes": 803,
+          "sha256": "94adac729ac459162a5f9563a67df6bd1b7ce4554249807dfa29c2709646d720"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/assets/wurst-hero-daylight.jpg",
+          "bytes": 92991,
+          "sha256": "cbe84195f2933c1e0f3643ab84de1d5761fb60f9e0f41dba0c304694b25556b7"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/assets/images/aktivitaetsspots-banner-v225.webp",
+          "bytes": 392262,
+          "sha256": "e6e17621e348838c9bc18b138b6ca11b8f306149ba1dda63553d66c785c4d7d2"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/assets/images/pott-quiz-daylight-mobile.jpg",
+          "bytes": 390066,
+          "sha256": "d97ce5200ff432c2d5091f5de25f6eb14246ce59cf7d3c86bf631e8aa68426ec"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/assets/images/buedchen-radar-hero.jpg",
+          "bytes": 138971,
+          "sha256": "d755e3d5528a2c966f74256577d6ac4cce10b0a49588f23a94b4f9f545f0e859"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/assets/images/buedchen-radar-daylight.jpg",
+          "bytes": 382369,
+          "sha256": "bce7a5a480d943adf2a55721e4af14418e7f0211488db5e5328cc895713e64e2"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/assets/images/pott-quiz-daylight.jpg",
+          "bytes": 464947,
+          "sha256": "a428a0e089c76dbdca87199befac577c94d4c636cbfa388c6f5a87d39a5766a7"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V313_EVENT_RIGHTS_UI_CLEANUP_FINAL.txt",
+          "bytes": 872,
+          "sha256": "87fd46efe63168cf74dfdca09c4b286e7d15cc34d3edb4cccc73ab76f6b6fe52"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V319_EVENT_HINT_ICONS_TICKET_LAYOUT_FINAL.txt",
+          "bytes": 561,
+          "sha256": "32a9cf135b42bb30ff3c51e671194035ec0f1249b82302fc6dcce84f75d9e420"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V298_EVENT_FALLBACK_RELEVANCE_FINAL.txt",
+          "bytes": 1052,
+          "sha256": "bede6ae6ba3d38829ae141100a11e48e8a234e0a58e869221fa706f75e27ce25"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V266_DETAIL_TAG_NAVIGATION.txt",
+          "bytes": 1206,
+          "sha256": "22f99e149bcd677c883be5a0066c8f4160071ebef1dbfa85cf660d027c965b24"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/search-global.php",
+          "bytes": 287,
+          "sha256": "77965a0415e2d1f9ddf33b9b93fe29916112506a7b62683df8982673f73b5e99"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V268_ACTIVITIES_COMMUNITY_PHOTO_CTA.txt",
+          "bytes": 1015,
+          "sha256": "17e6769dca06eb741143a0f5616a5c73dd0ef0761630618d8bc378d7e5650b7a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V292_MEDIA_CROP_OVERRIDE_VERIFICATION.txt",
+          "bytes": 673,
+          "sha256": "3994bcdf5d6749cecf2d3648d30fbb5441135560800380882aa8d2e74cc9000e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V291_VERIFICATION.txt",
+          "bytes": 2082,
+          "sha256": "e9e6c7a92407abc760571458f9bc9414982d6e80ae080781dac133e551134c41"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V249_RELATED_EVENT_INLINE_DETAIL_SWAP.txt",
+          "bytes": 587,
+          "sha256": "123fe70776c7d1ce99a19b2273f4fe519d2bc5a22bc3b63a6fbc56017a920f61"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V290_VERIFICATION.txt",
+          "bytes": 1379,
+          "sha256": "175e111bc520a8eb869f765d71f44f190dc725234b08be0e3700a63a1c814d8c"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/package.json",
+          "bytes": 763,
+          "sha256": "0c156668b11f6ce829c006ee3477ee2a5c743c24b59ee24cedface055dcf1655"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V272_ACTIVITIES_MEDIA_ROLLBACK.txt",
+          "bytes": 772,
+          "sha256": "76aad123d0c81bbb6cd25d352cc9043caf48887a83a55a9f2358845e1d127d9e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V332_EVENT_CITYSCOPE_DISTANCE_FALLBACK_FINAL.txt",
+          "bytes": 264,
+          "sha256": "c7a52825259de0a3103392d250840cf4311e823f34a173c4098aa93abcf1d1e0"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V315_WESEL_CITY_SCOPE_DESCRIPTION_FINAL.txt",
+          "bytes": 501,
+          "sha256": "70bfa8e325590062d424e304aa98fd111181dce397c58312ceb47d5645c398f9"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V321_GLOBAL_ADDRESS_LOCATION_MAPNRW_FINAL.txt",
+          "bytes": 801,
+          "sha256": "188e54d313473ff2f1b4128e1a4bf3ae7f1a46ef54b4ae42c07f9abb42a5608e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/page.php",
+          "bytes": 8982,
+          "sha256": "4a8bb67f68b2a4e102171c66dd3f4387128869e672df9234dd857b4143be5ecc"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/front-page.php",
+          "bytes": 1764,
+          "sha256": "a5a9777a3796dfc997fee68020811a9b7a9f46221c1337c35d4fc9b22237c2d1"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V283_EVENTS_DISTANCE_RUNNING_DATE_FINAL.txt",
+          "bytes": 963,
+          "sha256": "5f2c7267140a3143d82e5aee9d3febba6e3854bfb04e803ec1fe0b70fe29d395"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V292_MEDIA_CROP_OVERRIDE_FINAL.txt",
+          "bytes": 410,
+          "sha256": "40cdcc3879fab6bf7d180ef38459880df8e986cc537044f4a185ca93c8c54e3c"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V246_EVENT_TERMIN_ORGANIZER_FINAL.txt",
+          "bytes": 530,
+          "sha256": "3299a9e9bc007436579df3d4205f17ceb983607286f5148f458f5a146621facc"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V244_EVENT_DATA_COMPLETENESS.txt",
+          "bytes": 975,
+          "sha256": "88b9212e61380bb3662c089513d09184c4338b89172dbb172636561d54ce0527"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/page-start-test.php",
+          "bytes": 1470,
+          "sha256": "4f52f6c6f0891103523f2a2ed17babafc6215fcb53fc1821ddc8393059e78308"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V253_OPENING_HOURS_FINAL.txt",
+          "bytes": 379,
+          "sha256": "5e91c233d0f84ec9c56c36104913ca82581bcc804f0e3c6a7cb160c916f66d40"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V294_RADIUS_PERSISTENCE_FINAL.txt",
+          "bytes": 518,
+          "sha256": "471346c070c710766adf73c17fefd76ea1adc55df21f124600b352c455339181"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V303_SINGLE_SOURCE_DETAIL_FINAL.txt",
+          "bytes": 529,
+          "sha256": "01e5997f8f42e0a791283d3f981541e27332467f3fd9972f2f96e18964c03269"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V219_MAIL_SENDER_NAME.txt",
+          "bytes": 193,
+          "sha256": "6e0e9c367d14a1f56af04880f1f9dcc97f08e4d63b1c8adca98db20871d67f34"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V309_WEBSITE_AUDIT_FIXES_FINAL.txt",
+          "bytes": 798,
+          "sha256": "9a9faf17d17bb185d758b43e5cc586cd9034e42cb56dfeb98507eb431b99f070"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V273_UX_MICRO_INTERACTIONS_FINAL.txt",
+          "bytes": 2089,
+          "sha256": "b9247c535e9e6274ab15a55a24cb0e087e969a2d8edccd5e445e451de18c9740"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V281_HALLOWEEN_SEO_COMMUNITY_MERGE_FINAL.txt",
+          "bytes": 1032,
+          "sha256": "ed250705c3276a758536138786e9cab14c80fff6e224aca8adc75b57027ab8de"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V260_ET4_EVENT_END_TO_END.txt",
+          "bytes": 732,
+          "sha256": "55936915843ef35be8a8210ccddd1ef71aa2381e9a78c14cde42c3e84d3c309c"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V310_SEO_DEEPLINK_HEAD_FINAL.txt",
+          "bytes": 806,
+          "sha256": "7dab37fff886ace160ee4fddecaba886fcce89c63b32bb984fddd0162ba0732a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/src/react-app/place-events.js",
+          "bytes": 6284,
+          "sha256": "6fa0dff3a4728a23fa606cf68c61f179be01e210b79a5e90506d8437df8f1d9f"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/src/react-app/location.js",
+          "bytes": 20075,
+          "sha256": "13703711bb22a0a317e391ca33cd486fe282c4db393c20959b8583db26a0971f"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/src/react-app/views.js",
+          "bytes": 145820,
+          "sha256": "02e6d0dc5d4f8e5eaf7ba94c5f6cc66b54690644d694c329edfc35c959818a4c"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/src/react-app/analytics.js",
+          "bytes": 6480,
+          "sha256": "81291851d20569ea06c88e2c3c0ee330543bd106736ddab0b0b6e451c6e28de3"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/src/react-app/api.js",
+          "bytes": 73905,
+          "sha256": "7d1f5b9c9cf3fe245416f10fdf3853a070e6c281884f9695f8d6ab3c78e918a2"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/src/react-app/components.js",
+          "bytes": 136405,
+          "sha256": "87978a8d09f4307f3ce5e963fe5ce29c6ff90b089cfad124940481306175fe3e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/src/react-app/runtime.js",
+          "bytes": 36774,
+          "sha256": "58380d237b696409722c878a92f2d453381296c024be7acd5262a5f62a548393"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/src/react-app/main.js",
+          "bytes": 16856,
+          "sha256": "ba1c13d664860d0e433a6f5260895655395b77f3d4195b65e8a66249b19a1da8"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/src/react-app/README.md",
+          "bytes": 425,
+          "sha256": "6ffb19c05bca9e4daad1170dc30c93aef1878c96a9969c75e4efedcbaded20ea"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V279_HALLOWEEN_STRICT_EVENT_RELEVANCE_FINAL.txt",
+          "bytes": 1232,
+          "sha256": "3e65cbc0c78dde4d082f809fd76dbc88af1cbfb148621d7c4be8c4d6f2c9343a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/style.css",
+          "bytes": 82247,
+          "sha256": "723d3fa92e6ddeba2ab0fcef3ff7b7ee7be99992a8ee7028ac6e55ebf24a26d6"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V286_GLOBAL_EVENT_MEDIA_RIGHTS_NO_TEXT_FALLBACK.txt",
+          "bytes": 519,
+          "sha256": "fe2a26ee057681bf1bdb01847258de47e614e398da785997f699d746e9be7141"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/RP_THEME_V262_PLACE_IMAGE_POOL.txt",
+          "bytes": 475,
+          "sha256": "58b8bd95219e9673d0618bc6b400efc48e825a10f3b19b3301c31ee02cd074e7"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V299_HALLOWEEN_FULL_RADIUS_DEDUPE_FINAL.txt",
+          "bytes": 499,
+          "sha256": "54657ecc61fbc5249faf2b50ea11781e7de30e846e03cc2233ae57aaed11679a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V326_GEOAPIFY_EU_ADDRESS_RESOLVER_FINAL.txt",
+          "bytes": 1076,
+          "sha256": "618d8631dac4097aca9868ae82a4a6a3f65d8db40be509f9f7ad9c60ddde7daf"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V302_HALLOWEEN_DATE_GROUP_DISTANCE_UNCHANGED_FINAL.txt",
+          "bytes": 842,
+          "sha256": "056442547cf960fdd5ee86316570a1272a8ab99290360418a40e937c9eba2cca"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V254_DESKTOP_CARD_TYPOGRAPHY.txt",
+          "bytes": 339,
+          "sha256": "7484dad021bc1ebc244fe044d87d80c8a5d289f641c112288cc1ba1999f395f3"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V276_HALLOWEEN_IM_POTT_FINAL.txt",
+          "bytes": 1471,
+          "sha256": "cbd5ed5e6f2c81ef69ebb04b703ed5c3cf75776acf320307b38bfc281c80ef7c"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V340_MOBILE_NAV_FULL_WIDTH_FINAL.txt",
+          "bytes": 343,
+          "sha256": "c9b6930a37b916dd1060674238420dfe1eeef1c38e279fcc5ff2e48513ea5b68"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V256_URL_LOCATION_TEST_MODE.txt",
+          "bytes": 541,
+          "sha256": "ebfec32795c67e8277a171c62190a45ab19e68a9457c7db44fb3ab89ede77bf5"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/404.php",
+          "bytes": 1015,
+          "sha256": "9bdd4d5138327fed1b55e39090219c2c072055c2256392ef4975f1ce3f4fd312"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V269_ACTIVITIES_FINAL_QS.txt",
+          "bytes": 2554,
+          "sha256": "547e0297aa5892bca1fd1861d7e179c01515b7f5067fd90e5586c8b0ae75f362"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V250_EVENT_AT_A_GLANCE.txt",
+          "bytes": 664,
+          "sha256": "cf4177a74a63c0e24cb05c4393cd6d7123fe37909a6205a8920f34f8bde8c870"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V287_GLOBAL_EVENT_MEDIA_QUALITY_GATE_FINAL.txt",
+          "bytes": 721,
+          "sha256": "a18df8bb34f0d8ced66df01f0e515643d96e8139c53370135f1bcf999154b6ca"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V265_FRONTEND_DATA_INTELLIGENCE.txt",
+          "bytes": 1274,
+          "sha256": "7af9adbbb987b3b18cd6fbe9ac28f74314d2657df26186a9b091da547f8f8d9c"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V240_EVENT_VISIBILITY_ALL_IMAGES.txt",
+          "bytes": 490,
+          "sha256": "3074564bfdbaca335d99a90977e3b7a9a14a889ce3aeb69259a98b2b3dc3542e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V306_DETAIL_DISCOVERY_CHIPS_FINAL.txt",
+          "bytes": 1654,
+          "sha256": "69af8b783cdda5822d87a4f699ebe99fc6e0041294a9e621b7938f27b5eb704e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V242_EVENT_MEDIA_DIVERSITY_WINDOWED.txt",
+          "bytes": 1838,
+          "sha256": "b55a628e90702a93d9b64bbb20b0efe64044648e5cbb0227eb6e8e1a82c0f8c4"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/RP_THEME_V252_FINAL_VERIFICATION.txt",
+          "bytes": 496,
+          "sha256": "7b2ce0a004bc2307cbfa9fe36e5485f086d9eb0629ca1de6385a5cea7a62bade"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V257_ACCESSIBILITY_FOCUS_CONTRAST.txt",
+          "bytes": 631,
+          "sha256": "a23adae0eb7bd464a69905e8648daa58135372751200fc88ff6df3964b2e449e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V263_EVENT_DIRECT_E2E_FINAL.txt",
+          "bytes": 961,
+          "sha256": "a96cca35865c9783ee3ad96906c5e0a90d9129a1dd65d888ad4d56e13b5dc48f"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V305_COMMUNITY_MOBILE_IMAGE_OPTIMIZER_FINAL.txt",
+          "bytes": 1404,
+          "sha256": "4e06e21e9fb212f02e7388483aa54637219de3ccc126efaed6358faa64885bc4"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/inc/food-place-identity.php",
+          "bytes": 15091,
+          "sha256": "f14aa4e513ff6bd547c8dddf0490c8f68b24e3fb82d30016b2e7651ef920f125"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/inc/rpg-pexels-secret.php",
+          "bytes": 319,
+          "sha256": "43404c6bbfe9abcd70810470ecb330b15adc6eab52b88beb8784bfd9c467aaad"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/inc/rpg-et4-secret.php",
+          "bytes": 280,
+          "sha256": "b1221bfa15b5f7585bab91ded991f801374cac00f8c7e82001ea1bc20981e466"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/NIGHT_LOCATION_SELECTOR_V177.txt",
+          "bytes": 443,
+          "sha256": "6a8f55e7576e7c7fa073e2917e5fdb284ca3dd6d7e8771ca32b294436dad3f05"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BETA_NOTICE_REMOVED_V147.txt",
+          "bytes": 342,
+          "sha256": "60e9f839a4a6301fb829e517354c5c24bbecb25ddaf73dec87ce8a26eefa16e2"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_LOCATION_ACTIONS_V201.txt",
+          "bytes": 289,
+          "sha256": "0686211fb28d2c45ffcce427858697af16705faf6d60cc92b9524459204b6131"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HIGHLIGHTS_EXPERIENCE_INTELLIGENCE_V86.txt",
+          "bytes": 939,
+          "sha256": "3ae09ba0a1abece7d7da3ce6b728e18dce4598cd3a9514c27329f42272af8e8e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/PLACES_DB_ADAPTER_V73.txt",
+          "bytes": 431,
+          "sha256": "4e9e91914ae26dcc81d4a66095030986aa995499788eb0aab38326842735c585"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ACTIVITIES_DIVERSITY_V87.txt",
+          "bytes": 745,
+          "sha256": "1c79024ea51be8496b594f083ba0c5bb5ccfbc0fcc59f0f3c7cdca0b61538aa3"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ACTIVITIES_LOCAL_COVERAGE_V102.txt",
+          "bytes": 738,
+          "sha256": "10ebce625849f6d2fab68121bb02137f3e07004ce861b80d9714094a749d0a93"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/GLOBAL_SEARCH_V167.txt",
+          "bytes": 584,
+          "sha256": "b870ee19a21427a6944fb8d209426a0313d93ee788a1bc204b9ddf7baabf0196"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EDITORIAL_IMAGE_SHARPNESS_V110.txt",
+          "bytes": 374,
+          "sha256": "d195d51b7b5f3ceae1e573a6f64d94bb477ccd1835506a952f75797843aa6da7"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/TEMP_EDITORIAL_FALLBACK_V100.txt",
+          "bytes": 544,
+          "sha256": "2d13875ee780576dea2916735cd1f4c26fb7a2ab8a38387024b62a9402d031a5"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENTS_CHRONOLOGICAL_V2.txt",
+          "bytes": 724,
+          "sha256": "d87bb21732bb2edb472e16189ae867a616d119f52335523bb0d59ba527cb5d4b"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BETA_READINESS_V119.txt",
+          "bytes": 555,
+          "sha256": "181f94e2384041cfe26ead016409fad2c67db5942dc6ab7a619cde9a079d02a6"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_MULTI_REPORT_FORM_V149.txt",
+          "bytes": 591,
+          "sha256": "6dc84288d68eb3a4bc6a84a63ee6f01ccb280fc05cbe9f68d3ec648621d8ae08"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FEEDBACK_INBOX_V121.txt",
+          "bytes": 624,
+          "sha256": "cc374fe751b310ff461e65fd2f5107d45071c7ac07c9da652eb6327cc7d9c806"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_MEDIA_FINAL_REAL.txt",
+          "bytes": 812,
+          "sha256": "f74cbeeccddf51649a6ee1c56d37aaffe1388c6856b515c4993cd3df77b2dd2d"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/START_TEST_STABLE_RESTORE_V46.txt",
+          "bytes": 670,
+          "sha256": "8479da6d10e90a4ee93ac92f2a41cad70d36229ab6e47fa6ea1f7247c2f3e96f"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ROUTE_CURATED_MEDIA_FIX_V187.txt",
+          "bytes": 273,
+          "sha256": "2a4d9b8897701c4925ff6bacc95fa991804f67cbf0ce1ab20f3f793bcde450d7"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_ET4_EXACT_MEDIA_HANDOFF_V232.txt",
+          "bytes": 640,
+          "sha256": "eac57a9e0210d6083f29fb0491c1ec3e0e3bf93280ffdfae1f7429c921f45014"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_LOCATION_MEDIA_POOL_V83.txt",
+          "bytes": 1579,
+          "sha256": "d06fec0e0b081333bb53fece4cef00636a13dc32cc0b7272bf41b6ce2ec5b3c6"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_FILTER_RADIUS_FIX_V129.txt",
+          "bytes": 701,
+          "sha256": "a93e864df3e62de96faf0554ff6e74f9edb38beed628a8e7af6902b0d5d12d4a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ROUTE_BADGES_MEDIA_MERGE_V188.txt",
+          "bytes": 340,
+          "sha256": "3d5170d18aef468698a264c9c83ec3f5ca361a23c245f3040f0fc4d1d83c6728"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_MOBILE_UX_V22.txt",
+          "bytes": 1642,
+          "sha256": "127b02173090365129d5b922f920cd7e46ab0c541d19323198ffdd4f03c56248"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_EDITORIAL_INSERTS_V97.txt",
+          "bytes": 746,
+          "sha256": "b870f605b2fff33766b7fdeb6064daed8b780effe51d782ce512469c59dd2443"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/PRIVACY_RETENTION_V120.txt",
+          "bytes": 794,
+          "sha256": "3e8820bd9810999b9c0e3f9c54f17322c4ce61ecb0d0358b56eeb51fe7991c24"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/SCENE_PURE_V32.txt",
+          "bytes": 888,
+          "sha256": "2f32efddb96017405cf7ba978ec172d63ced6c2d31a904b08933730783e63a5f"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/readme.txt",
+          "bytes": 1905,
+          "sha256": "c0068e0a4244c5050d91ef1b83971d8b6179e14828f30e9ab23bd9c8bdbd96bc"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_DAYLIGHT_ARTWORK_V139.txt",
+          "bytes": 485,
+          "sha256": "dd7d185518b216c197a8a347f5a2f9af4b9d4c9c6a66f99ef1a496b84c5b90c8"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_RADAR_DESKTOP_POLISH_V127.txt",
+          "bytes": 517,
+          "sha256": "8b136bf788c003d549d53c80c1745fa4d90fc8f2f1f18628a5348e1fb5e32c12"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_DB_PERFORMANCE_MEDIA_V165.txt",
+          "bytes": 435,
+          "sha256": "8e7232a7da398711092b6e3057ba5260be47827f4accd7ce8edab72d9bcfc059"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_MEDIA_RIGHTS_AWARE_V233.txt",
+          "bytes": 989,
+          "sha256": "1faa740dc7ee229cdb071d690047eb3ee4443d5889fb5c344b34677312606caf"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_MARKER_CLICK_V144.txt",
+          "bytes": 563,
+          "sha256": "4261edd205a03b1ba27e13f82165b7620e848cfecb77ae1947f30ae5bc1fac05"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ACTIVITY_HYBRID_DISTANCE_V104.txt",
+          "bytes": 638,
+          "sha256": "a7fcc3ec900f5e8f2646429d9d9fd4b251ce16628c24a6259010a12781803659"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_MOBILE_RECOVERY_V45.txt",
+          "bytes": 818,
+          "sha256": "fc2bfc8ff0a86ec05324709c5c52fe5ba79805ad9213aa536b6d51dcbed37273"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/CONTENT_HEADER_V1.txt",
+          "bytes": 915,
+          "sha256": "afd6ed527b2b3c3ed98f071aae89040ed995e29941d88134c8104309b181e321"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EDITORIAL_IMAGE_LINK_V111.txt",
+          "bytes": 299,
+          "sha256": "959ddc36fc6de642c9b4e8d6b51b10f60189709159229e5c36993342abe3a5e8"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_MEDIA_IDENTITY_STRICT_V162.txt",
+          "bytes": 816,
+          "sha256": "53cb39d722f2d465609912a220e369cd4d8298e42774d374dc53d3dec0e58a14"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/GPS_RELOAD_REFRESH_V227.txt",
+          "bytes": 1082,
+          "sha256": "a0bdfc01443a64ddbd195229dec42a79c0fc9fef3a64d1115a53c4533994b3bf"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/NIGHT_SHARED_LOCATION_V179.txt",
+          "bytes": 386,
+          "sha256": "cb465916dec6972cea861499b60bf5e86db5891002fc2ed81ac63a266b95e903"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_DB_DIRECT_EVENTS_ROUTE_V77.txt",
+          "bytes": 478,
+          "sha256": "d229ea314d5df5e38bbd0913a8dc35d00ca5c7ce0e5e5b4db5996877b014822e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/POSTCODE_LOCATION_V264.txt",
+          "bytes": 762,
+          "sha256": "bba3a9cf7f39df9c60cae223efd32fc66620283d793141a9003793a17e05962f"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_MOBILE_BOOT_V44.txt",
+          "bytes": 1140,
+          "sha256": "c7b3b1364cf857a7d9de5b74fced6675e7cdae4b375744cb74128a1f24557803"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_WURST_BANNER_V156.txt",
+          "bytes": 426,
+          "sha256": "be978479fee9dab12809ba93825da24113ed811b4ab3c291cb894d14ed8b6c62"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_MARKER_DESKTOP_CLICK_FIX_V145.txt",
+          "bytes": 699,
+          "sha256": "ca70c054148101c9bc604a889d172f219c89f997582678171a53d20ffed55f1a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/STATE_STICKY_FIX_V1.txt",
+          "bytes": 1157,
+          "sha256": "0137068fc07ad6b5176a178184bd85cfa00f2755916f4a36214082625003385e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_WESEL_OBERHAUSEN_RICH_DETAIL_V195.txt",
+          "bytes": 564,
+          "sha256": "1567eeeada871d66afc46637328669a37c81d8e1d215753ca6e4f96da7534c2d"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_TWO_FINGER_MOBILE_V134.txt",
+          "bytes": 406,
+          "sha256": "cbe845261455c4765fc05d0ff8c784ebe599261ee2153cabba1f0f75d5cb626b"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/POTTQUIZ_HOME_BANNER_V171.txt",
+          "bytes": 460,
+          "sha256": "db9925d7154a93689f95734d4a8eee4728f13254f06ed65956fed6e2aec0ab54"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/SCENE_RADIUS_SAFE_V34_VERIFICATION.txt",
+          "bytes": 1428,
+          "sha256": "e7388856a87d8a34057be73bfe58f71b6b438a42a6c397c438ed50f1d319d831"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_VISUAL_RHYTHM_V220.txt",
+          "bytes": 479,
+          "sha256": "95996c4cc7c1290ce17b7ab5023ecba7141cd92daa835efe1241ac9145a7517f"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/POTTQUIZ_PAGE_SHORTCODE_V169.txt",
+          "bytes": 483,
+          "sha256": "9373e9d7c2669299f0c6000215341fa5c6930ac31cd2f0373d9cfe8f088a695d"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/MEDIA_PIPELINE_V99.txt",
+          "bytes": 776,
+          "sha256": "06ca577a4f86669dd388376fa4793e2ac527dc31f829224a5bc4853e411c6f11"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_SORT_URGENCY_V1.txt",
+          "bytes": 329,
+          "sha256": "a995ad6763760eaab0007c8b85142cd7d36dfd1483e6562bc4de84e65db05d1a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ROUTE_DISTANCE_MEDIA_V185.txt",
+          "bytes": 563,
+          "sha256": "b0a4ad79fb5fe4eb17aaa6f09f12f036465d7c147145af740b3b98a1b39e7098"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/GLOBAL_MOBILE_FILTER_CONTAINMENT_V117.txt",
+          "bytes": 889,
+          "sha256": "64914034005f63800547f836fdf2e84156b1d9534fff172107f2f9e3b0762ccc"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/MOBILE_GPS_OSM_ATOMIC_V1.txt",
+          "bytes": 730,
+          "sha256": "f4951bae3b641053c72c3f793d1fcb282a7ce45f0dd5d621a400df2334249e4c"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ACTIVITYSPOTS_BANNER_V225.txt",
+          "bytes": 337,
+          "sha256": "d0a91688f6c06cea0c3955934cd4ef04523f4b342224db90be7e988c39b9b662"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/V338_MOBILE_NAVIGATION_WIDTH.txt",
+          "bytes": 459,
+          "sha256": "fce9756166a0f399158b8a936572f5d3f1aaf01f72dc9868123f12a09b51a94b"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/OSM_POOL_HANDOVER_V64.txt",
+          "bytes": 1836,
+          "sha256": "60ae137d0393fe7946a6298d66314e0e57d4faa5bb2005f0451861a5b28d6154"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/SHARE_ICON_V36.txt",
+          "bytes": 410,
+          "sha256": "4329c3ce2af8aa40d93ee38bfefec5e2c643a047a6401e2b1ed693e152bd9358"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/NIGHT_RUNTIME_BOOT_V181.txt",
+          "bytes": 182,
+          "sha256": "ec6ab87d915ff37e7337ba2f84bf1fd9cde47d6a9be95a022925be11c77711ef"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/WP_CATEGORY_PAGES_FOOTER_V37.txt",
+          "bytes": 1968,
+          "sha256": "9d2ced4b51126055236705da08ed2073aefc81a48ae07e305d3b65c7fabb4890"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_CATEGORY_HEADER_COMPACT_V81.txt",
+          "bytes": 325,
+          "sha256": "554a326d4bff367d757045adee1677df77ccdfada69fef713b9acfe4cff3bca9"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_MEDIA_RELEASE.txt",
+          "bytes": 674,
+          "sha256": "a59974d81a8f05d1c585015d424343e4992c1c6402aa039a07428d7507045aca"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENTS_WESEL_MULTISOURCE_V18.txt",
+          "bytes": 4493,
+          "sha256": "5643f0c1692ee963f32f80028e0b077098cf5ff81b569d33103eea8bc697e51e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_FILTER_PARITY_V1.txt",
+          "bytes": 981,
+          "sha256": "0fcfd2a58b1d9d2807141eff239a48a68eceb69a2554d9654510eee2cf43cd3c"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/INTERVIEW_PLACEHOLDER_REMOVED_V106.txt",
+          "bytes": 340,
+          "sha256": "52994b0b761edffbfb948463c02246225c17d89e7915ec7e8d1fbcb7165df7d6"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_SOURCE_AUDIT_V114.md",
+          "bytes": 12529,
+          "sha256": "ef4c5b0df276e2c22ebd143362b5a9700f70e72fdaf2b7910e5aab96057a552b"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/GPS_OSM_RESILIENCE_V1.txt",
+          "bytes": 648,
+          "sha256": "70a0d8b7a2550ae2ff5485a01f495b4f2ab33528fd96168d3db3aa0e8268e100"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_LOTTO_FILTER_V132.txt",
+          "bytes": 488,
+          "sha256": "24b84566ec23edcfcaede85548282572a7c38018ed52ce03611cee15c7df8e88"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/SOURCE_REACT_VISUAL_PARITY_V96.txt",
+          "bytes": 821,
+          "sha256": "d757df8ebaa55d731136dfc7b69b55a02338bfb3c8bde22e7fba17199c4226c7"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/WURST_FRONTEND_V153.txt",
+          "bytes": 581,
+          "sha256": "63039ae8597332a15386a8855c0bf3f79228ce8b278878cb3fe93d9ebd0f7816"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOTER_EVENTS_PAGINATION_V1.txt",
+          "bytes": 629,
+          "sha256": "721a00cf6a9106e162b27dd691efc5c9120e0ebf32f346c74a662acf744b2dbd"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/DESKTOP_POLISH_V125.txt",
+          "bytes": 824,
+          "sha256": "982702b7d2ba3445da9eecd17a229a3dd692ee456998b8f52d7368b1f1216785"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_FILTER_V2.txt",
+          "bytes": 1278,
+          "sha256": "5eefd92ee65b5f08f2af59fa138b3b23e7feb26a802cc927807c608ec7dc7504"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_RADAR_V126.txt",
+          "bytes": 769,
+          "sha256": "c006596144df146d6758940af8b6e30a3d4e2f27e4670a011b0e59a47d71f70f"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/MARKETING_TRACKING_V231.txt",
+          "bytes": 596,
+          "sha256": "9d1842e648476a69ce0b5b1b22746c380fabb96078e57bba7184cd929ff8d9c9"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENTS_TODAY_V1.txt",
+          "bytes": 347,
+          "sha256": "50ccd0d09c48b50d53915732b27ad806c28c9bd52046813e53f03888cf0f5658"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENTS_LOCATION_AUTHORITATIVE_V17.txt",
+          "bytes": 867,
+          "sha256": "a873d26ab87fc697c7bd8c4c5f952da8613d7d9a7eb8771ce0cb0a0881091b33"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HEADER_VIEWPORT_TOP_FIX_V236.txt",
+          "bytes": 1208,
+          "sha256": "42aeeb7486c918bd6fbbda04a74570310db03c49fe90e0c30cd61b5563861a8d"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/DATENSCHUTZ_LINK_V1.txt",
+          "bytes": 334,
+          "sha256": "95e1a2ee81fbfebaf2194cc47d337f886ac87c25d9c5a74d4b3f755f2d9da68a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_INTERACTIVE_MAP_V133.txt",
+          "bytes": 981,
+          "sha256": "2a35fcd4620e81839176ab3bb6cbe4a74396ea4d9e18156d0f1f0d293d3a1aaf"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_MAP_DEFERRED_SEARCH_V137.txt",
+          "bytes": 803,
+          "sha256": "e6ca4eaa9ec41fd03315a8c7d0b2e8eb18c6d5aa08c44e4b76cbb93bd76e1a03"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/SHARE_FRAGMENT_V21.txt",
+          "bytes": 979,
+          "sha256": "1940e8fd37893000d619b12c9f2c7ec46f19d2bb7bdc7d05f0cf9ab871782eaa"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ROUTE_DETAIL_OFFICIAL_LINK_V189.txt",
+          "bytes": 352,
+          "sha256": "dae894be1e10a432c704634b253d1fcc8d75ca60b44b57bca5b815c6d52985a0"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/CATEGORY_WEB_UX_V35.txt",
+          "bytes": 946,
+          "sha256": "e3b27e01437bf261491881f4e49b0f579592c644c85b64154aabd5601a173f0c"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_BUEDCHEN_BANNER_V136.txt",
+          "bytes": 435,
+          "sha256": "8619bdcf10d9ab34d3c98fabc9a91764628ae1a5b9d97332a632922c18b56e02"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENTS_CATALOG_TODAY_V3.txt",
+          "bytes": 281,
+          "sha256": "f0c27f17279d825c397a689c9c49d7940991d8ba97c22cc379403675f55596b6"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/SCENE_PURE_V32_VERIFICATION.txt",
+          "bytes": 1725,
+          "sha256": "da1fce317d65b22431490540ee21d674ebc2dab54b913bab87896804019119e8"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/COMMUNITY_FORM_V193.txt",
+          "bytes": 362,
+          "sha256": "4e0b6acc935dd418e0c0c6dccc3283455eec0f6a17d2a2c8d4104e15ba1c30bc"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ROUTE_HOME_TEASER_V107.txt",
+          "bytes": 538,
+          "sha256": "2cbe9e9e478f354276a773cd3b6d09315f5005fa0cbbb94c03005c9e69161426"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/OPENING_HOURS_DETAIL_CLOSE_V135.txt",
+          "bytes": 497,
+          "sha256": "0b18cd65cba408aa5ab44ad95fa814a838b53b76992173bec01fb172a5590bfd"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_EXISTING_FEED_V40.txt",
+          "bytes": 1219,
+          "sha256": "09cb538c8a5cf966a144b1996d81bc064714a494954ffd6845749b9e1bb64bdc"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_DB_MEDIA_IDENTITY_V166.txt",
+          "bytes": 258,
+          "sha256": "63343f4c938511fc155fe12569f5f21e95a79d5933472f52de891f36647326ce"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_MAGAZINE_MODULES_V41.txt",
+          "bytes": 2556,
+          "sha256": "7e03cdbf1ac118b72696d19663c6a9ac3fe2a472eba9eba0512f35c7ba5eb41a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EXPERIENCE_INTELLIGENCE_V101.txt",
+          "bytes": 532,
+          "sha256": "487519c24b84a3ae97dc1880076e74eca7b773c745e61993b5cd0039d5c28e96"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_MAP_MEDIA_FIX_V131.txt",
+          "bytes": 497,
+          "sha256": "d9c08ecae4827a1eb6007f9bfa67dc50c6ec6830fd153d169250653870269f5f"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_MITWIRKENDE_V164.txt",
+          "bytes": 341,
+          "sha256": "12bd1158790985d5ad9a71bb0c508d2e5e6d8d6aa25adb9a154f98d385050959"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ROUTE_LOCATION_HERO_V90.txt",
+          "bytes": 550,
+          "sha256": "fe971e452c2294ffcbdb5f1afffd21e80d96aa698110cc3d1a520921c67e069b"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_MASTER_RICH_DATA_V168.txt",
+          "bytes": 493,
+          "sha256": "de252ede76172acef335998364101bb4faacf7578b1b6c00578ab641486cecea"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/LOCATION_SELECTION_REFRESH_V76.txt",
+          "bytes": 731,
+          "sha256": "1f1b30dff201b58e051c4ddef42869058bc310f19ddc29438a1d5223c6c2967e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_POLISH_V215.txt",
+          "bytes": 615,
+          "sha256": "c25920ff3ba417971ac7761bac2139dd4fcf8dea794a0328ac3cc29cb42bcf62"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/COMMUNITY_FORM_RUNTIME_FIX_V158.txt",
+          "bytes": 486,
+          "sha256": "8837b74bb3518f8cf8ca4b254f4580cc472d925cae1423f4c0a0b2ccdd78b495"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ANALYTICS_TODAY_V238.txt",
+          "bytes": 401,
+          "sha256": "c3f5a53b3af2e03356a28ecfc9351905d1fad31e2953fc77e4fde2648d0610f5"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/COMMUNITY_PRESENTATION_V218.txt",
+          "bytes": 769,
+          "sha256": "9ee20bfe3e4776649acfddec069c35351cd9144280d032f70c208400e9c61dc4"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_FILTER_FIX_V115.txt",
+          "bytes": 705,
+          "sha256": "8294ce1e17d0491f607b6f6ed833e562abc034e121ac5a3bd7c0eedc0e957879"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/WP_CATEGORY_SHORTCODES_STICKY_FOOTER_V75.txt",
+          "bytes": 644,
+          "sha256": "7e8f30ce6717a4a60dd530f5530e94703643755cc25932a1af8e35852d159f55"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/LOCATION_DESKTOP_MOBILE_MAP_SCROLL_V143.txt",
+          "bytes": 833,
+          "sha256": "d0da67e588ed70e3fe85b69bc773d37691d77413b2db9588fd2324e4efb92b1e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/WURST_FRONTEND_V152_TECHNICAL_ROUTE_FALLBACK.txt",
+          "bytes": 383,
+          "sha256": "b6a81c1d21876495780e95c8f71a794718df44fdd04db0f278aedbe018ec4d0b"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/GPS_LOCATION_LAYER_V74.txt",
+          "bytes": 655,
+          "sha256": "c005e41c9c66ccb6b85dc2d9d8fb7dd15717d916a94a6b13ec5ee5d0e994c528"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_MODULES_V39_VERIFICATION.txt",
+          "bytes": 950,
+          "sha256": "c90f01684f538072afebfffebd9b316cae39b186c4803aa3baf5a7e141a70540"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/COOKIE_PRIVACY_V1.txt",
+          "bytes": 1766,
+          "sha256": "d8f5c23555daafb24100e846ed3bf253f56c2eb23734017f5955c92ff075bf4f"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_SINGLE_OSM_V46.txt",
+          "bytes": 1780,
+          "sha256": "d931b4125c687f95d54ce4099861568bbd9bdb64eb661da3f63e7b587aca01e5"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/MOBILE_NAV_OVERLAY_HEADER_V343.txt",
+          "bytes": 411,
+          "sha256": "01ba8c7adc670f01b299427118cfede19201347b1292c579e705eebf961920c9"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ACTIVITIES_EXPERIENCE_INTELLIGENCE_V84.txt",
+          "bytes": 833,
+          "sha256": "1d5789e093210d820d0cc66dfa9eb063a9abb8966bd5f887ba3c1ee5170ffc2c"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_PREVIEW_20_SCENE_OFF_V69.txt",
+          "bytes": 556,
+          "sha256": "036f920e2dcd4b4ff444b66bfabe8746f0b8c389fe7e26d3587ba137a4f53db5"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_DISTANCE_V2.txt",
+          "bytes": 328,
+          "sha256": "5d89dcc62c8538b12a8f01085ab73a504052ff66864d0412647298f14a3087bb"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_PHOTO_ARTWORK_V138.txt",
+          "bytes": 472,
+          "sha256": "8d1eb41295c63dc982f7489f1f713f384f35ea2a5c87432e1cdd2ddc0dac878c"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_TIME_ORGANIZER_V245.txt",
+          "bytes": 569,
+          "sha256": "50bbddbe1f5bd5ebe83fd4b17a2cb7cbac81a6ee52f26451b87bc4b5c417a245"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/NIGHT_LIVE_LOCATION_REBIND_V183.txt",
+          "bytes": 405,
+          "sha256": "d616c801fe0ea291930214a601949ac75fc51d18dc8c842612352a0d1508f815"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_DETAIL_OVERLAY_CLOSE_V23.txt",
+          "bytes": 796,
+          "sha256": "6de8aa92e2a75c1f7df97e05f072cdd21e3f7a51272f821f51a82e048ff2fd1b"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/THEME_HYGIENE_LOGO_V1.txt",
+          "bytes": 222,
+          "sha256": "203330edb8ce5b1b185c61098a539290ef10692c240910d62b8785c4c3ed3615"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/CATEGORY_CARD_POLISH_V222.txt",
+          "bytes": 688,
+          "sha256": "d8991c14854e6b1f1d5f580fc1f2ebb9080c12326e97503514b76d77a8a45279"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/V339_MOBILE_NAVIGATION_XL_NO_RIGHT_ARROWS.txt",
+          "bytes": 521,
+          "sha256": "1eca9808a8c6aed386140ec5ff58365670c2ed5efd2e9042b377bfbbd1ab2b3e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_SEMANTIC_HEADINGS_V226.txt",
+          "bytes": 523,
+          "sha256": "32451afbd49db65e6c32ba56e029c301a829f49b5e8bf042df379bbd484d5a6a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/DIRECT_DETAIL_V94.txt",
+          "bytes": 338,
+          "sha256": "5d6cf92ed84799e6315cc4bd630ea9e323275544d46d4c626ab5309eb389482e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/SOURCE_REACT_TAKEOVER_V95.txt",
+          "bytes": 577,
+          "sha256": "34541344355a22d742450869558248784abb098e974791e73fb3db68a12f4b37"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/NIGHT_FILTER_RUNTIME_FIX_V180.txt",
+          "bytes": 299,
+          "sha256": "2e38345b4f2747404a9130e66708f6814e291534e2e793a4b83193f3f9fcd1e2"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_INFO_ACTIONS_V1.txt",
+          "bytes": 1515,
+          "sha256": "044fed7be297695fa486a1d78c249903639a6199074ebd52757a180c110742cf"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_ACTIV_EVENTS_LAYOUT_V80.txt",
+          "bytes": 416,
+          "sha256": "791459a4f7fa5a87e769fb8a68d1dc501d0aa8b5b2fcc3d1e7aef5f28a4dc1a2"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ANALYTICS_COMMERCIAL_FOUNDATION_V118.txt",
+          "bytes": 1161,
+          "sha256": "80e1b3d2adcb3b7088b8aaf0c03d4d89c511aa67fb411d91e6d37d4e026d0607"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_DB_FRONTEND_V163.txt",
+          "bytes": 580,
+          "sha256": "2af017d7c04b404b92fa1103b2ae4cedd261686ed22c1fb927ff153a4875a4a2"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_RADAR_FIXES_V128.txt",
+          "bytes": 790,
+          "sha256": "e7d5a519755fa5fa1ac2ed0e2df9efd4d6c9c317823f0bb4a685d76fa0cabc81"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/INDEPENDENT_RADIUS_CHANGE_V123.txt",
+          "bytes": 651,
+          "sha256": "bf25bc7c34ef24628cd2f6df5fae122f625e9e02aeeadcad4b85d895eab8a1fc"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/OSM_REPEAT_LOAD_FIX_V65.txt",
+          "bytes": 882,
+          "sha256": "f01199161a2ca9a8b09b8a9d3c91ed9192293014a9335463d78b26b37cf05495"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_RUNTIME_DETAIL_V200.txt",
+          "bytes": 430,
+          "sha256": "688e266331b9804ebf3715f1372ad34da54984229442dade4ba4a1b9df2038eb"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/IMAGE_BADGE_DECLUTTER_V91.txt",
+          "bytes": 552,
+          "sha256": "bbd017bb62fc3033697f833943fd4e0f63653892264ec69da2ba612db720714e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HEADER_CONTENT_SPACING_V148.txt",
+          "bytes": 493,
+          "sha256": "8caa942cf6d3968a8b3f1b45847b1154ae3d1eebce7babfe29bab48d78a5a4db"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_CATEGORY_DB_DIRECT_V78.txt",
+          "bytes": 404,
+          "sha256": "444552c772c40e64d131654e0d25f70b87b504c868395b92cdd91be223d8c025"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/PEXELS_SYMBOL_MEDIA_V1.txt",
+          "bytes": 1349,
+          "sha256": "6b205b5d3fe3805382fc147ed36fc3c372e56a64cab5f9f73340d6c7a46a1f18"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_WEBSITE_RESOLVER_V24.txt",
+          "bytes": 1121,
+          "sha256": "39245b648fc5a927f030afbdaf1d5f6ffa36b6dd25a6b27c73130f6960f2f9f7"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HEADER_LOGO_MOBILE_V197.txt",
+          "bytes": 423,
+          "sha256": "84e6e2faeae4919bb4a0c96492b2b8b718c38c3a3d29416fe1fcaff56e6c3bed"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/NIGHT_VISIBLE_ROOT_BIND_V182.txt",
+          "bytes": 397,
+          "sha256": "b42d6d8a4ba1effbbda55c51b967f79a45807054c9f0252a6a795067854968ff"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/MOBILE_EVENT_FILTER_LAYOUT_V116.txt",
+          "bytes": 558,
+          "sha256": "4fd7def375c704379e4e88ad721189158dbd03c06f85a588abfaaf398938165e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_MAGAZINE_MODULES_V41_VERIFICATION.txt",
+          "bytes": 1105,
+          "sha256": "f0087928c7ab3f1a6a81be1d3e24dae02a3ece017def58b2197a3d88f649f692"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_OFFICIAL_ENRICHMENT_V1.txt",
+          "bytes": 1251,
+          "sha256": "29962eb6ebd9e57211cb220de551eca189de35272470906567daa958812bebca"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/DIRECT_DETAIL_OVERLAY_V93.txt",
+          "bytes": 485,
+          "sha256": "4f09f7b06a6a9fe92906be8dd5e16515299cd8f0a0c2a186bf5f302fcbca519c"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ROUTE_TEASER_POSITION_EDITORIAL_CARD_V109.txt",
+          "bytes": 219,
+          "sha256": "525f40eba8dc7a134fefeba79ad7531fc4d84915ae70983c7ee83308fab2dae0"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_OFFICIAL_ENRICHMENT_V1_1_FIX.txt",
+          "bytes": 480,
+          "sha256": "8ca5c78c4d49f21cec3fe47bc07a6b0856d43156925938be885848006f6dd7e2"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/OPENING_HOURS_PILOT_V202.txt",
+          "bytes": 567,
+          "sha256": "b841bfc4ba4396c95b2e2d78daafd48a01a9af9b0320178a90b816b68df6fac9"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/CARD_UX_V1.txt",
+          "bytes": 2473,
+          "sha256": "b85e1aefd7711ca39ad748590e49cb1cce823f1e710130ed3206e8f6556808f3"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_MEDIA_EVENT_ORT_V235.txt",
+          "bytes": 583,
+          "sha256": "3a6de882a61237fac01c4f54d4c54d2cab70dff9b92b60bdbec65c2ed60219b0"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ROUTE_CARD_CITY_MATCH_V184.txt",
+          "bytes": 501,
+          "sha256": "c7da728c10970c74280ce9001f66d90a289843592cae5611135e423b3198d4d6"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_HOME_10KM_ORIGINAL_MEDIA_V85.txt",
+          "bytes": 891,
+          "sha256": "03075f4ac639913c9f0fdbbf5052fa641d3b99fce0610ed8350f2e078a9869a8"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ANALYTICS_VISITS_BURGER_V237.txt",
+          "bytes": 1156,
+          "sha256": "3c1cc1e875ac467b4b10d59b98a4fb3fa2d18c770599fc31d9eaf6403fa7b404"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/COMMUNITY_DATA_MEDIA_V157.txt",
+          "bytes": 603,
+          "sha256": "d8f84878e692c2945d4cb4cfb6a8a86fac831d34097b76f64f6cab59b35571a6"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/PLACES_DB_READY_CUTOVER_V72.txt",
+          "bytes": 1029,
+          "sha256": "e3b3fd69caef92e3c0ce5284854481b3145078ff18897300f9b164b33c32e3ad"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_HISTORICAL_RESTORE_V63.txt",
+          "bytes": 1821,
+          "sha256": "3a9e0019a3dba643c546c580c36937f4a6db7a5013d63478c14aca089038a8da"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_BROWSER_OVERPASS_V70.txt",
+          "bytes": 866,
+          "sha256": "f6eb96970392f9b3461c54db27e0be63761811925fe5ead6c5834c52ee486fdf"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/LOCATION_PERSON_FREE_V82.txt",
+          "bytes": 1071,
+          "sha256": "ea6bc32769279398ed3a6653de20027e7a269891879d127f96a98694daac79cb"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_MOBILE_OSM_V43.txt",
+          "bytes": 1233,
+          "sha256": "06e93104777f07b3469b97662dbab85cb7cc71d531ed4b81e5d45b8cd5a8e272"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_RADIUS_POLICY.txt",
+          "bytes": 383,
+          "sha256": "32dec19413a35602b71b20f704260388fecf12f3db97e04508c5f5aca2fe396d"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_LOCATION_MARKER_V142.txt",
+          "bytes": 557,
+          "sha256": "4edce50055ccd079a7afba2b3f35869c52269b66c5ecb225c15d37d92493d44d"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/WP_HOME_CONTENT_HEADER_V98.txt",
+          "bytes": 740,
+          "sha256": "d89d009bf1f67404ef271682a6761cadb04ad615fd5d3d71636efcbbc89fb3a2"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/LOCATION_PERSISTENCE_V140.txt",
+          "bytes": 867,
+          "sha256": "38a1826802f968bacc951e5aefd8dc7b28984ebbd0994bf110cab178e1642247"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/IMPRESSUM_LINK_V1.txt",
+          "bytes": 129,
+          "sha256": "d7a7ef3e904f1ac366323c4daef498d837c865e6ee162d9174df58b8b3387cba"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_WESEL_RICH_DETAIL_V194.txt",
+          "bytes": 580,
+          "sha256": "898888390914b5d176a25f0f7eae2409d887dad65c5509667ad8df34e5080d07"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/POTTQUIZ_RENDER_RESTORE_V170.txt",
+          "bytes": 385,
+          "sha256": "4860dd97781435536f1d197a8548bee0b7db04ea5f03bd9cad0c9a48f196798b"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_REGION_SAFE_V173.txt",
+          "bytes": 478,
+          "sha256": "20566188f254b3b8f19860f5116c189072f279b0a6a3eb98f6051bbd075b9dee"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/PEXELS_CONFIGURED_RELEASE.txt",
+          "bytes": 566,
+          "sha256": "cdccb9fa65ea75bf6b81d14e5d439922057a38a90180ac40951343300584d952"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/SHARE_NATIVE_DEEPLINK_V20.txt",
+          "bytes": 787,
+          "sha256": "cad1691cb9da6ff14c9a710ccea6900fd82c9419bb9602e665b1bfba1ff9b844"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/PRIVACY_HARDENING_V113.txt",
+          "bytes": 955,
+          "sha256": "f6c6be2e80dc662094550ba7c1f477f6b5ac823a537ffc1f545a61d74483d881"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/WURST_FRONTEND_V150.txt",
+          "bytes": 865,
+          "sha256": "35318dddec3f568b2bafa621c645ee91ee473199e1e819e78b28b55641673004"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_ET4_IMAGE_AUTHORITY_V229.txt",
+          "bytes": 354,
+          "sha256": "e65641102a44b7e0f363b7239f559f885d070ce4712f6c288498b9a939836026"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_MODULES_V39.txt",
+          "bytes": 3317,
+          "sha256": "a68b570fe929a92adb7011141cc2e487120d061b5fb239a56bd884201140926f"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/NIGHT_DETAIL_GALLERY_V178.txt",
+          "bytes": 354,
+          "sha256": "665d04d82b7dbc822f7350c9e78b5509353f5096d9a44fbeafdc5b3e768707f0"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_PROGRAM_LINK_V213.txt",
+          "bytes": 357,
+          "sha256": "146b0ec4c66ffdd46c6bd2b7e84e6388ba23bfec9753b7832042357f4c27aeec"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/WP_HOME_FREE_EDITORIAL_PLACEMENT_V105.txt",
+          "bytes": 996,
+          "sha256": "0cbdc91cb51bdafef89e4e6a5955eeb5334bf4187342def26a37216ee8302faf"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/SHARE_GLOBAL_DEEPLINK_V190.txt",
+          "bytes": 583,
+          "sha256": "e0f29926b555f256b9ec60543df0e1233089737bf423fa334a22425a100567c3"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ORIGINAL_PLACE_MEDIA_V112.txt",
+          "bytes": 1413,
+          "sha256": "fa3f5e271b26f88fb9cbba265482f5a00762d6f907028e0630deae54d2872f98"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_MEDIA_ADDRESS_GLOBAL_V161.txt",
+          "bytes": 1184,
+          "sha256": "eddf5b371c6e4333f18c9af4a366d08c6477606377762c9728d4021fce388121"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_RENDER_FIX_V130.txt",
+          "bytes": 588,
+          "sha256": "b590479c6819ca84c3971400940a4a436fc1bee909ee328ec3fd9a591206fbe2"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/WURST_FRONTEND_V151.txt",
+          "bytes": 364,
+          "sha256": "13a5b4bd42e9ce1e4b9c0fddc79c31e6bf851cc6d696e9e8c4ab8ac548f41cee"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_CALENDAR_CLEAN_TAGS_V19.txt",
+          "bytes": 1293,
+          "sha256": "a0e93d51bea91602ade97fd35f5eeadf41b6aca16c671b12d1d2e1c568385589"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/LOCATION_PERSISTENCE_V1.txt",
+          "bytes": 558,
+          "sha256": "4342b786e3ff854352c71b08a22d74436212fd47cb73450aa0ce31e1ab230a17"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/CITY_HIGHLIGHT_ROUTE_V89.txt",
+          "bytes": 847,
+          "sha256": "ba65c53c9d93b00044a12f80e9d8854bbf51fd6174300c4857ab92c9dfd93f55"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/PLACES_DB_BACKEND_V71.txt",
+          "bytes": 1119,
+          "sha256": "3404d5e446912fff3ddb473472bcc99f4addd73c27185cebadf93ca13795fca7"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/V342_MOBILE_NAVIGATION_BALANCED_PORTRAIT_FINAL.txt",
+          "bytes": 419,
+          "sha256": "8e24fd03ba29f2f902fd28fd537fd2592efc5f0ee545e78701f8188aca39bf95"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/WP_CONTENT_SHELL_V1.txt",
+          "bytes": 310,
+          "sha256": "e1f35c30fd3181f4f2a9c32d7cc09cd1a61fd4cc3b3c79f0b0774565c88fb531"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_CALENDAR_RESTORE_V174.txt",
+          "bytes": 648,
+          "sha256": "b7617d87b003097555eeedd75476f966439fcd06a1ffc56241f754666a2c1054"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ROUTE_HOME_TEASER_CRASH_FIX_V108.txt",
+          "bytes": 400,
+          "sha256": "55c9db3e9c1ce38e94bfbced1987d944019b690973a9bca02a519a30bf45939e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_GPS_PROGRESSIVE_V42.txt",
+          "bytes": 2138,
+          "sha256": "bfa13d46a98a68b92b3b0d8165d8abe9415241be958cfae4f655a5059eb912c3"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/DISTANCE_ORDER_V88.txt",
+          "bytes": 384,
+          "sha256": "96702fe5c87dbc888eda9ff0b81edb7b1cb5eea68ce9d07845b7a43193709e28"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FEEDBACK_ABUSE_PROTECTION_V122.txt",
+          "bytes": 1051,
+          "sha256": "f1b5eead0c3f0f6f4217908c64dbfbd73a5bdec638e89fdb789acf194343deaa"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HOME_CANONICAL_NAV_V79.txt",
+          "bytes": 780,
+          "sha256": "6268be0f5a77f9419975ff705deb2146c965c1c4d93c41c2c55fbb501f54401d"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/SCENE_RADIUS_SAFE_V34.txt",
+          "bytes": 694,
+          "sha256": "92a7249312ee6eb9867907356544f0156c414af589e28b6d91ece578f615d5ee"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/COMMUNITY_UPLOAD_EMAIL_FIX_V191.txt",
+          "bytes": 456,
+          "sha256": "c09133f2801954850ce0b3974bd90e33ddb02e98cfc52034efc8c453542b9567"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/DESKTOP_PASS_V223.txt",
+          "bytes": 689,
+          "sha256": "ddef247d8820a7fac5fe81e70218380a4980d357985559eb9b3a897d38f29107"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/NIGHT_PAGE_V176.txt",
+          "bytes": 385,
+          "sha256": "3435c6d16621ade6e7e91c8d6c06a53fb5cb2cf0262512dbbff0606005dc820c"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_SOURCE_PROVENANCE_V172.txt",
+          "bytes": 560,
+          "sha256": "08c8916c22db1d2763fa2b8b627dec9202ea8caf96e909477079231dce92cf9a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/COMMUNITY_STORIES_V192.txt",
+          "bytes": 439,
+          "sha256": "b9f64b711eede9252398d9cde907b4e2d6c244410d170b627ba04fcdce2d1391"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/DESKTOP_LOGO_LARGER_V203.txt",
+          "bytes": 324,
+          "sha256": "9822db845f3c2ea4794b6c1721c0ca0f4fc15d6b1f6fbfd162846bbcbcf33969"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_MEDIA_V1.txt",
+          "bytes": 1361,
+          "sha256": "57e8536c92467c6b904b3927bd51d7765f7a83d1e03d7f120d23cac092b3c91e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/WP_STICKY_FOOTER_V38.txt",
+          "bytes": 1202,
+          "sha256": "16dfd07af493b937fd54f6aaf78c905c4eab0c0c29cd161f76ab4f38ae036c2e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_DISTANCE_V1.txt",
+          "bytes": 550,
+          "sha256": "4b6c5c824fbb369ed187d8a5fc1988f764857e5795eed906173a4296f3c82c3c"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_MEDIA_BADGE_V234.txt",
+          "bytes": 480,
+          "sha256": "d04353a3ac17185575fb58ff3ca92a019879f159545e239ce383853571858f7e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/WURST_FRONTEND_V154.txt",
+          "bytes": 514,
+          "sha256": "95e52e26cc1acfa2603464cb4f14cf0a2bc24dc20578cd458b13aaaf4bba1488"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_INITIAL_ZOOM_V141.txt",
+          "bytes": 572,
+          "sha256": "2bf82f3affe80ce2230e988ddf9ae1bee54930472591b7b127588904a08beefe"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BUEDCHEN_MARKER_OPENS_DETAIL_V146.txt",
+          "bytes": 634,
+          "sha256": "7dff3781a998084c7502cb4f8b2981239098cbc5508126f1828b665c9245627b"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/FOOD_MEDIA_FINAL_V10.txt",
+          "bytes": 714,
+          "sha256": "d4170b6ddf5896bcfe9e359695303d89c983ac1919ce61ae0245fd0a35aeb31a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/V341_MOBILE_NAV_STRUCTURAL.txt",
+          "bytes": 469,
+          "sha256": "7e5cd4018779d337d309e6c708461bf842e339fdb8dd84717146d5ad187ad72f"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/DESKTOP_WEATHER_LOCATION_CACHE_V206.txt",
+          "bytes": 380,
+          "sha256": "3841526150f054c4930ae9e43effb7073beac68324d3e289f3785b5894976661"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_OCCURRENCE_LIST_DEDUPE_V175.txt",
+          "bytes": 484,
+          "sha256": "77c46a9fd29e57cf57541518c43bf17d22534ee8bb02a88c287dc1bc3564c0c5"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/HEADER_INTERACTIONS_V155.txt",
+          "bytes": 521,
+          "sha256": "06f73025725f41b446001bb7cf8bac820c0e86489fdf3a340e54f5b415f00686"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/BETA_POLISH_V124.txt",
+          "bytes": 529,
+          "sha256": "e163d475d3089e663225efb58cb8efded4f6107bfca3453facd6a0abc806e1b9"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/SCROLL_LOCATION_V1.txt",
+          "bytes": 1887,
+          "sha256": "cbc204f8fc6f660433237f063de77efaba64f16e3ffb42cabcb398da82a15e96"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/RP_REDAKTION_AND_FORM_FIX_V159.txt",
+          "bytes": 350,
+          "sha256": "381f7f4f98f503d1a1ad75c59cb5b4b708360b16fe83a32bda38c45ec9f45cf5"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ACTIVITY_INTELLIGENCE_V103.txt",
+          "bytes": 488,
+          "sha256": "11260159f227deac6843ad2aa1eadb41c9d03f4fb5159ede1c036a9f4571900d"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/EVENT_DATE_FILTER_V228.txt",
+          "bytes": 531,
+          "sha256": "eaf4da2468ff01aaf54cd6b96cf336720cc8035f5790918b535677ce6b9d1ee4"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/txt/ROUTE_BADGES_DETAIL_LINK_V92.txt",
+          "bytes": 561,
+          "sha256": "52f2cffd8306ef05dc841f12b03958477f1c7789bb4297b882dd7383141abc35"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V247_GLOBAL_EVENT_SERIES.txt",
+          "bytes": 530,
+          "sha256": "2ab106beffcfa5423b4c38ea1b36f595b0a9b2d4ecdfa27a57d2bfd7abdf6713"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V296_TODAY_BEFORE_LONG_RUNNING_FINAL.txt",
+          "bytes": 1208,
+          "sha256": "44b813361fa0c772afb269ff69cf9f4c9a277f5e0a28bcd875ed87d89ffbe53b"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V307_PLACE_EVENTS_FINAL.txt",
+          "bytes": 1642,
+          "sha256": "2c7979a26a17e0ab9b7edf57d87cec8ce3b1d73cefa14cee376e854db97b11d9"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V331_EVENT_DISTANCE_PRIORITY_FINAL.txt",
+          "bytes": 290,
+          "sha256": "eda64272bc6deeb7239a1dc9a9c865854d3ad21072d67d48455897abc68a49b3"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/functions.php",
+          "bytes": 438390,
+          "sha256": "49142d34f1b12afd3f364cae3a0a76301b37d15d9f21ff43b11cb3462c00acf1"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V300_HALLOWEEN_DATE_RELEVANCE_RANKING_FINAL.txt",
+          "bytes": 792,
+          "sha256": "1f063e5d6953cb671d44888a9e1d7ea7a54a0729576020c24479e548807f1197"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V241_EVENT_MEDIA_DIVERSITY_REVERSIBLE.txt",
+          "bytes": 1186,
+          "sha256": "721a4ca663d937011f5d91310927a4911e24f5767edff03ff88562fc56be7a49"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V318_EVENT_HINT_CONSOLIDATION_FINAL.txt",
+          "bytes": 555,
+          "sha256": "5cfb7cc0fba3e10d955162ffbda345e9782cbcf6ada0909c30ae6f91d58f385f"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V308_ANALYTICS_STORAGE_FREE_FINAL.txt",
+          "bytes": 1712,
+          "sha256": "0dc89b2c556e36fdafd6b8ab80693f6be6612222776d32a06419e999bfae668a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/RP_THEME_V251_EVENT_FINAL_8POINT.txt",
+          "bytes": 574,
+          "sha256": "bea7119c3bb09f3e01514417b3558c944a78ab2a34d2a444c13deb34b3773bfc"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V211_STICKY_HEADER_CATEGORY_HEADINGS.txt",
+          "bytes": 64,
+          "sha256": "492cd60dab67890708ab52bbed0ed6fff4ecb5b19d65e046793b115df10407ec"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V282_SELM_CALENDAR_SOURCE_HANDOFF.txt",
+          "bytes": 718,
+          "sha256": "e753302cce01d7035b68ef9bad3fcc03358424ab8e1b6e2ac875eacd8aabd7b9"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V280_HALLOWEEN_SEQUENTIAL_RADIUS_FALLBACK_FINAL.txt",
+          "bytes": 575,
+          "sha256": "e79af11479bb20833123a4314ea264ae990b276b454e64c8076c7e61b7447dc3"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V248_CANONICAL_ORGANIZER_AUTHORITY.txt",
+          "bytes": 763,
+          "sha256": "a858ec36525d7a4f44a456bce95b0d29deb2ffe6a6bba0737d39e561eddfba13"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V289_EVENT_CONTEXT_VISUAL_GATE.txt",
+          "bytes": 1199,
+          "sha256": "92cfc52181d60febef3ae337708eccc128bcd193b89ff1824b0608919e28383d"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V291_EVENT_AUTO_FALLBACK_VISUAL_GATE.txt",
+          "bytes": 1336,
+          "sha256": "f3959906036601e9b0e358318f6df4f9e2a0d0361268dc5d5016a12e38370e6a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V323_ADDRESS_GEOCODER_UTM_FIX_FINAL.txt",
+          "bytes": 777,
+          "sha256": "9861a758e8d5394c5b4d7683afc4abfd2677afc9f2f59eee6b97958aeee8c048"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V259_EYEABLE_ACCESSIBILITY_PASS.txt",
+          "bytes": 779,
+          "sha256": "6b4ae6a4439eea0a4b0bd54a04bc335368128c9ea460823279fe31c1505a61fe"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V288_SINGLE_PAGE_SCROLL_PATH_FINAL.txt",
+          "bytes": 1320,
+          "sha256": "b2870a7048cf92ebaaa1436d951efcc553d1f3778484a8f672013b4aab6e668e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V277_HALLOWEEN_VISUAL_AND_SERIES_FIX_FINAL.txt",
+          "bytes": 644,
+          "sha256": "dc901eb14d64b77c7f870e7724da16bd6d41b606cd0d7b8d8104bb72587abc1e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V304_DETAIL_OVERLAY_20PX_TOP_SINGLE_SOURCE_FINAL.txt",
+          "bytes": 465,
+          "sha256": "c23f5b44a6b0d4e0e2be875707cbeb6c7467b56cd2c994422dad0526d1a2e173"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V252_CANONICAL_ORGANIZER_GUARD.txt",
+          "bytes": 464,
+          "sha256": "0e77cb8f9d53b49d3bd9a51e2ef89d63fd651bd0732079109f6392d486a053f7"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/single.php",
+          "bytes": 1957,
+          "sha256": "c77dcd027ac3e8c0b91fab3ba419962df7379d2286657fbd8c60fe2c922447f1"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/footer.php",
+          "bytes": 8997,
+          "sha256": "93a612a725bbc5fd666aa15d5a8065d5d162643450f2cf95b0b5cd5c97296010"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V293_MEDIA_CROP_ZOOM_OUT_FINAL.txt",
+          "bytes": 527,
+          "sha256": "21672859be8a013179c238a9fa08717d988617979e52e09adb7924571d2a3d70"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/tests/detail-chips.cjs",
+          "bytes": 7988,
+          "sha256": "35b13242ac89f17c4dfc22047fe33ad1aa7f82e2b2e0f17558118560c3ae5026"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/tests/v326-geoapify-address.cjs",
+          "bytes": 2441,
+          "sha256": "e4569b723cb8af4614a24b80da4793af8ba261ff3c70a6eeade4862cd91f21cb"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/tests/v330-event-visit-times.cjs",
+          "bytes": 4365,
+          "sha256": "9db3c96d18e5549f4513980b0609fa57263e4aacd8772f6479e0cc20fa7daa23"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/tests/place-events.cjs",
+          "bytes": 4331,
+          "sha256": "f5ec5e6988e4ebb8947b13cecbe601b99fb15c73d8418698774708f4ac2d5840"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/tests/v329-home-events.cjs",
+          "bytes": 6497,
+          "sha256": "d7a8aa126c00918c1887cd96941c9d40cd6da655921650310fbd037ba045ca81"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/tests/v331-event-distance-priority.cjs",
+          "bytes": 4595,
+          "sha256": "7e701734d39c685a7f031b1bdc46ab30ff0180703e0f6439bd76455ff8a1cb4a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/tests/wesel-cityscope-description.cjs",
+          "bytes": 1992,
+          "sha256": "0b6b3590dcabc1828fb1602fd7963fb4f3574e9ec828b47997a865a6a2d3fb22"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/tests/fixtures/cappenberg-events.json",
+          "bytes": 263940,
+          "sha256": "bc696c6fb03484827f02ab08c59b91e5c24aaf0d4fa45b26ae7b71cbdc9648fc"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/tests/fixtures/cappenberg-place.json",
+          "bytes": 976,
+          "sha256": "a27391beebea0dd2c4a307a00d51663451fc655efd2d0d94e88c28ded258fa14"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/tests/home-event-time-switch.cjs",
+          "bytes": 6437,
+          "sha256": "d422f98f78dbee9b01e48648c41c0be777dbe80fab343ea715d0cebb6ecb4467"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/tests/event-detail-facts-box.cjs",
+          "bytes": 4413,
+          "sha256": "4a59dd16f1b33f0f3e3919c73b2a418e0058dc40cf3d01241e6bbc1bd669720b"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/tests/event-rights-ui.cjs",
+          "bytes": 2630,
+          "sha256": "429c116021e1993a2d8ea0bc172652114f66932d502eb0260898aaac5bd6554b"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/tests/wesel-marketing-chip.cjs",
+          "bytes": 4870,
+          "sha256": "5f0676bb8aede57a41f5e3fbfc811f42e520a63bade1029309bf6fbf250d0db6"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/tests/v332-event-cityscope-distance-fallback.cjs",
+          "bytes": 2798,
+          "sha256": "51e41f6142f46a26d7e33f7d051aa5ce77338fd1190f82691da0afb05a014f74"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/tests/v332-halloween-day-distance.cjs",
+          "bytes": 2734,
+          "sha256": "91492ec12c4c3ba428c7d393c4bda0c75a3075ec6adc039d47cfec12c115650c"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/tests/v312-regression.cjs",
+          "bytes": 3056,
+          "sha256": "588196595f9d536ea9699f3515ce3aaa29a32cc805d2a3f9af96f331d6cdd81a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V295_EVENTS_CHRONOLOGY_DISCOVERY_FINAL.txt",
+          "bytes": 1898,
+          "sha256": "70ad0cb35a3735f6f710c7d816307d42b478e1aab275061277153cc63ef134aa"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V275_PUBLIC_DISCOVERY_TAGS_FINAL.txt",
+          "bytes": 1243,
+          "sha256": "253e818bdf77e5cd1beddab1cffb6ba4e066ced9c641c976009b1e0322c01e43"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V317_EVENT_DETAILS_PRICE_FINAL.txt",
+          "bytes": 563,
+          "sha256": "366d53cdefb028a5be983ab578c8ada6df6ade0af77808dfb6a779b6f1a2921b"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V267_FOOD_TAG_COVERAGE.txt",
+          "bytes": 871,
+          "sha256": "1f5e7630ee60506292115cd250ebbd3c3daf3dda2a34cd7832e4117cc205f629"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V239_ET4_EVENT_FINAL_PASS.txt",
+          "bytes": 658,
+          "sha256": "ee687c5743ed30466929615cd988e46444df109669d9dc18927d05d2fcdc033e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V290_EVENT_CONTEXT_PREFLIGHT_VISUAL_GATE.txt",
+          "bytes": 1586,
+          "sha256": "c24f449b8f7825a6974955f650a914fb481d71a65de161f3fd18b5c2c67731a3"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V285_GLOBAL_EVENT_MEDIA_DISTANCE_TIE_FINAL.txt",
+          "bytes": 469,
+          "sha256": "313e05171b90d927100a84e6a589588e5ecf7484ad5a5cf6ff0b37966c8f494a"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V278_HALLOWEEN_PALETTE_AND_RADIUS_FALLBACK_FINAL.txt",
+          "bytes": 829,
+          "sha256": "149e00bdb5db91eb5fc7b2b43cae2b481db661c75eed81e2897e2c2c5fe55389"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V297_CLEAN_PUBLIC_CATEGORY_META_FINAL.txt",
+          "bytes": 610,
+          "sha256": "8e57c21289e67e745b7fd92dad6e6815582422ccb6671875f95e6b795add7713"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/favicon.svg",
+          "bytes": 1412,
+          "sha256": "16bf0971d5c1bf85e22f7898d78ee5ea7fb9dd05b133fe3f705b6fb96b6333ad"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/css/rpg-night.css",
+          "bytes": 10807,
+          "sha256": "01f6f4754a248197756b572a04588d166e8ad5e07e81ce11a81afb0dce5ddd2b"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/css/ruhrpott-app.css",
+          "bytes": 106972,
+          "sha256": "279d573b1d7210f70631ff172fb21772da348f58b3170dcb9fd209e2354b13aa"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/css/rpg-react-source.css",
+          "bytes": 136826,
+          "sha256": "aff68651b6c3ab9597ae1ed5c40b0e99b4fb7966564f542815e89c12705a66aa"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V274_PLACE_TAG_COVERAGE_FINAL.txt",
+          "bytes": 1748,
+          "sha256": "67489dd2ecff694cc01d8fa223d7b9d85baedfa1df4ce64a2c1073a1b66f2c63"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/index.php",
+          "bytes": 8870,
+          "sha256": "35a3aca321c65052de65341d99b8d11569438f1d0be133d7bd85e935155da62b"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V325_MAPNRW_SEARCH_CALLBACK_FINAL.txt",
+          "bytes": 402,
+          "sha256": "7bd8234e3104cad175042ebadf4800d5b1899477f8317844bd33f4f27c617b8c"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V332_HALLOWEEN_CHRONOLOGICAL_DISTANCE_FINAL.txt",
+          "bytes": 566,
+          "sha256": "ea037146290a61b016c735b2a066d18888e65be971b6e4d2818598582466d08e"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V312_SEARCH_MEDIA_LOCATION_FINAL.txt",
+          "bytes": 744,
+          "sha256": "ba23186cbf3ebe0a6dd26144c9f1187e339a1da1fc11bff9e59d5c8c7d239cc6"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V314_WESEL_MARKETING_DISCOVERY_CHIP_FINAL.txt",
+          "bytes": 622,
+          "sha256": "fbc90201460a14942b64b9ca38d81160cf511f0ea5b57d4970d0e84c28603ac2"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V258_SURECOOKIE_ACCESSIBLE_NAMES.txt",
+          "bytes": 671,
+          "sha256": "d718ffa4051f2cfb516176f62dabdb8e7ecaed3267f82ee1924873a5a3b52beb"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/V311_SEARCH_LOCATION_PARITY_FINAL.txt",
+          "bytes": 1658,
+          "sha256": "eedbe49c87b3d7bb424b31bfc19bf6d7008277a64ba7548e9a1dd35fe61e50f7"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/header.php",
+          "bytes": 866,
+          "sha256": "6ec257cf4cf3911796008514290dbb55514fa6c6aeb9a19b4e5ca631ebdc4216"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/js/rpg-night.js",
+          "bytes": 23078,
+          "sha256": "6c79971fb706c6a5a49bba3a10889eb2b166697a400b48c37b9511f8af997bc9"
+        },
+        {
+          "path": "wordpress/themes/ruhrpott-guru/js/rpg-icons-local.js",
+          "bytes": 2670,
+          "sha256": "ab62ac4e6ff0fb46801945e350a2c49ba77ca0319b2f09a5deaec6b4189dcba1"
+        }
+      ]
+    }
+  ]
+}

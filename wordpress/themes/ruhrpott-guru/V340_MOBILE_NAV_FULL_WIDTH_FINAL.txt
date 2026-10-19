@@ -1,0 +1,7 @@
+RuhrpottGuru Theme v340.0 – Mobile Navigation Full Width
+
+Scope:
+- Mobile burger drawer widened to almost the complete viewport (8 px left gutter).
+- Right-side chevrons remain removed from v339.
+- Menu labels remain single-line.
+- No navigation links, order, behavior, category, GPS, radius, ranking, sorting, SEO or backend logic changed.

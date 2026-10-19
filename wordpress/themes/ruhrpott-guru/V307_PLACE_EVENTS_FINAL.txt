@@ -1,0 +1,26 @@
+RuhrpottGuru Theme v307.0 – Events am Ort
+
+Aufbauend auf v306: Namens- und Themen-Filterchips bleiben enthalten.
+Ortsdetails zeigen „Events an diesem Ort“, sofern passende aktuelle Termine
+vorliegen. Abgleich: Ortsname oder expliziter Alias, Stadt und maximal 150 m.
+„Museum Schloss Cappenberg“ wird Schloss Cappenberg zugeordnet; Waldschule
+und Gemeindehaus Cappenberg werden nicht zugeordnet.
+Ohne passende Termine bleibt der Abschnitt ausgeblendet. Ladefehler erhalten
+eine neutrale Meldung. Abruf erst beim Öffnen des Ortsdetails, Cache 2 Minuten.
+Klick öffnet den Event-Detail-Layer über den bestehenden Einzel-Event-Endpunkt.
+Schließen erhält die ursprüngliche Übersicht; direkte Ortslinks kehren zu ihrer
+Ortsübersicht zurück. Modifier-Klicks bleiben normale Links.
+Ganztägige laufende Ausstellungen zeigen „Läuft bis“ mit korrektem Kalenderdatum.
+
+Validierung am 02.10.2026:
+22 neue funktionale Assertions mit echten Cappenberg-Daten, Leerfall,
+Koordinaten/Stadt/Name/Datum-Grenzfällen, Cache, Fehler/Retry und Navigation.
+154 bestehende Filterchip-Assertions weiterhin erfolgreich.
+JavaScript-Syntaxprüfung aller React-Quelldateien erfolgreich.
+Geänderte PHP-Enqueue-Anweisungen serverseitig syntaxgeprüft.
+Isolierter Browser-Test mit Original-DetailOverlay, realen Orts/Event-Fixtures
+und echtem Event-REST-Einzelabruf: zwei Termine, Event-Layer ersetzt Ortslayer,
+Schließen erhält Highlights-Übersicht. Namens-Chip und All-Day-Datum geprüft.
+
+Installation: Theme-ZIP wie üblich als Update installieren. Kein Backend-Update
+oder Datenimport erforderlich. Produktivcode wurde nicht veröffentlicht.

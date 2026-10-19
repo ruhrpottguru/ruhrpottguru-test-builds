@@ -1,0 +1,7 @@
+RuhrpottGuru Theme 194 – Wesel Rich Event Detail Test
+
+- Kein Audit und kein neuer Event-Import im Theme.
+- Bestehende strukturierte Eventdaten werden im Detail-Layer sichtbar genutzt.
+- Fuer Events mit Stadt Wesel gibt es testweise einen eigenen Bereich 'Eintritt & Tickets' mit Preistext und vorhandenen strukturierten Preiszeilen.
+- Veranstalter/Kontakt, Mitwirkende, Beschreibung, Event-Merkmale, Ticketlink, Event-Webseite und Kalender bleiben Teil derselben Detailansicht.
+- Andere Staedte behalten exakt die bisherige Darstellung; Wesel dient als kontrollierter UX-Test.

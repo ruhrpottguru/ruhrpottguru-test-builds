@@ -1,0 +1,9 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.17 – CANONICAL EVENT VISITOR MODEL
+
+- Global search and visitor event feed use the same strict identity basis (title + city + venue/geo).
+- Exact cross-source duplicates collapse to one visitor card.
+- Daily-neighbour occurrences (18–30h apart, max 10-day run) collapse to one short-series card.
+- Weekly/monthly recurrences are not merged by this backend clustering.
+- Verified event media is shared inside the concrete cluster so Events cards and Detail use the same artwork already visible in search.
+- Search overfetches before collapsing so duplicates no longer crowd out other results.
+- Raw occurrence storage remains untouched; calendar/lifecycle data stays available in MySQL.

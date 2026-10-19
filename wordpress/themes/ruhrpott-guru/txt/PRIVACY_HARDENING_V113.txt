@@ -1,0 +1,14 @@
+RuhrpottGuru v113 – Privacy Hardening
+
+- Externe Lucide/unpkg-Verbindung vollständig entfernt.
+- Icons werden jetzt aus einer kleinen, theme-eigenen lokalen SVG-Runtime ausgeliefert.
+- Keine Anfrage an unpkg/jsDelivr für Icons mehr.
+- Veraltete Halden-Autoerkennung und die nicht mehr verwendeten temporären Halden-Seiten entfernt.
+- Damit sind auch die alten fest verdrahteten Unsplash-Fallbackbilder entfernt.
+- Referrer-Policy: strict-origin-when-cross-origin.
+- X-Content-Type-Options: nosniff.
+- Permissions-Policy bleibt geolocation=(self).
+- Externe Originalbilder (z. B. Wikimedia / offizielle Anbieter) werden bewusst weiterhin direkt geladen;
+  sie sind Teil der Bildquellenlogik und müssen in der Datenschutzerklärung dokumentiert bleiben.
+- Kein allgemeiner Image-Proxy eingeführt: Das würde auf 1blu erheblichen zusätzlichen Traffic,
+  Cache- und SSRF-Sicherheitsaufwand erzeugen und ist für die aktuelle Architektur nicht nötig.

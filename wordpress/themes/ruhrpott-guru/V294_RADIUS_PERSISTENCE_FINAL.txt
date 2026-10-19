@@ -1,0 +1,8 @@
+RuhrpottGuru Theme v294 — Radius persistence hardening
+
+- Radius remains stored in localStorage as before.
+- Adds a first-party SameSite=Lax radius cookie shared across .ruhrpottguru.de.
+- This mirrors the existing city fallback and fixes the asymmetric case where city persists across apex/www but radius falls back to 5 km.
+- URL ?radius= remains an explicit temporary override and is not persisted.
+- No category/event fallback-radius rules changed.
+- No GPS/location coordinates are stored in the radius cookie.

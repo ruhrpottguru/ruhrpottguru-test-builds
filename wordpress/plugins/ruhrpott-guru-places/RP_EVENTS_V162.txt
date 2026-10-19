@@ -1,0 +1,14 @@
+RuhrpottGuru Places Backend 1.6.2 – Event-Enrichment
+
+- RP Redaktion > Events bleibt der zentrale Event-Bereich.
+- Manueller Button startet jetzt den kompletten 53-Städte-Sync, nicht nur eine Stadt.
+- Nach jedem vollständigen Nachtlauf um 03:00 Uhr startet automatisch eine serverfreundliche Enrichment-Welle.
+- Enrichment verarbeitet 5 Events pro Batch und setzt den Lauf per WP-Cron fort.
+- Event-eigene Bilder aus ET4/Open Data Finder werden direkt aus den Media-Feldern übernommen.
+- Shared Venue-/Location-Medien werden ausdrücklich nicht als Eventfoto verwendet.
+- Wenn kein Eventbild im Feed steckt, wird – sofern das Theme den strikten v162-Resolver bereitstellt – nur eine eindeutig identifizierte offizielle Eventseite geprüft.
+- Gefundene Bilder werden persistent in rg_event_media mit Quelle, Credit/Lizenz-Metadaten und Identity Confidence gespeichert.
+- Verschachtelte Event-Adressen werden global bewertet; Veranstalter-/Kontakt-/Rechnungsadressen werden abgewertet.
+- Bereits vorhandene Adressfelder werden nicht überschrieben, nur fehlende Felder ergänzt.
+- Enrichment läuft höchstens einmal pro Event und Welle; dadurch keine Endlosschleife mit teilweisen Treffern.
+- 10-Tage-Lifecycle bleibt unverändert.

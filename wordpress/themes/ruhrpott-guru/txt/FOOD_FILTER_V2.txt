@@ -1,0 +1,36 @@
+RUHRPOTT GURU – FOOD PLACE IDENTITY / FILTER V2
+
+Ziel:
+- Rohdaten und Radius bleiben unangetastet.
+- Food-Filter ist vollständig reversibel.
+- Aktuelle Namen gewinnen bei klar belegten Namenswechseln.
+
+Filter EIN (Standard):
+https://www.ruhrpottguru.de/?rg_food_filter=on
+
+Filter AUS / Rohdaten anzeigen:
+https://www.ruhrpottguru.de/?rg_food_filter=off
+
+Beim Umschalten werden nur Ruhrpott-Guru Session-Caches für OSM/Kategorien geleert.
+
+Food-Radius bleibt:
+1 -> 2,5 -> 5 -> 10 -> 25 km
+
+V2 entfernt/korrigiert konservativ:
+- explizit als inaktiv/geschlossen markierte OSM-Objekte
+- namenlose Food-Objekte
+- echte Dubletten (gleicher Name + derselbe physische Ort)
+- alte Namens-Datensätze nur bei starkem Rename-Nachweis
+
+Namenswechsel:
+- OSM old_name / previous_name / former_name / was:name
+- bekannte lokale Paarung Mezzomar -> Oliv, aber nur wenn beide Datensätze am selben Ort vorhanden sind
+
+WICHTIG:
+Zwei unterschiedliche aktive Namen an derselben Adresse werden NICHT automatisch zusammengeführt.
+
+
+Lokale reversible Korrekturen V2:
+- Mezzomar am Standort Kreuzstraße 1a -> Café-Bistro Oliv
+- San Marino / San Marino II in Wesel-Kern: ausgeblendet (user-confirmed closed)
+- Berliner Stube / Berliner Stuben in Wesel-Kern: ausgeblendet (user-confirmed closed)

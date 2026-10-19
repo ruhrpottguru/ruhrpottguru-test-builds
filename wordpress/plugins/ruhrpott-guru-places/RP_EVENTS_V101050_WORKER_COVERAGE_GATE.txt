@@ -1,0 +1,23 @@
+RUHRPOTTGURU EVENTS 1.10.50 – WORKER-INVENTUR / COVERAGE-GATE
+
+Ziel
+Vor dem 53-Städte-Quellen-Coverage-Ausbau muss klar sein, welche bestehenden Queues gleichzeitig laufen. Dieser Build schafft ausschließlich Transparenz und eine zentrale Gate-Funktion; er startet noch keinen neuen Coverage-Importer.
+
+Erfasste Worker
+- Places / OSM 53 Städte
+- ET4 Masterimport
+- destination.one / 53-Städte-Zusatzfeed
+- Event-Enrichment
+- ET4 Bildkatalog
+- Raw-Payload Bild-Backfill
+- ET4 Bild-Lokalisierung
+- Eventbild-Fallback
+- Event-Ort-Upgrade
+- Bild-Dubletten SHA-256
+- Öffnungszeiten-Audit
+
+Schutzregel für den kommenden Coverage-Audit
+Der Coverage-Audit gilt nur als startbar, wenn kein Worker der Klasse external-heavy aktiv ist. Lokale DB-only-Jobs blockieren ihn nicht. Der Gate ist zentral implementiert und kann vom kommenden Coverage-Worker direkt wiederverwendet werden.
+
+Bewusst unverändert
+Kein Reset von Worker-States, keine Änderung bestehender Cron-Taktung, kein neuer Eventimport, keine Schemaänderung, kein Theme-Update.

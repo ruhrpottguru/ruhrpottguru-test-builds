@@ -1,0 +1,6 @@
+RUHRPOTTGURU THEME v253 — OPENING HOURS FINAL WORDING
+
+- No change to open/closed calculations.
+- Missing hours remain state=unknown and are never interpreted as closed.
+- Visitor-facing wording standardized to 'Öffnungszeiten nicht bekannt'.
+- Unknown hours remain hidden as a card status chip to avoid visual noise; detail views state the neutral unknown status explicitly.

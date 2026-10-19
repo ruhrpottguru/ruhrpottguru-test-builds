@@ -1,0 +1,16 @@
+RuhrpottGuru Places Backend 1.10.15 – Event Website Filter
+
+Ziel
+- destination.one / eT4 / Open-Data-Providerseiten bleiben interne Quellen, erscheinen aber nicht mehr als Besucher-Webseite bei Events.
+- Gilt global fuer alle Events.
+- Kein Theme-Update erforderlich.
+
+Umsetzung
+- Interne source_url-Provenienz bleibt unveraendert erhalten.
+- Visitor-facing Website wird separat aus offiziellen Website/Homepage/sameAs/Event-URL-Feldern ermittelt.
+- Blockiert werden destination.one, eT4 und Open-Data-Providerhosts.
+- Bereits gespeicherte Events werden beim Ausliefern sofort bereinigt; kein kompletter Neuimport notwendig.
+- Ticketlinks bleiben separat und unveraendert.
+- Globale Suche verwendet ebenfalls nur die bereinigte Event-Webseite.
+
+Version: 1.10.15

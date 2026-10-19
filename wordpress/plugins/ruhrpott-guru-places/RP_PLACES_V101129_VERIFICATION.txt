@@ -1,0 +1,16 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.129 — VERIFICATION
+
+BASE: 1.10.128 Schema Contract Repair
+SCOPE: place_media persistence contract only
+
+PASS — Plugin header 1.10.129
+PASS — Runtime VERSION 1.10.129
+PASS — SCHEMA_VERSION 1.10.129
+PASS — PHP lint
+PASS — four malformed place_media format arrays repaired
+PASS — one-time idempotent historical repair
+PASS — 53-city audit contract diagnostics added
+PASS — no Event Lifecycle/Reprocessing behavior changed
+PASS — no media worker cursor/state/reset/resume behavior changed
+
+The production worker must stay paused during installation. After install, verify the DB/audit contract first; then resume from the existing cursor.

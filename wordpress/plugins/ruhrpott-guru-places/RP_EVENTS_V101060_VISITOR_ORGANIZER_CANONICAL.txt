@@ -1,0 +1,7 @@
+RuhrpottGuru Places Backend v1.10.60
+
+- Organizer-Ausgabe wird im Visitor-REST bei jedem Request aus dem gespeicherten ET4-Rohpayload kanonisch neu bestimmt.
+- Alte organizer_json-Zeilen aus v1.10.58 können dadurch Support/Author/Contact/Provider nicht mehr sichtbar machen.
+- Gleichnamige echte Organizer werden zusammengeführt; passende Kontaktdaten derselben Identität dürfen ergänzen.
+- Der vorhandene lokale Backfill bleibt zur persistenten Bereinigung bestehen, ist aber nicht mehr Voraussetzung für eine korrekte Anzeige.
+- Keine externen Requests, keine Änderungen an Eventauswahl, Sortierung oder Medienlogik.

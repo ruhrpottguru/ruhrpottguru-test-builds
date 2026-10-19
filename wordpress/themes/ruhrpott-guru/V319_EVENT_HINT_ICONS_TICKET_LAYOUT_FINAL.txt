@@ -1,0 +1,7 @@
+RuhrpottGuru Theme v319 — Veranstaltungshinweis Icons & Ticketlayout
+
+- Uhrsymbol steht direkt an der Zeile „Termin“, nicht mehr über dem Veranstaltungshinweis.
+- Preis erhält ein eigenes €-Symbol direkt an der Preiszeile.
+- Ticketlinks, die in freien Preistexten stecken, werden aus dem Preistext herausgelöst und als eigener Ticket-Link dargestellt.
+- Preisbestandteile werden sauber untereinander dargestellt; Abendkassen-Hinweise werden in eine eigene Zeile normalisiert.
+- ET4-Mitwirkende bleiben im Veranstaltungshinweis unverändert erhalten.

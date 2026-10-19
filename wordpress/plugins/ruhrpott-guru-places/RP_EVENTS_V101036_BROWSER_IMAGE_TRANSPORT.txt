@@ -1,0 +1,41 @@
+RuhrpottGuru Places Backend 1.10.36 – Eventbilder: Browser-Transport
+=================================================================
+
+Ziel
+----
+Keine neue Bildzuordnung. Die in rg_event_media bereits per ET4/global_id verifizierten
+Original-Bild-URLs bleiben unverändert gespeichert. Nur der Browser-Transport wird
+vereinheitlicht: Besucher erhalten eine HTTPS-URL auf RuhrpottGuru (admin-ajax.php),
+die ausschließlich eine vorhandene aktive event_media-ID akzeptiert.
+
+Datenweg
+---------
+ET4 global_id -> rg_event_media (bestehend) -> Event-REST -> RuhrpottGuru Bild-Proxy
+-> unveränderte Bildbytes -> aktuelles Theme normalizeEvent() -> Media <img>.
+
+Sicherheit / Verhalten
+----------------------
+- Kein URL-Parameter für fremde Bildquellen; Browser übergibt nur media_id.
+- Proxy löst media_id serverseitig gegen wp_rg_event_media auf.
+- Nur aktive Bild-Medienzeilen mit zulässigem Health-Status.
+- Download über wp_safe_remote_get (SSRF-sicherer WordPress-Transport).
+- Erlaubt JPEG, PNG, WebP, GIF, AVIF; HTML/PDF/SVG/sonstige Inhalte werden nicht ausgeliefert.
+- Byte-/MIME-Prüfung vor Ausgabe; widersprüchliche MIME-Angaben werden abgelehnt.
+- Unveränderte Originalbytes werden lokal unter uploads/rpg-event-image-cache gecacht.
+- ETag + Browsercache; Upstream wird nach lokalem Cache-Hit nicht erneut benötigt.
+- Kein Eingriff in ET4/global_id-Zuordnung, Source Ownership oder Opening-Hours-Audit.
+
+Verifikation 2026-09-10
+-----------------------
+PASS  PHP 8.4 Syntax.
+PASS  Proxy-URL: HTTPS RuhrpottGuru, keine Upstream-URL im Querystring.
+PASS  Unbekannte media_id wird abgewiesen (kein Open Proxy).
+PASS  JPEG / PNG / GIF / WebP / AVIF: MIME erkannt, Bytes unverändert.
+PASS  Fake image header + HTML-Bytes wird abgewiesen.
+PASS  Widersprüchlicher Bild-MIME wird abgewiesen.
+PASS  Erster Abruf: Upstream -> Cache; zweiter Abruf bei simuliertem Upstream-Ausfall -> Cache-HIT.
+PASS  HTTP-Response: 200, korrekter Content-Type, Content-Length, ETag, Cache-Control, nosniff.
+PASS  If-None-Match liefert 304.
+PASS  Mock DB -> echtes frontend_events_query(): imageUrl/media_objects/rpg_event_media zeigen auf Proxy.
+PASS  Tatsächliches Theme v231 api.js normalizeEvent() behält Proxy-URL.
+PASS  Tatsächliches Theme v231 components.js Media rendert <img src="Proxy-URL"> statt Ticket-Fallback.

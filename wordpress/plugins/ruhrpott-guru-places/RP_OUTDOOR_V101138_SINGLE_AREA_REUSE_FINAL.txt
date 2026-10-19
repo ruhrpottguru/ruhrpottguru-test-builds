@@ -1,0 +1,24 @@
+RuhrpottGuru Places Backend v1.10.138 – Outdoor Coverage Single Area Reuse FINAL
+
+Scope
+- Read-only 53-municipality Hunde/Wald coverage runner only.
+- Resolve the official municipality boundary relation exactly once per city.
+- Derive and reuse the corresponding Overpass area id for all subsequent counters.
+- Preserve the hard preflight: exactly one boundary relation and exactly one generated area.
+- Split Phase B into dog-rule evidence and trailhead counters.
+
+Verified live before build
+- Bochum relation 62644 -> area 3600062644.
+- Bochum direct-area counts: dog areas 8, nature 77, dog-rule evidence 3, trailheads 0.
+- Dortmund relation 1829065 -> area 3601829065.
+- Dortmund direct-area dog areas: 21.
+
+Unchanged
+- Municipality/AGS/admin_level inventory.
+- Dog/nature filter semantics.
+- Provider ordering/timeouts/affinity.
+- Outdoor entity/search/ranking/entry logic.
+- Places, Events, Media, workers, reprocessing and frontend.
+- Persistent writes remain coverage-state-only.
+
+Query version: outdoor-coverage-1.4.

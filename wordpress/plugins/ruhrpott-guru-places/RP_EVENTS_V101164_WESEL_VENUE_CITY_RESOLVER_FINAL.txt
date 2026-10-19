@@ -1,0 +1,68 @@
+RuhrpottGuru Places Backend 1.10.164
+WeselMarketing Venue/Stadt-Resolver – FINAL verification
+Date: 2026-10-06
+
+Scope
+- Backend only. No Theme/frontend layout change.
+- Builds on 1.10.161 occurrence identity, 1.10.162 source discovery and 1.10.163 exact venue/address anchors.
+- Reprocesses only stored WeselMarketing candidates that still have no canonical Wesel-owned event.
+- Does NOT refetch the 25 calendar pages or event detail pages.
+- Does NOT use city-centre coordinates, title-based geo guessing or arbitrary nearest-place assignment.
+
+Product rule implemented
+- A unique, known venue inside the already known city Wesel is sufficient to publish an event even when the source omits house number or the complete address.
+- Example: "Bühnenhaus" + city Wesel resolves to "Städtisches Bühnenhaus Wesel".
+- Existing trusted canonical venue/address data may fill missing street/house/postcode fields for the public event detail.
+- Source-provided address components are never overwritten merely because a canonical venue has richer data.
+- If the source supplies an address component that contradicts the resolved venue, the candidate stays Audit.
+
+1.10.164 resolver order
+1) Existing exact city + postcode + street + house evidence from active Places.
+2) Existing exact postal address from a canonical geocoded event.
+3) Exact canonical event venue identity with compatible source address components.
+4) Curated deterministic Wesel venue/address anchors.
+5) NEW: unique city-local venue alias resolution against geocoded canonical Places + Events.
+6) Existing conservative Places fallback.
+7) Otherwise: remain Audit.
+
+Venue/city safety gate
+- Venue matching is limited to Wesel.
+- Municipality words such as "Wesel" and "Städtisches" may be ignored for venue identity, so "Bühnenhaus" can equal "Städtisches Bühnenhaus Wesel".
+- Generic short names such as "Halle" are rejected.
+- Multiple references are accepted only when their coordinates lie in one physical cluster (max 125 m spread).
+- Source street, house number and postcode, when present on both sides, must remain compatible.
+- No fuzzy title->location inference.
+
+Bühnenhaus anchor
+- Aliases: Städtisches Bühnenhaus Wesel, Städtisches Bühnenhaus, Bühnenhaus Wesel, Bühnenhaus.
+- Official main entrance: Martinistraße 11-13, 46483 Wesel.
+- Geo anchor uses the existing canonical Bühnenhaus coordinate 51.6588764, 6.6120351.
+- This allows venue-only Wesel events to receive the known canonical address and coordinates.
+
+Address backfill
+- The original source candidate remains the provenance source.
+- A separate resolved-address layer fills only missing street, house number, postcode or city fields for canonical event materialization.
+- Known source values are preserved.
+- The event feed can use the canonical venue label when source label and resolved venue are the same normalized identity.
+
+Reprocessing
+- New immutable job: wesel-venue-city-resolver-v101164.
+- Fingerprint: wesel-coverage:unique-venue-city+address-backfill:1.10.164.
+- Resumable monotonic candidate-ID cursor, batch size 8.
+- Autostarts once after installation.
+- Processes only currently unresolved Wesel candidates.
+- Shares the external-event lane because a successful import may cache the already-approved Wesel image.
+- 1.10.161 and 1.10.163 history is preserved.
+
+Admin
+- RP Redaktion -> Events adds a separate "Venue/Stadt-Resolver 1.10.164" progress line.
+- Historic full-sync counters remain unchanged.
+- The current Audit list continues to show only candidates that are still genuinely unresolved.
+
+Regression promises
+- ET4 precedence unchanged.
+- Event radius/date/distance sorting unchanged.
+- Missing/cancelled lifecycle unchanged.
+- Multiple-performance logic from 1.10.161 unchanged.
+- Wesel Marketing discovery chip from 1.10.162 unchanged.
+- No new visible rights/freigabe/license text is introduced.

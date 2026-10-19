@@ -1,0 +1,8 @@
+RuhrpottGuru Theme v251 – finaler Event-8-Punkte-Pass
+
+- allDay wird durch Karten, Detail, Share, Suche, Eventreihe und Kalender konsistent respektiert.
+- Programm/Flyer/Ablauf/PDF erscheinen als eigener Block „Programm & Downloads“.
+- Ticket und Event-Webseite werden getrennt und bei identischer URL nicht doppelt angeboten.
+- Share/Kalender verwenden weiterhin den kanonischen RuhrpottGuru-Eventlink.
+- Related-Event-Klick bleibt im selben Detail-Layer; Hintergrundliste wird nicht neu geladen.
+- Auf-einen-Blick, Eventtyp-Badges und Bildvielfalt bleiben erhalten.

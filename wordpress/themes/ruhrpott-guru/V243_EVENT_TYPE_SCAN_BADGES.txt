@@ -1,0 +1,17 @@
+RUHRPOTTGURU THEME V243 – EVENT TYPE SCAN BADGES
+
+SCOPE
+- UI-only addition on event cards.
+- No event is hidden, grouped, re-ordered or rewritten.
+- Event images and V242 media diversity remain unchanged.
+
+DISPLAY
+- Existing media-origin badge stays top-right (Event-Ort / Symbolfoto).
+- New event-type badge sits top-left with a small orange line icon.
+- Supported explicit signals: Rätsel, Führung, Ausstellung, Konzert, Bühne, Workshop, Vortrag, Film, Familie, Markt/Fest, Sport, Party.
+- Type inference uses existing ET4 categories/features/keywords plus explicit title terms only.
+- Ambiguous events receive no type badge.
+
+ROLLBACK
+RP Redaktion -> Event-Bilder -> uncheck “Eventart auf Eventkarten anzeigen” -> save.
+This removes the type badges immediately without changing stored data.

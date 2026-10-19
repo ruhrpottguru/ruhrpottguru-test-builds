@@ -1,0 +1,10 @@
+RuhrpottGuru Theme v223 – Desktop Pass
+
+Desktop-only refinement; mobile/tablet layout remains unchanged.
+- Header, location strip and main content aligned to one 1320/1360 px canvas.
+- Home rows show complete desktop cards (4, or 5 on wide screens) rather than partial mobile-style cards.
+- Category grids use stable 4-column card sizing and equal heights.
+- Highlights retain magazine hierarchy with calmer desktop proportions.
+- Direct detail overlay receives a real 1080 px desktop dialog width and internal scrolling below the fixed header.
+- Sticky footer remains at the bottom but uses horizontal icon+label navigation on desktop.
+- No data, ranking, API or backend logic changed.

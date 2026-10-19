@@ -1,0 +1,9 @@
+RuhrpottGuru V69 – Home Preview 20 + Scene Filter OFF
+
+- Scene/Trends quick filter disabled in compiled app and Home magazine.
+- Scene scoring function short-circuited; no scene matrix is evaluated in runtime filtering.
+- New /wp-json/ruhrpottguru/v1/home-osm-preview endpoint.
+- Home OSM modules load independently, max 20 named POIs per category.
+- No Home radius cascade; every preview uses exactly the selected radius.
+- Full category pages keep the established canonical loader and can load additional results.
+- Events transport remains unchanged.

@@ -1,0 +1,50 @@
+RUHRPOTT GURU – FOOD INFO & ACTIONS V1
+Generated: 2026-08-20
+
+BASE
+- Built directly on Food Card UX V1.
+- Keeps Content + Header V1, Cookie & Privacy V1, Infinite Scroll + Smart Location V1 and configured Pexels media.
+
+FOOD CARD STRUCTURE
+- Title
+- Exact street/address when available (city-only values are suppressed as redundant)
+- Rating + review count only when both are actually present in item data
+- Price tier € / €€ / €€€ only when an explicit supported source value exists
+- Live opening status directly below the facts
+- Official website link only when an actual http(s) URL exists
+- Menu link only when an actual menu URL exists in supported OSM/item fields
+- Reservation CTA only when an actual reservation/booking URL exists
+- Cuisine/feature hashtags
+- Route + Details at card bottom
+
+SUPPORTED LINK EVIDENCE
+Website:
+- item.website
+- OSM website
+- OSM contact:website
+
+Menu:
+- item.menuUrl
+- OSM menu
+- menu:url
+- website:menu
+- contact:menu
+- takeaway:menu
+- delivery:menu
+
+Reservation:
+- item.reservationUrl
+- reservation:website
+- reservation:url
+- website:reservation
+- booking:website
+- booking (URL only)
+- contact:booking
+- contact:reservation
+
+SAFETY / TRUTHFULNESS
+- No website/menu/reservation button is shown without a valid http(s) URL.
+- reservation=yes is NOT converted into a fake link.
+- javascript:, data:, malformed and non-URL values are rejected.
+- No rating, review count or price tier is invented.
+- Existing opening-hours evidence engine remains authoritative.

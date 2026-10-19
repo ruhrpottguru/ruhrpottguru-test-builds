@@ -1,0 +1,13 @@
+RuhrpottGuru Theme v244 – ET4 Eventdaten Vollständigkeit
+
+- event/homepage links also read ET2014A media_objects rel=homepage
+- ticket/booking links also read nested ET2014A media_objects rel=booking
+- destination.one/eT4 provider pages remain blocked from public website/ticket buttons
+- rich ET4 description paragraphs/lists stay readable instead of being flattened
+- ET4 addresses.address wrappers are resolved; organizer/contact addresses are not shown as event venue addresses
+- venue names can come from explicit location fields or event/venue address relations
+- timeIntervals wrappers retain exact source start/end instants and timezone offsets
+- additional explicit price fields are reused when present; false free-flags are ignored
+- organizer/organizers and additional structured participant roles are reused when present
+- existing v243 event-type badges and v242 reversible image-diversity remain unchanged
+- no event filtering, regrouping or sorting changes

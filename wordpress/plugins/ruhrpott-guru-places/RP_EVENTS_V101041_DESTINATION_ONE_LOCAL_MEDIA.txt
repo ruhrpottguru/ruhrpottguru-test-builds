@@ -1,0 +1,62 @@
+RUHRPOTTGURU – EVENTS 1.10.41 – DESTINATION.ONE LOCAL EVENT MEDIA
+=================================================================
+Stand: 10.09.2026
+
+AUSGANGSLAGE / PRODUKTIONSBEWEIS
+--------------------------------
+Die Essen-5-km-Antwort enthielt 253 Karten mit 152 eindeutigen global_id-Werten.
+V1.10.40 konnte davon nur 13 eindeutige IDs / 16 Karten aus dem lokalen
+ET4-Bildcache rehydrieren. Gleichzeitig existierten destination_one_open_data-
+Events mit media_status=verified, die in derselben Antwort ohne imageUrl ankamen
+(z. B. Kinderflohmarkt, global_id e_101350419, eventId 16608).
+
+VERIFIZIERTE URSACHE IN 1.10.40
+-------------------------------
+1. Der Rich-Supplemental-Importer holt unique ET2014A-Quellobjekte und bewahrt
+   deren event-eigene Medien beim lokalen Termin-Expandieren.
+2. Solche Bilder werden bereits exakt am betreffenden destination_one_open_data-
+   Event als source=et4-feed persistiert.
+3. Der lokale Cache-Worker 1.10.40 fragte aber ausschließlich aktuelle Master-
+   Zeilen source in (open_data_finder, et4) mit media.source=et4-global-id ab.
+4. Der defensive REST-Handoff entfernte anschließend externe ET4/destination.one-
+   Bildfelder für beide Quellen, konnte aber nur lokale Master-Bilder wieder
+   einsetzen. Damit waren persistierte Zusatzfeed-Bilder für Besucher unsichtbar.
+
+LÖSUNG 1.10.41
+--------------
+- Lokaler Cache arbeitet Source-Owner-bewusst:
+  * master       = current Open Data Finder / ET4 + et4-global-id
+  * supplemental = destination_one_open_data + et4-feed
+- Aktueller Master besitzt eine global_id immer vorrangig. Supplemental wird bei
+  Master-Overlap per NOT EXISTS ausgeschlossen.
+- Download-Datei bleibt global_id-stabil. Ein Cache-Hit gilt nur, wenn zusätzlich
+  source_hash der konkreten Upstream-URL identisch ist; dadurch kann ein alter
+  Dateistand bei Quellen-/URL-Wechsel nicht unbemerkt wiederverwendet werden.
+- Propagation und Retry/Failure bleiben strikt innerhalb des Source-Owners.
+- Neue/erneut gefundene et4-feed-Medien werden automatisch für den lokalen Cache
+  geöffnet; nach Supplemental-Ingest und Raw-Feed-Backfill wird der Worker geweckt.
+- Exact-global_id-REST-Handoff liest erst lokalen Master, dann ausschließlich für
+  noch fehlende IDs lokalen destination.one-et4-feed.
+- Global Search, Event-DB-Enrichment und Besucher-Batch priorisieren fertige lokale
+  et4-global-id / et4-feed-Medien vor schwächeren Medienzeilen.
+- Keine Cross-Source-Bildvererbung, keine Titel-/Venue-Heuristik, keine Websuche,
+  keine Frontend-Änderung.
+
+RUNTIME-PRÜFPUNKTE NACH INSTALLATION
+------------------------------------
+WP Admin -> RP Redaktion -> Events:
+  Lokaler Eventbild-Cache v1.10.41
+  - Master ready / total
+  - destination.one Zusatzfeed ready / total
+
+/wp-json/ruhrpottguru/v1/events Meta:
+  visitorModel = canonical-cluster-v1041-multi-owner-local-handoff
+  et4ExactImageHandoff.version = 1.10.41
+  matchedMasterGlobalIds
+  matchedSupplementalGlobalIds
+
+ERWARTUNG
+---------
+Nur destination.one-Events, die in ihrem eigenen ET2014A-Quellobjekt tatsächlich
+Bildmedien besitzen und als et4-feed persistiert sind, erhalten ein lokales Bild.
+Echte no-media-Events wie Portal der Industriekultur bleiben bewusst ohne Bild.

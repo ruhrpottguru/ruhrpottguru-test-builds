@@ -1,0 +1,19 @@
+RuhrpottGuru – Food Detail Overlay Close V23
+
+BASE
+- Built from V22 Food Mobile UX.
+- V22 overview-card polish, source placement and price copy retained.
+
+DETAIL OVERLAY CORRECTION
+- The item detail view is a modal/layer over the existing results, not an independent page.
+- Removed the V22 "← Zurück" control from ItemDetailModal.
+- Restored a top-right "× Schließen" action.
+- Closing the overlay keeps the underlying filtered result list and state intact.
+- Close control retains a minimum 44 px touch target on mobile.
+
+REGRESSION INTENT
+- Event/Wesel loading unchanged.
+- Calendar actions unchanged.
+- V21 fragment sharing unchanged.
+- Food overview badges/tags/Route+Details layout unchanged from V22.
+- Food detail price wording and relocated source information unchanged from V22.

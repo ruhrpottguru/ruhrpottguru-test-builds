@@ -1,0 +1,34 @@
+RUHRPOTTGURU PLACES BACKEND – OPENING HOURS AUDIT 1.10.10
+Generated: 2026-09-02
+
+PURPOSE
+- Stabilize phase-2 opening-hours research on shared hosting.
+- Preserve all already stored opening hours and the existing v1.10.8 audit state.
+- Re-check old incomplete/unknown/error phase-2 outcomes under the corrected source logic.
+
+FIXES
+- Exact OSM type mapping n/w/r -> node/way/relation: PASS
+- Live OSM source URL uses mapped type: PASS
+- Web discovery DuckDuckGo + Bing fallback: PASS
+- Search-engine pages remain discovery-only, never canonical opening-hours sources: PASS
+- Directory/search hosts remain excluded as canonical websites: PASS
+- Coverage-based completion: optional provider outage alone no longer forces incomplete: PASS
+- Verified official website blocked still forces incomplete: PASS
+- Official website subpage fan-out capped to reduce request runtime: PASS
+- Phase-2 pause increased to reduce shared-host/source pressure: PASS
+- AJAX credentials same-origin explicit: PASS
+- HTML/non-JSON server responses detected: PASS
+- Transient HTML/429/5xx responses retried with backoff: PASS
+- Live counter cards update from each AJAX snapshot: PASS
+- New places added during a long audit are catch-up inventoried: PASS
+- v1.10.8 unknown/incomplete/error outcomes are requeued once on first resume: PASS
+- Existing found-web and permanently stored hours are preserved: PASS
+
+STATIC VALIDATION
+- PHP syntax: PASS
+- Plugin header version: 1.10.10
+- Runtime VERSION: 1.10.10
+- SCHEMA_VERSION: 1.10.10
+
+NOTE
+The live WordPress database and external provider behavior cannot be executed from the build container. The worker therefore preserves/resumes the on-server audit and exposes source outcomes in the existing audit table for verification during the live run.

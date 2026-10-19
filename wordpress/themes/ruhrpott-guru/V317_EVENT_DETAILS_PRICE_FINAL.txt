@@ -1,0 +1,7 @@
+RuhrpottGuru Theme v317 — Event-Details Preisfix
+
+- Veranstaltungstyp wurde aus der separaten Box "Veranstaltungsdetails" entfernt; er bleibt unten als anklickbarer Chip unter "Mehr davon entdecken".
+- Kompakte Preiswerte wie 45.00EUR werden sicher als 45 € / 45,50 € dargestellt und nicht mehr vom Preis-Signalfilter verworfen.
+- Die Details-Box erscheint nur noch, wenn echte Details vorhanden sind: Preis, Ticket oder Mitwirkende.
+- Veranstalter & Kontakt bleibt unverändert.
+- Keine Änderung an Event-Import, Quelle, Rechtehinweisen oder Filterlogik.

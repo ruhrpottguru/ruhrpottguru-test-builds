@@ -1,0 +1,8 @@
+RuhrpottGuru v171 – Pott-Quiz Home-Banner
+
+- Approved daylight Pott-Quiz artwork added locally to the theme.
+- Desktop artwork is normalized to 16:5, matching the established Home-banner geometry.
+- Mobile artwork uses the existing 16:6.4 visible banner geometry and a dedicated crop.
+- Entire banner links to /pott-quiz/.
+- Placement is directly after the Aktivitäten module on Home.
+- No change to category data, location/GPS, event import or quiz logic.

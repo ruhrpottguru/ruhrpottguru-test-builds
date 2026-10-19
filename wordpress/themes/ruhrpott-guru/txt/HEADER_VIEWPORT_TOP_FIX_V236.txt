@@ -1,0 +1,19 @@
+RuhrpottGuru Theme v236 – Header bündig am sichtbaren Viewport
+
+Ausgangsbasis: Theme v235; kompatibel mit installiertem Places Backend v1.10.49.
+
+Verifizierte Ursache:
+- Der React-Header ist viewport-fixed.
+- Für body.admin-bar wurde bisher statisch top: 32px bzw. mobil 46px gesetzt.
+- Auf mobilen Tests kann WordPress body.admin-bar beibehalten, obwohl die Admin-Toolbar selbst nicht sichtbar ist.
+- Dadurch begann der Header 46 CSS-Pixel unter der Viewport-Oberkante; der bereits gerenderte Seiteninhalt war in dieser Lücke sichtbar.
+
+Finale Korrektur:
+- Kein statischer admin-bar Offset mehr.
+- components.js misst #wpadminbar und setzt --rpg-admin-bar-offset nur dann > 0, wenn die Toolbar tatsächlich sichtbar im Viewport liegt.
+- Ohne sichtbare Toolbar ist der Offset exakt 0px; der Header beginnt bündig oben.
+- Bei tatsächlich sichtbarer WordPress-Toolbar bleibt der erforderliche Abstand erhalten.
+- Der vorhandene dynamisch gemessene Header-Spacer bleibt unverändert und hält den Content unterhalb des Headers.
+- Resize/Orientation sowie Größenänderungen der Admin-Bar werden erneut gemessen.
+
+Keine Änderungen an Backend, Eventdaten, Bildern, Standortlogik, Navigation oder Karten.

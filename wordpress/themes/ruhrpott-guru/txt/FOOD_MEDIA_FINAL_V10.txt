@@ -1,0 +1,14 @@
+RUHRPOTT GURU – FOOD MEDIA FINAL V10
+
+Media order for active gastronomy:
+1. OSM-linked direct image / Commons media
+2. OSM-linked Commons category
+3. OSM-linked Wikidata P18
+4. OSM-linked Wikipedia page image
+5. OSM-linked official website image
+6. KartaView open street-level image near exact POI coordinate, camera-direction checked and explicitly labelled as nearby imagery
+7. Clearly labelled generic AI food/ambience illustration (never presented as an original venue photo)
+
+Name-only Wikimedia matching is forbidden for Gastronomie.
+Permanent-closure gate still blocks AI generation and keeps archival placeholder behavior.
+KartaView imagery attribution: © Grab and KartaView Contributors, CC BY-SA 4.0.

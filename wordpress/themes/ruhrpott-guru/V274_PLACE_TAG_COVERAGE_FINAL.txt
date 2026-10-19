@@ -1,0 +1,30 @@
+RuhrpottGuru Theme v274 – Place Tag Coverage FINAL
+
+Basis
+- Directly based on Theme v273 UX Micro-Interactions FINAL.
+- Places Backend baseline: v1.10.93 Data Quality FINAL.
+- v273 skeleton loaders, detail continuation, banner counts and v272 Activities media rollback remain unchanged.
+
+Changes
+1) Culture tag transport
+- The backend already publishes rg:culture_tags from the Culture Intelligence profile.
+- normalizePlace now maps those tags into item.labels, just like Highlights and Activities.
+- This fixes the missing Culture tag coverage in detail/search/tag filters.
+
+2) Full category tag capacity
+- Structured backend tag lists accept up to 6 labels (previous frontend split truncated at 4).
+- Cards remain visually bounded by their existing 1-2 badge limits; only detail/search/filter coverage improves.
+
+3) Explicit Food source facets
+- Food facets are still derived only from explicit OSM cuisine/amenity/diet/outdoor_seating evidence or the existing identity-verified official-site resolver.
+- Added explicit mappings for Ramen, Steak, BBQ, Korean, French, Spanish, Mediterranean, Seafood, Chicken, Sandwiches and Breakfast plus explicit cafe/ice_cream/bar/pub amenity facets.
+- Generic restaurant/fast_food is intentionally not exposed as a tag.
+- No tag is inferred from a venue name.
+
+Unchanged
+- Card badges remain informational and non-clickable.
+- Detail chips remain the only tag navigation action.
+- Current GPS/city, exact radius and distance ordering are preserved by the existing v266+ filter path.
+- Activities V2 ranking/admission and Activities media/opening-hours logic unchanged.
+- Food official-site facets remain identity-verified and locally cached as introduced in v267.
+- No backend/schema/import/cron changes.

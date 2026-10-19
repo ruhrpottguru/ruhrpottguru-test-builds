@@ -1,0 +1,14 @@
+RuhrpottGuru v134 – Mobile map gesture correction
+
+Mobile/touch:
+- One finger no longer pans the map.
+- One finger scrolls the page normally across the map.
+- Two fingers pan the map.
+- Two fingers pinch to zoom.
+
+Desktop:
+- Mouse drag remains enabled.
+- Mouse wheel zoom remains enabled.
+- +/- controls and reset remain enabled.
+
+No changes to filters, radius logic, backend queries or footer behavior.

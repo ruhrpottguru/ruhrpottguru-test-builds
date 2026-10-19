@@ -1,0 +1,68 @@
+Ruhrpott Guru – Home Magazine Modules V41
+==========================================
+
+Basis: V40 (home-existing-feed-v40)
+
+Ziel
+----
+Die bestehende Home bleibt abgesichert: [ruhrpott_home_categories] funktioniert
+weiterhin als kompletter, etablierter React-Home-Feed mit allen vier Kategorien,
+Trefferzahlen und Vorschau-Ergebnissen.
+
+Neu sind vier unabhängig platzierbare Gutenberg-Shortcodes:
+
+[ruhrpott_home_events]
+- horizontaler Swipe-Slider
+- große bildbasierte Event-Karten
+- Datum/Startzeit, Ort, Entfernung und Status im Bild
+- bis zu 6 Treffer aus dem bestehenden Event-Snapshot
+
+[ruhrpott_home_food]
+- zweispaltiges visuelles Raster auf Mobile
+- bildbasierte Food-Karten mit Ort, Entfernung und Öffnungsstatus
+- bis zu 4 Treffer
+
+[ruhrpott_home_highlights]
+- asymmetrisches Mosaik
+- 1 große Hauptkarte + 2 kleinere Karten
+- Szene-Badge wird ausschließlich über die bestehende scene-trends-Logik ermittelt
+
+[ruhrpott_home_kultur]
+- kompakte vertikale Kultur-Liste
+- Bild, Titel, Unterkategorie, Ort, Entfernung, Status
+- Details-Pill rechts
+- Szene-Badge über die bestehende scene-trends-Logik
+
+Datenarchitektur
+----------------
+Die neuen Module benutzen window.RuhrpottGuruHomeAPI aus dem unveränderten
+kompilierten React-Bundle. Dadurch bleiben Standort, Radius, OSM/eT4-Daten,
+Sortierung/Scoring, Media Resolver und Szene-Klassifikation auf dem bestehenden
+Datenpfad. Es wird keine zweite Datenquelle oder zweite Szene-Logik eingeführt.
+
+Navigation
+----------
+Titel/Ziel-URLs der Kategorie-Module stammen aus demselben WordPress-Menü wie
+Footer - Entdecken. Der Button "Alle ansehen" führt auf die jeweilige WP-Seite.
+Item-Karten erzeugen die bestehenden RuhrpottGuru-Deep-Links auf dieser Seite.
+
+Redaktionelle Module
+--------------------
+[ruhrpott_guru_tipp]
+- nur Ausgabe, wenn eine passende Kategorie Guru-Tipp/Guru Tipp existiert UND
+  mindestens ein veröffentlichter Beitrag zugeordnet ist.
+- KEIN Fallback mehr auf den neuesten beliebigen Beitrag.
+
+[ruhrpott_naehkaestchen]
+- nur Ausgabe bei passender Beitragskategorie und veröffentlichten Beiträgen.
+- keine Editor-Hinweisbox und keine leere Besucherbox.
+
+Damit können beide redaktionellen Shortcodes schon auf einer Seite liegen,
+bevor redaktionelle Inhalte vorhanden sind: Es erscheint dann nichts.
+
+Kompatibilität
+--------------
+- page.php gegenüber V40 unverändert
+- js/ruhrpott-app.js gegenüber V40 unverändert
+- bestehender [ruhrpott_home_categories]-Funktionsblock gegenüber V40 unverändert
+- Header/Footer und Food-Identity gegenüber V40 unverändert

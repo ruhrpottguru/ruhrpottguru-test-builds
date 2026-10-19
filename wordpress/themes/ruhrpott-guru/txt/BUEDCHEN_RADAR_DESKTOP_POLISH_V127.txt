@@ -1,0 +1,13 @@
+RuhrpottGuru v127 – Büdchen-Radar Desktop Polish
+
+Only desktop rules (min-width 1024px) were added.
+Mobile V126 was not changed.
+
+Fixes:
+- More editorial hero proportions.
+- Filters in one dedicated toolbar.
+- Radar/list balance changed from 50/50 to roughly 42/58.
+- Radar gets a subtle map-like texture without external map tiles.
+- Result cards become larger, clearer editorial cards.
+- Detail overlay becomes a centered desktop dialog.
+- Existing RuhrpottGuru header/footer/navigation logic remains untouched.

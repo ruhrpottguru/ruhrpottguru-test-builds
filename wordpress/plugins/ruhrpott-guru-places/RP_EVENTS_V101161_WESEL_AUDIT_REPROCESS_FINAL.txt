@@ -1,0 +1,64 @@
+RuhrpottGuru Places Backend 1.10.161
+WeselMarketing Mehrfachtermine / Audit-Reprocess – FINAL verification
+Date: 2026-10-06
+
+Scope
+- Backend only. No theme/frontend rendering change.
+- Keeps ET4/Open Data Finder precedence, radius logic, sorting and lifecycle unchanged.
+- Reprocesses the already stored Wesel coverage candidates; it does NOT refetch the 25 calendar list pages or 246 detail pages.
+
+Verified live root cause before build
+- Completed Wesel run: 246 checked, 49 imported, 19 linked to existing, 178 audit, 0 errors.
+- The three conflict rows are legitimate consecutive source-owned occurrences:
+  * Mein Freund Harvey: node-3037#1 10.10.2026 18:00–20:00; node-3038#1 11.10.2026 15:00–17:00.
+  * Kalter Weißer Mann: node-3052#1 14.11.2026 19:00–21:15; node-3053#1 15.11.2026 16:00–18:15.
+  * REBEL TELL... und der Schlager wird gerockt: node-3106#1 19.02.2027 18:30–21:00; node-2856#1 20.02.2027 18:30–21:00.
+- The first occurrence of each pair already exists as wesel_marketing_calendar and has canonical geo.
+- 175 unique current candidates are held in missing/conflict state without a Wesel-owned event row.
+- Live audit showed exact-address geo evidence is available for a material subset; the former resolver rejected address-only evidence because exact address scored 45 while the generic threshold was 55.
+
+1.10.161 changes
+1) Occurrence identity / dedupe
+- Same-day + close-time high-confidence duplicates remain existing/merge candidates.
+- Real interval overlap remains an existing duplicate signal.
+- Neighbour-date title similarity remains a conservative conflict signal for unrelated/cross-source data.
+- Exception: if a nearby row is already owned by or carries an attached WeselMarketing source_uid different from the incoming Wesel source_uid, it is a distinct official occurrence and is not blocked as a conflict.
+- This handles both Wesel-owned rows and ET4 rows to which the first Wesel occurrence was attached as provenance.
+
+2) Geo resolution
+- Exact city + postcode + street + house number in active Places is accepted as identity-safe geo even without a venue-name match.
+- If Places lacks the address, a canonical event with the exact same address, usable geo and address_status complete/verified/manual may be reused.
+- Street/postcode-only fallback still needs strong venue evidence; a different house number without venue identity remains blocked.
+- No city-centre coordinate fallback is introduced.
+
+3) Central reprocessing
+- New job: wesel-audit-reprocess-v101161.
+- Registered through the existing versioned reprocessing framework (no one-off worker architecture).
+- Autostarts once because of a new immutable fingerprint.
+- Resumable monotonic candidate-ID cursor; batch size 3.
+- Uses only stored raw_payload candidate data for event fields; no calendar/detail refetch.
+- Shares the external-event conflict lane because approved images may be materialized for newly imported events.
+- Existing event-symbolic reprocess keeps its cursor and resumes after this higher-priority job.
+
+4) Admin audit visibility
+- RP Redaktion -> Events shows both the historic full-sync audit counter and the current number still held back.
+- Expandable "Nur Audit anzeigen" table shows up to 100 current rows with event, time, venue/address, concrete audit reason and source-page link.
+- Reprocess status/progress is shown directly in the Wesel coverage panel.
+
+Functional fixture tests (11/11 PASS)
+- Harvey second date -> missing/import candidate, not conflict.
+- Kalter Weißer Mann second date -> missing/import candidate, not conflict.
+- REBEL TELL second date -> missing/import candidate, not conflict.
+- Generic non-Wesel neighbour-date case remains conflict.
+- ET4 row with different attached Wesel source_uid is treated as legitimate sibling occurrence.
+- Pure cross-source neighbour-date row without Wesel provenance remains conflict.
+- Same-day close-time duplicate remains existing.
+- Long-running interval overlap remains existing.
+- Exact Places address resolves with no venue-name match.
+- Exact canonical event address resolves.
+- Same street/postcode but wrong house number + unrelated venue remains unresolved.
+
+Static / packaging checks
+- Main plugin and all PHP files: php -l PASS.
+- Reprocess selector SQL shape was executed read-only against production and returns current held candidates.
+- Diff against 1.10.160 limited to version metadata, 1.10.161 resolver/reprocess/admin logic and this verification file.

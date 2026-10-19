@@ -1,0 +1,8 @@
+RUHRPOTTGURU THEME v252 – ORGANIZER GUARD – FINALVERIFIKATION
+Stand: 14.09.2026
+
+- Backend-rpg_event_details bleibt autoritative Organizerliste.
+- Raw-ET4 darf dieselbe Identitaet nur um company/street/houseNumber/zip/city/phone/email anreichern.
+- Raw-ET4 darf keine Organizer-Website in den kanonischen Veranstalterblock nachladen.
+- Eventreihen, Inline-Detailwechsel, Auf-einen-Blick, Kalender, Share, Bildvielfalt und Eventtyp-Badges bleiben unveraendert.
+- PHP-/JavaScript-Syntax: PASS.

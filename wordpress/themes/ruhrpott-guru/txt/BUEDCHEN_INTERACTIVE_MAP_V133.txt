@@ -1,0 +1,23 @@
+RuhrpottGuru v133 – Interactive Büdchen map
+
+Map:
+- Mouse drag / pressed pointer pans the map.
+- One-finger drag pans on touch devices.
+- Two-finger pinch zooms.
+- Mouse wheel zooms around the cursor.
+- +/- controls remain.
+- Reset button returns to selected GPS/city + radius.
+- After pan/zoom settles, the Büdchen backend is queried for the visible map area.
+- List and markers update to the current map viewport.
+- Existing quick filters continue to reduce the current map result set.
+
+Spatial rules:
+- Until the map is moved, the selected city/GPS + radius remains the hard search scope.
+- Once the user actively pans/zooms, the map viewport becomes the active spatial scope.
+- The UI explicitly says "Kartenausschnitt · Liste aktualisiert".
+- Reset returns to the original selected location/radius.
+
+Desktop:
+- The RuhrpottGuru footer navigation is restored to the sticky/fixed bottom.
+- It no longer sits below the desktop header.
+- Mobile footer behavior is unchanged.

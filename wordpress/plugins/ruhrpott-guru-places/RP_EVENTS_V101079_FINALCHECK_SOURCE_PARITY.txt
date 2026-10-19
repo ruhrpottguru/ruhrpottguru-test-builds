@@ -1,0 +1,38 @@
+RuhrpottGuru Places Backend 1.10.79 – Event Finalcheck / Source-Parity
+Date: 2026-09-16
+
+LIVE-QS FINDING
+- Event: Europäische Mobilitätswoche - Mobilität unter den Generationen
+- ET4 global_id: e_101331283
+- Stored ET4 raw payload contains top-level web = http://www.essen.de/emw
+- The same URL is also repeated on the organizer record.
+- 1.10.78 blocked the URL because organizer/contact URLs were added to the blocklist before the top-level event website was evaluated.
+- Result: Finalcheck and visitor canonical model could show no Web target although ET4 had an explicit event-level website.
+
+SOURCE-DATA FINDING
+- For the same Event, ET4 texts[] contains PRICE_INFO=Kostenfrei.
+- details / teaser entries exist structurally but contain no value.
+- Therefore a missing description is a source-data gap, not a parser/normalizer loss.
+
+FIX
+1. ET4 top-level event website fields (website/homepage/web/officialUrl/eventUrl/sameAs) are evaluated as object-level Event metadata first.
+2. Provider/directory URLs remain blocked.
+3. Nested organizer/contact/author/provider/media websites remain excluded from the Event website slot.
+4. Event-Finalcheck now distinguishes:
+   - PRÜFEN: source had usable description/explicit event website but it was lost in import/resolver, unsafe URL, or other technical E2E failure.
+   - HINWEIS: source itself provides no optional qualitative field such as description or Web/Ticket target.
+5. Finalcheck explicitly detects a future regression where an ET4 top-level Event website exists but the public resolver returns none.
+
+REGRESSION SCOPE
+- No Theme change required.
+- No opening-hours worker, queue, parser, audit, lifecycle or persistence code changed.
+- No Event visibility rule changed: missing image/text/link never hides an Event.
+- Direct-link/share media hierarchy from 1.10.78 remains unchanged.
+
+TESTS
+- PHP syntax: PASS
+- Resolver fixture: explicit event web identical to organizer web -> preserved: PASS
+- Resolver fixture: destination.one top-level provider URL -> blocked: PASS
+- Resolver fixture: organizer-only website -> blocked: PASS
+- Resolver fixture: media/homepage-only nested URL -> remains blocked by existing safety policy: PASS
+- Diff against 1.10.78 restricted to version metadata, event website resolver and Event-Finalcheck classification/parity checks: PASS

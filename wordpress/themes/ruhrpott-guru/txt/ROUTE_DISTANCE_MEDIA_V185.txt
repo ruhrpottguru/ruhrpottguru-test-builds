@@ -1,0 +1,6 @@
+V185 – Route der Industriekultur
+- Alle 57 Primärstandorte werden nach echter Entfernung zum aktiven RuhrpottGuru-Standort sortiert.
+- Auch RDI-Fallbackeinträge erhalten Entfernung und erscheinen nicht mehr gesammelt am Listenende.
+- Fehlende Medien nutzen nur dann kuratierte, lizenzierte Wikimedia-Commons-Fallbackbilder, wenn der normale Places-Medienresolver kein Bild liefert.
+- Stadt/Ort und Entfernung stehen auf jeder Route-Kachel.
+- Backend v1.9.0 ergänzt exakte OSM-Identitäten und kanonische Koordinaten für strukturell ungewöhnliche RDI-Orte.

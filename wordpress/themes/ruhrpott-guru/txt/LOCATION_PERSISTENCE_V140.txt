@@ -1,0 +1,18 @@
+RuhrpottGuru v140 – Cross-page location persistence
+
+Problem:
+Reloading Büdchen-Radar or another location-dependent page could cause a fresh
+geolocation request because the old GPS cache was treated as expired after six hours.
+
+Fix:
+- Last valid location is now stored in a dedicated persistent snapshot.
+- GPS locations no longer expire merely due to elapsed time.
+- Manual city locations remain persistent.
+- Home, Events, Food, Highlights, Kultur, Aktiv, Route der Industriekultur and
+  Büdchen-Radar all reuse the same saved location.
+- Reloading or navigating between pages does not trigger a new GPS prompt.
+- A new GPS lookup happens only on the very first visit with no saved location,
+  or when the user explicitly chooses Standort ändern / GPS.
+- Existing v1 manual/GPS storage is migrated transparently on read.
+
+Radius persistence remains unchanged.

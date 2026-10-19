@@ -1,0 +1,70 @@
+RUHRPOTT GURU – WORDPRESS HOME MODULES V39
+==========================================
+
+Ziel
+----
+Die bereits angelegte WordPress-Seite „Home“ kann als Staging-Seite aus freien
+Gutenberg-Blöcken und fünf RuhrpottGuru-Shortcodes aufgebaut werden. Die
+bestehende Live-Startseite / wird in V39 ausdrücklich NICHT umgeschaltet oder
+ersetzt.
+
+Neue Shortcodes
+---------------
+[ruhrpott_home_categories]
+  Vier Hauptkategorien. Titel, Reihenfolge und Ziel-URLs stammen aus derselben
+  WordPress-Menüposition „Fußzeile (Footer)“ wie Footer und Sticky-Navigation.
+  Ein Beitragsbild der verlinkten WP-Seite wird – falls vorhanden – als
+  Kachelbild verwendet.
+
+[ruhrpott_guru_tipp]
+  Großer redaktioneller Aufmacher. Bevorzugt den neuesten veröffentlichten
+  Beitrag der Kategorie „Guru-Tipp“ (Slug guru-tipp / guru-tip). Existiert die
+  Kategorie noch nicht, wird als sichere Vorschau der neueste veröffentlichte
+  Beitrag verwendet.
+
+[ruhrpott_jetzt_offen]
+  Standortbezogenes horizontales Live-Karussell mit maximal sechs gemischten
+  Treffern aus Events, Food, Highlights und Kultur. Verwendet die bestehende
+  Quick-Filter-Regel „now-open“ aus der Haupt-App – keine zweite Öffnungslogik.
+
+[ruhrpott_naehkaestchen]
+  Redaktionelles Raster mit standardmäßig zwei Beiträgen. Unterstützte
+  Kategorien sind u. a. „Aus'm Nähkästchen“, „Aus dem Nähkästchen“,
+  „Nähkästchen“, „Pott-Geflüster“ und „Interviews“. Optional: count="1" bis 4.
+
+[ruhrpott_fuer_lau]
+  Standortbezogenes horizontales Live-Karussell mit maximal sechs gemischten
+  Treffern. Verwendet die bestehende Quick-Filter-Regel „free“. Bei Events wird
+  die Startseiten-Auswahl zusätzlich auf den passenden nahen Zeitraum begrenzt;
+  die Gratis-Erkennung selbst bleibt vollständig die vorhandene App-Regel.
+
+WordPress-Seitenverhalten
+-------------------------
+Die fünf Home-Shortcodes sind absichtlich KEINE App-Seiten-Shortcodes in
+page.php. Deshalb bleibt „Home“ eine normale WordPress-Inhaltsseite. Gutenberg-
+Blöcke können beliebig vor, zwischen und nach den Shortcodes stehen.
+
+Die dynamischen Module werden erst im sichtbaren WordPress-Seiteninhalt
+aktiviert. Die versteckte Quellkopie, die React für den WP-Seiten-Shell nutzt,
+startet keine Datenabfragen.
+
+Standort
+--------
+Die Module verwenden den bereits gespeicherten GPS- oder manuellen Standort und
+den gespeicherten Radius. Ist noch kein Standort vorhanden, wird keine fremde
+Fallback-Stadt vorgetäuscht; stattdessen erscheint „GPS-Standort verwenden“.
+
+Architektur / Regression-Isolation
+----------------------------------
+- index.php ist byte-identisch zu V38: die Live-Startseite / bleibt unverändert.
+- page.php ist byte-identisch zu V38: die bestehende WP-Seiten-/Kategorie-
+  Insertion-Point-Architektur bleibt unverändert.
+- footer.php ist byte-identisch zu V38.
+- Die kompilierte React-App ist byte-identisch zu V38, wenn ausschließlich die
+  neue read-only window.RuhrpottGuruHomeAPI-Bridge entfernt wird.
+- Szene-Klassifikation, Quick-Filter, OSM-/ET4-Lader, Radius-Merge, Share- und
+  Sticky-Footer-Logik wurden nicht geändert.
+
+V39 ist eine Staging-Funktion. Die WordPress-Seite „Home“ wird nicht automatisch
+unter / aktiviert. Die spätere Umschaltung erfolgt erst nach ausdrücklicher
+Freigabe.

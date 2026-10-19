@@ -1,0 +1,7 @@
+RuhrpottGuru v93 – Direct Detail Overlay
+
+- Home result cards open the existing React detail overlay immediately on the current page.
+- Route Industriekultur matched result cards use the same direct overlay behavior.
+- Category result cards already used direct React onOpenDetail and remain unchanged.
+- Deep-link hrefs remain as fallback/share targets when React is unavailable or for modified clicks.
+- Detail modal Schließen button changed from red to RuhrpottGuru amber/orange.

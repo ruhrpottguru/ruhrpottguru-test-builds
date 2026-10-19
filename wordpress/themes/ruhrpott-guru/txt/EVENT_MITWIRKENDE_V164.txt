@@ -1,0 +1,6 @@
+Theme v164
+
+- Events zeigen strukturierte Mitwirkende im Detail-Layer.
+- Unterstützt performer, artist, contributor, participant, actor, musician, band, ensemble und speaker.
+- Keine Personenerkennung aus freien Beschreibungstexten.
+- Bevorzugt die in der Event-DB gespeicherten rpg_participants, funktioniert aber auch beim Live-Fallback.

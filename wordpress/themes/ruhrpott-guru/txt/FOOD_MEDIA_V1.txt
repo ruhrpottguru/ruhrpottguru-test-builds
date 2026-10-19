@@ -1,0 +1,29 @@
+RUHRPOTT GURU – FOOD MEDIA RESOLVER V2
+
+Goal: maximize real, identity-linked Food photos without inventing storefronts or accepting homonym false positives.
+
+Priority:
+1. image explicitly attached to the OSM venue object
+2. Wikimedia Commons File or Category explicitly attached to the OSM object
+3. P18 from the OSM-linked Wikidata entity
+4. page image from the OSM-linked Wikipedia article
+5. image from the OSM-linked official venue website (enhanced lazy-load / srcset / JSON-LD / same-domain gallery recovery)
+6. truthful Ruhrpott Guru placeholder only as final fallback
+
+Safety rules:
+- no generic web image/name search for Food
+- no Google Places / billing dependency
+- no synthetic photorealistic storefront fallback
+- reject logo/icon/favicon/placeholder assets
+- official-site pages must match venue + local context
+- generic Commons name/geo search is forbidden for Food because restaurant names are frequently ambiguous
+
+Cache version: ruhrpottguru_intel_v7_
+Resolver version: v7.0-food-real-coverage
+WordPress endpoint: /wp-json/ruhrpottguru/v1/food-media
+
+V9 SAFETY HOTFIX
+- Generic client-side Wikidata/Commons search is skipped for Gastronomie.
+- Server-side Commons geo/name fallback is disabled for Gastronomie.
+- This prevents homonym false positives such as film stills or unrelated landmarks.
+- Media caches bumped to v9 / food-media v3.

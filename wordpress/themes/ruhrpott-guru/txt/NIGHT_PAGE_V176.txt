@@ -1,0 +1,7 @@
+RPG THEME V176 - UNSER POTT BEI NACHT
+- Auto-created WordPress page /unser-pott-bei-nacht/ if missing
+- Shortcode [ruhrpott_nacht]
+- Reads existing persistent location snapshot, no automatic second GPS prompt
+- Radius fallback and Night filters
+- Community night-photo upload form with rights/email workflow
+- Day-photo fallback is explicitly labeled as day image / night photo wanted

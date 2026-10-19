@@ -1,0 +1,4 @@
+RUHRPOTTGURU EVENTS CATALOG + LOCAL TODAY V3
+Base: Events Chronological V2
+Purpose: restore complete ET4 event catalog pagination and resolve today/ongoing occurrences locally.
+No changes to radius, pagination size, event urgency sort, OSM, Food, media fallback, or privacy logic.

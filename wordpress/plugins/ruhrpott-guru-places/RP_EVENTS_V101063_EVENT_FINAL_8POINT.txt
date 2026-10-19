@@ -1,0 +1,11 @@
+RuhrpottGuru Events v1.10.63 – finaler 8-Punkte-Pass
+
+- Veranstalter: strikte Rollen-/Konfliktpruefung gegen Autor, Provider, Media, Rechte, Kontakt.
+- Termin: explizites allDay-Flag fuer 00:00-Tagesgrenzen; keine erfundene Uhrzeit.
+- Links: Event-Webseite, Ticket und Organizer strikt getrennt; source_url wird nicht als Event-Webseite ausgegeben.
+- Programm: ET4-Programm/Flyer/Ablauf/PDF-Links als sichere Dokumentliste.
+- Direktlink/Share: kanonische RuhrpottGuru-URL bleibt zentraler Besucherlink.
+- Dubletten: identische externe ET4-Quellobjekte werden nur in Besucherlisten auf eine Karte kollabiert; DB-Occurrences bleiben bestehen.
+- Reihen: globale konservative Eventreihen-Logik unveraendert, mit allDay fuer Related-Items.
+- Qualitaetsaudit: read-only 12-Event-Stichprobe aus sechs Ruhrgebietsstädten im Events-Backend.
+- Lokale Zusatzquellen bleiben bis Rechtefreigabe deaktiviert.

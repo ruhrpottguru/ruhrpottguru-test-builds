@@ -1,0 +1,10 @@
+RuhrpottGuru Theme v342.0
+Mobile navigation balanced portrait fix
+
+Changes only:
+- Portrait drawer width reduced to 82vw (max 430px).
+- Drawer starts below the sticky mobile header at 100px.
+- Drawer height is limited to remaining viewport height.
+- Existing removal of right-side chevrons retained.
+- Single-line menu labels retained.
+- No category, GPS, radius, ranking, sorting, SEO, data-source or backend changes.

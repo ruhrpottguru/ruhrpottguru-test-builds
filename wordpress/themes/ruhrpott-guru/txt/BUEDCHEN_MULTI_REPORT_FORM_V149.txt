@@ -1,0 +1,22 @@
+RuhrpottGuru v149
+
+Das Büdchen-Hinweisformular ist kein Einzelauswahl-Formular mehr.
+Nutzer und Betreiber können in EINEM Formular gleichzeitig oder teilweise ergänzen:
+- Öffnungszeiten
+- Website
+- Telefon
+- Instagram
+- Beschreibung
+- sonstiger Hinweis
+- Gemischte Tüte
+- Kaffee
+- belegte Brötchen
+- Sitzplätze
+- Lotto
+- Paketshop
+- dauerhaft geschlossen
+
+Nicht ausgefüllte Felder werden nicht übermittelt. Nicht gesetzte Merkmale bedeuten
+weiterhin „unbekannt“ und werden nicht als Nein interpretiert.
+
+Benötigt Places Backend >= 1.3.2 für eine gemeinsame Batch-Einreichung.

@@ -1,0 +1,9 @@
+RuhrpottGuru Theme v257 — Accessibility focus + contrast
+
+- Hidden WordPress source nodes use hidden/inert instead of aria-hidden around focusable content.
+- SureCookie reconsent bridge is hidden but remains programmatically triggerable.
+- Honeypot controls are removed from keyboard/AT navigation without aria-hidden/focus conflicts.
+- Runtime guard makes any dynamically aria-hidden focusable subtree inert until it becomes visible again.
+- Muted small text contrast raised toward WCAG AAA on dark slate surfaces.
+- Visible :focus-visible outline added for keyboard users.
+- URL test location mode from v256 remains unchanged.

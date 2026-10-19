@@ -1,0 +1,12 @@
+RUHRPOTT GURU – PEXELS CONFIGURED RELEASE
+
+- Pexels credential is loaded server-side from inc/rpg-pexels-secret.php.
+- The credential is never localized into frontend JavaScript.
+- Verified/original venue images keep priority over Pexels.
+- Pexels is used only as a clearly labelled symbolic fallback.
+- Server food-media cache bumped to v8; browser media salt bumped to v14.
+- Pexels semantic-pool cache bumped to v2.
+
+SECURITY
+- Treat this ZIP as private because it contains a server credential.
+- The secret PHP file rejects direct execution outside WordPress.

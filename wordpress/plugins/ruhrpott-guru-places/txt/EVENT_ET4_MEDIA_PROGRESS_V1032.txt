@@ -1,0 +1,7 @@
+RuhrpottGuru Places Backend v1.10.32 – ET4-Bildzuordnung Admin-Fortschritt
+
+Änderung:
+- Keine Änderung an der Eventbild-/Import-/Matchinglogik von v1.10.31.
+- RP Redaktion -> Events zeigt einen neuen read-only Statusblock „ET4-Bildzuordnung“.
+- Sichtbar: Status, Fortschritt, catalog_seen/overall, Objekte mit Bild, exakt zugeordnete global_ids, zugeordnete Occurrences, gespeicherte Bilder, nicht zugeordnete IDs, Mehrdeutigkeiten, Fehler, Startzeit, letzter und nächster Worker, letzter Fehler.
+- Der Admin-Block startet, stoppt oder resettet keinen Worker.

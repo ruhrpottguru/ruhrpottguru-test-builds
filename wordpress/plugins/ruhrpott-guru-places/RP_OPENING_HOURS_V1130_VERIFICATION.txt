@@ -1,0 +1,59 @@
+RUHRPOTTGURU PLACES BACKEND — OPENING HOURS TECHNICAL CLOSURE v1.10.70 / Audit 1.10.30
+Generated: 2026-09-15
+
+INPUT / LIVE EVIDENCE
+- User export shows 500 displayed rows from the current technical-open list; every visible row is status research-incomplete.
+- The backend card reports 555 technical-open cases in total; the admin table intentionally displays at most 500 rows.
+- The visible cases span Food, Highlights, Kultur and Aktivitäten, so this is not a single category parser problem.
+
+ROOT CAUSES VERIFIED IN v1.10.69 CODE
+1. opening_audit_remote_search() treated public search-engine HTML discovery as a completion gate whenever no readable official site was available.
+   Result: if both DuckDuckGo and Bing blocked/timed out server-side, the case stayed research-incomplete even when the identity-bound source chain had otherwise been exhausted.
+2. opening_audit_site_hours() set the entire official-site path to incomplete when ANY of the selected auxiliary subpages failed.
+   The candidate set included weak links such as Kontakt, Info, Service and Besuch.
+   Result: a readable official root page could still become research-incomplete because a non-critical helper page returned 403/404/timeout.
+3. The stored diagnosis collapsed these structurally different conditions into one generic text:
+   'Mindestens ein Quellenpfad war technisch nicht vollständig prüfbar.'
+   Therefore the old admin list could not distinguish the real failure mode.
+
+FIXES IN 1.10.70
+- Public search engines remain best-effort discovery only; their outage alone is no longer a technical-open condition.
+- Known identity-bound official websites stay conservative:
+  * unreadable official root => research-incomplete
+  * unreadable explicitly linked Öffnungszeiten/Opening/Hours page => research-incomplete
+  * failed weak Kontakt/Info/Service/Besuch page => does NOT invalidate an otherwise readable official site.
+- Website fetch now keeps the existing theme helper first and adds one browser-header fallback when that fetch is rejected.
+- Technical leftovers persist the exact reason, including:
+  * official root unreachable
+  * explicit opening-hours page unreachable
+  * Wikidata P856 unavailable
+  * internal eT4/destination.one/website resolver unavailable
+- Admin page groups research-incomplete cases by technical source signature.
+- Existing 1.10.69 charset/parser fix is preserved unchanged.
+
+UPGRADE BEHAVIOR
+- No full audit reset.
+- No re-opening of found-existing/found-web rows.
+- No re-opening of unknown-after-exhaustive-search rows.
+- No blind retry of unrelated error signatures.
+- Exactly once after the audit is in finished state, only current active/public research-incomplete rows are requeued with the corrected 1.10.30 logic.
+- Historical v1.10.27/v1.10.11 recovery markers are closed so the same technical rows are not immediately reopened a second time.
+- Existing place_schedules, place_enrichment and places.opening_hours remain untouched until a retried case produces a better verified result.
+
+DETERMINISTIC TESTS
+- PHP syntax: PASS
+- Plugin load with WordPress hook/runtime stubs: PASS
+- Readable official root + failed weak Kontakt page => complete, not technical-open: PASS
+- Theme helper rejected + browser-header fallback succeeds => complete: PASS
+- Readable root + failed explicit Öffnungszeiten page => remains technical-open: PASS
+- Unreadable official root => remains technical-open: PASS
+- No official website + structured resolver complete + DuckDuckGo/Bing unavailable => complete unknown, not technical-open: PASS
+- Resolver failure + DuckDuckGo/Bing unavailable => remains technical-open: PASS
+- Known official website blocked => remains technical-open: PASS
+- v1.10.69 legacy parser code retained; regression harness still passes the Il-Cavallo day/interval case: PASS
+- Automatic v1.10.30 SQL scope: active=1 + lifecycle_status=active + public categories + status=research-incomplete only: PASS
+- Confirmed unknowns absent from automatic v1.10.30 requeue SQL: PASS
+
+PACKAGE
+- Plugin root slug preserved: ruhrpott-guru-places/
+- No theme change required.

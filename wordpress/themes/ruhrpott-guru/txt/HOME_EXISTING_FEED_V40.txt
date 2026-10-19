@@ -1,0 +1,32 @@
+Ruhrpott Guru V40 – Existing Home Feed shortcode bridge
+========================================================
+
+Goal
+----
+[ruhrpott_home_categories] on a normal WordPress page is now an insertion point
+for the established RuhrpottGuru React Home feed instead of the simplified V39
+static category tile grid.
+
+Preserved existing Home behaviour
+---------------------------------
+- Four established category tiles: Events, Food & Drinks, Highlights, Kultur & Szene
+- Existing category counts
+- Existing section labels
+- Existing live preview/result cards below each category
+- Existing loading, empty and degraded states
+- Existing GPS/manual city/radius snapshot logic
+- Existing detail overlay and category navigation behaviour
+
+WordPress composition
+---------------------
+Content before [ruhrpott_home_categories] remains above the React Home feed.
+Content after it remains below the feed. Other V39 Home shortcodes in the after
+content continue to be processed by WordPress and hydrated independently.
+
+No changes in V40 to:
+- compiled React application
+- data providers / OSM / eT4
+- radius logic
+- Scene logic
+- V39 Guru Tipp / Jetzt offen / Nähkästchen / Für lau modules
+- footer or sticky footer navigation

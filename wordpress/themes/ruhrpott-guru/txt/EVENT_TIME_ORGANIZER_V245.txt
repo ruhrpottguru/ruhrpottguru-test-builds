@@ -1,0 +1,8 @@
+RUHRPOTTGURU THEME v245 — EVENT TIME + ORGANIZER SEMANTICS
+
+- ET4 00:00→00:00 date boundaries are rendered as date/all-day, not invented midnight times.
+- ICS/Google Calendar use date-only all-day semantics for such intervals.
+- Organizer UI accepts only true organizer relations; author/support/contact/provider entries cannot become organizers.
+- Same-name contact rows may enrich a real organizer with address/contact/website.
+- Event website stays separate from organizer website.
+- Event visibility, order, v242 image diversity and v243 type badges unchanged.

@@ -1,0 +1,6 @@
+RuhrpottGuru Theme v325
+
+- Replaces the unsupported hidden map.center geocoding workaround with map.nrw's documented search module + search callback path.
+- Callback returns GeoJSON in EPSG:4326 and is fed into the existing central RuhrpottGuru location pipeline.
+- Split address form remains visible; map.nrw helper stays off-screen.
+- Existing category, radius, ranking and fallback logic unchanged.

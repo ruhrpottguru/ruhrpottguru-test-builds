@@ -1,0 +1,8 @@
+V231 – Marketing Tracking
+- Zweites Backend-Dashboard: RP Redaktion -> Marketing Tracking
+- Aggregierte First-Party-Attribution nach Quelle, Medium, Kanal, Kampagne, Landingpage und Gerät
+- UTM source/medium/campaign/content; utm_term wird bewusst nicht gespeichert
+- Referrer nur als Domain, keine vollständige URL
+- gclid/msclkid/fbclid/igshid werden nur zur Kanalerkennung verwendet und nicht persistiert
+- Temporäre Attribution im sessionStorage, ohne Cookie, User-ID oder persistente Besucherkennung
+- Conversion-Zuordnung für Detailöffnungen sowie Route/Website/Reservierung/Tickets

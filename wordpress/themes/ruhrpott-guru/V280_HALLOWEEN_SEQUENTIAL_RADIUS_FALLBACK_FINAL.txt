@@ -1,0 +1,11 @@
+RuhrpottGuru Theme v280 – Halloween Sequential Radius Fallback FINAL
+
+Change from v279 only:
+- Halloween automatic radius fallback is now strictly sequential: 5 km -> 10 km -> 25 km.
+- The 10 km result set is always evaluated before 25 km is selected.
+- During automatic expansion the existing skeleton remains visible, so no temporary empty-state is rendered.
+- All v279 strict Halloween relevance rules, deduplication, hero cleanup and Halloween palette remain unchanged.
+- Backend/API/database/resolver logic is untouched.
+
+Theme version: 280.0
+Package version: 280.0.0

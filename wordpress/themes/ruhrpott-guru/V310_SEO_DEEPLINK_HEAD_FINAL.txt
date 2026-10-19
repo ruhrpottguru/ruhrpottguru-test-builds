@@ -1,0 +1,17 @@
+RuhrpottGuru Theme v310.0 – SEO/Deep-Link Head Final
+
+Scope:
+- Successful canonical /ort/{id}/{city}/{slug}/ and /veranstaltung/{id}/{city}/{slug}/ requests no longer leak WordPress' stale internal 404 title into wp_head().
+- Exactly one title remains: the canonical title emitted by the Places backend detail renderer.
+- Canonical, Open Graph, Twitter and JSON-LD stay backend-owned and unchanged.
+- Missing/non-public canonical records remain real 404 responses because their renderer never invokes wp_head().
+- Home now receives a deterministic meta description.
+- Existing category meta descriptions remain unchanged.
+
+Explicitly untouched:
+- radius / fallback rules
+- sorting
+- GPS / location persistence
+- detail chips and tag filtering
+- Place/Event admission or resolver logic
+- event/place data

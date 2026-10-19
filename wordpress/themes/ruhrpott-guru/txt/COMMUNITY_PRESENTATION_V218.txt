@@ -1,0 +1,9 @@
+RuhrpottGuru Theme v218 – Community-Darstellung final
+
+- Community-Beitrag benötigt im normalen Frontend mindestens ein Bild; Submission-/Moderationsprozess bleibt unverändert.
+- Ein Beitrag: Teaser über volle Detailbreite. Ab zwei Beiträgen: 50:50-Grid; ungerader letzter Beitrag bleibt 50 %.
+- Klick auf einen Teaser öffnet den Beitrag innerhalb desselben Detail-Layers direkt unter seiner Zweier-Zeile; die Nachbarkarte bleibt sichtbar.
+- Kein zweiter Detail-Layer für Community-Beiträge.
+- Volltext, Abstände und Typografie überarbeitet.
+- Galerie lädt bei Bedarf die bereits am freigegebenen Community-Post hängenden WordPress-Medien; Fallback ist das vorhandene Hauptbild.
+- Keine Änderungen an Einreichungs-Endpoint, CPT, Moderation oder Freigabe.

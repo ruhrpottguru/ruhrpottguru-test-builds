@@ -1,0 +1,9 @@
+RUHRPOTTGURU EVENT CALENDAR RESTORE V174
+
+- Basis: Theme v173 Event Region Safe.
+- Event-Detailansicht hat wieder einen eigenen Kalenderblock.
+- iPhone / Apple Kalender: .ics nach RFC-5545-Grundstruktur mit Titel, Start, Ende, Ort, Beschreibung und Event-Webseite.
+- Android / Google Kalender: Google-Calendar-TEMPLATE-Link mit denselben Eventdaten und Europe/Berlin-Kontext.
+- Fehlende Endzeit bekommt wie im früheren bewährten Build einen 2-Stunden-Fallback.
+- Kalenderaktionen erscheinen ausschließlich bei Events mit gültigem Starttermin.
+- Places/Food/Highlights/Kultur/Aktiv, GPS, Eventquellen und Region-Safe-Logik bleiben unverändert.

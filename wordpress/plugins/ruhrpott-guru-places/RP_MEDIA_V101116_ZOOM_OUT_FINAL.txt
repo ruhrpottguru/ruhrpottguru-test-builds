@@ -1,0 +1,7 @@
+RuhrpottGuru Places Backend 1.10.116 – Media crop zoom-out
+
+- Manual card/detail crop zoom now supports 0.00–2.50.
+- 1.00 preserves the previous cover crop.
+- Below 1.00 interpolates from full-image contain (0.00) to cover (1.00), revealing more source image instead of merely shrinking the already-cropped bitmap.
+- Focal point remains independently draggable for card and detail.
+- Existing 1.00+ saved overrides remain behavior-compatible.

@@ -1,0 +1,37 @@
+RUHRPOTTGURU PLACES BACKEND v1.10.92
+Activities Intelligence V2 – Phase 2C controlled public activation
+
+Basis accepted from live Phase-2B audit after 53/53 source coverage:
+- 5,434 active Activities rows audited across all 53 municipalities
+- REIN 1,646 / BEDINGT 2,057 / RAUS 1,731
+- table_tennis: 117 REIN / 1,360 BEDINGT / 14 RAUS
+- shooting_sports: 2 REIN / 91 BEDINGT / 3 RAUS
+- model_flying: 1 REIN / 29 BEDINGT
+- golf: 0 REIN / 15 BEDINGT / 2 RAUS
+- blockers: experience_missing 1,201; private_access 79; retail_only 32; former_or_ruin 5; access_no 1
+
+Phase 2C behavior:
+1. Public Activities feed now projects through activity_v2_profile().
+2. Only overall Admission=REIN is publicly emitted. BEDINGT and RAUS are not upgraded by scarcity/distance.
+3. Public projection chooses a REIN core experience; if the core is not REIN, the first REIN add-on becomes the visitor-facing experience for that response only.
+4. Public rg:experience_tags are generated from accepted REIN experience types only.
+5. Category pages remain nearest-first; Home receives a diversified REIN-only candidate pool and the existing Theme performs the final six-card hybrid/distance selection.
+6. The old SQL hard blacklist is no longer allowed to hide leisure=pitch / fitness-centre candidates before V2 sees them. This is required for public basketball, table tennis, beach volleyball, bolzplatz and verified course venues.
+7. SQL prefilter now removes only unambiguous lifecycle/access blockers (closed/inactive, access private/no/members). V2 PHP admission remains authoritative.
+8. Public candidate query limit raised to 8,000; the accepted live inventory currently contains 5,434 rows total, so the former 1,500/2,500 pre-V2 truncation cannot silently lose V2 candidates in the current catalogue.
+9. Admin diagnosis remains available and now labels V2 as Phase 2C active. It also lists municipalities with no REIN/BEDINGT rather than inventing coverage.
+10. No import/source-coverage state reset. No Overpass refresh. Theme, Events, Food, Highlights, Kultur and opening-hours code unchanged.
+
+Embedded Finalcheck regression added:
+- public basketball (REIN) survives to visitor feed
+- public Hallenbad (REIN) survives
+- derived table tennis without public evidence (BEDINGT) stays out
+- golf with website only (BEDINGT) stays out
+
+Static build verification:
+- PHP syntax: PASS
+- public Activities path uses V2 projection: PASS
+- public SQL safety gate does not contain generic pitch/fitness exclusion: PASS
+- category limit >=1000 uses distance order after V2 admission: PASS
+- Phase-2B resolver/calibration code retained: PASS
+- 53-city source-coverage hook/state names retained: PASS

@@ -1,0 +1,8 @@
+RuhrpottGuru Theme v2.26 – Home semantic headings
+
+- Exactly one Home H1: RuhrpottGuru – Events, Food & Freizeit im Ruhrgebiet
+- H1 is visually hidden so the approved homepage layout/spacing is unchanged.
+- Existing category headings remain H2.
+- Home editorial post titles are normalized to H3 for Latest Posts and Query Loop/Post Title blocks.
+- Route der Industriekultur, Büdchen-Radar and Hier geht's um die Wurst teaser titles are H3.
+- No SEO body text, data logic, ranking, queries or backend behavior changed.

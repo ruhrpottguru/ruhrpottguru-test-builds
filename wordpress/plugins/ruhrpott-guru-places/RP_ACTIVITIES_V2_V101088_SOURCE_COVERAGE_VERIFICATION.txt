@@ -1,0 +1,56 @@
+RUHRPOTTGURU PLACES BACKEND v1.10.88
+ACTIVITIES INTELLIGENCE V2 – SOURCE COVERAGE / EXPERIENCE MATRIX
+
+Scope
+- V2 remains Dark Launch; visitor Activities feed/ranking are NOT switched to V2.
+- Adds V2 recognition for soccer_five/futsal, model_flying, shooting_sports,
+  athletics, golf, dance_fitness, volleyball, handball, korfball, multi_sport_park.
+- Basketball and beach-volleyball inside generic sports centres/halls are no longer
+  automatically REIN without public/dedicated-court/visitor evidence.
+- Multi-sport rows may contain multiple Experience Units (CORE + ADD_ON).
+- Verified regression identities:
+  Sporttreff Castrop-Rauxel -> soccer_five REIN
+  Modellflugplatz R/C Club Bottrop -> model_flying REIN
+  Jump Academy Bottrop -> dance_fitness REIN
+  Spiel- und Sportlandschaft Jacobi -> multi_sport_park REIN
+- Shooting and athletics are recognised but stay BEDINGT when visitor access is unclear.
+- Golf House Bottrop remains RAUS via retail_only despite sport=golf.
+
+OSM source coverage
+- Named sport query expanded for basketball, table tennis, beach volleyball,
+  volleyball, handball, korfball, futsal, model aerodrome, shooting and athletics.
+- Added fitness_station to named leisure coverage.
+- Added a separate bounded source group for NAMELESS highly specific facilities only:
+  basketball, table_tennis, beachvolleyball, skateboard/skateboarding, bmx,
+  skate_park and fitness_station.
+- Generic nameless soccer, tennis and fitness infrastructure remains excluded.
+- Nameless accepted high-specificity facilities get a neutral derived display name
+  and raw tag rg:name_source=derived; original OSM tags are retained.
+
+Regression fixtures verified in isolated V2 harness
+PASS Sporttreff Castrop-Rauxel -> REIN / soccer_five CORE
+PASS Modellflugplatz R/C Club Bottrop -> REIN / model_flying CORE
+PASS Schießstätten Schöpplenberg -> BEDINGT / shooting_sports CORE
+PASS H2K Arena -> BEDINGT; basketball CORE + volleyball ADD_ON + soccer_pitch ADD_ON/RAUS
+PASS Public Basketballplatz -> REIN / basketball
+PASS Jump Academy -> REIN / dance_fitness
+PASS public sport=fitness outdoor pitch -> REIN / outdoor_fitness
+PASS Golf House -> RAUS / retail_only
+PASS Jahnstadion athletics -> BEDINGT / athletics
+PASS former/ruin swimming fixture -> RAUS / former_or_ruin
+
+Critical production parity vs v1.10.87
+UNCHANGED frontend_events_query
+UNCHANGED register_rest_routes
+UNCHANGED event_upsert_from_feed_item
+UNCHANGED activity_experience_profile (legacy visitor Activities path)
+UNCHANGED rank_activity_rows
+UNCHANGED nearby_activity_experience_rows
+UNCHANGED highlight_experience_profile
+UNCHANGED culture_experience_profile
+
+Schema
+- No DB schema version change. SCHEMA_VERSION remains 1.10.17.
+
+IGA2027
+- No IGA changes. IGA work remains paused pending external feedback.

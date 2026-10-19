@@ -1,0 +1,11 @@
+.env
+.env.*
+!.env.example
+wp-config.php
+*.sql
+*.sql.gz
+*.pem
+*.key
+node_modules/
+private/
+backups/

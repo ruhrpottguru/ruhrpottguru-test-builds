@@ -1,0 +1,12 @@
+RuhrpottGuru v72 – Places DB READY Cutover
+
+- Requires RuhrpottGuru Places Backend in READY/database mode for DB cutover.
+- Bumps the category cache namespace from v19_places_db_v71 to v20_places_db_ready_v72.
+- Theme cache salt changes, clearing old rg_snap_/ruhrpott_osm_ session caches once on upgrade.
+- In database mode the category loader never falls back to the historic v7_shared browser-OSM cache.
+- The compiled loader still uses the same OSM-shaped contract, but routes requests to the same-origin /places/overpass DB adapter when placesMode=database.
+- Events are untouched and remain on the ET4/event path.
+- No layout/design changes.
+
+Reason:
+The v71 theme was already installed while the 53-municipality bootstrap was still running. Therefore a visitor browser could have valid v71 cache entries produced by the temporary browser-OSM fallback. After the backend became READY, those entries could otherwise survive a reload and delay the visible switch to the database. v72 makes the READY cutover deterministic.

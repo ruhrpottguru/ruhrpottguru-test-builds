@@ -1,0 +1,36 @@
+RUHRPOTT GURU – HOME GPS + PROGRESSIVE HYDRATION V42
+Generated: 2026-08-21
+Base: home-magazine-v41
+
+USER-REPORTED SYMPTOMS
+- Mobile Start-Test page waited too long with all modules stuck at “Live-Daten werden geladen …”.
+- Highlights and Kultur could finish empty while Events/Food were also loading.
+- The established GPS-first location bootstrap was missing before Home recommendations started.
+
+ROOT CAUSE IN V41
+- V41 loadShared() started every visible category at once with Promise.allSettled().
+- The UI waited for the slowest category before hydrating any category card.
+- Food, Highlights and Kultur could therefore run OSM/Overpass fallback chains concurrently on mobile.
+- The Home modules trusted the previously stored preferred location instead of performing the GPS-first bootstrap for this page load.
+
+V42 FIX
+- GPS is authoritative for the Home preview again: requestGPS() resolves before any category snapshot request starts.
+- One shared GPS promise prevents duplicate browser permission prompts across four shortcodes.
+- On denied/unavailable GPS no provider load starts; modules show the existing GPS action and location guidance.
+- Progressive rendering: Events and Food start immediately after GPS and each renders as soon as its own snapshot is ready.
+- OSM stability: Highlights waits for Food; Kultur waits for Highlights, avoiding three simultaneous OSM chains.
+- Empty/degraded Home snapshots retry with independent radius keys through 2.5 / 5 / 10 / 25 / 50 km as applicable.
+- Each category displays its actual effective radius.
+- [ruhrpott_home_categories] is unchanged.
+
+STATIC ACCEPTANCE
+- js/app.js syntax: PASS
+- js/ruhrpott-app.js syntax: PASS
+- functions.php syntax: PASS
+- Home API marker v42: PASS
+- GPS bootstrap appears before category load orchestration: PASS
+- Promise.allSettled removed from V42 category module loader: PASS
+- OSM Home sequence Food -> Highlights -> Kultur: PASS
+- Events remains independent from OSM sequence: PASS
+- Initial category module copy changed to “Standort wird bestimmt …”: PASS
+- Existing ruhrpott_home_categories shortcode registration retained: PASS

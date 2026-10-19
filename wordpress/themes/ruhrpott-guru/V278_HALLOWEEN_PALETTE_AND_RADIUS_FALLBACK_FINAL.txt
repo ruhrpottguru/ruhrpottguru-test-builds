@@ -1,0 +1,15 @@
+RuhrpottGuru Theme v278 – Halloween Palette + Radius Fallback FINAL
+
+Basis: Theme v277. Backend unchanged.
+
+Changes
+- Restored the dedicated Halloween visual palette from v276 (orange + purple spooky accents).
+- Keeps the v277 removal of the bottom explanatory note.
+- Keeps the v277 conservative series deduplication for repeated performances such as Rampenmonster.
+- Halloween special now automatically expands from 5 km or 10 km directly to 25 km when the current radius contains zero Halloween matches.
+- While the automatic expansion is happening, the listing stays in loading/skeleton state instead of flashing a zero-results message.
+- Manual radius controls remain unchanged (1 / 2.5 / 5 / 10 / 25 / 50 km).
+- No REST, database, resolver, reprocessing or backend changes.
+
+Theme version: 278.0
+Package version: 278.0.0

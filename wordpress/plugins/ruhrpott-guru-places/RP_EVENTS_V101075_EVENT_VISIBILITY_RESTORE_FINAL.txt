@@ -1,0 +1,13 @@
+RuhrpottGuru Places Backend 1.10.75 – Event visibility restore
+
+Verbindliche Produktregel wiederhergestellt:
+- Kein Event wird aufgrund fehlender Medien aus Besucherlisten oder REST entfernt.
+- Native, lokal materialisierte ET4-Medien derselben global_id haben weiterhin Prioritaet.
+- Wenn kein natives ET4-Bild existiert, greift wieder die bereits vorhandene lokalisierte, rechtebewusste Fallback-Hierarchie.
+- Fehlt jedes Bild, bleibt der Datensatz trotzdem sichtbar.
+
+Beibehalten aus 1.10.74:
+- ET4 media_objects zuerst, danach addresses[].image desselben Eventobjekts (Organizer/Provider ausgeschlossen).
+- einmaliger ET4-Medien-Reconcile fuer Altbestand.
+- weitere konkrete Termine derselben global_id im Serien-Endpunkt.
+- keine Aenderung an Opening-Hours-/Delta-/Salvage-Funktionen.

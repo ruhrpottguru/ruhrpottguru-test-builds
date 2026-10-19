@@ -1,0 +1,8 @@
+RuhrpottGuru Theme V203 – Desktop Logo Larger
+
+Scope:
+- Desktop only (>= 821px): larger custom RuhrpottGuru logo.
+- Header inner height increased to 82px to avoid clipping.
+- Logo height 62px, max-width 180px.
+- Mobile <= 430px and tablet 431–820px are untouched.
+- Based on V202 Opening Hours Pilot Wesel + Oberhausen.

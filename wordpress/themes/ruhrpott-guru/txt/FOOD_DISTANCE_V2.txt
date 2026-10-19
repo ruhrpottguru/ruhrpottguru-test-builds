@@ -1,0 +1,12 @@
+RUHRPOTT GURU – FOOD DISTANCE DISPLAY V2
+
+Internal distance math and sorting remain unchanged.
+Only presentation is softened:
+- < 1 km: "ca. N m", rounded to nearest 10 m
+- >= 1 km: one decimal km
+
+Examples:
+0.175 km -> ca. 180 m
+0.198 km -> ca. 200 m
+
+This avoids implying GPS/OSM precision that is not physically justified.

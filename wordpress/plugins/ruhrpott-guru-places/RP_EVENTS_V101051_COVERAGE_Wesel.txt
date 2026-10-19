@@ -1,0 +1,26 @@
+RuhrpottGuru Events 1.10.51 – Coverage-Pilot Wesel
+====================================================
+
+Ziel
+----
+Erster echter Coverage-Audit-Pfad für lokale Eventquellen, ohne den Live-Eventbestand blind zu verändern.
+
+Umgesetzt
+---------
+- neue persistente Tabelle rg_event_coverage_candidates
+- Quelle 1: weseltickets.de als Wesel-Pilot
+- automatische Seiteninventur inkl. paginierter Eventliste
+- lokale Detailseiten werden vollständig nachgeladen; externe Gastify-Karten bleiben als Listenkandidaten erhalten
+- Vergleich mit aktivem RuhrpottGuru-Eventbestand nach Stadt, Datum, Titelnormalisierung und Venue-Hinweis
+- Klassifikation: existing / merge_candidate / missing / conflict / rejected
+- Confidence-Aufteilung: Quellenautorität, Datenvollständigkeit, Deduplizierung, Red-Flag-Penalties
+- 00:00–00:00 wird als unsichere All-Day-/Quellzeit erkannt und abgewertet
+- Coverage-Kandidaten sind read-only: kein automatisches Publizieren in v1.10.51
+- stale Kandidaten werden beim nächsten vollständigen Quellenlauf deaktiviert
+- täglicher automatischer Lauf; bei aktiven externen Schwerlast-Workern Verschiebung um 15 Minuten
+- manueller Start unter RP Redaktion -> Events nur für Diagnose/sofortige Aktualisierung
+- Admin-Übersicht mit Quelle/geprüft/vorhanden/ergänzbar/fehlt/Konflikt/Fehler
+
+Wichtig
+-------
+Der Pilot ist absichtlich noch kein Auto-Importer. Er validiert zuerst, ob der Coverage-Vergleich auf realen Wesel-Daten zuverlässig zwischen bereits vorhandenen, ergänzbaren und tatsächlich fehlenden Events trennt. Erst danach wird die Feld-Provenienz-/Auto-Merge-Schicht freigeschaltet.

@@ -1,0 +1,15 @@
+RuhrpottGuru Theme v292 – Media Crop Overrides – Verification
+
+Scope
+- Reads automatic/manual crop metadata from Place, Event, gallery and global-search payloads.
+- Applies card crop to all standard card/image renderers and search results.
+- Applies detail crop to DetailGallery.
+- Keeps current object-cover behavior when no crop metadata exists.
+- Removes the v290/v291 generic browser pixel/text gate; venue photos, symbol images and posters are valid media.
+
+Validation
+- Theme PHP syntax: PASS
+- All src/react-app JavaScript node --check: PASS
+- npm run check: PASS
+- Automatic and manual crop modes accepted: PASS
+- v288 single-page-scroll changes retained: PASS

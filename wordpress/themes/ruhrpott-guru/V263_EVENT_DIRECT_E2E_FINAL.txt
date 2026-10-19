@@ -1,0 +1,14 @@
+RuhrpottGuru Theme v263 – Event Direct-Link E2E final
+
+Scope
+- External Event direct-link close semantics and temporary Event-location context.
+- No changes to category eligibility, Event visibility, organizer logic, calendar generation or opening-hours backend.
+
+Product behavior
+1. Internal Event detail: X closes back to the same mounted RuhrpottGuru page.
+2. External /teilen/event/... entry: Event opens directly.
+3. X from an external Event entry opens /veranstaltungen/ around the exact Event coordinates.
+4. The temporary coordinates use rg_lat/rg_lng/rg_city URL parameters and are never persisted.
+5. A previously saved GPS/manual city remains untouched and resumes on normal navigation.
+6. If coordinates are unavailable, the Event city is used as a temporary city-center context.
+7. With Backend 1.10.78 the /veranstaltungen/ Event context is already mounted behind the externally opened detail; X therefore closes inline without a second reload.

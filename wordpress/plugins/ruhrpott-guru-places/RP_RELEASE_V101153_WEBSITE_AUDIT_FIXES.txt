@@ -1,0 +1,5 @@
+RuhrpottGuru Places Backend 1.10.153 – Website-Audit-Fixes
+- Wurst-Radar: nur Food-Places im Visitor-Payload; Kultur-/Theater-Amenities ausgeschlossen; 'Grill' nur als eigenes Token statt Treffer in 'Grillo'.
+- Eventkontakt: Telefonnummern werden vor Besucher-Ausgabe als Telefonnummer validiert/extrahiert; Footer-/Rechtstext kann nicht mehr als Telefonnummer erscheinen.
+- Mitwirkende: Medien-, Rechte-, Fotografen-, Provider- und Organizer-Aeste sind von der rekursiven Teilnehmerextraktion ausgeschlossen.
+- Eventlaufzeit: kanonische DB-Start-/Endzeiten werden immer in das Visitor-Readmodel übernommen, unabhängig von einem Programmlink.

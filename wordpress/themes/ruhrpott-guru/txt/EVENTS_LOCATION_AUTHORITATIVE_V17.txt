@@ -1,0 +1,11 @@
+RuhrpottGuru Events Location Authoritative V17
+
+- GPS coordinates or the manually selected city are the authoritative search centre.
+- ET4 access is server-side via /wp-json/ruhrpottguru/v1/events; the license key is no longer exposed in frontend JavaScript.
+- ET4 sources combined: geographic catalogue, exact city catalogue, exact city unrolled occurrences from today forward.
+- Root-array and wrapped ET2014A pagination both continue with limit=100 / offset=100 steps.
+- Frontend performs final Haversine filtering for 1 / 2.5 / 5 / 10 / 25 / 50 km.
+- Events bypass POI lifecycle/closure gating.
+- ET2014A texts[], addresses[], media_objects and timeIntervals/occurrences are normalized.
+- Ongoing events remain eligible regardless of original start date.
+- Ordering: ongoing soonest-ending first; then today's upcoming starts; then future starts chronologically.

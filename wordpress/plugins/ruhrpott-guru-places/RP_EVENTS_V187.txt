@@ -1,0 +1,7 @@
+RP Events v1.8.7
+- Serien-/Restdiagnose nur bei Bedarf ladbar.
+- Zeigt die 25 größten aktiven Terminserien mit Terminanzahl, aktiven Tagen, Terminen pro Tag und Zeitraum.
+- Markiert auffällige Serien rein diagnostisch; keine automatische Löschung.
+- Zerlegt den verbleibenden Bestand „Sonstige · open_data_finder“ nach Stadt und zeigt bis zu 60 Datensätze zur fachlichen Prüfung.
+- Prüft zusätzlich, wie viele Restobjekte dieselbe externe ID wie ein Objekt im aktuellen Master besitzen.
+- Keine Datenänderung, kein neuer Sync und keine automatische Bereinigung.

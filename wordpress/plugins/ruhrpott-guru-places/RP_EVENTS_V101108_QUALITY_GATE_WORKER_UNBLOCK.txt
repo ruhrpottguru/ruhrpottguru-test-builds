@@ -1,0 +1,26 @@
+RuhrpottGuru Places Backend 1.10.108 – Event Fallback Quality Gate Worker Unblock
+
+Scope
+- No new image heuristics.
+- No Selm-specific media branch.
+- Fixes only the worker dependency that blocked the existing 1.10.107 global quality audit.
+
+Root cause verified from production status + code path
+- Event fallback worker correctly entered waiting_quality_gate.
+- 1.10.107 quality reprocess job declared conflicts=['events_external'].
+- Candidate SHA-256 worker is classified external-heavy and remained status=running.
+- The local quality audit therefore waited on an unrelated hash worker.
+- Visitor REST continued to serve legacy active venue/Pexels fallback rows until the audit could run.
+
+Fix
+- Existing job key/fingerprint event-fallback-media-quality-v101107 is retained.
+- Broad events_external conflict is removed; quality audit is local DB/filesystem work.
+- New auto fallback writes remain protected by event_store_local_fallback_v1042 quality gate.
+- Normal fallback worker continues to wait_quality_gate, preventing its write race.
+- One-time migration wakes an existing waiting 1.10.107 job without resetting cursor/progress.
+
+Expected sequence after installation
+1. Quality job resumes within seconds.
+2. Legacy text/poster-like auto fallbacks are quarantined in batches.
+3. On completion the normal global fallback wave resumes once.
+4. Rejected cards get a suitable venue/symbol image when found, otherwise neutral ticket placeholder.

@@ -1,0 +1,19 @@
+RuhrpottGuru Places Backend 1.10.83 – Skatepark/Pitch-Ausnahme
+
+Scope
+- Ausschließlich Aktivitäten-Datenqualität.
+- Keine Änderung an Theme, Events, IGA 2027, Öffnungszeiten, Food, Highlights, Kultur oder öffentlichen REST-Verträgen.
+
+Ursache
+- OSM kann Skateparks legitim als leisure=pitch plus sport=skateboard/skateboarding/bmx modellieren.
+- Die bestehende generische Pitch-Sperre entfernte solche Datensätze vor dem bereits vorhandenen Skatepark-Scoring.
+
+Korrektur
+- leisure=pitch bleibt grundsätzlich ausgeschlossen.
+- Ausnahme nur bei eindeutigen Skate-Signalen: leisure=skate_park oder sport=skateboard/skateboarding/bmx.
+- Normale Sportplätze und sport=soccer bleiben ausgeschlossen.
+- Dieselbe Ausnahme gilt im SQL-Vorfilter und im PHP-Experience-Filter.
+
+Regressionstest
+- leisure=pitch ohne Skate-Signal => weiterhin ausgeschlossen.
+- leisure=pitch + sport=skateboard => urban_action, Score >= 90.

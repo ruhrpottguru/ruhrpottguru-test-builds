@@ -1,0 +1,20 @@
+RUHRPOTTGURU EVENTS v1.10.23 - ET4 HASHLINK MEDIA FIX
+Date: 2026-09-04
+
+ROOT CAUSE
+- v1.10.22 used q=globalid:(...) for exact canonical ET4 lookup.
+- ET4 documents the exact object prefix as hashlink:, while ET2014A exposes the same canonical key as global_id.
+- Therefore the visitor-time canonical resolver could return zero objects even though the Open Data Finder card had an image.
+
+FIX
+- Exact canonical requests now use q=hashlink:(...).
+- Lookup hashlinks are taken from raw_payload.global_id/hashlink first, then a hash-like external_id.
+- Response mapping uses ET2014A global_id and additionally tolerates provider-local id rows in the full backfill.
+- media rel=imagegallery is explicitly accepted as an image relation.
+- New v1.10.23 transient/backfill keys bypass stale negative caches from v1.10.22.
+- No master reimport and no theme update required.
+
+REFERENCE
+- ET4 Query Language supports field grouping.
+- ET4 API examples query a single canonical object with q=hashlink:<GLOBAL_ID>.
+- ET2014A JSON exposes that hashlink as global_id and media in media_objects.

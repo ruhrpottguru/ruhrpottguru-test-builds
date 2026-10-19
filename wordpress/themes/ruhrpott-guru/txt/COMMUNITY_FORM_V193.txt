@@ -1,0 +1,6 @@
+RuhrpottGuru Theme v193
+- Community CTA and modal title: „Beitrag erstellen“
+- Custom file picker: „Dateien auswählen“ without native „Keine ausgewählt“ text
+- Selected files listed individually and removable before submission
+- Sticky footer Home uses a house SVG instead of the generic eyes icon
+- Community API/backend unchanged (Plugin 1.10.9)

@@ -1,0 +1,31 @@
+RuhrpottGuru Places Backend 1.10.42 – Rights-aware Event Media Orchestration
+
+Ziel
+- Alle Events bleiben sichtbar; Bildstatus ist niemals ein Eligibility-Filter.
+- Native Eventbilder bleiben autoritativ: ODF/ET4 -> destination.one.
+- Weitere Bildquellen werden nur nach klarer Rechte-/Kontextregel verwendet und lokal gespeichert.
+
+Priorität
+1. et4-global-id (lokal)
+2. et4-feed / destination.one (lokal)
+3. editorial-override (lokal, dokumentierte Nutzungsgrundlage)
+4. official-approved (lokal, redaktionell freigegeben)
+5. venue-commons-context (lokal, offene Lizenz)
+6. pexels-symbolic-event (lokal, als Symbolfoto gekennzeichnet)
+7. Kein Bild / Frontend-Fallback
+
+1.10.42
+- web-Feld aus Rich-Payload wird als offizielle Eventwebsite an den Resolver übergeben.
+- Alte checked_no_media / externe verified-Zustände werden einmalig neu auditiert, sofern kein visitor-taugliches lokales Bild existiert.
+- Native Cache-Fehler dürfen in die Rechte-Fallback-Kette weiterlaufen.
+- ET4/destination.one Raw-Bild-URLs werden im Visitor-Pfad nicht erneut direkt injiziert.
+- Defensiver REST-Handoff: native global_id-Bilder zuerst; danach nur lokal gespeicherte, explizit erlaubte Fallbackquellen.
+- Generische redaktionelle Overrides per global_id inkl. Upload, Lizenz/Nutzungsgrundlage, Credit, optional Fotograf/Quellseite.
+- Offizielle Website-Bildkandidaten werden nicht automatisch veröffentlicht. Freigabe erfordert dokumentierte Rechte.
+- Zentrale Kandidatenliste unter RP Redaktion -> Events.
+- Alter einzelner Medien-Sonderfall entfernt.
+
+Installationsreihenfolge
+1. Theme v233 installieren/aktivieren.
+2. Backend 1.10.42 installieren/aktivieren.
+Der einmalige Re-Audit läuft danach gegen den v233-Resolver.

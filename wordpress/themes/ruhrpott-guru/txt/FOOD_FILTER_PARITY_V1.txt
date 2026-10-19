@@ -1,0 +1,19 @@
+RUHRPOTT GURU – FOOD FILTER PARITY V1
+
+Purpose:
+- Preserve Food Filter V2 when mobile/browser direct Overpass fallback is used.
+- Direct fallback no longer bypasses server-side identity corrections.
+
+Behavior:
+- Normal WordPress Overpass proxy path: unchanged, Food Filter V2 runs server-side.
+- Direct Overpass fallback: response is passed through same-origin /ruhrpottguru/v1/food-filter.
+- If that pure-transform endpoint is temporarily unavailable, a client safety mirror applies the critical V2 rules.
+- rg_food_filter=off remains reversible and disables the filter.
+
+Expected Wesel parity:
+- San Marino / San Marino II in Wesel core excluded.
+- Berliner Stube / Berliner Stuben in Wesel core excluded.
+- Mezzomar at Kreuzstraße 1a corrected to Café-Bistro Oliv and rename/deduping preserved.
+- Explicitly inactive, nameless, strong rename-old records and exact-place/name duplicates remain filtered.
+
+Mobile GPS/OSM atomic behavior from previous build remains unchanged.

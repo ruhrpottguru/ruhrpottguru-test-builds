@@ -1,0 +1,9 @@
+RuhrpottGuru Theme v341.0
+
+Scope: mobile burger navigation only.
+- Dedicated .rpg-mobile-menu-panel class on the existing footer drawer panel.
+- Portrait/mobile panel geometry is applied directly to that dedicated panel.
+- 8px left gutter, right edge flush to viewport.
+- Menu labels stay one line.
+- Right-side chevrons remain removed from v339.
+- No navigation URLs, ordering, menu source, category logic, GPS, radius, ranking, sorting, SEO or backend logic changed.

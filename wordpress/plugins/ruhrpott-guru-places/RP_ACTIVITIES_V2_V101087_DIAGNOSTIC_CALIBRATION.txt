@@ -1,0 +1,60 @@
+RuhrpottGuru Places Backend 1.10.87 – Activities Intelligence V2 Diagnostic Calibration
+
+SCOPE
+- Dark Launch only. Public Activities visitor feed/ranking is unchanged.
+- Event Radius Monotony 1.10.85 is preserved byte-for-byte in frontend_events_query().
+- IGA2027 is intentionally untouched/paused pending external feedback.
+- No Theme, Food, Highlights, Culture, Opening Hours or REST contract changes.
+
+V2 SPEC
+- Spec version: 1.1
+- Admission remains separate from Experience Role, capabilities and ranking.
+
+CHANGES
+1. Lifecycle / former facility guard
+   - Active DB rows with clear former/ruin identity are RAUS in Activities V2.
+   - Signals include ruins=yes, historic/tourism=ruins and strong former/ruin names.
+   - Example regression: "Ruine Wellenbecken - Altes Freibad Toeppersee" => RAUS.
+
+2. Water classification calibration
+   - Bare leisure=water_park is no longer sufficient to force primary water_park.
+   - Strong water-park identity or attraction evidence confirms water_park.
+   - Unconfirmed leisure=water_park falls back to swimming as CORE and keeps water_park only as BEDINGT ADD-ON.
+   - Example: generic "Hallenbad im Sportpark" + leisure=water_park => swimming CORE.
+   - Example: "Erlebnisbad" => water_park CORE.
+
+3. Equestrian guest-use calibration
+   - access=yes alone does not prove that visitors can ride.
+   - REIN requires guest-facing evidence such as booking/rental/fee+visitor operation or explicit riding-offer signal.
+   - Public-only riding club remains BEDINGT; private remains RAUS.
+
+4. Tennis stays differentiated
+   - Public/bookable tennis => REIN.
+   - Unknown guest access => BEDINGT.
+   - Private access => RAUS.
+
+5. Diagnostics
+   - Full Experience distribution (no top-25 truncation).
+   - Experience x Admission cross table.
+   - Blocker distribution.
+   - Stratified samples for skatepark, basketball, bolzplatz, soccer_pitch, tennis, padel, equestrian, swimming, water_park, escape_room, bowling, karting and none.
+   - Raw signal/evidence columns for diagnosis.
+   - Dedicated none sample.
+
+REGRESSION FIXTURES
+PASS expected:
+- Skateplatz Gladbeck => REIN / skatepark
+- Club Mumbai Palais Skateshop => RAUS / retail_only
+- Basketballplatz => REIN
+- Private soccer club pitch => RAUS
+- Bolzplatz => REIN
+- Hünxe Hallenbad => REIN
+- Private riding club => RAUS
+- Public-only riding club => BEDINGT
+- Guest riding offer => REIN
+- Public tennis => REIN
+- Tennis with unknown access => BEDINGT
+- Former/ruin pool => RAUS
+- Generic OSM water_park without supporting evidence => swimming CORE
+- Erlebnisbad => water_park CORE
+- Freibad + Beachvolleyball => swimming CORE + beach_volleyball ADD-ON

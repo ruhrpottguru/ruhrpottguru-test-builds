@@ -1,0 +1,15 @@
+RuhrpottGuru Theme v311 — Search / Location Parity Final
+
+1. Global-search Place results consume the exact backend visitor element and normalize it through the same RPG.normalizePlace() path as category pages. This keeps search thumbnails, detail hero/gallery/crop, Route metadata, address and chips identical. Events remain on their existing path.
+2. Internal RuhrpottGuru navigation with www/non-www host variants is rewritten to the browser current origin. This prevents origin-scoped localStorage from losing an exact postcode/GPS snapshot when changing categories. External links remain untouched.
+3. Footer category links, brand/Home, global search navigation and category-tag links use the same-origin navigation helper.
+4. No changes to radius rules, event sorting/media, category ranking or backend persistence.
+
+Abnahme
+- Syntax: runtime.js, api.js, location.js, components.js, views.js, main.js via node --check: OK.
+- Search-Parity-Fixture: Place-Suchergebnis nutzt exakt element.image/gallery/crop/subcategory/address und übergibt dasselbe normalisierte Objekt an DetailOverlay: OK.
+- Leerbild-Randfall: kein Rückfall auf ein veraltetes reduziertes Search-Bild: OK.
+- Event-Regression: Event-Suchbild unverändert: OK.
+- Place/Event Regressionstest tests/place-events.cjs: 22/22 Assertions OK.
+- Same-Origin-Navigation: www/non-www interne Kultur/Highlights-Links werden auf den aktuellen Browser-Origin reduziert; externe Links bleiben absolut: OK.
+- Bestehender tests/detail-chips.cjs ist bereits in Theme v310 wegen fehlendem directBoot-Testfixture defekt und schlägt unverändert vor dieser Änderung fehl; kein v311-Regressionseffekt.

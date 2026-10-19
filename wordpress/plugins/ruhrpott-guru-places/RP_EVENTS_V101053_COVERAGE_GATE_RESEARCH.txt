@@ -1,0 +1,30 @@
+RuhrpottGuru Places Backend 1.10.53 – Coverage Gate + Kreis Wesel Quellenrecherche
+
+Ziel
+- Waiting-/Paused-Worker duerfen das Coverage-Gate nicht als laufende externe Schwerlast blockieren.
+- Ein alter wait_reason darf die Admin-Anzeige nicht verfälschen; Blocker werden bei Anzeige live neu berechnet.
+- Kreis Wesel wird als naechster Research-Scope vollständig profiliert, ohne neue Quellen produktiv zu aktivieren.
+
+Worker-Gate
+- Eventbild-Fallback status=waiting_enrichment => passiv, auch wenn Retry-Cron in <=30 Sekunden faellig ist.
+- Event-Enrichment status=paused_places => passiv; der aktive Places-Import bleibt der eigentliche Blocker.
+- Status queued/starting/retrying darf bei unmittelbar faelligem Cron reservieren.
+- Status running bleibt aktiver Blocker.
+- Coverage-Status waiting_workers zeigt die aktuell berechneten Blocker statt des gespeicherten historischen Textes.
+
+Quellen-Recherche Kreis Wesel
+13/13 Kommunen besitzen jetzt ein Research-Profil:
+Alpen, Dinslaken, Hamminkeln, Huenxe, Kamp-Lintfort, Moers, Neukirchen-Vluyn,
+Rheinberg, Schermbeck, Sonsbeck, Voerde (Niederrhein), Wesel, Xanten.
+
+Wichtig
+- Nur weseltickets.de/Wesel bleibt Pilot aktiv.
+- Alle weiteren Profile sind research-only und werden von keinem Worker abgefragt oder importiert.
+- ET4/Open Data Finder bleibt fuer alle 53 Kommunen die Basisquelle.
+- Auto-Import/Auto-Merge bleibt deaktiviert bis die reale Wesel-Auswertung validiert ist.
+
+Build-Pruefung
+- PHP-Syntax aller PHP-Dateien: OK
+- municipalities_seed: 53 Kommunen
+- Kreis-Wesel Research-Profile: 13
+- ZIP-Integritaet: OK

@@ -1,0 +1,12 @@
+RuhrpottGuru Places Backend 1.7.1
+
+- Masterimport-Zählung getrennt: Rohzeilen, erfolgreiche Upserts, eindeutige Event-Termine, Mehrfachlieferungen, ungültige Zeilen.
+- Canonical-Key-Audit über alle Seiten eines Masterlaufs; identische source/external_id/start-Kombinationen werden exakt als ein Event-Termin gezählt.
+- Eindeutige Quellobjekte (source/external_id) werden zusätzlich gezählt, damit wiederkehrende Termine von Quellobjekten unterschieden werden können.
+- ET4 overallcount wird pro Seite beobachtet (Start/Minimum/Maximum/Ende); Abweichungen zur tatsächlich verarbeiteten Rohzeilenzahl werden sichtbar statt als Eventzahl missverstanden.
+- Der bereits abgeschlossene vorherige Masterlauf kann über das last_synced_at-Zeitfenster nachträglich auf eindeutige DB-Termine auditiert werden; ein erneuter Import ist dafür nicht zwingend nötig.
+- Pagination beendet bei vorhandenem overallcount nicht mehr allein wegen einer unerwartet kurzen Seite.
+- Leere Seite vor Erreichen des gemeldeten overallcount wird als echter Retry-Fehler behandelt statt still als fertig zu gelten.
+- Sekundäre Sortierung title asc stabilisiert Seiten mit vielen identischen Startzeitpunkten; start asc bleibt Primärsortierung für unrollIntervals.
+- Bestehende Eventdaten, Enrichment, Bilder, Frontend-Readmodel und Lifecycle bleiben unverändert.
+- Kein Theme-Update und kein Neuimport zwingend erforderlich; der nächste planmäßige Masterlauf erzeugt die vollständigen neuen Audit-Zähler automatisch.

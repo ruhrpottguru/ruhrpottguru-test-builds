@@ -1,0 +1,7 @@
+RUHRPOTTGURU THEME V154
+
+- Imbissbuden: Standort-/Radius-Steuerung im Hero visuell an Büdchen-Radar angeglichen.
+- Standortkarte, Standort-Button und Radiusbuttons verwenden nun denselben Aufbau und dieselbe Formsprache.
+- 50-km-Schritt bleibt für Imbissbuden erhalten; mobil werden 6 Radiusbuttons in zwei Reihen zu je 3 dargestellt.
+- Keine Änderung an Datenlogik, Tier-B-Freigabe, Header oder Footer.
+- Burger-Menü bleibt WordPress-Menüposition `burger`; Reihenfolge wird weiterhin in WordPress verwaltet.

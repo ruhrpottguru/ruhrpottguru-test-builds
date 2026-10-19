@@ -1,0 +1,10 @@
+RuhrpottGuru Places Backend v1.10.62
+
+Organizer Relation Authority
+
+- Structured organizer/organizers rows keep their own rel/relation/role/type semantics.
+- author, support, contact, provider, publisher, source, rights, copyright, creator and artist rows can no longer become organizers merely because they live inside an organizer-like container.
+- Such rows may only enrich an already independently identified organizer of the same normalized identity.
+- Visitor-facing organizer output remains recalculated from raw ET4 data on every REST read as introduced in v1.10.60.
+- Event series logic from v1.10.61 is unchanged.
+- No event selection, sort, media, timing, coverage or rights-source behavior changes.

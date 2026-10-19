@@ -1,0 +1,21 @@
+RuhrpottGuru v71 – Places DB Adapter
+===================================
+
+Base: v70 browser-overpass-no-server-curl (hard rollback reference)
+
+- Existing layout retained.
+- Events remain ET4.
+- Food / Highlights / Kultur / Aktivitäten use Places DB only when plugin reports READY.
+- Until READY the exact v70 browser-OSM runtime remains the fallback.
+- Theme runtime settings are filterable by RuhrpottGuru Places Backend.
+- Home DB path: max 20 per category, exact selected radius.
+- Full category loader keeps its existing OSM-shaped contract; plugin replaces the transport endpoint and the compiled loader explicitly routes to the same-origin DB adapter in database mode.
+- DB place IDs override volatile OSM-live list IDs when available.
+- DB category/subcategory markers override legacy client inference when available.
+- Fabricated generic routeInfo removed from new mapped items.
+- OSM attribution added visibly to the footer.
+- Scene filter remains disabled from v69/v70.
+
+Rollback:
+RuhrpottGuru-v70-browser-overpass-no-server-curl.zip
+SHA256 206358974c8494c1928360f3c2bb88007a76556ec15273213f1869f30425f8d8

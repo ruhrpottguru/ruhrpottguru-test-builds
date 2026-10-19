@@ -1,0 +1,14 @@
+RuhrpottGuru Places Backend 1.10.115 – Unified Media Editor – Verification
+
+Functional acceptance performed before release:
+- v1.10.114 unified media search preserved: search "Waldschule" returns Event media usages and groups byte-identical uses.
+- Each Place/Event media result now exposes "Zuschnitt bearbeiten".
+- Direct editor link preserves the exact media focus (place:<id> / event:<id>) and opens one logical motif.
+- Editor renders separate card 4:5 and detail 16:9 previews, draggable focal point and independent zoom sliders.
+- Save is reversible; "Automatik wieder verwenden" removes manual override.
+- Original image bytes are never rewritten.
+- Crop alias identity supports normalized URL, local/source SHA-256, WP attachment id and local perceptual dHash.
+- Existing content-class filters, copyright/rights metadata and event usage list from 1.10.114 remain present.
+- Backend hands cropCard/cropDetail to Event, Place, gallery and global-search payloads.
+- Old generic text/poster and Waldschule special blocking hooks are not registered.
+- PHP syntax: PASS.

@@ -1,0 +1,12 @@
+RuhrpottGuru Theme V161 – Global Event Media + Address Resolver
+
+- Event address parser now evaluates nested ET4/destination.one address structures globally.
+- Complete street/house number/postcode/city addresses outrank city-only records.
+- Organizer/contact/billing addresses are penalized and excluded from deep venue selection.
+- Missing street/postcode can be enriched from the local RuhrpottGuru Places DB when venue identity + event coordinates match.
+- Frontend formats house number, postcode and city and avoids duplicate city output in detail overlays.
+- Event media parser accepts all known ET4 media wrapper variants while remaining restricted to media/image branches.
+- Event media resolver checks multiple event/detail URLs present in the raw licensed record, verifies event-title identity, then extracts OG/Twitter/JSON-LD/image candidates.
+- If exact event artwork is unavailable, a moderated local venue image may be used when venue identity/coordinates match.
+- Final branded SVG fallback guarantees a visual for every event without inventing a photographic source.
+- Existing radius, location, sorting, source/license and event filtering logic remains unchanged.

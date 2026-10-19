@@ -1,0 +1,7 @@
+RuhrpottGuru v108
+
+- Behebt den V107-Frontend-Crash auf der Home.
+- Ursache: Der neue Route-der-Industriekultur-Teaser verwendete in views.js nicht definierte a/div/span-Helfer.
+- Alle Teaser-Elemente verwenden jetzt den vorhandenen React-h()-Renderer.
+- Der breite Route-der-Industriekultur-Teaser zwischen Food und Highlights bleibt erhalten.
+- Der alte Route-Badge bei Highlights bleibt entfernt.

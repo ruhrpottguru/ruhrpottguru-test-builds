@@ -1,0 +1,34 @@
+RUHRPOTT GURU – FOOD CARD UX V1
+Generated: 2026-08-20
+
+BASE
+- Built directly on Content + Header V1 (therefore includes Cookie & Privacy V1, Infinite Scroll + Smart Location V1 and configured Pexels fallback).
+
+FOOD CARD CHANGES
+- Gastronomy cards are optimized for scanning: image overlays -> title -> live opening status -> price tier/cuisine tags -> Route/Details.
+- The generic food description paragraph is removed from compact cards; factual descriptions remain available in the detail view.
+- Opening status is placed directly below the title.
+- Reliable opening data uses the existing opening-hours decision engine and shows labels such as "Jetzt geöffnet · bis 22:00" or "Geschlossen · öffnet morgen um 11:30".
+- If no verified opening-hours data is available, the card says "Öffnungszeiten derzeit nicht verfügbar" instead of guessing.
+- Generic "Preise laut Aushang" is no longer shown on gastronomy cards.
+- Price tendency (€ / €€ / €€€) is shown only when a supported source field explicitly supplies a 1–3 price level / euro tier. No price tier is inferred from cuisine or venue type.
+- Food hashtags are cuisine-aware (examples: #Sushi #Japanisch, #Döner #Türkisch, #Chinesisch #Asiatisch, #Eiscafé #Eis, #Bowls #Healthy Food).
+- Additional evidence-based tags include #VeganFriendly, #Vegetarisch and #Außengastronomie when present in OSM tags.
+- Food hashtags are clickable. Clicking a tag filters the current category feed to matching places; clicking it again or the active filter chip clears it.
+- Active hashtag filter is visibly shown above the result count.
+- Favorite heart remains in the same top-right image position on every card.
+- Route and Details remain the bottom actions; when no food price tier exists they align cleanly to the right.
+
+DATA QUALITY
+- No opening state is invented without schedule evidence.
+- No € price tier is guessed from "fast_food", cuisine or name.
+- Detail view now says "Keine verlässliche Preisangabe hinterlegt" for gastronomy when no real price data exists.
+- OSM and snapshot cache versions bumped so old generic tags/price placeholders cannot survive deployment.
+
+UNCHANGED
+- Header order Search -> Location -> Favorites.
+- Sticky global header and sticky quick-filter rail.
+- Infinite scroll and "Nach oben" after card 12.
+- Smart Location thresholds/background behavior.
+- SureCookie-only consent architecture.
+- Pexels/real-photo priority and server-side API key configuration.

@@ -1,0 +1,17 @@
+RuhrpottGuru Places Backend 1.10.111 – Surgical Waldschule Media Block
+
+Purpose
+- Remove exactly the repeatedly wrong Waldschule-Cappenberg Event-Ort image without introducing another general visual filter.
+- Preserve all other venue images, symbolic images, posters, ET4/ODF originals, editorial media and approved media.
+
+Verified execution contract
+1. Only active native Selm calendar events in Selm whose venue contains "Waldschule ... Cappenberg" are inspected.
+2. Only persisted source=venue-commons-context rows are considered.
+3. A candidate must be the same persisted asset on at least 3 distinct active Waldschule events. Otherwise no media is changed.
+4. The exact asset fingerprint (local/source SHA-256 where present, otherwise normalized source URL) is persisted in a surgical blocklist.
+5. Matching event_media rows are rejected and removed from primary selection.
+6. A matching place_media URL is disabled only for the same Waldschule place, if such a row exists.
+7. Venue-context transients for that place are cleared.
+8. Affected events are requeued into the existing global fallback chain.
+9. event_store_local_fallback refuses only the exact stored fingerprint/URL so the bad asset cannot return.
+10. No generic poster/text/image-class rule is added by 1.10.111.

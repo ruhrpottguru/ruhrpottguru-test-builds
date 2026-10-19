@@ -1,0 +1,31 @@
+Ruhrpott Guru – WP Sticky Footer V38
+====================================
+Basis: V37
+
+Ziel
+----
+Die vier Kategorieeintraege der festen BottomNavigation verwenden dieselbe
+WordPress-Menuequelle wie der Footer-Bereich "Entdecken".
+
+Verhalten
+---------
+- "Start" bleibt unveraendert.
+- Events / Food / Highlights / Kultur werden, sobald ein WP-Footermenue
+  vorhanden ist, aus #ruhrpott-footer-menu-data erzeugt.
+- Reihenfolge, sichtbarer Menue-Titel und Ziel-URL entsprechen dem in
+  WordPress der Position "Fusszeile (Footer)" zugewiesenen Menue.
+- Klick auf einen WP-gesteuerten Kategorieeintrag navigiert zur echten
+  WordPress-Seite (window.location.assign), genau wie der normale Footer-Link.
+- Die WP-gesteuerten Links bleiben auch ohne bereits aufgeloesten Standort
+  anklickbar; die Zielseite kann dort selbst die Standortauswahl starten.
+- Ist kein passendes WP-Footermenue vorhanden, bleibt die bisherige interne
+  BottomNavigation als Fallback erhalten.
+
+Nicht geaendert
+---------------
+- Datenloader / OSM / ET4
+- Radius- und Snapshot-Logik
+- Szene- und Quickfilter-Logik
+- Footer-Menue-Resolver in PHP
+- Kategorie-Shortcodes und WP-Inhalts-Splitting
+- Share-, Detail- und Kartenfunktionen

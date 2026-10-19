@@ -1,0 +1,8 @@
+RUHRPOTTGURU THEME V175 – EVENT OCCURRENCE / LIST DEDUPE
+
+- DB-backed event rows trust canonical persisted start/end only.
+- Raw parent timeIntervals are ignored for DB-backed rows.
+- Visitor-facing event lists collapse recurring occurrences to the nearest relevant occurrence per external event ID.
+- Exact title + start + city + venue/address duplicates are suppressed as a cross-source safety net.
+- Calendar restore from v174 retained.
+- Event DB/source/region logic unchanged.

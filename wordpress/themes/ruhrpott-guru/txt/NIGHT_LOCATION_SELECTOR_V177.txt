@@ -1,0 +1,7 @@
+V177 – Unser Pott bei Nacht Standortauswahl
+- Standortkarte entspricht Büdchen/Imbiss (Mein Standort + Standort ändern)
+- gleiche 53-Städte-Auswahl im bekannten Standort-Modal
+- expliziter GPS-Button, kein ungefragter zweiter GPS-Prompt
+- Radius 1 / 2,5 / 5 / 10 / 25 / 50 km direkt im Hero und Modal
+- schreibt dieselben persistenten Standort-/Radius-Keys wie der Rest von RuhrpottGuru
+- Cookie-Fallback für Stadtwahl bleibt kompatibel

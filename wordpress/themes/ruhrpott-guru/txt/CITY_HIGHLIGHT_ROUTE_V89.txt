@@ -1,0 +1,9 @@
+RuhrpottGuru v89 - City Highlight Intelligence V2 + Route Industriekultur
+
+- Highlights use stricter A/B city-highlight qualification before distance sorting.
+- Low-level industrial components (e.g. individual shafts/headframes) are excluded unless independently prominent.
+- Industrial ensembles are de-duplicated by site root.
+- The official 57 Route Industriekultur primary sites are authoritative A highlights.
+- Home Highlights: if one or more official route sites exist inside the user's selected radius, one is chosen randomly as the featured first card. Expanded 10/25 km results do not force this rule.
+- New Route Industriekultur page: /route-industriekultur/ with 27 anchor points, 17 panoramas and 13 settlements, filters and distance sorting where DB matching is available.
+- Existing Places catalogue remains untouched; no reimport.

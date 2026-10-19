@@ -1,0 +1,19 @@
+RuhrpottGuru Places Backend 1.10.152 – Community Mobile Media Contract
+
+Aenderung
+- Community Story: max. 2 MB je empfangenem Bild, max. 12 MB gesamte Multipart-Einsendung.
+- Place Contribution / Foto beisteuern: max. 2 MB je empfangenem Bild.
+- Die Browseroptimierung liegt in Theme v305.0; Backend bleibt Sicherheitsgrenze.
+- Moderation, Place-Zuordnung, Bildpflicht, Rechte-/Datenschutzbestaetigung und Publish-Gate aus 1.10.151 bleiben unveraendert.
+
+Live-Regression auf 1.10.151 vor dem Limit-Pass
+- vorhandener Testbeitrag #3093 wurde aus Trash -> Pending gesetzt: Community-REST blieb count=0.
+- Pending -> Publish: /places/10563/community-stories lieferte genau 1 Beitrag; E-Mail wurde nicht im Public-JSON ausgegeben.
+- Attachment #3094 war ueber wp/v2/media(parent=3093) als WebP inkl. WordPress-Derivaten vorhanden.
+- Publish -> Trash: Public-REST wieder count=0.
+- bildlose valide Einsendung wurde serverseitig mit HTTP 400 "Mindestens ein Foto ... Pflicht" abgelehnt.
+- Testbestand nach Abnahme wiederhergestellt: nur der historische Testbeitrag liegt im Papierkorb.
+
+Release-QS
+- PHP-Syntax aller Plugin-Dateien muss PASS sein.
+- ZIP-Integritaet muss PASS sein.

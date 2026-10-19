@@ -1,0 +1,18 @@
+RuhrpottGuru Places Backend v1.10.135 — Outdoor Coverage Provider Affinity
+
+Scope
+- Nur Transportlogik des read-only 53-Kommunen Outdoor-Coverage-Runners.
+
+Geändert
+- Phase B versucht zuerst denselben Overpass-Provider, der Phase A derselben Kommune gerade erfolgreich beantwortet hat.
+- Der bevorzugte Provider erhält für diesen Folgeaufruf bis zu 25 Sekunden statt des bisherigen Standardlimits.
+- Danach bleiben dieselben Fallback-Provider wie in v1.10.134 erhalten.
+
+Nicht geändert
+- Phase-A-/Phase-B-Queries und Count-Semantik
+- AGS-/admin_level-Boundary-Preflight
+- Dog Policy, Ranking, Entries, Outdoor-Entities
+- Places, Events, Medien, Worker, Reprocessing, Frontend
+
+Anlass
+- Live: Bochum Phase A erfolgreich über overpass-api.de, Phase B scheiterte danach, weil erneut zuerst ein bereits timeoutender Mirror probiert wurde. Derselbe Phase-B-Query lieferte über overpass-api.de 3 Hunderegel-Evidenzen und 0 Trailheads.

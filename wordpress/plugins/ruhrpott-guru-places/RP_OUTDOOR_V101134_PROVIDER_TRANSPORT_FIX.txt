@@ -1,0 +1,19 @@
+RuhrpottGuru Places Backend v1.10.134 – Outdoor Coverage Provider Transport Fix
+
+GEÄNDERT
+- Nur der admin-only Outdoor-53-Kommunen-Coverage-Runner.
+- Provider-Reihenfolge entspricht jetzt dem bewährten RuhrpottGuru-Overpass-Proxy: private.coffee -> overpass-api.de -> maps.mail.ru.
+- Einzel-Timeouts: 20 s -> 20 s -> 10 s; maximale Provider-Wartezeit bleibt damit unter der bisherigen Worst-Case-Dauer des Runners.
+
+NICHT GEÄNDERT
+- Coverage-Queries und queryVersion outdoor-coverage-1.1.
+- AGS/admin_level-Boundary-Auflösung aus v1.10.133.
+- Count-Vertrag für boundaryRelationCount, areaCount, dogAreas, natureCandidates, dogRuleEvidence und trailheads.
+- Outdoor-Suche, Ranking, Dog Policy, Entry-Logik.
+- Places, place_media, Events, event_media.
+- Importer, Worker, Reprocessing.
+- Frontend und Theme.
+
+VERIFIZIERTER AUSLÖSER
+- Derselbe korrigierte Dortmund-Phase-A-Query scheiterte im Coverage-Runner an allen direkten Provider-Versuchen.
+- Über den bestehenden RuhrpottGuru-Overpass-Proxy war derselbe Query unmittelbar erfolgreich: private.coffee Timeout, danach overpass-api.de HTTP 200 mit 1 Boundary-Relation, 1 Area, 21 Hundewiesen und 168 Naturkandidaten.

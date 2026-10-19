@@ -1,0 +1,18 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.140 – SEO/GEO PLACE RENDERER
+
+Scope
+- Presentation-only improvement of existing canonical /ort/{id}/{slug}/ pages.
+- No new data source, table, category resolver, import, worker, reprocessing job or sitemap admission rule.
+- Existing visitor admission remains authoritative.
+
+Changes
+- Place type label is derived from existing normalized OSM/visitor tags first, existing primary_subcategory second, existing category label last.
+- Generic fallback descriptions now include place name + resolved type + city and only existing address/opening-hours facts.
+- JSON-LD remains schema.org Place and adds mainEntityOfPage plus sameAs only from existing official website/Wikipedia/Wikidata identifiers.
+- Existing canonical URL, sitemap generation, 301 slug correction, noindex 404 behavior and frontend deep-link CTA remain unchanged.
+
+Regression intent
+- Events untouched.
+- Sitemap eligibility untouched.
+- Place resolver/category intelligence untouched.
+- No SEO/GEO duplicate data store introduced.

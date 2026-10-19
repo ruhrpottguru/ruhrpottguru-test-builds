@@ -1,0 +1,28 @@
+RuhrpottGuru Theme v305.0 – Community Mobile Image Optimizer FINAL
+
+Scope
+- Community-Beitrag ("Beitrag erstellen") und Place-Beitrag/Foto-CTA nutzen denselben clientseitigen Bild-Optimizer.
+- Keine Aenderung an Radius, Sortierung, Place/Event-Resolver, SEO/GEO oder Detail-Layout.
+
+Bildvertrag
+- bis zu 5 Bilder
+- Ausgangsdatei bis 20 MB
+- JPEG, PNG, WebP; HEIC/HEIF werden auf Browsern verarbeitet, die sie dekodieren koennen
+- vor Upload max. 2400 px laengste Kante
+- Seitenverhaeltnis bleibt unveraendert
+- Re-Encode zu WebP, Ziel/hartes Uploadlimit 2 MB je Bild
+- Canvas-Re-Encode entfernt lokale EXIF-/Metadaten aus dem Upload
+- Karten/Galerie bestimmen ihren sichtbaren Crop weiterhin nur per CSS object-fit; das gespeicherte Community-Masterbild wird nicht auf ein Kachelformat zugeschnitten
+
+Funktionale Browser-Abnahme (Chromium 144 / Playwright)
+PASS
+- Landscape 3000x2000, 4.18 MB -> 2400x1600 WebP, 0.90 MB, Ratio 1.500 unveraendert
+- Portrait 1600x2600, 2.90 MB -> 1477x2400 WebP, 0.81 MB, Ratio unveraendert
+- EXIF-Testmarker im JPEG ist nach Canvas/WebP-Re-Encode nicht mehr im Upload enthalten
+- EXIF Orientation=6 wird korrekt als 1200x1600 ausgegeben
+- >20 MB Ausgangsdatei wird vor Decode abgelehnt
+- nicht erlaubter Dateityp wird abgelehnt
+
+Regression
+- npm run check: alle React-Source-Dateien syntaktisch OK
+- bestehende Community-Grid-/Inline-Detail-/Gallery-Logik unveraendert

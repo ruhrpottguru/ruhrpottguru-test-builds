@@ -1,0 +1,16 @@
+RUHRPOTT GURU – FOOD OFFICIAL ENRICHMENT V1.1 HOTFIX
+
+Fixes runtime crash in ItemCard:
+ReferenceError: L is not defined
+
+Cause:
+A local ItemCard category-style function was emitted as an undeclared assignment after useEffect.
+
+Fix:
+Restored the local declaration (`const L = ...`) without changing the official website enrichment logic.
+
+Checks:
+- Compiled JS syntax: PASS
+- Broken undeclared assignment absent: PASS
+- Correct local declaration present: PASS
+- PHP syntax: PASS

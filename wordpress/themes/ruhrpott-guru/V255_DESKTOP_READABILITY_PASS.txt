@@ -1,0 +1,1 @@
+Desktop readability pass for location/weather strip, category headings, cards, badges, meta rows and detail pills.

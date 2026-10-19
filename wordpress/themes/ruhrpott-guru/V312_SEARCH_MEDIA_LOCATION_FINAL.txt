@@ -1,0 +1,6 @@
+RuhrpottGuru Theme v312 — Search Media / Exact Location Persistence Final
+
+Scope
+- Global-search Place cards now render through the existing C.Media/useMedia path used by normal category cards. Missing persisted images therefore receive the same bounded identity-aware resolver instead of a search-only placeholder. Event search media logic is unchanged.
+- Same-site WordPress/PHP anchors are normalized to the browser current origin, including legacy burger/menu links that bypassed v311 internalNavUrl(). This prevents www/non-www transitions from losing the exact localStorage postcode/GPS snapshot and falling back to the coarse city cookie.
+- No changes to radius, sorting, event logic, backend, place classification, or detail overlay.

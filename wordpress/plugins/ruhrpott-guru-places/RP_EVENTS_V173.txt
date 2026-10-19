@@ -1,0 +1,8 @@
+RuhrpottGuru Places Backend 1.7.3
+
+- Behebt den ET4-Masterimport-Fehler: Bei unrollIntervals=true akzeptiert ET4 ausschließlich die Sortierung "start asc". Die in v1.7.1/v1.7.2 ergänzte Sekundärsortierung "title asc" wurde entfernt.
+- Ein durch genau diesen v1.7.2-Sortierfehler fehlgeschlagener Masterimport wird nach dem Update automatisch am vorhandenen master_offset fortgesetzt; kein Neustart bei Offset 0 nötig.
+- Die fünf bereits erfolgten identischen Fehlversuche werden beim Recovery nicht länger als verarbeitete Seiten dargestellt.
+- pages_done wird künftig nur nach einer erfolgreich geladenen ET4-Seite erhöht. Fehlversuche werden als Fehler/Versuche behandelt, nicht als Seiten.
+- Safety-Retry, Watchdog, run_token-Audit, 365-Tage-Zeitraum, Event-Enrichment und Lifecycle bleiben erhalten.
+- Kein Theme-Update erforderlich.

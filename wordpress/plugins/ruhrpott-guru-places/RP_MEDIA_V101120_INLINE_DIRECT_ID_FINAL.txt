@@ -1,0 +1,23 @@
+RuhrpottGuru Places Backend 1.10.120 – Media Inline Direct-ID Crop
+
+Problem:
+Der Karten-Button „Zuschnitt bearbeiten“ verließ weiterhin die konkrete Medienkarte und wechselte in den globalen Motiv-/Such-Editor. Dadurch blieb der Bearbeitungspfad unnötig an Seitenreload, Suchzustand und globalen Editor gekoppelt.
+
+Finaler Cut:
+- Der Button in jeder Ortsbild- und Eventbild-Karte öffnet den Zuschnitt direkt in derselben Karte.
+- Vorschau, scope und media_id stammen aus genau derselben DB-Zeile, die die Karten-Vorschau erzeugt.
+- Kein Suchbegriff, Gruppen-Representative oder alter Fokus entscheidet beim Öffnen mehr über die Vorschau.
+- Beim Speichern werden master_key/identity_keys bei vorhandenem scope+media_id serverseitig neu aus exakt dieser DB-Zeile berechnet. Versteckte Browserwerte sind dann nicht autoritativ.
+- Nach Speichern/Reset Rückkehr an exakt dieselbe Medienkarte; gesetzte Medienfilter bleiben erhalten.
+- Der bisherige obere Motiv-/Such-Editor bleibt nur für eine bewusst gestartete Motivsuche erhalten.
+
+Interne Abnahme:
+PASS – PHP-Syntax sämtlicher PHP-Dateien.
+PASS – Eventkarten verwenden den Inline-Direct-ID-Editor.
+PASS – Ortsbildkarten verwenden den Inline-Direct-ID-Editor.
+PASS – alter Karten→globaler-Editor-Linkpfad aus der Medienbibliothek entfernt.
+PASS – Server-Save löst direkte scope+media_id erneut gegen die konkrete DB-Zeile auf.
+PASS – Rücksprung erhält scope+media_id und Medienfilter.
+PASS – leerer/ungültiger Direct-ID-Datensatz rendert keinen Ersatz-Editor (kein stiller Fallback auf ein anderes Bild).
+PASS – bestehender globaler Such-/Motiveditor bleibt als Regression unverändert verfügbar.
+PASS – Theme wird nicht verändert; Backend-only Release.

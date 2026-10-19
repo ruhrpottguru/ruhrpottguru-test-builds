@@ -1,0 +1,24 @@
+RuhrpottGuru Theme v268 – Activities Community Photo CTA
+
+Scope
+- Theme/frontend only. Places Backend unchanged.
+- Activities only for this rollout. Food/Highlights/Kultur remain unchanged.
+- Only shown after the existing media resolver has settled with no usable image.
+
+UX
+- Replaces the activities emoji placeholder with a neutral camera/community placeholder.
+- Card keeps its normal detail action.
+- Separate 44px touch CTA: "Foto beisteuern".
+- CTA opens the existing Place Contribution form directly in photo-only mode.
+
+Data / moderation
+- Existing submitPlaceContribution endpoint is reused.
+- Existing place_id and category are submitted unchanged.
+- Existing image copyright, submitter name, e-mail confirmation and rights confirmation remain mandatory.
+- No automatic publication and no automatic title-image promotion.
+
+Regression boundaries
+- Events untouched.
+- Food/Highlights/Kultur placeholder behavior untouched.
+- Location/radius/tag filters untouched.
+- Activities V2 backend/feed untouched.

@@ -1,0 +1,9 @@
+V322 — Global Address Form FINAL
+
+- Replaces the visible map.nrw map/search UI in the canonical location modal with four split fields: street, house number, postcode, city.
+- Reuses existing location paths: postcode-only -> choosePostcode, city-only -> chooseCity.
+- Street searches require postcode or city; house number remains optional.
+- map.nrw remains the official geocoder but runs in a hidden 2x2 basemap:none component using documented data-itnrw-addresses + map.center behavior.
+- Global address result still flows into the existing central lat/lng location state. No category loader/ranking/radius logic changes.
+- Postcode resolver now rejects results that cannot be mapped to the existing canonical 53 Metropole Ruhr municipalities and returns the matched city.
+- Postcode cache key bumped to v322 so older broad-envelope cache entries cannot bypass the new municipality gate.

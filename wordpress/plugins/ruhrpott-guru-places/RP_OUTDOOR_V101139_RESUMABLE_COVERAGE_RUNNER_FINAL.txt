@@ -1,0 +1,24 @@
+RuhrpottGuru Places Backend v1.10.139
+Outdoor 53-City Coverage Runner – resumable server-side final
+
+GEÄNDERT
+- Nur der read-only Outdoor-Coverage-Runner.
+- Ein /next-/Cron-Schritt führt maximal einen Overpass-Request aus.
+- Fortschritt einer Kommune wird nach jedem erfolgreichen Schritt im bestehenden Coverage-Audit-State gespeichert.
+- Der Lauf setzt sich serverseitig via WP-Cron fort; ein offener Browser-Tab ist nicht erforderlich.
+- Transiente Overpass-Providerfehler werden pro Schritt mit Backoff wiederholt (60s, 120s, 300s), maximal 4 Versuche.
+- Nach einem erfolgreichen Schritt folgt der nächste reguläre Schritt mit 30s Abstand.
+- Die bestehende Reihenfolge bleibt: Boundary -> Area-Check -> Hundewiesen -> Natur -> Hunderegel-Evidence -> Trailheads.
+- Query-Version: outdoor-coverage-1.5.
+
+NICHT GEÄNDERT
+- 53-Kommunen-Inventar / AGS / admin_level.
+- Boundary-, Area-, Hundewiesen-, Natur-, Hunderegel- und Trailhead-Queries.
+- Overpass-Provider, Reihenfolge und Timeouts.
+- Outdoor Dog Policy, Ranking, Entries, Resolver und öffentliche Suche.
+- Places, Place-Media, Events, Event-Media, Worker und Reprocessing.
+- Theme / Frontend.
+
+SCHREIBSCOPE
+- Wie zuvor ausschließlich Coverage-Audit-State sowie WordPress Cron/Transient-Steuerung.
+- Keine Writes in Places, Media, Events oder Outdoor-Entities/Entries.

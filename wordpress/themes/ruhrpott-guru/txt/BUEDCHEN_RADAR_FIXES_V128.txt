@@ -1,0 +1,10 @@
+RuhrpottGuru v128 – Büdchen Radar fixes
+
+- Real OpenStreetMap raster map replaces the abstract radar drawing.
+- Tiles are requested only from RuhrpottGuru's same-origin Places Backend proxy (requires Places Backend 1.2.9).
+- Existing RuhrpottGuru header/footer stay unchanged.
+- Büdchen images from verified place_media are shown when available; OSM image/Wikimedia tags remain supported.
+- No fabricated location photos are used; missing images keep the branded Trinkhalle placeholder.
+- Filters search all eligible Tier A+B candidates, not only the 12-card starter selection.
+- Selecting an assortment filter such as Kaffee clears an old time/open filter.
+- Selecting a time filter clears assortment filters. This prevents Kaffee from being implicitly dependent on "Jetzt geöffnet".

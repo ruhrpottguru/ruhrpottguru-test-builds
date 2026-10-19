@@ -1,0 +1,9 @@
+RuhrpottGuru v132 – Büdchen filter adjustment
+
+- Visible quick filter "Spät geöffnet" replaced by "Lotto".
+- Lotto is considered positive only when confirmed by:
+  - OSM lottery=yes, or
+  - RuhrpottGuru manual/operator/community override.
+- Missing lottery data is unknown, never interpreted as "no Lotto".
+- Radius invariant remains unchanged: filters can only reduce the current radius result set.
+- Existing map implementation remains unchanged for the next dedicated map review.

@@ -1,0 +1,21 @@
+RUHRPOTT GURU – HOME MOBILE BOOT V44
+
+ROOT CAUSE
+- V41/V42/V43 category-module MutationObserver watched the complete document for 30 seconds.
+- Rendering a spinner, result card or error changed the DOM, which triggered scheduleBoot() again.
+- Every restart incremented bootGeneration, reset all modules and launched category hydration again.
+- On mobile this multiplied same-origin OSM/Overpass requests and explains long loading plus Food/Highlights/Culture provider failures while Events could still appear.
+
+FIX
+- Observer is only active when category modules are not yet present.
+- It disconnects before the first boot as soon as modules appear.
+- init no longer races an immediate boot against apiWait.
+- After GPS resolves, exactly one job per visible category is launched.
+- Events/Food/Highlights/Culture render independently as each finishes.
+- Canonical category loader remains authoritative for radius fallback and exact GPS filtering.
+- [ruhrpott_home_categories] unchanged.
+
+EXPECTED
+- No render mutation can restart network hydration.
+- No 30-second request storm on mobile.
+- Highlights/Culture are not queued behind Food.

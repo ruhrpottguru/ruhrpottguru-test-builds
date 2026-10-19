@@ -1,0 +1,7 @@
+RuhrpottGuru Theme V191 – Community Upload E-Mail/Submit Fix
+
+- E-Mail-Pflichtfeld im Community-Bildformular sichtbar gestylt (type=email war im CSS-Selektor vergessen).
+- Der Senden-Button bleibt anklickbar und zeigt bei unvollständigen Pflichtangaben eine konkrete Meldung.
+- Während des tatsächlichen Sendens wird der Button gesperrt.
+- React autoComplete-Attribute korrigiert.
+- Keine Änderungen an Homepage, Datenlogik oder Plugin erforderlich.

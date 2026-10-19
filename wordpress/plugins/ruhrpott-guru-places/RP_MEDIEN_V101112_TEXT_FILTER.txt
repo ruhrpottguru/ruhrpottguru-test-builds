@@ -1,0 +1,20 @@
+RuhrpottGuru Places Backend 1.10.112 – Medien Text/Bild+Text Filter
+
+Ziel
+- RP Redaktion -> Medien erhält einen persistenten Bildinhalt-Filter.
+- Filterwerte: Alle Inhalte, Text oder Bild + Text, Bild + Text, überwiegend Text/Plakat, nur Bild/Foto, noch nicht analysiert.
+
+Technik
+- place_media erhält content_class, content_text_score, content_class_reason, content_classified_at.
+- Ein kleiner resumierbarer WP-Cron-Worker klassifiziert maximal 6 unbekannte Bilder pro Lauf.
+- Lokale Uploads werden direkt gelesen; externe Bilder werden read-only mit 8 MB Limit geladen.
+- Die Analyse nutzt dieselbe lokale Pixel-/Kantenmetrik wie das bestehende Event-Media-Qualitätsmodul, verändert aber keine Moderations- oder Besucherfreigabe.
+- Neue Bilder starten als unknown und werden automatisch nachklassifiziert.
+- Laufende Ortsbild-Coverage darf parallel laufen: Klassifikation schreibt ausschließlich die neuen content_* Metadatenfelder.
+
+Nicht verändert
+- Besucherfrontend / Theme
+- Event-Sync / Selm
+- Medienfreigabe / Rechte
+- Ortsbild-Resolver und Ortsbild-Coverage
+- bestehende Bilder und Moderationsstatus

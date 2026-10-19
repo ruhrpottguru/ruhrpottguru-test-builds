@@ -1,0 +1,7 @@
+RuhrpottGuru Theme v309 – Website-Audit-Fixes
+- Öffnungszeiten: deutsche Wochentagskürzel werden vor Berechnung normalisiert; unplausible Zeitlisten erzeugen keine konkrete Öffnungsbehauptung.
+- Deep-Links: Karten besitzen echte kanonische href-Ziele; Modifier-Klick/Link kopieren funktionieren.
+- Direktdetail-Chips transportieren temporären Ortskontext, ohne gespeicherten Standort zu überschreiben.
+- Place-Events: sehr nahe, eindeutige Namensvarianten wie Stratmanns Theater / Stratmanns Theater im Europahaus werden verknüpft.
+- 404.php mit echtem HTTP-404-Template; doppelte H1 aus WP-Seitenshell vermieden; Kategorie-Meta-Descriptions ergänzt.
+- Imbissbuden-Zahlen klarer beschriftet; Entfernung 2,5 statt 2.5; Night-Foto-Tag/Score bereinigt; Merkzettel zeigt Kultur statt culture.

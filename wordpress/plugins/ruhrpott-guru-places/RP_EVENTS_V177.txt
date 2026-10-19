@@ -1,0 +1,7 @@
+RuhrpottGuru Events v1.7.7 – Region Forensics
+
+- Read-only split of outside-master events against the canonical 53 municipalities.
+- Counts inside Metropole Ruhr, outside Metropole Ruhr, and unknown.
+- Top city tables and outside-region sample.
+- Uses municipalities_seed() so Places and Events share one region definition.
+- No event deletion or status mutation.

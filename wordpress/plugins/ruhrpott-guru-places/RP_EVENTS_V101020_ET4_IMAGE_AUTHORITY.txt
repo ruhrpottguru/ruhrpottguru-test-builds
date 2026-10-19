@@ -1,0 +1,6 @@
+RPG EVENTS 1.10.20 - ET4 IMAGE AUTHORITY
+
+- Master/Open Data Finder and destination.one supplemental rows use the event-owned ET4 image from raw_payload as the authoritative visitor image.
+- The ET4 image overlays later enrichment media for those rows.
+- Existing canonical event clustering may inherit that ET4 image to a matching cross-source representative (for example an Essen supplemental duplicate without its own image).
+- No opening-hours audit state, cron hook, schema, ranking, dates or place data are changed.

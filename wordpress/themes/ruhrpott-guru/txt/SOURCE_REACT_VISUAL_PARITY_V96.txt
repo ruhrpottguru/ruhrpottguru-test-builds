@@ -1,0 +1,14 @@
+RuhrpottGuru V96 – Source React visual parity
+
+- Keeps the readable/source-owned React architecture introduced in V95.
+- Restores the V94 category-specific Home layouts:
+  Events = horizontal magazine carousel
+  Food = 2-column visual grid
+  Highlights = cinematic featured mosaic
+  Kultur = compact list rows
+  Aktivitäten = horizontal magazine carousel
+- Reconstructs the original AI-Studio detail modal visual hierarchy from the shipped V94 bundle, without reactivating the old bundle.
+- Detail modal opens at the top on mobile (items-start) and never as a bottom sheet.
+- Close button remains orange.
+- No Route Industriekultur badge is rendered on images; route membership and overview link live in the detail content/actions.
+- Home result clicks open the central detail state directly; no category-page detour.

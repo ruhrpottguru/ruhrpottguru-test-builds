@@ -1,0 +1,7 @@
+RuhrpottGuru v124 – Beta Polish
+- Compact beta notice on the home page.
+- Category empty states distinguish no-data from a user filter with zero matches.
+- If a category has no unfiltered results, user can expand to the next radius without changing location.
+- Detail overlays now offer “Stimmt hier etwas nicht?” and open the existing protected feedback form with the item title prefilled.
+- Uses the v122 protected feedback endpoint and v121 WordPress feedback inbox.
+- v123 independent radius control remains unchanged.

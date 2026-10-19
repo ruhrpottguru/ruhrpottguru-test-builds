@@ -1,0 +1,7 @@
+RuhrpottGuru Theme v163 – Event DB Frontend Cutover
+
+- /ruhrpottguru/v1/events liest DB-first, sobald mindestens ein vollständiger, frischer 53-Städte-Nachtlauf abgeschlossen wurde.
+- Vorher bzw. bei veraltetem/unverfügbarem Event-Cache bleibt Open Data Finder/ET4 automatisch als Fallback aktiv.
+- Standort, Radius, Chronologie und bestehende React-Darstellung bleiben unverändert.
+- Verifizierte Eventbilder aus rg_event_media und angereicherte Adressen aus rg_events werden an das bestehende Eventformat adaptiert.
+- Keine Sonderfälle für einzelne Events oder Städte.

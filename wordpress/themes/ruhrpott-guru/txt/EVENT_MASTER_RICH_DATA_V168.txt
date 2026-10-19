@@ -1,0 +1,7 @@
+RuhrpottGuru Theme 168
+
+- ET4-Fetch unterstützt einen internen Start-Offset für serverfreundliche Master-Pagination.
+- Event-Detailansicht zeigt Preisangaben, Ticket/Buchung, Veranstalter/Kontakt und zusätzliche Event-Merkmale.
+- Vollständige normalisierte Eventbeschreibung wird dargestellt.
+- Globale Suchergebnisse öffnen Eventdetails mit denselben strukturierten Zusatzdaten.
+- Suchergebnis-Zusammenfassung verwendet nach einer neuen Suche den tatsächlich ausgeführten Suchbegriff.

@@ -1,0 +1,39 @@
+RuhrpottGuru Places Backend 1.10.154 – Event-Datums-Plausibilität
+
+Ursache
+- Live-Datensatz #2017 (Castrop-Rauxel) wurde von destination.one selbst mit Start 2026 und Ende 2126 geliefert.
+- Der bisherige Pfad über lokale ET4-Expansion und Event-Upsert übernahm dieses Quellende unverändert.
+- Bestand vor Fix: 3 Events >365 Tage, davon nur 1 >2 Jahre / >5 Jahre / >10 Jahre. Die realen Langläufer mit 371 und 443 Tagen sind valide Regressionen und bleiben unverändert.
+- Ein bereits beendeter Termin (#19331) wurde am 04.10.2026 spät in einer älteren, noch laufenden Supplemental-Welle neu angelegt. Dadurch konnte status=active trotz bereits vergangenem Ende entstehen.
+
+Fix
+1. Kanonischer Range-Guard
+   - end < start => Endwert wird nicht kanonisch übernommen.
+   - end > start + 5 Kalenderjahre => Endwert wird nicht kanonisch übernommen.
+   - Keine 365-Tage-Grenze; reale Langzeitausstellungen bleiben erlaubt.
+2. ET4-Expansion
+   - Bei verworfenem Endwert wird der bereits etablierte 12-Stunden-Default für einen Termin ohne belastbares Ende verwendet.
+   - Ein altes Event mit Jahrhundert-Ende bleibt dadurch nicht künstlich in aktuellen Query-Fenstern sichtbar.
+3. Upsert/Lifecycle
+   - Bereits beendete Termine werden auch bei verspäteter Worker-Verarbeitung direkt als expired geschrieben.
+   - Zukünftige Termine bleiben active; explizite Absagen bleiben cancelled.
+4. Altbestand
+   - Einmaliger idempotenter Repair entfernt nur implausible kanonische Endwerte (>5 Jahre oder Ende vor Start).
+   - Bereits vergangene status=active-Zeilen werden auf expired normalisiert.
+   - Raw-Quellpayloads bleiben unverändert als Provenienz erhalten.
+5. Visitor-/Share-Handoff
+   - Wenn die kanonische DB kein Ende mehr hat, werden stale rohe end/endDate/end_date/to-Felder aus dem Besucherobjekt entfernt.
+
+Nicht verändert
+- Event-Radius und 4-Event-Home-Fallback
+- Datums-/Entfernungssortierung
+- Missing-/Inactive-Lifecycle-Schwellen
+- ET4/destination.one Quellenpriorität
+- Medien-/Rechtepfad
+- Places/Food/Kultur/Highlights/Aktivitäten
+
+Regressionen
+- 443-Tage-Event „Ans Werk!“ bleibt unverändert.
+- 371-Tage-Event „Der kleine Prinz – Jugendkunst-Projekt“ bleibt unverändert.
+- Zukunftstermin mit fehlerhaftem Jahrhundert-Ende bleibt als Termin erhalten, aber ohne Jahrhundertdauer.
+- Vergangenheitstermin mit fehlerhaftem Jahrhundert-Ende wird nicht mehr künstlich in aktuelle Suchfenster gezogen.

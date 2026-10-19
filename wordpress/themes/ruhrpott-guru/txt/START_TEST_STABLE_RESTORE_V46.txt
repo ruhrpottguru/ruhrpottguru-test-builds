@@ -1,0 +1,18 @@
+RUHRPOTT GURU – START TEST STABLE RESTORE
+Base: HOME SINGLE OSM V46
+
+Purpose:
+- Restore the pre-Vercel WordPress ZIP workflow.
+- Restore the old magazine-style individual Home shortcode modules.
+- Keep [ruhrpott_home_categories] unchanged.
+- /start-test/ processes the four Gutenberg shortcodes normally.
+- Events use the established ET4 snapshot path.
+- Food + Highlights + Kultur share one compact OSM payload on the Home modules.
+- GPS resolves before Home live data starts.
+- No Vercel runtime/deployment code is part of this theme.
+
+Expected /start-test/ page content:
+[ruhrpott_home_events]
+[ruhrpott_home_food]
+[ruhrpott_home_highlights]
+[ruhrpott_home_kultur]

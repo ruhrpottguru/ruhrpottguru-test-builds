@@ -1,0 +1,15 @@
+RUHRPOTT GURU – HOME MOBILE RECOVERY V45
+
+Root cause correction after V43/V44:
+- V43 disabled browser direct Overpass recovery whenever the WordPress proxy failed.
+- The mobile screenshots show this made OSM categories fail quickly while ET4 Events still completed.
+- V44 fixed duplicate boot cycles but retained the V43 transport regression.
+
+V45:
+- restores direct Overpass recovery after WordPress proxy failure
+- removes private.coffee from browser mirror list; uses overpass-api.de then lz4.overpass-api.de
+- bounds proxy wait to 12s and direct mirror wait to 10s
+- keeps V44 single-boot / one snapshot request per category
+- staggers Food/Highlights/Culture by 0/350/700ms to avoid a three-request cold burst while keeping requests overlapping
+- keeps GPS-first behavior
+- [ruhrpott_home_categories] unchanged

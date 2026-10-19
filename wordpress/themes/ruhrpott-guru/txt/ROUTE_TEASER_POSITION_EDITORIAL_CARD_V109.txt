@@ -1,0 +1,5 @@
+RuhrpottGuru v109
+
+- Route der Industriekultur Teaser direkt nach Events.
+- Teaser auf Mobil und Desktop flacher.
+- Gutenberg Neueste-Beiträge-Blöcke erhalten Card-Styling, sobald Beitragsbild anzeigen aktiviert ist.

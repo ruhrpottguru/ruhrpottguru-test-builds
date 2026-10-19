@@ -1,0 +1,6 @@
+RuhrpottGuru Theme v201 — Food location actions
+
+- Speisekarte and Reservieren moved into the Adresse & Ort field.
+- Actions render directly below address/city/distance.
+- The duplicate action row at the bottom of the detail overlay was removed.
+- Food only; other categories unchanged.

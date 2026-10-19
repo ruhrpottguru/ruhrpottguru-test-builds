@@ -1,0 +1,53 @@
+RuhrpottGuru Places Backend 1.10.80 – Places-Datenqualität End-to-End
+Stand: 2026-09-16
+
+Ziel
+- Punkt 4 der Masterliste systematisch über reale Datenpfade absichern: Kultur, Highlights, Aktivitäten, Altbestand/Lifecycle.
+- Keine ortsspezifischen Schnellfixes, sondern wiederverwendbare Besucher- und Reconcile-Regeln.
+
+Kultur
+- Neuer konservativer Besucher-Resolver für den öffentlichen Kulturfeed.
+- Museen, Theater, Kinos, Galerien, Kultur-/Kunstzentren, Bibliotheken, Musikorte, Nachtclubs und qualifizierte öffentliche Kunst bleiben sichtbar.
+- community_centre/events_venue werden nicht mehr blind als Kultur ausgespielt.
+- Vereinsheime, Sportvereine, Gemeinde-/Pfarrzentren, Jugendtreffs/-zentren, THW-/Kleingarten-/Sport-Kontexte ohne eigenständiges Kultursignal werden unterdrückt.
+- Distinktive lokale Kulturorte mit eigener Website/Autorität/Kultursignal bleiben möglich; reine generische Miet-/Festsäle werden nicht allein wegen events_venue zugelassen.
+- Stolperstein-Hygiene bleibt nach der DB-Abfrage und kann die Kulturabfrage nicht leeren.
+
+Highlights
+- City Highlight Intelligence bleibt maßgeblich.
+- Historische/geschützte Gebäude mit heutiger Primärnutzung Hotel, Pflege/Soziales, Gesundheit, Bildung, Büro oder Shop werden nicht allein durch Heritage-/Wikidata-Signale zum Ausflugsziel.
+- Explizite tourism=attraction-Signale und offizielle Route-Industriekultur-Zuordnungen bleiben autoritativ.
+
+Aktivitäten
+- Bestehende Activity Experience Intelligence bleibt erhalten: lokale Bäder möglich; geschlossene/inaktive Objekte raus; reine Trainings-/Mitgliedschafts-Infrastruktur raus; Besucherangebote wie Verleih/Tour/Kurs bleiben.
+- Keine Änderung an der bewährten Wasser-/Erlebnis-/Distanzlogik.
+
+Altbestand / OSM-Core
+- Bei derselben primären OSM-Identität gewinnt künftig Aktualität vor Datenfülle: entfernte Tags/Websites/Kategoriesignale dürfen nicht wegen sinkendem quality_score im alten Core hängen bleiben.
+- Nach einem vollständig erfolgreichen Kommunen-Refresh wird eine verschwundene primäre OSM-Quelle auf eine aktuell im selben Snapshot gesehene relevante OSM-Quelle desselben kanonischen Places umgehängt.
+- source_missing wird weiterhin nur nach vollständig erfolgreichem Kommunen-Snapshot gesetzt. Partielle/fehlgeschlagene Syncs bleiben nicht-destruktiv.
+- Einmalige 53-Kommunen-Refresh-Welle wird serverseitig über den bestehenden 15-Minuten-Worker angestoßen; kein offener Browser-Tab nötig.
+
+Admin-QS
+- RP Redaktion -> Places enthält „Places-Finalcheck laden“.
+- Mehrstadt-Abnahme: Essen, Dortmund, Duisburg, Bochum, Oberhausen, Wesel; je Highlights/Kultur/Aktivitäten mit den echten Besucher-Resolvern.
+- Zusätzlich: Fortschritt der 1.10.80-Altbestandswelle, stale Primary Sources in bereits aktualisierten Kommunen und aktive Lifecycle-Widersprüche.
+
+Regression
+- Event-/ET4-Logik unverändert.
+- Öffnungszeiten-Worker/-Queue unverändert.
+- Bildverfügbarkeit bleibt von Place-/Event-Sichtbarkeit getrennt.
+- Kein Theme-Update erforderlich.
+
+Zusätzliche Core-Härtung vor Finalbuild
+- Lifecycle- und Kategoriehoheit folgen nun derselben OSM-Quelle, die den kanonischen Core besitzt.
+- Eine niedrigwertigere/inaktive Sekundärrepräsentation desselben Orts darf einen aktiven Primary Place weder deaktivieren noch umklassifizieren.
+- Recovery bleibt möglich: Ein source_missing/source-inactive Place kann über eine aktuell wieder vorhandene aktive OSM-Repräsentation reaktiviert und auf diese Quelle umgehängt werden.
+- OSM-Link-/Schedule-Cleanup wird nur von der Quelle ausgeführt, die den Core übernimmt; dadurch kann eine schwächere Dublette keine Website oder Öffnungszeiten der Primary-Quelle entfernen.
+
+Finalbuild-Verifikation
+- PHP-Syntax: PASS.
+- Assets/bootstrap.js Syntax: PASS.
+- Neue Resolver-Fixtures: PASS (Kultur, Highlight-Nutzungs-Gate, OSM-Core-Ownership).
+- Kritische Event-/Öffnungszeiten-Funktionen gegen 1.10.79 verglichen: 299 geprüft, 0 verändert.
+- Keine Debug-Ausgaben im Produktionsplugin.

@@ -1,0 +1,17 @@
+RuhrpottGuru Places Backend 1.10.136 – Outdoor Coverage Phase-A Split
+
+GEÄNDERT
+- Nur der read-only 53-Kommunen-Coverage-Runner.
+- Der bisher kombinierte Phase-A-Request wird in drei semantisch identische, kleinere Requests geteilt: Boundary/Area, Hundewiesen, Naturkandidaten.
+- Der bereits vorhandene Provider-Affinity-Mechanismus wird zwischen diesen Teilrequests weitergereicht.
+- Query-Version: outdoor-coverage-1.2.
+
+NICHT GEÄNDERT
+- Definitionen/Filter für Hundewiesen und Naturkandidaten.
+- Phase B (Hunderegel-Evidence und Trailheads).
+- AGS/admin_level Boundary-Regel.
+- Dog Policy, Outdoor-Suche, Ranking, Entries.
+- Places, Events, Medien, Worker, Reprocessing, Theme/Frontend.
+
+VERIFIZIERTER AUSLÖSER
+- Essen 05113000/admin_level 6: kombinierte Phase A scheiterte unter aktueller Overpass-Last; dieselben Teilabfragen lieferten einzeln Boundary=1, Area=1, dogAreas=35, natureCandidates=144.

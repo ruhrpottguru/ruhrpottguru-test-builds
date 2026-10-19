@@ -1,0 +1,10 @@
+RuhrpottGuru Places Backend v1.5.6
+
+- Neuer WordPress-Hauptpunkt „RP Redaktion“ mit Unterpunkten „Daten“ und „Medien“.
+- Daten-Inbox: nur offene Datenfelder, feldweise Übernehmen/Ablehnen, Alt → Neu, Verknüpfung zu Bildern derselben Einsendung.
+- Medien-Inbox: nur offene neue Bilder; reine Bild-, reine Daten- und kombinierte Einsendungen werden automatisch getrennt dargestellt.
+- Bestandsmedien werden nicht mehr ungefiltert geladen. Erst nach Filter/Suche erscheinen maximal 50 Treffer.
+- Bestandsfilter: Kategorie, Herkunft/Quelle, Status, Suche nach Location/Urheber/Copyright/IDs.
+- Bestehende Deaktivieren/Löschen/Audit-Logik bleibt erhalten.
+- Community-Freigabe wurde aus Werkzeuge → RuhrpottGuru Places entfernt.
+- Keine Frontend-Ranking-/Standort-/Radius-/Importlogik geändert.

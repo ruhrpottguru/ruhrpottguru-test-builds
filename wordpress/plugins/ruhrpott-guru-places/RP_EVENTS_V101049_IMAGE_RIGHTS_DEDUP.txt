@@ -1,0 +1,66 @@
+RUHRPOTTGURU EVENTS 1.10.49 – EVENTBILD-RECHTEPRÜFUNG / DUBLETTEN
+==================================================================
+
+ZIEL
+----
+Dasselbe offizielle Eventbild soll in RP Redaktion nur einmal geprüft werden,
+auch wenn es bei vielen Event-Terminen oder Datensätzen vorkommt.
+
+UMSETZUNG
+---------
+1. Rechteprüfung ist bildzentriert:
+   - gleicher stabilisierter Quell-URL-Schlüssel => eine Arbeitsposition
+   - zusätzlich SHA-256 über die vollständigen Bildbytes
+   - gleicher SHA-256 funktioniert auch bei unterschiedlichen URLs
+
+2. Sicherheitsregeln:
+   - nur Tracking-Parameter (utm_*, fbclid, gclid, mc_cid, mc_eid) werden aus
+     der URL-Identität entfernt
+   - echte Bild-/Transformationsparameter bleiben Bestandteil der URL
+   - sobald dieselbe normalisierte URL unterschiedliche bekannte SHA-256 hat,
+     wird URL-Identität allein nicht mehr zur Zusammenführung verwendet
+   - ähnlich aussehende Bilder werden nicht per perceptual hash zusammengelegt
+
+3. Rechteentscheidung:
+   - Freigeben / Unklar / Verwerfen gilt für alle aktuell identischen Kandidaten
+   - beim Freigeben wird das Bild genau einmal lokalisiert
+   - weitere identische Verwendungen übernehmen lokalen Pfad + Rechte-Metadaten
+   - nach dem lokalen Download wird der tatsächliche lokale SHA-256 erneut als
+     maßgebliche Identität verwendet, damit eine zwischenzeitlich geänderte URL
+     keine falsche Freigabe auf alte/neue Bytes übertragen kann
+
+4. Historische Entscheidungen:
+   - bestehende official-approved-Zeilen übernehmen ihren bereits vorhandenen
+     local_content_hash ohne neuen Download als source_content_hash
+   - der Backfill hasht Kandidaten/alte Ablehnungen in kleinen Batches
+   - dadurch können frühere Freigaben/Ablehnungen bei exakt gleichem Inhalt
+     automatisch auf weitere Kandidaten übertragen werden
+   - nicht erreichbare Quellen werden bis zu drei Durchläufe erneut versucht
+
+5. Admin-UX:
+   - Rechteprüfungs-Liste zeigt eindeutige Bilder + Gesamtzahl Verwendungen
+   - jedes Bild erscheint nur einmal
+   - pro Bild wird die Verwendungszahl angezeigt
+   - Matching zeigt URL / SHA-256 / einzeln
+   - Detailansicht weist auf Mehrfachverwendung und gemeinsame Entscheidung hin
+   - zusätzlicher Statusblock "Bild-Dubletten-Scan v1.10.49"
+
+SCHEMA
+------
+rg_event_media:
+- source_content_hash CHAR(64) NOT NULL DEFAULT ''
+- Index source_content_hash
+Schema-Version: 1.10.15
+
+VERIFIKATION VOR BUILD
+----------------------
+- PHP-Syntaxprüfung: php -l -> keine Syntaxfehler
+- Direkt-Test der echten privaten Matching-Methoden mit WordPress-Stubs:
+  * Tracking-URL-Normalisierung korrekt
+  * gleiche normalisierte URL ohne Hash -> zusammengeführt
+  * gleicher SHA-256 über unterschiedliche URLs -> zusammengeführt
+  * ein bekannter Hash + gleiche URL ohne Hash -> zusammengeführt
+  * unterschiedliche bekannte Hashes unter derselben URL -> NICHT zusammengeführt
+  * unklare Rechte in einer Gruppe bleiben als Gruppenstatus sichtbar
+- Keine Theme-Datei geändert.
+- Bestehende ET4-/destination.one-Bildpipeline und Besucher-Auslieferung nicht umgebaut.

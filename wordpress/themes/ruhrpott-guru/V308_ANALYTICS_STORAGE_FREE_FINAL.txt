@@ -1,0 +1,31 @@
+RuhrpottGuru Theme v308.0 – Speicherfreies Analytics / Marketing
+
+Aufbauend auf v307.0. Keine Änderungen an Places-, Event-, Detailseiten- oder Filterlogik.
+
+Funktionale Änderung
+- Analytics verwendet weder sessionStorage noch localStorage.
+- Visit = neuer Einstieg in RuhrpottGuru.
+- Interne Navigation erzeugt keinen neuen Visit.
+- Reload erzeugt keinen neuen Visit.
+- Browser Zurück/Vorwärts erzeugt keinen neuen Visit.
+- Jeder echte Seitenaufruf bleibt eine Page Impression.
+- Marketing-Herkunft wird nur aus dem aktuellen Dokument/Einstieg abgeleitet und nicht browserseitig fortgeschrieben.
+- Ohne belastbare Herkunft wird bei Reload/Zurück/Vorwärts keine künstliche Direct-Zuordnung erzeugt.
+- Analytics-Admin öffnet standardmäßig mit Zeitraum „Heute“.
+- 7/30/90/365 Tage bleiben manuell auswählbar.
+- Marketing-Tracking-Admin behält seinen bisherigen Standardzeitraum von 30 Tagen.
+- Die bisherige 30-Minuten-Sessionlogik entfällt.
+
+Validierung
+- 7 Analytics-Szenarien: Direct-Einstieg, Google-Einstieg, interne Navigation, Reload,
+  Zurück/Vorwärts, UTM-Einstieg und interner UTM-Aufruf.
+- In allen Szenarien 0 Zugriffe auf sessionStorage/localStorage.
+- Direct/Google/UTM-Einstieg: genau 1 visit_start + 1 page_view.
+- Interne Navigation/Reload/Zurück-Vorwärts: 0 visit_start + 1 page_view.
+- Reload ohne belastbare Quelle wird nicht fälschlich als Direct-Marketingtraffic klassifiziert.
+- 154 bestehende Detailchip-Regressionsassertions erfolgreich.
+- JavaScript-Syntaxprüfung der React-Quelldateien erfolgreich.
+- PHP-Syntaxprüfung aller 12 PHP-Dateien erfolgreich.
+- Admin-Zeitraumprüfung: Analytics=Heute, Marketing=30 Tage.
+
+Kein Backend-/DB-Schema-Update erforderlich.

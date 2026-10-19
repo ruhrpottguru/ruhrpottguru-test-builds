@@ -1,0 +1,18 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert'),path=require('path');
+const dir=path.join(__dirname,'../src/react-app/');
+const document={getElementById:()=>null};
+const window={wp:{element:{createElement:(type,props,...children)=>({type,props:props||{},children}),Fragment:'fragment'}},ruhrpottSettings:{homeUrl:'https://www.ruhrpottguru.de/',root:'https://www.ruhrpottguru.de/wp-json/'},location:{origin:'https://www.ruhrpottguru.de'},localStorage:{getItem:()=>null,setItem:()=>{}},sessionStorage:{getItem:()=>null,setItem:()=>{}}};
+const context=vm.createContext({window,document,URL,URLSearchParams,Date,Intl,console,Set,Map,setTimeout,clearTimeout,navigator:{},fetch:()=>{throw Error('Unexpected HTTP')}});
+for(const file of ['runtime.js','api.js'])vm.runInContext(fs.readFileSync(dir+file,'utf8'),context);
+const RPG=window.RPGReact; let n=0; const ok=(v,m)=>{assert(v,m);n++;};
+const item=RPG.normalizeEvent({id:'wesel-city-1',title:'Stadtweites Event',city:'Wesel',rpg_geo_scope:'city',rpg_event_db:{cityScope:true},address:{city:'Wesel'},start:'2027-08-12T17:00:00+02:00'}, {lat:51.66,lng:6.62,city:'Wesel'});
+ok(item.cityScope===true,'city-scoped flag survives event normalization');
+ok(item.coords===null,'city-scoped event has no fabricated point coordinate');
+ok(item.distanceKm===null,'city-scoped event has no fabricated distance');
+const views=fs.readFileSync(dir+'views.js','utf8');
+ok(views.includes('Number.isFinite(x.distanceKm)||x.cityScope===true'),'event pool keeps city-scoped items');
+ok(views.includes('x.cityScope===true||x.distanceKm<=radius'),'radius eligibility keeps city-scoped items returned for selected city');
+const components=fs.readFileSync(dir+'components.js','utf8');
+ok(components.includes("split(/\\n{2,}/)"),'detail description splits semantic paragraph boundaries');
+ok(components.includes("whiteSpace:'pre-line'"),'line breaks inside a paragraph stay readable');
+console.log('PASS '+n+' Wesel city-scope/description assertions');

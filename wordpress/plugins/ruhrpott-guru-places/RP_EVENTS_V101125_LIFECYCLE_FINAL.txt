@@ -1,0 +1,110 @@
+RUHRPOTTGURU – EVENTS 1.10.125 – SOURCE LIFECYCLE FINAL
+Generated: 2026-09-25
+Baseline: Places Backend 1.10.124
+
+SCOPE
+- Completes the generic ET4/ODF + destination.one missing/cancellation lifecycle.
+- Leaves event sorting, radius, frontend event UI, media hierarchy, crop identity, tier cadence and global import lock unchanged.
+
+SCHEMA 1.10.22
+- source_status: active | missing | cancelled
+- missing_since
+- missing_count
+- last_source_run
+- last_missing_run
+- Existing cancelled rows are backfilled to source_status=cancelled.
+
+POLICY
+- A source hit resets missing evidence and immediately reactivates source-missing rows.
+- A missing event is counted ONLY after a fully successful source wave.
+- First complete-wave miss: source_status=missing, event remains public/active.
+- Same run token cannot increment missing_count twice.
+- Public deactivation requires BOTH:
+  1) at least two distinct completed source waves with a miss, and
+  2) at least 24 hours since missing_since.
+- Deactivation uses status=inactive; it is not a physical delete.
+- Explicit source cancellations are status=cancelled immediately, including source objects that emit no occurrence.
+- Failed/incomplete ET4 pages and supplemental waves with failed cities do not reconcile Missing state.
+- A complete destination.one 53-city wave no longer hard-deletes missing events; it uses the same lifecycle.
+- Existing natural expiry remains: ended active events -> expired; physical cleanup remains 10 days after natural end.
+
+CANCELLATION INPUTS
+- Explicit boolean flags including cancelled/canceled/abgesagt variants.
+- Explicit scalar status fields including schema.org EventCancelled/EventCanceled and common cancelled/abgesagt values.
+- Cancellation marker at the beginning of an event title.
+- Generic description/body text is intentionally NOT used for cancellation, avoiding false positives such as cancellation-policy wording.
+
+FUNCTIONAL FIXTURES
+Lifecycle core (actual private plugin methods via Reflection):
+PASS seen-active-stays-active
+PASS first-miss-counts-only
+PASS same-run-idempotent
+PASS second-miss-under-24h-not-hidden
+PASS second-distinct-miss-after-24h-inactivates
+PASS reappearance-reactivates
+PASS cancelled-never-becomes-missing
+PASS schema-eventcancelled
+PASS schema-eventcanceled
+PASS structured-cancelled
+PASS boolean-cancelled
+PASS title-abgesagt
+PASS body-mention-does-not-false-cancel
+PASS master-token
+PASS tier-token
+PASS supplemental-token
+TOTAL 16 / FAIL 0
+
+DB RECONCILER FIXTURE (actual plugin reconciler with fake wpdb):
+PASS scoped-4
+PASS seen-2
+PASS missing-2
+PASS reactivated-1
+PASS inactivated-1
+PASS seen-active-unchanged
+PASS first-miss-remains-public
+PASS old-second-miss-inactive
+PASS seen-inactive-reactivated
+PASS query-status-scope
+PASS rerun-idempotent-row2
+PASS rerun-idempotent-row3
+PASS rerun-skips-missing
+PASS empty-wave-harmless
+PASS missing-token-refused
+TOTAL 15 / FAIL 0
+
+EXPLICIT-CANCELLATION DB FIXTURE:
+PASS two-unique-cancellations
+PASS two-update-statements
+PASS updates-both-source-aliases
+PASS run-token-written
+PASS normal-body-not-cancelled
+PASS no-source-refused
+TOTAL 6 / FAIL 0
+
+STATIC INTEGRATION / REGRESSION
+PASS version_header
+PASS version_const
+PASS schema_version
+PASS schema lifecycle fields/indexes
+PASS upsert resets missing evidence
+PASS upsert tracks authoritative run token
+PASS explicit cancellation writes cancelled state
+PASS schema.org cancellation detection
+PASS tier errors return before lifecycle reconciliation
+PASS tier lifecycle runs only in done branch
+PASS master errors return before lifecycle reconciliation
+PASS master lifecycle runs only in done branch
+PASS supplemental failed wave skips lifecycle
+PASS supplemental disappearance has no hard-delete path
+PASS natural 10-day cleanup retained
+PASS public status=active gate retained
+PASS admin inactive label present
+PASS stale admin text about automatic destination.one deletion removed
+
+SYNTAX / PACKAGE
+- All PHP files: php -l PASS
+- Source comparison: only ruhrpott-guru-places.php changed from 1.10.124 plus this verification marker.
+- ZIP integrity and SHA256 checked after packaging.
+
+LIVE NOTE
+This release was functionally fixture-tested against the actual plugin methods and statically verified across the worker completion/error branches. A real production source disappearance/cancellation was not fabricated against the live ET4 account; live evidence can be observed naturally after installation without a destructive test.

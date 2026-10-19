@@ -1,0 +1,9 @@
+RuhrpottGuru v142 – Büdchen user-location marker
+
+- On initial page load the selected/GPS location is exactly in the centre of the map.
+- The blue location marker is anchored to the real location coordinates.
+- After the user pans the map, the marker moves geographically with the map and
+  no longer falsely remains fixed at the viewport centre.
+- Reset returns the actual location marker to the exact map centre.
+- Initial street-name zoom from v141 remains unchanged.
+- Filters, deferred mobile search, two-finger gestures and radius logic unchanged.

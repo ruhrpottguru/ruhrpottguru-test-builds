@@ -1,0 +1,25 @@
+RuhrpottGuru Theme v296 — Today appointments before long-running events
+
+Scope
+- Preserve the selected-radius eligibility boundary and the established date-first Event ordering.
+- Refine only the old "running" urgency bucket so concrete appointments today are not hidden behind long-running events.
+
+Event ordering inside the selected radius
+1. Currently running same-day appointments.
+2. Later-today appointments, chronological by start time.
+3. Long-running/ongoing events, soonest-ending first.
+4. Tomorrow and later events, chronological by start time.
+5. Distance is only a tie-breaker inside the same bucket/time.
+
+Unchanged
+- Radius eligibility and persisted radius.
+- Home 4-event 5->10 km fallback.
+- Event recurrence/occurrence normalization.
+- ET4/ODF import and event media.
+- Event image rights/crop/media fallbacks.
+- Event "Mehr davon" facets from v295.
+- Calendar/date presets, search, pagination and dedupe.
+- Food, Highlights, Kultur and Aktivitäten sorting/tag behavior.
+
+Reason
+- Long-running exhibitions/fairs can be active for many days. Returning visitors should first see today's concrete appointments with times, rather than repeatedly seeing the same duration events at the top.

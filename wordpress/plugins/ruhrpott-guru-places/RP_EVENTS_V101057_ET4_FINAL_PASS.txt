@@ -1,0 +1,6 @@
+RuhrpottGuru Places Backend 1.10.57 – ET4 Event Final Pass
+
+- Direct/share event payload now uses the same exact global_id -> local static ET4 media map as the normal visitor endpoint.
+- Provider/destination.one source_url remains internal provenance in direct-share payloads.
+- rpg_event_details now contains canonicalUrl pointing to the RuhrpottGuru event share route.
+- No local tourism/marketing source is enabled; ET4/Open Data Finder remains the event baseline.

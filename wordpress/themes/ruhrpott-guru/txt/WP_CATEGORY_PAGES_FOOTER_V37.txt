@@ -1,0 +1,39 @@
+Ruhrpott Guru V37 – WordPress category pages + WordPress footer navigation
+
+BASE
+- Built directly from V36 Share Icon.
+- Scene classification, OSM loader, event loader, radius merge and sharing logic are unchanged.
+
+CATEGORY PAGES
+Use one category shortcode as the insertion point on a normal WordPress page:
+- Events:          [ruhrpott_veranstaltungen]
+- Food & Drinks:   [ruhrpott_gastronomie]
+- Highlights:      [ruhrpott_highlights]
+- Kultur & Szene:  [ruhrpott_kultur]
+
+V37 behavior:
+- Gutenberg/WordPress content above the shortcode remains above the RuhrpottGuru category view.
+- Gutenberg/WordPress content below the shortcode remains below the category view.
+- The global RuhrpottGuru header stays above all page content.
+- The global RuhrpottGuru footer stays below all page content.
+- The shortcode category is authoritative even when the WordPress page slug is e.g. /events/ or /food-drinks/.
+- Gutenberg shortcode-block wrapper comments are removed only around the insertion point.
+
+FOOTER NAVIGATION
+- WordPress menu location: "Fußzeile (Footer)".
+- The React footer reads category links from the WordPress menu assigned to this location.
+- Category identity is derived first from the shortcode on the linked WordPress page.
+- Conservative slug/title fallback exists for Events, Food & Drinks, Highlights, Kultur & Szene.
+- WordPress menu title/order/URL control the visible footer category navigation.
+- RuhrpottGuru adds the familiar category emoji automatically.
+- If no recognized WordPress footer category menu exists, the previous four hard-coded category buttons remain as a safe fallback.
+
+TESTS
+- PHP lint: PASS
+- JavaScript syntax: PASS
+- Gutenberg shortcode split fixture: PASS
+- Scene classification segment unchanged from V36: PASS
+- OSM provider segment unchanged from V36: PASS
+- Category loader segment unchanged from V36: PASS
+- Spatial radius merge segment unchanged from V36: PASS
+- Share/deeplink segment unchanged from V36: PASS

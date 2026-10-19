@@ -1,0 +1,18 @@
+RuhrpottGuru Places Backend 1.10.52
+
+Ziel
+- Vorbereitung der skalierbaren Event-Coverage fuer alle 53 Kommunen, ohne vor der realen Wesel-Pilot-Auswertung Auto-Import oder Auto-Merge live zu schalten.
+
+Aenderungen
+1. Zentrale 53-Staedte-Quellenmatrix auf Basis der bereits gepflegten Kommunenliste.
+2. ET4 / Open Data Finder bleibt fuer jede Kommune die Baseline.
+3. Wesel / weseltickets.de bleibt der einzige aktive lokale Pilot; alle anderen lokalen Quellenprofile sind bewusst noch nicht freigeschaltet.
+4. Confidence-Policy ist zentral definiert: 90-100 Auto-Kandidat, 75-89 Audit-Kandidat, <=74 Review. Die Policy ist in 1.10.52 technisch noch disabled/read-only.
+5. Feldprioritaeten fuer spaeteres Merge sind zentral definiert: ET4/ODF-Bildprioritaet, lokale offizielle Texte nur qualitaetsgesichert, relevante Zeitkonflikte niemals still ueberschreiben.
+6. Waiting-Status des Eventbild-Fallbacks blockiert Coverage nicht mehr faelschlich. Nur wirklich running zaehlt dort als aktiver externer Worker.
+7. Jeder Coverage-Kandidat speichert bereits die spaetere proposed_action im Audit-JSON, ohne einen Schreibpfad in die Live-Events zu aktivieren.
+
+Sicherheitsentscheidung
+- Keine automatische Veroeffentlichung in 1.10.52.
+- Keine neuen lokalen Quellen fuer 52 Staedte blind aktiviert.
+- Erst reale Wesel-Auswertung, dann Freigabe der Auto-Schwellen und Ausbau der Quellenprofile.

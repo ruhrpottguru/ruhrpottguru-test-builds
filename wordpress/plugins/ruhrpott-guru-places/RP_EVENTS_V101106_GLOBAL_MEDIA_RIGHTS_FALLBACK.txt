@@ -1,0 +1,9 @@
+RuhrpottGuru Places Backend 1.10.106 – Global Event Media Rights + Fallback
+
+- No source-specific Selm media branch.
+- Every DB-backed Event strips raw media payload fields before visitor rendering.
+- Visitor media can only be reattached from the established localized/approved hierarchy: ET4/ODF, editorial/official approved, Event-Ort (open-licensed Commons), Pexels Symbolfoto.
+- Direct/share Event payloads obey the same rule.
+- Temporary ET4-only auxiliary fallback pause is lifted globally.
+- Previously paused fallback worker resumes once via v1.10.106 migration flag, retaining existing import/worker collision gates.
+- Official website images remain candidates until explicit rights approval; they are not visitor-live automatically.

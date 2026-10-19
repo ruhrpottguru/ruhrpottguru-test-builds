@@ -1,0 +1,10 @@
+RuhrpottGuru Places Backend 1.10.9 – Community-Beiträge
+
+- Neuer CPT rpg_community für redaktionell freizugebende Nutzerbeiträge zu bestehenden Places.
+- Öffentliche Einreichung ohne Registrierung; neue Beiträge landen immer im Status pending.
+- Verknüpfung per _rpg_place_id, private E-Mail-Metadaten, Nickname/Instagram, Zustimmungs-Version und Zeitstempel.
+- Optional bis zu 5 Bilder; automatische Dateinamen und Herkunfts-Metadaten.
+- Honeypot, Origin-Prüfung, Größenlimits und kurzlebiges Rate-Limit.
+- REST-Endpunkte für Einreichung und ausschließlich veröffentlichte Community-Beiträge.
+- Redaktionshinweis per E-Mail; Moderation über WordPress/RP Redaktion → Community.
+- Bestehende Öffnungszeiten- und Place-Contribution-Logik unverändert.

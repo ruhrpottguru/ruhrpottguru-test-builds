@@ -1,0 +1,10 @@
+SUPERSEDED BY v261: The image-only visibility rule below was incorrect. v261 restores the product rule that every event stays visible; ET4 images only have priority in image selection.
+
+RuhrpottGuru Theme v260 – ET4 Events End-to-End
+
+- Events in visitor lists require native localized ET4 media (source et4-global-id-local).
+- No generated SVG event placeholder is used for image-less events.
+- Event media diversity / Pexels display substitution is disabled for the ET4 final scope.
+- Same-global_id occurrences returned by Backend 1.10.74 are shown as further selectable dates in the detail overlay.
+- Share/calendar continue to operate on the selected concrete event occurrence.
+- No opening-hours UI or worker logic changed.

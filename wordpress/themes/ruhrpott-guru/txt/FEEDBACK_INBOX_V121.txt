@@ -1,0 +1,12 @@
+RuhrpottGuru v121 – Persistent Feedback Inbox
+
+- Builds on v120.
+- Adds a permanent WordPress admin menu "RPG Feedback".
+- Feedback can be filtered by: All, New, In Progress, Done.
+- Search across message, page and category.
+- Actions: mark new, in progress, done, or delete.
+- Menu badge shows number of new feedback items.
+- Existing feedback table is upgraded safely with status + resolved_at fields.
+- The feedback system remains usable after the beta; only the frontend wording/beta badge may later change.
+- 12-month automatic deletion from v120 remains active.
+- No IP/user identifier is added to feedback records.

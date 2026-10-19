@@ -1,0 +1,57 @@
+RuhrpottGuru Places Backend 1.10.86 – Activities Intelligence V2 Dark Launch
+Generated: 2026-09-17
+
+SCOPE
+- Additive Activities V2 diagnostic resolver only.
+- Public Activities visitor feed/ranking remains unchanged; base includes the 1.10.85 Event-Radius-Monotonie fix.
+- No schema migration.
+- No Theme changes.
+- No Event, IGA, Opening Hours, Food, Highlights or Culture logic changes.
+- Global Skate search alias hardened against retail-only rows.
+
+V2 MODEL
+- Admission: rein / bedingt / raus
+- Experience role: core / add_on
+- Capabilities: solo/friends/date/group/spontaneous/indoor/outdoor/etc.
+- Static scores: access / experience / destination / spontaneity
+- Local relevance deliberately remains null in Phase 2A; radial 5/15-km calculation is Phase 2B after real-data audit.
+
+REGRESSION FIXTURES
+PASS Skateplatz Gladbeck-style: leisure=pitch + sport=skateboard + public -> REIN / skatepark
+PASS Club Mumbai-style: shop=sports + sport=skateboard -> RAUS / retail_only
+PASS public Basketball court -> REIN / basketball
+PASS private Vereinsfußballplatz -> RAUS
+PASS public informal Bolzplatz -> REIN
+PASS Hallenbad Hünxe-style -> REIN / swimming
+PASS private equestrian facility -> RAUS
+PASS guest-oriented Reiterhof -> REIN / equestrian
+PASS Freibad + Beachvolleyball -> swimming CORE + beach_volleyball ADD_ON
+
+PUBLIC-PATH PARITY
+UNCHANGED activity_experience_profile
+UNCHANGED rank_activity_rows
+UNCHANGED nearby_activity_experience_rows
+UNCHANGED register_rest_routes
+UNCHANGED event_upsert_from_feed_item
+
+ADMIN DIAGNOSTIC
+Werkzeuge / RuhrpottGuru Places Backend now shows:
+- V2 checked count
+- REIN / BEDINGT / RAUS counts
+- municipalities with admitted activity candidates
+- primary Experience distribution
+- edge-case sample (skate, basketball, bolz, pools, riding, beach/volleyball)
+
+SEARCH GUARD
+Skate synonym search still resolves Skatepark/Skateplatz/Skaterplatz/Skateanlage/Skateranlage and leisure=skate_park.
+A raw sport=skateboard/skateboarding/bmx signal only expands the alias when it is tied to an activity context and no shop=* is present.
+
+VALIDATION
+PHP syntax: PASS
+Fixture harness: PASS
+Public function parity hashes: PASS
+
+MERGE BASE
+- Built on RuhrpottGuru Places Backend 1.10.85 Event-Radius-Monotonie FINAL.
+- Event radius monotonicity fix preserved unchanged.
+- Theme v264 remains unchanged.

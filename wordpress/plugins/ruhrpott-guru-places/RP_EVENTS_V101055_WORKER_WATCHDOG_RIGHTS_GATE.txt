@@ -1,0 +1,46 @@
+RuhrpottGuru Events v1.10.55 — Worker-Watchdog + Rechte-Gate
+
+Ausgangslage
+- Die Worker-Uebersicht zeigte ueber mehrere Tage wechselnde, aber dauerhaft aktive Blocker.
+- Die Ursache war nicht ein einzelner Coverage-Fehler, sondern eine Queue-Architektur, in der mehrere externe Worker unabhaengig liefen bzw. nach einem harten HTTP/PHP-Abbruch im Status "running" verbleiben konnten.
+- Der lokale Wesel-Coverage-Pilot war zudem noch auf weseltickets.de verdrahtet, obwohl die Nutzungsfreigabe nicht dokumentiert ist.
+
+Konkrete Korrekturen
+1. destination.one / 53-Staedte-Zusatzfeed
+   - Safety-Cron wird VOR jedem externen Stadtabruf gesetzt.
+   - Stadtversuche werden VOR dem Request persistiert.
+   - Nach drei erfolglosen/hart abgebrochenen Versuchen wird die einzelne Stadt als Fehler markiert und die Queue laeuft mit der naechsten Stadt weiter.
+   - Ein 15-Minuten-Watchdog repariert fehlende/ueberfaellige Cron-Hooks.
+
+2. Bild-Dubletten SHA-256
+   - Pro Cron-Request wird nur noch ein externes Bild verarbeitet.
+   - Der Cursor wird VOR dem Netzwerkabruf gespeichert. Ein PHP-/HTTP-Abbruch kann deshalb nicht mehr dauerhaft dasselbe Bild festhalten.
+   - Fehlende/ueberfaellige Hooks und stale Heartbeats werden automatisch repariert.
+   - Maximal drei Paesse; danach endet der Lauf kontrolliert als finished_with_failures, falls einzelne Quellen nicht fingerprintbar sind.
+
+3. Eventbild-Fallback
+   - Laeuft nicht mehr parallel zum 53-Staedte-Zusatzfeed.
+   - Status waiting_supplemental ist passiv und blockiert nicht als eigener laufender Schwerlast-Worker.
+
+4. Lokale Coverage / Rechte
+   - Automatischer Abruf von weseltickets.de ist technisch deaktiviert.
+   - Selbst ein historisch verbliebener Cron-Aufruf kann keinen weseltickets-HTTP-Abruf mehr ausloesen.
+   - Wesel Tourismus / WeselMarketing ist als vorgesehene lokale Hauptquelle eingetragen.
+   - Alle lokalen Quellen bleiben rights_pending, bis eine dokumentierte Nutzungsfreigabe oder passende Open-Data-Lizenz vorliegt.
+   - ET4 / Open Data Finder bleibt unveraendert aktiv.
+
+5. Admin-Transparenz
+   - Supplemental zeigt Fortschritt Staedte erledigt / Gesamt und letzte Stadt.
+   - SHA-256 zeigt Pass, verarbeitet, gehasht, fehlgeschlagen und offene Restmenge (sobald bekannt).
+   - Passive Wartezustaende werden nicht mehr als aktive Worker gezaehlt.
+
+Verifikation vor Auslieferung
+- PHP-Syntax aller PHP-Dateien: OK
+- Plugin-Version Header + const VERSION: 1.10.55
+- 53/53 Kommunen im Registry-Seed: OK
+- 53/53 recherchierte Quellenprofile: OK
+- weseltickets Coverage hard-disabled: OK
+- Supplemental Safety-Cron + persisted attempts: OK
+- SHA-256 pre-request cursor checkpoint + stale recovery: OK
+- Eventbild-Fallback waiting_supplemental: OK
+- ZIP-Struktur und ZIP-Integritaet werden vor Auslieferung geprueft.

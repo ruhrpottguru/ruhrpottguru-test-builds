@@ -1,0 +1,20 @@
+RuhrpottGuru Places Backend 1.10.127 — 53-Kommunen Places-Abschlussaudit
+Stand: 2026-09-25
+
+Ziel
+- Masterlisten-Punkt 3 nicht durch einen neuen Datenumbau, sondern durch eine katalogweite, reale Read-only-Abnahme abschließen.
+- Alle 53 Kommunen statt der bisherigen 6 Testzentren gemeinsam sichtbar machen.
+
+Neu unter RP Redaktion -> Places
+- Button „53-Kommunen Abschlusscheck“.
+- Pro Kommune: aktive Places gesamt, Food, Highlights, Kultur, Aktivitäten, sichtbares Ortsbild, Food-Classifier-Drift, Highlights-Visitor-Ausschlüsse/Classifier-Drift, Kultur-Visitor-Ausschlüsse/Classifier-Drift, Stolpersteine.
+- Globale Place-Medien-Inhaltsanalyse: Foto, Bild+Text, Text/Plakat, unavailable, noch nicht analysiert.
+- Actionable Samples mit direktem Link in den bestehenden Place-Editor.
+- Kompakter JSON-Diagnoseblock zum Kopieren in die Projektabnahme.
+
+Sicherheitsgrenzen
+- Rein lesend: keine DB-Schreibzugriffe durch den Audit.
+- Keine externen HTTP-/Overpass-/Wikidata-/Bild-Requests.
+- Keine Imports, Reprocessing-Läufe oder Media-Worker werden gestartet.
+- Activities V2 wird nur gezählt/Medien-Coverage ausgewiesen, nicht wieder fachlich bewertet.
+- Bestehender 6-Städte-Besuchercheck bleibt unverändert verfügbar.

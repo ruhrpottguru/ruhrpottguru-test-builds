@@ -1,0 +1,16 @@
+RuhrpottGuru Places Backend 1.10.123
+Visitor-Safe Crop Runtime
+
+ROOT CAUSE / REGRESSION BOUNDARY
+- 1.10.122 correctly fixed crop identity, but the shared canonical resolver was also used by public visitor REST paths.
+- When a media row had no persisted SHA-256, that resolver could synchronously hash a local image file during /events.
+- The event response then also called the automatic focal-point analyser for images without a manual override, which may decode/scan image bytes in the visitor request.
+- Heavy media filesystem/image work does not belong in the public event-list request and can turn a normal data request into a PHP fatal/critical response under hosting limits.
+
+1.10.123 RULES
+- Public batch crop lookup uses persisted SHA-256 only. No hash_file fallback.
+- Missing persisted hash falls back to scope+media-row identity; no URL/source-url/pHash aliasing returns.
+- Public /events crop payload returns only an already-resolved manual crop. Otherwise frontend keeps its established centered cover fallback.
+- Admin/editor may still hash a local file once when needed to establish canonical image identity.
+- Canonical 1.10.122 crop identity remains unchanged for persisted hashes and existing manual crops.
+- No event selection, radius, import, rights, visibility or REST route changes.

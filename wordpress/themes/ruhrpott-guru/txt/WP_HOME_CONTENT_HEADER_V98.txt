@@ -1,0 +1,8 @@
+RuhrpottGuru v98 – WordPress Home Content + Header cleanup
+
+- Freie Gutenberg-Inhalte der WordPress-Home werden wieder sichtbar und behalten ihre Position relativ zu den fünf Live-Kategorieblöcken.
+- Die dynamischen Shortcode-Platzhalter werden nicht doppelt gerendert.
+- Halden-Editorial bleibt unmittelbar vor Highlights, Interview unmittelbar vor Kultur, sofern passende veröffentlichte WordPress-Beiträge existieren.
+- Interview-Erkennung berücksichtigt zusätzlich die historischen Nähkästchen/Pott-Geflüster-Kategorien, verlangt aber weiterhin echtes Interview-/Gesprächs-Wording.
+- Der zusätzliche Text „RuhrpottGuru / Dein Revier. Dein Plan.“ neben dem Custom Logo ist entfernt.
+- Kein AI-Studio-Bundle reaktiviert.

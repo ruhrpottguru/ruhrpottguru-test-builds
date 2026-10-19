@@ -1,0 +1,5 @@
+V189 – RDI-Detailansichten für alle 57 Primärstandorte
+- Jede Kachel öffnet zuerst eine RuhrpottGuru-Detailansicht.
+- Auch bisherige Fallback-Karten sind klickbar und erhalten ein Detailobjekt.
+- Externer Link erscheint nur in der Detailansicht und heißt exakt: Zur offiziellen Seite ↗
+- Backend liefert die exakte RDI-Einzelseite je Standort.

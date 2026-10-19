@@ -1,0 +1,6 @@
+RuhrpottGuru v80 – Home Aktiv layout parity with Events
+
+- [ruhrpott_home_aktiv] keeps its Activities data/category semantics.
+- The Home Activities result body now uses the same horizontal swipe carousel and 4:5 overlay-card layout as Events.
+- Activities preview count is raised from 4 to 6 to match Events.
+- No changes to category pages, Places DB, GPS/location logic, footer navigation or other Home modules.

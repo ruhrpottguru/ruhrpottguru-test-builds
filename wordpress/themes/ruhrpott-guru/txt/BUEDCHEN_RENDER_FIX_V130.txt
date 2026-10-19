@@ -1,0 +1,14 @@
+RuhrpottGuru v130 – Büdchen Radar render hotfix
+
+Cause:
+The real-map component introduced in v128/v129 uses React useRef, but views.js
+did not bind/import that hook. The component therefore threw at render time and
+the Büdchen page remained blank while static surrounding output such as the OSM
+attribution could still be visible.
+
+Fix:
+- React useRef is now bound correctly.
+- Real OSM map remains.
+- place_media image support remains.
+- v129 radius invariant remains unchanged: filters only reduce the fixed result set.
+- Existing mobile/header/footer logic is otherwise unchanged.

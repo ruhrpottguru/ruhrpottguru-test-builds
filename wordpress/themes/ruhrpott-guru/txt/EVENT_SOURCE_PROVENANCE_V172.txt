@@ -1,0 +1,8 @@
+RuhrpottGuru v172 – Event-Quellen-Provenienz
+
+- Öffentlicher destination.one/Open-Data-Fallback erhält eine eigene provider_source: destination_one_open_data.
+- Der öffentliche Pool wird nicht länger fälschlich als open_data_finder/Ruhr-Tourismus-Masterquelle markiert.
+- Open Data Finder RTG bleibt open_data_finder.
+- Essen-EMG bleibt essen_emg_export.
+- Keine Änderung an Ranking, GPS, Radius oder Eventdarstellung.
+- Diese Korrektur wirkt für neu eingelesene Fallback-Daten; bestehende Altzeilen werden im Places-Backend v1.7.5 separat auditiert.

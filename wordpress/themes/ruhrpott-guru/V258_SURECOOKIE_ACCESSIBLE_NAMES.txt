@@ -1,0 +1,9 @@
+RuhrpottGuru Theme v258 — SureCookie accessible-name alignment
+
+Based on the Pluspol accessibility report for https://www.ruhrpottguru.de/?place=essen:
+- SureCookie branding link: accessible name follows the visible "Powered by SureCookie" text.
+- "Alle Akzeptieren" button: accessible name equals the visible button text.
+- "Präferenzen" button: accessible name equals the visible button text.
+- Conflicting aria-labelledby values on those identified controls are removed.
+- A MutationObserver reapplies the correction after SureCookie dynamically renders or updates the banner.
+- The existing v257 aria-hidden/focus guard and contrast improvements remain unchanged.

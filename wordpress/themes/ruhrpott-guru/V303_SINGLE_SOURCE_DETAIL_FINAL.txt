@@ -1,0 +1,7 @@
+RuhrpottGuru Theme v303.0 – Single Source Detail
+
+- Canonical /ort/ and /veranstaltung/ URLs use the exact same React DetailOverlay component as in-app browsing.
+- Direct-detail boot token is read from the root element and resolved through the existing share-item read model.
+- No duplicate detail layout is introduced. Future DetailOverlay changes automatically affect direct pages.
+- Direct X/close returns to the backend-provided overview URL.
+- No category, radius, sorting, resolver, Halloween or lifecycle logic changed.

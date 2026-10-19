@@ -1,0 +1,16 @@
+RuhrpottGuru Places Backend 1.10.38
+ET4 browser image transport – final
+
+ROOT CAUSE CLOSED
+- ET4 media discovery/reconciliation is not changed: exact ET4 global_id -> same ET4 media_objects remains authoritative.
+- Persisted rg_event_media(source=et4-global-id) stays the source of truth.
+- Visitor browsers no longer fetch the original ET4 host directly.
+- Visitor image URLs no longer depend on /wp-admin/admin-ajax.php.
+- A normal same-origin frontend request (?rg_event_image=1&media_id=...) resolves the persisted media id server-side, validates/fetches the original ET4 bytes and caches them in wp-content/uploads/rpg-event-image-cache.
+- Theme v232 can no longer bypass this transport via originalEt4Url: the public response uses source=et4-global-id-same-origin and retains the upstream URL only as upstreamEt4Url for provenance/debugging.
+
+INVARIANT
+If /wp-json/ruhrpottguru/v1/events contains a global_id that has a current active rg_event_media row with source=et4-global-id, the final response exposes one same-origin HTTPS image URL in media_objects, image, imageUrl and rpg_event_media.imageUrl. The browser never needs ET4 hotlink access.
+
+NO FUZZY FALLBACK
+No title, venue, date or foreign-source image matching is introduced.

@@ -1,0 +1,19 @@
+RuhrpottGuru Places Backend v1.10.133 – Outdoor Coverage Boundary Preflight Fix
+
+GEÄNDERT
+- Nur der admin-only Outdoor-53-Kommunen-Coverage-Runner.
+- AGS-Auflösung erfolgt nicht mehr über alle Overpass-Areas mit gleichem AGS.
+- Stattdessen: AGS + erwartetes admin_level + boundary=administrative -> exakt eine Boundary-Relation -> map_to_area -> exakt eine Area.
+- Phase-A-Vertrag zählt boundaryRelationCount, areaCount, dogAreas und natureCandidates.
+- queryVersion: outdoor-coverage-1.1.
+
+NICHT GEÄNDERT
+- Provider-Reihenfolge und Overpass-Timeouts.
+- Outdoor-Suche, Ranking, Dog Policy, Entry-Logik.
+- Places, place_media, Events, event_media.
+- Importer, Worker, Reprocessing.
+- Frontend und Theme.
+
+VERIFIZIERTER AUSLÖSER
+- Dortmund trägt den kommunalen AGS 05913000 sowohl an der Stadtgrenze (admin_level=6) als auch an mehreren Stadtbezirken (admin_level=9). area[AGS] ist daher nicht eindeutig.
+- rel[AGS][boundary=administrative][admin_level=6] ergibt genau eine Stadtgrenze und map_to_area genau eine Area.

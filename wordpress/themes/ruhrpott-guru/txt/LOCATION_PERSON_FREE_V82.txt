@@ -1,0 +1,15 @@
+RuhrpottGuru v82 – Location Persistence + Person-Free Media Policy
+
+1. Standort-Persistenz
+- Ein bereits gespeicherter GPS- oder manueller Standort hat beim Wechsel zwischen Home und Kategorieseiten Vorrang.
+- Bei vorhandenem Standort wird beim Seitenaufruf KEIN automatisches getCurrentPosition mehr gestartet.
+- Eine neue GPS-Ermittlung erfolgt nur noch, wenn kein verwertbarer Standort vorliegt oder der Nutzer sie ausdrücklich über den Standort-Layer anfordert.
+
+2. Personenfreie Medien
+- Alle Home-Module gehen durch Media Intelligence; rohe Bild-URLs umgehen die Policy nicht mehr.
+- Veranstaltungsspezifische Fotos werden nicht verwendet; falls verfügbar wird ein Venue-/Ort-Foto genutzt, sonst der neutrale Platzhalter.
+- Medien mit Personenhinweisen in Metadaten werden verworfen.
+- Pexels-Food-Fallback: deutlich erweiterter Human-/People-Filter, leere Alt-Texte werden verworfen, neuer Pool- und Media-Cache.
+- Bestehende lokale Media-/Snapshot-Caches werden durch den neuen Cache-Salt einmalig invalidiert.
+
+Datenbank/Places Backend bleibt unverändert.

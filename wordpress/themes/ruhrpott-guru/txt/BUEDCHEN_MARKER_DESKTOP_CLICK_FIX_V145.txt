@@ -1,0 +1,14 @@
+RuhrpottGuru v145 – desktop Büdchen marker click fix
+
+Bug:
+Clicking a non-overlapping Büdchen marker on desktop bubbled pointer-down into
+the map. The map captured the mouse as a drag gesture and a tiny movement could
+change the viewport, causing a Büdchen list reload instead of opening detail.
+
+Fix:
+- Non-overlapping markers stop pointer-down and pointer-up propagation.
+- Marker click prevents default and opens the existing detail overlay directly.
+- The parent map never starts drag/pan for a marker click.
+- Overlapping markers remain non-clickable exactly as in v144.
+- Normal desktop map dragging, wheel zoom, mobile one-finger page scroll and
+  two-finger map gestures are unchanged.

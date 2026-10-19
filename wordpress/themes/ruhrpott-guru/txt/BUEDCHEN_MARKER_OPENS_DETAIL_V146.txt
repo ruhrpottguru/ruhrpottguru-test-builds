@@ -1,0 +1,14 @@
+RuhrpottGuru v146 – Büdchen marker opens detail overlay
+
+Root cause:
+The marker click itself was working, but BudeMap's onPick callback was explicitly
+implemented to scroll the corresponding list card into view. Therefore marker
+clicks could never open the Büdchen detail overlay.
+
+Fix:
+- BudeMap onPick now calls the exact same setDetail(item) state used by clicks
+  on Büdchen list cards.
+- Non-overlapping markers open BudeDetail immediately.
+- No scrollIntoView / list centering is triggered by marker clicks.
+- Overlap protection from v144 remains.
+- Desktop map drag, wheel zoom and mobile touch behavior remain unchanged.

@@ -1,0 +1,7 @@
+RUHRPOTTGURU THEME V292 – MEDIA CROP OVERRIDES
+
+- Auto crop remains default.
+- Manual card/detail focal point and zoom metadata from backend are rendered non-destructively.
+- Venue photos, symbolic images and posters are permitted; former generic text/poster client gate is disabled.
+- Display-diversity replacement images do not inherit a crop from another image.
+- Original media files are never modified.

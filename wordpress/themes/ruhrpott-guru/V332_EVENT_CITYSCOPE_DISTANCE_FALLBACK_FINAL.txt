@@ -1,0 +1,1 @@
+Theme v332.0: source-verified city-scope events lacking GPS receive same-city observed median as INTERNAL sort-only proxy in home time-priority views. Exact geocoded ranking preserved. No fake displayed km, no fallback if no same-city samples. No backend changes.

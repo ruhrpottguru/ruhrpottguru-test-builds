@@ -1,0 +1,9 @@
+RuhrpottGuru Places Backend 1.8.2
+
+- Supplemental exact-city wave gets its own run token.
+- Accepted destination.one occurrences are marked with last_supplemental_run.
+- A full 53/53 wave prunes stale destination_one rows only after all cities completed without permanent failures.
+- Provider errors retry the same city up to 3 times instead of silently skipping it.
+- If a city still fails after 3 attempts, status becomes finished_with_errors and no stale-prune runs.
+- On upgrade from 1.8.1, one clean tracked 53-city wave is restarted automatically.
+- Admin remains lazy/performance-optimized from 1.8.1.

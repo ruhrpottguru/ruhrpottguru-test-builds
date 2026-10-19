@@ -1,0 +1,5 @@
+RUHRPOTTGURU V225 – ACTIVITYSPOTS BANNER
+
+- Replaces the Home editorial image for 'Die 10 besten Aktivitätsspots im Revier' with the approved 3:1 panorama.
+- The banner is bundled with the theme and also replaces the featured-image output for that article.
+- Existing card height/crop rules remain unchanged; no taller desktop image.

@@ -1,0 +1,9 @@
+RUHRPOTT GURU – FOOTER + EVENTS PAGINATION V1
+
+- Legacy duplicate PHP footer removed; mobile overlay/SureCookie/wp_footer preserved.
+- React footer reduced to 3 columns; Revier-Technologie removed.
+- ET4 center remains the selected location: GPS coordinates in GPS mode, persisted manual coordinates in manual mode.
+- Direct-root-array ET4 responses now paginate 0,100,200,... until a short page; wrapped responses honor overallcount.
+- Stable distance-ascending ET4 paging added.
+- Event order: running first by soonest end, then today/future by start.
+- Event snapshot cache bumped so incomplete old snapshots are discarded.

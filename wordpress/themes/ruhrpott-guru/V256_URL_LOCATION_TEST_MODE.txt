@@ -1,0 +1,9 @@
+V256 — URL-Standort für Tests und Direktaufrufe
+
+- ?place=essen setzt Essen vor dem ersten React-Render.
+- Die GPS-Abfrage wird für diesen Seitenaufruf vollständig übersprungen.
+- Optional: &radius=10 (1–50 km).
+- Städtenamen werden case-insensitiv und URL-freundlich gegen CITY_CENTERS aufgelöst.
+- Ungültige place-Werte fallen auf die bestehende normale Standortlogik zurück.
+- URL-Standort und URL-Radius werden nicht persistent in LocalStorage/Cookies gespeichert.
+- Normale Besucherlogik ohne Parameter bleibt unverändert.

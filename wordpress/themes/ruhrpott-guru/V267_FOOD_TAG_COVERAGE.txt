@@ -1,0 +1,14 @@
+RuhrpottGuru Theme v267 – Food Tag Coverage
+
+Basis: v266 Detail-Tag-Navigation.
+
+Änderungen:
+- Bestehende OSM-/Place-Tags bleiben primär.
+- Der bereits identitätsgeprüfte offizielle Food-Webresolver darf zusätzliche starke Angebots-Tags liefern (z. B. Burger, Steak, Sushi, Pizza).
+- Vegetarisch/Vegan aus offizieller Quelle nur bei Venue-/Konzept-Signal, nicht wegen eines einzelnen Menügerichts.
+- Offiziell bestätigte Food-Tags werden lokal pro stabiler Place-ID 30 Tage gecacht und stehen dadurch nach Klick im Radiusfilter zur Verfügung.
+- Kein Bulk-Crawling auf Kategorie-Seiten; offizielle Quelle wird nur im bereits bestehenden Food-Detail-Enrichment aufgerufen.
+- Activities-Tagfilter bleibt weiterhin deaktiviert.
+- Places-Backend wird nicht verändert.
+
+Regression fixture: Butcha Wesel / offizielles Signal „Burger.Steak&Co.“ => Burger + Steak.

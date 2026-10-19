@@ -1,0 +1,11 @@
+RuhrpottGuru v85 – Event Home 10 km + Original Media
+
+- Home Events target exactly 4 cards.
+- At the normal 5 km Home radius, fewer than 4 events trigger a Home-only soft expansion to max. 10 km.
+- The saved user radius and category pages are not changed.
+- Expanded Home Events are labelled “bis 10 km”.
+- Event selection prefers venue diversity, then fills remaining slots with distinct events.
+- Event media priority: existing original dataset image, then original image from the exact official event page, then venue media.
+- Original event artwork is exempt from the person-free POI rule; POI categories remain person-free.
+- Official event-page resolver uses exact event page/title identity and OG/Twitter/JSON-LD/page image metadata. No generic image search and no event-title hardcoding.
+- Media/cache versions bumped so old venue-only event images cannot mask the new result.

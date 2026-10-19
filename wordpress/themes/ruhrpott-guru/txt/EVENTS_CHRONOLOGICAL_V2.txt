@@ -1,0 +1,10 @@
+EVENTS CHRONOLOGICAL V2
+
+- ET4 search now requests a rolling today+365d event window using startdate/enddate.
+- ET4 unrollIntervals=true and sort=start asc are used as documented for chronological occurrence lists.
+- unique=false allows occurrences to be returned; client keeps the first still-eligible occurrence per global_id.
+- Expired occurrence no longer blocks a later occurrence with the same global_id.
+- Direct/reloaded #events view defaults to date sort, not distance sort.
+- Popstate restores date sort for Events.
+- ET4 extensionless official image URLs are accepted only for known image relations.
+- Existing radius, pagination size/offset, GPS, Food/OSM, Pexels, SureCookie and enrichment logic are unchanged.

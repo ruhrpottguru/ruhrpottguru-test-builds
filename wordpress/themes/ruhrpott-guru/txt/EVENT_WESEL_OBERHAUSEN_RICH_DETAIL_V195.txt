@@ -1,0 +1,8 @@
+RuhrpottGuru Theme 195 – Wesel + Oberhausen Rich Event Detail Test
+
+- Rich event detail fallback expanded from Wesel to Wesel + Oberhausen only.
+- "Darum geht’s" moved directly below the address/termin row.
+- Exact repeated price/booking text is collapsed (e.g. duplicate "Vorabbuchung nicht erforderlich").
+- Structured participant keys expanded for event-specific fields such as person(s), cast, lineup, organist, soloist, singer, choir and orchestra.
+- No names are inferred from free description text.
+- Other cities keep the previous rich-fallback scope.

@@ -1,0 +1,39 @@
+RUHRPOTTGURU EVENTS – BACKEND v1.10.63 – FINALVERIFIKATION
+Stand: 14.09.2026
+
+8-PUNKTE-PASS
+1. Veranstalter: PASS
+   - Besucher-Organizer werden gegen Author/Provider/Publisher/Source/Rights/Creator/Artist/Photographer/Credit-Rollen konfliktgeprüft.
+   - Kontaktzeilen können nur eine bereits erkannte gleiche Organizer-Identität ergänzen.
+   - Fixture: Kreis Wesel (EAW) als organizer+author/media artist wird verworfen; WeselMarketing GmbH bleibt inkl. Kontaktadresse erhalten.
+2. Terminlogik: PASS
+   - Backend liefert explizites allDay.
+   - 00:00-Tagesgrenzen werden nicht als echte Uhrzeit interpretiert.
+3. Event-/Ticket-/Organizer-Links: PASS
+   - Event-Webseite verwendet keine Source-/Provider-/Organizer-/Media-URL.
+   - Ticket wird separat aufgelöst; destination.one/ET4-Verzeichnislinks bleiben Provenienz.
+   - Fixture: reine pages.et4.de source/url ergibt keine Event-Webseite.
+4. Programm/Flyer/Anhänge: PASS
+   - ET4 Program/Programme/Flyer/Schedule/Agenda/Brochure/Document/PDF werden als sichere Linkliste geliefert.
+5. Direktlink/Share: PASS
+   - canonicalUrl bleibt /teilen/event/<event_id>/<slug>/ und wird in allen DB-Detailpfaden geliefert.
+6. Dubletten: PASS
+   - Identische externe Quellobjekte werden nur im Besucher-Readmodel auf eine Karte kollabiert.
+   - Datenbank-Occurrences bleiben unangetastet.
+   - Fixture: zwei ET4-Occurrences derselben external_id -> 1 Besucherobjekt mit 2 cluster_ids.
+7. Eventreihen: PASS
+   - Globale konservative v1.10.61-Logik bleibt bestehen; Related-Items tragen allDay.
+   - Fixture: Orgelherbst Konzert I/II wird mit Score 90 als Reihe erkannt.
+8. Qualitätsaudit: PASS / LIVE NACH INSTALLATION
+   - RP Redaktion -> Events -> „12-Event-Finalcheck laden“ prüft lokal bis zu 2 Events aus Essen, Dortmund, Duisburg, Bochum, Oberhausen und Wesel.
+   - Prüffelder: Termin/Ganztag, Adresse, Bild, Text, Preis, Veranstalter, Mitwirkende, Event-Web/Ticket, Kalenderbasis, Reihenhinweis, Programm/Downloads.
+   - Keine zusätzliche lokale Tourismusquelle wird dabei abgefragt.
+
+RECHTE-GATE
+- Zusätzliche lokale Tourismus-/Marketingquellen bleiben bis dokumentierter Freigabe deaktiviert.
+
+TECHNISCHE PRÜFUNG
+- PHP-Syntax aller Plugin-PHP-Dateien: PASS
+- Keine doppelten Methodennamen: PASS
+- Organizer/Link/Programm/allDay/Dedupe/Eventreihe-Fixtures: PASS
+- ZIP-Integrität wird nach dem Packen separat geprüft.

@@ -1,0 +1,18 @@
+RUHRPOTT GURU – HOME MOBILE OSM V43
+Generated: 2026-08-21
+
+ROOT CAUSE
+- Canonical OSM loader already performs Highlights/Culture fallback 5 -> 10 -> 25 -> 50 km.
+- V42 Home wrapper called that canonical chain again for each radius, multiplying cold mobile requests.
+- Provider failures were rendered as a false “0 Treffer / 50 km” state.
+- GPS coordinate jitter produced different exact WordPress transient keys, so mobile frequently missed caches that desktop could reuse.
+- After same-origin proxy failure the browser also tried public Overpass mirrors directly, adding long mobile timeout paths.
+
+V43
+- Home calls one canonical snapshot per category only.
+- Empty degraded snapshots render provider error, never false zero-results.
+- WordPress Overpass baseline uses a padded 0.01-degree spatial grid query; frontend exact Haversine filtering remains authoritative.
+- Server Overpass transient namespace bumped to v8_mobile_grid_v43.
+- Production WordPress proxy failures no longer trigger slow browser-direct mirror attempts.
+- Canonical OSM radius fallback stops on provider failure instead of repeating the same failed provider through larger radii.
+- GPS-first Home flow and [ruhrpott_home_categories] remain unchanged.

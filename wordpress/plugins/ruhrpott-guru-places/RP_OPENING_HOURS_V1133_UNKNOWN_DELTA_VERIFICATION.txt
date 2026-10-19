@@ -1,0 +1,33 @@
+RuhrpottGuru Places Backend 1.10.73 / Opening Hours Audit 1.10.33
+
+Purpose
+-------
+Targeted delta pass over historical confirmed-unknown opening-hours rows after the 1.10.32 technical salvage produced real additional hits.
+
+Scope and safety
+----------------
+- Does NOT interrupt an already running 1.10.32 salvage queue.
+- Starts automatically only when the current research queue is empty.
+- Also starts from an already-finished audit if 1.10.73 is installed after the 1.10.32 run has ended.
+- Reopens only historical unknown-after-exhaustive-search rows that have a usable official URL target (places.website, raw website/opening_hours URL metadata, or an active verified place_links website).
+- Excludes rows that were just completed by the 1.10.31/1.10.32 final salvage, so those methods are not immediately repeated on the same technical-rest population.
+- Delta rows receive marker __rpg_unknown_delta_v1133__.
+- Marker rows short-circuit opening_audit_remote_search BEFORE live OSM, Wikidata, resolver, and public web-discovery code.
+- Only opening_audit_final_salvage_site() is used: alternate canonical root/www/scheme variants and the restricted official paths /oeffnungszeiten/, /opening-hours/, /besuch/, /visit/ on already-known official domains.
+- No directory/search-engine opening hours are stored.
+- A hit is stored through the existing canonical opening_audit_save_hours() path in place_schedules, place_enrichment and places.
+- A miss returns to unknown-after-exhaustive-search; it does not become a new research-incomplete case.
+- Background worker remains server-side and continues without an open browser tab.
+- Delta baseline, queued count and recovered-hit count are stored separately and shown on the admin page.
+
+Static verification
+-------------------
+- PHP syntax: PASS
+- Plugin header version 1.10.73: PASS
+- Internal VERSION constant 1.10.73: PASS
+- Delta marker short-circuits before old full research chain: PASS
+- Historical final-salvage unknowns excluded from immediate re-run: PASS
+- Active verified place_links website targets included: PASS
+- Worker queue-end handoff present: PASS
+- Finished-state installation trigger present: PASS
+- Admin heading Opening Hours Audit 1.10.33: PASS

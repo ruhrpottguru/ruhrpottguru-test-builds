@@ -1,0 +1,14 @@
+RuhrpottGuru Places Backend 1.7.0
+
+- Event-Nachtlauf auf einen vollständigen Open-Data-Finder-Masterimport für area:"Metropole Ruhr" umgestellt.
+- 365-Tage-Zeitfenster, unique=false, unrollIntervals=true, chronologische Pagination in 100er Seiten.
+- Keine 53 getrennten Stadt-/25-km-Fenster mehr als primäre DB-Befüllung.
+- ET2014A-Rohdatensatz bleibt vollständig in raw_payload erhalten.
+- ET2014A texts werden für Voll- und Kurzbeschreibung ausgewertet.
+- Veranstalter/Kontakt aus addresses(rel=organizer/organisation/contact_person/author/support) werden strukturiert gespeichert.
+- Preisfelder aus texts/numbers/attributes sowie direkten Preisfeldern werden strukturiert gespeichert.
+- Kategorien, Features, Keywords, Areas, Attributes und Numbers werden in event_info_json übernommen.
+- created/changed aus der Quelle werden gespeichert.
+- Frontend-Readmodel liefert rpg_event_details inkl. Beschreibung, Preise, Veranstalter, Ticket, Eventinfos.
+- Globale Suche durchsucht zusätzlich Veranstalter und Preistext und ignoriert technisch defekte Eventbilder.
+- Bestehender Media-Health-Check und striktes Eventbild-Matching bleiben erhalten.

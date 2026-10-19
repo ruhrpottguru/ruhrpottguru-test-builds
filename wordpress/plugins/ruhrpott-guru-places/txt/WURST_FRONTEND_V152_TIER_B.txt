@@ -1,0 +1,10 @@
+RUHRPOTTGURU PLACES BACKEND v1.5.2
+
+Wurst-Frontend:
+- Liefert automatisch freigegebene/manuell bestätigte Treffer PLUS Tier B.
+- Manuell abgelehnte Treffer bleiben immer ausgeschlossen.
+- U und X bleiben automatisch ausgeschlossen.
+- API-Limit auf max. 800 erhöht; Theme fragt 600 an, damit große Radien nicht bei 200 abgeschnitten werden.
+- verifiedTotal bleibt Zahl der geprüften/freigegebenen Treffer.
+- radarTotal ist A/manuell bestätigt plus Tier B.
+- Klassifikator selbst unverändert.

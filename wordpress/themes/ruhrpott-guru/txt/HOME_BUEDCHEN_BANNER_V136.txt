@@ -1,0 +1,6 @@
+RuhrpottGuru v136 – Home Büdchen-Radar banner
+
+- Adds a dedicated Büdchen-Radar magazine banner to the Home page.
+- The banner is inserted between the Food and Events modules, regardless of which of those two appears first in the WordPress editor order.
+- Links to /buedchen-radar/.
+- Existing Home category modules, WordPress editorial blocks, Route der Industriekultur teaser, mobile behavior and backend logic remain unchanged.

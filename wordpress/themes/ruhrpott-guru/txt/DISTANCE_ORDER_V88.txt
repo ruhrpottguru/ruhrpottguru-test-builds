@@ -1,0 +1,6 @@
+RuhrpottGuru v88 – Distance Order
+
+Highlights, Kultur and Aktivitäten are displayed by ascending distance on both Home modules and dedicated category pages.
+Experience Intelligence and hard exclusions remain eligibility filters; they no longer control visible ordering.
+Events retain chronological ordering. Food remains unchanged.
+Home preview cache namespace: rg_home_pool_v88_.

@@ -1,0 +1,6 @@
+RuhrpottGuru Theme v159
+
+- Community-Formular: zweiten Runtime-Fehler behoben (fehlender strong()-Helper).
+- „Daten ergänzen oder Bild hochladen“ öffnet das Formular jetzt ohne React-Absturz.
+- Büdchen: CTA-Layout an die übrigen Detailseiten angeglichen.
+- Keine Änderung an Standort, Radius, Ranking, Karten, Header/Footer oder Datenfluss.

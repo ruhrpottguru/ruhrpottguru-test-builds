@@ -1,0 +1,11 @@
+RuhrpottGuru Places Backend v1.7.8
+
+- Safe cleanup action deletes only active/future outside-master events whose venue city is outside the canonical 53 Metropole-Ruhr municipalities.
+- Keeps all inside-region supplementals (e.g. Domspringen Wesel).
+- Hard region gate on every non-master event feed upsert.
+- Adds persistent 53-city supplemental wave against public destination.one open-data, exact-city and 365-day scoped.
+- Supplemental source objects that overlap the latest master by external ID are skipped.
+- Recurrences are expanded locally using the same v1.7.4 occurrence engine.
+- Legacy public rows mislabelled open_data_finder are migrated to destination_one_open_data when seen again, avoiding duplicates.
+- Essen official export is merged as an explicit supplemental source.
+- Supplemental wave runs after each master and then starts enrichment.

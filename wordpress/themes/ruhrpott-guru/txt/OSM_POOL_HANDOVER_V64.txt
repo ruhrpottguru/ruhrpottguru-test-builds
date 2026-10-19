@@ -1,0 +1,34 @@
+RUHRPOTT GURU – HANDOVER LAYOUT + OSM ACQUISITION POOL V64
+============================================================
+
+Layout basis
+------------
+- Visible theme/layout basis: handover build V63.
+- Header, footer, page shell, compiled CSS and Home magazine card markup remain from the handover package.
+- No AI-Studio redesign layout was adopted.
+
+OSM correction
+--------------
+- Browser uses one same-origin WordPress OSM path.
+- Legacy Food/Highlights/Culture queries <= 5 km are translated to one shared 5 km server pool.
+- Food can still be evaluated by the existing frontend at 1 / 2.5 / 5 km from the same pool.
+- Radius expansion above 5 km is category-specific.
+- Activities remain supported on their own allowed OSM pool.
+- Legacy mixed/all queries remain supported without forwarding arbitrary Overpass QL.
+- Server builds fixed Overpass templates; arbitrary raw client queries are rejected.
+- Valid empty results are authoritative and cacheable; provider errors are not converted to zero results.
+- Empty upstream pools: short cache. Non-empty pools: fresh cache plus bounded stale-success fallback.
+- Public browser Overpass mirrors are disabled; historic fallback URLs are rewritten to same-origin fail-fast routes.
+- OSM diagnostics use the same WordPress pool instead of a separate public browser connection.
+
+Home orchestration
+------------------
+- Events remain independent on the established ET4 WordPress path.
+- OSM Home modules run Food -> Highlights -> Culture sequentially.
+- The optional "Jetzt offen" / "Für lau" modules use the same sequencing to avoid a second three-way OSM burst.
+
+Compatibility
+-------------
+- Existing ET4 server transport and active ET4 key are unchanged.
+- Existing WordPress Home/category shortcodes remain available.
+- Existing handover styling and responsive layout are retained.

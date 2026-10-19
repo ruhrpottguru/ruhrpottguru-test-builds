@@ -1,0 +1,42 @@
+RUHRPOTTGURU THEME V291 – VERIFICATION
+Date: 2026-09-24
+
+BASE
+- RuhrpottGuru Theme v290 Event Context Preflight Quality Gate FINAL
+
+ROOT CAUSE CONFIRMED
+- v290 explicitly excluded source=pexels-symbolic-event from the visual preflight gate.
+- Therefore an automatic Symbolfoto could bypass the text/poster filter even though the same global fallback rule should apply to Event-Ort and Symbolfoto alike.
+- The real currently visible Waldschule crop is less white-dominant than the earlier fixture; it still has high monochrome/dark mass plus dense hard edges and must be rejected as text/wordmark-like.
+
+FIX
+- All automatic event fallback media are gated before paint: Event-Ort/context AND Symbolfoto/symbolic.
+- Explicit approved originals stay untouched: ET4/ODF exact media, official-approved, editorial-override.
+- Legacy/unknown DB fallback labels are gated defensively unless explicitly approved original media.
+- Added monochrome-edge-text detector for tightly cropped wordmark/sign visuals.
+- A runtime replacement Symbolfoto is also quality-checked before display; unprobeable replacement media fails closed to the neutral ticket placeholder.
+- Existing DetailGallery gate automatically inherits the broader automatic-fallback rule.
+
+FIXTURE CHECKS
+- Current user screenshot bad Waldschule crop: REJECT / monochrome-edge-text.
+- Existing Büchereikino/cake photo: PASS.
+- Existing Museum Stadt Lünen photo: PASS.
+- Existing museum interior photo: PASS.
+
+SOURCE CLASSIFICATION CHECKS
+- venue-commons-context: GATE
+- pexels-symbolic-event: GATE
+- mediaKind=symbolic/context: GATE
+- legacy unknown DB fallback: GATE
+- et4-global-id-local: BYPASS (approved original)
+- official-approved: BYPASS (approved original)
+- editorial-override: BYPASS (approved original)
+- non-event categories: BYPASS
+
+REGRESSION CHECKS
+- php -l: PASS for all shipped PHP files
+- node --check: PASS for all shipped JS files
+- v288 single-page scroll marker retained
+- no backend changes
+- no event sync/radius/date/order changes
+- no changes to Places/Food/Highlights/Kultur/Aktiv rendering logic

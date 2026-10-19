@@ -1,0 +1,14 @@
+RuhrpottGuru Events v1.10.34 – DB freshness/media handoff
+
+Root cause verified in code path:
+- Theme /ruhrpottguru/v1/events calls the persistent DB first via ruhrpottguru_events_db_frontend_query().
+- frontend_events_query() previously returned ready=false before querying whenever both last complete nightly and last ingest were older than 48h.
+- The theme then fell back to the legacy live ET4 transport.
+- That live transport merges sparse unrolled occurrence rows before rich catalog rows, so visitor cards can lose event-owned media even though rg_event_media already contains verified images.
+
+Fix:
+- Mature Event DB (>=100 active rows) is queried regardless of the 48h freshness flag.
+- If current in-radius rows exist, they remain visitor-authoritative and carry canonical rg_event_media output.
+- Stale DB triggers a rate-limited background master refresh; it does not force visitors onto the sparse live feed.
+- Live ET4 fallback remains available only for a genuine local DB miss when there is no fresh complete run proving an authoritative empty result.
+- ET4 global_id/media matching, event_media persistence, health checks, opening-hours logic, source ownership, and frontend/theme code are unchanged.

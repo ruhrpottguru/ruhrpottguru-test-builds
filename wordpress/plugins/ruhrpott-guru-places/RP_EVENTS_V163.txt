@@ -1,0 +1,7 @@
+RuhrpottGuru Places Backend v1.6.3 – Frontend Event Read Model
+
+- Persistente Event-DB kann nach vollständigem 53-Städte-Nachtlauf als Frontend-Quelle dienen.
+- DB-Ausgabe ist standort-/radiusbasiert und verwendet exakte Haversine-Distanz.
+- Enrichment-Felder für Adresse und verifizierte primäre Eventbilder überschreiben rohe Feed-Felder.
+- Letzter vollständig abgeschlossener Nachtlauf wird separat gespeichert, damit während des nächsten 03:00-Laufs weiter der vorherige vollständige Bestand ausgeliefert wird.
+- Live-Feed bleibt Bootstrap-/Ausfall-Fallback im Theme.

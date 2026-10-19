@@ -1,0 +1,6 @@
+RUHRPOTT GURU – DATENSCHUTZ LINK V1
+
+- Footer Datenschutzerklärung links to https://www.ruhrpottguru.de/datenschutzerklaerung/
+- Burger privacy item is labeled Datenschutzerklärung and links to the same canonical page.
+- WordPress burger menu privacy items are canonicalized to the same URL.
+- No other application logic changed.

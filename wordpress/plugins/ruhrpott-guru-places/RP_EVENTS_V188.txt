@@ -1,0 +1,9 @@
+RuhrpottGuru Events v1.8.8 – finale Legacy-Bereinigung
+
+- Sicherer Einmal-Abgleich des alten source=open_data_finder-Restbestands außerhalb des aktuellen Masters.
+- Ausführung nur wenn aktueller Master und der zugehörige 53/53-Supplemental-Lauf fehlerfrei abgeschlossen sind.
+- Exakte aktuelle Dubletten werden mit dem gültigen Master-/destination.one-Termin zusammengeführt.
+- Alte konkrete Termine einer weiterhin existierenden Serie, die im aktuellen Lauf nicht mehr vorkommen, werden entfernt.
+- Nicht mehr bestätigte Legacy-Objekte werden entfernt.
+- Medien/Quellenzuordnungen werden bei exakten Dubletten auf den aktuellen Datensatz übernommen.
+- Ergebnis wird dauerhaft als rg_events_legacy_reconcile_v188 protokolliert.

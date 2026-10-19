@@ -1,0 +1,54 @@
+RuhrpottGuru Places Backend 1.10.118
+Media Crop Direct-ID Final
+Stand: 24.09.2026
+
+VERIFIZIERTE URSACHE
+-------------------
+Der 1.10.117-Fix hat die angeklickte Medien-ID zwar als crop_focus transportiert, den Editor aber weiterhin durch den allgemeinen Such-/Gruppierungspfad laufen lassen. Dieser Pfad verbindet Treffer über mehrere Identitätsaliase inkl. Dateihash/perzeptuellem Hash und wählt anschließend Gruppen/Representatives. Damit blieb trotz Fokusparameter weiterhin ein Pfad offen, auf dem ein bereits bearbeitetes Mastermotiv bzw. eine gruppierte Variante die konkrete Vorschau dominieren konnte.
+
+FINALE AENDERUNG 1.10.118
+------------------------
+1. "Zuschnitt bearbeiten" übergibt jetzt getrennt:
+   - crop_scope = place|event
+   - crop_media_id = konkrete DB-Medien-ID
+   - crop_focus bleibt nur als Legacy-Kompatibilität erhalten.
+2. Bei gesetzter Direct-ID wird der allgemeine Such-/Union-/pHash-Gruppierungspfad NICHT mehr ausgeführt.
+3. Die Vorschau wird ausschließlich direkt über place_media.id bzw. event_media.id geladen.
+4. Existiert diese ID nicht, wird bewusst kein anderes Bild als Ersatz geöffnet.
+5. Crop-Overrides im Direct-ID-Modus verwenden nur exakte Identitätsaliase: URL/WP-ID/persistierter SHA-Hash bzw. SHA-256 der Datei. Kein pHash-Cluster.
+6. Speichern und "Automatik wieder verwenden" erhalten dieselbe crop_scope/crop_media_id und kehren exakt zu diesem Bild zurück.
+7. Die obere Editoranzeige nennt die tatsächlich geladene Medien-ID explizit.
+
+FUNKTIONALE ABNAHME
+-------------------
+Hauptpfad Event:
+- vorheriges Bild event_media #101 = logo.jpg
+- angeklicktes Bild event_media #202 = boots.jpg
+- Request enthält absichtlich widersprüchliches Legacy-Fokusziel event:101 sowie Direct-ID event/#202
+- Ergebnis: Direct-ID #202 gewinnt; Vorschau boots.jpg; logo.jpg erscheint im Editor nicht.
+
+Render-End-to-End:
+- render_rp_media_crop_editor_v101112 mit event/#202 ausgeführt
+- Ausgabe enthält Event-Medien-ID #202 und boots.jpg
+- Ausgabe enthält NICHT logo.jpg.
+
+Leeres/ungültiges Ergebnis:
+- event_media #999 nicht vorhanden
+- Ergebnis: keine Gruppe, keine Ersatzvorschau; Editor meldet ausdrücklich, dass kein anderes Bild geöffnet wird.
+
+Randfall / Regression:
+- place_media Direct-ID #303 lädt exakt das Ortsbild #303.
+- alter crop_focus=event:101 wird weiterhin als Legacy-Link verstanden.
+- leerer Request bleibt im normalen manuellen Suchmodus.
+
+Speicherpfad:
+- Crop-Save für Direct-ID event/#202 ausgeführt.
+- Redirect enthält crop_scope=event, crop_media_id=202 und normalisiertes crop_focus=event:202.
+- damit bleibt auch nach Speichern dieselbe konkrete Bild-ID aktiv.
+
+TECHNISCHE PRUEFUNGEN
+---------------------
+- PHP-Syntax: fehlerfrei.
+- Plugin-Version und Runtime-Konstante: 1.10.118.
+- Nur Backend geändert; Theme v293 bleibt unverändert.
+- Keine Event-/Places-/REST-/Frontend-/Workerlogik außerhalb des Medien-Zuschnitteditors verändert.

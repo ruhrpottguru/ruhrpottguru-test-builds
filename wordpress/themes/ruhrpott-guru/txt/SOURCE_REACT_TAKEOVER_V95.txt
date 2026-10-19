@@ -1,0 +1,10 @@
+RuhrpottGuru V95 – Source-owned React takeover
+
+- Former AI-Studio compiled JS is no longer enqueued.
+- Active UI is readable React source under src/react-app/.
+- React comes from WordPress core wp-element.
+- One shared DetailOverlay is used from Home and category views.
+- Existing Places Backend 1.2.1 and REST endpoints remain the data layer.
+- Existing location persistence keys remain compatible with V94.
+- Route Industriekultur Home hero preference remains within the user-selected radius.
+- WordPress remains responsible for pages, menus and editorial/legal content.

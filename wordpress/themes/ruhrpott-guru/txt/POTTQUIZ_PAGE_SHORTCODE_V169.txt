@@ -1,0 +1,8 @@
+POTT-QUIZ PAGE SHORTCODE V169
+
+- Neuer kanonischer WordPress-Shortcode: [ruhrpott-pottquiz]
+- Rendert die bestehende RuhrpottGuru Quiz-Ansicht (view=quiz).
+- Funktioniert als Inhalt einer normalen WordPress-Seite, z. B. Slug pott-quiz.
+- Die Seite kann anschließend regulär in die WordPress-Navigation aufgenommen werden.
+- Der bisherige Shortcode [ruhrpott_pott_quiz] bleibt als Legacy-Alias erhalten.
+- Keine Änderungen an der bestehenden Quiz-Logik oder an anderen Kategorien.

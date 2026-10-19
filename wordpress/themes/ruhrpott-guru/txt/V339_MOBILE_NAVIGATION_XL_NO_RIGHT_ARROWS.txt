@@ -1,0 +1,11 @@
+RuhrpottGuru Theme v339.0 – Mobile Navigation XL / ohne Rechtspfeile
+
+Basis: v338.0
+
+Änderungen:
+- Mobile Burger-Navigation auf nahezu volle Viewport-Breite erweitert (12 px Abstand links).
+- Desktop/Tablet-Drawer auf maximal 640 px / 96vw erweitert.
+- Menülabels bleiben einzeilig.
+- Kleine Chevron-Rechtspfeile am rechten Rand der Menükarten entfernt.
+- Linke Kategorie-/Menü-Icons bleiben unverändert.
+- Keine Änderungen an Menülinks, Reihenfolge, Navigation, GPS, Radius, Filtern, Ranking, SEO oder Backend.

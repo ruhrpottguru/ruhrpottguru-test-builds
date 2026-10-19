@@ -1,0 +1,7 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.112 – MEDIA MASTER + CROP WORKFLOW
+
+- RP Redaktion -> Medien: searchable logical motifs; WP derivatives and byte-identical copies group under one master.
+- Auto crop is default; manual card/detail focal point + zoom are reversible metadata overrides.
+- Original files remain untouched.
+- Crop metadata is handed to Place and Event REST payloads.
+- Venue photos, symbolic images and posters are allowed again; temporary generic text/poster and Waldschule special blocks are retired.

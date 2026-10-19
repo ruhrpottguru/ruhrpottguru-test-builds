@@ -1,0 +1,12 @@
+RuhrpottGuru Theme v326
+
+- Replaces the map.nrw hidden-map/search workaround with a direct server-side Geoapify geocoding endpoint.
+- Uses https://api-eu.geoapify.com/v1/geocode/search only from WordPress; no Geoapify JS, map, cookie, or API key is exposed to the browser.
+- Requires a short-lived same-site request nonce for the public address endpoint.
+- Does not cache or persist full address searches server-side; the chosen full address remains in the existing browser-local location snapshot only.
+- Displays the Geoapify and OpenStreetMap attributions required for the Free plan in the address panel.
+- Keeps the existing split address form and the existing central lat/lng + radius location contract.
+- Keeps postcode-only and city-only paths unchanged.
+- Validates returned addresses against RuhrpottGuru's 53 municipalities before accepting them.
+- Stores/displays the full address only through the existing address location label in the location layer.
+- API key is read from the non-autoloaded WordPress option rpg_geoapify_api_key and is not bundled in this ZIP.

@@ -1,0 +1,7 @@
+RuhrpottGuru Places Backend 1.6.16 – Event Media Candidate Fix
+
+- Generic website URLs are no longer accepted as event images merely because they occur inside a media object.
+- Explicit image payload fields (contentUrl/src/imageUrl/downloadUrl) are preferred over generic url/href/@id.
+- Generic URL fields require image MIME/relationship or an actual image extension.
+- Source/homepage URLs are kept as source_url instead of image url.
+- Existing Media Health validation remains active and can invalidate already stored bad rows.

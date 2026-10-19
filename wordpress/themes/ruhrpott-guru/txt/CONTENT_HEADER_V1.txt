@@ -1,0 +1,11 @@
+RUHRPOTT GURU – CONTENT + HEADER V1
+
+- Live OSM gastronomy copy is now factual and cuisine-aware instead of generic Ruhrpott/Kult-Imbiss wording.
+- Explicit OSM descriptions remain authoritative and are preserved.
+- Mono, Viehtor 3, Wesel receives the verified Açaí-Bowl description supplied for this release.
+- Food semantics include Açaí/bowls, ice cream, sushi/Japanese, Chinese, Vietnamese, Thai, Indian, Döner/Turkish, Greek, Italian, burger, vegan/vegetarian, café, brewery, biergarten/pub, bar/tapas and generic streetfood.
+- Unknown cuisine no longer invents popularity, Kult status or Ruhrpott classics.
+- Header icons reordered: Search -> Location -> Favorites.
+- Global header remains sticky; quick-filter rail is now sticky directly below the measured header height.
+- OSM/snapshot cache versions bumped to invalidate stale generic descriptions.
+- Pexels semantic pool adds Açaí/bowl imagery.

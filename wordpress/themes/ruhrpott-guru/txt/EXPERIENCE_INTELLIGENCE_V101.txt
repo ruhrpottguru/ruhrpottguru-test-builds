@@ -1,0 +1,10 @@
+RuhrpottGuru v101 – Experience Intelligence Update & Filter-Optimierung
+
+Theme basis: v100 complete.
+Frontend/React changes: NONE.
+Places Backend target: 1.2.2.
+
+Backend rules:
+- SQL hard blacklist: leisure=fitness_centre, sport=yoga, sport=pilates, sport=gymnastics, leisure=pitch.
+- Strong priority: tourism=zoo, tourism=theme_park, leisure=water_park, sport=skateboard/skateboarding, historic=industrial, natural=water + sport=swimming.
+- Wikidata/Wikipedia: strongest candidate-pool priority + massive PHP scoring multiplier.

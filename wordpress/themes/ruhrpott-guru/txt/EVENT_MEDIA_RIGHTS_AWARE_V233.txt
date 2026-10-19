@@ -1,0 +1,12 @@
+RuhrpottGuru Theme v233 – Rights-aware Event Media Chain
+
+- ET4/ODF und destination.one native Bilder bleiben höchste Priorität.
+- Event-Media-Resolver erkennt das Payload-Feld web.
+- Offizielle Eventseiten: OG/Twitter/JSON-LD/eventbezogene IMG-Kandidaten, aber nur nach strikter Event-Identity-Prüfung.
+- Root-Website darf exakt einen Same-Domain-Hop zu stark titelpassender Unterseite machen; max. 3 Kandidatenseiten.
+- Provider-/Verzeichnisdomains destination.one und et4.de werden nicht als offizielle Website-Fallbacks behandelt.
+- Offizielle Website-Bilder sind nur redaktionelle Kandidaten, nicht automatisch live.
+- Venue-Kontext: nur identity-/geo-passende Wikimedia/Wikidata/Commons-Bilder mit explizit offener Lizenz; Label Orts-Kontextbild.
+- Pexels: semantischer, person-free Symbolbild-Fallback; Label Symbolfoto, Fotograf + Pexels-Credit.
+- Karten und Detailgalerie zeigen Kontext-/Symbol-Kennzeichnung und Credits.
+- Kein Event wird wegen fehlendem Bild ausgefiltert.

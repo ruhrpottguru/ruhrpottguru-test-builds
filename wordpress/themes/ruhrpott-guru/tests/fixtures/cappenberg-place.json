@@ -1,0 +1,33 @@
+{
+  "type": "way",
+  "id": 33176864,
+  "tags": {
+    "addr:city": "Selm",
+    "addr:housenumber": "1",
+    "addr:postcode": "59379",
+    "addr:street": "Schloßberg",
+    "building": "yes",
+    "historic": "castle",
+    "name": "Schloss Cappenberg",
+    "tourism": "attraction",
+    "wikidata": "Q1497541",
+    "website": "http://www.muensterland.com/",
+    "rg:place_id": "9618",
+    "rg:canonical_url": "https://www.ruhrpottguru.de/ort/9618/selm/schloss-cappenberg/",
+    "rg:source": "places-db",
+    "rg:category": "highlights",
+    "rg:subcategory": "Schloss, Burg & Geschichte",
+    "rg:quality_score": "0.6900",
+    "rg:last_synced_at": "2026-10-01 08:21:41",
+    "rg:highlight_score": "70",
+    "rg:highlight_rank_score": "70",
+    "rg:highlight_bucket": "heritage_vibe",
+    "rg:highlight_tags": "Geschichte|Besonderer Ort",
+    "rg:highlight_tier": "B"
+  },
+  "timestamp": "2026-10-01T08:21:41+00:00",
+  "center": {
+    "lat": 51.6507491,
+    "lon": 7.5391259
+  }
+}

@@ -1,0 +1,29 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.128 — VERIFICATION
+
+Scope
+- Schema contract repair only.
+- 53-city audit enriched with read-only schema/media diagnostics.
+- No category/ranking/import/REST/frontend logic changed.
+
+Verified cause
+- Runtime plugin version had reached 1.10.127.
+- SCHEMA_VERSION was still 1.10.22.
+- ensure_schema_and_schedule() only calls install_schema()/dbDelta when the persisted schema marker differs.
+- Later CREATE TABLE columns were therefore not guaranteed to exist after ordinary plugin ZIP replacement.
+
+Checks
+- Plugin header VERSION 1.10.128: PASS
+- Runtime VERSION 1.10.128: PASS
+- SCHEMA_VERSION 1.10.128: PASS
+- Existing schema gate preserved: PASS
+- Existing dbDelta path preserved: PASS
+- place_media content classification columns declared: PASS
+- events source lifecycle columns declared: PASS
+- 53-city audit reports schema presence + place_media counts + query errors: PASS
+- Place media coverage state/cursor key unchanged: PASS
+- Reprocessing state key unchanged: PASS
+- Only main plugin file + 1.10.128 documentation/verification added or changed from 1.10.127: PASS
+- PHP lint: PASS
+
+Operational rule
+Pause the 1.10.94 place-media coverage worker before installing 1.10.128 because the one-time schema reconciliation may ALTER the same place_media table that the worker writes. Resume after installation; cursor and counters remain preserved.

@@ -1,0 +1,26 @@
+RuhrpottGuru Places Backend v1.10.98 – Broad Radius Event REST FINAL
+
+Root cause verified:
+- Halloween v280 expands 5 km -> 10 km -> 25 km only after the prior request completed without an error.
+- The failing screenshot was already at 25 km, so 5 km and 10 km had completed successfully.
+- In v1.10.97, rest_request_after_callbacks executed event_manual_place_pool_candidate_v1076() once for every image-less event in the /events response.
+- That helper performs event/place/media DB lookups per item. A 600-item synthetic response executed 600 event-row lookups + 600 place lookups (and 618 get_results calls overall), i.e. an unbounded N+1 path whose cost grows with radius.
+- The six rpg_seasonal_editorial Halloween rows themselves serialize correctly through frontend_events_query() and the REST media filter in isolation; the error is not a missing seasonal field.
+
+Fix:
+- Bulk /wp-json/ruhrpottguru/v1/events keeps only batched media paths: exact localized ET4/destination.one media and already stored event-specific fallback media.
+- Per-item manual Place-pool lookup is removed from the bulk list response.
+- Direct/share event detail retains the existing bounded one-event manual Place-pool fallback via event_finalize_direct_media_v1078().
+- rpg_seasonal_editorial IDs are no longer sent through the ET4 exact-media identity query.
+- No event is hidden because it has no image.
+
+Regression guards:
+- Halloween 2026 anchors unchanged.
+- SEO/deep-link 1.10.96 unchanged.
+- Reprocessing standard 1.10.95 unchanged.
+- Ortsbild worker state keys and pause/resume methods unchanged; a paused 1.10.94 worker stays paused.
+- Theme unchanged.
+
+Synthetic stress verification (600 image-less seasonal list items):
+- v1.10.97: 600 event-row lookups + 600 place lookups; requestedGlobalIds=600.
+- v1.10.98: 0 event-row lookups + 0 place lookups; 2 batched media queries; requestedGlobalIds=0 for non-ET4 IDs.

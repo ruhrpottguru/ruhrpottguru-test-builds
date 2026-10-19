@@ -1,0 +1,44 @@
+RUHRPOTT GURU – PLACES BACKEND 1.10.89
+Activities Source Coverage + Admin UX – Verification
+
+Scope
+- Explicit 53-municipality Activities Source Coverage refresh wave.
+- Server-side continuation via WP-Cron; browser tab is not required.
+- Uses the existing non-destructive municipality refresh path.
+- Technical Tools admin page gets sticky section navigation.
+- Widefat tables/lists are collapsed by default; existing Activities V2 details remain collapsed.
+- Büdchen A/B/C quality sample is collapsed by default.
+
+Safety
+- No schema migration.
+- No automatic coverage wave on plugin activation/update.
+- Wave begins only after explicit admin button + nonce.
+- If another municipality sync is active, the coverage worker waits instead of resetting/overlapping it.
+- Municipality status remains complete during refresh; failed refreshes preserve the last live catalogue behavior.
+- Worker state survives page close and is re-scheduled on init if queued/running and its cron event is missing.
+
+Production-path parity against 1.10.88
+- register_rest_routes: unchanged
+- frontend_events_query: unchanged
+- event_upsert_from_feed_item: unchanged
+- activity_experience_profile: unchanged
+- rank_activity_rows: unchanged
+- nearby_activity_experience_rows: unchanged
+- activity_v2_profile: unchanged
+- activity_v2_audit_snapshot: unchanged
+- build_city_overpass_queries: unchanged
+- classify_tags: unchanged
+- server_sync_municipality: unchanged
+- claim_next_municipality: unchanged
+
+Admin UX
+- Sticky anchors: Übersicht, Activities V2, Imbiss, Büdchen, Community, Kommunen, System.
+- Existing V2 Experience, Experience x Admission, Blocker, targeted sample and none sample remain native closed details blocks.
+- All remaining widefat tables on the technical page are wrapped client-side in closed details blocks.
+- Validation report is collapsed.
+
+Verification
+- PHP syntax: PASS
+- All plugin PHP files: PASS
+- ZIP integrity: PASS
+- Only main plugin file plus this verification note differ from 1.10.88.

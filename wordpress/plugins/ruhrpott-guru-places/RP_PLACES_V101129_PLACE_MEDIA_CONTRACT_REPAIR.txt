@@ -1,0 +1,52 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.129 — PLACE MEDIA CONTRACT REPAIR
+Generated: 2026-09-26
+
+ROOT CAUSE (verified against production 1.10.128)
+- wp_rg_place_media-equivalent table exists as l8bt_rg_place_media.
+- 3,677 real rows are present; the previous audit total=0 was not data loss.
+- All 3,677 rows had relation_type='0.000000'.
+- All 3,677 rows had visual_quality=0.0000.
+- All 3,677 rows had last_seen_at='0000-00-00 00:00:00'.
+- Example live place 5698 ("Der unbekannte Fußballzuschauer", Herne) has a persisted Wikimedia row, but visitor lookup returned imageUrl='' because visitor SQL requires relation_type='place'.
+- Source code inspection found four place_media insert paths with a wpdb format-array shift: relation_type was formatted as %f, visual_quality as %d, and last_seen_at had no matching format.
+
+PRODUCTION EVIDENCE BEFORE REPAIR
+- total place_media rows: 3,677
+- unique places: 3,676
+- expected historic contextual Büdchen street-level rows: 19 (kartaview/panoramax + is_primary=0)
+- expected place rows: 3,658
+- expected night rows: 0
+- verified_at available for 1,538 rows; these timestamps can safely backfill last_seen_at.
+- Coverage worker state is paused; cursor=5716, processed=5619, found=3646, existing=248, missing=1725, errors=0.
+
+REPAIR POLICY
+- malformed community_night_upload -> relation_type=night
+- malformed kartaview/panoramax with is_primary=0 -> relation_type=contextual
+- all other malformed rows -> relation_type=place
+- zero visual_quality -> 0.98 editorial-place-upload, 0.90 community uploads, otherwise 0.75
+- last_seen_at is backfilled only from a real verified_at timestamp; no artificial timestamp is invented for lower-confidence historic rows.
+- Worker state, cursor, counters, queues, categories, event logic and frontend are untouched.
+
+FUTURE WRITE CONTRACT
+Correct format lists were applied to exactly four place_media writers:
+1) editorial place upload
+2) 1.10.94 place-media coverage worker
+3) Büdchen media enrichment
+4) community/night media approval
+
+FUNCTIONAL / REGRESSION VERIFICATION
+- PHP syntax: PASS
+- malformed format signatures absent: PASS
+- corrected relation_type/identity_confidence/visual_quality/is_primary format positions: PASS
+- migration policy fixtures: 6/6 PASS
+- migration idempotence fixture: PASS
+- source diff scope: exactly 6 existing functions changed + 1 repair function added: PASS
+- critical Event Lifecycle/Reprocessing functions byte-identical to 1.10.128: 22 functions PASS
+- no worker resume/reset code added: PASS
+
+EXPECTED AFTER INSTALL
+- place_media_invalid_relation_rows = 0
+- place_media_zero_visual_quality_rows = 0
+- relation_type distribution for current production snapshot: 3658 place / 19 contextual / 0 night
+- persisted media becomes visible to visitor/media-selection SQL that requires relation_type='place'.
+- 53-city audit will report real place_media totals/classes instead of 0.

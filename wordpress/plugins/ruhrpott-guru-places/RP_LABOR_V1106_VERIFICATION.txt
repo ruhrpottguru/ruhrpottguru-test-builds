@@ -1,0 +1,17 @@
+RUHRPOTT GURU PLACES BACKEND – LABOR 1.10.6 VERIFICATION
+
+BASE
+- Source: v1.10.5 labor quality floor
+
+CHECKS
+- Plugin version 1.10.6: PASS
+- PHP syntax: PASS
+- City center resolver from active Places grouped by municipality_slug: PASS
+- City change JS updates lat/lng and sets coord mode auto: PASS
+- 0/0 resolves to selected city coordinates server-side: PASS
+- Manual coordinates supported via coord mode manual: PASS
+- Selection/filter forms preserve coord mode: PASS
+- Essen fallback coordinate present: PASS
+- Wesel fallback coordinate present: PASS
+- Quality-floor selection logic from 1.10.5 retained: PASS
+- Public frontend untouched: PASS

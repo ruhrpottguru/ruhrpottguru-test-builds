@@ -1,0 +1,15 @@
+RuhrpottGuru Places Backend 1.10.78 – Event Direct/Share E2E parity
+
+Scope
+- Event direct/share payload only.
+- Opening-hours audit/queue/parser/research logic unchanged.
+
+Verified product invariants
+1. No Event is hidden because an image is missing.
+2. Direct/share Event media uses the same order as the normal Event feed:
+   native localized ET4 global_id image -> editorial/official Event image -> manual Place image pool -> approved Commons/Pexels fallback -> no image.
+3. Raw ET4 media branches are removed before the direct/share payload reaches React.
+4. Share/OG image is taken from the finalized verified Event media assignment.
+5. Provider/source URLs remain provenance only and are not exposed as visitor website links.
+6. Event share landing redirects to /veranstaltungen/ with temporary event coordinates, so the Event list at the Event location is already mounted behind the direct detail.
+7. Event-Finalcheck exercises the real single-Event/share payload for up to two current visible Events in Essen, Dortmund, Duisburg, Bochum, Oberhausen and Wesel, including canonical URL, finalized image pointers/source and Event-location context.

@@ -1,0 +1,35 @@
+RuhrpottGuru Theme v273 – UX Micro-Interactions FINAL
+
+Basis
+- Builds directly on Theme v272 Activities Media Rollback FINAL.
+- Places Backend remains v1.10.92 unchanged.
+- Activities selection/ranking, media resolver, opening-hours logic and V2 feed are untouched.
+
+Implemented
+1) Community photo gap handling
+- Preserved v272 exactly: the upload hint appears only for Activities after the existing media path has settled with no usable image (the former lightning placeholder state).
+- Existing and duplicate images remain visible; no additional media hygiene/filtering was reintroduced.
+
+2) React skeleton loading states
+- Home category modules now reserve the final Events/Food/Highlights/Culture/Activities geometry while live data loads.
+- Category pages use an 8-card grid skeleton instead of the text-only "Daten werden geladen …" block.
+- Soft opacity pulse only; prefers-reduced-motion disables animation.
+- Screen-reader loading status remains available while visual skeletons are aria-hidden.
+
+3) Detail continuation
+- The separate detail-tag section is now labelled "Mehr davon entdecken".
+- Cards stay one clear touch target; card badges remain informational/non-clickable.
+- Existing detail tag navigation/filter behavior and radius preservation stay unchanged.
+
+4) Location-aware cult banners
+- Home Büdchen and Imbiss banners use the current GPS/PLZ/city coordinates and current radius.
+- When the existing endpoints return nearby results, copy becomes e.g. "6 Büdchen in deinem 5-km-Radius" / "4 Imbissbuden in deinem 5-km-Radius".
+- If no count can be established or the request fails, the established static banner copy remains.
+- No "currently open" claim is introduced, so no reliability promise is made from incomplete opening-hours data.
+- Büdchen endpoint cap is represented safely as "200+" if reached; Wurst uses up to 800 current-radius results.
+
+Explicitly not implemented
+- No clickable tags on cards.
+- No additional Home filter-chip rows.
+- No floating filter action/button.
+- No backend schema, REST route, resolver, import, cron or worker changes.

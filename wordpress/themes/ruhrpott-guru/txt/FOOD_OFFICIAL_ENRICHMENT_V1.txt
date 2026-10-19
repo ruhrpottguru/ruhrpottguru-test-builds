@@ -1,0 +1,28 @@
+RUHRPOTT GURU – OFFICIAL WEBSITE ENRICHMENT V1
+
+Purpose
+- Enrich gastronomy cards from identity-verified official restaurant websites.
+- No Google scraping and no Google Places/Billing dependency.
+
+Priority / safety
+1. OSM-linked official website (requires venue name + local context on page).
+2. If no OSM website: max. two deterministic .de domain candidates.
+   A guessed domain is accepted ONLY with strict venue + city + street/house-number identity match.
+3. Crawl at most five useful pages on the verified official site.
+4. Extract only factual links/metadata found on that official site.
+
+Extracted fields
+- Official website
+- Food menu / Speisekarte (prefers a clearly labelled PDF when available)
+- Online reservation URL (may be an external booking provider only when linked clearly from the official site)
+- Opening hours via Schema.org JSON-LD or common German weekday text
+
+Caching
+- Successful enrichment: 7 days server-side
+- Negative result: 6 hours server-side
+- Session cache in browser avoids repeat requests for already-seen cards
+
+UI
+- Existing Food Info & Actions buttons are populated asynchronously.
+- No placeholder buttons are shown.
+- Official opening hours override weaker OSM opening hours when successfully extracted.

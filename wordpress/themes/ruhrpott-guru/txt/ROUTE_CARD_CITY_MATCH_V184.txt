@@ -1,0 +1,6 @@
+V184 – Route der Industriekultur
+
+- Jede RDI-Kachel zeigt die Stadt/den Ort direkt in der Karten-Meta.
+- Gematchte RDI-Karten verwenden als Unterzeile den RDI-Typ (Ankerpunkt/Panorama/Siedlung) statt der generischen Highlight-Kategorie.
+- Noch nicht gematchte Manifest-Einträge bleiben im gleichen visuellen Kartenraster und fallen nicht mehr zu kleinen Textboxen zusammen.
+- Zusammen mit Places Backend 1.8.9 wird das RDI→Places-Matching für Stadtteil-/municipality_slug-Abweichungen robuster.

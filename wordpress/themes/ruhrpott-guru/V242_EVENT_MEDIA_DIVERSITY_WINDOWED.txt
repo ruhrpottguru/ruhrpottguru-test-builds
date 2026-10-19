@@ -1,0 +1,27 @@
+RUHRPOTTGURU THEME v242 – WINDOWED, REVERSIBLE EVENT MEDIA DIVERSITY
+
+Goal
+- Keep every event visible on Home and category pages.
+- Never replace exact/original ET4/ODF event images.
+- Reduce visually repeated Event-Ort context images without changing stored event/media data.
+
+Display rule
+1. Event count, order, radius and eligibility remain unchanged.
+2. Exact/original ET4/ODF images remain unchanged.
+3. Existing Symbolfoto assignments remain unchanged.
+4. For visible list cards, the same underlying Event-Ort image is treated as repeated when it would occur again within a 10-card window. Wikimedia thumbnail-width variants are canonicalized to the same file identity.
+5. A repeated Event-Ort card first tries an already loaded Symbolfoto from the same semantic event bucket (e.g. exhibition, concert, industrial heritage). Each existing symbol is borrowed at most once per local pass.
+6. Only unresolved duplicate context cards may use the existing person-filtered Pexels symbolic resolver.
+7. If no suitable alternative is available, the original Event-Ort image stays. No event is hidden.
+8. Detail overlays always use the event's stored/original media assignment, never the display-only borrowed symbol.
+
+Performance
+- Event list renders first.
+- Immediate local pass uses already loaded list data and requires no network call.
+- Only first 60 list items are inspected.
+- Max 24 unresolved context duplicates are sent to the bounded symbolic resolver.
+- Existing cached Pexels pools and the established person filter remain in use.
+
+Rollback
+RP Redaktion -> Event-Bilder -> uncheck "Wiederholte Event-Ort-Bilder reduzieren" -> save.
+The option name is intentionally retained from v241 so existing installations need no migration. Disabling it restores v240 card behaviour immediately without import, DB changes or reinstall.

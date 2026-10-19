@@ -1,0 +1,7 @@
+RuhrpottGuru Theme v262 – Ortsbild-Pool
+
+- venue-editorial-pool wird als Event-Ort-Kontextbild erkannt.
+- Der bestehende Place-Detail-Slider bleibt unverändert und liest den vom Backend gelieferten rg:media_gallery-Pool.
+- Eventkarten zeigen weiterhin genau ein Bild.
+- Bereits durch den manuellen Ortsbild-Pool verteilte Eventbilder werden nicht durch die ältere Pexels-Dubletten-Diversifizierung ersetzt.
+- Keine Sichtbarkeitslogik ist an Bildverfügbarkeit gekoppelt.

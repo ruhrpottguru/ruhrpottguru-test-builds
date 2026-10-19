@@ -1,0 +1,12 @@
+RUHRPOTT GURU – FOOD DISTANCE ORDER V1
+
+Goal:
+- Food order is based on fresh Haversine distance from the currently selected GPS coordinate.
+- No rounding is allowed before sorting.
+- Under 1 km, cards show meters so ordering can be visually checked.
+- Radius chain stays 1 -> 2.5 -> 5 -> 10 -> 25 km.
+- Food Filter V2 remains reversible and unchanged.
+
+Regression invariant:
+If distance(Kaiserhof) < distance(Martinelli) for the current GPS coordinate, Kaiserhof MUST appear before Martinelli.
+No venue-name hardcoding is used to force that order.

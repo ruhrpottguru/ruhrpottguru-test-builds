@@ -1,0 +1,46 @@
+RuhrpottGuru Places Backend 1.10.44
+Eventbild-Fallback-Audit
+
+URSACHE
+- Die rights-aware Bildkette aus 1.10.42 war vorhanden, aber an den allgemeinen Event-Enrichmentlauf gekoppelt.
+- Ein Event ohne Treffer wurde als checked_no_media abgeschlossen.
+- DB-Events starten im Browser absichtlich keinen einzelnen Live-Media-Request pro Karte.
+- Dadurch konnte ein temporärer Fehler bei offizieller Website / Commons / Pexels dauerhaft als bildlose Karte sichtbar bleiben.
+
+LOESUNG
+- Eigener serverseitiger Background-Worker fuer aktive/kommende Events ohne lokales Livebild.
+- Der Worker ist unabhaengig vom enrichment_status und prueft pro Welle jedes bildlose Event hoechstens einmal.
+- Upgrade auf 1.10.44 startet automatisch eine Welle.
+- Nach jedem abgeschlossenen 53-Staedte-Zusatzlauf startet automatisch eine neue Welle; temporaere Upstream-Fehler erhalten so spaeter eine neue Chance.
+- Allgemeiner Event-Enrichment- und Places-Import haben Vorrang; der Worker wartet statt parallel dieselben Datensaetze zu bearbeiten.
+- Einzelne Exceptions blockieren nicht die gesamte Welle; der Datensatz bleibt retry-faehig.
+- Kein Event wird wegen fehlendem Bild ausgefiltert.
+- Bestehende ET4/ODF- und destination.one-Lokalbilder werden weder geloescht noch neu zugeordnet.
+
+LIVE-BILDHIERARCHIE
+1. et4-global-id
+2. et4-feed
+3. editorial-override
+4. official-approved
+5. venue-commons-context
+6. pexels-symbolic-event
+7. Frontend-Fallback
+
+REDAKTION
+RP Redaktion -> Events zeigt zusaetzlich "Eventbild-Fallback-Audit v1.10.44" mit:
+- in dieser Welle geprueft
+- neue Livebilder
+- aktuell noch ohne lokales Livebild
+- offizielle Bildkandidaten zur Rechtepruefung
+- Commons-Kontextbilder
+- Pexels-Symbolbilder
+- Worker-Status / letzter und naechster Lauf
+
+VERIFIKATION
+- PHP-Lint: PASS
+- 25/25 statische Architektur-/Regressionstests: PASS
+- 0 undefinierte $this->Methoden: PASS
+- native lokale Download-/global_id-/REST-Handoff-Funktionen byte-identisch zu 1.10.43: PASS
+- frontend_events_query byte-identisch zu 1.10.43: PASS
+- kein Bildfilter in der Eventauslieferung: PASS
+- neuer Worker enthaelt keine Medien-/Event-Loeschung: PASS

@@ -1,0 +1,6 @@
+V180 Night Runtime Fix
+- Initialisierung erst nach React PlainWpView-Render.
+- Bindings auf sichtbare Nachtseite statt versteckter WordPress-Quelle.
+- Filter/Radius/Standort per Event-Delegation.
+- Nachtfoto-Filter prüft echte Nachtmedien.
+- REST-Suche mit Timeout und Abbruch veralteter Requests.

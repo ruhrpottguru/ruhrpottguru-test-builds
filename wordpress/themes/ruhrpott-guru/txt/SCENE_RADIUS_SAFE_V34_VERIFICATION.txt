@@ -1,0 +1,28 @@
+Ruhrpott Guru – Filter-safe Radius Snapshot V34 Verification
+
+Basis: V32 Scene Pure (live-confirmed data path)
+
+Scope:
+- Spatial radius snapshot merge only for food, highlights and culture.
+- Events explicitly bypass merge and remain fresh-only.
+- No changes to scene classifier, quick-filter predicates, OSM loader, provider/radius loader, event loader, GPS, PHP proxy or base CSS.
+
+PASS JavaScript syntax (ruhrpott-app.js + app.js)
+PASS all PHP files
+PASS OSM loader $S byte-identical to V32
+PASS spatial loader d4 byte-identical to V32
+PASS event loaders o4/u4 byte-identical to V32
+PASS RG_sceneClassification byte-identical to V32
+PASS quick-filter predicates _y/t4/n4 byte-identical to V32
+PASS functions.php byte-identical to V32
+PASS js/app.js byte-identical to V32
+PASS food-place-identity.php byte-identical to V32
+PASS css/ruhrpott-app.css byte-identical to V32
+PASS 25 km -> 50 km preserves known Food/Highlights/Kultur items inside the new radius
+PASS 25 km -> 10 km removes known items outside the new radius
+PASS fresh duplicate wins over older known duplicate
+PASS Events bypass radius merge completely
+PASS location change does not carry old-location results
+PASS active quick-filter state is not reset by radius change
+PASS all five quick filters are re-evaluated from the updated pt snapshot: Jetzt offen, Heute, Szene & Trends, Für lau, Mit Family
+PASS removed technical event-template tag remains absent

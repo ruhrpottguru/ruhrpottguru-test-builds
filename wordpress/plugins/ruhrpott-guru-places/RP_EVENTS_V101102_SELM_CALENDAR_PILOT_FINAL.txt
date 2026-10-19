@@ -1,0 +1,46 @@
+RUHRPOTTGURU EVENTS 1.10.102 — SELM CALENDAR PILOT FINAL
+Date: 2026-09-23
+
+PURPOSE
+- Adds the official Stadt Selm HTML event calendar as an additional canonical Event source.
+- Creates NO separate Selm calendar, frontend page, card type or visitor layout.
+- Selm-only events flow through the existing event cache, visitor endpoint, filters, radius logic, detail overlay and deep-link system used by ET4 events.
+
+SOURCE
+- Listing: https://www.stadtportal-selm.de/veranstaltungen/
+- Stable source identity: selm:<numeric calendar id>; date/time changes update the same DB event instead of creating a duplicate.
+- Visitor attribution: "Quelle: Stadt Selm · Veranstaltungskalender"
+- The existing event source box links to the concrete original event page.
+- Calendar images are deliberately NOT imported by this adapter.
+
+SYNC / LIFECYCLE
+- Uses global Event import lock; no parallel ET4/Selm import writer.
+- 0–14 days: detail refresh every 4 hours.
+- 15–90 days: detail refresh daily.
+- 91–365 days: detail refresh weekly.
+- Events beyond the 365-day product horizon are recognized on the listing but are not imported until they enter the horizon.
+- Listing changes force a detail refresh independent of tier.
+- Missing events require >=3 successful listing misses and >=24h before Selm-owned rows expire.
+- Explicit source cancellation phrases mark Selm-owned rows cancelled immediately.
+
+DEDUPE
+- Existing ET4/open-data/EMG candidates are matched before creating a Selm row.
+- ET4 remains higher priority in public cross-source dedupe.
+- Matching existing events receive Selm provenance in rg_event_sources rather than a second visitor card.
+
+LOCATION
+- Official 59379 Selm district labels such as "Selm-Cappenberg" are normalized to municipality "Selm" for the canonical 53-city gate.
+- Foreign event venues (e.g. Nürburgring) are not rewritten to Selm and remain subject to the existing Ruhrgebiet city gate.
+- No approximate city-center coordinates are invented. Coordinates are reused only from matching local event/place evidence; unresolved rows remain geo_missing rather than receiving a false distance.
+
+ADMIN
+- RP Redaktion -> Events includes "Selm-Pilot jetzt synchronisieren".
+- Status shows listing count, processed, inserted, updated/matched, geo_missing, wait reason and errors.
+
+REGRESSION
+- PHP syntax: PASS
+- Selm timed event parser fixture: PASS
+- Selm multi-day/all-day parser fixture: PASS
+- Stable numeric detail URL/listing parser fixture: PASS
+- 59379 Selm district normalization: implemented
+- Visitor layout change: NONE beyond generic source-page link inside the pre-existing source box.

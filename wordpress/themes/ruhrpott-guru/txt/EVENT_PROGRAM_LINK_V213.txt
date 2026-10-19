@@ -1,0 +1,6 @@
+RUHRPOTTGURU – EVENT PROGRAM LINK V213
+
+- Generic event programUrl support in DetailOverlay.
+- Program action is displayed inside the Termin card, analogous to Food Speisekarte.
+- Visitor-facing official day hours can be shown below the event date.
+- Bulli Summerfestival 2026 receives official program link and opening hours from Places Backend 1.10.18.

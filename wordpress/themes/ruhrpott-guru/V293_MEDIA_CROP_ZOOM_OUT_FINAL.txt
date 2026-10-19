@@ -1,0 +1,7 @@
+RuhrpottGuru Theme v293 – manual crop zoom-out
+
+- Existing crop zoom 1.00+ behavior remains cover + zoom-in.
+- New 0.00–0.98 range interpolates from full-image contain to the previous cover crop.
+- Uses natural image ratio and rendered box ratio on load, so zoom-out reveals additional source pixels instead of shrinking the already-cropped cover result.
+- Applies to cards, detail gallery, favorites, home magazine cards, culture cards and global-search thumbnails.
+- Existing v288 page-scroll behavior remains unchanged.

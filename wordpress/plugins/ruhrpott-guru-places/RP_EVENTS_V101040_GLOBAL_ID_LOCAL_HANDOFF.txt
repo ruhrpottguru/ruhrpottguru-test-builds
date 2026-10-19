@@ -1,0 +1,48 @@
+RuhrpottGuru Places Backend 1.10.40
+ET4 GLOBAL_ID -> LOCAL STATIC IMAGE -> VISITOR HANDOFF
+Date: 2026-09-10
+
+LIVE EVIDENCE INCORPORATED
+- ET4 catalog assignment finished: 470 catalog objects checked, 316 with image, 316 exact global_id matches, 1,777 occurrences assigned, 0 unmatched, 0 ambiguous, 0 errors.
+- Local cache finished: 316 / 316 current ET4 event images reported ready.
+- The cache directory wp-content/uploads/rpg-et4-event-media/ is physically populated on the live host.
+- A concrete cache stem supplied from the live server (005a43aa64ea11cf0a7277d3c045197044a14f68) maps to ET4 global_id e_101277217 and the local image exists on the server.
+- Despite this, the event cards can still show the ticket fallback. Therefore ET4 retrieval and local file creation are no longer the unresolved stage; the remaining stage is the visitor handoff.
+
+CODE DEFECT CLOSED
+- In 1.10.39 the main frontend_events_query() first selected media by occurrence/database event_id.
+- That generic selection admitted both localized exact ET4 media and older healthy ET4/feed media, and its ordering did not make local_cache_status=ready + source=et4-global-id an absolute first choice.
+- The local cache itself is keyed by ET4 global_id, not by occurrence event_id.
+- A late rest_request_after_callbacks filter attempted to re-hydrate the response by global_id, but the main visitor payload did not itself enforce the same invariant.
+
+1.10.40 INVARIANT
+1. Event rows are filtered, source-owned and series-clustered first.
+2. Only then are the visible ET4 external_id/global_id values collected.
+3. Those ids are resolved directly against the current master event_media rows where:
+   source=et4-global-id, moderation_status=active,
+   local_cache_status=ready, local_path is non-empty.
+4. That exact local media row wins before any event_id media candidate.
+5. The local static uploads URL is written directly into media_objects, rpg_event_media, image and imageUrl in frontend_events_query().
+6. Theme v232 can therefore consume the local URL without depending on the late REST filter.
+7. The late REST filter remains only as a defensive second invariant.
+8. The existing 316 cached files are reused. 1.10.40 does not reset or redownload the completed local cache.
+
+QUERY HARDENING
+- The event_id batch media query now also explicitly orders a ready local et4-global-id row before all other image rows.
+- This prevents older et4-event-feed/enrichment rows without local_path from winning the generic occurrence-media selection.
+
+THEME V232 CONTRACT TEST
+Fixture:
+  global_id=e_101277217
+  source=open_data_finder
+  local URL=https://www.ruhrpottguru.de/wp-content/uploads/rpg-et4-event-media/et4-005a43aa64ea11cf0a7277d3c045197044a14f68.jpg?v=...
+Result:
+  PASS - unmodified Theme v232 normalizeEvent() returns the exact same local URL as imageUrl.
+  PASS - no originalEt4Url branch is required.
+  PASS - no event-media AJAX/PHP image proxy is required.
+
+STATIC / PACKAGE TESTS
+- php -l ruhrpott-guru-places.php: PASS
+- No schema bump: existing 1.10.39 local_path/local_cache columns are reused.
+- Existing local worker/cache option names retained: no new download wave is triggered by the plugin version bump.
+- Only plugin version/comment, visitor media selection/handoff, admin cache label and this verification note changed.

@@ -1,0 +1,10 @@
+RuhrpottGuru v102 – Activities Local Coverage & Lifecycle
+
+- Theme UI/React unchanged; version metadata only.
+- Places Backend 1.2.3 owns the logic.
+- Active normal Hallen-/Freibäder remain discoverable as local utility.
+- Erlebnisbad, Wakeboard/Wasserski, Scuba, Skate/BMX, Klettern/Bouldern/Climbing-Adventure and Karting receive stronger experience priority.
+- Pure tourism/historic records no longer qualify as Activities without an independent sports/action signal.
+- Zoos/Freizeitparks are handled by Highlight Intelligence.
+- Known closed/disused/abandoned/demolished/razed/removed/source-missing records are suppressed.
+- Home discovery gets a curated experience mix; category pages preserve the full eligible local catalogue.

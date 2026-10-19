@@ -1,0 +1,6 @@
+RuhrpottGuru v206 – Desktop weather location cache
+- Weather cache is scoped to selected city + rounded coordinates.
+- Cache lifetime: 15 minutes.
+- Location change immediately clears the previous location's weather while the new request loads.
+- Returning to a previously used location within 15 minutes reuses only that location's cached weather.
+- Mobile behavior unchanged.

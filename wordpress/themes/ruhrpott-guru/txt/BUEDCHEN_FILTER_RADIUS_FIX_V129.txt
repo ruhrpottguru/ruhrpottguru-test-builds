@@ -1,0 +1,22 @@
+RuhrpottGuru v129 – Büdchen filter/radius invariant
+
+Hard invariant:
+Location + radius + quality selection create the fixed public result set.
+Filters only reduce that set.
+
+Example:
+5 km = 12 Büdchen
+Kaffee <= 12
+Sitzplätze <= 12
+Jetzt geöffnet <= 12
+Kaffee + Sitzplätze <= 12
+
+No filter can ever increase the result count or pull additional Tier-B candidates
+into the current radius result.
+
+Time filters and assortment filters remain independent modes:
+choosing Kaffee clears an old "Jetzt geöffnet" filter, and choosing a time filter
+clears assortment filters.
+
+Map and image fixes from v128 remain included.
+Requires Places Backend 1.2.9 for same-origin map tiles and place_media images.

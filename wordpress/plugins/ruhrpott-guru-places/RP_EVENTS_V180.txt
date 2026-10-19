@@ -1,0 +1,9 @@
+RuhrpottGuru Places Backend 1.8.0 - Supplemental Exact-City Gate
+
+- Fixes broad destination.one supplemental responses being accepted across all 53 municipalities during each city worker.
+- Every city worker now post-filters provider rows to the exact requested municipality using the canonical 53-city normalization.
+- Rows from other Ruhr municipalities are counted as Fremdstadt-Treffer and ignored by that worker.
+- Outside-region rows remain rejected.
+- Existing v1.7.9 supplemental runs that already progressed are restarted once from city 1 after upgrade; existing valid DB rows are preserved.
+- Adds provider/raw vs exact-city diagnostics to the supplemental status line.
+- No event cleanup is performed by this upgrade.

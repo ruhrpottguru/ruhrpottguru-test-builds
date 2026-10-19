@@ -1,0 +1,27 @@
+RuhrpottGuru Places Backend 1.10.72 / Opening Hours Audit 1.10.32
+
+Verified root cause from 1.10.71 trigger code:
+- The 1.10.71 one-shot option rg_opening_hours_audit_v1131_final_salvage was written immediately after the enqueue UPDATE, regardless of whether the UPDATE affected rows or failed.
+- If that first enqueue did not take over the live research-incomplete rows, later requests were permanently gated by the option although the real DB still contained technical-open rows and the queue stayed 0.
+- This matches the observed live state: audit finished, queue 0, 221 technical-open rows.
+
+1.10.72 correction:
+- No persistent option is used as the gate for starting the final salvage.
+- The trigger checks the real DB state when the audit is finished.
+- Eligible scope is strictly active/public Food, Highlights, Culture, Activities rows with:
+  * status = research-incomplete, or
+  * status = error and last_error contains x-mac-roman.
+- If eligible rows exist they are marked research-queued with the dedicated __rpg_final_salvage_v1132__ marker.
+- The final-salvage parser accepts both v1131 and v1132 row markers.
+- If the enqueue SQL fails, the DB error is surfaced in the audit message and no completion gate is written, so a later request can retry safely.
+- Already found opening hours, confirmed unknown rows, not-required rows and excluded rows are untouched.
+- After successful salvage, rows leave research-incomplete/error, so the real-state trigger is naturally idempotent and cannot loop the same completed set.
+- Admin heading updated to Opening Hours Audit 1.10.32 so the installed audit logic is visible.
+
+Static checks:
+- PHP syntax: PASS
+- Version header 1.10.72: PASS
+- v1132 marker accepted by remote search: PASS
+- Finished-state real-DB trigger present: PASS
+- One-shot option no longer gates final salvage: PASS
+- Existing v1131 marker compatibility retained: PASS

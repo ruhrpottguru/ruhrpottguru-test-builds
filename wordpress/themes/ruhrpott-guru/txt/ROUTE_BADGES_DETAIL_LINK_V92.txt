@@ -1,0 +1,9 @@
+RuhrpottGuru Theme v92
+
+- Removes Route der Industriekultur badges from all Home highlight images.
+- Removes Ankerpunkt/Panorama/Siedlung image badges on the Route overview page.
+- Suppresses Route Industriekultur subcategory badges on category-card imagery.
+- Filters Route/Ankerpunkt/Panorama/Siedlung chips from Highlight image overlays.
+- Route locations now show an internal "Zur Übersicht der Route" link in the detail modal.
+- Detail image no longer shows the Route subcategory badge for Route locations.
+- Backend remains 1.2.1; no DB import required.

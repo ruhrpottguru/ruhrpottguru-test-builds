@@ -1,0 +1,31 @@
+RuhrpottGuru Places Backend v1.10.31 — ET4 Eventbild-Zuordnung
+
+Ziel
+- Ein ET4-Master-Event verwendet ausschließlich das Bild aus media_objects desselben ET2014A-Items.
+- Die Zuordnung erfolgt ausschließlich über global_id -> rg_events.external_id.
+- Kein Dateinamen-Matching, kein Titel-/Venue-/Geo-Matching, keine Cross-Source-Bildvererbung.
+
+Verifizierte Datenkette
+1. ET2014A Item besitzt global_id.
+2. Dasselbe Item besitzt optional media_objects.
+3. media_object besitzt rel + url; default wird bevorzugt.
+4. Lokale Terminexpansion kopiert global_id und media_objects unverändert auf alle Occurrences.
+5. rg_events.external_id wird aus global_id gebildet.
+6. Canonical-media Backfill schreibt die Item-Bild-URL auf alle aktiven aktuellen Master-Occurrences mit external_id = global_id.
+7. Besucher-REST liest das primäre rg_event_media-Bild.
+
+V1.10.31 Reparatur
+- alter fuzzy Katalogabgleich (Titel/Stadt/Geo/Venue/Postcode) aus dem Master-Bildpfad entfernt.
+- Kandidaten werden nur noch über exact external_id IN (global_ids) gefunden.
+- aktuelle Masterquellen open_data_finder und et4 werden beide akzeptiert.
+- einmaliger v1.10.31-Backfill startet automatisch nach Installation; keine Öffnungszeiten-/Master-/Supplemental-States werden zurückgesetzt.
+- zukünftige Masterimporte persistieren Item.media_objects direkt.
+
+Lokale Regression
+PASS: global_id wird als Besitzer-ID gelesen.
+PASS: rel=default wird gegenüber gallery bevorzugt.
+PASS: canonical/html wird nicht als Bild akzeptiert.
+PASS: media_objects.media_object Wrapper wird akzeptiert.
+PASS: address.image wird im canonical Master-Bildpfad nicht als Eventbild verwendet.
+PASS: lokale Occurrence-Expansion erhält global_id + media_objects.
+PASS: DB-Kandidatenpfad ist exact external_id + current master token; fuzzy matcher entfernt.

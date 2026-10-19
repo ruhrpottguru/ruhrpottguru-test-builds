@@ -1,0 +1,40 @@
+RuhrpottGuru Places Backend 1.10.71 / Opening Hours Audit 1.10.31
+Finaler Ergebnis-Salvage – Verifikation
+
+Scope
+- Ausgangspunkt: 1.10.70.
+- Kein neuer Vollaudit, kein Reset vorhandener Öffnungszeiten, keine Requeue bestätigter Unknowns.
+- One-shot-Requeue ausschließlich für bestehende research-incomplete-Fälle sowie Errors mit x-mac-roman-Signatur.
+
+Änderungen
+1. x-mac-roman
+   - Charset-Aliase werden normalisiert (x-mac-roman -> MACINTOSH).
+   - mb_convert_encoding() und iconv() sind jeweils per try/catch gegen nicht unterstützte Encoding-Namen geschützt.
+   - Fallbacks Windows-1252 und ISO-8859-1 bleiben erhalten.
+
+2. Finaler offizieller Salvage
+   - Nur bei dem markierten One-shot-Pass.
+   - Bereits bekannte offizielle URL bleibt die Identitätsbasis.
+   - Zusätzliche Versuche nur auf derselben offiziellen Domain / äquivalentem www-/Scheme-Ziel:
+     kanonische Root, www/non-www, alternatives http/https und typische offizielle Pfade
+     /oeffnungszeiten/, /opening-hours/, /besuch/, /visit/.
+   - Gefundene Zeiten werden wie bisher dauerhaft in place_schedules, place_enrichment und places gespeichert.
+   - Wird keine belastbare Zeit gefunden, wird der historische technische Restfall als
+     unknown-after-exhaustive-search abgeschlossen. Die Diagnose unterscheidet erreichbaren
+     Salvage ohne Zeiten, weiterhin unerreichbare offizielle Seite und technischen Nebenpfad.
+
+3. Sicherheit / Bestandsschutz
+   - found-existing, found-web, not-required und bereits unknown-after-exhaustive-search werden nicht requeued.
+   - Normale zukünftige technische Fehler bleiben weiterhin research-incomplete/error; nur der One-shot-Marker
+     darf ohne Ergebnis final als Unknown abschließen.
+   - Kein Google-/Verzeichnis-Ergebnis wird als Öffnungszeit gespeichert; offizielle Betreiber-/Kommunalseiten
+     bleiben die Datenquelle.
+
+Prüfungen
+- PHP-Syntax aller Plugin-PHP-Dateien: OK.
+- Versionsheader und Runtime-Konstante: 1.10.71 / 1.10.71.
+- Requeue-SQL statisch geprüft: nur research-incomplete + x-mac-roman-Error.
+- Marker-Übergabe Worker -> Recherchepfad geprüft.
+- Final-Salvage-Abschluss ohne Ergebnis -> complete=true -> confirmed unknown geprüft.
+- Reset-Pfad löscht neuen One-shot-Optionschlüssel.
+- Gegen 1.10.70 ist funktional nur ruhrpott-guru-places.php geändert; diese Verifikationsdatei kommt neu hinzu.

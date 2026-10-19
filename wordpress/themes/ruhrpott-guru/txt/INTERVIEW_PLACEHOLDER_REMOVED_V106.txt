@@ -1,0 +1,5 @@
+RuhrpottGuru v106
+
+- Der fest eingebaute Interview-Platzhalter wurde vollständig entfernt.
+- Keine automatische Interview-Suche, kein Ersatz-Interview und keine ?rpg_story=interview-Seite mehr.
+- Redaktionelle WordPress-Beiträge erscheinen nur dort, wo sie im WordPress-Seiteninhalt zwischen den RuhrpottGuru-Shortcodes platziert werden.

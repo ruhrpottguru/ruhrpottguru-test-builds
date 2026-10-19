@@ -1,0 +1,7 @@
+RuhrpottGuru v103 – Activity Intelligence / Visitor Utility
+
+- Activities Home preserves backend curation order instead of re-sorting by distance.
+- Reine Häfen/Marinas und Vereinsobjekte without a direct public activity offer are filtered by Places Backend 1.2.4.
+- Local pools remain discoverable but do not crowd out special activities.
+- Near-duplicate representations of the same venue are collapsed in the backend.
+- Category pages remain distance-sorted for local completeness.

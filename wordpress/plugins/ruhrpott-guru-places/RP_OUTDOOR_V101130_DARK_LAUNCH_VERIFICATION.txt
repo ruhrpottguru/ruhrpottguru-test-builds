@@ -1,0 +1,21 @@
+RuhrpottGuru Places Backend 1.10.130 – Hunde & Wald/Natur Dark Launch
+
+Scope
+- Base: production v1.10.129 Place-Media-Contract-Repair.
+- Additive only: no edits to existing Places/Event/Media schema, imports, workers, reprocessing or public frontend routes.
+- Four dedicated tables: outdoor_entities, outdoor_entity_sources, outdoor_entries, outdoor_municipalities.
+- Separate schema option rg_outdoor_schema_version=1.0.0; core rg_places_schema_version remains 1.10.129.
+- Existing source_registry / intelligence_claims / resolved_snapshots remain the evidence store.
+- Admin-only endpoints:
+  GET  /wp-json/ruhrpottguru/v1/outdoor/status
+  POST /wp-json/ruhrpottguru/v1/outdoor/search
+- Search supports intents forest, dog_any, dog_walk, dog_park, forest_dog, dog_off_leash, forest_dog_off_leash.
+- Radius is calculated exclusively from public-ready visitor entries, never from entity centroid.
+- No outdoor importer or worker in this release. Empty database therefore returns a valid empty result.
+
+Release gates
+- PHP syntax: all PHP files.
+- Archive root and plugin metadata.
+- v1.10.129 regression: core schema marker unchanged; place_media repair path unchanged; existing worker hooks unchanged.
+- Functional fixture acceptance: main path, empty result, invalid request, closed result, unknown dog policy, leashed vs off-leash, entry-point radius, generic dog diversification.
+- Static safety: no outdoor code writes place_media/events/places, schedules cron, starts reprocessing, or registers public frontend integration.

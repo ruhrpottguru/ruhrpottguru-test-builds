@@ -1,0 +1,6 @@
+EVENT SORT URGENCY V1
+- Running events first, ordered by earliest end time.
+- Running events without reliable end time follow running events with known end time.
+- Today upcoming events next, ordered by start time.
+- Future events after that, ordered by start date/time.
+- ET4 occurrence/media/radius/pagination logic unchanged.

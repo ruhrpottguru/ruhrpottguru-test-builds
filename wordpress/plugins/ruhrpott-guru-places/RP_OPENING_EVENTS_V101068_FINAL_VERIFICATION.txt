@@ -1,0 +1,28 @@
+RuhrpottGuru Places Backend 1.10.68 — Öffnungszeiten + Events Abschluss-Pass
+Stand: 15.09.2026
+
+ÖFFNUNGSZEITEN
+- Audit, Inventur, Kategorie-Qualitätsmatrix, Retry-Queue und Restfall-Liste verwenden denselben Besucher-Scope:
+  active=1 + lifecycle_status='active' + Food/Highlights/Kultur/Aktivitäten.
+- Deaktivierte/geschlossene Lifecycle-Altobjekte verfälschen Coverage, Restqueue und Fortschritt nicht mehr.
+- Ein aktives UND verifiziertes Manual-Override mit explizitem Status geschlossen/inaktiv wird in rows_to_elements()
+  nicht mehr an Besucher ausgeliefert. Der DB-Datensatz bleibt erhalten und ist reversibel.
+- Fehlende Öffnungszeiten sind ausdrücklich KEIN Schließungssignal. „Öffnungszeiten nicht bekannt“ bleibt neutral.
+
+EVENTS
+- Der bestehende kanonische Organizer-Resolver 1.10.66 bleibt unverändert maßgeblich; kein Namens-Hardcode.
+- Der Event-Finalcheck prüft zusätzlich:
+  * kanonischer RuhrpottGuru-Direktlink auf derselben Domain und /teilen/event/<id>/
+  * Kalenderfähigkeit (gültiger Startzeitpunkt)
+  * verbliebene Provider-/Media-Rollenkonflikte in der final ausgegebenen Organizerliste
+  * tatsächliche Organizer-Namen sowie Web-/Ticket-Zieldomains.
+- Die öffentliche Theme-Logik für Share und Kalender bleibt in Theme v259 unverändert und wurde statisch geprüft.
+- Zusätzliche lokale Tourismus-/Marketingquellen bleiben bis zur jeweiligen Nutzungsfreigabe deaktiviert.
+
+PRÜFUNGEN DES FERTIGEN PAKETS
+- PHP-Syntax aller Plugin-PHP-Dateien: OK
+- Öffnungszeiten-Scope: alle Audit-Abfragen im relevanten Abschnitt lifecycle_status='active': OK
+- Besucher-Gate für verifiziert geschlossen/inaktiv vorhanden: OK
+- Event-Finalcheck: 15 Spalten inkl. Share + Kalender, colspan 15: OK
+- Organizer-Konfliktregel ist rollenbasiert, nicht namensbasiert: OK
+- ZIP-Integrität nach Packen: geprüft

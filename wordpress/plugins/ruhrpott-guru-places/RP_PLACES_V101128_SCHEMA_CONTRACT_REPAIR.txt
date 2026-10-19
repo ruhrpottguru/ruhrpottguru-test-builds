@@ -1,0 +1,17 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.128 — SCHEMA CONTRACT REPAIR
+
+Cause verified in 1.10.127 source:
+- Runtime VERSION had advanced to 1.10.127 while SCHEMA_VERSION was still 1.10.22.
+- ensure_schema_and_schedule() only invokes install_schema()/dbDelta when the stored schema marker differs.
+- Columns introduced later in CREATE TABLE declarations (including place_media content classification and event lifecycle fields) were therefore not guaranteed to be applied during ordinary plugin replacement updates.
+- This exactly explains a 53-city audit with place_media_analysis.total=0 while the place-media coverage worker reports persisted finds.
+
+Fix:
+- SCHEMA_VERSION -> 1.10.128.
+- Next normal request performs the existing idempotent dbDelta schema reconciliation exactly once.
+- No tables are dropped, no worker cursors/options are reset, and existing data is retained.
+- The 53-city audit now reports schema_version, presence of required media/event-lifecycle columns, place_media row counts and any media grouping SQL error.
+
+Operational safety:
+- Pause the 1.10.94 place-media coverage worker before installing because schema reconciliation can ALTER wp_rg_place_media while the worker writes to that same table.
+- After installation and one admin request completes, the worker can be resumed from its preserved cursor.

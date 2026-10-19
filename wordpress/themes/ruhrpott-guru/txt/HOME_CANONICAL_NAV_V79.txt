@@ -1,0 +1,10 @@
+RuhrpottGuru V79 — Canonical WordPress Home + Footer Navigation
+
+- WordPress page_on_front is the only start page.
+- New front-page.php renders the Gutenberg Home modules through the proven WP page shell.
+- Home shortcodes on the front page can no longer be misclassified as a category shell.
+- Sticky bottom navigation is now driven by the WordPress Footer menu when present; the hard-coded Start tab is removed.
+- The WordPress Home menu item is identified as home before shortcode inspection.
+- Legacy /start and /start-test menu entries are ignored in mobile bottom navigation.
+- Header logo and “Zurück zur Startseite” now navigate to the canonical WordPress Home URL.
+- Existing category pages, Food DB path, Places Backend and location persistence remain unchanged.

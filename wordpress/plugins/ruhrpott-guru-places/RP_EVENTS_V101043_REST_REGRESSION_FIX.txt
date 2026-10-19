@@ -1,0 +1,37 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.43
+Event REST Regression Fix
+Date: 2026-09-11
+
+OBSERVED PRODUCTION SYMPTOM
+- Event category page in Essen / 5 km rendered the normal empty-radius state although the event database had previously returned many events.
+- This appeared immediately after deploying Theme v233 + Backend 1.10.42.
+
+VERIFIED ROOT CAUSE
+- Backend 1.10.42 removed the old hard-coded Bulli Summerfestival visitor override.
+- In the same edit, the adjacent generic method event_visitor_datetime_iso() was accidentally removed.
+- The method was still called by visitor-facing event serialization in the event REST path, global search and share-item path.
+- Static class audit of 1.10.42 found exactly one undefined $this method call: event_visitor_datetime_iso.
+- Theme v233 catches backend Throwable in ruhrpott_guru_event_rest() and falls open to the live ET4 transport. This masks the backend fatal; if the fallback returns no local items the UI shows the normal empty-radius state instead of a PHP error.
+
+FIX
+- Restore event_visitor_datetime_iso() byte-for-byte from the proven Backend 1.10.41 implementation.
+- Keep the 1.10.42 rights-aware multi-source event-media architecture unchanged.
+- Keep all events eligible regardless of whether an image exists.
+- No reimport, image-cache reset, or database migration is introduced.
+
+VERIFICATION
+- PHP syntax: PASS
+- All plugin PHP files linted: PASS
+- Static class closure: PASS; every $this->method() call resolves to a declared class method.
+- 1.10.42 negative-control audit: PASS; exactly event_visitor_datetime_iso was unresolved.
+- Restored method exact-match against 1.10.41: PASS
+- Event base SQL has no media/image predicate: PASS
+- Rights-aware source chain retained: et4-global-id, et4-feed, editorial-override, official-approved, venue-commons-context, pexels-symbolic-event: PASS
+- Existing one-time v1.10.42 media re-audit remains untouched: PASS
+- Diff from 1.10.42 limited to version/comment, restored generic serializer, admin cache label, this verification note: PASS
+- ZIP integrity: verified after packaging
+
+DEPLOYMENT
+- Replace only the RuhrpottGuru Places Backend plugin with 1.10.43.
+- Keep Theme v233 installed.
+- Existing local Event image files remain untouched.

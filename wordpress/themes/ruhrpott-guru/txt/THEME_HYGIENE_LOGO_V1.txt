@@ -1,0 +1,5 @@
+RUHRPOTT GURU – THEME HYGIENE + CUSTOM LOGO V1
+Generated: 2026-08-20
+- Root TXT files moved to /txt/
+- WordPress custom-logo support enabled
+- React header consumes configured WordPress custom logo via hidden DOM source

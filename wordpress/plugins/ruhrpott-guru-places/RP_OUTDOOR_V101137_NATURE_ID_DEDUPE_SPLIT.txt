@@ -1,0 +1,24 @@
+RuhrpottGuru Places Backend v1.10.137 – Outdoor Coverage Nature ID Dedupe Split
+
+Scope
+- Ausschliesslich der read-only 53-Kommunen Outdoor-Coverage-Runner.
+- Keine Aenderung an Places, Events, Media, Outdoor-Entities, Ranking, Dog Policy, Entries, Worker oder Frontend.
+
+Geaendert
+- Der bisherige kombinierte Nature-UNION-Count wird in drei kleinere, semantisch identische ID-only Overpass-Abfragen geteilt:
+  1) Wald: natural=wood | landuse=forest | boundary=forest (jeweils mit name),
+  2) Schutzgebiete: boundary=protected_area (mit name),
+  3) Parks/Naturreservate: leisure=park|nature_reserve (mit name).
+- Der Runner dedupliziert die drei Mengen serverseitig exakt nach OSM-Typ + OSM-ID. Dadurch bleibt der eindeutige Nature-Candidate-Count identisch zur bisherigen UNION-Semantik und Doppelzaehlungen zwischen Kategorien werden vermieden.
+- Query-Version: outdoor-coverage-1.3.
+
+Live-Verifikation vor Build
+- Bochum: Einzelmengen 24 Wald, 12 Schutzgebiet, 52 Park/Naturreservat.
+- 11 kategorienuebergreifende Ueberschneidungen; eindeutige Vereinigungsmenge = 77.
+- Das entspricht exakt dem zuvor erfolgreich gemessenen kombinierten Bochum-Wert 77.
+
+Unveraendert
+- Boundary/Area-Vertrag (AGS + admin_level -> 1 Relation + 1 Area).
+- Hundewiesen-Query und Count.
+- Phase B fuer Hunderegel-Evidence + Trailheads.
+- Provider-Reihenfolge, Timeouts und Provider-Affinity.

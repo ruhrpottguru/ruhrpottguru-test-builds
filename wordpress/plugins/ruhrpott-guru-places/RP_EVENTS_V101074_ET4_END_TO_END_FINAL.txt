@@ -1,0 +1,22 @@
+SUPERSEDED IN PART BY 1.10.75: The native-ET4-image VISIBILITY GATE described below was incorrect and is no longer active. Keep only the addresses[].image reconciliation and same-global_id occurrence improvements.
+
+RuhrpottGuru Places Backend 1.10.74 — ET4 Events End-to-End Final
+Stand: 15.09.2026
+
+Ziel
+- Besucher-Events nur mit nativer, lokal materialisierter ET4-Bildidentität derselben global_id.
+- ET4 media_objects bleibt primär; dokumentiertes addresses[].image desselben Eventobjekts ist zulässiger Rückfall.
+- Organizer-/Contact-/Provider-Bilder aus addresses[] sind ausgeschlossen.
+- Redaktion/Official/Commons/Pexels bleiben als historische/reversible Daten erhalten, qualifizieren ein Event aber nicht für Besucherlisten/REST.
+- Wiederkehrende Termine derselben global_id werden im Detail als konkrete weitere Termine ausgegeben; jeder Termin besitzt seinen eigenen RuhrpottGuru-Deep-Link.
+- Event-Finalcheck verwendet dasselbe native ET4-Bildgate wie die Besucheransicht.
+
+Migration
+- Einmaliger Reconcile des ET4-Katalog-Medienpfads, damit Altbestände mit addresses[].image neu verarbeitet werden.
+- Öffnungszeiten-Worker, -Queues und -Funktionen werden nicht verändert.
+
+Verifikation vor Paketierung
+- PHP-Syntax Backend/Theme: OK.
+- Theme JavaScript npm run check: OK.
+- 57 Opening-Hours/Delta/Salvage-Funktionen gegen Backend 1.10.73 verglichen: 0 Änderungen.
+- WordPress-Paketstruktur und ZIP-Integrität werden nach Paketierung erneut geprüft.

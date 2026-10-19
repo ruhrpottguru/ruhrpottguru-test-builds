@@ -1,0 +1,63 @@
+RuhrpottGuru Places Backend 1.10.100 - Halloween Geo Fix
+===========================================================
+Basis: 1.10.99 Halloween 53-Kommunen Coverage
+Datum: 2026-09-22
+
+Ziel
+----
+Nur die neun bereits verifizierten Research-Anker beheben, die im 1.10.99-Lauf als
+'nicht ergänzt: Geo lokal nicht auflösbar' markiert wurden. Kein neuer 53-Kommunen-Sweep.
+
+Verifizierte Venue-Pins
+-----------------------
+Bottrop      | Tanzlokal NINA              | Am Südring Center 7, 46242 Bottrop     | 51.510413, 6.935145
+Dortmund     | Rush Hour Dortmund           | Im Spähenfelde 51, 44143 Dortmund      | 51.520916, 7.487924
+Gelsenkirchen| Cloud 7                      | Am Bugapark 1d, 45899 Gelsenkirchen    | 51.5288433, 7.0305428
+Oberhausen   | Steffys Nightclub            | Im Lipperfeld 23, 46047 Oberhausen     | 51.483809, 6.867278
+Schwelm      | Sabor Andaluz                | Kirchstraße 12, 58332 Schwelm          | 51.2840439, 7.2942017
+Witten       | WERK°STADT                   | Mannesmannstraße 6, 58455 Witten       | 51.4406227, 7.3459503
+Herten       | Schwarzkaue Eventlocation    | Glückauf-Ring 35-37, 45699 Herten      | 51.607029, 7.118920
+Waltrop      | Jugendcafé Yahoo             | Hochstraße 50, 45731 Waltrop            | 51.622653, 7.39028
+Wesel        | Krachgarten Indoor           | Delogstraße 30, 46483 Wesel             | 51.66101, 6.60309
+
+Sicherheits-/Architekturregel
+-----------------------------
+- Static Geo wird nur an diesen neun bestehenden research-anchor Datensätzen ergänzt.
+- halloween_2026_existing_match_v101097() läuft weiterhin VOR dem Fallback-Upsert.
+- Ein reguläres vorhandenes Event gewinnt daher weiterhin vor rpg_seasonal_editorial.
+- Keine Änderung an ET4/destination.one/Open-Data-Import, REST, Radius, Theme oder Ranking.
+- Keine Änderung am Ortsbild-Worker und kein Start/Fortsetzen dieses Workers.
+- Bestehender Seed-Fingerprint ändert sich durch die Anchor-Daten, daher kann der Lauf
+  mit demselben sicheren Seed-State erneut genau gegen den neuen Stand geprüft werden.
+
+Prüfung vor Auslieferung
+------------------------
+- PHP-Syntax: siehe Release-Prüfung
+- Exakt neun Ziel-IDs mit gültigem static geo: siehe Release-Prüfung
+- ZIP-Integrität: siehe Release-Prüfung
+- Keine Produktionslauf-Behauptung: Nach Installation einmal im Admin den bestehenden
+  Button 'Halloween-2026-Anker erneut prüfen' ausführen und Live-Statistik kontrollieren.
+
+Quellenprovenienz der neun Pins
+-------------------------------
+Bottrop: https://www.wir-lieben-bottrop.de/veranstaltungen/tanzlokal-nina-halloween-party-2026/
+         https://adresse.dastelefonbuch.de/Bottrop/2-Tanzschule-Tanzlokal-NINA-Bottrop-GmbH-Bottrop-Am-S%C3%BCdring-Center.html
+Dortmund: https://www.rushhour-dortmund.de/events/rush-hour-the-house-of-horrors-18-auf-4-areas-31-10-2026
+          https://wie.de/poi/rush-hour-dortmund.9834053093
+Gelsenkirchen: https://heiners-cloud7.de/event
+               https://heiners-cloud7.de/?id=12&view=category
+Oberhausen: https://steffy-oberhausen.de/events/scde-circus-halloween-2026-31-10-2026
+            https://steffy-oberhausen.de/kontakt
+            https://wie.de/poi/steffy-oberhausen.3740038216
+Schwelm: https://www.schwelm.de/aktuelles/kalender/veranstaltungen
+         https://sabor-andaluz.de/
+         https://restaurantguru.com/walters-cafe-and-bistro-Schwelm
+Witten: https://www.werk-stadt.com/kontakt
+        https://www.reservix.de/tickets-halloween-party-circus-of-horror-in-witten-halle-am-31-10-2026/e2604571
+        https://musicgrounds.net/event/halloween-party-circus-of-horror-witten-werkstadt-jugend-u-kulturzentrum-2026-10-31---RX2604571
+Herten: https://schwarzkaue-herten.de/alle-veranstaltungen/
+        https://hochzeits-location.info/hochzeitslocation/schwarzkaue-eventlocation-zeche-schlagel-eisen
+Waltrop: https://yahoo-waltrop.ticket.io/9Tj3xSGl/?lang=de
+         https://www.jugendcafe-waltrop.de/anfahrt.html
+Wesel: https://krachgarten-wesel.de/event/halloween-party/
+       https://mapcarta.com/de/W159222043

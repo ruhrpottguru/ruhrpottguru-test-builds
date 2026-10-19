@@ -1,0 +1,17 @@
+RuhrpottGuru v122 – Feedback Abuse Protection
+
+- Based on v121 Feedback Inbox.
+- No external CAPTCHA or third-party anti-spam service.
+- Same-site HMAC feedback token, valid for 15 minutes.
+- Token must be at least 2 seconds old before submission (basic bot timing check).
+- One submission per token (replay protection).
+- Hidden honeypot field.
+- Request body hard limit: 8 KB.
+- Message length: 4–1200 characters.
+- More than 3 URLs rejected.
+- Exact duplicate from same ephemeral client key rejected for 15 minutes.
+- Ephemeral rate limits: 5 submissions / 10 min and 15 / hour per salted client key.
+- Global emergency ceiling: 150 accepted attempts / 5 min before temporary 429 responses.
+- Raw IP address is not written to Feedback or Analytics. The abuse limiter derives a salted one-way HMAC key from REMOTE_ADDR and stores only the temporary key/counter in WordPress transient storage.
+- No Google reCAPTCHA, Cloudflare Turnstile or tracking cookie introduced.
+- Existing WordPress Feedback Inbox and 12-month retention remain unchanged.

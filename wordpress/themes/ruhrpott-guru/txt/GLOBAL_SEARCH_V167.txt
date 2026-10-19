@@ -1,0 +1,7 @@
+V167 Global Search
+- Header search is global on every page; it no longer focuses category-local search fields.
+- Search icon opens a compact global search bar with input + Suchen CTA.
+- /suche/?q=... is a dedicated React result page.
+- Results are grouped: Events, Food, Highlights, Kultur, Aktiv, Buedchen, Wurst, Specials, Beiträge.
+- Event search includes title, description, venue, city and participants_json so artists/performers are discoverable.
+- Search is global across the full database, not radius-limited. Existing saved location is only used to compute detail distance.

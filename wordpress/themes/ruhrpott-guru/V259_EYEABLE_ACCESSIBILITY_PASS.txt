@@ -1,0 +1,10 @@
+RuhrpottGuru Theme v259 — Eye-Able accessibility pass
+
+Evidence addressed from the uploaded Eye-Able WCAG PDF:
+- 1.1 short emoji alt texts: WordPress frontend emoji image conversion disabled; footer category emoji marked decorative.
+- 1.4.6 enhanced contrast: deterministic high-contrast footer and targeted SureCookie branding/buttons.
+- 2.5.3 label-in-name: v258 accessible-name alignment retained.
+- 3.1.1 language: theme language_attributes now guarantees a valid lang value with de-DE fallback.
+
+Not guessed/faked:
+- The report's landmark findings on /veranstaltungen and /highlights were generated from an "Internal Server Error" document. No speculative landmark fix was added for that server error page; a fresh scan should determine whether the 500 response persists.

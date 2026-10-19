@@ -1,0 +1,38 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.86
+Activities Intelligence V2 Dark Launch on Event-Radius-Monotonie base
+Date: 2026-09-17
+
+BASELINE
+- Productive base: 1.10.85 Event-Radius-Monotonie FINAL.
+- Theme v264 unchanged.
+- No schema migration.
+
+MERGE GUARANTEES
+- frontend_events_query: byte-identical to 1.10.85 Event-Radius-Monotonie.
+- activity_experience_profile: byte-identical to productive 1.10.85.
+- rank_activity_rows: byte-identical to productive 1.10.85.
+- nearby_activity_experience_rows: byte-identical to productive 1.10.85.
+- register_rest_routes: byte-identical to productive 1.10.85.
+- event_upsert_from_feed_item: byte-identical to productive 1.10.85.
+- Activities V2 resolver functions are byte-identical to the previously tested Dark-Launch branch.
+
+NEW IN 1.10.86
+- Additive Activities Intelligence V2 diagnostic resolver and admin audit.
+- Admission: rein / bedingt / raus.
+- Experience roles: core / add_on.
+- Capability tags and static scores.
+- Local relevance remains dark-launch/null pending real-data calibration.
+- Skate search alias hardened so retail-only shop=sports + sport=skateboard is not treated as a Skatepark.
+
+UNCHANGED PUBLIC BEHAVIOUR
+- Existing Activities visitor feed/ranking remains unchanged.
+- Event radius monotonicity fix from 1.10.85 remains unchanged.
+- Events, IGA, Opening Hours, Food, Highlights, Culture and Theme contracts unchanged apart from the already isolated global Skate search guard.
+
+VALIDATION
+- PHP syntax: PASS
+- ZIP integrity: PASS (to be verified after packaging)
+- Merge conflict markers: NONE
+- Event function parity: PASS
+- Public Activities function parity: PASS
+- V2 resolver parity with tested branch: PASS

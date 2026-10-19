@@ -1,0 +1,96 @@
+RuhrpottGuru Places Backend 1.10.150 – Places-Datenqualität / Medien Abschluss-QS
+Stand: 2026-10-01
+
+Ziel
+----
+Gezielter Abschluss-Pass fuer den operativen Projektleiterpunkt "Places-Datenqualität / Medien".
+Keine neue Produktfunktion, keine Aenderung an Radius, Entfernungssortierung, Events oder Activities V2.
+
+Live-Ausgangslage vor dem Fix
+-----------------------------
+- Places gesamt: 25.769
+- aktive Places: 24.963
+- Kommunen: 53
+- Lifecycle-Widersprueche: 0
+- aktive Null-Koordinaten: 0
+- aktive Places ohne Kommune/Stadt: 0
+- aktive Places ohne primary_category: 3
+  - #1542 Cafe24 (Duisburg): amenity=cafe -> aktueller Classifier: food
+  - #2275 Vitamin (Duisburg): supermarket -> kein Core-Kategorie-Treffer
+  - #2406 SKS Asiamarkt (Duisburg): supermarket -> kein Core-Kategorie-Treffer
+- Geo-Ausreisser: #6154 Hrvoje, als Kamen/food gefuehrt, Koordinate 43.5130628 / 16.5168715.
+  Die OSM-Quelle wurde am 2026-10-01 erneut als aktuell markiert; es handelte sich daher nicht um einen blossen Altbestand.
+- Doppelte canonical_key: 0
+- Doppelte aktive OSM-Entities: 0
+- Verwaiste Kategoriezeilen: 0
+
+Verifizierte Geo-Ursache
+------------------------
+Die kommunale Overpass-Abfrage loeste eine Kommune bisher global ausschliesslich ueber Name + admin_level auf.
+Bei mehrdeutigen Namen konnte dadurch eine gleichnamige Verwaltungsflaeche ausserhalb NRW verwendet werden.
+1.10.150 bindet die Kommune zuerst an OSM-Relation 62761 (Nordrhein-Westfalen), mappt diese via map_to_area
+und sucht die kommunale Relation nur innerhalb dieser Flaeche. Zusaetzlich blockiert ein grosszuegig gepufferter
+NRW-Koordinaten-Sanity-Guard Fremdkoordinaten als Defense-in-Depth.
+
+Rueckwirkungsstandard
+---------------------
+Neuer lokaler, resumierbarer Job "places-final-quality-v101150":
+- aktive Geo-Ausreisser werden reversibel auf active=0 / source_missing gesetzt;
+- aktive Altzeilen ohne primary_category werden mit dem aktuellen Classifier neu bewertet;
+- Cafe24 wird dadurch Food;
+- weiterhin nicht klassifizierbare Supermarkt-Altzeilen werden aus dem oeffentlichen Core-Bestand genommen;
+- keine manuellen/editorialen Kategorien werden pauschal umgeschrieben.
+
+Medien-Livebefund vor dem Fix
+-----------------------------
+- aktive place_media: 3.686
+- verwaiste Medienzeilen: 0
+- ungueltige relation_type: 0
+- visual_quality=0: 0
+- last_seen_at Null/Zero-Date: 2.139
+- content_class unknown: 2.129
+- Orte mit mehreren aktiven Primary-Bildern: 1 (Place #1517; Media #1013/#1014)
+- Pexels: 1.957 aktive Zeilen; identity_confidence=0.0000. Diese sind Symbolbilder, keine belastbaren Ortsbilder.
+
+Medienvertrag 1.10.150
+----------------------
+- Erfolgreiche Place-Bildinhaltsanalyse (image/mixed/text) setzt kuenftig gleichzeitig last_seen_at.
+- Neuer lokaler Reprocess "place-media-contract-v101150" uebernimmt fuer bereits erfolgreich analysierte
+  historische Zeilen content_classified_at als realen last_seen_at-Zeitpunkt.
+- unknown/unavailable erhalten bewusst keinen erfundenen Zeitstempel.
+- Mehrfach-Primary wird einmalig deterministisch repariert: verified > identity_confidence > visual_quality > niedrigste ID.
+- Der 53-Kommunen-Audit trennt jetzt belastbares Ortsbild (identity_confidence >= 0.88 bzw. direkte Tags)
+  von "nur Symbolbild" (niedrigere Identitaetskonfidenz). Pexels wird dadurch nicht mehr als echtes Ortsbild verkauft.
+- Der persistente 1.10.94 Coverage-Worker fordert ab 1.10.150 keine neuen Symbolbilder mehr an (allowSymbolic=false).
+  Bereits vorhandene Pexels-Symbolbilder werden bewusst nicht pauschal geloescht, um keinen ungeprueften UX-Einschnitt zu erzeugen.
+- Der manuell pausierte Coverage-Worker wird durch dieses Release NICHT heimlich fortgesetzt.
+
+Tests
+-----
+1. PHP-Syntax: Hauptplugin und alle PHP-Dateien im Paket ohne Fehler.
+2. Actual-Code-Test Overpass:
+   - Kamen-Query enthaelt rel(62761) + map_to_area + kommunale Suche innerhalb area.rpgNwArea.
+   - alte globale area[name=Kamen]-Aufloesung ist nicht mehr enthalten.
+3. Actual-Code Geo-Guard:
+   - Ruhrgebiet-Koordinate 51.59/7.66 -> akzeptiert.
+   - Fremdkoordinate 43.5130628/16.5168715 -> abgelehnt.
+4. Actual-Code Classifier:
+   - amenity=cafe -> food.
+   - shop=supermarket + cuisine -> kein Food (Food-v1.10.143-Regressionsschutz).
+   - swimming_pool/swimming -> activities (Activities-Regressionsschutz).
+5. Reprocess-Prozessoren mit kontrolliertem DB-Double:
+   - Cafe24-Pfad -> food + Kategoriebeziehung.
+   - Supermarkt-Altbestand -> reversibel source_missing.
+   - Geo-Ausreisser -> reversibel source_missing.
+   - leerer Selector -> sauber leer, keine erfundene Arbeit.
+   - Media-last_seen -> exakt content_classified_at, kein aktuelles Fantasiedatum.
+   - Mehrfach-Primary -> deterministisch genau ein Primary bleibt.
+6. Diff-Abnahme gegen 1.10.149:
+   - nur Places-Geo/Altbestand, Place-Media-Vertrag, 53-Kommunen-Audit und Versionsmetadaten angefasst.
+   - keine Aenderung an Besucher-Radius, Entfernungssortierung, Event-Sync/Lifecycle oder Activities-V2-Resolver.
+
+Nach Installation
+-----------------
+Die beiden lokalen 1.10.150-Reprocess-Jobs werden vom vorhandenen zentralen Reprocessing-Standard automatisch
+eingereiht. Danach muss der Live-Abschlussaudit nochmals gelesen werden. Erst bei 0 aktiven Geo-Ausreissern,
+0 aktiven Blank-Kategorien, 0 Mehrfach-Primary und sauberem Reprocess-Status kann der Projektpunkt final auf Gruen.

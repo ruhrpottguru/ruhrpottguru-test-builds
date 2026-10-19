@@ -1,0 +1,10 @@
+RuhrpottGuru Places Backend v1.10.131 – Outdoor 53-City Coverage Runner
+
+Additive admin-only coverage audit for Hunde & Wald/Natur.
+- 53 municipalities identified by AGS
+- one synchronous city per /outdoor/coverage/next call
+- two lightweight Overpass count phases per city
+- area preflight is embedded; count results accepted only when areaCount == 1
+- no writes to Places, Place Media, Events, Event Media, Outdoor Entities or Outdoor Entries
+- persistent write limited to rg_outdoor_coverage_run_v1 audit state; transient lock prevents concurrency
+- no cron/background worker and no public integration

@@ -1,0 +1,12 @@
+RuhrpottGuru v123
+
+Standort- und Radiusauswahl sind jetzt logisch getrennt.
+
+- Radius-Select verändert nicht mehr sofort den aktiven Radius.
+- Neben dem Radius steht ein eigener Button „Ändern“.
+- Erst „Ändern“ übernimmt den neuen Radius.
+- Bei bereits vorhandenem GPS- oder Stadtstandort wird nur der Radius geändert; der Standort bleibt unverändert.
+- Nach erfolgreicher Radiusänderung schließt sich der Standort-Layer.
+- Die Städteauswahl bleibt eine eigene Aktion und setzt weiterhin nur den Standort.
+- Mobile Layout ist für drei Controls abgesichert.
+- v122 Feedback-Spamschutz und alle vorherigen Funktionen bleiben erhalten.

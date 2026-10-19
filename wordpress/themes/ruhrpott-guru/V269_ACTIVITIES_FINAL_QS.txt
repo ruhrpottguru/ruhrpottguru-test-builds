@@ -1,0 +1,52 @@
+RuhrpottGuru Theme v269 – Activities Final QS
+Generated: 2026-09-21
+
+SCOPE
+- Theme-only final Activities quality pass on top of v268.
+- Places Backend v1.10.92 / Activities V2 Phase 2C remains unchanged.
+
+COMMUNITY PHOTO PLACEHOLDER
+- Keeps the existing moderated Community contribution flow and exact place_id.
+- Missing/rejected Activities imagery shows a camera placeholder, the visible copy
+  "Hier fehlt noch ein gutes Foto" and one touch-friendly "Foto beisteuern" CTA.
+- Removed the duplicate camera icon from the CTA itself.
+- CTA minimum touch height is 44 px on mobile.
+
+ACTIVITIES OPENING / ACCESS SEMANTICS
+- Public outdoor Activities are not displayed with shop/business wording.
+- Explicit opening_hours are retained and presented as Nutzungszeiten:
+  "Jetzt nutzbar" / "Nutzbar ab …" / "Rund um die Uhr nutzbar".
+- Public access without hours never implies 24/7; detail says
+  "Öffentlicher Zugang · Nutzungszeiten nicht bekannt".
+- Indoor/commercial Activities such as swimming pools keep normal
+  "Öffnungszeiten" / "Geschlossen · öffnet …" semantics.
+
+MEDIA HYGIENE
+- Exact same image URL on multiple Activities Places is treated as shared/symbolic
+  and suppressed in favor of the Community photo placeholder.
+- Obvious logo/icon/avatar/placeholder URL/metadata and existing person-hint metadata
+  are rejected conservatively.
+- This is NOT pixel-level person detection and does not claim to guarantee person-free
+  images. Visual/manual media quality remains a separate data-quality layer.
+
+ACTIVITIES TAG NAVIGATION
+- Activities joins Food, Highlights and Kultur in the existing detail-tag filter path.
+- Card tags stay passive; only detail tags are navigation/filter actions.
+- Existing location, radius, URL rg_tag state and distance ordering remain unchanged.
+
+GENERIC PLACE TITLES
+- Generic Activities names may append existing OSM district/suburb/street context.
+- No location name is invented when such source context is absent.
+
+VERIFICATION
+- node --check all src/react-app/*.js: PASS
+- PHP syntax all theme PHP files: PASS
+- Public skate explicit-hours fixture -> "Zugang & Nutzungszeiten" / "Nutzbar ab …": PASS
+- Public outdoor no-hours fixture -> no 24/7 inference: PASS
+- Swimming fixture keeps normal opening-hours language: PASS
+- Table-tennis public evidence gate: PASS
+- Activities tag navigation active: PASS
+- Generic-title source-context fixture: PASS
+- Duplicate activity image suppression: PASS
+- Obvious logo URL suppression: PASS
+- Other categories untouched by duplicate media preparation: PASS

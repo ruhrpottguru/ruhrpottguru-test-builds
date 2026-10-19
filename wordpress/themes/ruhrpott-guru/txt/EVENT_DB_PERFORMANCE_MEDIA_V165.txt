@@ -1,0 +1,5 @@
+Theme v165
+- Event-Frontend fragt nur den tatsächlich benötigten Radius ab (Home mindestens 10 km), nicht pauschal 50 km.
+- DB-verifizierte Eventbilder werden direkt über rpg_event_media.imageUrl priorisiert.
+- media type=image wird als Bild akzeptiert, auch bei CDN-URLs ohne Dateiendung.
+- Für DB-Events werden keine browserseitigen /event-media Live-Resolver-Requests mehr gestartet; Bildrecherche bleibt im Backend-Enrichment.

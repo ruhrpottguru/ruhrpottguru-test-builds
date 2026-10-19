@@ -1,0 +1,9 @@
+V232 – ET4 Exact Media Handoff
+
+Scope: Event images only. No other sources are used for image enrichment.
+
+1. Licensed ruhr-tourismus-open-data unique=false occurrence rows are hydrated only from a rich unique=true item with exactly the same global_id.
+2. Only media_objects/mediaObject branches are copied. Start/end and all occurrence identity fields stay on the occurrence.
+3. No title/venue/city/fuzzy/cross-source image matching.
+4. If backend v1.10.37 supplies rpg_event_media.originalEt4Url for an exact global_id mapping, the frontend uses that original ET4 URL before any proxy URL.
+5. Events without ET4 media remain unchanged.

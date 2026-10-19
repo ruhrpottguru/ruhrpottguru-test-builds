@@ -1,0 +1,41 @@
+RUHRPOTT GURU – PLACES BACKEND 1.10.90
+ACTIVITIES SOURCE-COVERAGE WORKER CONTROL – FINAL VERIFICATION
+Date: 2026-09-18
+
+GOAL
+Prevent the normal 15-minute Places municipality cron and the explicit Activities
+53-city Source-Coverage worker from sending different municipalities to Overpass
+at the same time, without resetting or restarting the running coverage wave.
+
+VERIFIED ROOT CAUSE IN 1.10.89
+- Both workers call claim_next_municipality() and server_sync_municipality().
+- The Activities worker checks for an already active municipality before claiming.
+- The normal 15-minute cron did not check whether the Activities wave was queued/running.
+- Therefore, while an Activities city was already inside server_sync_municipality(),
+  the normal cron could claim another due city and start a second Overpass request path.
+
+FIX
+- The persisted 1.10.89 coverage hook and state option are intentionally unchanged:
+  rg_places_activity_source_coverage_tick_v101089
+  rg_places_activity_source_coverage_state_v101089
+- New helper activity_source_coverage_owns_refresh_lane_v1090() treats queued/running
+  as exclusive ownership of municipality refreshes.
+- cron_sync_tick() keeps lightweight non-Overpass maintenance but returns before
+  claim_next_municipality() while the coverage wave is queued/running.
+- An already-running normal municipality sync is not killed or reset. The existing
+  Activities worker waits for its municipality lock and continues afterwards.
+
+PROGRESS / QUEUE SAFETY
+- No UPDATE/DELETE is added for places_municipalities.
+- No coverage state initialization or restart is added on plugin update.
+- started_at/requested_at/completed city timestamps remain untouched.
+- No wp_clear_scheduled_hook() is added during upgrade/runtime.
+- Retry counters and cooldown logic are unchanged.
+- Existing progress such as 3/53 therefore continues from the persisted 1.10.89 state.
+
+UNCHANGED
+- OSM query construction and provider order
+- claim_next_municipality() and server_sync_municipality()
+- Activities resolver/matrix and public visitor feed
+- Food, Highlights, Culture
+- Events, opening hours, REST contracts and Theme

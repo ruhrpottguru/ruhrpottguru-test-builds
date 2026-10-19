@@ -1,0 +1,12 @@
+RuhrpottGuru Places Backend v1.5.9 – Event-Cache Sync + 10-Tage-Lifecycle
+
+- Event-REST-Antworten der bestehenden Theme-Quelle werden automatisch in rg_events zwischengespeichert.
+- Kein zweiter konkurrierender ET4-Parser: Der Backend-Cache übernimmt die bereits zusammengeführte Eventantwort.
+- Hintergrund-Sync arbeitet die 53 Kommunen schrittweise über die vorhandene Theme-Eventquelle ab.
+- Canonical Key trennt konkrete Event-Termine/Occurrences.
+- Quellen werden in rg_event_sources protokolliert.
+- Adressen aus dem bereits normalisierten Eventobjekt werden übernommen, bestehende verifizierte/manuelle Adressen nicht überschrieben.
+- Events werden nach Ablauf auf expired gesetzt.
+- 10 Tage nach Eventende (oder Start, wenn kein Ende vorhanden) werden Event + Sources + Media + Enrichment gelöscht.
+- RP Events zeigt Sync-/Cleanup-Status sowie manuelle Buttons für nächste Stadt und Cleanup.
+- Frontend bleibt in diesem Build weiterhin auf der bestehenden Eventquelle; Umschaltung auf DB folgt erst nach kontrollierter Befüllung/Validierung.

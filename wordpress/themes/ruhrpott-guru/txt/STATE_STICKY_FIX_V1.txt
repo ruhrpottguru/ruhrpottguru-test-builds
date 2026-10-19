@@ -1,0 +1,17 @@
+RUHRPOTT GURU – STATE + STICKY FIX V1
+Generated: 2026-08-20
+
+FIXES
+- Removed shortcode-root overflow clipping that prevented CSS sticky from attaching to the viewport.
+- Header is sticky at top:0; filter rail remains sticky below measured header height.
+- One authoritative requested-radius state is now used by UI, snapshot validation, cache lookup and provider fetch.
+- Food defaults to 1 km only when the user has not explicitly chosen a radius.
+- Explicit radius choice is persisted in localStorage across reloads.
+- Removed the hidden Food radius=1 override that previously disagreed with the global radius state.
+- Old in-memory snapshot namespace bumped to v13_location_radius_atomic_v1.
+- GPS watch runs only while GPS is the active selected-location mode; a manually selected city cannot be overwritten in the background.
+- Previously granted GPS can be quietly refreshed on reload even on browsers whose Permissions API reports an indeterminate state.
+- Cuisine tag filter resets when the actual location changes.
+
+UNCHANGED
+- Official website enrichment, Food Info actions, Pexels configuration, SureCookie, Infinite Scroll and media priority.

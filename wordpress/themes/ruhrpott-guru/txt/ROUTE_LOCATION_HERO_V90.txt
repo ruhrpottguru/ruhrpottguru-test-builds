@@ -1,0 +1,8 @@
+RuhrpottGuru v90 - Route location hero guard
+
+- Featured Home Highlight may never be a city/municipality record.
+- If an official Route Industriekultur site exists in the user's selected radius, the hero uses the official site title.
+- City remains metadata only (e.g. "Oberhausen" below "Gasometer Oberhausen").
+- Administrative OSM objects are excluded from Route matching in Places Backend 1.2.1.
+- Route matching cache bumped to v3.
+- If no valid Route location exists inside the selected radius, existing distance-based Highlight logic applies.

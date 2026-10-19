@@ -1,0 +1,37 @@
+RuhrpottGuru Places Backend 1.10.81 – IGA 2027 Intelligence Dark Launch
+
+Basis: 1.10.80 Places Data Quality FINAL
+Schema: 1.10.17
+
+Neu (additiv):
+- Source Registry: rg_source_registry
+- Intelligence Claims: rg_intelligence_claims
+- Resolved Snapshots: rg_resolved_snapshots
+- Modulares IGA-Intelligence-Modul unter includes/intelligence/
+- IGA Event Classifier iga-event-1.0 auf bereits gespeichertem ET4/destination.one-Raw
+- 53-Städte-Gate über die bestehende RuhrpottGuru-Kommunenlogik
+- Negative Evidence für historische/fremde IGA-Kontexte
+- Lokaler 250er Reprocessing-Worker mit Cursor, Lock, Wiederaufnahme und idempotentem Claim-Upsert
+- Redaktion -> Events: Tabs Events | IGA 2027
+- IGA Dark-Launch-Cockpit mit Confirmed / Probable / Review / Rejected
+- Editorial Override (Bestätigen/Ablehnen), ohne den automatischen Claim zu löschen
+
+Bewusst NICHT verändert:
+- ET4/destination.one Importpfad
+- öffentlicher Event-REST
+- Frontend-Eventquery / Ranking
+- Theme
+- Öffnungszeiten
+- öffentliche Badges/Filter
+
+Abnahme vor Paketierung:
+- PHP-Lint: bestanden
+- Classifier-Fixtures: 7/7 bestanden
+- register_rest_routes: unverändert gegen 1.10.80
+- event_upsert_from_feed_item: unverändert gegen 1.10.80
+- event_public_source_rank: unverändert gegen 1.10.80
+- frontend_events_query: unverändert gegen 1.10.80
+- öffentliche IGA-REST-Routen: 0
+
+Produktions-Gate:
+Nach Installation unter RP Redaktion -> Events -> IGA 2027 einmal "IGA-Bestand prüfen" starten. Erst die reale Trefferverteilung des produktiven Eventbestands entscheidet über die fachliche Freigabe von Classifier 1.0. Bis dahin bleibt die Funktion vollständig intern.

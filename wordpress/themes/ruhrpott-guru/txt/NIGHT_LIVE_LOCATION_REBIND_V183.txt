@@ -1,0 +1,7 @@
+RuhrpottGuru Theme v183
+
+- Nachtseite bleibt an den sichtbaren React-Root gebunden.
+- PlainWpView-Replacements nach Stadt-/GPS-/Radiuswechsel werden dauerhaft erkannt.
+- Neue sichtbare Nachtinstanz liest den bereits gespeicherten gemeinsamen Standort sofort neu ein.
+- Veraltete/detached Nachtinstanzen ignorieren globale Standort- und Radius-Events.
+- Kein Reload nach Standortwechsel mehr erforderlich.

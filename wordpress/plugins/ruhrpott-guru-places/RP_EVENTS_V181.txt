@@ -1,0 +1,20 @@
+RuhrpottGuru Places Backend 1.8.1 - RP Redaktion Events Performance
+
+Ziel
+- RP Redaktion -> Events darf beim normalen Öffnen keine vollständigen Eventlisten oder historischen Forensik-Auswertungen mehr laden.
+
+Änderungen
+- Standardansicht: nur Kennzahlen, Sync/Lifecycle-Status, Workerstatus, Aktionen und Filterformular.
+- Eventliste wird erst geladen, wenn mindestens ein echter Filter oder Suchbegriff gesetzt ist.
+- Kein separater COUNT(*) mehr für die gefilterte Liste; angezeigt wird die Zahl der tatsächlich geladenen Zeilen bis zum Limit.
+- Quellen-, Quellenforensik- und Regionsforensik laufen nur nach explizitem Klick auf "Diagnose bei Bedarf laden".
+- Enrichment-Diagnose wird ebenfalls nur im Diagnosemodus berechnet/angezeigt.
+- Der teure Master-DB-Window-Audit wird nicht mehr bei jedem Seitenaufruf ausgeführt; die abgeschlossenen Laufzähler kommen aus dem persistierten Masterstatus.
+- Stadtfilter nutzt die feste 53-Kommunen-Liste statt SELECT DISTINCT über den Eventbestand.
+- Quellenfilter nutzt die unterstützten Eventquellen statt SELECT DISTINCT über den Eventbestand.
+- Dashboard-Kennzahlen werden in einem einzigen SQL-Durchlauf ermittelt statt in fünf Einzelabfragen.
+- Neuer Index source_start (source,start_at) für gefilterte Quellenlisten.
+
+Unverändert
+- Masterimport, Zusatzfeed-Worker, Exact-City-Gate, Enrichment und Lifecycle.
+- Keine Events werden durch dieses Update gelöscht oder verändert.

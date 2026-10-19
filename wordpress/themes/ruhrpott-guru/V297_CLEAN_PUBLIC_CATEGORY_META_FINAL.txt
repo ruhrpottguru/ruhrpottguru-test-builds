@@ -1,0 +1,16 @@
+RuhrpottGuru Theme v297 — Clean public category meta
+
+Scope:
+- Presentation-only change in category header metadata.
+- Public header now shows only location and selected radius.
+- Internal implementation labels such as "nach Termin · dann Entfernung" and "nach Entfernung" are no longer exposed there.
+
+Explicitly unchanged:
+- Event chronology / urgency comparator from v296.
+- Today-before-long-running ordering.
+- Radius eligibility and persistence.
+- Home 4-event fallback.
+- Event recurrence/occurrence handling.
+- Mehr davon.
+- Media, image-rights and crop behavior.
+- Other category sorting behavior.

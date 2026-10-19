@@ -1,0 +1,35 @@
+RuhrpottGuru Places Backend 1.10.65 – Organizer Livefix + transparenter Finalcheck
+
+Ursache des verbleibenden Livefehlers
+- In 1.10.64 waren Provider/Author/Media/Rights negative Evidenz.
+- contact/support/contact_person/lessor waren jedoch nur Anreicherungsrollen im Parser, aber KEINE negative Evidenz im abschliessenden Resolver.
+- Ein historisch gespeicherter organizer_json-Eintrag bekam deshalb weiterhin 35 Legacy-Punkte und konnte ohne explizite Organizer-Evidenz sichtbar bleiben.
+- Genau dieser Pfad erklaert den Livezustand: WeselMarketing GmbH + Kreis Wesel (EAW) gleichzeitig.
+
+Fix 1.10.65
+- contact/support/contact_person/contactperson: -45 Evidenz.
+- lessor: -25 Evidenz.
+- Explizite organizer/organiser/organisation/veranstalter-Relationen bleiben starke positive Evidenz.
+- Ein echter Organizer, der zugleich Kontakt ist, bleibt erhalten (positive Evidenz ueberwiegt).
+- Zusaetzlich sind persistierte event_media.artist und event_media.rights_holder negative Organizer-Signale, sofern fuer dieselbe Identitaet KEINE explizite Organizer-Evidenz existiert.
+- Kein Namens-Hardcode fuer Kreis Wesel oder WeselMarketing.
+
+Regressions-Fixture (Score-Modell)
+- WeselMarketing nur historisch bestaetigter Organizer, keine Gegenrolle: 35 -> BEHALTEN.
+- Kreis Wesel (EAW) historisch gespeichert + support: 35 - 45 = -10 -> ENTFERNEN.
+- Kreis Wesel (EAW) historisch gespeichert + Bild-Urheber/Rechteinhaber, keine Organizer-Evidenz: 35 - 100 -> ENTFERNEN.
+- Echte Organisation organizer + contact: 35 + 140 - 45 = 130 -> BEHALTEN.
+
+Finalcheck
+- Zeigt ab 1.10.65 nicht mehr nur ✓ (n), sondern die tatsaechlichen Veranstalternamen.
+- Event-Webseite und Ticketlink zeigen die konkrete Ziel-Domain und sind direkt pruefbar.
+- Dedupe/Occurrence-Cluster und alle bisherigen OK/Hinweis/Pruefen-Regeln bleiben unveraendert.
+
+Pruefungen
+- PHP-Syntax: PASS
+- Version 1.10.65: PASS
+- contact/support negative Evidenz vorhanden: PASS
+- persistierte Media-Urheber/Rechteinhaber als Gegenrolle: PASS
+- kein Namens-Hardcode Kreis Wesel/WeselMarketing: PASS
+- Finalcheck Veranstalternamen: PASS
+- Finalcheck Web/Ticket-Zieldomain: PASS

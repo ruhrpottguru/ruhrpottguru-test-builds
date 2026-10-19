@@ -1,0 +1,87 @@
+RuhrpottGuru Places Backend 1.10.39
+ET4 LOCAL STATIC EVENT MEDIA – FINAL IMPLEMENTATION / VERIFICATION
+Date: 2026-09-10
+
+GOAL
+- If the authoritative ET4/Open Data Finder catalog object has an event image, RuhrpottGuru must display that exact event-owned image.
+- Visitor browsers must never depend on the remote ET4 image URL, its hash/token lifetime, redirects, hotlink rules, CORS, referrer behavior, or cookie consent.
+- No cross-source, venue-title, web-search or fallback image is substituted for the canonical ET4 image.
+
+ARCHITECTURE
+1. ET4 catalog returns global_id + media_objects on the same ET2014A object.
+2. Exact global_id matching maps that image to every current occurrence of the same event series.
+3. During the server-side catalog/media synchronization, a dedicated background localizer downloads each unique global_id image once.
+4. Files are stored outside the WordPress Media Library in:
+   wp-content/uploads/rpg-et4-event-media/
+5. Stable file identity is SHA-256(global_id); multiple occurrences reference the same local file.
+6. rg_event_media keeps the upstream ET4 URL and rights/provenance metadata, plus local file metadata/status.
+7. Visitor REST output exposes only the local HTTPS uploads URL for ET4 images.
+8. Theme v232 receives source=et4-global-id-local, so its old source=et4-global-id/originalEt4Url branch cannot bypass the local image.
+9. There is no AJAX/PHP/front-controller image proxy in 1.10.39. The browser requests the static uploads file directly.
+
+CUSTOM FOLDER DECISION
+- Deliberately NOT registered as wp_insert_attachment()/Media Library attachments.
+- Reason: hundreds of API-managed ET4 images should not clutter the editorial WordPress Media Library.
+- The local cache is still persistent and fully tracked in rg_event_media.
+- The public folder contains index.php to prevent directory index presentation without host-specific .htaccess directives.
+
+DB / MIGRATION
+rg_event_media adds:
+- local_path
+- local_mime
+- local_bytes
+- local_content_hash
+- local_cached_at
+- local_cache_status
+- local_cache_attempts
+- local_cache_error
+Schema version: 1.10.13
+Plugin version: 1.10.39
+
+FIRST UPGRADE BEHAVIOR
+- One fresh exact ET4 catalog-media pass is triggered automatically so rotating/hash/token image URLs are refreshed before localization.
+- The localizer starts automatically; no admin button, health check, new master import, or manual ET4 dashboard work is required.
+- Upcoming/current event series are processed first.
+- One unique global_id is downloaded once and then propagated to all current occurrences with that exact global_id.
+- Failed remote downloads retry up to three times; a later fresh catalog pass can reset a missing local image for retry.
+- Every normal completed nightly event master import re-runs the exact ET4 catalog media reconciliation for new/changed events.
+
+IMAGE VALIDATION / CACHE SAFETY
+- Full image bytes are streamed server-side with WordPress wp_remote_get.
+- The same WordPress HTTP transport/User-Agent class that succeeded in the existing Event Media Health probe is used; the failed v1.10.38 wp_safe_remote_get proxy path is gone.
+- Maximum image size: 12 MiB.
+- Allowed local formats: JPEG, PNG, WebP, GIF, AVIF.
+- Actual bytes/MIME are validated before publish; HTML/PDF/video/audio/SVG is not published as a same-origin image.
+- Local cache hits revalidate the cached file bytes/MIME so a truncated/corrupt file cannot become permanent.
+- New bytes are downloaded to a temporary file and only published after validation; replacement is atomic on normal Linux WordPress filesystems.
+- Content hash is appended as ?v=... for browser cache busting.
+
+RIGHTS / MEDIA IDENTITY
+- Missing ET4 license/artist/credit fields do NOT block the exact ET4 global_id image from being localized.
+- When present, license, artist and credit remain stored and returned as provenance.
+- Strict media identity still prevents borrowing unrelated venue/cross-source images; it does not reject the event's own ET4 media_object merely because a credit field is empty.
+
+COOKIE / FRONTEND / LAZY LOADING
+- ET4 event images are same-origin static /wp-content/uploads/... URLs in the visitor browser.
+- SureCookie cannot block a third-party ET4 host because no ET4 image host is contacted by the visitor.
+- Theme v232 uses the local image as ordinary <img src>; no data-src -> src JavaScript replacement is required.
+- WordPress's 🎟️ emoji remains only the no-image fallback and is not part of the successful ET4 image path.
+
+LOCAL TESTS EXECUTED AGAINST THE ACTUAL 1.10.39 PLUGIN CODE
+PASS - PHP syntax.
+PASS - Local image directory created without host-specific .htaccess dependency.
+PASS - Remote JPEG downloaded through HTTP redirect and stored as stable global_id file.
+PASS - Same source/global_id returns validated local cache hit.
+PASS - Deliberately corrupted local cache is detected and automatically re-downloaded.
+PASS - Changed upstream URL/token for same global_id replaces the same stable local file and changes content-hash cache-buster.
+PASS - Simulated upstream HTTP 403 is detected as a localizer error, not exposed to the visitor browser.
+PASS - Opaque/hash/token image URL with no filename extension is accepted when ET4 rel=default proves image semantics.
+PASS - Empty license/artist/credit does not reject that exact ET4 media object.
+PASS - Exact ET4 global_id remains bound to the selected media_object.
+PASS - Real unmodified Theme v232 api.js normalizes source=et4-global-id-local to the local uploads URL.
+PASS - Real Theme v232 still chooses an external originalEt4Url only for the legacy exact source marker; 1.10.39 deliberately never emits that marker or originalEt4Url.
+PASS - No active rg_event_image/admin-ajax/template_redirect image-serving endpoint remains.
+
+BOUNDARY OF BUILD-TIME VERIFICATION
+- The production ET4 licensed endpoint itself is not callable from this build container. The download/cache/403/redirect/token behavior was exercised with a controlled HTTP server, and Theme v232 was executed against the real source file from the production ZIP.
+- On the live WordPress host, the automatically refreshed ET4 catalog supplies the real current image URLs and the localizer writes the actual files to uploads.

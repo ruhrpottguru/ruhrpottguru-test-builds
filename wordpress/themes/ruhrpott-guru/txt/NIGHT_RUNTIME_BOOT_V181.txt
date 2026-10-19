@@ -1,0 +1,4 @@
+Night runtime v181
+- Bind night UI after React DOM is actually rendered via MutationObserver.
+- Use shared RPG.storage for location/radius persistence.
+- Prevent duplicate bindings.

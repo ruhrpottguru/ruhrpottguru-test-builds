@@ -1,0 +1,12 @@
+RuhrpottGuru V70 - Home Browser Overpass
+
+- Events remain on the existing ET4 path.
+- Food, Highlights, Culture and Activities Home previews bypass WordPress cURL.
+- Each category issues one bounded browser-side Overpass query for the selected radius, max 20 named POIs.
+- Provider load is split: Food/Culture prefer private.coffee; Highlights/Activities prefer maps.mail.ru; each has the other as one fallback (7s + 5s max). No radius cascade.
+- Session cache: 30 min fresh, up to 6h stale fallback.
+- Scene filter remains disabled.
+- Full category-page loaders are unchanged in this release.
+
+- Full OSM category pages also bypass WordPress cURL via the existing browser transport.
+- Category pages use private.coffee then maps.mail.ru, 9s per provider maximum; a valid empty result is accepted immediately so the normal radius logic can decide whether to expand.

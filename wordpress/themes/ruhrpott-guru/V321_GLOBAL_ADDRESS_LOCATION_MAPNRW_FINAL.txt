@@ -1,0 +1,10 @@
+RuhrpottGuru Theme v321 — Global Address Location via map.nrw
+
+Scope:
+- Extends the existing canonical LocationModal only.
+- GPS, postcode, city, radius, category loaders, sorting and fallback rules are unchanged.
+- Adds an optional official NRW address/place search using map.nrw v2.1.0, loaded only after explicit user interaction.
+- Search results are converted into the existing central lat/lng location snapshot with locationMode=address.
+- Results are accepted only when the returned municipality matches one of RuhrpottGuru's 53 municipalities. Outside results are rejected without replacing the current location.
+- Full address label remains browser-local through the existing snapshot. Cross-host cookies continue to contain only the coarse city.
+- No new category-specific location logic.

@@ -1,0 +1,23 @@
+RuhrpottGuru Places Backend 1.10.144 – SEO/GEO City Guide Metadata
+
+Scope
+- 53 city hubs below WordPress page 3355.
+- Five category children per city: veranstaltungen, restaurants, sehenswuerdigkeiten, kultur, freizeit.
+- Reuses existing post_excerpt as meta description; deterministic content/category fallback only when excerpt is empty.
+- Emits exactly one plugin-owned canonical on these surfaces by removing WordPress core rel_canonical for the request.
+- Emits Open Graph/Twitter metadata and JSON-LD CollectionPage + BreadcrumbList; city hubs also expose hasPart links to the five category deep-links.
+- No DB migration, no resolver/reprocessing/import changes, no category/radius/sort changes.
+
+Acceptance checks
+1. Main path: city hub -> description + canonical + CollectionPage/BreadcrumbList + five hasPart entries.
+2. Main path: category child -> description + canonical + category breadcrumb.
+3. Empty description: empty excerpt falls back to stripped page content; fully empty page falls back to deterministic city/category wording.
+4. Edge: unrelated WordPress pages and unexpected child slugs return no RPG city-guide SEO context.
+5. Regression: Food Resolver 1.10.143, Activities V2 1.10.142 and Highlight Cluster 1.10.141 code/comments remain present; no DB/schema version change introduced by this release.
+6. PHP syntax: all plugin PHP files lint clean.
+7. Archive: final ZIP integrity tested; plugin root remains ruhrpott-guru-places/.
+
+Production follow-up after installation
+- Re-run mobile SEO audits for /stadt/essen/ and /stadt/essen/restaurants/.
+- Verify rendered head has description, one canonical and JSON-LD.
+- Diagnose the separate Lighthouse robots.txt validity warning without rewriting robots.txt blindly.

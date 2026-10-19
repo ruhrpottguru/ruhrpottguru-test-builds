@@ -1,0 +1,13 @@
+RuhrpottGuru Places Backend 1.7.2
+
+- Behebt den fehlerhaften v1.7.1-Auditzähler, der laufende Masterimporte mit 0 eindeutigen Event-Terminen und allen Rohzeilen als Mehrfachlieferungen anzeigen konnte.
+- Jeder neue Masterlauf erhält eine eigene run_token-Kennung. Die Eventtabelle speichert last_master_run; dadurch werden eindeutige Event-Termine pro Masterlauf direkt und belastbar aus MySQL gezählt.
+- Eindeutige Quellobjekte werden pro Masterlauf über source + external_id gezählt; wiederkehrende Termine bleiben davon getrennt.
+- Laufende v1.7.1-Masterimporte werden beim Update übernommen: bereits seit Laufbeginn synchronisierte Events werden einmalig einem Recovery-Run zugeordnet; der Lauf muss nicht neu gestartet werden.
+- Der Master-Worker erhält einen Safety-Retry, der vor jedem ET4-Seitenabruf geplant wird. Ein harter PHP-/HTTP-Abbruch kann dadurch nicht mehr dauerhaft einen Status running ohne Folgejob hinterlassen.
+- Zusätzlicher Init-Watchdog: erkennt einen laufenden Masterimport ohne geplanten Worker und startet den Worker automatisch erneut. Ein 180-Sekunden-Lock verhindert parallele Doppelverarbeitung.
+- Die Statusseite zeigt den nächsten Master-Worker und den Zeitpunkt des letzten Fortschritts.
+- Der 365-Tage-Abfragezeitraum wird für neue Masterläufe beim Start eingefroren, damit ein ungewöhnlich langer Lauf nicht durch einen Datumswechsel seine Pagination-Basis verändert.
+- Rohzeilen, eindeutige Event-Termine, Mehrfachlieferungen, eindeutige Quellobjekte, ungültige Rohzeilen und ET4-overallcount bleiben getrennte Kennzahlen.
+- Bestehende Eventdaten, Enrichment, Bilder, Frontend-Readmodel, Ticketdaten und Lifecycle bleiben unverändert.
+- Kein Theme-Update erforderlich.

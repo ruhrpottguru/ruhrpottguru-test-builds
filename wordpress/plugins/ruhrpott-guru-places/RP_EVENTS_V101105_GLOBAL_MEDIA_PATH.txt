@@ -1,0 +1,8 @@
+RuhrpottGuru Places Backend 1.10.105 – Global Event Media Path
+
+- Entfernt ausschließlich den in 1.10.104 eingeführten Selm-Sonderblock.
+- Selm-Events verwenden wieder dieselbe Eventbild-Hierarchie wie alle anderen Quellen.
+- Selm-Kalender-Originalbilder werden weiterhin nicht importiert, solange keine ausdrückliche Bildfreigabe vorliegt.
+- Orts-/Venuebilder, Commons-Kontextbilder und Symbolbilder bleiben als globale Fallbacks erlaubt.
+- Globale Qualitäts-/Rechtefilter bleiben unverändert.
+- Import, Parser 1.10.103, Deduplizierung, Lifecycle, Radius und Quellenangabe bleiben unverändert.

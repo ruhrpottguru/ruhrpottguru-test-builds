@@ -1,0 +1,7 @@
+RuhrpottGuru v77
+
+- Dedicated Food category broad requests use the Places DB endpoint directly in database mode.
+- Old empty Food snapshots are invalidated by a new cache namespace.
+- Events page slug collision with The Events Calendar /events/ is migrated to /veranstaltungen/ (or /events-guide/ if occupied).
+- Footer Events target resolves to the real WordPress page containing [ruhrpott_home_events].
+- Highlights, Kultur, Aktiv and Events data transports remain unchanged.

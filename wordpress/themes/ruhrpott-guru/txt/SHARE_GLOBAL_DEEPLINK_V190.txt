@@ -1,0 +1,9 @@
+RuhrpottGuru – Global Share Deep Links V190
+
+- Gemeinsame Share-URL für Events, Food, Highlights, Kultur, Aktiv und Imbiss-Details.
+- Stabile IDs aus Event-/Place-Datenbank statt aktueller Browser-URL.
+- Öffentliche Links: /teilen/<typ>/<id>/<slug>/.
+- Empfänger öffnet den geteilten Inhalt direkt, unabhängig von GPS/Radius.
+- Native Web Share bevorzugt; Clipboard-Fallback kopiert den Deep-Link.
+- Backend v1.9.7 liefert Open-Graph-/Twitter-Metadaten mit Titel, Beschreibung und eigenem Bild.
+- Route-der-Industriekultur-Fallbacks werden über rdi:<slug> direkt auflösbar.

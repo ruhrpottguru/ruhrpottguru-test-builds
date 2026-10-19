@@ -1,0 +1,12 @@
+RuhrpottGuru Places Backend 1.10.0 - JETZT Nutzbarkeitsmodell
+
+- Keine Homepage- oder Theme-Aenderung.
+- Labor -> Was geht JETZT? unterscheidet nun Termin, Oeffnungszeiten, frei zugaengliches Outdoor-Ziel, eingeschraenkten Zugang und unbekannte Nutzbarkeit.
+- Highlights/Kultur mit klaren Viewpoint-/Denkmal-/Artwork-Tags muessen nicht mehr kuenstlich Oeffnungszeiten besitzen.
+- Oeffentlich markierte Outdoor-Aktivitaeten koennen ebenfalls ohne Oeffnungszeiten als aktuell nutzbar gelten.
+- access=no/private wird im Labor als nicht aktuell nutzbar ausgeschlossen.
+- Event- und Place-Scores wurden entsaettigt; valide Events landen nicht mehr pauschal bei 100 Punkten.
+- Distanzgewicht reduziert, Zeit/Oeffnung bleiben entscheidender.
+- Labor-Summary zeigt zusaetzlich erkannte oeffentliche Outdoor-Ziele.
+- Tabelle zeigt Nutzbarkeitsmodus + Konfidenz fuer jede Diagnose.
+- Bestehende Frontend-, REST-, Kultur-, Share-, Events-, Night- und Places-Logik bleibt unveraendert.

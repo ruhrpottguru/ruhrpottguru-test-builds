@@ -1,0 +1,55 @@
+RuhrpottGuru Places Backend 1.10.45
+Eventbild-Rechteworkflow
+
+ZIEL
+- Offizielle Eventbild-Kandidaten aus Event-/Veranstalterseiten bleiben bis zur dokumentierten Rechtefreigabe nicht live.
+- Redaktion kann Rechte nachvollziehbar prüfen, als unklar markieren, verwerfen oder freigeben.
+- Alle Events bleiben sichtbar; die bestehende Bildhierarchie und der Fallback-Audit aus 1.10.44 bleiben unverändert.
+
+RECHTE-DOSSIER JE EVENTBILD
+- rights_status: pending / unclear / approved / rejected
+- rights_basis: eigene Rechte / schriftliche Freigabe / Presse-Medienfreigabe / CC0 / Public Domain / CC BY / CC BY-SA / sonstige dokumentierte Freigabe
+- Rechteinhaber
+- Rechtenachweis-URL
+- freie Rechte-Notiz, z. B. E-Mail-Freigabe mit Datum
+- Prüfzeitpunkt und prüfender WP-Benutzer
+- Credit und Fotograf/Urheber bleiben getrennt gespeichert
+
+ADMIN-WORKFLOW
+RP Redaktion -> Events -> Offizielle Bildkandidaten:
+- Bildvorschau + Bildlink + Quellseite
+- Rechteampel mit Grün/Gelb/Rot-Leitlinie
+- getrennte Zähler für offen / unklar
+- Detailansicht mit standardisierter Nutzungsgrundlage
+- Pflicht: Credit; außerdem Nachweis-URL oder nachvollziehbare Notiz
+- "Unklar" hält den Kandidaten bewusst offline
+- "Verwerfen" bleibt dauerhaft verworfen und wird bei späteren Enrichmentläufen nicht automatisch wiederbelebt
+- "Freigabe anfragen" erzeugt bei vorhandenem Veranstalter-E-Mailkontakt eine vorbefüllte Mail im lokalen E-Mail-Programm; es wird nichts automatisch versendet
+- Freigabe lokalisiert das Bild erst danach als source=official-approved
+
+REDAKTIONELLER UPLOAD
+- Der manuelle global_id-Override nutzt denselben standardisierten Rechtenachweis.
+- Eigene Aufnahme darf ohne externe Nachweis-URL dokumentiert werden; andere Grundlagen benötigen URL oder Notiz.
+
+UNVERÄNDERT
+- ET4/ODF- und destination.one-Lokalbilder
+- Bildpriorität: et4-global-id -> et4-feed -> editorial-override -> official-approved -> venue-commons-context -> pexels-symbolic-event -> Frontend-Fallback
+- frontend_events_query
+- global_id-/REST-Handoff
+- Fallback-Audit v1.10.44
+- Kein Bildfilter in der Eventauslieferung
+- Kein Bulli-Sonderfall
+
+VERIFIKATION
+- PHP-Lint: PASS
+- JavaScript-Syntax: PASS
+- 57/57 statische Architektur-/Regressionstests: PASS
+- 0 undefinierte $this-Methoden: PASS
+- 0 doppelte Methoden: PASS
+- frontend_events_query byte-identisch zu 1.10.44: PASS
+- event_local_media_download_v1039 byte-identisch zu 1.10.44: PASS
+- event_visitor_datetime_iso byte-identisch zu 1.10.44: PASS
+- enforce_et4_global_id_media_response_v1039 byte-identisch zu 1.10.44: PASS
+- cron_events_fallback_media_batch_v1044 byte-identisch zu 1.10.44: PASS
+- offizielle Kandidaten bleiben bis Freigabe moderation_status=candidate/local_cache_status=pending: PASS
+- rejected Kandidaten werden durch spätere Enrichmentläufe nicht wiederbelebt: PASS

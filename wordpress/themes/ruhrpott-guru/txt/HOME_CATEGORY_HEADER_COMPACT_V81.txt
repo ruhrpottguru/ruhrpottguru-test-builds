@@ -1,0 +1,6 @@
+RuhrpottGuru v81 — Home category header compact
+
+- Removes the yellow kicker/eyebrow line above all five Home category titles.
+- Keeps category title and subtitle unchanged.
+- Makes the Home category location/GPS label slightly smaller.
+- No data, GPS, Places DB, category page, sticky footer or card-layout logic changed.

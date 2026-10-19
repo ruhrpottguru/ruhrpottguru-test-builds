@@ -1,0 +1,20 @@
+RuhrpottGuru Places Backend 1.10.97 – Halloween 2026 Coverage
+
+Ziel
+- Urgente Coverage-Luecke fuer verifizierte Halloween-Termine am 31.10.2026 schliessen.
+- Kein Vollscraper und keine fremden Beschreibungen/Bilder kopieren.
+- ET4/Open Data Finder und destination.one bleiben priorisierte Eventquellen.
+
+Umsetzung
+- 8 verifizierte saisonale Anker (Essen, Bochum, Duisburg) mit Titel, Datum/Uhrzeit, Venue, Adresse, Geo, offizieller Quell-URL und optional Ticket-URL.
+- Vor Einfuegen wird der lokale Eventbestand im +/-3h-Fenster derselben Stadt auf Titel bzw. identische Venue + Halloween-Signal geprueft.
+- Bestehender Nicht-Editorial-Termin gewinnt; sonst idempotenter Fallback unter source=rpg_seasonal_editorial.
+- Source-Rank 80: unter ET4/destination.one/EMG/verifiziert-offiziell.
+- Kein Eventbild wird durch diesen Fallback importiert.
+- Admin-Panel unter RP Redaktion -> Events zeigt 8 Anker sowie bereits vorhanden / ergaenzt / aktualisiert / Fehler.
+
+Merge-Sicherheit
+- Basis: 1.10.96 (enthaelt 1.10.95 Reprocessing + SEO/Deep-Link).
+- Pause/Fortsetzen aus 1.10.94.1 wurde mit unveraenderten Hook/Option-Namen uebernommen.
+- rg_places_media_coverage_paused_v101094 wird beim Upgrade nicht geloescht; pausierter Ortsbild-Worker bleibt pausiert.
+- Kein place_media-Reset, kein Cursor-Reset, kein OSM/Overpass-Lauf.

@@ -1,0 +1,7 @@
+RuhrpottGuru v78 – Food category DB direct
+
+- Dedicated Food category feed now reads /places/home directly in database mode.
+- Bypasses the legacy Overpass-shaped compatibility path for full Food pages only.
+- Uses active Places DB records and maps them directly to Gastronomie cards.
+- Other categories, Home modules, Events and layout remain unchanged.
+- Food category cache namespace bumped to v78.

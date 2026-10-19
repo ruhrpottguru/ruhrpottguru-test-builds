@@ -1,0 +1,8 @@
+RuhrpottGuru Theme v247
+
+Globale Veranstaltungsreihen im Event-Detail:
+- Der neue Block „Weitere Events dieser Reihe“ steht direkt vor „Weitere Event-Infos“.
+- Er wird nur angezeigt, wenn das Backend weitere hochsicher zugehörige Events meldet.
+- Bis zu sechs Einträge kompakt sichtbar; größere Reihen lassen sich im Block aufklappen.
+- Klick führt über die kanonische RuhrpottGuru-Event-URL zum jeweiligen Event.
+- Keine Event-Ausblendung, Gruppierung der Hauptliste oder Änderung der v242/v243 Bild-/Badge-Logik.

@@ -1,0 +1,24 @@
+RuhrpottGuru Places Backend 1.10.112 – Media Master + Crop Overrides – Verification
+
+Scope
+- RP Redaktion -> Medien gets a searchable logical motif/crop editor.
+- Automatic crop is default; manual card (4:5) and detail (16:9) overrides are optional and reversible.
+- Original image files are never modified.
+- Same image variants are grouped through normalized WP URL/attachment identity, byte SHA-256 and (when local image support is available) perceptual dHash.
+- Place photos, symbolic images and posters are allowed; the temporary generic text/poster gates and the Waldschule one-off block are retired.
+
+Data / API
+- Schema 1.10.19 adds rg_media_crop_overrides.
+- Crop aliases are stored per logical master and handed to Places, Events and global search.
+- Auto focal metadata is computed once per local file/version and cached; GD and Imagick are supported.
+- Manual override always wins over automatic focal metadata.
+- Rights/editorial rejections remain untouched.
+
+Validation
+- PHP syntax: PASS
+- Public crop handoff for Place/Event/Search: PASS
+- Old Waldschule init hook absent: PASS
+- Old v1.10.107/v1.10.110 quality reprocessing jobs historical/autostart false: PASS
+- Automatic fallback policy reset: PASS
+- Original-byte mutation: NONE
+- Smart auto focal regression on supplied Waldschule banner: card focal ~23% x, detail focal ~30% x (logo/colour-block side), matching the requested left-focused presentation.

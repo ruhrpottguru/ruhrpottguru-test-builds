@@ -1,0 +1,23 @@
+RuhrpottGuru v118
+Privacy-first Analytics & Commercial Foundation
+
+ACTIVE NOW:
+- Database schema for aggregate daily analytics.
+- Anonymous first-party REST endpoint with strict event taxonomy.
+- No analytics cookies, no persistent visitor ID, no GPS coordinates in analytics.
+- Radius is reduced to buckets; area is a city/area label.
+- Product/outbound events can be aggregated with raw/accepted/filtered counters.
+- Non-blocking browser transport via sendBeacon/fetch keepalive.
+
+PREPARED BUT DORMANT:
+- Partner, campaign and placement tables (all default inactive).
+- HMAC commercial token with 30-minute expiry + nonce.
+- TTL sequence-state adapter using WordPress Transients, compatible with 1blu without Redis/APCu.
+- Commercial event names exist but anonymous endpoint rejects them: signed flow required.
+- No sponsored content is injected, no affiliate link is displayed, no ranking is modified.
+
+PERMANENT PRODUCT RULES:
+- No Google Ads or comparable display ad networks.
+- Organic Best-Around-Me ranking remains independent.
+- Sponsored must later pass geographic/content/time eligibility and be clearly labelled.
+- No user profiling/fingerprinting.

@@ -1,0 +1,9 @@
+RUHRPOTT GURU THEME v153
+
+- Wurst-Hero mit Tageslicht-Imbissmotiv.
+- Hero-Typografie an Büdchen-Radar angepasst: 34px mobil, 50px Desktop; Subline 14/17px.
+- Frontend lädt jetzt A/manuell bestätigte Treffer plus Tier B aus dem Backend.
+- Tier-B-Karten werden dezent als „Im Radar“ gekennzeichnet; bestätigte/A als „Geprüft“.
+- Hero unterscheidet geprüfte Gesamtzahl und gesamten Radar-Bestand.
+- Echte vorhandene Place-Bilder werden weiterhin über imageUrl genutzt; der WURST-Platzhalter bleibt nur Fallback.
+- Standort-/Radiuslogik, Header und Footer unverändert.

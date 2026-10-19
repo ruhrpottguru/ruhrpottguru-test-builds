@@ -1,0 +1,11 @@
+RuhrpottGuru Places Backend 1.10.151 – Community / UGC Finalisierung
+
+- Serverseitig zwingend 1–5 Community-Fotos; JPG/PNG/WebP, max. 8 MB je Bild.
+- Gesamt-Request-Limit an 5 × 8 MB plus Multipart-Overhead angepasst.
+- Upload ist atomar: schlägt ein Bild fehl, werden Beitrag und bereits angelegte Attachments zurückgerollt.
+- Die Community-Kategorie stammt ausschließlich aus dem aktiven Place, nicht aus Clientdaten.
+- RP Redaktion → Community zeigt Place-Zuordnung, Nickname/E-Mail/Instagram, Zustimmungen und alle Fotos.
+- Listenansicht zeigt Ort, Einreicher und Fotoanzahl.
+- Freigabe = WordPress Veröffentlichen; Ablehnung = Papierkorb.
+- Öffentlicher REST-Endpunkt liefert weiterhin nur veröffentlichte Beiträge und keine privaten E-Mail-/Consent-Metadaten.
+- Kein Eingriff in Places-/Eventdaten, Radius, Sortierung, SEO/GEO, Media-Coverage oder Community-Frontendlayout.

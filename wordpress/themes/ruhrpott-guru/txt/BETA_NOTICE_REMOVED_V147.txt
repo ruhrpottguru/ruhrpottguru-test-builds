@@ -1,0 +1,6 @@
+RuhrpottGuru v147 – großer Beta-Hinweis entfernt
+
+- Der große Hinweisblock „RuhrpottGuru ist in der Beta“ auf der Startseite ist entfernt.
+- Der Seiteninhalt rückt automatisch nach oben.
+- Der kleine weiße globale BETA-Badge bleibt unverändert bestehen.
+- Sonstige Home-, Karten-, Standort- und Büdchen-Logik bleibt unverändert.

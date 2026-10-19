@@ -1,0 +1,9 @@
+RuhrpottGuru Theme v276 – SEO/Deep-Link Handoff FINAL
+
+Basis: v275 Public Discovery Tags FINAL.
+
+- Places lesen rg:canonical_url aus dem bestehenden REST-Tagvertrag.
+- Share verwendet fuer Events und Places bevorzugt canonicalUrl.
+- Solange das Backend keine neue canonicalUrl liefert, bleibt /teilen/... unveraendert der Fallback.
+- Keine Aenderung an Location/Radius, Kategorie-Resolver, Media, Community, Activities V2 oder Backend-Schreibpfaden.
+- Kompatibel mit Backend v1.10.94/v1.10.95; volle SEO-URLs ab v1.10.96.

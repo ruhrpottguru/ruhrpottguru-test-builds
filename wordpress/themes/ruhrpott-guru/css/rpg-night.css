@@ -1,0 +1,92 @@
+
+.rg-night{max-width:1180px;margin:0 auto;padding:8px 18px 42px;color:#f8fafc}
+.rg-night-hero{position:relative;overflow:hidden;border:1px solid #1f2937;border-radius:22px;padding:28px;background:
+radial-gradient(circle at 80% 10%,rgba(245,158,11,.17),transparent 32%),
+linear-gradient(145deg,#07101c 0%,#0b1220 48%,#111827 100%);box-shadow:0 18px 50px rgba(0,0,0,.25)}
+.rg-night-hero:after{content:"";position:absolute;inset:auto -8% -45% 38%;height:210px;background:linear-gradient(90deg,transparent,rgba(56,189,248,.12),rgba(245,158,11,.13));transform:skewY(-8deg);pointer-events:none}
+.rg-night-kicker{display:inline-flex;padding:6px 10px;border-radius:999px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.3);color:#fbbf24;font-size:12px;font-weight:800;letter-spacing:.04em;text-transform:uppercase}
+.rg-night-hero h1{position:relative;margin:10px 0 6px;font-size:clamp(30px,5vw,54px);line-height:1.02;color:#fff}
+.rg-night-hero p{position:relative;max-width:760px;margin:0;color:#cbd5e1;font-size:15px;line-height:1.65}
+.rg-night-location{position:relative;margin-top:16px;color:#e2e8f0;font-weight:700}
+.rg-night-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 10px}
+.rg-night-filters{display:flex;gap:8px;flex-wrap:wrap}
+.rg-night-filters button,.rg-night-location-button{appearance:none;border:1px solid #334155;background:#111827;color:#e5e7eb;border-radius:999px;padding:8px 12px;font-weight:800;font-size:13px;cursor:pointer}
+.rg-night-filters button:hover,.rg-night-filters button.is-active,.rg-night-location-button:hover{border-color:#f59e0b;background:#f59e0b;color:#111827}
+.rg-night-status{min-height:24px;margin:8px 0 14px;color:#94a3b8;font-size:13px}
+.rg-night-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:14px}
+.rg-night-card{position:relative;overflow:hidden;border-radius:18px;background:#0b1220;border:1px solid #1f2937;min-height:360px;display:flex;flex-direction:column;box-shadow:0 12px 32px rgba(0,0,0,.2)}
+.rg-night-image{position:relative;aspect-ratio:4/3;background:linear-gradient(145deg,#101827,#1e293b)}
+.rg-night-image img{width:100%;height:100%;display:block;object-fit:cover}
+.rg-night-image:after{content:"";position:absolute;inset:auto 0 0;height:45%;background:linear-gradient(transparent,rgba(2,6,23,.88))}
+.rg-night-image-badge{position:absolute;z-index:2;left:10px;top:10px;padding:5px 8px;border-radius:999px;background:rgba(2,6,23,.82);backdrop-filter:blur(8px);font-size:11px;font-weight:800;color:#fff}
+.rg-night-image-badge.is-day{background:rgba(120,53,15,.9);color:#fef3c7}
+.rg-night-score{position:absolute;z-index:2;right:10px;top:10px;background:#f59e0b;color:#111827;border-radius:999px;padding:5px 8px;font-size:11px;font-weight:900}
+.rg-night-card-body{display:flex;flex:1;flex-direction:column;padding:14px}
+.rg-night-card h3{margin:0 0 5px;color:#fff;font-size:18px;line-height:1.18}
+.rg-night-meta{font-size:12px;color:#94a3b8;margin-bottom:9px}
+.rg-night-reason{font-size:13px;line-height:1.5;color:#dbe4f0;margin:0 0 10px}
+.rg-night-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:auto}
+.rg-night-tag{font-size:10px;font-weight:800;padding:4px 7px;border:1px solid #334155;border-radius:999px;color:#cbd5e1}
+.rg-night-access{margin:10px 0 0;padding:8px;border-radius:9px;background:#111827;color:#cbd5e1;font-size:11px;line-height:1.4}
+.rg-night-card-actions{display:flex;gap:7px;margin-top:10px}
+.rg-night-card-actions button,.rg-night-card-actions a{flex:1;text-align:center;border-radius:10px;padding:9px 8px;font-size:12px;font-weight:900;text-decoration:none;cursor:pointer}
+.rg-night-upload{border:1px solid #f59e0b;background:#f59e0b;color:#111827}
+.rg-night-site{border:1px solid #334155;background:#111827;color:#f8fafc}
+.rg-night-empty{grid-column:1/-1;border:1px dashed #334155;border-radius:16px;padding:22px;text-align:center;color:#94a3b8}
+.rg-night-safety{margin-top:18px;padding:14px 16px;border-radius:14px;background:#111827;border:1px solid #334155;color:#cbd5e1;font-size:12px;line-height:1.55}
+.rg-night-modal{position:fixed;z-index:99999;inset:0;background:rgba(2,6,23,.86);display:flex;align-items:flex-start;justify-content:center;padding:7vh 16px 24px;overflow:auto}
+.rg-night-modal[hidden]{display:none}
+.rg-night-modal-card{position:relative;width:min(560px,100%);background:#0b1220;color:#fff;border:1px solid #334155;border-radius:20px;padding:22px;box-shadow:0 24px 90px rgba(0,0,0,.55)}
+.rg-night-modal-card h2{margin:0 36px 4px 0}
+.rg-night-modal-place{color:#fbbf24;font-weight:800;margin:0 0 16px}
+.rg-night-close{position:absolute;right:12px;top:10px;border:0;background:#f59e0b;color:#111827;border-radius:999px;width:34px;height:34px;font-size:24px;line-height:1;cursor:pointer}
+.rg-night-modal-card label:not(.rg-night-check){display:block;margin:10px 0;color:#e5e7eb;font-size:12px;font-weight:800}
+.rg-night-modal-card input[type="text"],.rg-night-modal-card input[type="email"],.rg-night-modal-card input[type="url"],.rg-night-modal-card input[type="file"]{width:100%;box-sizing:border-box;margin-top:5px;border:1px solid #334155;border-radius:10px;background:#111827;color:#fff;padding:10px}
+.rg-night-check{display:flex;align-items:flex-start;gap:9px;margin:14px 0;color:#d1d5db;font-size:12px;line-height:1.45}
+.rg-night-check input{margin-top:3px}
+.rg-night-form-note{font-size:11px;line-height:1.5;color:#94a3b8}
+.rg-night-submit{width:100%;border:0;border-radius:11px;background:#f59e0b;color:#111827;padding:11px 13px;font-weight:900;cursor:pointer}
+.rg-night-submit:disabled{opacity:.55;cursor:wait}
+.rg-night-form-status{min-height:20px;margin-top:9px;color:#cbd5e1;font-size:12px}
+@media(max-width:650px){
+  .rg-night{padding:0 10px 34px}.rg-night-hero{padding:20px 16px;border-radius:16px}.rg-night-toolbar{align-items:flex-start;flex-direction:column}
+  .rg-night-grid{grid-template-columns:1fr 1fr;gap:9px}.rg-night-card{min-height:0;border-radius:14px}.rg-night-card-body{padding:10px}.rg-night-card h3{font-size:15px}
+  .rg-night-reason{font-size:11px}.rg-night-card-actions{flex-direction:column}.rg-night-image-badge,.rg-night-score{font-size:9px;padding:4px 6px}
+}
+@media(max-width:410px){.rg-night-grid{grid-template-columns:1fr}}
+
+/* V177 – Standortauswahl identisch zu Büdchen/Imbiss */
+.rg-night-location-card{position:relative;margin:18px 0 10px;max-width:620px;z-index:2}
+.rg-night-radius{position:relative;max-width:620px;z-index:2;margin-top:8px}
+.rg-night-radius>div{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px;margin-top:6px}
+.rg-night-radius button.active{border-color:#f59e0b;background:#f59e0b;color:#111827}
+.rg-night-location-backdrop[hidden]{display:none!important}
+.rg-night-location-backdrop{z-index:100000}
+.rg-night-location-backdrop .rpgx-radius-apply{appearance:none;border:1px solid #d97706;background:#111c2c;color:#fbbf24;border-radius:9px;padding:9px 10px;font-weight:800;font-size:11px;cursor:pointer}
+.rg-night-location-backdrop .rpgx-radius-apply:hover{border-color:#f59e0b}
+@media(max-width:650px){
+  .rg-night-location-card{margin-top:16px}
+  .rg-night-radius>div{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+
+/* V178 – Nacht-Detailoverlay + Galerie */
+.rg-night-card-open,.rg-night-title-button{appearance:none;border:0;background:transparent;color:inherit;padding:0;margin:0;text-align:left;cursor:pointer;width:100%}
+.rg-night-title-button h3{transition:color .15s ease}.rg-night-title-button:hover h3{color:#fbbf24}
+.rg-night-card-open:focus-visible,.rg-night-title-button:focus-visible{outline:2px solid #f59e0b;outline-offset:2px}
+.rg-night-photo-count{position:absolute;z-index:2;left:10px;bottom:10px;background:rgba(2,6,23,.86);color:#fff;border:1px solid rgba(255,255,255,.18);border-radius:999px;padding:5px 8px;font-size:10px;font-weight:900}
+.rg-night-detail-btn{border:1px solid #334155;background:#111827;color:#f8fafc}
+.rg-night-card-actions .rg-night-detail-btn:hover{border-color:#f59e0b;color:#fbbf24}
+.rg-night-detail{position:fixed;z-index:99998;inset:0;background:rgba(2,6,23,.9);display:flex;align-items:flex-start;justify-content:center;padding:4vh 14px 26px;overflow:auto}
+.rg-night-detail[hidden]{display:none}
+.rg-night-detail-card{position:relative;width:min(820px,100%);overflow:hidden;border-radius:22px;border:1px solid #334155;background:#0b1220;color:#fff;box-shadow:0 28px 100px rgba(0,0,0,.6)}
+.rg-night-detail-hero{height:min(48vh,430px);min-height:260px;background:linear-gradient(145deg,#111827,#1f2937);display:flex;align-items:center;justify-content:center;overflow:hidden}
+.rg-night-detail-hero img{width:100%;height:100%;object-fit:cover;display:block}
+.rg-night-detail-placeholder{padding:30px;color:#94a3b8;text-align:center;font-weight:800}
+.rg-night-detail-body{padding:20px}
+.rg-night-detail-head{display:flex;justify-content:space-between;gap:16px;align-items:flex-start}.rg-night-detail-head h2{margin:8px 0 0;font-size:clamp(24px,4vw,36px);line-height:1.08}.rg-night-detail-count{white-space:nowrap;border-radius:999px;background:#111827;border:1px solid #334155;color:#fbbf24;padding:7px 10px;font-size:11px;font-weight:900}
+.rg-night-detail-meta{margin-top:8px;color:#94a3b8;font-size:13px}.rg-night-detail-reason{color:#e2e8f0;line-height:1.6;margin:14px 0}.rg-night-detail-access{padding:10px 12px;border-radius:10px;background:#111827;color:#cbd5e1;font-size:12px}
+.rg-night-detail-gallery-wrap{margin-top:20px}.rg-night-detail-gallery-wrap h3{margin:0 0 10px;font-size:17px}.rg-night-detail-gallery{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}.rg-night-detail-gallery .rg-night-empty{grid-column:1/-1}
+.rg-night-thumb{appearance:none;border:2px solid transparent;background:#111827;padding:0;border-radius:10px;overflow:hidden;aspect-ratio:4/3;cursor:pointer}.rg-night-thumb img{width:100%;height:100%;object-fit:cover;display:block}.rg-night-thumb.is-active{border-color:#f59e0b}.rg-night-detail-credit{min-height:18px;margin-top:8px;color:#94a3b8;font-size:11px}
+.rg-night-detail-actions{display:flex;gap:9px;margin-top:18px}.rg-night-detail-actions button,.rg-night-detail-actions a{flex:1;text-align:center;border-radius:11px;padding:11px;font-size:12px;font-weight:900;text-decoration:none;cursor:pointer}
+.rg-night-form-status.is-error{color:#fca5a5}.rg-night-form-status.is-success{color:#86efac}
+@media(max-width:650px){.rg-night-detail{padding:0}.rg-night-detail-card{min-height:100dvh;border-radius:0;border-left:0;border-right:0}.rg-night-detail-hero{height:34vh;min-height:220px}.rg-night-detail-body{padding:16px}.rg-night-detail-head{display:block}.rg-night-detail-count{display:inline-flex;margin-top:10px}.rg-night-detail-gallery{grid-template-columns:repeat(3,minmax(0,1fr))}.rg-night-detail-actions{flex-direction:column}}

@@ -1,0 +1,9 @@
+Ruhrpott Guru – GPS / OSM Resilience V1
+
+Fixes:
+- Food + Highlights no longer stop their radius chain after one transient OSM/proxy failure.
+- WordPress proxy failures fall back to direct Overpass mirrors (unless the request was explicitly aborted).
+- Category/provider failures are tracked per radius; later radii are still attempted.
+- Hidden quick filters and text search are reset on an explicit location change (manual city or GPS).
+- Browser OSM cache namespace bumped to v16 to avoid stale empty/error-era entries.
+- Manual-location persistence, sticky header, official website enrichment, Pexels, SureCookie and Infinite Scroll retained.

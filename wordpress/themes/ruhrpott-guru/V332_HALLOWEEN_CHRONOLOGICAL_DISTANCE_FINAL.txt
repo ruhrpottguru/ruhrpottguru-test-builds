@@ -1,0 +1,6 @@
+V332: Halloween-Special Sortierkorrektur, ausdruecklich freigegeben am 12.10.2026.
+- Kalenderdatum aufsteigend; 16.10. vor 31.10.
+- Innerhalb desselben Datums exakte vorhandene distanceKm aufsteigend; Uhrzeit nur bei gleicher Entfernung.
+- Kein Stadtbonus, keine erfundene Entfernung, keine Zeitreiter.
+- Keine Aenderung an isHalloweenEvent, Halloween-Seriendubletten, Radius-Fallback, Eventquellen, regulärer Eventuebersicht, GPS, Backend oder SEO.
+- Dies ersetzt die V300/V302-Naehe-zum-31.10.-Prioritaet; die historischen Marker dokumentieren nur alte Releases.

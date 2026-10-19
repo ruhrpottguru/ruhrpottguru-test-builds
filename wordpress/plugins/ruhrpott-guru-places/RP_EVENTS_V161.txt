@@ -1,0 +1,7 @@
+RuhrpottGuru Places Backend v1.6.1
+
+- RP Events ist kein eigener WordPress-Hauptmenuepunkt mehr.
+- Die Event-Verwaltung liegt jetzt unter RP Redaktion > Events.
+- Slug rp-events und alle bisherigen Event-Funktionen bleiben unveraendert.
+- Nacht-Sync um 03:00 Uhr und 10-Tage-Lifecycle bleiben unveraendert.
+- Keine Schema-Aenderung; SCHEMA_VERSION bleibt 1.6.0.

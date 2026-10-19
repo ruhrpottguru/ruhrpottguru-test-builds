@@ -1,0 +1,8 @@
+RuhrpottGuru Theme v215 – Event polish
+- Rich event fields no longer limited to Wesel/Oberhausen; reuses existing payload only.
+- Structured participants use strict structured fields + controlled explicit text patterns globally.
+- Price information rendered as compact rows/cards; booking-only text is not treated as a price.
+- Multi-day canonical series show a visitor-facing Zeitraum while retaining the next relevant occurrence.
+- Organizer and participants are 50:50 from tablet/desktop and stack on mobile.
+- Duplicate/generic event-info chips are removed.
+- No new external requests or event crawler added.

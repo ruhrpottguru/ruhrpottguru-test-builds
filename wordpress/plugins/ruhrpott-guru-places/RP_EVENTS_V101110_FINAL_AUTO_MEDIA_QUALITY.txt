@@ -1,0 +1,70 @@
+RuhrpottGuru – Event Auto Media Quality FINAL 1.10.110
+Build date: 2026-09-24
+
+ROOT CAUSE
+- The repeated black/white "NE-Re…" visual was already persisted in rg_event_media as an automatic Event fallback.
+- Theme-only pixel gates could not be the authoritative fix because DB-backed Event cards receive their media from the server-side event_media selection/handoff.
+- Browser/incognito cache was therefore not the source of the defect.
+
+FINAL CONTRACT
+- Automatic Event fallback sources are exactly:
+  * venue-commons-context
+  * pexels-symbolic-event
+- These rows are FAIL-CLOSED for all visitor-facing Event reads unless visual_quality_status='passed'.
+- On schema migration, legacy active automatic fallbacks are marked 'unchecked'. They therefore disappear from visitor output immediately, before the audit has completed.
+- Trusted Event media are not subject to this automatic-fallback gate:
+  * et4-global-id / et4-feed (ET4/ODF originals)
+  * editorial-override
+  * official-approved
+- No Selm-specific media branch exists; Selm uses the same global Event-media hierarchy as every other source.
+
+QUALITY AUDIT
+- New resumable Reprocessing job: event-fallback-media-quality-v101110.
+- The old 1.10.107 job is historical and cannot execute.
+- The audit validates the local bytes and evaluates:
+  * full image
+  * center 4:5 crop used by Event cards
+  * wide center crop used by Event detail presentation
+- Metadata rejection covers text/poster/flyer/banner/logo/wordmark/sign/map/diagram/scan/document/screenshot/typography classes.
+- Pixel validation detects text-heavy, paper-like, monochrome-edge and bimodal-wordmark imagery.
+- If no GD/Imagick decoder is available, automatic fallback media fail closed rather than being shown unchecked.
+- Rejected automatic media are persistently quarantined. Passed automatic media receive visual_quality_status='passed'.
+- Newly generated automatic Event fallbacks must pass the same server-side gate before activation.
+
+PUBLIC SURFACES COVERED
+- Normal /events database listing and card media
+- Global search Event image join
+- Single/direct Event DB enrichment
+- Direct/share/SEO Event payload finalization
+- REST exact-media/fallback handoff and pre-hydrated fallback recovery
+- Fallback live-media counts and primary reselection
+- Event fallback/context upgrade worker eligibility
+- Final Event quality audit image-presence check
+
+TRANSITION GUARANTEE
+- existing automatic + unchecked => hidden
+- existing automatic + passed    => visible
+- rejected/inactive automatic     => hidden
+- trusted ET4/editorial/official  => visible independent of automatic visual status
+- image-less Event                => remains visible with the neutral frontend placeholder
+
+FIXTURE REGRESSION
+- bad_fixture.png:
+  * full        => rejected: text-heavy
+  * 4:5 card    => rejected: bimodal-wordmark
+  * detail-wide => rejected: text-heavy
+- good_cakes.png:
+  * full / 4:5 / detail-wide => PASS
+- good_museum.png:
+  * full / 4:5 / detail-wide => PASS
+- good_museum2.png:
+  * full / 4:5 / detail-wide => PASS
+
+UNCHANGED
+- Event sync / ET4 import architecture
+- Selm calendar parser and sync
+- Event sorting/radius/date behavior
+- Places and Place-media coverage
+- Opening hours
+- RP Redaktion admin UX
+- Theme/frontend code (Theme v291 remains the companion theme)

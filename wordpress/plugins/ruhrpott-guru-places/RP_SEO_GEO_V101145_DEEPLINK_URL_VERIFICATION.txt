@@ -1,0 +1,32 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.145 – DEEP-LINK URL CONTRACT
+
+Changed only the canonical public detail URL contract:
+- Place: /ort/{id}/{city}/{place-slug}/
+- Event: /veranstaltung/{id}/{city}/{event-slug}/
+
+Compatibility / redirect behavior:
+- Legacy /ort/{id}/{slug}/ and /veranstaltung/{id}/{slug}/ are still matched.
+- Any legacy, missing-city, wrong-city or wrong-slug variant that resolves to a public ID is 301 redirected to the canonical URL derived from the live DB row.
+- Unknown/non-public IDs still follow the existing 404 path.
+
+Propagation verified in source:
+- DB Place sitemap URLs include city.
+- DB Event sitemap URLs include city.
+- Place response rg:canonical_url includes city.
+- Event REST/share/series canonicalUrl outputs include city.
+- SEO detail canonical + JSON-LD URL use the same canonical helper.
+- Existing visitor admission, category intelligence, sorting, radius, imports and data persistence are unchanged.
+
+Static acceptance:
+- Main URL helper contracts present: PASS
+- Legacy-compatible route matchers present: PASS
+- 301 canonicalization present: PASS
+- Sitemap propagation present: PASS
+- All PHP files lint clean: PASS
+
+Production E2E after installation:
+1) /ort/18645/essen/villa-huegel/ must return the Villa Hügel detail.
+2) old /ort/18645/villa-huegel/ must 301 to /ort/18645/essen/villa-huegel/.
+3) /veranstaltung/4112/luenen/wochenmarkt-in-der-innenstadt/ must return the event while it is still public/current.
+4) old /veranstaltung/4112/wochenmarkt-in-der-innenstadt/ must 301 to the city-bearing canonical URL while public/current.
+5) sitemap + HTML canonical are checked live after install.

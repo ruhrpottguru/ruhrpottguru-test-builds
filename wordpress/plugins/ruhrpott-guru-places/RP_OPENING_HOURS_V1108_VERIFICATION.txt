@@ -1,0 +1,59 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.8 — OPENING HOURS RESEARCH QUEUE
+Generated: 2026-09-01
+
+PURPOSE
+- Replace misleading fast single-pass audit with a two-phase workflow.
+- Phase 1 is local-only inventory/classification and is allowed to run fast.
+- Phase 2 researches exactly one unresolved relevant place per request.
+- A place is marked unknown only after every configured source path completed without a usable opening schedule.
+- If any required source path was blocked/failed, status is research-incomplete, never confirmed unknown.
+
+SOURCE CHAIN (PHASE 2)
+1. Exact live OSM object refresh using stored OSM type + ID via Overpass.
+2. OSM opening_hours and opening_hours:url / website / Wikidata tags.
+3. Exact Wikidata P856 when QID exists.
+4. Wikidata name search + P856 candidates when no QID exists; candidate page must pass identity check.
+5. Existing RuhrpottGuru resolver, including destination.one/eT4 and strict official-domain verification.
+6. Verified official/operator/municipal website and up to 4 same-host opening/visit/contact/service pages.
+7. Public DuckDuckGo HTML search only as a discovery mechanism for additional official-site candidates.
+   Search-engine and directory data are never stored as opening-hours evidence.
+   Candidate pages must pass name + local-context identity checks; the official page is stored as the source.
+
+PERSISTENCE
+- Opening hours: place_schedules (general), place_enrichment, places.opening_hours.
+- Source/confidence/verified timestamp stored with canonical schedule/enrichment data.
+- Verified official website can be persisted even when no opening hours are found.
+- Already stored opening hours from 1.10.7 remain intact when a new 1.10.8 audit starts.
+
+AUDIT STATES
+- found-existing
+- not-required
+- research-queued
+- found-web
+- unknown-after-exhaustive-search
+- research-incomplete
+- error
+
+ADMIN UX
+- Separate progress bars for local inventory and external research.
+- Separate counters for research queue, completed research, confirmed unknown, and incomplete research.
+- Closing the browser tab pauses AJAX processing without deleting stored results.
+- Incomplete/error cases can be re-queued separately.
+- External phase has one place/request and a 2.5s client pause between requests.
+
+PARSER / IDENTITY TESTS EXECUTED
+PASS — split opening intervals: Mo 06:00-08:00,12:00-20:00; Di-Fr 06:00-08:00,10:00-20:00; Sa-So 08:00-20:00
+PASS — explicit always-open text -> 24/7
+PASS — Schema.org openingHoursSpecification -> Mo-Di 10:00-18:00
+PASS — identity matcher accepts Rheinbad/Wesel matching page fixture
+PASS — identity matcher rejects Düsseldorf mismatch fixture
+
+STATIC CHECKS
+PASS — plugin header/version = 1.10.8
+PASS — schema version = 1.10.8
+PASS — retry-incomplete AJAX hook + handler present
+PASS — no old v1107 audit-state option references
+PASS — PHP syntax check
+
+NETWORK NOTE
+The build container has no outbound runtime network access, so live Overpass/Wikidata/destination.one/official-site/DuckDuckGo calls cannot be executed here. Those calls execute on the installed WordPress host. Failures are deliberately classified as research-incomplete rather than being silently counted as unknown.

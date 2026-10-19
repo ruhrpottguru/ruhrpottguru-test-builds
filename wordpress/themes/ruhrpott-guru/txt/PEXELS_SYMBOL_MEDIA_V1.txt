@@ -1,0 +1,36 @@
+RUHRPOTT GURU – PEXELS SYMBOL MEDIA V1
+
+Purpose
+- Preserve verified real venue images.
+- Use Pexels only when every real/contextual food image source fails.
+- Never present a Pexels stock image as a photograph of the venue.
+
+Priority
+1. Direct OSM image / Commons
+2. OSM-linked Wikidata P18 / Wikipedia
+3. Regional tourism/open-data exact identity image
+4. OSM-linked official website
+5. Panoramax / KartaView contextual open imagery
+6. Pexels clearly labelled symbolic food/cuisine image
+7. Neutral no-photo state
+
+Configuration
+WordPress Admin -> Settings -> RuhrpottGuru Bilder -> Pexels API-Key
+
+Alternative server config
+Define RPG_PEXELS_API_KEY in wp-config.php or as an environment variable.
+The key is not exposed in the public frontend JavaScript.
+
+Pexels behavior
+- Fixed bounded semantic query taxonomy (ice cream, coffee, Chinese, kebab, pizza, fries, etc.)
+- 40 landscape photos per query pool
+- Pexels query pool cached for 24 hours
+- deterministic per-venue image selection, reducing duplicates without extra API calls
+- photos with obvious people/portrait alt-text are rejected
+- badge: "Symbolfoto · Pexels · Foto: <photographer>"
+- source badge links to the corresponding Pexels photo page
+- symbolic photos are allowed only for active places
+
+Cache versions
+- Frontend media intelligence: v13
+- Backend Food Media: v7-pexels

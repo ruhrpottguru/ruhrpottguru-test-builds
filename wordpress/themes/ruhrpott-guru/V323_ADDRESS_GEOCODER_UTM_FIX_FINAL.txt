@@ -1,0 +1,9 @@
+V323 — Address geocoder UTM fix FINAL
+
+- Keeps the V322 split address form and hidden official map.nrw geocoder.
+- Fixes the actual V322 runtime bug: map.nrw map.center is documented in ETRS89 / UTM zone 32N (EPSG:25832), not WGS84 longitude/latitude.
+- Converts the documented map.center to WGS84 before passing coordinates into the unchanged RuhrpottGuru location pipeline.
+- Accepts direct geographic coordinates defensively if map.nrw changes behavior.
+- Full address remains stored locally for the selected address location but is rendered only inside the Standort dialog.
+- Category/home/special location labels remain coarse (postcode + city / city), so a private street address is not exposed on individual pages.
+- No category/radius/ranking/fallback logic changed.

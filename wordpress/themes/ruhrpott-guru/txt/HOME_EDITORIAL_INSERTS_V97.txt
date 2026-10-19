@@ -1,0 +1,9 @@
+RUHRPOTT GURU – HOME EDITORIAL INSERTS V97
+===========================================
+
+- Reaktiviert den vorhandenen Halden-Beitrag als redaktionellen Home-Aufmacher direkt VOR Highlights.
+- Reaktiviert genau einen veröffentlichten Interview-Beitrag direkt VOR Kultur.
+- Inhalte bleiben echte WordPress-Beiträge; React enthält keine fest eingebauten Artikeltexte.
+- Halden-Suche bevorzugt Guru-Tipp-Beiträge mit Halden-Bezug und fällt auf veröffentlichte Posts mit Halde/Halden im Inhalt zurück.
+- Interview bevorzugt die WordPress-Kategorie Interviews/Interview und fällt auf veröffentlichte Posts mit Interview-Bezug zurück.
+- Die Source-owned React-Architektur aus V95/V96 bleibt erhalten; kein AI-Studio-Bundle wird reaktiviert.

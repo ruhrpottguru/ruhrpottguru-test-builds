@@ -1,0 +1,4 @@
+V219
+- WordPress mail sender display name globally branded as "Ruhrpottguru".
+- Sender email address is not changed.
+- Applies to normal wp_mail() messages, including Community workflow mails.

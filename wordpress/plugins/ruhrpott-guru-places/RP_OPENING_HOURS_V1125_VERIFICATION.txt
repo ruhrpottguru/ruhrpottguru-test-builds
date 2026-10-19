@@ -1,0 +1,43 @@
+RUHRPOTTGURU PLACES BACKEND — OPENING HOURS FINALIZATION v1.10.25
+Generated: 2026-09-08
+
+SCOPE
+- Based on the latest backend package v1.10.24.
+- No theme change.
+- No reset of persisted place_schedules, place_enrichment or places.opening_hours.
+- Confirmed unknown results are not re-opened.
+
+ROOT CAUSE VERIFIED FROM THE CURRENT CODE + FINISHED AUDIT SCREENSHOT
+1. The dashboard total counted only currently active Food/Highlights/Kultur/Aktiv places.
+2. The audit counters counted every historic row in place_opening_audit without the same current-place scope.
+3. Therefore audit rows for places that had since become inactive/reclassified could make Phase 1 exceed 100% (20,874 indexed vs 20,646 current candidates => 101.1%).
+4. The Phase-2 queue selector also lacked the current active/category scope, so stale queued rows could still be processed.
+5. The completeness rule treated a failed public search-engine discovery as incomplete even when an identity-bound official site had already been fetched and its relevant hours/visit/contact subpages were completely checked. That made search-engine availability unnecessarily decisive.
+
+FIXES
+- Snapshot counters now JOIN the current active/public place scope.
+- Stale/out-of-scope audit rows are pruned safely from place_opening_audit.
+- Research queue selection and manual retry are restricted to current active/public places.
+- PHP and browser progress calculations are capped at 100% as a final presentation invariant.
+- An accessible identity-bound official website with a completed site/subpage crawl is now a complete primary source path even if DuckDuckGo/Bing discovery is temporarily unavailable.
+- A blocked identity-bound official website still remains research-incomplete; it is never converted to confirmed unknown.
+- Existing research-incomplete/error rows are automatically requeued exactly once after upgrade to v1.10.25.
+- Existing found hours, locked schedules and confirmed unknown rows remain untouched.
+- Reset explicitly clears the one-time v1.10.25 recovery marker.
+
+STATIC/PACKAGE CHECKS
+- PHP 8.4 syntax: PASS
+- Version header + class constant both 1.10.25: PASS
+- Current-scope snapshot invariant: PASS
+- Current-scope queue invariant: PASS
+- Current-scope retry invariant: PASS
+- One-time recovery guard: PASS
+- Official-site completeness rule: PASS
+- 20,874 / 20,646 screenshot regression case renders max 100.0%: PASS
+- ZIP root plugin slug preserved: ruhrpott-guru-places/: PASS
+
+RUNTIME EXPECTATION AFTER INSTALL
+- The existing finished audit is kept.
+- On the next normal WordPress request, v1.10.25 removes stale audit rows and requeues only current research-incomplete/error cases once.
+- The background worker continues server-side as before.
+- If a retried case still has a genuinely blocked official source path and no complete alternative identity path, it remains research-incomplete by design.

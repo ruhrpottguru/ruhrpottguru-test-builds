@@ -1,0 +1,19 @@
+RUHRPOTTGURU EVENTS 1.10.47 – RECHTESTATUS-BADGES
+
+SCOPE
+- Reine Admin-UX-Aenderung in RP Redaktion -> Events -> Offizielle Bildkandidaten.
+- Rechtestatus wird direkt in der Arbeitsliste als farbiges Badge dargestellt.
+
+BADGES
+- Offen · Pruefung noetig: gelb
+- Unklar: gelb
+- Freigegeben: gruen
+- Verworfen: rot
+
+UNVERAENDERT
+- Event-Auslieferung
+- Event-Medienprioritaet
+- Rechteentscheidungslogik
+- ET4/destination.one Cache
+- Fallback-Audit / Enrichment
+- REST

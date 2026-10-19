@@ -1,0 +1,36 @@
+RuhrpottGuru Places Backend v1.10.101 – Tiered Event Sync Verification
+====================================================================
+
+Ziel
+- Kurzfristige Events schnell aktualisieren, ohne den kompletten 365-Tage-Pool mehrfach täglich zu laden.
+- Keine parallelen Event-Importwellen.
+- Bestehende 365-Tage-Master-/Supplemental-Identität und SEO-Langzeitabdeckung erhalten.
+
+Installierte Taktung
+1) HOT: heute bis +14 Tage, alle 4 Stunden.
+2) PLAN: +15 bis +90 Tage, täglich 01:00 WordPress-Zeitzone.
+3) FULL: heute bis +365 Tage, sonntags 03:00 WordPress-Zeitzone.
+   Der FULL-Lauf ist absichtlich ein kompletter Reconciliation-Snapshot und umfasst damit
+   auch die kürzeren Zeitfenster einmal pro Woche. Das hält last_master_run, den 53-Städte-
+   Supplemental-Abgleich und die bestehende Vollbestandsdiagnostik konsistent.
+
+Kollisionsschutz
+- Persistente Queue für hot14 / plan90 / full365.
+- Globaler Event-Import-Lock mit Heartbeat.
+- Master, Tier-Refresh und 53-Städte-Supplemental laufen nie parallel.
+- Breitere, bereits wartende Läufe decken schmalere, bereits wartende Requests ab.
+- Neue Requests, die während eines laufenden Imports eintreffen, bleiben in der Queue.
+- Ein vor dem Update bereits laufender v1.10.100-Master bleibt unverändert bestehen und
+  wird beim nächsten Batch-Tick in den neuen Lock übernommen.
+
+Datenpfad
+- Bestehender ET4/Open-Data-Finder-Transport bleibt erhalten.
+- Bestehende stabile Event-/Occurrence-Identität bleibt erhalten.
+- Tier-Refreshes nutzen den autoritativen ET4-Primärmedienpfad.
+- Tier-Refreshes schreiben NICHT last_master_run; nur der Wochen-Master besitzt diesen Token.
+- Keine Datenbank-Schemaänderung in v1.10.101.
+
+Bewusst nicht Bestandteil dieses Builds
+- Der separate geplante Cancellation/Missing-Lifecycle mit missing_since/missing_count/
+  source_status. Dieser braucht eine eigene Schema-/Lifecycle-Abnahme und wird nicht mit
+  dem reinen Taktungs-/Kollisionsbuild vermischt.

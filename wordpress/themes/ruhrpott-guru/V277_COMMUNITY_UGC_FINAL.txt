@@ -1,0 +1,11 @@
+RuhrpottGuru Theme v277 – Community / UGC Final
+
+- Basis: v276 SEO/Deep-Link Handoff; SEO- und Deep-Link-Logik unverändert.
+- Community-Beitrag bleibt Gast-Einreichung ohne Konto und benötigt 1–5 Fotos.
+- Client-seitige Upload-Grenzen entsprechen dem bestehenden Backend: JPG/PNG/WebP, max. 8 MB/Bild, max. 5, keine Dubletten in derselben Auswahl.
+- Konkrete Feldvalidierung statt einer Sammelmeldung.
+- Nach erfolgreicher Einreichung eigener Bestätigungszustand; kein irreführend leeres Formular.
+- Ladefehler bei „Aus der Community“ werden nicht mehr als „keine Beiträge“ ausgegeben; Retry vorhanden.
+- Instagram-Nennung im freigegebenen Beitrag wird bei gültigem Handle als UGC/nofollow-Link ausgegeben.
+- 1 Beitrag volle Breite; 2 = 50:50; 3 = 50:50 + 50 % nächste Zeile; Inline-Aufklappen und Galerie unverändert.
+- Kein Schreiben in place_media, keine Places-Tabellen, kein Reprocessing, kein Backend-Worker.

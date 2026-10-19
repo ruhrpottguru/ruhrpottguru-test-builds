@@ -1,0 +1,31 @@
+RUHRPOTTGURU THEME V290 – VERIFICATION
+Date: 2026-09-24
+
+BASE
+- RuhrpottGuru Theme v289 Event Context Visual Gate FINAL
+
+ROOT CAUSE CONFIRMED
+- The bad Waldschule/Cappenberg Event-Ort image remains in persisted visitor media.
+- It is a location fallback, not a native/freigegebenes Eventbild.
+- v289 only evaluated the image after paint and its visual threshold combination did not reliably reject the real high-contrast text/sign visual.
+- DetailGallery could re-add the stored context image independently of the runtime card fallback.
+
+FIX
+- Event-Ort fallbacks are preflighted before paint.
+- venue-commons-context and venue-editorial-pool are gated.
+- ET4/ODF originals, official-approved, editorial-override and Pexels symbols are excluded from this gate.
+- Unexpected external Event-Ort URLs fail closed to the existing Symbolfoto/ticket placeholder path.
+- Detail gallery cannot reinsert an unverified Event-Ort image.
+- Newly saved favorites use the approved runtime event image.
+
+VISUAL CALIBRATION
+- Real bad screenshot crop: REJECT (text-heavy)
+- Existing Museum Stadt Lünen photo: PASS
+- Existing Büchereikino/cake photo: PASS
+- Existing museum interior photo: PASS
+
+REGRESSION CHECKS
+- php -l: PASS for all shipped PHP files
+- node --check: PASS for all shipped JS files
+- v288 single-page scroll rules retained
+- no backend/event sync/radius/date/order changes

@@ -1,0 +1,7 @@
+RuhrpottGuru Places Backend v1.6.10
+
+Frontend-Enrichment-Overlay:
+- Auch solange das Event-Frontend wegen eines noch nicht abgeschlossenen 53-Städte-Nachtlaufs den Open-Data-Finder-Live-Fallback nutzt, werden gespeicherte Event-DB-Anreicherungen in die REST-Antwort eingeblendet.
+- Geprüfte Eventbilder aus rg_event_media werden als event-eigene media_objects ausgeliefert.
+- Angereicherte Adressen und Mitwirkende werden ebenfalls übernommen.
+- Keine Sonderfälle für einzelne Events oder Städte.

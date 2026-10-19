@@ -1,0 +1,5 @@
+WP CONTENT SHELL V1
+- Plain WordPress pages no longer auto-render the RuhrpottGuru React discovery app.
+- Standard RuhrpottGuru header + footer remain visible.
+- WordPress editor content is rendered between header and footer.
+- App/category pages and explicit Ruhrpott shortcodes keep their previous behavior.

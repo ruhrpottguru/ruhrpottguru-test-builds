@@ -1,0 +1,8 @@
+Ruhrpott Guru V36 – Share Icon
+
+Basis: V35 Category Web UX.
+
+Änderung:
+- Teilen verwendet auf Ergebnis-Karten und Detail-Layern das übliche Share-2-Symbol (drei verbundene Punkte) statt des Pfeils ↗.
+- Beschriftung, native Web Share API, Deep-Link-Format und Fallback-Verhalten bleiben unverändert.
+- Keine Änderungen an OSM/GPS/Radius, Szene-Intelligence, Event-Daten, Kalender oder Website-Resolver.

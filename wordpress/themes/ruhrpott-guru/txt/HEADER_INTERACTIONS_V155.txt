@@ -1,0 +1,8 @@
+RUHRPOTT GURU – HEADER INTERACTIONS V155
+
+- Suche auf /imbissbuden/ fokussiert jetzt eine echte lokale Suche nach Bude, Stadt, Adresse und Spezialität.
+- Merkzettel im Header öffnet jetzt eine eigene gespeicherte Liste; Einträge können entfernt werden.
+- Merkzettel im Burger-Menü öffnet dieselbe Liste.
+- Burger-Menü funktioniert jetzt auch auf Desktop; auf Desktop als rechter Drawer.
+- Bestehende WordPress-Menüposition „Mobilmenü (Burger-Menü)“ bleibt die Datenquelle.
+- Standort-Button unverändert.

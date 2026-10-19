@@ -1,0 +1,6 @@
+RUHRPOTTGURU THEME 2.00 – FOOD DETAIL DATA RESTORE
+
+- Food detail overlay re-runs the existing identity-verified /food-info resolver for the opened venue only.
+- Verified website, menu, reservation and opening hours are merged into the visible detail without placeholders.
+- Speisekarte action again has an icon.
+- No bulk crawl on list rendering; enrichment is detail-on-demand and is cached/persisted by the existing backend.

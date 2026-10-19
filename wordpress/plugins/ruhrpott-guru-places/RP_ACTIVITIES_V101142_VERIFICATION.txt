@@ -1,0 +1,34 @@
+RuhrpottGuru Places Backend 1.10.142 – Activities V2 Experience/Environment Pass
+
+Basis
+- Built directly from installed release line 1.10.141 Highlights Cluster FINAL.
+- No database migration and no reprocessing job.
+- Events, Food, Culture and Highlights resolver logic unchanged by this release.
+
+Changes
+- Activities V2 spec bumped from 1.3 to 1.4.
+- Added explicit visitor experiences: Barfuss-/Barfußpfad, Kletterpark/Klettergarten/Seilgarten aliases, Bogenschiessen/Bogenparcours, Parkour/Freerunning and Footballgolf/Footgolf.
+- Public park/recreation/sports-centre sites with at least three concrete sport/activity signals can qualify as multi_sport_park. sport=multi by itself is never sufficient.
+- Multi-offer bonus is based on concrete admitted experiences, not a generic multi tag.
+- Deterministic activity_environment: indoor | outdoor | both | unknown. Explicit indoor tags take precedence; accepted experience capabilities and building/covered context are fallbacks. unknown has no generic ranking penalty.
+- Public REST rows expose rg:activity_environment and rg:activity_multi_count in addition to the existing V2 activity tags.
+- Existing standard-sport differentiation retained: e.g. basketball remains stronger than table tennis, ordinary soccer club pitches are not promoted as general experiences.
+
+Functional fixtures passed
+1. Barfuss/Barfuß path -> REIN / barefoot_trail.
+2. Kletterpark -> REIN / climbing_adventure.
+3. Public park with football + basketball + table tennis -> REIN / multi_sport_park + multi_activity.
+4. Explicit indoor Escape Room -> environment=indoor.
+5. Explicit outdoor multi-sport park -> environment=outdoor.
+6. Padel without reliable environment evidence -> environment=unknown (no guessing).
+7. access=private Parkour -> RAUS.
+8. Public Basketballplatz regression -> REIN / basketball.
+9. Public park Tischtennis regression -> REIN / table_tennis.
+10. Ordinary soccer club pitch regression -> not REIN.
+11. Public Bogenparcours -> REIN / archery.
+
+Technical verification
+- php -l passed for every PHP file in the plugin tree.
+- Main plugin header version is 1.10.142.
+- Activities spec version is 1.4.
+- ZIP contains exactly one top-level plugin directory: ruhrpott-guru-places/.

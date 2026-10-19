@@ -1,0 +1,8 @@
+RuhrpottGuru Theme v300 – Halloween Date-Relevance Ranking FINAL
+
+- Halloween special ranks by proximity to 31 October, not generic next-event chronology.
+- 31.10. is first, then neighbouring days, then earlier seasonal horror content.
+- Strong Halloween-title signals break ties before time and distance.
+- Series dedupe keeps the occurrence closest to Halloween, so recurring festivals show the useful Halloween date instead of an early-season occurrence.
+- Strict Halloween eligibility, v299 full-radius filtering, cross-source dedupe, normal Events/Home sorting and all non-Halloween views remain unchanged.
+- Verified real-data edge cases: Rampenmonster is a genuine Halloween/Frankenstein/Dracula music-theatre event; Eyes in the Dark is a genuine paranormal/true-crime horror event.

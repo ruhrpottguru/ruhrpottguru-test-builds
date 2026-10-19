@@ -1,0 +1,36 @@
+RuhrpottGuru Places Backend 1.10.156 — Data Hygiene Final
+
+Scope
+- Historical HTML-derived opening-hours contamination only.
+- Persisted event organizer/contact leakage with legal/footer text.
+- No changes to radius, sorting, event lifecycle, source priority, OSM raw tags, manual/locked schedules or event raw_payload provenance.
+
+Verified production evidence before build
+- Haus der Technik #18743: canonical places.opening_hours already empty, but place_schedules + place_enrichment + audit still held a 798-char false schedule generated from event/calendar fragments.
+- Additional official-website discovery schedules contained hundreds of mutually conflicting daily intervals, proving a general historical whole-page aggregation problem rather than a single-place anomaly.
+- Selm event #19025: organizer_json stored phone "02303-271541 + footer/legal text" while raw source page currently exposes phone 02303-271541.
+- Current visitor organizer sanitizer already outputs the clean phone; 1.10.156 repairs the persisted canonical organizer_json locally.
+
+Parser hardening
+- Structured JSON-LD openingHours remains preferred.
+- Unstructured HTML weekday/time parsing now requires a nearby explicit opening/service/visit-hours context.
+- Calendar-date/event/seminar rows are rejected as Place opening hours.
+- Text-derived compact schedules are rejected when any day has >3 intervals or the whole weekly plan has >14 intervals.
+- Same structural guard is enforced again at the HTML-derived persistence boundary.
+
+One-time local repair
+- Only unlocked general schedules from official-website* or osm-opening-hours-url are eligible.
+- Only structurally implausible values are quarantined.
+- The exact same bad value is removed from place_schedules, place_enrichment, places.opening_hours and the opening audit result.
+- Audit evidence is retained with status data-quality-quarantine; no external worker is auto-started.
+- OSM/manual/locked schedules are untouched.
+- Event rows containing Impressum/Datenschutz/© leakage in organizer_json are re-materialized from unchanged raw_payload using the existing v1.10.153 phone sanitizer and hardened role/participant resolver.
+
+Fixture acceptance
+PASS seminar calendar line -> no opening hours
+PASS real Mo-Fr 09:00-18:00 / Sa 10:00-14:00 -> preserved
+PASS two split intervals/day -> preserved
+PASS Haus der Technik historical schedule -> quarantined
+PASS aggregated discovery schedule with >3 intervals/day -> quarantined
+PASS reasonable compact schedule -> preserved
+PASS Selm dirty phone -> 02303-271541

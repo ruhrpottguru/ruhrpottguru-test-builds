@@ -1,0 +1,23 @@
+RuhrpottGuru Places Backend 1.10.121 — Media Card Source Lock
+
+Root cause verified from the 1.10.120 code path and the supplied screenshot:
+- the visible event-media card rendered its image from the already loaded representative row ($m / $img),
+- but the inline crop editor immediately performed a second DB/media resolution by ID via media_crop_direct_group_v101118(),
+- therefore card image and editor preview could diverge even though both labels showed the same media ID.
+
+1.10.121 removes that second resolution from the inline editor.
+- Event editor receives the exact same $m row snapshot and exact same $img URL already used by the visible card.
+- Place editor receives the exact same place-media row and exact same visible URL.
+- The preview <img> elements use only that passed-in card URL.
+- Crop identity keys/master are calculated from that same in-memory snapshot.
+- Save/reset carries a server-signed HMAC snapshot (scope + ID + master + exact identity keys), so the save path does not re-resolve the target through another DB/media lookup.
+- Legacy/global motif search is unchanged and retains its old DB-bound path.
+
+Acceptance invariants checked before packaging:
+1. Event card -> inline editor passes the same $m and $img variables.
+2. Place card -> inline editor passes the same $m and visible URL.
+3. Inline v1.10.121 renderer contains no call to media_crop_direct_group_v101118().
+4. Both card/detail preview images use the same $preview argument.
+5. Signed inline save path validates HMAC before accepting master/identity keys.
+6. Legacy editor path remains available.
+7. PHP syntax check passes.

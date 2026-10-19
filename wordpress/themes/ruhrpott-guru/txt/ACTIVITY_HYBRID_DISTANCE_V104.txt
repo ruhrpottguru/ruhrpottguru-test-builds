@@ -1,0 +1,9 @@
+RuhrpottGuru v104 – Activity Intelligence + Entfernung
+
+- Activities Home uses Activity Intelligence AND distance.
+- Backend remains the source of eligibility, visitor-utility filtering and deduplication.
+- Home selects up to six cards with a hybrid score: activity score minus 2 points per km.
+- First selection pass limits repetitive exact activity buckets and water dominance when alternatives exist.
+- Sparse local areas are filled with valid remaining activities instead of showing empty slots.
+- The final six visible Home cards are ordered strictly by distance ascending.
+- Full Activities category pages remain distance sorted.

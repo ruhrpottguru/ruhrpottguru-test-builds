@@ -1,0 +1,37 @@
+RUHRPOTT GURU – HOME HISTORICAL RESTORE V63
+============================================
+
+Base strategy
+-------------
+V63 is NOT based on V62's provider changes. It is rebuilt from the V41 four-shortcode
+implementation and restores the exact V40/V41 canonical React/provider engine.
+
+Historical finding
+------------------
+The established single React Home did NOT load all four categories concurrently.
+Its real orchestration was:
+- Events: independent job
+- OSM: Food -> Highlights -> Culture, sequentially
+
+V41 introduced the four separately placeable magazine shortcodes but its app.js used
+Promise.allSettled() for all visible categories at once and also observed the entire DOM
+for 30 seconds. Rendering itself could retrigger boot work. V42+ then started modifying
+GPS, canonical OSM, proxy transport, caches and fallback behavior to compensate.
+
+V63 correction
+--------------
+- Four separate shortcodes remain: events, food, highlights, culture.
+- Gutenberg blocks can remain between them.
+- js/ruhrpott-app.js is byte-identical to V41/V40 known-good canonical engine.
+- functions.php is byte-identical to V41 provider/proxy implementation.
+- No /v6/home-pois route.
+- No V43 grid-normalized proxy query.
+- No V45 altered proxy timeout/mirror behavior.
+- No V42+ changes to canonical GPS/OSM/radius/cache logic.
+- Magazine app.js uses the SAME scheduling pattern as the established single React Home:
+  Events independently; Food -> Highlights -> Culture sequentially.
+- Observer disconnects before the first boot and cannot restart hydration from render mutations.
+- Provider failures remain provider failures; genuine empty snapshots remain empty snapshots.
+
+The only data-flow change relative to V41 is orchestration in the magazine shortcode layer.
+The canonical data engine itself is restored, not patched.

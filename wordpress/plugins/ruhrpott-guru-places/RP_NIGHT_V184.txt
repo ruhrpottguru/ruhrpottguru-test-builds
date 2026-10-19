@@ -1,0 +1,6 @@
+RPG PLACES 1.8.4 - NIGHT UPLOAD + GALLERY
+- Nachtfoto-Upload validiert reale Uploadfehler und Dateitypen robust.
+- JPEG, PNG, WebP; HEIC/HEIF werden bei Server-Unterstuetzung nach JPEG konvertiert.
+- Kein falscher Erfolgsstatus mehr, wenn kein Bild gespeichert wurde.
+- Neue REST-Galerie je Place: /places/night/{id}/photos.
+- Alle freigegebenen Nachtfotos bleiben an derselben Place-ID.

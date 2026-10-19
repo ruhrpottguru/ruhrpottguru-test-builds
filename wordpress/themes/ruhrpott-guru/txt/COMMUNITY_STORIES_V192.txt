@@ -1,0 +1,7 @@
+RuhrpottGuru Theme V192 – Community-Beiträge
+
+- „Aus der Community“ in Place-Details für Food, Highlights, Kultur, Aktiv, Büdchen/Wurst.
+- Gastformular ohne Registrierung: Titel, Tipp, Nickname, E-Mail, optional Instagram und bis zu 5 Bilder.
+- Datenschutz-, Einreichungs- und Bildrechte-Bestätigung.
+- Beiträge erscheinen erst nach Freigabe des CPT rpg_community.
+- Bestehende Daten-/Bildkorrekturen bleiben getrennt erhalten.

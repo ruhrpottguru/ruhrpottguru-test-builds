@@ -1,0 +1,17 @@
+RUHRPOTTGURU THEME V291 – EVENT AUTO-FALLBACK VISUAL GATE
+
+ROOT CAUSE
+- V290 gated Event-Ort context media but explicitly excluded pexels-symbolic-event.
+- The repeated Waldschule text/wordmark visual can therefore survive when it is delivered/classified as automatic Symbolfoto instead of Event-Ort.
+- The real visible crop also has less white area than the earlier calibration fixture, so the former black/white rule alone was insufficient for that crop.
+
+FIX
+- ONE global rule for automatic event fallbacks: Event-Ort AND Symbolfoto are preflighted before paint.
+- Approved originals remain excluded: ET4/ODF exact media, editorial override, official-approved.
+- Older/unknown DB fallback source labels are gated defensively unless they are explicit approved originals.
+- Added monochrome-edge-text detection for cropped wordmarks/sign text.
+- Runtime quality-fallback Symbolfotos are also probed before display; unprobeable candidates fail closed to the neutral ticket placeholder.
+- Same-origin localized images are inspected directly; images.pexels.com is attempted anonymously and fails closed when CORS/pixel access is unavailable.
+
+UNCHANGED
+- Event eligibility/count/order, dates, radius, source provenance, Selm sync, ET4 originals, approved editorial/official media, single-page scroll, other categories and backend data.

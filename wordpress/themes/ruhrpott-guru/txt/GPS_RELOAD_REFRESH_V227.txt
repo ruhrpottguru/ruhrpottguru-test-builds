@@ -1,0 +1,14 @@
+RuhrpottGuru Theme v2.27 – GPS refresh only on real reload
+
+Behavior:
+- Manual city selection remains persistent until the visitor changes it.
+- GPS mode remains persistent, but its coordinates are refreshed only on a real browser reload.
+- Normal navigation between Home, Events, Food, Highlights, Kultur, Aktiv, Route and Büdchen does not request or refresh GPS.
+- Automatic reload refresh runs only when the browser Permissions API reports geolocation=granted, so it cannot create a new permission prompt.
+- Browsers with permission=prompt/denied or without Permissions API keep the saved location silently.
+- Fresh GPS uses maximumAge=0.
+- Tiny GPS jitter is ignored using an accuracy-aware movement threshold (minimum 75 m, maximum 250 m); city changes and coarse cross-host fallbacks always update.
+- Cross-host fallback cookie now preserves whether the chosen mode was GPS or manual without storing precise GPS coordinates in the cookie.
+- Existing first-visit and explicit "GPS verwenden" flows remain available.
+
+No Places Backend or opening-hours worker logic changed.

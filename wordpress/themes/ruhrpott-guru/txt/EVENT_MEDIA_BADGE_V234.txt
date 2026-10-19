@@ -1,0 +1,8 @@
+RUHRPOTTGURU – EVENT MEDIA BADGE V234
+
+ÄNDERUNG
+- Für venue-commons-context lautet der sichtbare Eventkarten-Badge jetzt exakt: Event-Ort.
+- Die interne Quelle venue-commons-context und die Bildpriorität bleiben unverändert.
+- Der ausführliche Bildcredit bleibt weiterhin als Orts-Kontextbild / Wikimedia Commons nachvollziehbar.
+- Symbolfoto bleibt für Pexels unverändert.
+- Keine Event-, Radius-, Sortier-, Filter-, Rechte- oder Medienauflösungslogik wurde geändert.

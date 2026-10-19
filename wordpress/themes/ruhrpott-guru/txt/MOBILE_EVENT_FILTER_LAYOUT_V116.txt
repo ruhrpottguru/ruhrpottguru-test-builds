@@ -1,0 +1,9 @@
+RuhrpottGuru v116
+
+- Behebt den horizontalen Mobile-Overflow des Event-Filters.
+- Ursache: native Select-Elemente durften ihre intrinsische Textbreite in den Flex-Container drücken.
+- Suchfeld und Event-Art-Filter verwenden jetzt ein minmax(0,1fr)-Grid.
+- Beide Controls haben width/max-width 100% und min-width 0.
+- Lange Event-Arten werden im geschlossenen Select abgeschnitten statt die Seite zu verbreitern.
+- Unter 360 px werden die Controls sicher untereinander dargestellt.
+- Trusted Event Sources v114 und Event-Art-Logik v115 bleiben unverändert.

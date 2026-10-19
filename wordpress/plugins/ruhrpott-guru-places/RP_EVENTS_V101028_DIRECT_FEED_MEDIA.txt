@@ -1,0 +1,28 @@
+RuhrpottGuru Places Backend 1.10.28 – ET4 direct feed media persistence
+
+Verified root cause
+- v1.10.27 correctly upgraded master + destination.one supplemental fetches to rich unique ET2014A objects.
+- event_upsert_from_feed_item() persisted the rich object only into rg_events.raw_payload.
+- Visitor rendering reads persistent rg_event_media, not raw_payload directly.
+- Existing rows already terminally marked checked_no_media were excluded from later enrichment batches (which process only pending/retry/partial).
+- Therefore a rich payload could contain the correct ET4 image while the visitor card stayed on the red ticket fallback indefinitely.
+
+Fix
+1. For trusted ET4 sources open_data_finder / destination_one_open_data / et4, event_upsert_from_feed_item() now extracts the event-owned image immediately and persists it via event_store_authoritative_feed_media_v1022().
+2. ET4 feed artwork stays authoritative and becomes the primary media row immediately; no remote image-health roundtrip blocks visitor rendering.
+3. checked_no_media / checked_incomplete is promoted to complete when authoritative ET4 media is stored.
+4. One-time local raw-payload backfill scans all active ET4/destination.one rows and persists already-present images without external research.
+5. If the v1.10.27 rich supplemental worker is still running, the backfill performs a final second pass only after that worker finishes. This closes the race for cities updated while the first local pass was in progress.
+6. Current supplemental state is not restarted or reset. Opening-hours audit state/options/hooks are unchanged.
+
+Verification
+- PHP 8.4 syntax: PASS.
+- Actual ET2014A media parser fixture: root media_objects rel=default + type=image/jpeg -> PASS.
+- Wrapped media_objects.media_object fixture -> PASS.
+- Event subitem media_objects fixture -> PASS.
+- HTML/pages media candidate rejection -> PASS.
+- Direct ingest path contains authoritative media persistence before returning event_id -> PASS.
+- Local backfill is DB-only; no remote HTTP image probe is used -> PASS.
+- Final backfill pass waits for an already-running supplemental wave -> PASS.
+- No reset of rg_opening_hours_audit_state_v1108 or opening-hours worker state -> PASS.
+- No reset of rg_events_supplemental_state -> PASS.

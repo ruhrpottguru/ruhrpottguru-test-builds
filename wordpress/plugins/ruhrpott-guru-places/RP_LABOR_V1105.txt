@@ -1,0 +1,21 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.5 - LABOR QUALITY FLOOR
+
+Ziel
+- "Zielgröße 10" ist im Labor ab jetzt eine Obergrenze, keine Auffüllpflicht.
+- Die Empfehlungsauswahl darf bewusst bei 6-9 Treffern stoppen, wenn die verbleibenden Kandidaten nur mittelmäßig sind.
+
+Änderung gegenüber 1.10.4
+- Kategorieanker bleibt bei Auswahl-Score >= 70.
+- Geschützter zweiter Treffer bleibt bei >= 64.
+- Globaler Qualitäts-Fill wurde von >= 60 auf >= 64 angehoben.
+- Unsichere Candidate-Fallbacks bleiben ausschließlich erlaubt, wenn sonst weniger als 6 sichere Tipps vorhanden wären.
+- Maximal 3 Treffer pro Kategorie bleibt bestehen.
+
+Warum
+- In Wesel wurden nach 8 starken Treffern noch "Wesel Esel" und "Peter Minuit" mit Scores um 61 nachgeschoben.
+- Beide sind valide Katalogobjekte, aber keine notwendige Auffüllung für einen spontanen Top-Tipp.
+- Die Engine soll nicht semantisch korrekte, aber schwächere Objekte nur deshalb zeigen, weil die gewählte Zielgröße noch nicht erreicht ist.
+
+Scope
+- Nur RP Redaktion / Labor.
+- Keine Änderung an Homepage, Theme oder öffentlichen REST-Rankings.

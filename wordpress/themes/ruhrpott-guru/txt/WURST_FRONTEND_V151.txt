@@ -1,0 +1,8 @@
+RUHRPOTT GURU – WURST FRONTEND V151
+
+Basis: v150
+Änderung:
+- Die WordPress-Seite „Imbissbuden“ wird NICHT mehr automatisch angelegt.
+- Eine vorhandene Seite wird NICHT verändert oder überschrieben.
+- [ruhrpott_imbissbuden] bleibt unverändert registriert.
+- Das gesamte Wurst-Frontend, Standort-/Radius-Logik, Header, Footer und CSS bleiben unverändert.

@@ -1,0 +1,8 @@
+RuhrpottGuru Theme v304.0 — Detail Overlay 20px Top / Single Source
+
+Scope:
+- Shared DetailOverlay only.
+- Direct canonical detail pages and in-site detail layer use the same component.
+- Detail panel starts exactly 20px below the viewport top on mobile and desktop.
+- Removed desktop vertical centering and panel top margin that previously added/changed offset.
+- No data, resolver, radius, category, event lifecycle, Halloween, media, or sorting logic changed.

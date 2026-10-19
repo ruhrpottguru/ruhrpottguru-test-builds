@@ -1,0 +1,8 @@
+RuhrpottGuru v115
+
+- Behebt den falschen Event-Filter „Alle Arten“, der ET4-Anbieter/Organisationen als Event-Arten angezeigt hat.
+- Ursache: Der generische Kategorienfilter nutzte bei Events das Subtitle/Venue-Feld; zusätzlich konnte die rekursive Venue-Erkennung Provider-Metadaten erwischen.
+- Events haben jetzt eine eigene Event-Art-Klassifizierung.
+- Filterwerte: Konzert & Musik, Party & Nightlife, Theater & Bühne, Comedy & Show, Ausstellung & Kunst, Markt & Stadtfest, Sport, Familie, Tour/Wissen/Workshop, Weitere Events.
+- Venue-Erkennung ist jetzt strukturell begrenzt und greift nicht mehr rekursiv in Provider-Metadaten.
+- Trusted Event Sources aus v114 bleiben vollständig erhalten.

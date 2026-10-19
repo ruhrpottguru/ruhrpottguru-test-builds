@@ -1,0 +1,17 @@
+RUHRPOTTGURU THEME v283 — EVENTS DISTANCE + RUNNING MULTI-DAY DATE FINAL
+Date: 2026-09-23
+Base: v282 Selm Source Handoff FINAL
+
+Scope
+- No new Selm calendar, layout, route, card type or frontend surface.
+- Event category pages now perform one final distance sort AFTER all event sources are normalized and deduplicated.
+- Home keeps the established urgency selection/order.
+- Running multi-day events show "bis DD.MM." on cards instead of an already elapsed start date.
+- Single-day all-day events encoded with an exclusive next-midnight end remain single-day in the card display.
+- Future events and normal same-day/timed events keep their established start-date/start-time display.
+
+Expected Selm example at 2026-09-23
+- 0.22 km Selm event sorts before 6.x/9.x km events on the Events category page.
+- 15.09.–05.10. running exhibition -> "bis 05.10."
+- 16.07.–15.10. running exhibition -> "bis 15.10."
+- 10.05.–25.10. running exhibition -> "bis 25.10."

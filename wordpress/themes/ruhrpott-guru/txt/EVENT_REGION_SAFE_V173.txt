@@ -1,0 +1,7 @@
+RUHRPOTTGURU EVENT REGION SAFE V173
+
+- Public destination.one fallback remains supplemental.
+- Every destination_one_open_data item is normalized to its venue address and must belong to one of the canonical 53 Metropole-Ruhr municipalities.
+- Out-of-region events are discarded before visitor response/capture.
+- Event endpoint cache key bumped to v173 to prevent old broad-fallback cache reuse.
+- Master/Open Data Finder and Essen official source behavior otherwise unchanged.

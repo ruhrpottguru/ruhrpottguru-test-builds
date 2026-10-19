@@ -1,0 +1,13 @@
+RUHRPOTT GURU – HIER GEHT'S UM DIE WURST V150
+
+- New WordPress page: /imbissbuden/
+- Required shortcode: [ruhrpott_imbissbuden]
+- Existing header/footer/global location shell unchanged.
+- Existing persistent Standort + Radius logic reused; no second city selector.
+- Result pipeline: Standort -> Radius -> backend public eligibility -> positive specialty filters -> sort.
+- Backend visibility: only public_eligible and not rejected.
+- No invented ranking / Top 3. Sort: distance or newest inventory entry.
+- No generic venue photos presented as real place photos. Missing media uses an explicit RuhrpottGuru WURST placeholder.
+- Specialty filters appear only when positive menu evidence exists in the current radius pool. Missing evidence stays unknown.
+- Community suggestion form is moderated and does not auto-publish.
+- Desktop 3 columns, tablet 2, mobile 1.

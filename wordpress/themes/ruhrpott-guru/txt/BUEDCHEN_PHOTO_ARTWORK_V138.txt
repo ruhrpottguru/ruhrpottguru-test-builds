@@ -1,0 +1,8 @@
+RuhrpottGuru v138 – Büdchen photo artwork
+
+- Adds a local cinematic Trinkhalle/Büdchen image asset.
+- Home Büdchen-Radar banner now uses the image as a full-bleed background.
+- Büdchen-Radar page hero uses the same image.
+- Dark gradients preserve RuhrpottGuru text readability.
+- Existing header/footer, map interaction, deferred mobile search, filters and radius logic unchanged.
+- Image ships inside the theme; no external image host/browser request is required.

@@ -1,0 +1,50 @@
+RuhrpottGuru Places Backend 1.10.159
+WeselMarketing Veranstaltungskalender – FINAL verification
+Date: 2026-10-06
+
+SCOPE
+- Activates the official WeselMarketing/Wesel Tourismus calendar as an additional local event source after written third-channel permission.
+- No special Wesel frontend. Imported occurrences use the existing canonical events table, existing REST/read model and current Theme v312 rendering.
+- ET4/Open Data Finder remains higher priority. Strong cross-source matches link provenance to the existing event instead of creating a second public row.
+
+OFFICIAL SOURCE VERIFIED LIVE
+- Current calendar: https://www.wesel-tourismus.de/wesel-entdecken/veranstaltungen/veranstaltungskalender
+- Historic GovData XML resource /xmlveranstaltungen currently returns HTTP 404 and is deliberately not used.
+- 2026-10-06 live source sweep: pages 0..24 all HTTP 200; 241 visible calendar cards; last page contains 1 card; page 999 returns 0 cards without an HTTP failure.
+- 184 unique detail aliases were observed, confirming that recurring events can have multiple visible occurrences under the same detail URL.
+- Recurrence fixture verifies card-to-occurrence matching and stable source occurrence ids node-{Drupal-ID}#{ordinal}.
+- Long-running fixture: KUMMERSCHALEN start 2026-08-16 11:00 / end 2026-10-31 17:00.
+- Multi-occurrence live structure verified with 34. Traditioneller Waldweihnachtsmarkt (three start/end pairs on one detail page).
+- Momo high-resolution original image path returned HTTP 200 image/jpeg (1,654,293 bytes) in the live probe.
+
+RIGHTS / MEDIA
+- Data and organizer-provided event images are treated as approved only under the written WeselMarketing third-channel permission for RuhrpottGuru.
+- Any concrete contradictory event/image notice takes precedence operationally.
+- Existing visitor-ready ET4/ODF image stays preferred.
+- If no visitor-ready ET4 image exists, a Wesel image is localized through the existing official-approved event-media path and therefore uses the same card/detail resolver as all other approved event media.
+
+IMPORT / LIFECYCLE
+- Bounded resumable worker, max 4 detail pages per turn.
+- Uses the global event import lock and the existing external-heavy worker gate.
+- Source-run token uses wesel:<token> and therefore participates in the existing missing lifecycle.
+- Missing lifecycle is applied only after a complete source sweep without terminal detail failures.
+- Source-owned occurrences use Drupal node id + occurrence ordinal; corrected start times update the same occurrence row as long as the source occurrence order is stable.
+- Repeated cards for one detail URL are preserved in the queue instead of being collapsed by slug.
+- Same-title events on the same day are not deduplicated solely by title/venue when start times are more than three hours apart.
+
+GEO / RADIUS SAFETY
+- No city-centre fallback is used.
+- New Wesel-only events are public only after a strong local match against the existing OSM Places corpus (address or venue identity).
+- This preserves the existing visitor radius/distance promise. Events without trustworthy coordinates remain audit-only rather than receiving false coordinates.
+
+TESTS PASSED
+- PHP syntax: all plugin PHP files pass php -l.
+- Exact extracted parser fixture: normal cards, duplicate slug preservation, empty result, foreign-host rejection, high-resolution image conversion, address parsing, Drupal node id, long-running interval, recurring occurrence selection.
+- Exact extracted dedupe fixture: close cross-source match => existing; same-title same-day event 4h apart => distinct/missing; near-date contradiction => conflict.
+- Current public source probes: page 0, page 24, empty page 999, Momo detail, long-running exhibition detail and image original.
+- Theme v312 inspected: legacy ruhrpott_guru_verified_wesel_events() exists only as an unused function definition; no caller found. Theme is intentionally unchanged.
+
+INSTALLATION RESULT
+- Install only this backend ZIP over the existing RuhrpottGuru Places Backend.
+- Theme remains v312.
+- The Wesel worker is scheduled automatically; RP Redaktion -> Events also exposes “WeselMarketing jetzt synchronisieren”.

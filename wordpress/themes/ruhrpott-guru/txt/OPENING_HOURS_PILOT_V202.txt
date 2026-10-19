@@ -1,0 +1,8 @@
+RuhrpottGuru Theme v202 — Opening Hours Pilot Wesel + Oberhausen
+
+- Uses canonical opening_hours delivered by the Places backend; no new lookup/audit.
+- Scope: non-event places whose actual city is Wesel or Oberhausen.
+- Home/category cards show a compact current open/closed badge when hours are known.
+- Detail summary shows a dedicated Öffnungszeiten panel with current status and full formatted schedule.
+- Pilot prefers persisted item.openingHours over the optional Food runtime website lookup.
+- Existing behavior outside Wesel/Oberhausen remains unchanged.

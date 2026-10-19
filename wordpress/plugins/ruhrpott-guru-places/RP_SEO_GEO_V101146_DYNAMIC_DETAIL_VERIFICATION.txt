@@ -1,0 +1,33 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.146 – DYNAMIC DETAIL PAGE VERIFICATION
+
+Scope
+- Existing canonical URLs remain unchanged:
+  /ort/{id}/{city}/{place-slug}/
+  /veranstaltung/{id}/{city}/{event-slug}/
+- The canonical URL itself now renders the full server-side detail presentation.
+- No visitor admission, category resolver, radius, distance sort, event lifecycle or import logic changed.
+
+Place detail contract
+- Hero image when available
+- Public type, H1, city, opening hours, address and description
+- Website when available
+- Route action from coordinates/address
+- Share action uses the canonical URL
+- Back/more-discovery action
+- Existing Place JSON-LD, canonical, OG/Twitter metadata retained
+
+Event detail contract
+- Rights-aware event hero image when available
+- H1, city, visitor-local event date/time, venue, address and description
+- Ticket action when available
+- Validated event website when available
+- Route action
+- Share action uses the canonical URL
+- Back/more-discovery action to Events
+- Existing Event JSON-LD, canonical, OG/Twitter metadata retained
+
+Regression
+- Legacy/faulty city or slug URL normalization remains handled by the existing 301 resolver.
+- 404/noindex behavior for non-public records remains unchanged.
+- Event sitemap SELECT now includes city so sitemap URLs use the same city-bearing canonical contract.
+- The former "Im RuhrpottGuru öffnen" bridge CTA is no longer part of canonical detail pages.

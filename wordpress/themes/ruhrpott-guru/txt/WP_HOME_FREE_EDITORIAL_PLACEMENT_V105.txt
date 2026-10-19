@@ -1,0 +1,8 @@
+RuhrpottGuru V105 — freie WordPress-Beiträge zwischen Home-Shortcodes
+
+- Die Reihenfolge der Gutenberg-Blöcke auf der als Startseite gewählten WordPress-Seite ist autoritativ.
+- Normale WordPress-Blöcke zwischen den RuhrpottGuru-Shortcodes werden exakt an dieser Stelle auf der React-Home ausgegeben.
+- Keine automatische Suche mehr nach Halde/Halden, Interview, Kategorie, Tag oder Schlüsselwort für Home-Einschübe.
+- Der bisher automatisch vor Highlights eingesetzte Halden-Beitrag und der automatisch vor Kultur eingesetzte Interview-Slot werden nicht mehr injiziert.
+- Der Redakteur kann z.B. einen Query-Loop-/Neueste-Beiträge-Block, einen einzelnen Beitrags-Teaser oder beliebige Gutenberg-Inhalte zwischen [ruhrpott_home_events], [ruhrpott_home_food], [ruhrpott_home_highlights], [ruhrpott_home_kultur] und [ruhrpott_home_aktiv] setzen.
+- Die Live-Kategorien bleiben unabhängig davon dynamisch; WordPress-Inhalte benötigen keine technische Verknüpfung zum RuhrpottGuru-Theme.

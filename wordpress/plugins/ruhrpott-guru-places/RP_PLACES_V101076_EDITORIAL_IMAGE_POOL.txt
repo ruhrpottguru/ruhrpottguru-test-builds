@@ -1,0 +1,12 @@
+RuhrpottGuru Places Backend 1.10.76 – redaktioneller Ortsbild-Pool
+
+- Places -> Redaktionelle Daten -> Ortsbilder: mehrere Bilder aus der WordPress-Mediathek auswählen/hochladen.
+- Pflicht: Credit und Lizenz/Nutzungsgrundlage; Urheber und Quell-URL optional, danach pro Bild einzeln editierbar.
+- Ein Bild kann als Hauptbild gesetzt, jedes Bild deaktiviert/reaktiviert werden.
+- "Automatische Bilder wieder verwenden" deaktiviert den manuellen Pool reversibel.
+- Ist ein manueller Pool aktiv, liefert der normale Place-Detail-Slider nur diesen Pool; automatische Bilder bleiben gespeichert.
+- Events: eigenes ET4-/Eventbild bleibt immer vorrangig. Danach event-spezifisch freigegebenes Bild. Erst danach genau EIN Bild aus dem manuellen Ortsbild-Pool. Danach bisherige Commons/Pexels-Fallbacks.
+- Auswahl des Ortsbilds ist event-stabil und innerhalb derselben REST-Antwort kollisionsarm; Bilder werden genutzt, bevor sich der Pool wiederholt.
+- Events erhalten aus dem Ortsbild-Pool niemals einen Slider.
+- Kein Datensatz wird wegen fehlenden Bildes ausgeblendet.
+- Öffnungszeiten-Code unverändert gegenüber 1.10.75.

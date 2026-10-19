@@ -1,0 +1,6 @@
+RPG THEME V178 - NIGHT DETAIL + GALLERY
+- Nachtkarten oeffnen ein eigenes Detail-Overlay auf derselben Seite.
+- Alle freigegebenen Nachtfotos einer Place-ID werden als Galerie geladen.
+- Kein separater WordPress-Detailseitentyp.
+- Nachtfoto-Upload mit klarer Fehler-/Erfolgsausgabe und mobilem image/* Picker.
+- Standortauswahl aus V177 bleibt erhalten.

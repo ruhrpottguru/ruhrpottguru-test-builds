@@ -1,0 +1,6 @@
+V212 – reliable header pinning
+- Replaced CSS sticky with viewport-fixed header.
+- React measures real header height using ResizeObserver.
+- A matching spacer preserves document flow and adapts when search/header height changes.
+- Works on mobile and desktop; WordPress admin-bar offsets included.
+- V211 larger category headings retained.

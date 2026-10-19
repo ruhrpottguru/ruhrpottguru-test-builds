@@ -1,0 +1,8 @@
+RuhrpottGuru Events v1.10.54 — 53-Städte-Quellenmatrix
+
+- 53/53 Kommunen besitzen jetzt mindestens ein recherchiertes lokales Quellenprofil.
+- Wesel/weseltickets.de bleibt der einzige aktive Coverage-Parser.
+- Die übrigen 52 Kommunen sind ausschließlich Recherche-/Konfigurationsdaten: keine neuen HTTP-Requests, keine neue Cron-Last, kein Import.
+- Quellen werden nach offizieller Vollquelle, spezialisierter Quelle, ergänzender Quelle, Parser-Pending und bekannter Baseline-Überlappung unterschieden.
+- Essen und Lünen sind explizit als Baseline-Overlap markiert, damit vorhandene Destinationhub/destination.one-Pfade später nicht blind doppelt gescannt werden.
+- Confidence-/Auto-Merge-Pfade bleiben bis zur Auswertung des realen Wesel-Piloten deaktiviert.

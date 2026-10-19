@@ -1,0 +1,16 @@
+RUHRPOTT GURU PLACES BACKEND – LABOR 1.10.6
+
+ZWECK
+Behebt den Testkontext-Fehler beim Stadtwechsel im internen RP-Redaktion-Labor.
+
+ÄNDERUNGEN
+- Stadtwechsel setzt Labor-Koordinaten automatisch auf einen aus dem aktiven Places-Katalog berechneten Kommunen-Mittelpunkt.
+- Die Koordinaten werden pro municipality_slug aus den vorhandenen aktiven Places berechnet; keine externe Geocoding-API nötig.
+- 0 / 0 in den Koordinatenfeldern bedeutet jetzt automatisch: Koordinaten der ausgewählten Stadt verwenden.
+- Manuelle GPS-Koordinaten bleiben möglich. Sobald Lat/Lng editiert werden, wechselt der Testkontext in den manuellen Modus.
+- Auto-/Manuell-Modus bleibt beim Neuberechnen der Auswahl und bei Labor-Filtern erhalten.
+- Für Wesel und Essen existiert ein sicherer Fallback, falls der Live-Katalog wider Erwarten keinen Kommunen-Mittelpunkt liefern kann.
+- Keine Änderung an Homepage, öffentlichem Frontend oder produktiver Rankinglogik.
+
+WICHTIG
+Die Zielgröße 6/8/10 bleibt weiterhin nur eine Obergrenze. Die Quality-Floor-Regel aus 1.10.5 bleibt unverändert.

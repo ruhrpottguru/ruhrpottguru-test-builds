@@ -1,0 +1,23 @@
+RUHRPOTTGURU EVENTS 1.10.103 — SELM LISTING PARSER FIX FINAL
+
+ROOT CAUSE
+- The Selm pilot fetched the live municipal listing successfully, but the listing parser only accepted detail targets inside a narrowly shaped <a href> and implicitly required a slash before "veranstaltungen".
+- The live calendar contains normal event rows, while that narrow route matcher returned zero detail links. Therefore the run stopped before any detail page, upsert or geo step.
+
+FIX
+- Keep the same official source, same schedule, same stable selm:<numeric-id> identity and same visitor Event pipeline.
+- Discover the canonical /veranstaltungen/{slug}/{numeric-id} route independent of whether it is absolute, root-relative, relative, or exposed through form/data/JS URL-bearing markup.
+- Explicitly exclude /verwaltung/veranstaltungen/bilder/... so image-directory numbers can never be mistaken for event IDs.
+- Keep row text hashing, 365-day horizon, ET4-priority dedupe, missing lifecycle, source attribution and no-calendar-image policy unchanged.
+- No Theme/frontend/layout changes.
+
+VERIFICATION
+- PHP syntax: PASS
+- Absolute detail URL fixture: PASS
+- Root-relative detail URL fixture: PASS
+- Relative form action fixture: PASS
+- Listing-relative slug/id fixture: PASS
+- ./slug/id fixture: PASS
+- JS/onclick detail URL fixture: PASS
+- Calendar image path false-positive guard: PASS
+- Old narrow parser regression fixture confirms the previous zero-link failure mode: PASS

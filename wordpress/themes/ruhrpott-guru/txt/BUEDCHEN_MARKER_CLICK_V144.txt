@@ -1,0 +1,10 @@
+RuhrpottGuru v144 – clickable Büdchen map markers
+
+- A single, visually unambiguous Büdchen marker is directly clickable/tappable.
+- Click/tap opens the existing Büdchen detail overlay immediately.
+- Markers closer than 24 px are treated as overlapping.
+- Overlapping markers remain visible but are not clickable, preventing the wrong
+  Büdchen detail from opening.
+- Zooming in separates the markers; as soon as they no longer overlap, they
+  automatically become clickable.
+- Mobile one-finger page scrolling and two-finger map gestures remain unchanged.

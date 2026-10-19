@@ -1,0 +1,14 @@
+RuhrpottGuru Places Backend 1.10.4 - Labor Visitor-Intent + Quality Anchors
+
+- Keine Homepage-, Theme-, REST- oder oeffentliche Ranking-Aenderung.
+- Reaktion auf den Wesel-Labortest aus 1.10.3: technisch offene Orte muessen auch ein echtes Besucherangebot sein.
+- Aktiv: e.V./Verein/Club/Verband/Gemeinschaft wird standardmaessig aus der Empfehlungsauswahl entfernt, solange kein explizites Besucherangebot (z. B. Verleih, Tour, Kletterpark, Bad, Wakepark, Kartbahn) belegt ist.
+- Aktiv: Spa/Wellness/Sauna wird auch bei vorhandenem Pool nicht mehr automatisch als starkes Aktiv-Erlebnis behandelt. Wellness-first = -24, benanntes oeffentliches Bad/Therme = -14; echte Wasser-/Action-Angebote bleiben stark.
+- Kultur: Bibliotheken als spontane Top-Tipps jetzt -18.
+- Kultur: generische Denkmaeler/Gedenkobjekte -16; mit Tourism/Wikidata/Wikipedia weiterhin nur -8.
+- Kategorienvielfalt ist nur noch geschuetzt, wenn ein echter Qualitaetsanker >=70 existiert.
+- Zweiter Slot einer verankerten Kategorie ab 64.
+- Danach globaler Quality-Fill ab 60, maximal drei je Kategorie.
+- Kategorien ohne Qualitaetsanker haben keine Quote und koennen nur ueber ihren echten Auswahl-Score hineinkommen.
+- Unsichere Kandidaten weiterhin nur als Notfall-Fallback, wenn weniger als sechs belastbare Tipps existieren.
+- Rohdiagnose und JETZT-Score bleiben unveraendert; nur die Labor-Auswahl wird strenger.

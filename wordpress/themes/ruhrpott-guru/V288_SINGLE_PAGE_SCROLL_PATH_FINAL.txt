@@ -1,0 +1,21 @@
+RuhrpottGuru Theme v288 – Single Page Scroll Path FINAL
+
+Root cause
+- V117 set overflow-x:hidden on both html and body.
+- CSS overflow-axis coupling computes overflow-y:auto when the other axis is hidden.
+- If body is viewport-constrained, html and body can therefore both become vertical scroll containers.
+- With the fixed RuhrpottGuru header/footer, the inner body scrollbar is visually exposed only between header and footer, producing the two adjacent scrollbars seen in the mobile/narrow screenshot.
+
+Fix
+- Normal page: html is the sole vertical scroll owner (overflow-y:auto).
+- Normal page: body is not a vertical scroll container (overflow-y:visible).
+- html remains the single document scroll owner with horizontal containment; body uses overflow-x:clip so it cannot become a second scroll container.
+- rpgx-modal-open locks both html and body so location/Buedchen overlays keep a stable background while their own panels scroll.
+- Existing rg-direct-detail-open lock remains unchanged.
+- No event, media, location, radius, footer or data logic changed.
+
+Regression
+- Chromium viewport test with body forcibly constrained to 100vh: html scrollHeight > clientHeight, body overflow-y=visible, only documentElement owns page scrolling.
+- PHP syntax: PASS.
+- React source JS syntax: PASS.
+- ZIP integrity: PASS.

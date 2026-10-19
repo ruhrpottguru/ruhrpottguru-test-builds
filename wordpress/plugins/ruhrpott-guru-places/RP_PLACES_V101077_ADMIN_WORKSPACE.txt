@@ -1,0 +1,22 @@
+RuhrpottGuru Places Backend 1.10.77 – Redaktioneller Places-Arbeitsbereich
+
+Ziel
+- Die bisherige technische Sammelseite war für redaktionelle Arbeit zu lang und vermischte normale Places, Büdchen und Imbiss-Kandidaten.
+
+Neu
+- Neuer Einstieg: RP Redaktion -> Places.
+- Feste Kopfleiste mit drei getrennten Bereichen: Places | Büdchen | Imbiss.
+- Places: gezielte Suche nach Name, Stadt oder Straße; optionale Kategorie Food/Highlights/Kultur/Aktivitäten.
+- Büdchen: eigener Bestand und eigene Suche.
+- Imbiss: eigener Kandidatenbestand mit Tier-/Review-Information.
+- Trefferlisten sind standardmäßig eingeklappt.
+- Bei geöffnetem Datensatz steht der Ortsbild-Pool direkt sichtbar oben.
+- Vorhandene manuelle Ortsbilder sind als Liste standardmäßig eingeklappt.
+- Redaktionelle Stammdaten sind standardmäßig eingeklappt.
+- Die technische Legacy-Sammelseite unter Werkzeuge bleibt unverändert als Diagnose-/Audit-Zugang erhalten.
+
+Sicherheit / Regression
+- Keine Änderung am Besucher-Frontend.
+- Keine Änderung an Event-, Öffnungszeiten-, Import- oder REST-Logik.
+- Place-Image-Pool aus 1.10.76 bleibt unverändert; nur Admin-Zugang/Rücksprünge wurden ergänzt.
+- Büdchen-Merkmale werden nur verändert, wenn das entsprechende Formular sie tatsächlich übermittelt.

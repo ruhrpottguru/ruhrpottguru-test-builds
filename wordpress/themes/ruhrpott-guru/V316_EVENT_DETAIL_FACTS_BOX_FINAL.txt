@@ -1,0 +1,8 @@
+RuhrpottGuru Theme v316 — Veranstaltungsdetails neben Veranstalter
+
+- Event-Detailseiten zeigen Veranstalter & Kontakt links und Veranstaltungsdetails rechts (Desktop), mobil untereinander.
+- Veranstaltungsdetails bündeln den strukturierten Veranstaltungstyp, Preis/Ticketdaten und Mitwirkende.
+- Exakte strukturierte Veranstaltungstypen aus Wesel/ET4 werden als klickbare Filterchips gerendert.
+- Die Veranstaltungstypen werden zugleich Teil des echten Event-Filters, damit der Klick eine passende Ergebnisliste liefert.
+- Die bisherigen separaten Preis- und Mitwirkendenboxen werden nicht doppelt angezeigt.
+- Keine Änderung an Eventimport, Rechten, Radius, Sortierung, Lifecycle oder Bildern.

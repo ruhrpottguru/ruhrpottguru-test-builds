@@ -1,0 +1,16 @@
+RuhrpottGuru v120 – Privacy / Beta retention
+
+- Based on v119 Beta Readiness.
+- Beta feedback is automatically deleted after 12 months.
+- Cleanup runs daily via WordPress Cron.
+- Feedback continues to store only timestamp, page, category and the submitted message.
+- No analytics user identifier is added.
+- No exact GPS coordinate is added to analytics.
+- Aggregate first-party analytics from v118/v119 remain unchanged.
+- Commercial/advertising layer remains dormant.
+- No Google Ads or external analytics network is introduced.
+
+Privacy-policy wording should distinguish:
+1. server/network processing (where IP addresses may technically be processed/logged by hosting);
+2. RuhrpottGuru analytics records (IP is not stored as an analytics attribute);
+3. beta feedback (12-month retention).

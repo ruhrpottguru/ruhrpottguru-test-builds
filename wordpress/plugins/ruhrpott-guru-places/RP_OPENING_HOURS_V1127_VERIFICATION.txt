@@ -1,0 +1,31 @@
+RUHRPOTTGURU PLACES BACKEND — OPENING HOURS CLOSURE PASS v1.10.67 / Audit 1.10.27
+Generated: 2026-09-14
+
+GOAL
+- Finish the current opening-hours audit without resetting verified data.
+- Catch up current active visitor places that were added after the last inventory.
+- Retry only technically incomplete/error cases once after upgrade.
+- Never reopen confirmed unknown-after-exhaustive-search rows automatically.
+
+FIXES
+- The first v1.10.67 closure pass starts automatically on the next normal WordPress request when the previous audit is finished.
+- Future active visitor places that are not yet inventoried are also caught automatically without rerunning confirmed unknowns.
+- Missing current visitor places are inventoried through the existing catch-up path.
+- research-incomplete/error rows are requeued; confirmed unknowns and found hours remain untouched.
+- Finished-state message is derived live from current audit counters, so stale historical counts cannot disagree with the cards.
+- Admin dashboard separates 'no hours needed' from excluded/restricted places.
+- Category quality matrix added for Food, Highlights, Kultur and Aktivitäten.
+- Manual 'Abschluss-Pass starten' uses the same non-destructive rules.
+- Plugin header and runtime VERSION are aligned at 1.10.67.
+
+EXPECTED SCREENSHOT CASE
+- total 20,860 / indexed 20,529 => 331 not inventoried.
+- research-incomplete 606 + error 148 => 754 technically open.
+- The closure pass therefore starts with 331 catch-up places + 754 retry candidates.
+- A stale old message saying 757 no longer controls the displayed final status.
+
+SAFETY
+- place_schedules, place_enrichment and places.opening_hours are preserved.
+- found-existing/found-web rows are not reset.
+- unknown-after-exhaustive-search is not requeued.
+- Server-side background worker and throttling remain unchanged.

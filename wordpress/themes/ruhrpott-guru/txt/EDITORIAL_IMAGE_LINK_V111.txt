@@ -1,0 +1,6 @@
+RuhrpottGuru v111
+
+- Beitragsbilder im Gutenberg-Block 'Neueste Beiträge' auf der Home sind jetzt klickbar.
+- Das Bild führt auf denselben WordPress-Beitrag wie Titel und Weiterlesen-Link.
+- Die Bildschärfe-Optimierung aus v110 bleibt erhalten.
+- Das bestehende Kartenlayout bleibt unverändert.

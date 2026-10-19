@@ -1,0 +1,12 @@
+RuhrpottGuru Places Backend 1.9.9 - Labor-Kern + Was geht JETZT?
+
+- Keine Homepage- oder Theme-Aenderung.
+- RP Redaktion -> Labor auf die 14 festgelegten situations-/assistenzbasierten Module korrigiert.
+- Gemeinsamer Testkontext: Stadt, Radius, GPS und simulierte Uhrzeit.
+- Was geht JETZT? nutzt erstmals echte Kandidaten aus Events, Food, Highlights, Kultur und Aktiv.
+- Interne Diagnose: Drin / Unsicher / Raus, JETZT-Score, Distanz und nachvollziehbare Gruende.
+- Konservative opening_hours-Auswertung fuer gaengige OSM-Wochenregeln inklusive Uebernacht-Zeiten und NRW-Feiertagsregel PH; komplexe Regeln werden als unsicher behandelt statt als geschlossen.
+- Oeffnungszeiten werden fuer das Labor aus Redaktion, Schedule, Enrichment, Katalog und OSM-Rohdaten priorisiert zusammengefuehrt.
+- Simulierte Eventzeit: laufend, Start <=60/120/180 Minuten und spaeter heute werden getrennt bewertet.
+- Kategorieuebergreifender Pool wird nach interner Place-ID dedupliziert; Filter im Labor nach Kategorie und Entscheidung.
+- Bestehende Kultur-, Share-, Events-, Night- und Places-Logik bleibt unveraendert.

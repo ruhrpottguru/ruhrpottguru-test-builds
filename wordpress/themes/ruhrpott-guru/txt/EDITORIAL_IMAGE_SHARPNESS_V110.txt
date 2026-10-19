@@ -1,0 +1,6 @@
+RuhrpottGuru v110
+
+- Layout des WordPress-Beitrags bleibt unverändert gegenüber v109.
+- Der Home-Block 'Neueste Beiträge' fordert für Beitragsbilder WordPress-Größe 'large' an.
+- Responsive srcset bleibt erhalten und erhält einen zur Kartenbreite passenden sizes-Hinweis.
+- Voraussetzung: Das originale Beitragsbild wurde in ausreichend hoher Auflösung hochgeladen.

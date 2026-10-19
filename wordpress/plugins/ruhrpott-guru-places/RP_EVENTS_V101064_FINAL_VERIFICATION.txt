@@ -1,0 +1,23 @@
+RUHRPOTTGURU EVENTS – BACKEND v1.10.64 – FINALVERIFIKATION
+Stand: 14.09.2026
+
+VERANSTALTER-REGRESSION
+- Fresh- und persistierte Organizer werden vereinigt; ein einzelner Fresh-Treffer ersetzt nicht mehr blind die historische echte Organizerliste.
+- Evidenzmodell: echte Organizer-Relationen positiv; Provider/Source/Rights/Media/Author negativ.
+- Kontakt-/Support-Zeilen duerfen nur dieselbe bestaetigte Organizer-Identitaet ergaenzen.
+- Kein Namens-Hardcode fuer Wesel/Kreis Wesel.
+- Fixture: WeselMarketing explicit/stored => KEEP; stored legacy only => KEEP; Kreis Wesel weak-top + provider/author => DROP; echter Organizer explicit + provider => KEEP.
+
+EVENT-FINALCHECK
+- Die Stichprobe wird vor Bewertung mit event_listing_cluster_rows() durch dieselbe Besucher-Dedupe-/Occurrence-Clusterlogik wie das Frontend gefuehrt.
+- Statusstufen: OK / Hinweis / Pruefen mit konkreten Gruenden.
+- Beschreibung fehlt => Pruefen.
+- Veranstalter fehlt / kein Web-Ticket-Link / kein lokales Bild => Hinweis.
+- Mitwirkende werden nur bei passenden Eventarten erwartet.
+- Programm wird nur beanstandet, wenn die Quelldaten einen Programm-/Flyer-/Dokument-Hinweis enthalten.
+- Wiederholungen werden als 'Termine -> 1 Karte' ausgewiesen.
+
+TECHNIK
+- PHP-Syntax: PASS
+- Keine doppelten Methoden: PASS
+- Theme v252 kann nur kanonische Organizer-Identitaeten aus dem Backend anzeigen.

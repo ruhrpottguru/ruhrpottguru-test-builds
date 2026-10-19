@@ -1,0 +1,17 @@
+RUHRPOTTGURU THEME V290 – EVENT CONTEXT PREFLIGHT VISUAL GATE
+
+ROOT CAUSE
+- The existing v289 gate ran only after the Event-Ort image had already been painted and its visual thresholds were too strict for the real Waldschule/Cappenberg text image.
+- The backend already exposes visitor-live fallback media as localized same-origin files; the correct fix is therefore to inspect those local pixels before paint, not to add a new media source or proxy.
+- DetailGallery also retained item.galleryImages, allowing an automatic context image to re-enter a detail view after a card fallback.
+
+V290 FIX
+- Event-Ort fallback images (venue-commons-context and venue-editorial-pool) are not painted before quality approval.
+- Only same-origin localized visitor media is inspected. An unexpected external context URL fails closed to the existing Symbolfoto / neutral-ticket fallback.
+- The visual gate uses combined black/white mass, mid-tone structure, saturation and edge density; thresholds were calibrated against the real Waldschule/Cappenberg text image and existing photographic event cards.
+- ET4/ODF originals, event-specific editorial overrides, official-approved media and Pexels symbols are untouched.
+- DetailGallery excludes the unverified Event-Ort gallery entry and uses only the approved runtime image.
+- New favorites store the actually approved runtime event image instead of the rejected stored fallback.
+
+NO CHANGE
+- Event ordering, dates, source provenance, event sync, radius logic, single-page scroll v288, footer/header, other categories and backend data are unchanged.

@@ -1,0 +1,8 @@
+RPG NIGHT V1.8.3
+- REST /places/night: GPS/radius-based night candidates from existing Places DB
+- Night profile extension table, no parallel place database
+- Community night-photo upload via existing rights + email-verification workflow
+- Approved night photos stored in place_media relation_type=night
+- RP Redaktion > Medien: night badge, night-photo filter, set night title image
+- Normal place-image queries exclude relation_type=night
+- Access=private/no excluded from public night results

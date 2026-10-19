@@ -1,0 +1,25 @@
+RuhrpottGuru Events v1.10.29 – Source Ownership
+
+Ziel
+- Pro realem Besucher-Event genau eine Besitzerquelle.
+- Priorität: lizenzierter ET4/Open-Data-Finder-Master > öffentlicher ET4/destination.one-Zusatzpool > Legacy-ET4 > Essen-EMG > sonstige Zusatzquelle.
+- Untergeordnete Dubletten bleiben nur intern für Provenienz/Audit und dürfen keine Texte, Termine oder Bilder an den Gewinner vererben.
+
+Bildlogik
+- ET4-Event: Bild aus dem eigenen ET4-Payload bzw. dem auf genau dieses Master-Event persistierten ET4-Katalogbild.
+- destination.one-Zusatzevent: eigenes Feedbild.
+- Essen-EMG-only: bleibt sichtbar, wenn kein ET4-Pendant vorhanden ist; keine Bildübernahme aus ET4-Dubletten.
+- Fuzzy/cross-source Sibling-Media-Lookup im Besucherpfad entfernt.
+- ET4-Katalog-Reconciliation auf aktuelle Master-Zeilen beschränkt.
+- Legacy-Cleanup darf Media/Enrichment nur noch zwischen Zeilen derselben Besitzerquelle verschieben.
+
+Sicherheit
+- Keine Änderung am Opening-Hours-Audit-State oder dessen Queue/Migrationen.
+- Keine Worker- oder Event-Audit-Resets durch v1.10.29.
+- Bestehender v1.10.28 Raw-Payload-Media-Backfill bleibt unverändert aktiv.
+
+Verifikation
+- PHP 8.4 Syntax: PASS.
+- Source-Ownership Fixtures: PASS (Master gewinnt; Destination als Lückenfüller; EMG bleibt ohne ET4 sichtbar; Serien zählen nur Owner-Occurrences; unterschiedliche Venues/Performances bleiben getrennt).
+- Visitor path static audit: PASS (kein fuzzy cross-source media lookup).
+- Master catalog scope audit: PASS (master-only).

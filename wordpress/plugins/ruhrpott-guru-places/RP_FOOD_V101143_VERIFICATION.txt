@@ -1,0 +1,43 @@
+RUHRPOTTGURU PLACES 1.10.143 – FOOD CUISINE-DRIFT HARDENING
+
+Scope
+- Food classifier only; no changes to distance, sorting, Activities, Highlights, Culture, Events or SEO/GEO.
+- cuisine remains supporting evidence, but no longer overrides explicit non-gastronomic shop/amenity identities.
+- Strong gastronomic evidence always wins.
+- Existing classifier-owned Food rows are re-evaluated once through the central 1.10.95/1.10.126 reprocessing framework.
+- Manual/editorial category rows are never removed by the reprocessing job.
+
+Explicit cuisine-only blockers
+- shop: beauty, bookmaker, copyshop, hairdresser, hairdresser_supply, pet, clothes, florist, interior_decoration, newsagent, supermarket, vacant
+- amenity: social_facility
+
+Strong Food evidence retained
+- amenity: restaurant, cafe, fast_food, pub, bar, biergarten, food_court, ice_cream
+- craft: brewery, roastery
+- shop: coffee, tea
+- takeaway=only
+- microbrewery=yes
+
+Hybrid policy
+- farm, butcher, beverages/wine and events_venue are NOT blanket-blocked.
+- Forellenzentrum Naroda (shop=farm + cuisine=fish) is an explicit keep/regression case.
+
+Functional matrix (13/13 PASS)
+PASS Mister Barf: pet + sushi -> not Food
+PASS Die Zwei: hairdresser + pizza -> not Food
+PASS Kim my nails: beauty + greek -> not Food
+PASS Cafe24: bookmaker + ice_cream -> not Food
+PASS Officebedarf Albrecht: copyshop -> not Food
+PASS Tagespflegestätte: social_facility + greek -> not Food
+PASS Tains Asiamarkt: supermarket + asian -> not Food
+PASS Forellenzentrum Naroda: farm + fish -> Food
+PASS Fleischerei Schmitz: butcher + westphalian -> Food
+PASS Hybrid Restaurant: restaurant + conflicting shop tag -> Food
+PASS Kaffeerösterei: roastery/coffee -> Food
+PASS Biergarten: amenity=biergarten -> Food
+PASS Partyservice: events_venue + burger -> Food
+
+Static validation
+- php -l ruhrpott-guru-places.php: PASS
+- Version header: 1.10.143
+- Reprocessing: local, resumable, autostart, classifier-owned rows only

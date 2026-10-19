@@ -1,0 +1,5 @@
+RUHRPOTT GURU – EVENTS TODAY V1
+
+ET4 event occurrence normalization now resolves active and future occurrences from ET2014A timeIntervals, including recurring daily/weekly/monthly/yearly rules. Expired occurrences are excluded. ET4 media selection prefers real image media objects and retains author/source credits.
+
+Base: FOOD_FILTER_PARITY_V1

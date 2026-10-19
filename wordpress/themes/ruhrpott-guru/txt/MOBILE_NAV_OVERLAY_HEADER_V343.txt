@@ -1,0 +1,9 @@
+RuhrpottGuru Theme v343.0
+
+Scope: Mobile/Desktop burger navigation only.
+- Drawer z-index raised above sticky site header.
+- Menu panel starts at viewport top on mobile and desktop.
+- Mobile balanced width from v342 retained.
+- Desktop width from v342 retained.
+- Right-side small arrows remain removed from previous releases.
+- No category, filter, GPS, radius, ranking, sorting, SEO or backend logic changed.

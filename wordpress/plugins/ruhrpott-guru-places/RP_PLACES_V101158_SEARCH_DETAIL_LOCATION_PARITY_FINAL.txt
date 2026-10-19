@@ -1,0 +1,23 @@
+RuhrpottGuru Places Backend 1.10.158 — Search / Detail / Address Parity Final
+
+Änderungen
+- Global-search Place Treffer liefern zusätzlich das bereits gebatcht erzeugte visitor element aus rows_to_elements(). Theme v311 kann dadurch exakt denselben Normalisierungspfad wie Kategorie- und Direktdetailseiten verwenden.
+- Der reduzierte Kompatibilitäts-DTO bleibt bestehen, damit ältere Themes nicht brechen.
+- Für den kanonischen Route-Industriekultur-Standort UNESCO-Welterbe Zollverein wird ausschließlich bei fehlender OSM/DB-Anschrift die offizielle Besucheranschrift Gelsenkirchener Str. 181, 45309 Essen read-only ergänzt. Quelle: offizielle Zollverein-Anfahrtsseite.
+
+Unverändert
+- Radius und Entfernungssortierung
+- Event-Sortierung, Event-Medien, Event-Lifecycle
+- persistierte Places-Daten / OSM-Rohdaten
+- Route-Dedupe aus 1.10.157
+
+Rollback
+- Backend 1.10.157 wieder installieren; Theme v311 hat für ältere Search-Payloads einen Fallback.
+
+Abnahme
+- PHP-Syntax ruhrpott-guru-places.php: OK.
+- Funktionaler rows_to_elements-Fixture: Zollverein erhält bei fehlenden Feldern Gelsenkirchener Str. 181 / 45309 / Essen: OK.
+- Bestehende OSM/DB-Adresse hat Vorrang und wird nicht überschrieben: OK.
+- Anderer Route-Ort erhält keinen Zollverein-Fallback: OK.
+- Route-Metadaten, Besucher-Subkategorie und Canonical-URL bleiben erhalten: OK.
+- Global-search Payload enthält zusätzlich das exakt erzeugte visitor element: OK.

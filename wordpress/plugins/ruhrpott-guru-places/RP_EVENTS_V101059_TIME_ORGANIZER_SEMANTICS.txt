@@ -1,0 +1,7 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.59 — ORGANIZER SEMANTICS
+
+- Only true ET4 organizer/organiser/organisation/veranstalter relations become organizer entries.
+- author/support/contact/lessor roles are not shown as organizers.
+- Same-name support/contact rows may enrich an already identified organizer, never create one.
+- Public event website is event-owned; organizer/author websites are no longer mislabeled as Event-Webseite.
+- v1.10.59 reruns the local rich-field backfill from stored raw_payload so existing events are corrected without external requests.

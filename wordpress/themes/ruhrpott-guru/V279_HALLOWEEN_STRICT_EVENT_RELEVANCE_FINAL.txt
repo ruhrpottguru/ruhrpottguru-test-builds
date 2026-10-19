@@ -1,0 +1,16 @@
+RuhrpottGuru Theme v279 – Halloween Strict Event Relevance FINAL
+
+Scope: theme-only; Places Backend unchanged.
+
+Changes
+- Removed duplicate location / radius / "Standort ändern" row from the Halloween hero banner. Radius controls remain below the hero.
+- Replaced the broad Halloween detector with a strict seasonal relevance gate.
+- Removed JSON-wide raw payload scanning; only visitor-facing event text and explicit taxonomy fields are considered.
+- Fixed the former unbounded "geister" match that also matched ordinary words such as "begeistert" / "begeistern".
+- Removed weak generic October triggers such as plain "Hexe" and "Monster" (e.g. "Rampenmonster").
+- Requires explicit Halloween / horror / grusel / spuk / ghost / zombie / vampire / Dracula / Frankenstein / Nosferatu / paranormal / haunted / daemon / Hexennacht / Rocky Horror / Trick-or-Treat / Suesses-oder-Saures or explicit pumpkin-event signals.
+- Limits Halloween special results to the seasonal event window 15 September through 1 November of the active Halloween year.
+- Keeps v278 palette (orange / purple / dark Halloween design), series deduplication and 5/10 km -> 25 km empty-result fallback unchanged.
+
+Theme version: 279.0
+Package version: 279.0.0

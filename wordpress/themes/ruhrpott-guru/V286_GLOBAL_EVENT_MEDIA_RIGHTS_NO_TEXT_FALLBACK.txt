@@ -1,0 +1,7 @@
+RuhrpottGuru Theme v286 – Global Event Media Rights + No Text Fallback
+
+- DB-backed Events only render media explicitly handed off as verified rpg_event_media.
+- Raw source image branches can no longer bypass backend rights/quality decisions.
+- Generated text-on-image SVG Event fallback is no longer used.
+- If no approved Event-Ort or Symbolfoto exists yet, the existing neutral ticket placeholder is shown.
+- Existing Event-Ort / Symbolfoto labels, distance/date sorting and running-date display remain unchanged.

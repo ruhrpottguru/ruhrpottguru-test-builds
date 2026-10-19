@@ -1,0 +1,9 @@
+RuhrpottGuru Theme v285 – Global Event Media + Distance Tie FINAL
+
+- Basis: v283.
+- Keine Selm-spezifische Medienlogik im Frontend.
+- Globale Eventbildlogik bleibt für ET4, Selm und weitere Quellen identisch.
+- Entfernungssortierung bleibt erhalten.
+- Bei identischer Entfernung werden Events nach nächstem Startdatum, danach Titel sortiert.
+- Laufende Mehrtagesevents zeigen weiterhin 'bis DD.MM.'.
+- Selm-Quellenangabe/Deep-Link-Handoff aus v282 bleibt erhalten.

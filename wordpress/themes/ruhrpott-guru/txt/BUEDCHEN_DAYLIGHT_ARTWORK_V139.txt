@@ -1,0 +1,7 @@
+RuhrpottGuru v139 – Büdchen Tageslichtmotiv
+
+- Replaces the dark/night Büdchen artwork with the approved daylight Trinkhalle motif.
+- Image is packaged locally in the theme at assets/images/buedchen-radar-daylight.jpg.
+- Used on both the Home Büdchen-Radar banner and the Büdchen-Radar page hero.
+- Overlays were lightened so the daylight character remains visible while text stays readable.
+- Map, filters, media enrichment, radius logic, gestures, header and footer unchanged.

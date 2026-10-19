@@ -1,0 +1,30 @@
+RuhrpottGuru Places Backend 1.10.114
+Medienbestand: Event-Kontextsuche + Eventbild-Gruppierung
+
+Ursache
+- RP Redaktion -> Medien suchte bislang nur in rg_place_media + Places-Metadaten.
+- Ein in Eventkarten verwendetes Bild kann ausschliesslich in rg_event_media liegen.
+- Daher konnte die Suche nach einem Veranstaltungsort wie "Waldschule" 0 Treffer liefern, obwohl das Motiv live in mehreren Events verwendet wurde.
+
+Aenderung
+- Dieselbe Medienansicht durchsucht jetzt place_media UND event_media.
+- Event-Suche umfasst Eventtitel, Veranstaltungsort, Stadt, Strasse, Urheber, Credit, Rechteinhaber, Quell-URL und Bild-URL.
+- Byte-identische Eventbild-Verwendungen werden anhand local_content_hash/source_content_hash zu einem logischen Eintrag gruppiert; URL ist nur der Fallback, wenn kein SHA-256 vorliegt.
+- Eine Karte zeigt Anzahl und Liste der Event-Verwendungen sowie vorhandene Copyright-/Lizenz-/Rechteinformationen.
+- Der Bildinhalt-Filter wird auf lokal vorhandene Eventbilder ausgedehnt; der bestehende Hintergrundworker klassifiziert weiterhin in kleinen Batches.
+- Place-Kategorie/Place-Medientyp bleiben Place-Filter und mischen bewusst keine Eventbilder hinein.
+
+Nicht geaendert
+- Besucher-Frontend / Eventauswahl / Radius / Sortierung / ET4-Prioritaet
+- Rechtefreigabe-Logik der Events
+- bestehende Place-Medien-Verwaltung und Rechteakten
+- Theme
+
+Funktionale Abnahme
+1. Nur media_search=Waldschule erzeugt eine Event-Media-WHERE-Klausel mit e.title und e.venue_name.
+2. Nichtnumerische und numerische Suche haben passende SQL-Platzhalter/Parameter.
+3. Nur media_content=text funktioniert als Eventbild-Filter ohne weiteren Suchparameter.
+4. Place-Kategorie schliesst Eventbilder aus (keine fachliche Vermischung).
+5. Zwei Event-Media-Zeilen mit identischem SHA-256 werden zu einem logischen Bild mit 2 Verwendungen gruppiert; anderes SHA bleibt eigener Eintrag.
+6. Der reale Admin-Renderpfad wurde mit synthetischen Waldschule-Eventdaten ausgefuehrt: bei 0 Place-Treffern und 2 Event-Verwendungen erscheint der Eventbilder-Block, 2x-Verwendungsbadge und kein falscher Leerzustand.
+7. media_content allein wird weiterhin als aktiver Filter erkannt (Regression 1.10.113).

@@ -1,0 +1,8 @@
+RuhrpottGuru V76 — WordPress location selection refresh
+
+- Header location marker and every Home/category location CTA open the same shared location layer.
+- Category error-card buttons no longer start GPS directly; they open the layer so GPS or a city can be chosen.
+- Manual city selection is persisted defensively in the canonical ruhrpottguru_location_preference_v1 key.
+- City/GPS selection dispatches ruhrpott:location-changed and rehydrates the visible WordPress magazine/category modules immediately without a hard reload.
+- Previous GPS-denied/error cards are invalidated before rehydration, preventing stale "User denied Geolocation" state after selecting a city.
+- Places Backend remains v1.1.5; no DB/import changes.

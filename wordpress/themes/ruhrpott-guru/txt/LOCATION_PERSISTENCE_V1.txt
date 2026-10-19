@@ -1,0 +1,11 @@
+RUHRPOTT GURU – LOCATION PERSISTENCE V1
+
+Base: State + Sticky Fix V1
+
+Behavior:
+- A manually selected city/location is stored persistently in localStorage.
+- Page reload restores the manual location instead of switching back to GPS.
+- Silent GPS refresh is disabled while manual location mode is active.
+- In-flight silent GPS results cannot overwrite a newly selected manual city.
+- GPS becomes active again only after the user explicitly selects "Meinen aktuellen Standort nutzen".
+- Radius persistence and the prior sticky/state fixes remain unchanged.

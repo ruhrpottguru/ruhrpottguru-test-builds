@@ -1,0 +1,7 @@
+RuhrpottGuru Theme v238 – Analytics Zeitraum „Heute"
+
+- Zeitraumfilter „Heute" ergänzt.
+- „Heute" entspricht days=1 und filtert exakt auf den aktuellen WordPress-Tag.
+- Verfügbar in „Nutzung" und „Marketing Tracking" für konsistente Auswertung.
+- Bestehende Zeiträume 7 / 30 / 90 / 365 Tage bleiben unverändert.
+- Keine Änderung an gespeicherten Analytics-Daten oder Tracking-Logik.

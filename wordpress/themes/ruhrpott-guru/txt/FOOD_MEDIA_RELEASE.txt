@@ -1,0 +1,14 @@
+RUHRPOTT GURU – FOOD MEDIA RELEASE
+
+This release removes the repeated synthetic food illustration and expands the real-photo pipeline.
+
+Order for Gastronomie:
+1. OSM-linked image / Wikimedia Commons
+2. OSM-linked Wikidata P18 / Wikipedia
+3. Exact regional tourism dataset photo (strict venue + city + street/house identity; open license preferred, otherwise trusted official source credit only)
+4. OSM-linked official business website media
+5. Panoramax POI-visible open street-level imagery
+6. KartaView geometry-validated open street-level imagery
+7. Neutral no-photo state – never a synthetic food/title illustration
+
+Cache/media versions bumped to v12 / backend v6.

@@ -1,0 +1,18 @@
+RuhrpottGuru Theme v302 — Halloween date grouping only
+
+Geändert
+- Nur die in v300 eingeführte Halloween-Datumspriorisierung wurde korrigiert.
+- Halloween wird weiterhin nach Kalendertagen rund um den 31.10. priorisiert.
+- Innerhalb desselben Kalendertags greift wieder die vorhandene distanceKm-Ortsrelevanz; erst danach die Uhrzeit.
+- Serien wie Movie Park behalten dadurch weiterhin die Halloween-relevante Aufführung am 31.10.
+
+Nicht geändert
+- Berechnung von distanceKm.
+- Radius- und GPS-Logik.
+- Normale Event-Sortierung außerhalb der Halloween-Seite.
+- Halloween-Filter/Klassifizierung.
+- Halloween-Deduplizierungsregeln.
+- Event-Import, ODF/ET4, Medien, Bilder und Symbolfotos.
+- Food, Highlights, Kultur, Aktivitäten und alle anderen Ansichten.
+
+Basis: aktive v300.0. v301 wurde verworfen und ist nicht Basis dieses Builds.

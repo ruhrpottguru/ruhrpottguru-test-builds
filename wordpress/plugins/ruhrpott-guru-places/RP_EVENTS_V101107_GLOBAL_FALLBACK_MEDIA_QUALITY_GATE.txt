@@ -1,0 +1,12 @@
+RuhrpottGuru Places Backend 1.10.107 – Global Fallback Media Quality Gate
+
+- Global, source-independent correction for automatic Event fallback imagery.
+- Existing active venue-commons-context and pexels-symbolic-event rows are re-audited via the central 1.10.95 reprocessing registry.
+- Text/poster/sign/document-like metadata is rejected.
+- Localized auto-fallback rasters receive a bounded local visual gate that rejects near-pure light/dark text/scan surfaces without touching ET4/ODF or editorially approved event images.
+- Rejected legacy fallback rows are quarantined, removed from visitor selection, and their Events return to the normal global Event-Ort -> Symbolfoto -> neutral placeholder chain.
+- New automatic fallback rows pass the same central gate before becoming active.
+- If an Event-Ort candidate fails the visual gate, the existing Pexels symbolic fallback is tried in the same enrichment pass.
+- No Selm-specific media branch.
+
+- Screenshot-Kalibrierung: der konkret sichtbare NE-Re/Text-Fallback liegt selbst mit Card-Overlay bei ca. 0,76 Extremhell/dunkel und ca. 0,19 Mitteltönen; das Pixel-Gate ist bewusst darunter kalibriert (>=0,70 / <=0,25), normale geprüfte Kartenfotos lagen deutlich außerhalb dieser Kombination.

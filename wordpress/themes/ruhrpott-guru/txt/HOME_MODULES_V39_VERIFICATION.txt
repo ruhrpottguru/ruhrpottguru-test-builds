@@ -1,0 +1,21 @@
+RUHRPOTT GURU – V39 TECHNICAL VERIFICATION
+==========================================
+
+PASS – PHP syntax: all root and inc/*.php files
+PASS – JavaScript syntax: js/ruhrpott-app.js
+PASS – JavaScript syntax: js/app.js
+PASS – 5 required Home shortcodes registered
+PASS – synthetic PHP render test for all 5 shortcodes
+PASS – Home shortcodes do not enter page.php app-shortcode routing
+PASS – index.php V38 == V39 byte-for-byte
+PASS – page.php V38 == V39 byte-for-byte
+PASS – footer.php V38 == V39 byte-for-byte
+PASS – V39 compiled bundle minus HomeAPI bridge == V38 bundle byte-for-byte
+PASS – scene classification unchanged
+PASS – quick-filter implementation t4 unchanged
+PASS – category loader d4 unchanged
+PASS – event loader u4 unchanged
+
+Live browser/production behavior must still be verified after deployment on the
+staging WordPress page „Home“. V39 deliberately does not change the current /
+front-page route.

@@ -1,0 +1,8 @@
+RuhrpottGuru Theme v318 — Veranstaltungshinweis konsolidiert
+
+- Die separate untere Box „Veranstaltungsdetails“ entfällt.
+- Die obere Termin-Karte heißt jetzt „Veranstaltungshinweis“.
+- Termin, Preis/Ticketdaten und vorhandene ET4-Mitwirkende stehen gemeinsam in dieser oberen Box.
+- Veranstalter & Kontakt bleibt als eigener Abschnitt bestehen.
+- Veranstaltungstyp bleibt bei „Mehr davon entdecken“ als anklickbarer Filterchip und wird in der Hinweisbox nicht dupliziert.
+- Keine Änderung an Import-, Rechte-, Quellen- oder Filterlogik.

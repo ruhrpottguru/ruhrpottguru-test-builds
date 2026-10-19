@@ -1,0 +1,36 @@
+RUHRPOTTGURU PLACES BACKEND — OPENING HOURS BACKGROUND WORKER v1.10.12
+Generated: 2026-09-02
+
+GOAL
+- Opening-hours audit must continue server-side after the admin page is closed.
+- User can navigate WordPress, install themes, close the browser or switch off the local computer.
+- Existing v1.10.11 audit state and already persisted hours are preserved.
+
+IMPLEMENTATION
+- Server-side async loopback worker via admin-ajax.php: PASS
+- Unauthenticated worker endpoint protected by random stored token + hash_equals: PASS
+- One-worker lock with stale-lock recovery: PASS
+- Heartbeat and self-heal on normal WordPress requests: PASS
+- WP-Cron single-event safety net retained: PASS
+- Phase 1 processes local batches server-side: PASS
+- Phase 2 still processes exactly one external place per worker request: PASS
+- 3-second throttle between Phase-2 requests: PASS
+- Pause / Resume controls: PASS
+- Old v1.10.11 browser AJAX loop cannot start a second processor: PASS
+- Admin page now polls status only; it does not drive the audit: PASS
+- Reset stops worker and removes worker token/pause state: PASS
+
+COMPATIBILITY
+- State option remains rg_opening_hours_audit_state_v1108: PASS
+- Existing place_opening_audit rows retained on upgrade: PASS
+- Existing place_schedules/place_enrichment/places data untouched by upgrade: PASS
+- Existing v1.10.11 source/parsing logic retained: PASS
+
+STATIC / PACKAGE CHECKS
+- PHP syntax: PASS
+- Admin polling JavaScript syntax: PASS
+- No .bak/.orig/.tmp files in package: PASS
+- ZIP integrity: PASS
+
+LIVE HOSTING NOTE
+- The build container cannot prove 1blu loopback HTTP behavior. v1.10.12 therefore combines async loopback, a worker heartbeat, request-based self-heal and WP-Cron safety scheduling. After installation, the live proof is that the worker heartbeat and research counts continue to change after leaving the audit page.

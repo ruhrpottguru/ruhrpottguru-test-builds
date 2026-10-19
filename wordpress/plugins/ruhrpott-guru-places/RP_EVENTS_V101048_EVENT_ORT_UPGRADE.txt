@@ -1,0 +1,8 @@
+RPG EVENTS 1.10.48 – EVENT-ORT UPGRADE
+
+- Existing pexels-symbolic-event rows are re-audited exactly once against Theme v235.
+- Only venue-commons-context may replace a Pexels symbol image in this upgrade.
+- ET4/ODF, destination.one, editorial overrides and official-approved media are excluded.
+- Pexels remains stored as a lower-priority fallback if no Event-Ort can be verified.
+- Worker pauses during Places import and general Event Enrichment.
+- Admin status reports processed/upgraded counts.

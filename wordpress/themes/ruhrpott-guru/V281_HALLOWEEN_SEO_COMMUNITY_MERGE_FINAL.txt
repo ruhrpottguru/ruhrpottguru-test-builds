@@ -1,0 +1,27 @@
+RuhrpottGuru Theme v281 – Halloween + SEO + Community Merge FINAL
+
+Branch correction after v277 Community was accidentally based on the SEO v276 branch instead of the newer Halloween v280 branch.
+
+Base preserved: v280 Halloween Sequential Radius Fallback
+Merged from SEO/Community branch: v276 SEO Deep-Link Handoff + v277 Community/UGC UX
+
+Halloween preserved:
+- /halloween-im-pott/
+- Homepage Halloween banner
+- activation window 15.09.–01.11.
+- strict Halloween/horror relevance
+- sequential radius fallback 5 -> 10 -> 25 km
+- palette, filters, countdown and series dedupe
+
+SEO preserved:
+- canonicalUrl transport for Places
+- canonical URL preferred for sharing when backend supplies it
+- proven /teilen/ fallback remains on older backend
+
+Community preserved:
+- explicit form validation and success state
+- max 5 JPG/PNG/WebP files, 8 MB each
+- file sizes, precise field errors, retry state
+- Instagram UGC/nofollow output
+
+Backend unchanged. No place_media writes. No changes to the running 1.10.94 media coverage worker.

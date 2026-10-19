@@ -1,0 +1,9 @@
+RuhrpottGuru v135
+
+- Shared German opening-hours format across detail views.
+- OSM weekday codes translated: Tu→Di, We→Mi, Th→Do, Su→So.
+- Consistent separator and time range typography.
+- Example: Mo–Mi 07:00–02:00 · Do 07:00–02:30 · Fr–Sa 07:00–05:00 · So 09:00–02:00
+- 24/7 shown as "Täglich rund um die Uhr".
+- Büdchen detail now uses the same sticky "× Schließen" header/button as all standard detail overlays.
+- Map, filters, radius and mobile gestures unchanged.

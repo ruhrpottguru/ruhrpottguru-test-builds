@@ -1,0 +1,18 @@
+RuhrpottGuru v137 – Mobile map deferred search
+
+Goal:
+Keep two-finger map interaction fluid by preventing all Büdchen backend requests while
+the fingers are still on the map.
+
+Behavior:
+- One finger continues to scroll the page.
+- Two fingers pan and pinch-zoom the map.
+- During the complete two-finger gesture, map state and tiles can update visually,
+  but onViewport does not trigger a Büdchen search.
+- Each movement only stores the latest pending viewport.
+- Only after the final touch finger is lifted is one backend search started for
+  the final visible map area.
+- Intermediate pauses while fingers remain on screen can no longer trigger queries.
+- Desktop mouse drag / wheel behavior is preserved.
+- Reset remains immediate.
+- Filters, radius rules, Home banner and footer are unchanged.

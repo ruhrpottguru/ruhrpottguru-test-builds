@@ -1,0 +1,14 @@
+{
+  "name": "ruhrpott-guru-wordpress-react",
+  "private": true,
+  "version": "321.0.0",
+  "description": "Source-owned RuhrpottGuru React UI embedded in WordPress via wp-element.",
+  "scripts": {
+    "check": "node --check src/react-app/runtime.js && node --check src/react-app/api.js && node --check src/react-app/location.js && node --check src/react-app/components.js && node --check src/react-app/views.js && node --check src/react-app/main.js",
+    "test:chips": "node tests/detail-chips.cjs",
+    "test:rights-ui": "node tests/event-rights-ui.cjs",
+    "test:wesel-chip": "node tests/wesel-marketing-chip.cjs",
+    "test:wesel-cityscope": "node tests/wesel-cityscope-description.cjs",
+    "test:event-details": "node tests/event-detail-facts-box.cjs"
+  }
+}

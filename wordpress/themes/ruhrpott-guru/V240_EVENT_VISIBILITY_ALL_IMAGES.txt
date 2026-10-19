@@ -1,0 +1,7 @@
+RuhrpottGuru Theme v240 – Event Visibility Correction
+
+- Event eligibility on Home and Events category is independent of image type.
+- ET4/ODF originals, approved symbolic images and contextual images are all allowed.
+- Events without a resolved image are not discarded; the standard event placeholder is rendered.
+- Existing Home preview/radius behavior is retained; no event is excluded merely because of its media state.
+- All other v239 ET4 Event Final Pass changes remain unchanged.

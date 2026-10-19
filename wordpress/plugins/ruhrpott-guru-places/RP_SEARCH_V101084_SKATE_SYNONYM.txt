@@ -1,0 +1,22 @@
+RuhrpottGuru Places Backend 1.10.84 – Skate-Suchsynonym
+
+Scope
+- Ausschließlich globale Places-Suche.
+- Keine Änderung an OSM-Rohdaten, Import, Kategorien, Ranking, Sichtbarkeit, Theme, Events, IGA 2027, Öffnungszeiten, Food, Highlights oder Kultur.
+
+Problem
+- Die globale Suche arbeitet als Textsuche auf Name/Stadt/Unterkategorie/raw_tags.
+- Ein Place namens „Skateplatz“ wird bei der Suchanfrage „Skatepark“ nicht gefunden, obwohl beide dasselbe Besuchsziel meinen.
+- OSM-Tags wie leisure=skate_park oder sport=skateboard enthalten zudem nicht zwingend das sichtbare Wort „Skatepark“.
+
+Korrektur
+- Nur wenn die vollständige Suchanfrage einem Skate-Synonym entspricht, wird ein zusätzlicher Alias-Pfad aktiviert.
+- Synonyme: Skatepark, Skate Park, Skateplatz, Skaterplatz, Skateanlage, Skateranlage.
+- Zusätzlich qualifizieren eindeutige OSM-Signale leisure=skate_park sowie sport=skateboard/skateboarding.
+- Die gespeicherten OSM-Rohdaten werden nicht umgeschrieben.
+- Alle anderen Suchbegriffe laufen unverändert über die bestehende SQL-Suche.
+
+Erwartung
+- Suche „Skatepark“ findet auch einen aktiven Place mit Name „Skateplatz“.
+- Suche „Skateplatz“ findet auch einen Place mit Name „Skatepark“.
+- Nicht-Skate-Suchen werden nicht erweitert.

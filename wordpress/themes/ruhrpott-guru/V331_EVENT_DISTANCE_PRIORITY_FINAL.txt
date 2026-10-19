@@ -1,0 +1,1 @@
+RPG THEME v331.0: event-only distance priority after selected Home time class; remaining catalogue local day > exact distance > time > stable ID. No city groups. Normal category without Home handoff unchanged. All other categories, eligibility, radius, GPS, SEO, backend, import untouched.

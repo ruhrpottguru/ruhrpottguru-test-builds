@@ -1,0 +1,6 @@
+V94 Direct Detail Fix
+- Every normal result-card tap is prevented from navigating before detail handling.
+- Full React category pages keep using their native React detail overlay.
+- WordPress Home shells now open an immediate standalone detail overlay in-place.
+- No Home -> category -> search -> detail detour.
+- Close button is orange.

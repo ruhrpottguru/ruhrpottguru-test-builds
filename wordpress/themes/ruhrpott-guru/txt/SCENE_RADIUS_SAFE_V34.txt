@@ -1,0 +1,10 @@
+V34 – Filter-safe Radius Snapshot
+
+Basis: V32 Scene Pure (live-confirmed data path).
+
+- Radius merge ONLY for Food, Highlights and Kultur.
+- Events are explicitly excluded and always keep the fresh event snapshot.
+- Expanding a radius preserves already-known spatial results that still lie inside the new effective radius.
+- Shrinking a radius retains only items that are still inside the new effective radius.
+- Active quick filters are preserved and re-evaluated by React against the merged snapshot: Jetzt offen, Heute, Szene & Trends, Für lau, Mit Family.
+- OSM loader, GPS logic, radius provider chain, scene scoring rules, WordPress proxy and event pipeline remain unchanged from V32.

@@ -1,0 +1,14 @@
+RuhrpottGuru – Share Fragment V21
+
+FIXES
+- Replaces V20 long query-string share URLs with compact fragment-only links.
+- New format: https://www.ruhrpottguru.de/#rg/<category>/<item>/<lat>/<lng>/<city>
+- Fragment data never reaches WordPress, preventing canonical/query-routing redirect loops.
+- Removes rg_title and category=events from newly generated share links.
+- Native iOS/Android sharing remains the primary share path.
+- WhatsApp share text uses readable line breaks (title / date-time / city / link).
+- Shared item location is held stable while the deep link resolves; GPS bootstrap cannot overwrite it mid-load.
+- Shared result is auto-opened once, then the deep-link fragment is consumed with history.replaceState.
+- Existing V20 links are migrated server-side to the V21 fragment format at template_redirect priority 0.
+- Existing Event Calendar actions and Wesel event multisource logic are retained.
+- The previously removed legacy technical tag remains absent.

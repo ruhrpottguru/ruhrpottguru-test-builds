@@ -1,0 +1,46 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.24
+ET4 CANONICAL EVENT MEDIA - FINAL VERIFICATION
+Date: 2026-09-04
+
+ROOT CAUSE
+- RuhrpottGuru persists concrete event occurrences for the 365-day event list.
+- ET4 also has a unique/canonical event-object representation containing the event-owned media_objects.
+- The previous repair assumed that occurrence and canonical rows could always be connected by the same external/global/hash ID.
+- That assumption is not safe across ET4/destination.one representations. A rich catalog item could therefore have an image while the persisted occurrence remained image-less.
+- The frontend was behaving correctly: if no normalized event image reached the visitor JSON, it rendered the ticket fallback.
+
+FINAL DATA FLOW
+1. ET4 unique catalog object is the authoritative source for event-owned artwork.
+2. media_objects is parsed strictly; page/canonical/homepage/booking/video/audio links are rejected as images.
+3. Catalog object -> stored occurrence is joined by:
+   a) a genuinely shared source ID, otherwise
+   b) exact normalized ET4 event title + same city + matching geo (<=2 km), or
+   c) exact title + same city + compatible venue, or
+   d) exact sufficiently-specific title + same city + same postcode when geo/venue are unavailable.
+4. Wrong-city and geographically conflicting candidates are rejected.
+5. One canonical catalog image is persisted to every matching active occurrence, so category lists, search and detail use the same image.
+6. Visitor requests no longer perform speculative hashlink/global-id lookup loops.
+7. The nightly master changes to unique=true source objects and performs recurrence expansion locally. This preserves the rich ET2014A source object (including event media) for future imports.
+8. A fresh v1.10.24 catalog-media reconciliation starts automatically after update and after each completed nightly master run.
+
+SOURCE / SCHEMA AUDIT
+- ET4 search documentation: unique=true removes duplicate object renderings; unrollIntervals is specifically for rendered chronological occurrence lists.
+- ET2014A examples expose event-owned images in media_objects with rel/url/type metadata.
+- RuhrpottGuru master already has its own local recurrence expansion; therefore using rich unique source objects is the consistent source model.
+
+FIXTURE VERIFICATION
+PASS - provider-local ID shared between catalog and occurrence matches.
+PASS - different catalog/occurrence IDs still match by strict title + city + geo.
+PASS - same title/city but >2 km is rejected.
+PASS - same title but different city is rejected.
+PASS - no geo can match only through compatible venue/location evidence.
+PASS - ET4 imagegallery image is selected while canonical HTML page is rejected.
+PASS - one canonical ET4 catalog image fans out to all matching occurrences; wrong-city occurrence is excluded.
+PASS - local recurrence expansion preserves media_objects from the rich source object.
+PASS - master import uses unique=true and no unrollIntervals; local occurrence expansion remains active.
+
+PACKAGE VERIFICATION
+- Main plugin PHP syntax: PASS
+- All plugin PHP syntax: PASS
+- ZIP root slug: ruhrpott-guru-places/: PASS
+- ZIP integrity: PASS

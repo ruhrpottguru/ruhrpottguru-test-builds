@@ -1,0 +1,9 @@
+RuhrpottGuru Places Backend v1.6.15
+
+Event Media Health Check
+- Eventbilder werden vor dem Status verified serverseitig technisch geprüft.
+- HTTP-Status, Content-Type, Content-Length, Zeitpunkt und Fehler werden gespeichert.
+- Nur echte image/* Antworten mit erfolgreichem HTTP-Status werden als verified neu gespeichert.
+- Admin RP Redaktion > Events: Button „Eventbilder technisch prüfen“ prüft bestehende Bilder in Batches.
+- Ungültige/blockierte Bilder werden nicht mehr an das Frontend ausgeliefert; Event media_status wird zurück auf pending gesetzt, wenn kein gesundes Bild verbleibt.
+- Event-Audit zeigt die technische Health-Diagnose pro Bild.

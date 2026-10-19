@@ -1,0 +1,9 @@
+RuhrpottGuru Places Backend 1.10.115 – Unified Media Editor FINAL
+
+- Keeps v1.10.114 unified Place + Event media search, rights metadata, usage grouping and text-content filters.
+- Adds the already designed master-motif crop workflow to the current branch.
+- Automatic focal crop remains default.
+- Manual card (4:5) and detail (16:9) focal point/zoom overrides are reversible.
+- Original image bytes are never modified.
+- Crop metadata is returned in Place, Event, gallery and global-search payloads.
+- Old generic text/poster rejection and the temporary Waldschule one-off block remain disabled; editorial moderation/rights rejections remain authoritative.

@@ -1,0 +1,11 @@
+RPG EVENTS 1.10.21 - ET4 MEDIA NORMALIZED
+
+ROOT CAUSE FIX
+- ET2014A media_objects can contain both artwork and non-image links (for example canonical/pages/homepage/booking).
+- The visitor read model now emits only positively identified image media.
+- canonical/pages/homepage/booking/social/rating/qrcode/video/audio/barrierfree relations are never accepted as event images.
+- Event-owned images are read from the event itself first, then ET2014A subitems, then occurrences.
+- Venue/location/provider media is intentionally not used as event artwork.
+- Raw ET4 media branches are stripped from visitor JSON before normalized media is written back, preventing the frontend from reinterpreting a page URL as an image.
+- Existing persisted raw_payload is sufficient: no event reimport is required.
+- No theme files, opening-hours logic, ranking, dates, places or schema are changed.

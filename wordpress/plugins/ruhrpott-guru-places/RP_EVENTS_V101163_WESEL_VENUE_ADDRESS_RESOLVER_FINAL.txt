@@ -1,0 +1,65 @@
+RuhrpottGuru Places Backend 1.10.163
+WeselMarketing Venue-/Adressresolver – FINAL verification
+Date: 2026-10-06
+
+Scope
+- Backend only. No Theme/frontend rendering change.
+- Builds on 1.10.161 occurrence identity and 1.10.162 source-discovery membership.
+- Reprocesses only stored WeselMarketing candidates that still have no canonical Wesel event.
+- Does NOT refetch the 25 calendar pages or event detail pages.
+- Does NOT introduce city-centre fallback, loose title geo, arbitrary nearest-place assignment or guessed coordinates.
+
+Live baseline before build
+- 1.10.161 reprocess: complete, 175 processed, 24 changed, 151 skipped, 0 errors.
+- No conflict rows remain; Harvey / Kalter Weißer Mann / REBEL TELL sibling occurrences are resolved.
+- Remaining rows are classification=missing and are overwhelmingly high-confidence import candidates held only by missing safe geo.
+- Large repeated groups include Mehrgenerationenhaus Bogen, VHS Wesel, Großer Markt/Willibrordi-Dom, EVK/Gesundheitscampus, Wasserturm, DRK, Forum Sankt Nikolaus, Musik- und Kunstschule and Biologische Station.
+
+1.10.163 resolver order
+1) Existing exact city + postcode + street + house evidence from active Places.
+2) Existing exact postal address from a canonical geocoded event.
+3) Exact canonical event venue identity, but only if any address components present on both sides are compatible.
+4) Curated deterministic Wesel venue/address anchors listed below.
+5) Existing conservative Places street/venue fallback requiring the old strong-score threshold.
+6) Otherwise: remain in Audit. No city-centre coordinate is ever manufactured.
+
+Curated deterministic anchors
+- Mehrgenerationenhaus Bogen, Pastor-Janßen-Str. 7: official SkF / federal MGH address; map listing short Plus Code MJ46+7X recovered in Wesel to the exact venue cell (centre 51.6559500, 6.611171875).
+- VHS Wesel-Hamminkeln-Schermbeck, Ritterstr. 10-14: official VHS address + OSM venue coordinate 51.6584100, 6.6122000. House 10 is treated as compatible with official range 10-14, not as an arbitrary different house.
+- Forum Sankt Nikolaus, Pastor-Janßen-Str. 1-3: official church venue/address + event-map coordinate 51.6561648, 6.6127427. Exact venue identity is allowed when the source omits the address.
+- Evangelisches Krankenhaus / Gesundheitscampus, Schermbecker Landstr. 88: exact address coordinate 51.6599940, 6.6555080. House 88a remains deliberately unmatched.
+- Dritter Ort Wesel Stadtwerke Wasserturm, Brandstr. 44: WeselMarketing/Niederrhein verified-partner coordinate 51.6566430, 6.6202730.
+- Willibrordi-Dom, Großer Markt: WeselMarketing/Niederrhein verified-partner coordinate 51.6568260, 6.6106940.
+- Großer Markt public space: OSM public-space coordinate 51.6568200, 6.6113300; only exact street/public-space rows with no house number match.
+- Musik- und Kunstschule, An der Zitadelle 13: exact postal venue coordinate 51.6500460, 6.6171430.
+- Biologische Station im Kreis Wesel und Krefeld, Freybergweg 9: Bundesfreiwilligendienst directory coordinate 51.6737466, 6.606056542.
+- DRK Ortsverein Wesel, Handwerkerstr. 3: OSM exact-address coordinate 51.6745800, 6.6260500.
+- DRK Kreisverband Niederrhein, Handwerkerstr. 5: DRK official address + OSM exact-address coordinate 51.6744500, 6.6255700.
+- Marktplatz Büderich: WeselMarketing/verified partner public-space coordinate 51.6298810, 6.5798290; only exact venue identity is accepted.
+
+Deliberately NOT auto-resolved
+- Rows with neither venue nor address (routes/citywide events etc.) stay Audit.
+- Schermbecker Landstraße 88a does not inherit house 88.
+- Welcome Hotel row remains Audit because the Wesel source currently says postcode 46483 while the verified venue address is 46487; resolver does not silently correct source address data.
+- Berliner Tor Platz 3 remains Audit because a landmark coordinate is not sufficient proof for house no. 3.
+- ADFC Grünstr. 94, REWE Kurt-Kräcker-Str. 61, Julius-Leber-Str. 33, Flürener Weg 128, Mühlenfeldstraße without house, Kuhport 16 and other rows stay Audit unless a deterministic exact anchor exists.
+
+Reprocessing
+- New immutable job: wesel-venue-resolver-v101163.
+- Fingerprint: wesel-coverage:canonical-venue+verified-anchors:1.10.163.
+- Resumable monotonic candidate-ID cursor, batch size 5.
+- Autostarts once after installation.
+- Shares the external-event lane because successful imports may materialize the already-approved Wesel image.
+- Previous 1.10.161 job history is not reset.
+
+Admin
+- RP Redaktion -> Events continues to show the historic full-sync audit counter and the current held-back count.
+- Adds a separate “Venue-/Adressresolver 1.10.163” progress line.
+- Remaining rows distinguish “Quelle liefert weder Veranstaltungsort noch Adresse; kein Geo wird erfunden” from “Kein belastbarer exakter Venue-/Adressanker gefunden”.
+
+Regression promises
+- ET4 precedence unchanged.
+- Event date/radius/distance sorting unchanged.
+- Missing/cancelled lifecycle unchanged.
+- Wesel Marketing source chip from 1.10.162 unchanged.
+- No new visible rights/freigabe/license text is introduced.

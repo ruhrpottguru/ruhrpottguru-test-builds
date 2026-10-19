@@ -1,0 +1,10 @@
+RuhrpottGuru Theme v228 – Event-Datumsfilter
+
+- Nur auf der Events-Kategorieseite: Kalender-Icon zwischen Suche und „Alle Arten“.
+- Schnellwahl: Heute, Morgen, Am Wochenende.
+- Freier Zeitraum über native Kalenderfelder Von/Bis.
+- Aktiver Datumsfilter bleibt als entfernbarer Chip sichtbar.
+- Datumsfilter kombiniert sich mit Suche und Event-Art.
+- Laufende Events werden per Zeitfenster-Überlappung korrekt berücksichtigt.
+- Mobile: Suche volle Breite; darunter nur Kalender-Icon + Alle Arten.
+- Keine Backend-Änderung.

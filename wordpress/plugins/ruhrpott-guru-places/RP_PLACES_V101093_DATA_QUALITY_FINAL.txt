@@ -1,0 +1,28 @@
+RuhrpottGuru Places Backend 1.10.93 – Data Quality Final
+
+Scope
+- Food price-tier transport from persisted place_enrichment to public place tags.
+- Opening-hours parser guard against calendar-date fragments and event-only timing context.
+- One-time, narrow revalidation of the already verified false Scala signature 02:32-12:09.
+
+Verified
+PASS plugin version 1.10.93
+PASS schema version unchanged (1.10.17)
+PASS Activities V2 spec/version unchanged
+PASS persisted price_tier selected by rows_to_elements()
+PASS explicit 1/2/3, €, €€, €€€ (and $ tiers) normalize to € display tiers
+PASS unsupported free-form price values stay hidden
+PASS Theme v273 already consumes rg:price_tier; no Theme update required
+PASS 26.02.32-12.09.2003 yields no opening-time interval
+PASS valid German dot notation 12.00-22.30 remains accepted
+PASS valid colon notation 16:00-23:00 remains accepted
+PASS event-only timing such as Einlass 18.30-19.30 is ignored as Place opening hours
+PASS explicit regular opening-hours context remains accepted
+PASS known false 02:32-12:09 legacy signature is only cleared for unlocked web-derived data / known Scala Wesel case and queued for focused revalidation
+PASS no broad speculative deletion of unusual opening hours
+PASS PHP syntax
+PASS ZIP integrity
+
+Theme baseline
+- Current supported Theme baseline: v273 UX Micro Interactions.
+- No Theme files are changed by this release.

@@ -1,0 +1,27 @@
+RuhrpottGuru Theme v295 — Event chronology restore + category-wide “Mehr davon”
+
+Scope
+- Restore the established pre-v283 event category ordering without altering radius eligibility or the 4-event Home fallback.
+- Events inside the selected radius are ordered by the existing eventUrgencyCompare comparator: running/today/future -> relevant time -> distance -> title.
+- Other categories stay distance-first.
+- Event detail pages join the existing “Mehr davon entdecken” system already used by Food, Highlights, Kultur and Aktivitäten.
+- Event chips: venue/location first, then deterministic event-type facets from structured eventInfo categories/features/keywords; no title-based guessing.
+- Clicking an event chip keeps the current location/radius context and filters the Events category, matching the existing category tag workflow.
+
+Unchanged
+- Event sync/import, ET4/ODF media, image rights, crop logic, event visibility, recurrence resolution, date presets, 4-event Home radius fallback, GPS/location persistence, place ranking and all non-event category sort rules.
+
+Acceptance tests
+- JS syntax (runtime/api/location/components/views/main): PASS
+- PHP syntax: PASS
+- Event comparator source matches v282 byte-for-byte: PASS
+- Fixture: today 6.2 km -> today 1.8 km -> tomorrow 0.9 km -> later 0.08 km: PASS
+- Same-time fixture uses distance as tie-breaker: PASS
+- Radius eligibility filter remains unchanged: PASS
+- Home 4-event fallback code remains unchanged: PASS
+- Event “Mehr davon”: venue + Kabarett/Comedy fixture: PASS
+- Event “Mehr davon”: Krimi fixture: PASS
+- No title-based type guessing fixture: PASS
+- Direct category URL preserves radius: PASS
+- Existing Food/Highlights/Kultur/Aktivitäten discovery-tag fixture outputs unchanged vs v294: PASS
+- File-level diff vs v294 limited to version markers, runtime event facets and views event ordering/header: PASS

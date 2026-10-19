@@ -1,0 +1,8 @@
+RuhrpottGuru v131 – Büdchen map/media hotfix
+
+- Map tiles now use the binary same-origin admin-ajax endpoint from Places Backend 1.3.0.
+- Fixes REST JSON encoding of PNG data.
+- Büdchen cards/detail now lazily call the existing identity-safe media resolver when no stored image exists.
+- Resolver prefers OSM-linked image/Wikimedia/Wikidata/official sources, then conservative open street imagery.
+- No fabricated location photo is used.
+- Radius/filter invariant from v129 remains unchanged.

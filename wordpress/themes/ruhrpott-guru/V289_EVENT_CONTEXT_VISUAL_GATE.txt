@@ -1,0 +1,20 @@
+RUHRPOTTGURU THEME V289 – EVENT CONTEXT VISUAL GATE
+
+Purpose
+- Prevent automatic Event-Ort context images that are visually dominated by text/poster/sign content from ever being shown in cards or detail overlays.
+- Preserve the global media order and all ET4/editorial images unchanged.
+
+Scope
+- Browser visual gate runs ONLY for event mediaKind=context (venue-commons-context).
+- ET4/ODF originals, editorial/official-approved images and stored Pexels symbolic images are not inspected or replaced.
+- Rejected context images are removed from the current render immediately.
+- A bounded, batched call reuses the existing person-filtered Pexels event-symbol resolver for a display-only replacement; if none exists, the standard neutral ticket placeholder remains.
+- No event is hidden, moved, or persisted by the client fallback.
+- Existing backend 1.10.107+ quality/reprocessing remains authoritative for persistent cleanup.
+
+Regression guarantees
+- Single-page scroll fix v288 retained.
+- Event distance/date ordering retained.
+- Running multi-day event date labels retained.
+- Event count/eligibility independent of image availability.
+- No change to Places/Food/Culture/Activities media paths.

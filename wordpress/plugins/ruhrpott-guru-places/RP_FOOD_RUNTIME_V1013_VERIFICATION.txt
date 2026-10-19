@@ -1,0 +1,5 @@
+RUHRPOTTGURU PLACES 1.10.13 – FOOD RUNTIME DATA FIX
+
+- /places/home now exposes persisted website/menu/reservation/opening-hours values even when auxiliary link/schedule rows are absent.
+- Precedence: active curated link/schedule > place_enrichment > places canonical columns > raw imported tags.
+- Fixes verified Food data disappearing from detail overlays (e.g. Weseler Wirtshaus opening hours/menu).

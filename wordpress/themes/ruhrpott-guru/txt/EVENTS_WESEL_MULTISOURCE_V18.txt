@@ -1,0 +1,61 @@
+RuhrpottGuru – Events Wesel Multisource Release V18
+Date: 2026-08-20
+
+RELEASE GOAL
+- Selecting Wesel or using GPS near Wesel must yield genuinely local Wesel events before any 10/25/50 km expansion.
+- Event city/address must describe the event venue, not an organizer/contact address.
+- Existing Ruhr event coverage must remain active.
+
+IMPLEMENTATION
+PASS – Existing licensed eT4 experience ruhr-tourismus-open-data remains the primary source.
+PASS – When fewer than 3 raw events are available inside 5 km, the documented public destination.one/eT4 experience open-data is queried as a broad fallback.
+PASS – Public open-data requests do not require or expose the private eT4 licence key.
+PASS – Wesel has a verified local safety-net using real event/venue facts and real coordinates; entries are validity-bounded and expire automatically.
+PASS – Verified safety-net data is only admitted when the real venue coordinate is inside the caller's maximum radius.
+PASS – Server and browser both prefer venue/location addresses over organizer/contact/default addresses.
+PASS – Cross-source duplicate events with the same normalized title + venue coordinate are collapsed before delivery.
+PASS – Event source provenance is preserved in providerSource instead of forcing every record to et4-live.
+PASS – Event cache/version bumped to v18-wesel-multisource-release; V17 transients cannot be reused.
+PASS – Frontend final Haversine filtering/radius chain remains 1 / 2.5 / 5 / 10 / 25 / 50 km.
+
+LIVE PUBLIC SOURCE CHECKS (20.08.2026)
+1) LVR-Niederrheinmuseum Wesel – Thomas Baumgärtel NiederrheinTour 2026. Freiheit für Kunst
+   Validity: 10.07.2026–27.09.2026
+   Venue: An der Zitadelle 14-20, 46483 Wesel
+   Museum opening: Tue–Sun 11:00–17:00
+   Source: https://niederrheinmuseum-wesel.lvr.de/ausstellungen/thomas-baumgaertel-niederrheintour-2026-freiheit-fuer-kunst/
+   Opening source: https://niederrheinmuseum-wesel.lvr.de/ihr-besuch/
+
+2) Tourismus NRW / LVR-Niederrheinmuseum Wesel – Die Geschichte des Niederrheins
+   Validity: 12.08.2026–31.12.2026
+   Venue: LVR-Niederrheinmuseum Wesel, Wesel
+   Published occurrences: 11:00–17:00 on museum opening days
+   Source: https://www.nrw-tourismus.de/events/die-geschichte-des-niederrheins
+
+3) Wesel App current event overview independently showed local Wesel events on 20.08.2026 and 21.08.2026, including Thomas Baumgärtel at An der Zitadelle 14-20.
+   Source: https://www.wesel-app.de/veranstaltungen
+
+DETERMINISTIC WESEL RELEASE TEST
+Reference search centre: 51.6572, 6.6186 (Wesel Zentrum)
+Reference time: 20.08.2026 22:04 Europe/Berlin
+Requested radius: 5 km
+
+PASS – Wesel (Zentrum) -> eT4 city query city:"Wesel".
+PASS – Thomas Baumgärtel next eligible occurrence -> 21.08.2026 11:00–17:00 Europe/Berlin.
+PASS – Thomas Baumgärtel venue coordinate -> 51.65105, 6.61439 -> 0.74 km from Wesel centre.
+PASS – Die Geschichte des Niederrheins next eligible occurrence -> 21.08.2026 11:00–17:00 Europe/Berlin.
+PASS – Die Geschichte des Niederrheins venue coordinate -> 51.65105, 6.61439 -> 0.74 km from Wesel centre.
+PASS – At least 2 eligible Wesel events exist inside 5 km after the time shown above.
+PASS – Therefore the frontend fallback chain stops at 5 km; it does not need to expand to 25 km for this Wesel test.
+PASS – Dortmund regression gate: verified Wesel safety-net is not injected into a 50 km Dortmund-centred request.
+PASS – Address fixture with default=Dortmund and venue=Bocholt resolves to Bocholt, fixing the V17 wrong-city class of bug.
+
+STATIC / INTEGRITY TESTS
+PASS – php -l for every theme PHP file.
+PASS – node --check js/ruhrpott-app.js.
+PASS – node --check js/app.js.
+PASS – Event frontend parser accepts the two verified Wesel records as future/non-expired and reads city Wesel.
+PASS – Private eT4 key remains server-side; release check verifies its literal value is absent from public JS/CSS/HTML/PHP outside inc/rpg-et4-secret.php.
+
+NETWORK LIMITATION
+The build container has no DNS/network access and therefore cannot call meta.et4.de directly. This release does not treat that limitation as proof of eT4 success. The eT4 code is syntax/fixture tested, the public open-data pool is added as a runtime fallback, and the Wesel release gate is additionally backed by live-public-source-verified facts plus deterministic local records using real venue coordinates. Production WordPress will still perform its normal live source requests at runtime.

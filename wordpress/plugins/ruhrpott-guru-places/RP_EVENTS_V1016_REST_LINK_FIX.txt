@@ -1,0 +1,13 @@
+RuhrpottGuru Events 1.10.16 – REST Link Fix
+
+Fehlerursache:
+Der Event-DB-REST-Endpoint setzte nach der Filterlogik e.source_url erneut als raw.url/raw.detailUrl und rpg_event_details.website. Dadurch konnte destination.one im Frontend weiterhin als Webseite erscheinen.
+
+Fix:
+- publicWebsite wird aus dem unveränderten raw_payload ermittelt.
+- destination.one/eT4/Open-Data-Providerhosts werden verworfen.
+- source_url bleibt interne Provenienz.
+- raw.url/detailUrl/sameAs werden vor Ausgabe entfernt.
+- rpg_event_details.website erhält ausschließlich publicWebsite.
+- Ticketlinks bleiben separat erhalten.
+- Kein Theme-Update erforderlich.

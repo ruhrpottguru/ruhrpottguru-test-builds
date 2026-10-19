@@ -1,0 +1,20 @@
+RuhrpottGuru Places Backend v1.10.19 – Event visitor timezone fix
+
+Problem reproduced from Bulli Summerfestival 2026:
+- Curated official visitor start: 10:00 Europe/Berlin.
+- WordPress installation can use UTC as site timezone.
+- mysql2date('c', '2026-09-03 10:00:00') then serializes 10:00+00:00.
+- Browser in Germany converts that absolute instant to 12:00 CEST.
+
+Fix:
+- Curated visitor data carries timezone Europe/Berlin.
+- Visitor-facing timestamps are serialized with that explicit timezone.
+- 2026-09-03 10:00:00 => 2026-09-03T10:00:00+02:00.
+- Applied consistently to event list REST, persistent DB overlay, global search and share payload.
+- Non-curated events keep the existing WordPress-timezone behavior to avoid unrelated regressions.
+
+Checks:
+- PHP syntax: PASS
+- Bulli 03.09 start ISO expected: 2026-09-03T10:00:00+02:00
+- Bulli 04.09 start ISO expected: 2026-09-04T10:00:00+02:00
+- No Theme change required.

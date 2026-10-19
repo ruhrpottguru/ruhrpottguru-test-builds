@@ -1,0 +1,16 @@
+RuhrpottGuru v125 – Desktop Polish, Phase 1
+
+Hard rule:
+- No mobile CSS or JavaScript logic changed.
+- Every visual change in this release is scoped to @media (min-width:1024px).
+
+Desktop changes:
+1. Existing bottom navigation becomes a desktop portal navigation below the sticky header.
+   It reuses the exact same Footer menu/content; mobile footer stays unchanged.
+2. Location, detail and feedback overlays are centered desktop dialogs rather than bottom sheets.
+3. Home event/activity rows become four-column desktop grids.
+4. Food becomes a four-column grid.
+5. Highlights get a magazine mosaic with a larger lead card.
+6. Culture becomes a two-column scan list.
+7. Category controls, cards and detail typography receive modest desktop spacing/proportion polish.
+8. Mobile v124 appearance/behavior remains unchanged.

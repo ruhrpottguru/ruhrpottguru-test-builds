@@ -1,0 +1,9 @@
+RuhrpottGuru v157
+
+- Food, Highlights, Kultur, Aktivitäten und Büdchen: Detailbereich „Gemeinsam fürs Revier“ mit „Daten ergänzen oder Bild hochladen“.
+- Kategorieangepasste Felder.
+- Bis zu 5 Bilder pro Einsendung; Copyright pro Bild Pflicht; Nutzungsrecht-Checkbox Pflicht.
+- Bilder/Daten werden nie automatisch live gestellt.
+- WordPress-Moderation: Daten gebündelt, Bilder einzeln freigeben/ablehnen.
+- Mehrere freigegebene Bilder derselben Location erscheinen als Slider in der Detailansicht.
+- Bestehende Karten-, Standort-, Radius-, Ranking- und Kategorie-Logik bleibt unverändert.

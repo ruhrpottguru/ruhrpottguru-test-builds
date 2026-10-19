@@ -1,0 +1,12 @@
+RuhrpottGuru – Native Share + Deep Link V20
+
+IMPLEMENTATION
+- Result cards across category feeds, search results and favourites expose a Share button.
+- Detail modal exposes a labelled “Teilen” action beside Merken and Route planen.
+- navigator.share is preferred on iOS/Android and supported desktop browsers.
+- Clipboard fallback copies the generated RuhrpottGuru result URL and shows a non-blocking toast.
+- Share URLs carry category, stable item key/title and item coordinates/city.
+- Opening a share URL selects the shared item location, loads the matching category and auto-opens the result when found.
+- Existing Event Calendar actions remain unchanged.
+- Legacy technical ET template hashtags are absent from user-facing output.
+- Event/REST cache namespace bumped to V20.

@@ -1,0 +1,26 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.4 - VERIFICATION
+
+Scope
+- Labor-only recommendation selection for "Was geht JETZT?"
+- No public Home/Theme/REST ranking change
+
+Regression targets from Wesel 1.10.3
+- e.V./club entry without explicit visitor offer: hard reject from recommendation selection
+- Spa/wellness-first activity: -24 selection points unless a named public bath/therme softens to -14; true water/action experience exempt
+- Library: -18 selection points
+- Generic memorial/monument: -16; with attraction/Wikidata/Wikipedia evidence: -8
+
+Selection policy
+- Category quality anchor >= 70
+- Protected second slot only for already anchored category and score >= 64
+- Global quality fill >= 60
+- Max 3 per category
+- Candidate fallback only to reach at least 6 safe tips
+
+Build checks
+- PHP syntax: PASS
+- Version marker: PASS
+- Visitor-intent gate marker: PASS
+- Wellness demotion marker: PASS
+- Culture weak-object demotion markers: PASS
+- Quality-anchor thresholds: PASS

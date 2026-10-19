@@ -1,0 +1,21 @@
+RUHRPOTTGURU EVENTS v1.10.22 – ET4 CATALOG MEDIA RECONCILIATION
+Date: 2026-09-04
+
+ROOT CAUSE
+- The persistent master import consumes ET4 with unique=false + unrollIntervals=true.
+- Those occurrence rows can be sparse and may not carry media_objects although the canonical Open Data Finder object does.
+- Therefore v1.10.21 could correctly parse raw_payload but still had no image to parse.
+
+FIX
+- Missing ET4 images are resolved from the canonical unique catalog object by exact global_id.
+- Up to 40 visible missing external_ids are resolved in one exact grouped ET4 query and cached persistently.
+- One image is shared across all DB occurrences with the same external_id.
+- A background full-catalog backfill runs automatically after update, 200 unique catalog objects per batch.
+- ET4 catalog images are stored without a blocking second image HTTP probe; normal media-health checks remain available.
+- No Masterimport or theme replacement is required.
+
+SAFETY
+- No generic image search.
+- No venue/address/provider-image promotion.
+- canonical/pages/homepage/booking/social/video/audio remain excluded as card images.
+- After every completed nightly master wave, the catalog-media reconciliation is reset and run again for newly added/changed events.

@@ -1,0 +1,22 @@
+RuhrpottGuru Places Backend 1.10.157 — Zollverein / Search Parity Final
+
+Ursache (am unveränderten 1.10.156-Pfad verifiziert):
+1. Route-Industriekultur-Matching akzeptiert bei Zollverein sowohl den exakten Alias "Zeche Zollverein" (Basis-Match 130) als auch Teilobjekte, die den breiten Alias "Zollverein" enthalten (Basis-Match 108).
+2. Alle Route-Treffer erhalten im Highlight-Readmodel Tier A / Score 100 und denselben Ensemble-Key route:unesco-welterbe-zollverein.
+3. Der bisherige Ensemble-Dedupe verglich danach nur noch Entfernung. Dadurch konnte ein wenige Meter näheres Teilobjekt den eigentlichen Primärstandort verdrängen.
+4. Die globale Place-Suche serialisierte gleichzeitig rohe Places-Spalten statt rows_to_elements()/Visitor Intelligence. Deshalb konnten dort rohe Subkategorien (z. B. Park & Natur) und fehlende Bilder erscheinen, obwohl Kategorie-/Detailpfade andere Besucherdaten auflösen.
+
+Änderung:
+- Innerhalb desselben Route-Ensembles entscheidet nach Tier/Highlight-Score nun zuerst route.matchScore, erst bei Gleichstand die Entfernung.
+- Entfernungssortierung zwischen verschiedenen Highlights bleibt unverändert.
+- Globale Place-Suche läuft vor Ausgabe durch dieselbe Kategorie-Visitor-Projection und rows_to_elements()-Medien-/Override-/Link-/Schedule-Auflösung wie Kategorie/Detail.
+- Commons File:-Werte werden für Suchkarten in browserladbare Special:FilePath-URLs normalisiert; Commons-Kategorieseiten werden nicht fälschlich als Bilder ausgegeben.
+- Theme 310, Event-Suche, Event-Lifecycle, Radiuslogik, GPS und Datenquellen bleiben unberührt.
+
+Abnahme:
+- PHP-Syntax aller Plugin-PHP-Dateien: OK.
+- Fixture: exakter "Zeche Zollverein"-Match schlägt selbst maximal angereichertes "Zeche Zollverein (Schacht 4/5/11)" (130 > max. 121) und bleibt Gewinner, obwohl das Teilobjekt im Test näher liegt: OK.
+- Search-Media-Fixtures: direkte Bild-URL, Commons File:, Commons Category-Ausschluss: OK.
+- Regression: Event-Teil von rest_global_search byteidentisch zu 1.10.156: OK.
+- Regression: nearby_highlight_experience_rows Radius-SQL byteidentisch zu 1.10.156: OK.
+- ZIP-Pfad-/Syntax-/Integritätsprüfung erfolgt nach Paketierung.

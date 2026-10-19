@@ -1,0 +1,25 @@
+RuhrpottGuru Places Backend 1.10.117 – Medieneditor Fokus-/Preview-Fix FINAL
+
+Ursache
+- "Zuschnitt bearbeiten" uebergab die angeklickte place_media-/event_media-ID bereits korrekt als crop_focus.
+- Der Crop-Editor filterte zwar anschliessend auf die Motivgruppe dieser ID, waehlt die Vorschau innerhalb der Gruppe aber weiterhin aus dem ersten/repraesentativen Datensatz.
+- Wenn mehrere technische bzw. visuelle Varianten demselben Mastermotiv zugeordnet waren, konnte deshalb nach dem Klick auf Variante B wieder Variante A im Editor erscheinen.
+- Zusaetzlich konnte ein sehr breiter Suchbegriff (z. B. Veranstaltungsort) die fokussierte ID wegen LIMIT 240 aus der Suchmenge verdraengen.
+
+Fix
+- crop_focus wird jetzt vor der Gruppierung in Scope + Medien-ID aufgeloest.
+- Der fokussierte Datensatz wird bei Bedarf per exakter ID zusaetzlich geladen.
+- Nach Gruppierung bleibt nur die Gruppe mit der angeklickten ID aktiv.
+- Innerhalb dieser Gruppe ist die angeklickte ID fuer Vorschaubild und Bezeichnung autoritativ.
+- Speichern/Reset behaelt crop_focus wie bisher bei.
+- Crop-Overrides bleiben bewusst am logischen Mastermotiv; Originaldateien werden nicht veraendert.
+- Keine Theme-, REST-, Event-Import-, Places-, Worker- oder Frontendlogik geaendert.
+
+Abnahme 2026-09-24
+PASS PHP-Syntax ruhrpott-guru-places.php
+PASS Hauptpfad: zwei Varianten in derselben Mastergruppe; Klick auf die zweite ID zeigt exakt deren Datei
+PASS Regression: freie Motivsuche ohne crop_focus zeigt weiterhin den normalen Repraesentanten
+PASS Randfall: fokussierte ID fehlt im breiten LIMIT-Suchergebnis und wird gezielt nachgeladen
+PASS Leeres Ergebnis: "Keine passenden Bilder gefunden."
+PASS Randfall: ungueltiger crop_focus faellt auf normale Suche zurueck und hijackt keinen Treffer
+PASS Build-Diff: nur Plugin-Version, Medieneditor-Fokuspfad und diese Verifikationsdatei neu

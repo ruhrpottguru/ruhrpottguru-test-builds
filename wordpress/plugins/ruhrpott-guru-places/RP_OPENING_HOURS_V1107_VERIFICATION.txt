@@ -1,0 +1,32 @@
+RUHRPOTTGURU PLACES BACKEND v1.10.7 — OPENING HOURS AUDIT
+
+PURPOSE
+- Full server-side opening-hours audit for all active Food, Highlights, Kultur and Aktiv places.
+- Reuse reliable existing hours and persist them canonically.
+- For relevant places without hours, resolve identity-bound sources through existing RuhrpottGuru theme resolvers: OSM/source record, Wikidata P856, destination.one/eT4, then official website.
+- Crawl official site and likely opening-hours/visit/contact pages only; do not use generic directory/Google scraping as canonical evidence.
+- Save found hours to rg_place_schedules, rg_place_enrichment and rg_places.
+- Track evidence, source URL, attempts and unresolved places in rg_place_opening_audit.
+
+SAFETY
+- Public outdoor landmarks/activities that do not require classical opening hours are marked not-required.
+- Closed/restricted places are not promoted as open.
+- Unknown remains unknown when no reliable source is found.
+- External audit is throttled to max 2 remote places per AJAX batch for shared-hosting safety.
+- Restarting the audit clears audit status only; already saved opening hours stay intact.
+
+PARSER
+- JSON-LD openingHoursSpecification supported.
+- Multiple intervals per weekday retained.
+- German/English weekdays supported.
+- Day ranges supported.
+- Official-site text extraction supports multiple HH:MM-HH:MM intervals.
+
+CHECKS
+- Plugin version: 1.10.7
+- Schema version: 1.10.7
+- PHP syntax: PASS
+- Admin submenu RP Redaktion -> Öffnungszeiten: PRESENT
+- AJAX start/batch/reset endpoints: PRESENT
+- Canonical persistence to schedules/enrichment/places: PRESENT
+- Audit evidence table: PRESENT

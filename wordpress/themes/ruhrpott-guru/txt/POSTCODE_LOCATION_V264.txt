@@ -1,0 +1,9 @@
+RuhrpottGuru Theme v264 — PLZ-Standort
+
+- Standort-Layer: neben „GPS-Standort verwenden“ neuer Button „PLZ eingeben“.
+- 5-stellige deutsche PLZ wird serverseitig über einen gecachten Nominatim/OSM-Resolver in lat/lng aufgelöst.
+- Bestehende Radius-/Kategorie-/Ranking-Kette bleibt unverändert und erhält nur die neuen Startkoordinaten.
+- PLZ wird im Standortzustand persistiert; sichtbare Standortlabels zeigen bei PLZ-Modus die PLZ statt der nächstgelegenen Stadt.
+- Interne city-Zuordnung bleibt erhalten, damit Event-/Analytics-/Stadtlogik nicht gebrochen wird.
+- Resolver: 90-Tage-Cache, Upstream-Abstand >1 s, gleicher geografischer Service-Envelope wie bestehende OSM-Endpunkte.
+- OSM-Attribution wird im geöffneten PLZ-Formular angezeigt.

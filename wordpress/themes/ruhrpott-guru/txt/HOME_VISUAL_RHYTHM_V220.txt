@@ -1,0 +1,7 @@
+V220 – Homepage visual rhythm
+- Uniform top-level spacing for Home category modules, WP editorial blocks and all Home banners.
+- Consistent category heading typography and heading-to-content gap.
+- Consistent Home location trigger styling on desktop and mobile.
+- Mobile keeps location above the category title and CTA beside the title.
+- Narrow-phone legacy flex fallback removed so category headers do not change structure below 390px.
+- No data/query/backend logic changed.

@@ -1,0 +1,36 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.85
+Event-Radius-Monotonie
+Date: 2026-09-17
+
+OBSERVED PRODUCTION SYMPTOM
+- PLZ 45888: bei 5 km waren Events ab ca. 3,4 km sichtbar.
+- Dieselbe PLZ mit 10 km zeigte erst Events ab ca. 6,3 km.
+- Stadtbasierte Auswahl wirkte im Vergleich plausibel.
+
+VERIFIED ROOT CAUSE
+- Theme v264 keeps the selected postcode centre unchanged when only the radius changes.
+- /ruhrpottguru/v1/events receives that same lat/lng plus the selected radius.
+- Backend frontend_events_query() first queried full future Event rows from the radius bounding box,
+  sorted them by start_at and hard-limited that candidate set to 800 rows.
+- Exact Haversine filtering happened only afterwards.
+- Therefore a larger/dense 10-km bounding box could push nearby later-starting Events behind row 800,
+  while the smaller 5-km box still contained them. Result membership was not radius-monotone.
+
+FIX
+- No PLZ-coordinate or Theme workaround.
+- Query the complete bounding-box candidate set using only id/lat/lng.
+- Apply the exact Haversine radius test to every candidate point first.
+- Hydrate full Event rows only for exact in-radius IDs, in chunks of 300.
+- Preserve existing chronological Event ordering, clustering/deduplication, media handoff,
+  city parameter, ET4 fallback, date filters and frontend contract.
+- Add response diagnostics: spatialCandidates and inRadiusBeforeCluster.
+
+REGRESSION INVARIANT
+For one fixed centre C and radii r1 <= r2, every raw DB Event whose exact distance to C is <= r1
+is also part of the exact in-radius candidate ID set for r2. Candidate density or start time cannot
+remove it before the spatial test.
+
+DEPLOYMENT
+- Replace only RuhrpottGuru Places Backend with 1.10.85.
+- Theme v264 remains installed unchanged.
+- No database migration, reimport or cache reset is required.

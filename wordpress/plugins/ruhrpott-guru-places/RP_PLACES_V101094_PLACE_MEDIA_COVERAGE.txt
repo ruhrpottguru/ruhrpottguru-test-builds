@@ -1,0 +1,28 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.94 — PLACE MEDIA COVERAGE
+
+Purpose
+- Improve missing-place-image coverage across Food, Highlights, Kultur and Activities.
+- Reuse the already active, identity-safe Theme media resolver; do not introduce a new web/image source.
+- Persist successful resolver results in rg_place_media so future visitors do not need to rediscover them live.
+
+Root cause verified
+- Normal Place cards can resolve media live through /ruhrpottguru/v1/food-media when no image is stored.
+- Successful live results were not persistently written for the four main Place categories.
+- A persistent server-side enrichment loop already existed for Buedchen, but not for Food/Highlights/Kultur/Activities.
+
+Implementation
+- One-time resumable WP-Cron coverage wave after update.
+- Active/lifecycle-active Places only; Food, Highlights, Kultur and Activities only.
+- Existing persisted or directly linked images are never replaced.
+- Non-Food Places reuse place-info first when needed to recover an identity-bound official website.
+- Media resolver sources stay unchanged: OSM image, Commons/Wikidata/Wikipedia, official website, regional open data; Food keeps its existing symbolic fallback.
+- Successful results are stored in place_media as relation_type=place.
+- No Theme change, no category/ranking change, no Activities V2 change, no Event change, no opening-hours change.
+- Worker waits instead of skipping Places if the Theme media resolver is unavailable.
+- Progress is visible under RP Redaktion -> Places.
+
+Safety
+- Batch size: 3 Places per cron tick.
+- No Overpass/import refresh.
+- Existing media rows remain authoritative and untouched.
+- Community uploads remain untouched.

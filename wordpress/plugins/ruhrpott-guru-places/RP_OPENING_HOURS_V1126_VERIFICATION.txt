@@ -1,0 +1,56 @@
+RUHRPOTTGURU PLACES BACKEND — OPENING HOURS FINALIZATION v1.10.26
+Generated: 2026-09-08
+
+BASELINE
+- Based on the already verified v1.10.25 opening-hours finalization package.
+- No theme change.
+- No reset of place_schedules, place_enrichment or places.opening_hours.
+- The current finished audit data is preserved.
+
+ADDITIONAL ROOT CAUSE FOUND DURING FINAL RE-REVIEW
+- The historical v1.10.11 migration branch still contained a broad requeue for
+  unknown-after-exhaustive-search + research-incomplete + error.
+- Under an unusual upgrade state where rg_opening_hours_audit_v1111_migrated
+  was absent, that legacy branch could reopen already confirmed unknown cases.
+- This contradicted the v1.10.25 invariant that confirmed unknown results remain final.
+
+FINAL FIX
+- Historical migration requeue is now restricted to current active/public
+  Food/Highlights/Kultur/Aktivitaeten places AND only research-incomplete/error.
+- Confirmed unknown-after-exhaustive-search rows can no longer be requeued by that path.
+- The one-time v1.10.25/26 recovery pass explicitly marks the historical migration
+  as completed before the worker continues, closing the upgrade race completely.
+- Admin heading now reports Opening Hours Audit 1.10.26.
+
+PRESERVED v1.10.25 FIXES
+- Snapshot counters JOIN the current active/public place scope.
+- Stale/out-of-scope audit rows are pruned from place_opening_audit.
+- Phase-2 queue and manual retry are restricted to the same current scope.
+- PHP and browser progress calculations are capped at 100%.
+- Accessible, identity-bound official website + completed site/subpage crawl is a
+  complete primary source path even if public search-engine discovery is blocked.
+- A blocked identity-bound official website remains research-incomplete.
+- Existing research-incomplete/error rows are requeued exactly once after upgrade.
+- Existing found hours, locked schedules and confirmed unknown rows stay untouched.
+
+VERIFICATION
+- PHP 8.4 syntax: PASS
+- Plugin header/class constant: 1.10.26 / 1.10.26: PASS
+- Current-scope snapshot invariant: PASS
+- Current-scope phase-2 queue invariant: PASS
+- Current-scope manual retry invariant: PASS
+- Legacy migration excludes confirmed unknown: PASS
+- Legacy migration restricted to current scope: PASS
+- Recovery pre-marks legacy migration before worker continuation: PASS
+- Official-site completeness rule preserved: PASS
+- Server-side background worker chain preserved: PASS
+- 20,874 / 20,646 historic regression cannot render above 100%: PASS
+- ZIP root plugin slug ruhrpott-guru-places/: PASS
+
+EXPECTED BEHAVIOR AFTER INSTALL
+- No new full audit is started.
+- On the next normal WordPress request, stale audit rows are removed.
+- Only current research-incomplete/error cases from the finished run are retried once.
+- Confirmed unknowns are not reopened.
+- Already stored opening hours remain stored and continue to feed the frontend.
+- The retry continues server-side via the existing background worker/WP-Cron safety path.

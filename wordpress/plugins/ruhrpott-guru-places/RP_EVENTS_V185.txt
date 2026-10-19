@@ -1,0 +1,3 @@
+RP Events v1.8.5
+- Zusatzfeed-Status trennt Provider-Treffer, eindeutige Quellobjekte, erzeugte konkrete Termine, neue Inserts und Updates.
+- Keine Daten- oder Sync-Logik geändert.

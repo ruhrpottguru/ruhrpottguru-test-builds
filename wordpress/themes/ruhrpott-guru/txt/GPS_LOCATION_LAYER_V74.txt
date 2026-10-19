@@ -1,0 +1,8 @@
+RuhrpottGuru V74 — GPS / Standort-Layer
+
+- WordPress content shells now open a real location layer from the React header marker.
+- Home category location labels are interactive buttons and open the same layer.
+- Layer supports GPS, all canonical RuhrpottGuru municipalities, search, and radius selection.
+- Manual location preference is preserved when a GPS request fails or is denied. GPS mode is persisted only after a successful position.
+- Dedicated category slugs can use the established [ruhrpott_home_*] shortcodes as their category-shell insertion point.
+- Ordinary Home/Start pages continue to render those same shortcodes as magazine modules.

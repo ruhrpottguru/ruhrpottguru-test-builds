@@ -1,0 +1,35 @@
+RUHRPOTTGURU PLACES BACKEND v1.10.91
+ACTIVITIES INTELLIGENCE V2 – PHASE 2B REAL-DATA CALIBRATION
+
+BASE
+- v1.10.90 Activities Worker Control
+- 53/53 Source Coverage is preserved; no queue/state reset.
+- Public Activities visitor feed remains on the legacy path.
+
+VERIFIED ROOT CAUSES FROM 53-CITY AUDIT
+1. The diagnostic SQL had ORDER BY id ASC LIMIT 5000. A displayed total of exactly 5,000 therefore could not prove a complete 53-city audit.
+2. Nameless high-specificity table-tennis OSM objects receive the derived display name "Tischtennisanlage". The V2 admission rule then matched that synthetic name and promoted the same object to REIN. This contradicted the V2 spec, which starts table tennis at BEDINGT unless real public/leisure evidence upgrades it.
+3. Website/opening-hours metadata are boosters, not visitor-access proof. Shooting/model-flying/golf must not become REIN from those fields alone.
+
+CHANGES
+- Audit now scans the complete active primary_category=activities catalogue in ID-based batches of 1,000; no 5,000-row cutoff.
+- Admin diagnosis shows municipalities present in the audit separately from municipalities having REIN/BEDINGT, plus count of derived names.
+- rg:name_source is included in diagnostic raw-signal output.
+- Derived/nameless table_tennis without access/public/informal evidence => BEDINGT.
+- Explicit public/informal table_tennis => REIN.
+- Shooting sports: website/hours alone no longer promote to REIN.
+- Model flying: website alone no longer promotes to REIN (verified guest identity/public/visitor offer can).
+- Golf: opening hours alone no longer promote to REIN.
+
+UNCHANGED
+- OSM source coverage/import queries
+- 53-city coverage worker state, cron hooks, retry logic
+- Legacy/public Activities feed and ranking
+- Food, Highlights, Culture, Events, Opening Hours, IGA, REST contracts, Theme
+
+REGRESSION FIXTURES
+- Derived Tischtennisanlage + sport=table_tennis + no access => BEDINGT
+- Same object + access=yes => REIN
+- Shooting facility + website only => BEDINGT
+- Golf facility + opening_hours only => BEDINGT
+- Existing skate/water/equestrian/tennis/soccer-five/model-flying/outdoor-fitness fixtures remain PASS

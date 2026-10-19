@@ -1,0 +1,15 @@
+RuhrpottGuru Theme v313 – Event rights UI cleanup
+
+Scope:
+- Removes the visitor-facing badge “Freigegebenes Veranstaltungsbild” for internally approved event media.
+- Suppresses only the two synthetic WeselMarketing approval/proof strings from the detail-image credit line.
+- Keeps real artist/photographer/creator credits and normal licences unchanged.
+- Does not alter backend rights metadata, event data, images, sorting, cards, detail layout, share URLs or calendar actions.
+
+Release rule:
+- Frontend rights/provenance notices must be agreed with the product owner before being added as visitor-visible UI.
+Verification:
+- JavaScript syntax check: PASS.
+- Event rights normalization: 13 assertions PASS.
+- Detail gallery render path: synthetic Wesel approval line absent; real credit still rendered.
+- Existing detail-chip regression suite: 154 assertions PASS.

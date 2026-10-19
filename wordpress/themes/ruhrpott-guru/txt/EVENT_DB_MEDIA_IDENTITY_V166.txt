@@ -1,0 +1,4 @@
+RuhrpottGuru Theme v166
+- DB-verifizierte Eventbilder akzeptieren imageUrl, url und contentUrl.
+- Keine Event-spezifischen Sonderfälle.
+- Zusammen mit Backend 1.6.13 können starke semantische Geschwister-Datensätze dasselbe verifizierte Eventbild nutzen.

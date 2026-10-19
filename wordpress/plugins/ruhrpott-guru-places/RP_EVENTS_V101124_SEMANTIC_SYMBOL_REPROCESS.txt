@@ -1,0 +1,12 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.124 — EVENT SYMBOLFOTO SEMANTIC REPROCESS
+
+Purpose
+- Re-evaluate active/future persisted pexels-symbolic-event media created before Theme v298.
+- Prefer an exact/open-licensed Event-Ort image; otherwise request only Theme-v298 semantic Symbolfoto candidates.
+- If neither is safe/relevant, retire the old Symbolfoto and let the neutral frontend placeholder win.
+
+Safety / invariants
+- Background/resumable worker; no new heavy venue lookup is added to the public Event REST path.
+- Does not change Event selection, ordering, radius, recurrence, ET4 sync, rights priority or category logic.
+- Does not replace higher-priority ET4/ODF, editorial, official-approved or Event-Ort media.
+- Requires Theme v298 semantic resolver before queueing.

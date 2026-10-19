@@ -1,0 +1,42 @@
+RuhrpottGuru Places Backend 1.10.56 – ET4-Fokus bis Rechteklärung
+================================================================
+
+Ziel
+----
+Bis die Nutzungsrechte zusätzlicher lokaler/organisatorischer Eventquellen geklärt sind,
+werden nur die bestehenden lizenzierten/strukturierten Eventpfade weiter automatisiert.
+
+Technische Änderungen
+---------------------
+1. Eventbild-Fallback-Worker:
+   - wird auf paused_scope gesetzt
+   - vorhandene Cron-Hooks werden entfernt
+   - kein automatischer Neustart
+
+2. Event-Ort/Pexels-Upgrade:
+   - wird auf paused_scope gesetzt
+   - vorhandene Cron-Hooks werden entfernt
+   - kein automatischer Neustart
+
+3. SHA-256-Dublettenlauf für official-candidate:
+   - wird auf paused_scope gesetzt
+   - Lock und Cron werden entfernt
+   - vorhandene Kandidaten bleiben unverändert gespeichert
+
+4. Allgemeines Event-Enrichment:
+   - Teilnehmer-/Adress-/strukturierte Feed-Anreicherung bleibt aktiv
+   - ruhrpott_guru_event_media_resolver_v85 wird im ET4-Fokus nicht aufgerufen
+   - dadurch entstehen keine neuen official-candidate/Commons/Pexels-Fallbacks
+
+5. Unverändert aktiv:
+   - ET4/Open Data Finder Masterimport
+   - destination.one-Zusatzfeed
+   - ET4 Bildkatalog per exact global_id
+   - ET4/destination.one Bild-Lokalisierung
+   - bestehende bereits gespeicherte Medien
+
+Keine Datenlöschung
+-------------------
+Der Build entfernt weder bestehende Eventdatensätze noch bereits gespeicherte Medien.
+Er pausiert ausschließlich automatische Zusatzrecherche, die für den aktuellen ET4-Final-Pass
+nicht benötigt wird.

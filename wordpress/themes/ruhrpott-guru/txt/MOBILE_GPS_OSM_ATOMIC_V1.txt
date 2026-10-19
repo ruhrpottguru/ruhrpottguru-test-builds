@@ -1,0 +1,9 @@
+Ruhrpott Guru – Mobile GPS / OSM Atomic Fix V1
+
+Fixes:
+- GPS quiet refresh no longer invalidates category snapshots for coordinate jitter below 150 m.
+- Active Food / Highlights / Culture loads no longer abort a shared canonical OSM request during GPS refresh or React effect cleanup.
+- Prevents an aborted in-flight request from being reused under the same rounded GPS cache key.
+- Highlights and Culture now honor 1 km / 2.5 km requested radii before automatic fallback to larger radii.
+- OSM and category snapshot cache namespaces bumped to discard stale/degraded empty snapshots from earlier builds.
+- Manual-location persistence, sticky header, official website enrichment, Pexels, SureCookie and Infinite Scroll retained.

@@ -1,0 +1,31 @@
+RuhrpottGuru Theme 306 – Detailseiten-Filterchips
+Basis: Theme 305 / Places Backend 1.10.152.
+
+Änderungen:
+- Highlights und Kultur: Locationname als erster anklickbarer Filterchip.
+- Konkrete Unterkategorie vor weiteren Labels; maximal sechs Chips.
+- Events: vorhandene Veranstaltungsort-/Event-Art-Logik beibehalten.
+- Food und Aktivitäten: vorhandene Facetten unverändert.
+- Kategorie-Wechsel übernimmt das aktuelle WordPress-Footermenüziel.
+  Fallbacks: /food/, /aktiv/, /veranstaltungen/, /highlights/, /kultur/.
+- Keine Änderungen an Radius, Sortierung, Suche, Import, DB oder UGC.
+- Fehlende Ortsnamen werden nicht erfunden; Platzhalter bleiben ausgeblendet.
+
+Validierung:
+Live-Browser, Essen / 5 km, vorhandene Produktionsversion:
+Kultur: Stratmanns -> Theater -> passende Theater.
+Highlights: Baedeker-Haus -> Fotospot -> passende Highlights.
+Food: Hans im Glück -> Burger -> passende Gastronomie.
+Aktivitäten: RuhrEscape Essen -> Escape Room -> passende Aktivitäten.
+Events: ALIVE -> GOP Varieté-Theater Essen -> dortiges Event.
+Live bestätigt: Ortsnamenchips fehlen bei Highlights und Kultur.
+
+Neue Version lokal: 154 funktionale Assertions, echte Normalizer,
+Chip-Renderausdruck, Klickhandler, URL-Erstellung und Kategorie-Prädikat.
+Hauptpfade, nicht vorhandene Facetten, Filter entfernen, Suchschnittmenge,
+Chipbegrenzung, unbekannte Namen, Menüziele und Radius 2,5/5/25 km.
+Syntaxprüfung aller React-Quelldateien.
+Die neue Version wurde nicht auf der Produktionsseite installiert;
+eine Browserabnahme der neu ergänzten Chips nach Installation steht aus.
+
+Installation: nur diese Theme-ZIP. Kein Backend-Update erforderlich.

@@ -1,0 +1,13 @@
+RuhrpottGuru Theme v272 – Activities Media Rollback
+
+Basis: v269.
+
+Ziel:
+- Activities-Bildlogik zurück auf den Stand vor der Media-Hygiene aus v269/v270/v271.
+- Jedes vorhandene bzw. über den bestehenden Resolver gefundene Bild wird wieder normal angezeigt.
+- Doppelte Bilder werden nicht unterdrückt.
+- Logos/Personenbilder werden nicht zusätzlich durch das Theme ausgesiebt.
+- Nur wenn der bestehende Media-Pfad nach Abschluss wirklich kein Bild liefert – also dort, wo früher der Blitz-Placeholder stand – erscheint der Community-Hinweis „Hier fehlt noch ein gutes Foto“ / „Foto beisteuern“.
+- Öffnungszeiten-/Nutzungszeitenlogik aus v269 bleibt erhalten.
+- Activities-Tag-Navigation bleibt aktiviert.
+- Activities V2 / Backend bleibt unverändert.

@@ -1,0 +1,9 @@
+RuhrpottGuru Places Backend v1.6.6
+
+- Event-Audit vollständig deutsch beschriftet.
+- Eventtitel im Backend öffnet eine Detailprüfung.
+- Enrichment-Prüfweg wird pro Event in audit_json protokolliert.
+- Gespeicherte Bilder, Quellen, Matching-Sicherheit und Fehler werden im Detail sichtbar.
+- Strukturierte Mitwirkende werden global aus performer/artist/contributor/participant/actor/musician/band/ensemble/speaker-Feldern übernommen.
+- Keine Ableitung von Personen aus Beschreibungstexten.
+- participants_json wird beim Sync und Enrichment aktualisiert und ans Frontend ausgeliefert.

@@ -1,0 +1,2 @@
+RuhrpottGuru Events v1.7.9
+Supplemental sync priority: pauses enrichment, repairs overdue WP-Cron workers, resumes enrichment after 53-city sync.

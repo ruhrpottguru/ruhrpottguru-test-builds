@@ -1,0 +1,30 @@
+RuhrpottGuru Theme v265 – Frontend Data Intelligence
+
+BASE
+- Exact source: Theme v264 PLZ Standort FINAL.
+- Places Backend / Activities worker is not modified.
+
+CHANGES
+- Food price tier restored from explicit source fields only: rg:price_tier, price_tier, price_level, price:level.
+- Accepted tiers are only 1/2/3 or €/€€/€€€; no inference from cuisine/name/type.
+- Food cuisine/feature labels restored without #, maximum 3 labels.
+- Food labels use only cuisine, diet:vegan, diet:vegetarian and outdoor_seating evidence.
+- Food category cards show price tier + labels when available.
+- Food home cards show price tier + up to two compact labels.
+- Food detail shows “Preisniveau” from the exact price tier and reuses the same labels in “Passt zu dir”.
+- Category search includes normalized labels.
+
+UNCHANGED
+- Places REST endpoint and backend transport.
+- Activities worker / queue / resolver / Overpass logic.
+- Distance sorting and radius logic.
+- Address rendering.
+- Share/deep-link routing.
+- Opening-hours engine.
+- Media resolver / image source selection.
+- Event pipeline and event detail.
+
+POLICY
+- Missing price evidence stays hidden.
+- Missing cuisine evidence stays hidden.
+- No guessed price tier and no generic Food tag is fabricated.

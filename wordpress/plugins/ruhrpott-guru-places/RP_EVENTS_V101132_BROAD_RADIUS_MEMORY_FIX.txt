@@ -1,0 +1,21 @@
+RuhrpottGuru Places Backend v1.10.132 – Broad Radius Event Memory Fix + Outdoor Coverage Runner
+
+Base: v1.10.131 Outdoor 53-City Coverage Runner (not deployed separately).
+
+Event visitor-path fix:
+- broad-radius DB searches no longer hydrate SELECT e.* / raw_payload for every concrete occurrence before listing clustering;
+- exact-radius occurrence membership is still calculated over the full candidate set;
+- source/external-id + short-series clustering now runs on a lightweight projection first;
+- only selected visitor-facing representative rows are fully hydrated afterwards;
+- same-source series media inheritance is preserved with chunked media lookup over cluster member ids;
+- no arbitrary early 300-event cap: later seasonal events such as Halloween remain eligible;
+- response meta exposes inRadiusBeforeCluster, clusteredBeforeHydration and hydratedRepresentatives for live verification.
+
+Outdoor:
+- includes the already tested v1.10.131 admin-only 53-city read-only coverage runner.
+- no public outdoor integration, importer or outdoor worker is enabled.
+
+Regression intent:
+- 5/10 km event membership/order semantics unchanged;
+- 25/50 km no longer allocate full raw ET4 payloads for thousands of occurrence rows before clustering;
+- existing event media ownership and exact ET4 global-id handoff remain unchanged.

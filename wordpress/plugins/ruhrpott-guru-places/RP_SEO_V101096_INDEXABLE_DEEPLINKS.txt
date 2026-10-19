@@ -1,0 +1,47 @@
+RuhrpottGuru Places Backend v1.10.96 – SEO / Deep-Link FINAL
+
+Basis: v1.10.95 Reprocessing Standard FINAL.
+
+Ziel
+- Echte indexierbare DB-Detail-URLs statt /teilen/ als Canonical.
+- Bestehende Social-/Overlay-Deep-Links bleiben rückwärtskompatibel.
+- DB-Places und Events werden über eine eigene Sitemap auffindbar.
+- Keine Fachdaten-Reprocessings und keine Änderungen an place_media.
+
+Canonical URLs
+- Place: /ort/{id}/{slug}/
+- Event: /veranstaltung/{id}/{slug}/
+- falsche/veraltete Slugs: 301 auf die aktuelle Canonical-URL
+- nicht mehr öffentliche/abgelaufene Einträge: 404 + noindex
+
+Indexability Gate
+- Food: aktive öffentliche Food-Places
+- Activities: Activities Intelligence V2 Admission REIN
+- Kultur: bestehende Culture Experience Intelligence
+- Highlights: bestehende Highlight Experience Intelligence
+- Cross-Category-Fallback nur über bestehende Intelligence, niemals zu Food
+- Events: status=active und Ende/Start nicht in der Vergangenheit
+
+Sitemap / robots
+- /rpg-sitemap.xml
+- /rpg-sitemap-places.xml
+- /rpg-sitemap-events.xml
+- robots_txt-Filter ergänzt Sitemap: <home>/rpg-sitemap.xml
+- WordPress-native Sitemap bleibt unangetastet
+
+Legacy /teilen/
+- bleibt noindex,follow
+- behält Social-Meta und automatisches Öffnen des App-Overlays
+- Canonical verweist bei Events/numerischen Places auf die neue indexierbare URL
+
+SEO-Seiten
+- server-rendered HTML, Canonical, Meta Description, OpenGraph/Twitter
+- Place JSON-LD (Place)
+- Event JSON-LD (Event)
+- CTA öffnet den bestehenden RuhrpottGuru-Detail-Layer über rg_open/rgc
+
+Parallelität
+- 1.10.94 Ortsbild-Coverage Hook/State unverändert
+- 1.10.95 Reprocessing Standard enthalten
+- kein Places-/Event-/Media-Reprocessing beim Aufruf
+- Sitemap-Cache nutzt nur Transients

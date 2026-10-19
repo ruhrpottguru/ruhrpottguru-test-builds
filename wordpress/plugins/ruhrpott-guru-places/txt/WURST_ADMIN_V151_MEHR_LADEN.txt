@@ -1,0 +1,11 @@
+RUHRPOTTGURU PLACES BACKEND v1.5.1
+
+Wurst-Kandidaten-Audit:
+- Standard weiterhin 120 Treffer.
+- Unter der Ergebnisliste erscheint „Weitere 120 laden“, wenn mehr Treffer vorhanden sind.
+- Jeder Klick erweitert die bestehende Liste um weitere 120 Treffer.
+- Aktive Tier-/Stadt-/Gericht-/Review-/Website-/Suchfilter bleiben erhalten.
+- Nach einer Einzelentscheidung bleibt die aktuell geladene Trefferzahl erhalten.
+- Sprungziel bleibt #rg-wurst-audit.
+- Maximal 3000 Audit-Treffer können in einer Ansicht geladen werden.
+- Klassifikationslogik und Frontend-Freigaben unverändert.

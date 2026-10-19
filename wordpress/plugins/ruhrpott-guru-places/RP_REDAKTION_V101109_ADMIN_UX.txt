@@ -1,0 +1,37 @@
+RuhrpottGuru Places Backend 1.10.109 – RP Redaktion Admin UX
+
+Scope
+- Nur WordPress-Adminbereich "RP Redaktion".
+- Keine Änderungen an Besucherfrontend, REST-Ausgabe, Importen, Resolvern, Workerlogik oder Datenbank-Schema.
+
+Einheitliche Navigation
+- Daten
+- Places
+- Medien
+- Events
+- Labor
+- Öffnungszeiten
+- Community
+- Sticky oberhalb aller RP-Redaktion-Unterseiten.
+
+Kompakte Darstellung
+- Lange H2-Bereiche in Medien, Events, Labor und Öffnungszeiten werden standardmäßig eingeklappt.
+- Daten-Einsendungen werden pro Einsendung als einklappbare Karte dargestellt.
+- Places bündelt Technik/Altbestand/Ortsbild-Worker in einem geschlossenen Bereich.
+- Events bündelt Synchronisation, Worker und Sonderläufe in einem geschlossenen Bereich.
+- Alles einklappen / Alles öffnen ist global verfügbar.
+- URL-Anker und relevante Deep-Links öffnen den betroffenen Bereich automatisch (Event-Detail, Event-Finalcheck, Opening-Hours-Restfälle, Medienfokus, Places-Workersteuerung).
+
+Bewusst sichtbar
+- Seitentitel und kurze Einleitung.
+- Kern-KPIs, wo sie bereits vorhanden sind.
+- Suche/Filter und redaktionelle Hauptaktionen bleiben funktional; technische Details liegen dahinter.
+
+Verifikation
+- PHP-Syntax: PASS
+- Admin-Nav: 7 Unterseiten vorhanden
+- Community-Listen/Edit-Screens werden erkannt
+- Events: Sync/Worker/Sonderläufe explizit gekapselt
+- Places: Technik/Altbestand/Ortsbild explizit gekapselt
+- Auto-Folding greift nur im RP-Redaktion-Scope
+- Keine Änderungen außerhalb ruhrpott-guru-places.php plus dieser Verifikationsdatei

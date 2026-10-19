@@ -1,0 +1,10 @@
+Ruhrpott Guru – Food radius policy
+
+Food automatic radius chain:
+1 km -> 2.5 km -> 5 km -> 10 km -> 25 km
+
+Rules:
+- Stop at the first successful stage with coordinate-bearing Food data.
+- Advance only after an authoritative successful zero-result stage.
+- Provider failure/timeout does not expand the radius.
+- Events, Highlights and Culture retain their existing radius behavior.

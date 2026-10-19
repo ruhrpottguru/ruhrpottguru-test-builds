@@ -1,0 +1,7 @@
+RuhrpottGuru Theme v315 — Wesel city-scope events + readable descriptions
+
+- Official Wesel city-scoped events are allowed in the selected Wesel event view even though no point coordinate was invented.
+- City-scoped items never display a fabricated distance and do not offer coordinate-based directions.
+- Event detail descriptions render source paragraph breaks as real visual paragraphs.
+- Existing radius behaviour for geocoded events remains unchanged.
+- No new rights/freigabe text is exposed.

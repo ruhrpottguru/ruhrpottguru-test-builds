@@ -1,0 +1,37 @@
+RuhrpottGuru Places Backend 1.10.27 — ET4 Eventbilder Finalisierung
+=================================================================
+
+Ursache
+-------
+Der lizenzierte Master/Open-Data-Finder lief seit v1.10.24 korrekt mit unique=true
+und lokaler Terminexpansion. Der destination.one-Zusatzfeed für die 53 Kommunen
+verwendete jedoch weiterhin unique=false + unrollIntervals=true. Diese sparse
+Occurrence-Repräsentation kann eventeigene media_objects/subitems verlieren.
+
+Fix
+---
+1. destination.one/Open-Data-Zusatzfeed lädt unique=true Rich-Source-Objekte.
+2. Termine werden wie beim Master lokal expandiert; der vollständige ET2014A-
+   Payload inklusive eventeigener Medien bleibt auf jeder Occurrence erhalten.
+3. Pagination des Zusatzfeeds: 20 statt 6 Seiten pro Kommune.
+4. Einmaliger kompletter Rich-Media-Zusatzfeed-Neulauf nach Upgrade; laufende
+   Event-Wellen werden nicht unterbrochen.
+5. ET4-Katalog-Backfill: exakter Titel bleibt Fast Path. Nur wenn damit kein
+   strikter sicherer Match entsteht, wird ein normalisierter Titelkandidat gesucht.
+   Die finale Freigabe bleibt strikt an Titel + Stadt/Geo/Venue/Postcode gebunden.
+6. Kein Theme-Umbau. Theme v229+ bevorzugt das Event-eigene ET4-Bild bereits.
+
+Verifikation
+------------
+- PHP 8.4 Syntax: PASS
+- ET2014A subitem image / canonical HTML rejection: PASS
+- Local recurrence expansion preserves media_objects: PASS
+- Normalized title fallback + wrong-city rejection: PASS
+- Supplemental unique=true, no unrollIntervals: PASS
+- Migration defers during running supplemental wave: PASS
+- v1.10.26 Opening-Hours-Fixes remain in place: PASS (event-only diff)
+
+Wichtig zur Installation
+------------------------
+Nicht während eines aktuell laufenden Opening-Hours-Audits das Plugin ersetzen.
+Erst nach Abschluss des laufenden Audits installieren.

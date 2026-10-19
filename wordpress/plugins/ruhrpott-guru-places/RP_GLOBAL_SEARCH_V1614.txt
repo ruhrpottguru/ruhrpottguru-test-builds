@@ -1,0 +1,6 @@
+V1.6.14 Global Search
+- Public REST endpoint /ruhrpottguru/v1/global-search.
+- Searches active future events including description and participants.
+- Searches active places and dedicated Wurst candidates.
+- Adds specials and WordPress posts/pages.
+- Results are returned pre-grouped for the global search page.

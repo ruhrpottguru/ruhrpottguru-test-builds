@@ -1,0 +1,44 @@
+RuhrpottGuru Places Backend 1.10.122
+Canonical Crop Identity / Media Card Preview verification
+Date: 2026-09-25
+
+ROOT CAUSE VERIFIED
+- The media library card and crop editor were already using the same event_media row/image URL in 1.10.121.
+- The visible mismatch came from presentation state: the card rendered the source image with a plain centered object-fit:cover, while the editor immediately applied an existing manual crop override.
+- Crop overrides from 1.10.112-1.10.121 were addressable by several aliases (URL, source URL, WP attachment id, persisted/file SHA-256; broad grouping could also use pHash). A manual crop could therefore reappear through a non-byte alias even after the user thought they were working on a different representation.
+- For event images grouped as "26x verwendet", those uses are byte-identical by SHA-256, not 26 different visual versions. One byte-identical image is allowed to share one crop; different bytes must never inherit it merely because URL/provenance/visual similarity matches.
+
+1.10.122 INVARIANTS
+1) Canonical crop identity:
+   - event/local byte SHA-256 -> SHA identity
+   - readable local file -> calculated SHA-256 identity
+   - no reliable bytes -> concrete scope + media row id
+   - URL, source_url, WP attachment id and pHash are NOT crop identities.
+2) Existing SHA-based overrides remain compatible because the byte key format stays hash('sha256', 'bytes:' + sha256).
+3) Same SHA across multiple event_media rows shares one crop intentionally.
+4) Same URL with changed bytes gets a different crop identity.
+5) Same URL without a reliable hash does not link separate media rows.
+6) Reset deletes only the canonical identity. Old URL/source-url alias rows are inert because no current crop lookup reads them.
+7) Media-library thumbnails are enriched through the same crop resolver as visitor payloads and render the active card crop.
+8) Inline editor shows the unchanged original separately from Karte 4:5 and Detail 16:9.
+9) Direct save re-resolves scope + concrete DB id and writes only the canonical crop key.
+10) Theme contract is unchanged: imageCropCard/imageCropDetail and cropCard/cropDetail payload fields remain identical, so Theme v293 needs no update.
+
+FUNCTIONAL CONTRACT TESTS
+PASS same SHA + different row/URL -> same canonical crop key
+PASS same URL + different SHA -> different canonical crop key
+PASS same URL + no hash + different row id -> different canonical crop key
+PASS old 1.10.121 SHA crop key -> still identical to 1.10.122 canonical SHA key
+PASS direct save path -> canonical DB identity only
+PASS reset path -> identity_key only, no master-cluster deletion
+PASS visitor lookup -> canonical identity only
+PASS broad crop search grouping -> canonical identity only, no URL/pHash union
+PASS media-library place thumbnails -> crop override batch enrichment
+PASS media-library event representative thumbnails -> crop override batch enrichment
+PASS inline editor -> original shown independently from active crops
+PASS PHP syntax -> all plugin PHP files
+
+REGRESSION BOUNDARY
+- No changes to event selection/import, rights, image bytes/cache, place/event visibility, Activities, opening hours, community, SEO or REST field names.
+- No database schema migration required.
+- No Theme change required.

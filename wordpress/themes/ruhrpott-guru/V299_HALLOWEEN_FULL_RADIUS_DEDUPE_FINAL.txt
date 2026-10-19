@@ -1,0 +1,7 @@
+RuhrpottGuru Theme v299 – Halloween Full Radius + Cross-Source Dedupe FINAL
+
+- Halloween filtering runs before the normal category page 300-card presentation cap.
+- Normal Events/Home behavior and limits remain unchanged.
+- Halloween series dedupe additionally collapses same-city/same-venue cross-source variants with year/date title suffixes.
+- Looser title-token dedupe requires same venue and start time within 45 minutes.
+- Genuine horror-season events remain eligible under Grusel & Horror.

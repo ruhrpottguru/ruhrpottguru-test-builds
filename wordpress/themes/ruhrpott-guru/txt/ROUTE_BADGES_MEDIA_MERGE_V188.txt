@@ -1,0 +1,6 @@
+V188 – Route der Industriekultur: Media-Fix aus V187 + Badge-/Kartenlogik aus V186 zusammengeführt.
+- Badges: Ankerpunkt / Panorama / Siedlung.
+- Kein redundanter Typtext unter dem Titel.
+- Kein „Offizielle Route“-Link auf der Karte.
+- Footer nur Stadt links und Entfernung rechts.
+- Kuratierte RDI-Bilder aus V187 bleiben erhalten.

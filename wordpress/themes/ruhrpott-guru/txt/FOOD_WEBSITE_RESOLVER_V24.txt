@@ -1,0 +1,25 @@
+RUHRPOTT GURU – FOOD WEBSITE RESOLVER V24
+
+GOAL
+Improve official web-link coverage for Food results without showing unrelated directory/review pages.
+
+RESOLUTION ORDER
+1. OSM website / contact:website / url / contact:url
+2. OSM-linked Wikidata P856 official website
+3. destination.one/eT4 Gastro: public open-data pool, then licensed Ruhr pool
+4. Deterministic .de candidate only with strict name + city + address verification
+5. Exact OSM/eT4 Facebook or Instagram profile only when no verified own domain exists
+
+SAFETY
+- Third-party review/search/delivery portals are not returned as the venue website.
+- eT4 matches require strong title + city/address/coordinate identity evidence.
+- Explicit OSM/Wikidata official relations survive server-side fetch blocking.
+- Social-only results are labelled Facebook/Instagram rather than “Webseite”.
+
+UI
+- Food card “Zur Webseite” and “Speisekarte” horizontal spacing increased to 24 px (gap-x-6).
+- Existing V23 Food overlay close button retained.
+
+CACHE
+- Browser session Food info cache: rg_food_info_v2_
+- WordPress transient Food info cache: rg_food_info_v2_

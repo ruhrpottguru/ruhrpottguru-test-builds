@@ -1,0 +1,8 @@
+RuhrpottGuru v119 – Founding Beta Readiness
+- v118 Analytics foundation retained.
+- Category views, card opens, filter changes and radius changes instrumented first-party.
+- No analytics cookie, persistent visitor ID or GPS coordinate is added.
+- Global Beta badge and first-party feedback button/modal.
+- Feedback stores message + page + category only.
+- Commercial layer remains dormant; organic ranking/location fallback unchanged.
+- Before public beta, update the WordPress privacy-policy text for aggregate first-party analytics and beta feedback.

@@ -1,0 +1,8 @@
+RuhrpottGuru Theme v249 — Related event inline detail swap
+
+- Plain click on an event inside “Weitere Events dieser Reihe” no longer navigates the page.
+- The existing single-event REST/share read model loads the selected event and replaces only DetailOverlay.item.
+- Home/category/search below the overlay stays mounted; filters, result list and scroll state are not reloaded.
+- Overlay scroll resets to the top through the existing item-id effect.
+- Ctrl/Cmd/Shift/Alt click keeps the canonical event link for native new-tab/window behaviour.
+- No backend or event data changes.

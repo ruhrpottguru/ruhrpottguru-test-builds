@@ -1,0 +1,3 @@
+V187 – Route-Industriekultur Medien-Fix
+- Erzwingt kuratierte Bilder für Gasometer Oberhausen, Zeche Ewald, Fernsehturm Florian, Lindenbrauerei sowie die zuvor gemeldeten Problemorte.
+- Bevorzugt kuratierte RDI-Fallbackbilder vor falsch zugeordneten allgemeinen Medien.

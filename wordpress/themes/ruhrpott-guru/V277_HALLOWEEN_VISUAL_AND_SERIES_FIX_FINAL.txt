@@ -1,0 +1,13 @@
+RuhrpottGuru Theme v277 – Halloween Visual + Series Fix FINAL
+
+Basis: Theme v276. Backend unchanged.
+
+Changes
+- Halloween special uses only the existing RuhrpottGuru site palette (dark navy + existing amber/orange accents).
+- Removed the bottom explanatory "So wählt RuhrpottGuru aus" box.
+- Halloween listing now collapses repeated performances of the same logical event series to one card.
+  Series identity is preferred; a conservative title/city + venue/organizer fallback catches source records such as Rampenmonster on consecutive dates.
+- No REST, database, resolver or backend changes.
+
+Theme version: 277.0
+Package version: 277.0.0

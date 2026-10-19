@@ -1,0 +1,9 @@
+RuhrpottGuru Places Backend 1.10.66 – Organizer Conflict Resolver
+
+- Explizite organizer/veranstalter-Relationen sind autoritativ.
+- Provider/Author/Media-Urheber sind harte Gegenrollen; Rechteinhaber allein ist kein Ausschluss.
+- Historische/implizite Konflikte werden konservativ nach belastbarer Kontakt-/Adressqualitaet geloest.
+- Web-only Datenpartner werden nicht neben einem postalisch belegten Veranstalter angezeigt.
+- Stored-only Fallback-Websites werden nicht ausgegeben, solange aktuelle Rohdaten sie nicht fuer dieselbe Identitaet bestaetigen.
+- Kein Namens-Hardcode fuer Kreis Wesel oder WeselMarketing.
+- Event-Finalcheck nutzt denselben Resolver und zeigt Veranstalternamen + Web/Ticket-Zieldomains.

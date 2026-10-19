@@ -1,0 +1,21 @@
+RuhrpottGuru – Event Calendar + Clean Tags V19
+Date: 2026-08-20
+
+CHANGES
+- Event detail modal now offers two calendar actions for real event occurrences:
+  - iPhone / Apple Kalender: standards-compliant .ics export.
+  - Android / Google Kalender: opens a prefilled Google Calendar event.
+- Calendar payload uses the normalized ET4 occurrence start/end timestamps already used by the event feed.
+- Title, venue/address, description and official event URL are carried into calendar entries when available.
+- If a valid end timestamp is absent, calendar export uses a safe 2-hour fallback duration.
+- Technical ET template labels are no longer included in user-facing event tags.
+- Defensive UI filtering hides technical ET template tags, including stale cached items.
+- Category snapshot namespace and server event cache/version bumped to V19.
+
+RELEASE GATE
+- Node syntax check for compiled React bundle.
+- PHP lint for all theme PHP files.
+- Calendar helper fixture tests for UTC formatting, ICS escaping, ICS fields and Google Calendar URL fields.
+- Static assertion: live ET4 event tags no longer inject technical ET template labels.
+- Static assertion: both iOS and Android calendar controls exist only for event details with a valid start timestamp.
+- ZIP integrity test after packaging.

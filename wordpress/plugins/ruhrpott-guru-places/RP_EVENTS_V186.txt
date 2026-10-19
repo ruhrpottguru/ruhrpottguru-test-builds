@@ -1,0 +1,4 @@
+RP Events v1.8.6
+- Aktive Quellenbilanz nach Master, destination.one, Essen und sonstigen Quellen.
+- Zeigt Quellobjekte, konkrete Termine, Einzelobjekte, Serien und maximale Termine je Serie.
+- Keine Sync- oder Löschlogik geändert.

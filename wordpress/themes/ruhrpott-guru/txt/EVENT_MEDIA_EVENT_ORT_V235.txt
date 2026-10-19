@@ -1,0 +1,9 @@
+RUHRPOTTGURU THEME V235 – EVENT-ORT PLACE-BRIDGE
+
+- Event-Ort no longer depends solely on pre-existing licensed rg_place_media rows.
+- Exact venue -> RuhrpottGuru place matching is required; no anonymous nearest-place borrowing.
+- Reuses identity-bound OSM Commons, Wikidata P18, Wikipedia page media and strict Commons geo lookup.
+- Every inherited image must resolve to explicit reusable Commons metadata (CC0/Public Domain/CC BY/CC BY-SA).
+- Official-site images are not auto-published as Event-Ort.
+- Event-Ort remains above Pexels Symbolfoto.
+- Resolver cache bumped to v235.

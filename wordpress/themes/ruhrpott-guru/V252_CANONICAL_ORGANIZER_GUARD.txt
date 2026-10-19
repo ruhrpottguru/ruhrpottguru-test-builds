@@ -1,0 +1,6 @@
+RuhrpottGuru Theme v252 – Canonical Organizer Guard
+
+- Bei DB-Eventdetails ist die serverseitig kanonisierte Veranstalterliste autoritativ.
+- Rohe ET4-Daten duerfen dieselbe Veranstalter-Identitaet nur noch um Adresse/Telefon/E-Mail ergaenzen.
+- Eine Website aus Raw-Provider-/Media-/Author-Daten wird nicht mehr nachtraeglich in den Veranstalterblock gemischt.
+- Alle Eventreihen-, Kalender-, Share-, Auf-einen-Blick- und Bildlogiken aus v251 bleiben erhalten.

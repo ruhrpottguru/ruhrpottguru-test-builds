@@ -1,0 +1,14 @@
+RuhrpottGuru Places Backend 1.10.3 - Labor Quality-first Empfehlungsauswahl
+
+- Keine Homepage-, Theme-, REST- oder oeffentliche Ranking-Aenderung.
+- Frontend-Leitplanke vorbereitet: normale Home-Auswahl bleibt Inspiration; Situationsmodus liefert spaeter nur neue Daten fuer die bestehenden Kategorie-Grids.
+- Empfehlungsauswahl folgt jetzt "Qualitaet vor Quote": Kategorienvielfalt ist Ziel, aber keine Kategorie wird mit einem schwachen Treffer erzwungen.
+- Auswahl-Score liegt separat ueber dem JETZT-Score; die Rohdiagnose bleibt unveraendert sichtbar.
+- Harte Auswahl-Sperre fuer Infrastruktur/Parkplaetze.
+- Aktiv: reine Vereine/Organisationen ohne belastbare Besucher-Aktivitaet werden aus der Empfehlungsauswahl ausgeschlossen.
+- Aktiv: Spa/Wellness ohne klares Schwimm-/Aktiv-Erlebnis wird deutlich abgewertet.
+- Kultur: Bibliotheken bleiben gueltige Kulturorte, werden als spontane Top-Empfehlung aber abgewertet.
+- Starke Anker erst ab Auswahl-Score 65; regulaeres Auffuellen ab 60; weiterer starker Fallback ab 58.
+- Unsichere Kandidaten nur wenn weniger als sechs belastbare Empfehlungen existieren und Auswahl-Score >= 50.
+- Maximal drei Empfehlungen je Kategorie, aber keine Pflichtzahl je Kategorie.
+- Outdoor-/Open-End-Fixes und komplette Rohdiagnose aus 1.10.1/1.10.2 bleiben erhalten.

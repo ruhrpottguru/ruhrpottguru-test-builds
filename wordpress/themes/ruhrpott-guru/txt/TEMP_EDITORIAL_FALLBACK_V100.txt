@@ -1,0 +1,6 @@
+RuhrpottGuru V100 – Temporary Editorial Fallback
+- Home Halden slot: uses genuine WP post when present; otherwise bundled Halde Hoheward content from the former AI-Studio data set.
+- Home Interview slot: uses genuine WP interview post when present; otherwise a clearly marked source-owned editorial placeholder.
+- Both fallbacks have complete theme-native detail pages via ?rpg_story=halden / ?rpg_story=interview.
+- No database import or post creation required.
+- As soon as matching WP posts exist, the Home automatically switches to them.

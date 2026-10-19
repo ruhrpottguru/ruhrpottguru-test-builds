@@ -1,0 +1,26 @@
+RuhrpottGuru Theme v237 – Analytics: echte Visits + Burger-Menü-Klicks
+
+Ziel
+- Analytics zeigt Visits/Sitzungen zusätzlich zu Seitenaufrufen.
+- Burger-Menü erhält eine eigene Klickübersicht.
+
+Visits
+- Neuer Visit beim ersten getrackten Aufruf im Browser-Tab.
+- Neuer Visit nach mehr als 30 Minuten Inaktivität.
+- Session-State besteht nur aus einem Zeitstempel in sessionStorage.
+- Keine Analytics-Cookies, keine persistente Besucher-ID, keine Roh-IP, keine GPS-Speicherung.
+- Frühere Pageviews werden nicht rückwirkend als Visits geschätzt.
+
+Burger-Menü
+- Menüöffnungen werden als burger_open aggregiert.
+- Klicks auf dynamische WordPress-Burgerlinks sowie Cookie-Einstellungen und Merkzettel werden als burger_menu_click aggregiert.
+- Im Dashboard: Menüöffnungen, Klicks je Menüpunkt und Anteil an allen Menü-Klicks.
+
+Dashboard
+- KPI Visits, Seitenaufrufe, Seiten/Visit.
+- Visit-Verlauf und Pageview-Verlauf getrennt.
+- Geräte nach Visits.
+- Top-Einstiege nach Visits und Top-Seiten nach Pageviews.
+
+Datenhygiene
+- Events ohne Radius erhalten keinen künstlichen 1-km-Bucket mehr; Burger-Klicks verfälschen die Radiusstatistik nicht.

@@ -1,0 +1,23 @@
+V41 Verification
+================
+
+PASS: php -l functions.php
+PASS: php -l auf allen PHP-Dateien in Theme-Root und inc/
+PASS: node --check js/app.js
+PASS: page.php byte-identisch V40
+PASS: js/ruhrpott-app.js byte-identisch V40
+PASS: header.php byte-identisch V40
+PASS: footer.php byte-identisch V40
+PASS: inc/food-place-identity.php byte-identisch V40
+PASS: [ruhrpott_home_categories]-Funktionssegment byte-identisch V40
+PASS: vier neue Shortcode-Registrierungen vorhanden
+PASS: neue Einzel-Shortcodes sind NICHT als App-Shell-Shortcodes in page.php registriert
+      und können deshalb gemeinsam auf normalen WP-Testseiten stehen.
+PASS: Guru-Tipp besitzt keinen generischen Latest-Post-Fallback mehr.
+PASS: Nähkästchen gibt ohne Kategorie/Beiträge leer zurück.
+PASS: Szene-Badges der Einzelmodule verwenden applyQuickFilter(..., 'scene-trends').
+PASS: Medien verwenden den bestehenden RuhrpottGuruHomeAPI.resolveMedia-Pfad.
+
+Hinweis:
+Ein echter Browser-/WordPress-Livetest auf der Produktionsdomain ist mit dem ZIP
+nicht simuliert. Die Prüfungen sind Build-, Syntax-, Isolation- und Codepfadtests.

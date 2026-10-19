@@ -1,0 +1,11 @@
+RuhrpottGuru Theme V222 – Kategorie-Karten Optimierung
+
+Nur Präsentation, keine neue Daten-/Rankinglogik.
+- Meta-Zeile auf Home und Kategorieseiten vereinheitlicht.
+- Priorität: Öffnungsstatus, Ort, Entfernung, bei Events zusätzlich Termin.
+- Ort nicht mehr als redundante zweite Unterzeile, wenn er bereits Meta ist.
+- Titel auf zwei Zeilen begrenzt, damit Karten nicht auseinanderlaufen.
+- Bilder verwenden einheitlich object-fit: cover + zentrierten Crop.
+- Karten innerhalb ihrer jeweiligen Grid-/Carousel-Reihe strecken gleichmäßig.
+- Leere/generische Labels und Badges werden vor dem Rendern entfernt.
+- Opening-Chips bleiben einzeilig und verändern die Kartenhöhe nicht.

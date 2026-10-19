@@ -1,0 +1,18 @@
+RuhrpottGuru v148 – einheitlicher Header-Content-Abstand
+
+Geprüfte Seitentypen:
+- Startseite
+- Events
+- Food
+- Highlights
+- Kultur
+- Aktiv
+- Büdchen-Radar
+- Route der Industriekultur
+- normale WordPress-Seiten
+
+Ergebnis:
+- Grundabstand unter dem Header: 12 px
+- Zusätzliche obere Margins auf dem jeweils ersten Content-Element entfernt
+- Keine Änderung an horizontalen Abständen oder Abständen zwischen Modulen
+- Footer, Header, Standortlogik, Karten- und Detailverhalten unverändert

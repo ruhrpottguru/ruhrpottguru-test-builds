@@ -1,0 +1,19 @@
+RUHRPOTT GURU – FOOD MEDIA FINAL REAL
+
+Food cards no longer use generic AI/title illustrations as a substitute for venue photos.
+Resolver order:
+1. OSM-linked image / Commons
+2. OSM-linked Wikidata P18
+3. OSM-linked Wikipedia image
+4. Regional tourism/open-data page with strict name+city+address identity and explicit open license
+5. OSM-linked official website
+6. Panoramax POI-visible open street imagery (contextual, labelled)
+7. KartaView nearby/facing open street imagery (contextual, labelled)
+8. Neutral no-photo state
+
+Safety:
+- no generic Wikimedia name search for gastronomy
+- no fake AI food/restaurant photo
+- no unrelated homonym image
+- regional source requires explicit open license and exact local identity
+- real street imagery is labelled contextual rather than claimed as venue-owned photo

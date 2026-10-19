@@ -1,0 +1,49 @@
+RuhrpottGuru Places Backend 1.10.69 — Öffnungszeiten Audit 1.10.29
+Stand: 15.09.2026
+
+VERIFIZIERTE URSACHE
+- Reproduziert auf dem unveränderten Backend 1.10.68:
+  array_map(): Argument #2 ($array) must be of type array, false given
+- Auslöser ist der einzige entsprechende Opening-Audit-Codepfad:
+  preg_split('/\n+/u', $txt) liefert bei nicht-UTF-8-kodiertem Legacy-HTML false;
+  dieses false wurde in 1.10.68 unmittelbar an array_map() übergeben.
+- Der Fehler ist mit einem ISO-8859-1-Testkörper reproduzierbar und endet in 1.10.68
+  exakt mit demselben TypeError wie im realen Auditfall Ristorante Il Cavallo #22953.
+
+KORREKTUR
+- HTML wird vor Unicode-RegEx nach UTF-8 normalisiert:
+  deklariertes charset -> mb_convert_encoding/iconv -> Windows-1252/ISO-8859-1-Fallback.
+- preg_split wird zusätzlich defensiv auf Array geprüft; ein Parserfehler kann keinen TypeError mehr erzeugen.
+- Tagesabkürzungen besitzen Wortgrenzen. Dadurch wird z. B. "Fr" in "Frühstücksbüffet" nicht mehr fälschlich als Freitag erkannt.
+- Bei Kombinationen wie "Di. - Fr.+So." wird der expandierte Bereich mit den expliziten Zusatztagen vereinigt statt diese zu verlieren.
+
+REALDATEN-TESTFORMAT IL CAVALLO
+- Legacy-HTML / ISO-8859-1 mit:
+  Di. - Fr.+So.: 11:30 - 21:00
+  Sa.: 17:30 - 21:00
+  Frühstücksbüffet: Sa. + So.: 08:00 - 11:00
+- Ergebnis 1.10.69:
+  Di-Fr 11:30-21:00; Sa 08:00-11:00,17:30-21:00; So 08:00-11:00,11:30-21:00
+
+UPGRADE-VERHALTEN
+- Kein neuer Vollaudit.
+- Beim ersten normalen WordPress-Aufruf nach Upgrade werden ausschließlich bestehende error-Zeilen
+  mit der verifizierten array_map(false)-Signatur einmalig auf research-queued gesetzt.
+- Bestätigte unknown-after-exhaustive-search bleiben final und unangetastet.
+- research-incomplete-Fälle werden nicht blind erneut gestartet.
+- Andere Fehlersignaturen bleiben sichtbar und werden nicht mit diesem Fix vermischt.
+
+ADMIN-TRANSPARENZ
+- Restfallliste jetzt getrennt filterbar nach:
+  Technisch offen / Fehler / Quellenpfad unvollständig / Bestätigt unbekannt / Alle Restfälle.
+- Fehlersignaturen werden gruppiert mit Anzahl und letztem Prüfzeitpunkt gezeigt.
+- Bis zu 500 passende Restfälle können angezeigt werden; Gesamtzähler bleiben vollständig.
+
+PRÜFUNGEN
+- PHP-Syntax: OK.
+- Plugin 1.10.69 mit WordPress-Hook-Stubs geladen: OK.
+- Parser-Test normales UTF-8: OK.
+- Parser-Test 24/7: OK.
+- Parser-Test Legacy-ISO-8859-1 / Il-Cavallo-Format: OK.
+- Reproduktion 1.10.68 desselben Legacy-Testkörpers: exakter array_map(false)-TypeError bestätigt.
+- Bestehende Event-/Places-/Audit-Daten werden nicht zurückgesetzt.

@@ -1,0 +1,9 @@
+RuhrpottGuru v87 – Activities Diversity
+
+- Ursache behoben: Kategorieansicht sortierte Activities clientseitig wieder nur nach Entfernung und überschieb damit Experience Intelligence.
+- Default-Sortierung für Aktiv: Empfohlen (Experience Score + Diversität), nicht Entfernung.
+- Wasser wird in water_action, water_fun, water_outdoor, water_pool und wellness getrennt.
+- Normale Schwimmbäder werden deutlich niedriger gewichtet; Wake/Action und Erlebnisbäder bleiben relevant.
+- Maximal 3 Wasser-Kandidaten in den ersten 12 Aktiv-Treffern, sofern ausreichend Alternativen existieren.
+- All-Aktiv nutzt zusätzlich qualifizierte Highlight-Kandidaten (Aussicht, Halden, Chillspots, Ruhrpott-Fotospots).
+- Keine DB-Migration / kein Reimport.

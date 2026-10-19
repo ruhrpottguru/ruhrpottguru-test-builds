@@ -1,0 +1,8 @@
+RUHRPOTTGURU THEME V250 – EVENT AUF EINEN BLICK
+
+- Ersetzt den technischen Block „Weitere Event-Infos“ durch „Auf einen Blick“.
+- Zeigt maximal sechs belastbare Besucher-Fakten: Eventart, kompakte Preisinfo, Dauer, Zielgruppe, Barrierefreiheit, Indoor/Outdoor und Sprache.
+- „divers“/interne ET4-Kategorien werden nicht mehr als Besucher-Chips ausgegeben.
+- Fehlende oder uneindeutige Daten werden nicht geraten und bleiben unsichtbar.
+- Vollständige ET4-Kategorien/Features/Keywords bleiben intern unverändert für Filter, Badges und Serienlogik.
+- Bestehende Eventreihen-, Inline-Detail-, Organizer-, Kalender- und Bildlogik bleibt unverändert.

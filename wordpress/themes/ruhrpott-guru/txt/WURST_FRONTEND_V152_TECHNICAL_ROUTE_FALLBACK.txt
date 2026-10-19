@@ -1,0 +1,7 @@
+RUHRPOTT GURU – WURST FRONTEND V152
+
+Technischer Fix:
+- Primär bleibt die REST-Route /ruhrpottguru/v1/places/wurst.
+- Bei WordPress rest_no_route/404 fällt das Frontend automatisch auf admin-ajax.php?action=rg_wurst_frontend zurück.
+- Standort, Radius und A/Public-Eligibility bleiben unverändert.
+- Tier B wird in diesem Build ausdrücklich NICHT zusätzlich veröffentlicht.

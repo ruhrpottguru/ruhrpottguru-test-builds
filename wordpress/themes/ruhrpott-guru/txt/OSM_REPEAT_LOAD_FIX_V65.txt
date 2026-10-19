@@ -1,0 +1,16 @@
+RuhrpottGuru OSM Repeat-Load Fix V65
+
+Layout basis: handover v63/v64, no redesign changes.
+
+Changes:
+- Removed runtime use of historic lz4/z Overpass fallback path.
+- Server mirrors: overpass.private.coffee, overpass-api.de, maps.mail.ru.
+- OSM server/client cache coordinate precision made GPS-jitter tolerant.
+- Successful OSM pools fresh for 30 minutes; confirmed empty remains short-lived.
+- Added 24h last-known-good nearby pool fallback after provider failure.
+- Removed browser direct-mirror retry after WordPress proxy failure.
+- Shared 5 km acquisition remains authoritative for Food/Highlights/Culture.
+- Exact frontend Haversine/radius rules remain unchanged.
+
+Regression target:
+First mobile/incognito load may be cold; subsequent reloads in the same area must reuse the successful pool instead of re-querying public Overpass solely because GPS changed by a few metres.

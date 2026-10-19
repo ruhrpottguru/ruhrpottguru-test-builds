@@ -1,0 +1,45 @@
+RUHRPOTTGURU PLACES BACKEND — OPENING HOURS HARDENED v1.10.11
+Generated: 2026-09-02
+
+PURPOSE
+- Harden the two-phase opening-hours audit without resetting the existing v1.10.8 audit state.
+- Preserve already stored opening hours and requeue questionable older Phase-2 outcomes once.
+- Make source handling conservative: official/primary evidence is preferred, weaker data cannot overwrite stronger or locked schedules.
+
+FIXES VERIFIED
+- Plugin version/header/constant = 1.10.11: PASS
+- Existing audit state key retained for resume compatibility: PASS
+- One-time v1.10.11 migration/requeue flag present: PASS
+- OSM stored n/w/r -> node/way/relation mapping: PASS
+- OSM HTTP-200 runtime remark rejected instead of accepted: PASS
+- Theme resolver receives real JSON body (get_json_params compatible): PASS
+- Existing freshness_json is merged; unrelated freshness metadata is preserved: PASS
+- place_schedules confidence/locked precedence remains authoritative: PASS
+- places/place_enrichment receive the effective schedule after precedence resolution: PASS
+- Verified website saving does not blindly replace an existing website: PASS
+- Multi-schedule JSON-LD selection prefers the relevant facility (e.g. Badewelt over Sauna/Gastronomie for an activity pool): PASS
+- 24:00 accepted; invalid 24:30 rejected: PASS
+- JSON-LD 24/7 handled: PASS
+- Split daily intervals handled: PASS
+- HTML/AJAX transient error retry remains present: PASS
+- Backup/temp files excluded from release: PASS
+
+EXECUTED REGRESSION FIXTURES
+PASS 24:00 valid
+PASS 24:30 invalid
+PASS split text intervals
+PASS multi-schedule chooses pool/Badewelt
+PASS JSON-LD 24/7
+PASS JSON-LD openingHours
+
+BUILD CHECKS
+- PHP syntax: PASS
+- assets/bootstrap.js syntax: PASS
+- ZIP integrity: PASS (run after packaging)
+- Release structure: exactly one plugin folder at ZIP root
+
+IMPORTANT RUNTIME NOTE
+External providers and the user's live WordPress/MySQL/1blu runtime cannot be fully simulated in this build container. The worker is therefore designed to pause/retry rather than convert blocked/failed primary sources into a false "unknown" result. Existing state and stored opening hours remain persistent across tab closing and plugin upgrade.
+
+INSTALL / RESUME
+After installing v1.10.11, open RP Redaktion -> Öffnungszeiten and use "Audit fortsetzen". Do NOT start a new two-phase audit unless a full restart is intentionally desired.

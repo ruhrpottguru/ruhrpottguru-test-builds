@@ -1,0 +1,69 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.126
+REPROCESSING STANDARD — FINAL ACCEPTANCE / HARDENING
+
+PURPOSE
+- Final acceptance of the central 1.10.95 reprocessing standard.
+- Close two verified contract gaps without replacing the existing architecture.
+
+VERIFIED GAPS IN 1.10.125
+1) The documented cursor guarantee said progress was persisted after every entity,
+   but the worker only persisted once after the batch.
+2) A new managed job without an explicit autostart flag defaulted to pending,
+   although the standard promises that a new/changed fingerprint is queued once.
+
+1.10.126 HARDENING
+- Managed non-historical jobs now default to autostart=true.
+- Dependency-gated jobs can still explicitly set autostart=false.
+- Existing keys/fingerprints/states/cursors are preserved when the fingerprint is unchanged.
+- Changed fingerprints reset exactly one managed job pass to queued + cursor 0.
+- Cursor/state/statistics are persisted immediately after every processed entity.
+- Reprocessing API contract version raised from 1.0 to 1.1 and persisted.
+- No schema migration; SCHEMA_VERSION remains 1.10.22.
+- No Event, Place, REST, ranking, radius, media-policy, lifecycle or frontend logic changed.
+
+FUNCTIONAL ISOLATED CONTRACT TESTS
+PASS default-autostart-queues
+PASS explicit-autostart-false-pending
+PASS same-fingerprint-preserves-running-cursor
+PASS changed-fingerprint-resets-to-one-queued-pass
+PASS same-new-fingerprint-does-not-reset-again
+PASS simulated-abort-fired
+PASS cursor-persisted-after-each-entity
+PASS resume-starts-after-checkpoint
+PASS job-completes-after-resume
+RESULT 9/9 PASS
+
+STATIC INTEGRATION / REGRESSION
+PASS plugin version 1.10.126
+PASS schema unchanged 1.10.22
+PASS reprocess hook unchanged
+PASS reprocess state key unchanged
+PASS reprocess API 1.1
+PASS default autostart behavior present
+PASS v1.10.124 semantic dependency gate remains explicit autostart=false
+PASS per-entity checkpoint present
+PASS v1.10.125 event lifecycle present
+PASS tiered event sync present
+PASS public REST registration present
+PASS place-media worker present
+RESULT 12/12 PASS
+
+UNCHANGED CRITICAL FUNCTION HASH COMPARISON VS 1.10.125
+PASS event_lifecycle_transition_v101125
+PASS event_apply_missing_lifecycle_v101125
+PASS event_apply_explicit_cancellations_v101125
+PASS event_upsert_from_feed_item
+PASS cron_events_tier_refresh_batch_v101101
+PASS reprocess_event_symbolic_semantic_v101124
+PASS register_rest_routes
+RESULT 7/7 PASS
+
+SYNTAX
+- All PHP files: PASS
+
+ACCEPTANCE
+The central reprocessing standard is now suitable as the required default path for
+future resolver/parser/classifier changes that must update existing persisted data
+without a source reimport. A processor itself still has to be deterministic/idempotent,
+while the framework guarantees one pass per fingerprint, resumable per-entity progress,
+worker conflict gating and persistent audit state.

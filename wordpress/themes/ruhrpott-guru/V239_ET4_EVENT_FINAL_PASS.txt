@@ -1,0 +1,9 @@
+RuhrpottGuru Theme v239 – ET4 Event Final Pass
+
+- Restores urgency ordering: running events first, then later today, then future events.
+- Home Events promotes only events with a real localized HTTP(S) event image; Events category remains complete.
+- Defensive frontend filter never exposes destination.one/eT4 provider pages as public Event-Webseite.
+- Calendar exports link back to the canonical RuhrpottGuru event share URL and retain an official event website only as context.
+- Share uses backend-provided canonical event URL when available.
+
+NOTE: The v239 Home image-eligibility rule is superseded by v240. See V240_EVENT_VISIBILITY_ALL_IMAGES.txt.

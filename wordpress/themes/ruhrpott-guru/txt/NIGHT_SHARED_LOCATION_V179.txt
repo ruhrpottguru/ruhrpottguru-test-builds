@@ -1,0 +1,6 @@
+RUHRPOTTGURU V179 – NIGHT SHARED LOCATION
+- Nachtseite nutzt exakt den globalen Standortdialog von Büdchen/Imbiss.
+- Standort ändern -> rpg:open-location -> gemeinsamer React LocationModal.
+- GPS/Stadtwahl emittiert rpg:location-changed und lädt Nacht-Ergebnisse neu.
+- Radiusänderung synchronisiert globalen State + Nachtseite.
+- Doppelte statische Nacht-Standortmodal entfernt.

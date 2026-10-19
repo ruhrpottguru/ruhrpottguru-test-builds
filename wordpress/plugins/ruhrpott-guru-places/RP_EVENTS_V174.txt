@@ -1,0 +1,14 @@
+RuhrpottGuru Places Backend 1.7.4
+
+Masterimport: konkrete Wiederholungstermine
+- ET4 bleibt der 365-Tage-Filter mit startdate/enddate, unrollIntervals=true und exakt sort=start asc.
+- Unrolled ET4-Trefferzeilen werden nicht länger direkt als Canonical-Termine interpretiert.
+- Eindeutige ET4-Quellobjekte werden laufweit erkannt; wiederholte Trefferzeilen derselben Serie werden getrennt gezählt.
+- timeIntervals, occurrences und subitems werden lokal rekursiv ausgewertet.
+- Wiederholungen werden lokal als konkrete Termine für die kommenden 365 Tage erzeugt.
+- Unterstützt: single, daily, weekly, monthly, yearly, interval, repeatUntil, repeatCount, weekdays, dayOfMonth sowie dayOrdinal+weekday.
+- Canonical-Key bleibt Quelle + externe ID + konkreter Starttermin. Damit bleibt jede echte Wiederholung ein eigener Event-Termin.
+- Neue Admin-Zähler: ET4-Trefferzeilen, eindeutige Quellobjekte, erzeugte konkrete Termine, eindeutige gespeicherte Termine, wiederholte ET4-Zeilen und Serien mit Wiederholung.
+- Alte v1.7.1-v1.7.3-Auditwerte werden als nicht belastbarer Alt-Lauf gekennzeichnet, bis ein neuer v1.7.4-Masterimport gelaufen ist.
+- Watchdog, Safety-Retry, Lifecycle, Enrichment und vorhandene Event-Metadaten bleiben erhalten.
+- Kein Theme-Update erforderlich.

@@ -1,0 +1,44 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.127 — VERIFICATION
+Generated: 2026-09-25
+
+SCOPE
+- Read-only 53-municipality Place quality/media final audit only.
+- No schema change.
+- No frontend/theme change.
+- No event, opening-hours, Activities V2, import, resolver-write or reprocessing behavior change.
+
+FUNCTIONAL FIXTURES
+PASS synthetic catalogue audit: municipality aggregation
+PASS district/borough municipality_slug maps back to official municipality
+PASS visible-media count includes persisted image and direct OSM image
+PASS Food classifier drift detected
+PASS Highlight visitor rejection detected
+PASS Stolperstein culture case detected and separated
+PASS Activities membership counted without re-evaluating Activities V2
+PASS place-media content analysis counters
+PASS lifecycle mismatch counter
+PASS batch continuation across >800 rows (805 rows, two DB batches)
+
+SAFETY / READ-ONLY
+PASS audit method contains no wpdb update/insert/delete/query mutation
+PASS no update_option/delete_option
+PASS no wp_remote/rest_do_request
+PASS no cron scheduling or worker mutation
+
+REGRESSION AGAINST 1.10.126
+PASS rest_home unchanged
+PASS rest_overpass_adapter unchanged
+PASS reprocess_catalog_v101095 unchanged
+PASS reprocess_sync_registry_v101095 unchanged
+PASS cron_reprocess_tick_v101095 unchanged
+PASS event_source_lifecycle_status_v101125 unchanged
+PASS event_lifecycle_transition_v101125 unchanged
+PASS event_apply_missing_lifecycle_v101125 unchanged
+PASS event_apply_explicit_cancellations_v101125 unchanged
+PASS cron_events_tier_refresh_batch_v101101 unchanged
+PASS event_upsert_from_feed_item unchanged
+
+BUILD
+PASS PHP syntax
+PASS assets/bootstrap.js syntax
+PASS only ruhrpott-guru-places.php changed plus new documentation files

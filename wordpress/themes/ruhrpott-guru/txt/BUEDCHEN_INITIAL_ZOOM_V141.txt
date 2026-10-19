@@ -1,0 +1,13 @@
+RuhrpottGuru v141 – Büdchen map initial zoom
+
+Initial/reset map zoom is now intentionally tighter so local street names are readable:
+- 1 km radius -> zoom 16
+- 2.5 km radius -> zoom 15
+- 5 / 10 / 25 / 50 km radius -> zoom 14
+
+Important:
+- The selected search radius itself is NOT changed.
+- Before the user moves the map, the Büdchen list still uses the selected location + radius.
+- Only the visual map start view is tighter.
+- Two-finger mobile interaction, deferred search after finger release, mouse controls,
+  filters and location persistence remain unchanged.

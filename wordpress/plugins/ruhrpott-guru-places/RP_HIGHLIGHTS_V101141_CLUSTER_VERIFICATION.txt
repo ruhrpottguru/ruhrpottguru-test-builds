@@ -1,0 +1,37 @@
+RuhrpottGuru Places Backend 1.10.141 — Highlights Besucherort-Clustering
+
+Ziel
+- Einzelne OSM-Schacht-/Anlagenkomponenten bleiben im Rohkatalog erhalten.
+- Der öffentliche Highlight-Resolver bündelt Komponenten derselben realen Anlage zu einem Besucherort.
+- Gleichnamige, räumlich getrennte Betriebsgelände bleiben getrennt.
+- Route-der-Industriekultur-Treffer bleiben autoritativ.
+
+Produktionsaudit vor Build
+- 4.636 aktive Highlights.
+- 759 aktive man_made=mineshaft = 16,4 % des Highlight-Bestands.
+- räumliche Schacht-Paare: 19 <=25 m, 87 <=50 m, 241 <=100 m, 355 <=250 m.
+- Besucherevidenz bei mineshaft selten: tourism 4, heritage 4, historic 12, Wikidata 7, Wikipedia 3, Website 1.
+
+Implementierung
+- Bestehendes City Highlight Intelligence V2 bleibt maßgeblich.
+- mineshaft/adit/headframe ohne Wikipedia/Wikidata/tourism=attraction bleiben bereits durch den vorhandenen Component-Gate draußen.
+- Ensemble-Stamm normalisiert Schacht-/Förderturm-Komponenten, Statuszusätze sowie führendes Zeche/Bergwerk.
+- Gleicher Anlagenstamm wird nur innerhalb 250 m zusammengeführt.
+- Gleicher Stamm >250 m wird als eigener Standort behandelt.
+- Verschiedene Anlagenstämme werden auch bei unmittelbarer Nähe nicht zusammengeführt.
+- Route-Industriekultur-Slug bleibt übergeordnet und unverändert.
+- Keine DB-/Schemaänderung, kein Reprocessing nötig: reine Readmodel-/Resolverkorrektur.
+
+Lokale Abnahme
+PASS PHP syntax: ruhrpott-guru-places.php
+PASS same_site_near: gleicher Anlagenstamm innerhalb 250 m -> ein Cluster
+PASS same_name_far_separate: gleicher Anlagenstamm >250 m -> getrennte Besucherorte
+PASS different_name_near_separate: verschiedene Anlagenstämme trotz Nähe -> getrennt
+PASS status_suffix_normalized: '(Stillgelegt ...)' erzeugt keinen künstlichen zweiten Besucherort
+PASS zeche_prefix_normalized: 'Zeche X Schacht 1' und 'X Schacht 1' können am selben Gelände zusammenfallen
+PASS route_authority: identischer Route-Industriekultur-Slug bleibt ein autoritativer Besucherort
+
+Regression / Scope
+- Food, Kultur, Activities, Events, Opening Hours, Medien, Imports und DB-Schema unverändert.
+- Keine pauschale Namens-Deduplizierung.
+- Keine Löschung von OSM-Rohobjekten.

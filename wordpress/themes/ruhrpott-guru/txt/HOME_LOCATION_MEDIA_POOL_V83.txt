@@ -1,0 +1,24 @@
+RuhrpottGuru v83 – Home Location Media + Source Pool
+
+1. Category kickers
+- No category module outputs kicker text above Events/Food/Highlights/Kultur/Aktiv.
+- Defensive CSS hides legacy cached .rg-home-kicker inside category modules only.
+
+2. Old max-20 source cap
+- Removed from the V41 Home Places candidate loader.
+- Source pool is now bounded at 500 candidates per category from Places DB / emergency OSM fallback.
+- Visible magazine card counts stay intentionally small (Events 6, Food 4, Highlights 3, Kultur 4, Aktiv 6).
+- The ET4 event transport was never limited to 20 events: it paginates 100 records per page; its max_pages=20 means up to 2,000 records, not 20 locations.
+
+3. Food location-photo priority
+- No venue-specific hard-coding.
+- Generic resolver now activates Wikimedia Commons geo + venue-name matching.
+- Official-site scoring strongly prefers storefront/facade/exterior/interior/location imagery and penalizes menu/product/food/person imagery.
+- Panoramax/KartaView search radius is broadened moderately while camera geometry is stricter.
+- New media cache namespaces force old symbolic image decisions to be re-evaluated.
+
+4. Events + person-free media
+- Raw ET4 venue identity is propagated generically into venueName where available.
+- Frontend event normalization preserves venueName.
+- Event cards remain venue/building-photo first; event promotional photos remain blocked by the person-free policy.
+- Existing verified Wesel fallback records carry their factual venue names so the same generic venue media resolver can resolve a location photo.

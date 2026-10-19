@@ -1,0 +1,11 @@
+RuhrpottGuru Theme v261 – Event visibility restore
+
+Verbindliche Produktregel:
+- Kein Event wird wegen eines fehlenden Bildes ausgeblendet.
+- Ein natives ET4/ODF-Bild hat absolute Prioritaet.
+- Fehlt es, bleibt die bestehende lokale Bild-/Fallbackkette aktiv (redaktionell, freigegeben offiziell, Commons/Ortskontext, Symbolbild).
+- Fehlt auch dort ein Bild, bleibt das Event sichtbar und die neutrale Karten-/Ticket-Fallbackdarstellung greift.
+
+Beibehalten aus v260:
+- Weitere konkrete Termine derselben ET4-global_id im Detail-Layer.
+- Terminbezogene Deep-Links/Share/Kalender.

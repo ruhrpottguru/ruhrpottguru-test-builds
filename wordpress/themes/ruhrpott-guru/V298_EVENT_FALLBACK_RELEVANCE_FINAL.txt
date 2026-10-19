@@ -1,0 +1,16 @@
+RUHRPOTTGURU THEME V298 — EVENT FALLBACK RELEVANCE
+
+Scope
+- Hardens only automatic Event fallback imagery.
+- Existing ET4/ODF event images, approved editorial images and exact Event-Ort media keep their established priority.
+- Event sort, radius, Home 4-event fallback, recurrence, sync, rights and "Mehr davon" are not changed.
+
+Rule
+1. Use the existing approved/ET4 event image when available.
+2. Otherwise keep an exact, open-licensed Event-Ort image when available.
+3. Otherwise a Symbolfoto is allowed only for a deterministic event theme (Party, Konzert, Bühne, Ausstellung, Sport, Workshop, Führung, etc.) and only if the Pexels alt text independently matches that theme.
+4. Unknown/unsafe theme => no generic stock image; use the neutral frontend placeholder.
+
+Legacy protection
+- Existing pre-v298 Symbolfotos are not trusted by the visitor UI. They are suppressed until the v298 semantic resolver returns a matching image.
+- Theme v298 provides the resolver used by Backend 1.10.124 for resumable cleanup of persisted legacy Symbolfotos.

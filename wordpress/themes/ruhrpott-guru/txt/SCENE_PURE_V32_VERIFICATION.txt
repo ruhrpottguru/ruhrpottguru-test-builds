@@ -1,0 +1,43 @@
+RUHRPOTT GURU – SCENE PURE V32 VERIFICATION
+Generated: 2026-08-21
+
+REAL-WORLD BASELINE
+- V31 (V24 data path + isolated scene predicate) restored live Food/Highlights/Culture results in the user's real Wesel installation.
+- V32 is rebuilt directly from V24 to remove unrelated V26 filter changes still present in V31.
+
+PRODUCTION DIFF VS V24
+- Added RG_sceneClassification(item, categoryKey).
+- Changed only the scene-trends predicate to return RG_sceneClassification(...).isScene.
+- style.css version metadata changed.
+- This verification/documentation file added.
+- No other production file changed.
+
+BYTE-IDENTICAL TO V24
+- functions.php: MATCH
+- js/app.js: MATCH
+- inc/food-place-identity.php: MATCH
+- All other existing files except js/ruhrpott-app.js and style.css: MATCH
+- If the classifier insertion is removed and the scene predicate is reverted, js/ruhrpott-app.js equals V24 byte-for-byte: PASS
+
+SCENE SAFETY
+- No Object.assign of classification output into result objects.
+- No scene classifier writes to item/rawOsmTags.
+- Frozen input object test: PASS
+- Repeatability / no mutation: PASS
+- 20 category-specific positive/negative fixtures: 20/20 PASS
+- Threshold: sceneScore >= 3
+- Hard blocks: enabled
+- Lost-place/public-access safety: enabled
+
+REGRESSION PRESERVATION
+- OSM loader / radius / snapshot path inherited from V24 unchanged.
+- Share native + compact deep link present: PASS
+- Google Calendar + ICS calendar present: PASS
+- Food website resolver incl. Wikidata P856 + eT4 Gastro present: PASS
+- Overlay Schließen UI present: PASS
+- Legacy technical event hashtag occurrences: 0
+
+SYNTAX / PACKAGE
+- js/ruhrpott-app.js node --check: PASS
+- js/app.js node --check: PASS
+- all PHP files php -l: PASS

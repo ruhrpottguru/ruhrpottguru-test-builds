@@ -1,0 +1,17 @@
+RuhrpottGuru v143
+
+Desktop location persistence:
+- Exact GPS/manual snapshot remains in localStorage.
+- Added a first-party same-site fallback containing ONLY the city name.
+- This bridges ruhrpottguru.de / www.ruhrpottguru.de origin changes without
+  prompting for GPS again.
+- Precise GPS coordinates are NOT put into cookies and remain local-only.
+- If exact localStorage is unavailable after an origin change, the saved city
+  centre is used until the user explicitly requests GPS again.
+
+Mobile Büdchen map:
+- First finger is no longer pointer-captured by the map.
+- One finger scrolls the page normally even when starting directly on the map.
+- Only when a second finger is placed does the map capture the gesture.
+- Two-finger pan/pinch remains supported.
+- Büdchen query still waits until all gesture fingers are released.

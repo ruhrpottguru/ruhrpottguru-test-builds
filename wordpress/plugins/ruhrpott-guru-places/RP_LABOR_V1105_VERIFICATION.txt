@@ -1,0 +1,20 @@
+RUHRPOTTGURU PLACES BACKEND 1.10.5 - VERIFICATION
+
+Scope
+- Labor-only recommendation selection for "Was geht JETZT?"
+- No public Home/Theme/REST ranking change
+
+Selection policy
+- Category quality anchor >= 70
+- Protected second slot only for already anchored category and score >= 64
+- Global quality fill >= 64 (was 60 in 1.10.4)
+- Target is a maximum, not a quota
+- Max 3 per category
+- Candidate fallback only to reach at least 6 safe tips
+
+Expected Wesel effect from the supplied 1.10.4 screenshot
+- 3 Events remain
+- 3 Food remain
+- 2 Highlights remain
+- Culture items around selection score 61 are no longer added merely to reach 10
+- Result may intentionally be 8 of 10

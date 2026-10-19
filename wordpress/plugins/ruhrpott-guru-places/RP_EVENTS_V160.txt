@@ -1,0 +1,11 @@
+RuhrpottGuru Places Backend v1.6.0 – Nächtlicher Event-Sync
+
+- Vollständiger Event-Aktualisierungslauf startet täglich um 03:00 Uhr in der WordPress-Zeitzone.
+- Verwendet den bestehenden autoritativen Open-Data-Finder/ET4-Transport des RuhrpottGuru-Themes.
+- Alle 53 Kommunen werden serverfreundlich nacheinander abgearbeitet; neue Events werden angelegt, bestehende aktualisiert.
+- Der bisherige stadtweise Event-Sync über den 15-Minuten-Places-Cron ist deaktiviert.
+- Frontend-Eventantworten dürfen weiterhin zusätzlich in den Cache einfließen, sind aber nicht mehr der primäre Aktualisierungsmechanismus.
+- Lifecycle bleibt: expired nach Ablauf, endgültige Löschung nach 10 Tagen.
+- RP Events zeigt nächsten 03:00-Start und Status/Fortschritt des letzten Nachtlaufs.
+
+Hinweis: WordPress WP-Cron wird durch Website-/Cron-Aufrufe ausgelöst. Für minutengenauen Start um 03:00 sollte der Provider wp-cron.php regelmäßig aufrufen bzw. einen echten Server-Cron verwenden.

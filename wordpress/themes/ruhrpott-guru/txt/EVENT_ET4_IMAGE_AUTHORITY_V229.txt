@@ -1,0 +1,6 @@
+RuhrpottGuru Theme v2.29
+
+ET4/Open Data Finder event images are authoritative.
+- For open_data_finder / destination_one_open_data rows, the image carried by the event payload is selected before any later verified enrichment image.
+- Non-ET4 feeds keep the existing verified-media fallback behavior.
+- No ranking, date, GPS or event filter logic changed.

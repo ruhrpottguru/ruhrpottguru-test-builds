@@ -1,0 +1,9 @@
+RuhrpottGuru Places Backend 1.10.165 — Wesel official future / city scope
+
+- Official WeselMarketing current/future candidates are no longer blocked solely by a missing exact point coordinate or a completeness/confidence score below 85.
+- Exact venue/address geo remains preferred. If it cannot be resolved, the event is stored city-scoped for Wesel without fabricating lat/lng or a visitor distance.
+- The /events DB read path appends city-scoped WeselMarketing rows only when the request itself is scoped to Wesel.
+- Expired source rows stay excluded from the new reprocess.
+- Wesel descriptions preserve paragraph boundaries and split common labels such as Abfahrt, Treffpunkt and Adresse into readable blocks.
+- New resumable reprocess: wesel-official-future-import-v101165. It uses the existing external-event conflict lane and does not re-fetch the calendar.
+- No changes to ET4 precedence, lifecycle, rights metadata, image priority, or unrelated categories.

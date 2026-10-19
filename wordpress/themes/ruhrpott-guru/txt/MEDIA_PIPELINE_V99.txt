@@ -1,0 +1,8 @@
+RuhrpottGuru v99 – Media Pipeline Repair
+
+- Restores the proven ET2014A media_objects/media_object image selection from the pre-takeover React bundle.
+- Event images are selected by media rel/type/prio. Arbitrary nested contentUrl values are no longer treated as images.
+- Direct ET4 dataset artwork remains first priority; exact official event-page resolver remains the fallback.
+- OSM wikimedia_commons Category pages are no longer rendered as <img> URLs. They are passed to the existing server-side media resolver instead.
+- Home cards, category cards, culture rows and detail overlay recover from a failed image URL and retry the appropriate media resolver.
+- Broken media falls back to the neutral category placeholder instead of showing the browser broken-image icon.

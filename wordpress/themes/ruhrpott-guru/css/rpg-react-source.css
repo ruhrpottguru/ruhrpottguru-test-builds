@@ -1,0 +1,2434 @@
+:root{--rpg-bg:#07111f;--rpg-card:#0f1b2d;--rpg-card2:#132238;--rpg-text:#f8fafc;--rpg-muted:#dbe4ef;--rpg-border:#22324a;--rpg-orange:#f59e0b;--rpg-orange2:#fb923c}*{box-sizing:border-box}.rpgx-header{position:sticky;top:0;z-index:40;background:rgba(7,17,31,.94);backdrop-filter:blur(16px);border-bottom:1px solid var(--rpg-border)}.rpgx-header-inner{height:64px;max-width:1180px;margin:auto;padding:0 16px;display:flex;align-items:center;justify-content:space-between}.rpgx-brand{display:flex;align-items:center;gap:10px;color:var(--rpg-text);text-decoration:none}.rpgx-brand-mark{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:var(--rpg-orange);color:#111827;font-weight:900;font-size:20px}.rpgx-brand strong{display:block;font-size:16px}.rpgx-brand small{display:block;color:var(--rpg-muted);font-size:10px}.rpgx-header-actions{display:flex;gap:6px}.rpgx-icon-btn{width:38px;height:38px;border-radius:12px;border:1px solid var(--rpg-border);background:#0d192a;color:white;font-size:20px;cursor:pointer}.rpgx-location-line{max-width:1180px;margin:auto;padding:0 16px 7px;color:var(--rpg-muted);font-size:11px}.rpgx-main{width:min(1180px,100%);margin:0 auto;padding:14px 14px 92px;min-height:60vh}.rpgx-section{margin:0 0 26px}.rpgx-section-head{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;margin-bottom:10px}.rpgx-section-head h2{margin:0;color:white;font-size:25px}.rpgx-section-head p{margin:2px 0 0;color:var(--rpg-muted);font-size:12px}.rpgx-section-actions{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:flex-end}.rpgx-section-location{font-size:10px;color:var(--rpg-muted)}.rpgx-all-link,.rpgx-text-link{color:#fbbf24;text-decoration:none;font-weight:800;font-size:11px}.rpgx-card-row{display:grid;grid-auto-flow:column;grid-auto-columns:minmax(210px,26%);gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:4px}.rpgx-card{position:relative;display:block;width:100%;min-height:270px;aspect-ratio:4/5;border:0;border-radius:18px;overflow:hidden;background:var(--rpg-card);padding:0;color:white;text-align:left;cursor:pointer;scroll-snap-align:start}.rpgx-card-media,.rpgx-card-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}.rpgx-card-media:after{content:"";position:absolute;inset:35% 0 0;background:linear-gradient(transparent,rgba(3,8,18,.95))}.rpgx-image-fallback{width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(135deg,#17243a,#0b1322);font-size:46px;color:#cbd5e1}.rpgx-card-overlay{position:absolute;z-index:2;left:0;right:0;bottom:0;padding:14px}.rpgx-card-overlay h3{margin:0 0 5px;font-size:16px;line-height:1.15;text-shadow:0 2px 14px #000}.rpgx-card-overlay p{margin:0;color:#dbe4ef;font-size:11px}.rpgx-card-meta{display:flex;justify-content:space-between;gap:10px;margin-top:8px;color:#dbe4ef;font-size:10px}.rpgx-highlight-layout{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:1fr 1fr;gap:10px;min-height:430px}.rpgx-highlight-layout .rpgx-card{aspect-ratio:auto;min-height:205px}.rpgx-highlight-layout .rpgx-card-large{grid-row:1/3;min-height:430px}.rpgx-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.rpgx-category-header,.rpgx-route-head{margin:6px 0 16px}.rpgx-category-header h1,.rpgx-route-head h1{margin:0;color:white;font-size:30px}.rpgx-category-header p,.rpgx-route-head p{color:var(--rpg-muted);font-size:12px}.rpgx-loading,.rpgx-empty,.rpgx-error{padding:24px;border:1px solid var(--rpg-border);border-radius:16px;background:#0d192a;color:var(--rpg-muted)}.rpgx-error{color:#fecaca}.rpgx-footer-nav{position:fixed;z-index:35;bottom:0;left:0;right:0;display:flex;justify-content:center;background:rgba(7,17,31,.96);backdrop-filter:blur(18px);border-top:1px solid var(--rpg-border);padding:7px max(8px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}.rpgx-footer-link{flex:1;max-width:110px;display:flex;flex-direction:column;align-items:center;gap:2px;text-decoration:none;color:#cbd5e1;font-size:9px;font-weight:700}.rpgx-footer-icon{font-size:17px}.rpgx-modal-backdrop,.rpgx-detail-backdrop{position:fixed;z-index:100;inset:0;background:rgba(2,6,14,.82);backdrop-filter:blur(8px);display:flex;align-items:flex-end;justify-content:center}.rpgx-location-modal{width:min(680px,100%);max-height:88vh;overflow:auto;background:#0c1728;border:1px solid var(--rpg-border);border-radius:22px 22px 0 0;padding:18px;color:white}.rpgx-modal-head{display:flex;justify-content:space-between;align-items:center;font-size:18px;margin-bottom:12px}.rpgx-close-mini{background:none;border:0;color:white;font-size:28px}.rpgx-primary-btn,.rpgx-secondary-btn{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;padding:10px 14px;text-decoration:none;font-weight:800;font-size:12px;cursor:pointer}.rpgx-primary-btn{background:var(--rpg-orange);border:1px solid var(--rpg-orange);color:#111827}.rpgx-secondary-btn{background:#16243a;border:1px solid #30415c;color:white}.rpgx-radius-row{display:flex;justify-content:space-between;align-items:center;margin:14px 0}.rpgx-radius-row select,.rpgx-route-controls select{background:#132238;color:white;border:1px solid #30415c;border-radius:10px;padding:8px}.rpgx-location-or{color:var(--rpg-muted);font-size:11px}.rpgx-city-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px}.rpgx-city-btn{border:1px solid #30415c;background:#132238;color:#e2e8f0;padding:9px 7px;border-radius:10px;font-size:11px}.rpgx-location-error{padding:10px;border-radius:10px;background:#3a1c20;color:#fecaca;margin-bottom:10px}.rpgx-detail{position:relative;width:min(760px,100%);max-height:94vh;overflow:auto;background:#081322;color:white;border:1px solid var(--rpg-border);border-radius:24px 24px 0 0;box-shadow:0 -20px 60px rgba(0,0,0,.4)}.rpgx-detail-close{position:sticky;top:10px;float:right;z-index:5;margin:10px 10px -50px 0;background:var(--rpg-orange);color:#111827;border:0;border-radius:999px;padding:9px 13px;font-weight:900;cursor:pointer}.rpgx-detail-media{height:300px;background:#101d30}.rpgx-detail-media img{width:100%;height:100%;object-fit:cover}.rpgx-detail-body{padding:20px}.rpgx-detail-body h1{font-size:28px;line-height:1.1;margin:0 0 8px}.rpgx-detail-subtitle,.rpgx-detail-address{color:#cbd5e1}.rpgx-detail-facts,.rpgx-detail-labels,.rpgx-detail-actions{display:flex;gap:8px;flex-wrap:wrap;margin:12px 0}.rpgx-detail-facts span,.rpgx-detail-labels span{font-size:11px;color:#cbd5e1;background:#132238;border-radius:999px;padding:5px 8px}.rpgx-detail-description{line-height:1.55;color:#dbe4ef}.rpgx-route-detail-link{margin-top:18px;padding:14px;border-top:1px solid var(--rpg-border);display:flex;align-items:center;justify-content:space-between;gap:12px}.rpgx-route-detail-link a{color:#fbbf24;text-decoration:none;font-weight:800}.rpgx-route-controls{display:flex;gap:8px;margin-bottom:14px}.rpgx-route-unmatched{background:#0f1b2d;border:1px solid var(--rpg-border);padding:16px;border-radius:16px;color:white;min-height:150px}.rpgx-route-unmatched a{color:#fbbf24}.rpgx-wp-page article{max-width:850px;margin:auto}.rpgx-wp-page h1{color:white}.rpgx-wp-page a{color:#fbbf24}@media(max-width:820px){.rpgx-main{padding-left:10px;padding-right:10px}.rpgx-section-head h2{font-size:23px}.rpgx-section-head p{display:none}.rpgx-section-location{font-size:9px}.rpgx-card-row{grid-auto-columns:58%}.rpgx-highlight-layout{grid-template-columns:1.65fr 1fr;grid-template-rows:repeat(3,138px);min-height:0}.rpgx-highlight-layout .rpgx-card-large{grid-row:1/4;min-height:434px}.rpgx-highlight-layout .rpgx-card{min-height:138px}.rpgx-highlight-layout .rpgx-card-overlay h3{font-size:13px}.rpgx-highlight-layout .rpgx-card-overlay p{display:none}.rpgx-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.rpgx-grid .rpgx-card{min-height:235px}.rpgx-city-grid{grid-template-columns:repeat(2,1fr)}.rpgx-detail-media{height:260px}}@media(max-width:430px){.rpgx-header-inner{height:78px;padding-left:12px;padding-right:12px}.rpgx-brand-logo{width:128px;height:auto;max-width:128px;max-height:none;object-fit:contain}.rpgx-header-actions{gap:5px}.rpgx-icon-btn{width:36px;height:36px}.rpgx-brand small{display:none}.rpgx-card-row{grid-auto-columns:70%}.rpgx-highlight-layout{grid-template-columns:1.5fr 1fr}.rpgx-section-actions{gap:5px}.rpgx-text-link{display:none}.rpgx-grid .rpgx-card{min-height:220px}.rpgx-detail-body h1{font-size:24px}}
+.rpgx-category-tools{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px;margin:0 0 14px;width:100%;max-width:100%;min-width:0}
+.rpgx-category-tools input,.rpgx-category-tools select{display:block;width:100%;max-width:100%;min-width:0;background:#0f1b2d;border:1px solid #30415c;color:white;border-radius:12px;padding:10px 12px;font:inherit}
+.rpgx-category-tools select{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rpgx-category-tools input{min-width:0}.rpgx-load-more{display:flex;justify-content:center;padding:18px}.rpgx-editorial{margin:12px 0 18px;color:#dbe4ef}.rpgx-editorial a{color:#fbbf24}
+.rpgx-brand-logo{display:block;width:auto;height:38px;max-width:150px;object-fit:contain}
+
+/* V97 – WordPress editorial inserts inside the source-owned React Home. */
+.rpgx-home-editorial-insert { width: 100%; }
+.rpgx-home-editorial-insert > .rg-home-module { margin-top: 1.1rem; margin-bottom: 1.5rem; }
+.rg-home-story-grid-single { grid-template-columns: minmax(0, 1fr); }
+@media (min-width: 720px) {
+  .rg-home-interview-editorial .rg-home-story-card > a {
+    display: grid;
+    grid-template-columns: minmax(220px, 38%) minmax(0, 1fr);
+    align-items: stretch;
+  }
+  .rg-home-interview-editorial .rg-home-story-card img {
+    height: 100%;
+    min-height: 210px;
+    aspect-ratio: auto;
+  }
+  .rg-home-interview-editorial .rg-home-story-body {
+    justify-content: center;
+    padding: 1.15rem 1.25rem;
+  }
+  .rg-home-interview-editorial .rg-home-story-body strong { font-size: 1.08rem; }
+  .rg-home-interview-editorial .rg-home-story-body small { font-size: .8rem; }
+}
+
+/* V100 – temporary editorial fallbacks until genuine WP posts exist. */
+.rpg-temp-story-shell{width:min(900px,100%);margin:0 auto;padding:18px 14px 110px;color:#f8fafc}
+.rpg-temp-story{overflow:hidden;border:1px solid #22324a;border-radius:24px;background:#081322;box-shadow:0 24px 70px rgba(0,0,0,.32)}
+.rpg-temp-story-back{display:inline-flex;margin:16px 16px 12px;color:#fbbf24;text-decoration:none;font-weight:800;font-size:13px}
+.rpg-temp-story-hero{position:relative;min-height:430px;overflow:hidden;background:#101d30}
+.rpg-temp-story-hero>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.rpg-temp-story-shade{position:absolute;inset:28% 0 0;background:linear-gradient(transparent,rgba(3,8,18,.98))}
+.rpg-temp-story-hero-copy{position:absolute;left:0;right:0;bottom:0;padding:28px 24px;z-index:2}
+.rpg-temp-story-kicker{display:inline-block;color:#fbbf24;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.04em;margin-bottom:8px}
+.rpg-temp-story-hero h1{margin:0;color:white;font-size:34px;line-height:1.08}
+.rpg-temp-story-hero p{margin:8px 0 0;color:#dbe4ef;font-size:15px}
+.rpg-temp-story-hero-symbolic{display:grid;place-items:center;background:radial-gradient(circle at 30% 25%,rgba(245,158,11,.3),transparent 40%),linear-gradient(135deg,#17243a,#081322)}
+.rpg-temp-story-mic{font-size:110px;transform:translateY(-30px)}
+.rpg-temp-story-body{padding:24px}
+.rpg-temp-story-meta{color:#dbe4ef;font-size:12px;margin-bottom:18px}
+.rpg-temp-story-body p{color:#dbe4ef;line-height:1.7;font-size:15px}
+.rpg-temp-story-body .rpg-temp-story-lead{font-size:18px;font-weight:700;color:white}
+.rpg-temp-story-tags{display:flex;gap:7px;flex-wrap:wrap;margin-top:20px}
+.rpg-temp-story-tags span{border:1px solid #30415c;border-radius:999px;padding:6px 9px;color:#cbd5e1;font-size:11px}
+@media(max-width:600px){.rpg-temp-story-shell{padding:10px 8px 95px}.rpg-temp-story{border-radius:18px}.rpg-temp-story-hero{min-height:360px}.rpg-temp-story-hero-copy{padding:20px 16px}.rpg-temp-story-hero h1{font-size:27px}.rpg-temp-story-body{padding:18px 16px}.rpg-temp-story-mic{font-size:86px}}
+
+/* V111 – clickable editorial featured image */
+.rg-editorial-image-link{display:block;width:100%;height:100%;}
+.rg-editorial-image-link img{display:block;width:100%;height:100%;object-fit:cover;}
+
+/* V116 – category filter must never widen the mobile viewport */
+.rpgx-main,.rpgx-category-header,.rpgx-grid{max-width:100%;min-width:0}
+@media(max-width:600px){
+  .rpgx-category-tools{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:7px}
+  .rpgx-category-tools input,.rpgx-category-tools select{font-size:14px;padding:10px 9px}
+}
+@media(max-width:360px){
+  .rpgx-category-tools{grid-template-columns:1fr}
+}
+
+
+/* V117 – global mobile containment for every RuhrpottGuru control/filter.
+   This is intentionally generic: category filters, location/radius modal,
+   Route controls and future select/input controls all obey the viewport. */
+html,body{
+  max-width:100%;
+  overflow-x:hidden;
+}
+#ruhrpott-guru-root{
+  width:100%;
+  max-width:100vw;
+  min-width:0;
+  overflow-x:clip;
+}
+#ruhrpott-guru-root *,
+#ruhrpott-guru-root *::before,
+#ruhrpott-guru-root *::after{
+  min-width:0;
+  box-sizing:border-box;
+}
+#ruhrpott-guru-root input,
+#ruhrpott-guru-root select,
+#ruhrpott-guru-root textarea,
+#ruhrpott-guru-root button{
+  max-width:100%;
+  min-width:0;
+}
+#ruhrpott-guru-root select{
+  width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+.rpgx-modal-backdrop,
+.rpgx-detail-backdrop{
+  width:100vw;
+  max-width:100vw;
+  overflow-x:hidden;
+  padding-left:max(0px,env(safe-area-inset-left));
+  padding-right:max(0px,env(safe-area-inset-right));
+}
+.rpgx-location-modal,
+.rpgx-detail{
+  width:min(680px,100%);
+  max-width:100vw;
+  min-width:0;
+}
+.rpgx-radius-row{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(92px,auto);
+  gap:10px;
+  align-items:center;
+  width:100%;
+  max-width:100%;
+}
+.rpgx-radius-row label{
+  min-width:0;
+}
+.rpgx-radius-row select{
+  width:100%;
+  max-width:150px;
+  justify-self:end;
+}
+.rpgx-city-grid{
+  width:100%;
+  max-width:100%;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+.rpgx-city-btn{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+  overflow-wrap:anywhere;
+  word-break:normal;
+  white-space:normal;
+}
+.rpgx-route-controls{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  width:100%;
+  max-width:100%;
+}
+.rpgx-route-controls select{
+  width:100%;
+  max-width:100%;
+  min-width:0;
+}
+.rpgx-primary-btn,
+.rpgx-secondary-btn{
+  max-width:100%;
+  white-space:normal;
+}
+html.rpgx-modal-open,
+body.rpgx-modal-open{
+  overflow-x:hidden !important;
+  max-width:100vw !important;
+}
+
+@media(max-width:820px){
+  .rpgx-location-modal{
+    width:calc(100vw - 12px);
+    max-width:calc(100vw - 12px);
+    padding:16px;
+  }
+  .rpgx-detail{
+    width:100vw;
+    max-width:100vw;
+  }
+  .rpgx-city-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media(max-width:430px){
+  .rpgx-location-modal{
+    width:calc(100vw - 8px);
+    max-width:calc(100vw - 8px);
+    padding:14px 12px;
+  }
+  .rpgx-radius-row{
+    grid-template-columns:minmax(0,1fr) minmax(86px,120px);
+  }
+  .rpgx-route-controls{
+    grid-template-columns:1fr;
+  }
+}
+@media(max-width:340px){
+  .rpgx-city-grid{
+    grid-template-columns:1fr;
+  }
+  .rpgx-radius-row{
+    grid-template-columns:1fr;
+  }
+  .rpgx-radius-row select{
+    max-width:100%;
+    justify-self:stretch;
+  }
+}
+
+/* V119 Founding Beta UI */
+.rpgx-beta-badge{position:fixed;top:8px;left:8px;z-index:90;background:#fff;color:#111827;border:1px solid #cbd5e1;border-radius:999px;padding:3px 7px;font:700 10px/1.2 system-ui;letter-spacing:.08em;box-shadow:0 2px 8px rgba(0,0,0,.18)}
+.rpgx-feedback-fab{position:fixed;right:12px;bottom:78px;z-index:88;border:1px solid #475569;border-radius:999px;background:#0f172a;color:#fff;padding:9px 13px;font:700 12px/1 system-ui;box-shadow:0 5px 18px rgba(0,0,0,.28)}
+.rpgx-feedback-modal{width:min(480px,calc(100vw - 20px));max-width:100%;background:#0f172a;color:#fff;border:1px solid #334155;border-radius:18px;padding:16px}
+.rpgx-feedback-modal textarea{display:block;width:100%;min-height:130px;resize:vertical;background:#111c30;color:#fff;border:1px solid #475569;border-radius:12px;padding:10px;margin:10px 0 12px}
+.rpgx-feedback-success{padding:14px 0}
+
+/* V122 – invisible anti-bot honeypot + feedback error */
+.rpgx-feedback-hp{position:absolute!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}
+.rpgx-feedback-error{font-size:12px;line-height:1.4;color:#fecaca;margin:0 0 10px}
+
+/* V123 – Radius and city selection are independent actions */
+.rpgx-radius-row{
+  display:grid;
+  grid-template-columns:minmax(54px,auto) minmax(90px,1fr) auto;
+  gap:8px;
+  align-items:center;
+  width:100%;
+  max-width:100%;
+}
+.rpgx-radius-row select{
+  width:100%;
+  max-width:none;
+  justify-self:stretch;
+}
+.rpgx-radius-apply{
+  appearance:none;
+  border:1px solid #f59e0b;
+  background:#f59e0b;
+  color:#111827;
+  border-radius:11px;
+  padding:10px 13px;
+  min-height:42px;
+  font:800 13px/1 system-ui;
+  cursor:pointer;
+}
+.rpgx-radius-apply:disabled{
+  border-color:#475569;
+  background:#1e293b;
+  color:#cbd5e1;
+  cursor:default;
+}
+.rpgx-radius-help{
+  margin:7px 0 2px;
+  color:#dbe4ef;
+  font-size:12px;
+  line-height:1.35;
+}
+@media(max-width:430px){
+  .rpgx-radius-row{
+    grid-template-columns:minmax(48px,auto) minmax(76px,1fr) auto;
+    gap:6px;
+  }
+  .rpgx-radius-apply{padding:10px 10px}
+}
+@media(max-width:340px){
+  .rpgx-radius-row{
+    grid-template-columns:1fr auto;
+  }
+  .rpgx-radius-row label{grid-column:1/-1}
+}
+
+/* V124 Beta Polish */
+.rpgx-beta-notice{margin:12px 16px 18px;padding:11px 13px;border:1px solid #334155;border-radius:14px;background:#0f172a;display:flex;gap:10px;align-items:flex-start;color:#cbd5e1}
+.rpgx-beta-notice-icon{font-size:18px;line-height:1.2}.rpgx-beta-notice strong{display:block;color:#f8fafc;font-size:13px}.rpgx-beta-notice span:not(.rpgx-beta-notice-icon){display:block;font-size:12px;line-height:1.35;margin-top:2px}
+.rpgx-smart-empty{margin:10px 0 18px;padding:18px;border:1px solid #334155;border-radius:16px;background:#0f172a;color:#cbd5e1;text-align:left}.rpgx-smart-empty strong{display:block;color:#f8fafc}.rpgx-smart-empty p{margin:6px 0 13px;font-size:13px}.rpgx-smart-empty-btn{border:0;border-radius:11px;background:#f59e0b;color:#111827;font-weight:800;padding:10px 13px}
+.rpgx-report-item{appearance:none;border:0;background:transparent;color:#fbbf24;text-decoration:underline;text-underline-offset:3px;font-size:12px;font-weight:700;padding:3px 0;cursor:pointer;text-align:left}
+
+
+/* ============================================================
+   V125 – DESKTOP POLISH
+   IMPORTANT: all rules are min-width only. Mobile remains v124.
+   ============================================================ */
+@media (min-width:1024px){
+
+  /* Desktop gets a portal-style navigation bar below the sticky header.
+     The same WP menu/data is reused; no navigation logic is duplicated. */
+  .rpgx-footer-nav{
+    position:fixed;
+    top:82px;
+    bottom:auto;
+    left:50%;
+    right:auto;
+    transform:translateX(-50%);
+    width:min(1152px,calc(100vw - 40px));
+    min-height:48px;
+    padding:6px 12px;
+    border:1px solid var(--rpg-border);
+    border-top:1px solid var(--rpg-border);
+    border-radius:0 0 15px 15px;
+    background:rgba(7,17,31,.94);
+    box-shadow:0 10px 28px rgba(0,0,0,.18);
+    gap:4px;
+  }
+  .rpgx-footer-link{
+    flex:0 1 auto;
+    max-width:none;
+    min-width:112px;
+    padding:8px 13px;
+    flex-direction:row;
+    justify-content:center;
+    gap:7px;
+    border-radius:10px;
+    font-size:12px;
+    transition:background-color .15s ease,color .15s ease;
+  }
+  .rpgx-footer-link:hover,
+  .rpgx-footer-link:focus-visible{
+    background:#16243a;
+    color:#fff;
+    outline:none;
+  }
+  .rpgx-footer-icon{font-size:16px}
+
+  /* Reserve room only on desktop for the new navigation location. */
+  .rpgx-main{
+    padding-top:76px;
+    padding-bottom:34px;
+  }
+
+  /* Desktop dialogs behave like dialogs, not mobile bottom sheets. */
+  .rpgx-modal-backdrop,
+  .rpgx-detail-backdrop{
+    align-items:center;
+    padding:32px;
+  }
+  .rpgx-location-modal{
+    width:min(720px,calc(100vw - 64px));
+    max-height:78vh;
+    border-radius:22px;
+    padding:24px;
+    box-shadow:0 28px 80px rgba(0,0,0,.48);
+  }
+  .rpgx-detail{
+    width:min(980px,calc(100vw - 64px));
+    max-height:88vh;
+    border-radius:24px;
+    box-shadow:0 30px 90px rgba(0,0,0,.5);
+  }
+  .rpgx-detail-media{height:380px}
+  .rpgx-detail-body{padding:28px 32px 32px}
+  .rpgx-detail-body h1{font-size:34px}
+  .rpgx-detail-close{
+    top:14px;
+    margin:14px 14px -54px 0;
+  }
+
+  /* Category/search pages use the available desktop width more deliberately. */
+  .rpgx-category-header h1,
+  .rpgx-route-head h1{font-size:34px}
+  .rpgx-category-tools{
+    grid-template-columns:minmax(280px,1.5fr) minmax(220px,.7fr);
+    max-width:760px;
+  }
+  .rpgx-grid{gap:16px}
+  .rpgx-card{border-radius:20px}
+
+  /* Beta/feedback controls stay present, but less phone-like on desktop. */
+  .rpgx-beta-badge{top:14px;left:18px}
+  .rpgx-feedback-fab{
+    right:24px;
+    bottom:24px;
+    padding:11px 16px;
+  }
+  .rpgx-beta-notice{
+    margin-left:0;
+    margin-right:0;
+  }
+}
+
+@media (min-width:1280px){
+  .rpgx-footer-nav{width:1152px}
+  .rpgx-footer-link{min-width:128px}
+  .rpgx-detail{width:1040px}
+  .rpgx-detail-media{height:410px}
+}
+
+
+/* ============================================================
+   V126 – Büdchen- & Trinkhallen-Radar
+   Existing global header/footer remain untouched.
+   ============================================================ */
+.rpgx-bude-page{max-width:1180px;margin:0 auto;color:#e5e7eb}
+.rpgx-bude-hero{position:relative;margin:0 16px 18px;border:1px solid #26364a;border-radius:20px;overflow:hidden;background:linear-gradient(145deg,#07111f,#101a26 60%,#171109);box-shadow:0 20px 45px rgba(0,0,0,.24)}
+.rpgx-bude-hero-art{height:174px;overflow:hidden;background:radial-gradient(circle at 75% 15%,rgba(245,158,11,.18),transparent 35%),linear-gradient(180deg,#07101c,#0b1320)}
+.rpgx-bude-hero-copy{padding:18px 18px 10px;position:relative;margin-top:-86px;background:linear-gradient(180deg,transparent,rgba(5,12,23,.86) 30%,#08111e 100%)}
+.rpgx-bude-kicker{font-size:10px;font-weight:900;letter-spacing:.13em;color:#f59e0b}
+.rpgx-bude-hero h1{margin:4px 0 5px;font-size:34px;line-height:.96;letter-spacing:-.035em;color:#fff;font-weight:950}
+.rpgx-bude-hero h1 span{color:#fbbf24}.rpgx-bude-hero p{margin:0;color:#f8fafc;font-weight:750;font-size:14px}.rpgx-bude-hero small{color:#dbe4ef}
+.rpgx-bude-placeholder{width:100%;height:100%;min-height:120px;position:relative;display:flex;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 30%,rgba(245,158,11,.2),transparent 33%),linear-gradient(145deg,#07111e,#111827)}
+.rpgx-bude-neon{border:2px solid #f97316;padding:5px 11px;border-radius:4px;color:#fed7aa;font-weight:950;letter-spacing:.09em;text-shadow:0 0 8px #f97316;box-shadow:0 0 18px rgba(249,115,22,.25);transform:rotate(-2deg)}
+.rpgx-bude-window{position:absolute;bottom:14px;width:74%;height:38px;border:2px solid #25384c;display:flex;gap:5px;padding:5px;background:#07101a}.rpgx-bude-window span{flex:1;background:linear-gradient(180deg,#f59e0b,#854d0e);opacity:.55}
+.rpgx-bude-location-card{margin:8px 14px 10px;padding:11px 12px;border:1px solid #334155;border-radius:13px;background:rgba(15,23,42,.86);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rpgx-bude-location-card>div{display:flex;align-items:center;gap:9px;min-width:0}.rpgx-bude-location-card>div>span{font-size:20px}.rpgx-bude-location-card small,.rpgx-bude-location-card strong{display:block}.rpgx-bude-location-card small{color:#dbe4ef;font-size:10px}.rpgx-bude-location-card strong{font-size:13px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rpgx-bude-location-card button,.rpgx-bude-radius button{appearance:none;border:1px solid #475569;background:#111c2c;color:#e2e8f0;border-radius:9px;padding:9px 10px;font-weight:800;font-size:11px}
+.rpgx-bude-location-card button{border-color:#d97706;color:#fbbf24;white-space:nowrap}
+.rpgx-bude-radius{padding:0 14px 15px}.rpgx-bude-radius small{display:block;color:#dbe4ef;margin:0 0 6px}.rpgx-bude-radius>div{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:5px}.rpgx-bude-radius button{padding:9px 3px}.rpgx-bude-radius button.active{background:#f59e0b;border-color:#f59e0b;color:#111827}
+
+.rpgx-bude-filters,.rpgx-bude-radar-section,.rpgx-bude-results{margin:0 16px 18px}
+.rpgx-bude-section-title{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;margin:0 0 9px}.rpgx-bude-section-title h2{margin:0;color:#fff;font-size:18px}.rpgx-bude-section-title span,.rpgx-bude-section-title button{font-size:11px;color:#dbe4ef}.rpgx-bude-section-title button{border:0;background:none;color:#fbbf24;font-weight:800}
+.rpgx-bude-filter-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}.rpgx-bude-filter-grid button{appearance:none;border:1px solid #28384c;background:#0f1928;color:#cbd5e1;border-radius:12px;min-height:54px;padding:8px 9px;text-align:left;font-size:11px;font-weight:800;display:flex;gap:7px;align-items:center}.rpgx-bude-filter-grid button span{font-size:16px}.rpgx-bude-filter-grid button.active{border-color:#f59e0b;background:rgba(245,158,11,.12);color:#fff}
+
+.rpgx-bude-radar-plot{height:310px;border:1px solid #24374c;border-radius:18px;position:relative;overflow:hidden;background:radial-gradient(circle at center,rgba(56,189,248,.08),transparent 25%),linear-gradient(180deg,#08131f,#0a1724)}
+.rpgx-bude-ring{position:absolute;left:50%;top:50%;border:1px solid rgba(148,163,184,.22);border-radius:50%;transform:translate(-50%,-50%)}.rpgx-bude-ring.ring-1{width:30%;aspect-ratio:1}.rpgx-bude-ring.ring-2{width:58%;aspect-ratio:1}.rpgx-bude-ring.ring-3{width:86%;aspect-ratio:1}
+.rpgx-bude-radar-cross{position:absolute;background:rgba(148,163,184,.12)}.rpgx-bude-radar-cross.x{left:7%;right:7%;height:1px;top:50%}.rpgx-bude-radar-cross.y{top:7%;bottom:7%;width:1px;left:50%}
+.rpgx-bude-radar-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:34px;height:34px;border:3px solid #fff;border-radius:50%;background:#2563eb;color:#fff;display:flex;align-items:center;justify-content:center;z-index:3;box-shadow:0 0 0 8px rgba(37,99,235,.18)}
+.rpgx-bude-radar-pin{position:absolute;transform:translate(-50%,-50%);border:0;background:#f59e0b;color:#fbbf24;border-radius:50%;width:18px;height:18px;line-height:1;font-size:26px;padding:0;box-shadow:0 0 0 4px rgba(245,158,11,.12);cursor:pointer}
+.rpgx-bude-radar-label{position:absolute;left:12px;bottom:10px;font-size:11px;color:#cbd5e1;font-weight:800}
+
+.rpgx-bude-list{display:flex;flex-direction:column;gap:9px}.rpgx-bude-card{position:relative;display:grid;grid-template-columns:86px minmax(0,1fr);gap:11px;border:1px solid #243247;border-radius:14px;background:#0e1828;padding:9px;cursor:pointer;min-height:112px}.rpgx-bude-card:active{transform:scale(.995)}
+.rpgx-bude-card-media{width:86px;height:94px;border-radius:10px;overflow:hidden}.rpgx-bude-card-media img{width:100%;height:100%;object-fit:cover}.rpgx-bude-card-media .rpgx-bude-neon{font-size:8px;padding:3px 4px}.rpgx-bude-card-media .rpgx-bude-window{height:25px;bottom:7px}
+.rpgx-bude-card-body{min-width:0;padding-right:36px}.rpgx-bude-card h3{margin:2px 0 3px;color:#fff;font-size:14px;line-height:1.15}.rpgx-bude-address{margin:0;color:#dbe4ef;font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rpgx-bude-opening{margin:5px 0 4px;font-size:10px;color:#dbe4ef;line-height:1.25}.rpgx-bude-opening.open{color:#4ade80}.rpgx-bude-opening.closed{color:#fca5a5}.rpgx-bude-opening.unknown{color:#fbbf24}
+.rpgx-bude-mini-tags,.rpgx-bude-feature-row{display:flex;gap:5px;flex-wrap:wrap}.rpgx-bude-mini-tags span,.rpgx-bude-feature-row span{background:#172234;border:1px solid #26364a;border-radius:7px;padding:3px 5px;color:#cbd5e1;font-size:9px;font-weight:700}
+.rpgx-bude-distance{position:absolute;right:9px;top:11px;color:#e2e8f0;font-size:11px}.rpgx-bude-more{width:100%;margin-top:10px;min-height:44px;border:1px solid #334155;border-radius:12px;background:#101b2a;color:#fff;font-weight:850}
+.rpgx-bude-culture{margin:0 16px 18px;display:grid;gap:8px}.rpgx-bude-culture article{border:1px solid #27364a;background:#0e1828;border-radius:14px;padding:13px;display:flex;gap:11px}.rpgx-bude-culture article>span{width:34px;height:34px;border-radius:50%;background:#f59e0b;color:#111827;display:flex;align-items:center;justify-content:center;font-weight:950;flex:none}.rpgx-bude-culture h3{margin:0 0 3px;color:#fff;font-size:13px}.rpgx-bude-culture p{margin:0;color:#dbe4ef;font-size:11px;line-height:1.45}
+.rpgx-bude-disclaimer{margin:0 16px 26px;color:#cbd5e1;font-size:10px;line-height:1.45}
+
+.rpgx-bude-detail-backdrop{z-index:10040}.rpgx-bude-detail{position:relative;width:min(100%,720px);max-height:94vh;overflow:auto;background:#08121f;border:1px solid #29384c;border-radius:22px 22px 0 0;color:#e5e7eb;box-shadow:0 -18px 50px rgba(0,0,0,.45)}
+.rpgx-bude-detail-close{position:absolute;right:12px;top:12px;z-index:4;width:38px;height:38px;border-radius:50%;border:1px solid #475569;background:rgba(2,6,23,.82);color:#fff;font-size:22px}
+.rpgx-bude-detail-media{height:230px;overflow:hidden}.rpgx-bude-detail-media img{width:100%;height:100%;object-fit:cover}.rpgx-bude-detail-body{padding:18px}.rpgx-bude-detail-title{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}.rpgx-bude-detail-title h2{font-size:22px;margin:0 0 4px;color:#fff}.rpgx-bude-detail-title p{margin:0;color:#dbe4ef;font-size:11px}.rpgx-bude-detail-title>strong{white-space:nowrap}
+.rpgx-bude-detail .rpgx-bude-opening{font-size:12px;margin:14px 0}.rpgx-bude-feature-row{margin:0 0 14px}.rpgx-bude-feature-row span{font-size:10px;padding:5px 7px}
+.rpgx-bude-actions{display:flex;gap:8px;margin:14px 0 18px}.rpgx-bude-primary,.rpgx-bude-secondary{appearance:none;text-decoration:none;border-radius:11px;padding:11px 13px;font-size:11px;font-weight:900;border:1px solid #f59e0b}.rpgx-bude-primary{background:#f59e0b;color:#111827}.rpgx-bude-secondary{background:#111c2c;color:#fff;border-color:#475569}
+.rpgx-bude-detail-section,.rpgx-bude-unknown,.rpgx-bude-community{border-top:1px solid #233247;padding:16px 0}.rpgx-bude-detail-section h3,.rpgx-bude-community h3{margin:0 0 8px;color:#fff;font-size:14px}.rpgx-bude-detail-section p,.rpgx-bude-unknown p{margin:0;color:#cbd5e1;font-size:12px;line-height:1.55}.rpgx-bude-unknown strong{color:#fbbf24}.rpgx-bude-unknown button,.rpgx-bude-community button{margin-top:10px;border:1px solid #334155;background:#111c2c;color:#fff;border-radius:10px;padding:10px 11px;font-weight:800;font-size:11px}.rpgx-bude-community{display:flex;flex-direction:column;align-items:flex-start;gap:5px}
+
+.rpgx-bude-report-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.58);z-index:10080;display:flex;align-items:flex-end;justify-content:center}.rpgx-bude-report{width:min(100%,560px);background:#0b1624;border:1px solid #334155;border-radius:20px 20px 0 0;padding:16px;color:#e5e7eb}.rpgx-bude-report-head{display:flex;justify-content:space-between;gap:10px;align-items:center;margin-bottom:14px}.rpgx-bude-report-head strong{font-size:14px}.rpgx-bude-report-head button{border:0;background:none;color:#fff;font-size:24px}.rpgx-bude-report label{display:block;font-size:11px;font-weight:800;color:#cbd5e1;margin:10px 0}.rpgx-bude-report select,.rpgx-bude-report textarea{display:block;width:100%;margin-top:5px;border:1px solid #334155;border-radius:10px;background:#111c2c;color:#fff;padding:10px;font:inherit}.rpgx-bude-report .rpgx-bude-primary{width:100%;margin-top:8px}.rpgx-bude-report-warning,.rpgx-bude-report-status{font-size:11px;color:#cbd5e1}.rpgx-bude-report-status{color:#fbbf24;font-weight:800}
+
+@media(min-width:760px){
+  .rpgx-bude-filter-grid{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .rpgx-bude-culture{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .rpgx-bude-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(min-width:1024px){
+  .rpgx-bude-hero{margin-left:0;margin-right:0;display:grid;grid-template-columns:1.15fr .85fr;min-height:360px}
+  .rpgx-bude-hero-art{height:100%;grid-column:2;grid-row:1/4}.rpgx-bude-hero-copy{grid-column:1;grid-row:1;margin:0;padding:44px 34px 10px;background:none;align-self:end}.rpgx-bude-hero h1{font-size:50px}.rpgx-bude-location-card{grid-column:1;grid-row:2;margin:6px 34px}.rpgx-bude-radius{grid-column:1;grid-row:3;padding:0 34px 34px}
+  .rpgx-bude-filters,.rpgx-bude-radar-section,.rpgx-bude-results,.rpgx-bude-culture,.rpgx-bude-disclaimer{margin-left:0;margin-right:0}
+  .rpgx-bude-radar-section{width:49%;display:inline-block;vertical-align:top}.rpgx-bude-results{width:49%;display:inline-block;vertical-align:top;margin-left:1.5%}.rpgx-bude-radar-plot{height:590px;position:sticky;top:150px}
+  .rpgx-bude-list{display:flex}.rpgx-bude-detail{border-radius:22px;max-height:88vh}.rpgx-bude-detail-media{height:330px}.rpgx-bude-report-backdrop{align-items:center}.rpgx-bude-report{border-radius:20px}
+}
+
+
+/* ============================================================
+   V127 – BÜDCHEN-RADAR DESKTOP POLISH
+   Desktop only. Mobile V126 remains untouched.
+   ============================================================ */
+@media (min-width:1024px){
+
+  /* Keep the radar content clearly below the existing desktop nav shell. */
+  .rpgx-bude-page{
+    padding-top:92px;
+  }
+
+  /* Strong editorial hero instead of a narrow app card. */
+  .rpgx-bude-hero{
+    display:grid;
+    grid-template-columns:minmax(0,1.08fr) minmax(380px,.92fr);
+    grid-template-rows:auto auto auto;
+    min-height:390px;
+    margin:0 0 26px;
+    border-radius:24px;
+    overflow:hidden;
+    border:1px solid #2b3c52;
+    background:
+      radial-gradient(circle at 18% 18%,rgba(245,158,11,.12),transparent 30%),
+      linear-gradient(135deg,#07111f 0%,#0b1625 58%,#17110a 100%);
+  }
+  .rpgx-bude-hero-art{
+    grid-column:2;
+    grid-row:1/4;
+    height:100%;
+    min-height:390px;
+  }
+  .rpgx-bude-hero-copy{
+    grid-column:1;
+    grid-row:1;
+    align-self:end;
+    margin:0;
+    padding:48px 40px 14px;
+    background:none;
+  }
+  .rpgx-bude-hero h1{
+    max-width:640px;
+    font-size:58px;
+    line-height:.92;
+    letter-spacing:-.045em;
+  }
+  .rpgx-bude-hero p{font-size:17px}
+  .rpgx-bude-hero small{font-size:13px}
+  .rpgx-bude-location-card{
+    grid-column:1;
+    grid-row:2;
+    margin:8px 40px 10px;
+    padding:14px 15px;
+  }
+  .rpgx-bude-radius{
+    grid-column:1;
+    grid-row:3;
+    padding:0 40px 34px;
+  }
+
+  /* Filters become one clean toolbar below the hero. */
+  .rpgx-bude-filters{
+    margin:0 0 22px;
+    padding:18px;
+    border:1px solid #26364a;
+    border-radius:18px;
+    background:#0b1524;
+  }
+  .rpgx-bude-filter-grid{
+    grid-template-columns:repeat(6,minmax(0,1fr));
+    gap:10px;
+  }
+  .rpgx-bude-filter-grid button{
+    min-height:66px;
+    justify-content:center;
+    text-align:center;
+    flex-direction:column;
+    gap:4px;
+    font-size:12px;
+    border-radius:13px;
+  }
+
+  /* Main radar area: balanced 5/7 split, not two equal columns. */
+  .rpgx-bude-radar-section,
+  .rpgx-bude-results{
+    display:block;
+    width:auto;
+    margin:0;
+  }
+  .rpgx-bude-page > .rpgx-bude-radar-section,
+  .rpgx-bude-page > .rpgx-bude-results{
+    vertical-align:top;
+  }
+  .rpgx-bude-radar-section{
+    float:left;
+    width:43%;
+    margin-right:2%;
+  }
+  .rpgx-bude-results{
+    float:left;
+    width:55%;
+  }
+  .rpgx-bude-results::after,
+  .rpgx-bude-culture::before{
+    content:"";
+    display:block;
+    clear:both;
+  }
+
+  /* Radar gets map-like texture and a more useful visual scale. */
+  .rpgx-bude-radar-plot{
+    height:620px;
+    position:sticky;
+    top:156px;
+    border-radius:20px;
+    background:
+      linear-gradient(32deg,transparent 48%,rgba(148,163,184,.08) 49%,rgba(148,163,184,.08) 51%,transparent 52%) 0 0/120px 120px,
+      linear-gradient(-27deg,transparent 48%,rgba(148,163,184,.06) 49%,rgba(148,163,184,.06) 51%,transparent 52%) 0 0/150px 150px,
+      radial-gradient(circle at 35% 58%,rgba(37,99,235,.10),transparent 22%),
+      radial-gradient(circle at center,rgba(56,189,248,.07),transparent 38%),
+      #0a1623;
+    box-shadow:inset 0 0 70px rgba(0,0,0,.26);
+  }
+  .rpgx-bude-radar-pin{
+    width:20px;height:20px;
+    font-size:28px;
+    box-shadow:0 0 0 5px rgba(245,158,11,.10),0 5px 18px rgba(0,0,0,.32);
+  }
+
+  /* Results look like editorial place cards instead of database rows. */
+  .rpgx-bude-list{
+    display:flex;
+    flex-direction:column;
+    gap:12px;
+  }
+  .rpgx-bude-card{
+    grid-template-columns:116px minmax(0,1fr);
+    min-height:138px;
+    gap:14px;
+    padding:11px;
+    border-radius:17px;
+    transition:transform .15s ease,border-color .15s ease,background-color .15s ease;
+  }
+  .rpgx-bude-card:hover{
+    transform:translateY(-2px);
+    border-color:#475569;
+    background:#111d2f;
+  }
+  .rpgx-bude-card-media{
+    width:116px;
+    height:116px;
+    border-radius:13px;
+  }
+  .rpgx-bude-card-media .rpgx-bude-neon{
+    font-size:10px;
+    padding:4px 6px;
+  }
+  .rpgx-bude-card-body{
+    padding:5px 58px 3px 0;
+  }
+  .rpgx-bude-card h3{
+    font-size:17px;
+    margin-bottom:5px;
+  }
+  .rpgx-bude-address{
+    font-size:11px;
+  }
+  .rpgx-bude-opening{
+    font-size:11px;
+    margin:8px 0 7px;
+  }
+  .rpgx-bude-mini-tags span{
+    font-size:10px;
+    padding:4px 6px;
+  }
+  .rpgx-bude-distance{
+    right:14px;
+    top:16px;
+    font-size:12px;
+  }
+
+  .rpgx-bude-culture,
+  .rpgx-bude-disclaimer{
+    clear:both;
+    margin-left:0;
+    margin-right:0;
+  }
+  .rpgx-bude-culture{
+    padding-top:28px;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:14px;
+  }
+  .rpgx-bude-culture article{
+    padding:18px;
+    border-radius:17px;
+  }
+
+  /* Desktop details are centered portal dialogs. */
+  .rpgx-bude-detail-backdrop{
+    align-items:center;
+    padding:34px;
+  }
+  .rpgx-bude-detail{
+    width:min(920px,calc(100vw - 68px));
+    max-height:88vh;
+    border-radius:24px;
+  }
+  .rpgx-bude-detail-media{height:360px}
+  .rpgx-bude-detail-body{padding:26px 30px 30px}
+  .rpgx-bude-detail-title h2{font-size:30px}
+
+  /* Clear floats before normal footer/content following the shortcode. */
+  .rpgx-bude-page::after{
+    content:"";
+    display:block;
+    clear:both;
+  }
+}
+
+@media (min-width:1280px){
+  .rpgx-bude-radar-section{width:42%}
+  .rpgx-bude-results{width:56%;margin-left:2%}
+  .rpgx-bude-radar-section{margin-right:0}
+  .rpgx-bude-radar-plot{height:650px}
+}
+
+
+/* V128 – real same-origin map + filter independence */
+.rpgx-bude-map{height:360px;border:1px solid #24374c;border-radius:18px;position:relative;overflow:hidden;background:#0b1724}
+.rpgx-bude-map-tiles{position:absolute;inset:0;overflow:hidden}.rpgx-bude-map-tile{position:absolute;width:256px;height:256px;max-width:none;user-select:none;-webkit-user-drag:none;filter:saturate(.72) brightness(.72) contrast(1.08)}
+.rpgx-bude-map::after{content:"";position:absolute;inset:0;pointer-events:none;background:rgba(3,10,20,.16)}
+.rpgx-bude-map-radius{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);border:2px solid rgba(245,158,11,.68);background:rgba(245,158,11,.06);border-radius:50%;z-index:2;pointer-events:none}
+.rpgx-bude-map-center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:5;width:34px;height:34px;border:3px solid #fff;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#2563eb;color:#fff;box-shadow:0 0 0 7px rgba(37,99,235,.22)}
+.rpgx-bude-map-marker{position:absolute;transform:translate(-50%,-50%);z-index:4;border:2px solid #fff;width:19px;height:19px;border-radius:50%;background:#f59e0b;color:#f59e0b;font-size:0;box-shadow:0 3px 10px rgba(0,0,0,.45)}
+.rpgx-bude-map-marker::after{content:"";position:absolute;left:5px;top:5px;width:5px;height:5px;border-radius:50%;background:#7c2d12}
+.rpgx-bude-map-controls{position:absolute;right:10px;top:10px;z-index:7;display:flex;flex-direction:column;overflow:hidden;border:1px solid #475569;border-radius:9px}.rpgx-bude-map-controls button{width:36px;height:34px;border:0;border-bottom:1px solid #475569;background:#0f1b2b;color:#fff;font-size:20px}.rpgx-bude-map-controls button:last-child{border-bottom:0}
+.rpgx-bude-map-attribution{position:absolute;right:7px;bottom:5px;z-index:7;padding:2px 5px;border-radius:4px;background:rgba(255,255,255,.82);color:#334155!important;text-decoration:none;font-size:8px}
+.rpgx-bude-card-media .rpgx-bude-placeholder,.rpgx-bude-detail-media .rpgx-bude-placeholder{background:radial-gradient(circle at 50% 26%,rgba(245,158,11,.17),transparent 30%),linear-gradient(145deg,#07111e,#111827)}
+@media(min-width:1024px){.rpgx-bude-map{height:620px;position:sticky;top:156px}}
+@media(min-width:1280px){.rpgx-bude-map{height:650px}}
+
+
+/* ============================================================
+   V133 – Interactive map + desktop footer correction
+   ============================================================ */
+.rpgx-bude-map.interactive{
+  touch-action:pan-y;
+  cursor:grab;
+  user-select:none;
+  -webkit-user-select:none;
+  overscroll-behavior:contain;
+}
+.rpgx-bude-map.interactive:active{cursor:grabbing}
+.rpgx-bude-map-moved{
+  position:absolute;
+  left:10px;
+  top:10px;
+  z-index:7;
+  background:rgba(7,17,31,.9);
+  border:1px solid #475569;
+  color:#e2e8f0;
+  border-radius:9px;
+  padding:6px 9px;
+  font-size:10px;
+  font-weight:800;
+  pointer-events:none;
+}
+.rpgx-bude-map-controls button.reset{font-size:16px;color:#fbbf24}
+.rpgx-bude-map-tile{pointer-events:none}
+.rpgx-bude-map-radius,.rpgx-bude-map-center{pointer-events:none}
+
+/* Desktop footer goes back to the bottom. Mobile remains unchanged. */
+@media (min-width:1024px){
+  .rpgx-footer-nav{
+    top:auto!important;
+    bottom:0!important;
+    left:0!important;
+    right:0!important;
+    transform:none!important;
+    width:100%!important;
+    min-height:54px;
+    border-radius:0!important;
+    border-left:0!important;
+    border-right:0!important;
+    border-bottom:0!important;
+    border-top:1px solid var(--rpg-border)!important;
+    padding:7px 18px!important;
+    background:rgba(7,17,31,.96)!important;
+    box-shadow:0 -10px 28px rgba(0,0,0,.18)!important;
+  }
+  .rpgx-footer-link{
+    flex:1 1 0!important;
+    max-width:150px!important;
+    min-width:0!important;
+    flex-direction:column!important;
+    gap:2px!important;
+    padding:5px 10px!important;
+  }
+  .rpgx-main{
+    padding-bottom:88px!important;
+  }
+}
+
+
+/* V134: mobile map gesture rule
+   One finger scrolls the page; map interaction on touch requires two fingers.
+   Mouse/trackpad desktop behavior remains interactive. */
+@media (max-width:1023px){
+  .rpgx-bude-map.interactive{touch-action:pan-y;cursor:default}
+}
+
+
+/* V142 – geographically correct user-location marker */
+.rpgx-bude-user-location{
+  transform:translate(-50%,-50%);
+  width:30px;
+  height:30px;
+  border:3px solid #fff;
+  background:#2563eb;
+  color:#fff;
+  font-size:0;
+  box-shadow:0 0 0 7px rgba(37,99,235,.22),0 3px 12px rgba(0,0,0,.42);
+  pointer-events:none;
+}
+.rpgx-bude-user-location::after{
+  content:'';
+  width:8px;
+  height:8px;
+  border-radius:50%;
+  background:#fff;
+}
+
+
+/* V143 – Mobile map must never trap one-finger page scrolling */
+@media(max-width:1023px){
+  .rpgx-bude-map.interactive{
+    touch-action:pan-y!important;
+    overscroll-behavior:auto!important;
+    cursor:default;
+  }
+}
+
+
+/* V144 – Büdchen map marker interaction */
+.rpgx-bude-map-marker.is-clickable{
+  cursor:pointer;
+  pointer-events:auto;
+}
+.rpgx-bude-map-marker.is-clickable:hover,
+.rpgx-bude-map-marker.is-clickable:focus-visible{
+  z-index:6;
+  outline:3px solid rgba(245,158,11,.34);
+  outline-offset:3px;
+}
+.rpgx-bude-map-marker.is-overlapping{
+  pointer-events:none;
+  cursor:default;
+  opacity:.72;
+}
+
+
+/* V145 – keep marker clicks separate from desktop map drag gestures */
+.rpgx-bude-map-marker.is-clickable{
+  touch-action:manipulation;
+}
+
+
+/* ============================================================
+   V148 – Einheitlicher Abstand Header → Content
+   Ziel: 12 px sichtbarer Startabstand auf allen Seitentypen.
+   ============================================================ */
+.rpgx-main{
+  padding-top:12px!important;
+}
+
+/* Category + Route had an additional 6 px top margin. */
+.rpgx-category-header,
+.rpgx-route-head{
+  margin-top:0!important;
+}
+
+/* Home modules had their own 1.1rem top margin on the first item. */
+.rpgx-home > .rg-home-module:first-child,
+.rpgx-home > .rpgx-home-wp-editorial:first-child,
+.rpgx-home > .rg-home-buedchen-teaser:first-child,
+.rpgx-home > .rg-home-route-teaser:first-child{
+  margin-top:0!important;
+}
+
+/* Büdchen hero starts directly at the main content baseline. */
+.rpgx-bude-page > .rpgx-bude-hero:first-child{
+  margin-top:0!important;
+}
+
+/* Normal WordPress pages: suppress a first-child heading/block margin
+   from creating an extra gap above the content. */
+.rpgx-wp-page > :first-child,
+.rpgx-wp-page article:first-child > :first-child{
+  margin-top:0!important;
+}
+
+
+/* V149 – vollständiges Büdchen-Korrekturformular */
+.rpgx-bude-report-complete{max-width:720px;max-height:min(88vh,920px);overflow:auto}
+.rpgx-bude-report-head>div{display:flex;flex-direction:column;gap:2px}
+.rpgx-bude-report-subtitle{font-size:12px;color:#dbe4ef;font-weight:500}
+.rpgx-bude-report-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.rpgx-bude-report input[type="url"],
+.rpgx-bude-report input[type="tel"],
+.rpgx-bude-report input[type="email"],
+.rpgx-bude-report input[type="text"]{width:100%;box-sizing:border-box}
+.rpgx-bude-report-features{border:1px solid #334155;border-radius:12px;padding:12px}
+.rpgx-bude-report-features legend{padding:0 6px;font-weight:800;color:#fff}
+.rpgx-bude-report-features p{margin:0 0 10px;color:#dbe4ef;font-size:12px}
+.rpgx-bude-report-feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.rpgx-bude-report-feature-grid label,
+.rpgx-bude-report-closed{display:flex!important;align-items:center;gap:9px;padding:10px;border:1px solid #334155;border-radius:10px;background:#0b1322;cursor:pointer}
+.rpgx-bude-report-feature-grid input,
+.rpgx-bude-report-closed input{width:18px;height:18px;margin:0;flex:0 0 auto}
+.rpgx-bude-report-closed span{display:flex;flex-direction:column;gap:2px}
+.rpgx-bude-report-closed small{color:#dbe4ef;font-weight:500}
+@media(max-width:640px){
+  .rpgx-bude-report-grid,
+  .rpgx-bude-report-feature-grid{grid-template-columns:1fr}
+  .rpgx-bude-report-complete{max-height:92vh}
+}
+
+
+/* V150 – Hier geht's um die Wurst. Uses the existing RuhrpottGuru shell; only
+   the content module gets its own rough, collectible-card visual language. */
+.rpgx-wurst-page{padding-top:14px;max-width:1240px}
+.rpgx-wurst-hero{position:relative;overflow:hidden;border:1px solid rgba(245,158,11,.32);border-radius:22px;background:#090d14;box-shadow:0 24px 70px rgba(0,0,0,.28)}
+.rpgx-wurst-texture{position:absolute;inset:0;opacity:1;background-image:linear-gradient(90deg,rgba(2,6,23,.96) 0%,rgba(2,6,23,.82) 34%,rgba(2,6,23,.22) 68%,rgba(2,6,23,.08) 100%),linear-gradient(180deg,rgba(2,6,23,.04) 45%,rgba(2,6,23,.72) 100%),url('../assets/wurst-hero-daylight.jpg');background-size:cover;background-position:center center;background-repeat:no-repeat}
+.rpgx-wurst-hero-inner{position:relative;padding:22px 18px 18px;min-height:360px;display:flex;flex-direction:column;justify-content:flex-end}
+.rpgx-wurst-kicker,.rpgx-wurst-results-head span,.rpgx-wurst-community-copy>span{display:block;color:#f59e0b;font-size:.72rem;font-weight:950;letter-spacing:.18em}
+.rpgx-wurst-hero h1{max-width:760px;margin:4px 0 7px;color:#fff;font-size:34px;line-height:.96;font-weight:950;letter-spacing:-.035em;text-transform:uppercase}
+.rpgx-wurst-hero h1 em{color:#fbbf24;font-style:normal}
+.rpgx-wurst-hero> .rpgx-wurst-hero-inner>p{max-width:680px;margin:0;color:#f8fafc;font-size:14px;font-weight:750;line-height:1.5}
+.rpgx-wurst-stats{display:flex;gap:8px;margin-top:18px}.rpgx-wurst-stats span{display:inline-flex;align-items:center;gap:5px;padding:8px 11px;border:1px solid rgba(251,191,36,.28);border-radius:999px;background:rgba(2,6,23,.58);color:#e5e7eb;font-size:.8rem}.rpgx-wurst-stats strong{color:#fbbf24}
+.rpgx-wurst-location-card{margin:18px 0 10px;padding:11px 12px;border:1px solid #334155;border-radius:13px;background:rgba(15,23,42,.86);display:flex;align-items:center;justify-content:space-between;gap:10px}
+.rpgx-wurst-location-card>div{display:flex;align-items:center;gap:9px;min-width:0}.rpgx-wurst-location-card>div>span{font-size:20px}.rpgx-wurst-location-card small,.rpgx-wurst-location-card strong{display:block}.rpgx-wurst-location-card small{color:#dbe4ef;font-size:10px;text-transform:none;letter-spacing:0}.rpgx-wurst-location-card strong{font-size:13px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rpgx-wurst-location-card button,.rpgx-wurst-radius button{appearance:none;border:1px solid #475569;background:#111c2c;color:#e2e8f0;border-radius:9px;padding:9px 10px;font-weight:800;font-size:11px;cursor:pointer}.rpgx-wurst-location-card button{border-color:#d97706;color:#fbbf24;white-space:nowrap}.rpgx-wurst-location-card button:hover,.rpgx-wurst-radius button:hover{border-color:#f59e0b}
+.rpgx-wurst-radius{padding:0 0 2px}.rpgx-wurst-radius small{display:block;color:#dbe4ef;margin:0 0 6px;font-size:10px;text-transform:none;letter-spacing:0}.rpgx-wurst-radius>div{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:5px}.rpgx-wurst-radius button{padding:9px 3px}.rpgx-wurst-radius button.active{background:#f59e0b;border-color:#f59e0b;color:#111827}
+.rpgx-wurst-toolbar{position:sticky;top:68px;z-index:16;display:flex;align-items:center;justify-content:space-between;gap:12px;margin:16px 0 20px;padding:10px;border:1px solid rgba(51,65,85,.85);border-radius:16px;background:rgba(2,6,23,.88);backdrop-filter:blur(14px)}
+.rpgx-wurst-pills{display:flex;gap:7px;overflow:auto;scrollbar-width:none}.rpgx-wurst-pills::-webkit-scrollbar{display:none}.rpgx-wurst-pills button{flex:0 0 auto;border:1px solid #334155;border-radius:999px;background:#111827;color:#cbd5e1;padding:8px 12px;font-size:.78rem;font-weight:850;cursor:pointer}.rpgx-wurst-pills button span{margin-right:5px}.rpgx-wurst-pills button.active{border-color:#fbbf24;background:#fbbf24;color:#111827}
+.rpgx-wurst-sort{display:flex;align-items:center;gap:8px;flex:0 0 auto}.rpgx-wurst-sort span{color:#dbe4ef;font-size:.7rem;font-weight:800;text-transform:uppercase}.rpgx-wurst-sort select{border:1px solid #334155;border-radius:10px;background:#0f172a;color:#f8fafc;padding:8px 30px 8px 10px;font-weight:800}
+.rpgx-wurst-results-head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:0 0 13px}.rpgx-wurst-results-head h2{margin:.2rem 0 0;color:#f8fafc;font-size:clamp(1.35rem,3vw,2rem);font-weight:950}.rpgx-wurst-results-head p{margin:0;color:#dbe4ef;font-weight:750;font-size:.85rem}
+.rpgx-wurst-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px}
+.rpgx-wurst-card{display:block;width:100%;padding:0;overflow:hidden;border:1px solid #253044;border-radius:18px;background:#0b1220;color:inherit;text-align:left;cursor:pointer;box-shadow:0 10px 28px rgba(0,0,0,.18);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.rpgx-wurst-card:hover{transform:translateY(-4px);border-color:rgba(251,191,36,.65);box-shadow:0 18px 42px rgba(0,0,0,.3)}
+.rpgx-wurst-card-media{position:relative;aspect-ratio:4/3;overflow:hidden;background:#111827}.rpgx-wurst-card-media>img{width:100%;height:100%;object-fit:cover;transition:transform .28s ease}.rpgx-wurst-card:hover .rpgx-wurst-card-media>img{transform:scale(1.035)}.rpgx-wurst-card-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(2,6,23,.97) 0%,rgba(2,6,23,.35) 52%,rgba(2,6,23,.05) 100%)}
+.rpgx-wurst-distance{position:absolute;left:10px;top:10px;padding:6px 9px;border-radius:999px;background:rgba(2,6,23,.85);border:1px solid rgba(255,255,255,.14);color:#fff;font-size:.74rem;font-weight:900}.rpgx-wurst-tier{position:absolute;left:10px;top:48px;padding:5px 8px;border-radius:999px;background:rgba(2,6,23,.88);font-size:.66rem;font-weight:900;letter-spacing:.02em}.rpgx-wurst-tier.tier-a{border:1px solid rgba(251,191,36,.55);color:#fbbf24}.rpgx-wurst-tier.tier-b{border:1px solid rgba(96,165,250,.55);color:#93c5fd}.rpgx-wurst-specialties{position:absolute;right:10px;top:10px;display:flex;gap:5px}.rpgx-wurst-specialties span{display:grid;place-items:center;width:31px;height:31px;border-radius:50%;background:rgba(2,6,23,.86);border:1px solid rgba(251,191,36,.32);font-size:.86rem}
+.rpgx-wurst-card-copy{position:absolute;left:14px;right:14px;bottom:13px}.rpgx-wurst-card-copy h3{margin:0;color:#fbbf24;font-size:1.22rem;line-height:1.06;font-weight:950;text-transform:uppercase;letter-spacing:-.02em}.rpgx-wurst-card-copy p{margin:6px 0 0;color:#f8fafc;font-size:.82rem;font-weight:750}
+.rpgx-wurst-card-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:11px 13px;border-top:1px solid #1e293b}.rpgx-wurst-card-foot span{overflow:hidden;color:#aab6c7;font-size:.74rem;white-space:nowrap;text-overflow:ellipsis}.rpgx-wurst-card-foot span.muted{color:#cbd5e1}.rpgx-wurst-card-foot strong{flex:0 0 auto;color:#fbbf24;font-size:.76rem}
+.rpgx-wurst-card-fallback{position:absolute;inset:0}.rpgx-wurst-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;background:radial-gradient(circle at 50% 35%,rgba(245,158,11,.18),transparent 36%),repeating-linear-gradient(135deg,#111827 0,#111827 10px,#0b1220 10px,#0b1220 20px);color:#f8fafc;text-align:center}.rpgx-wurst-placeholder-top,.rpgx-wurst-placeholder-bottom{font-size:.58rem;font-weight:900;letter-spacing:.18em;color:#dbe4ef}.rpgx-wurst-placeholder-mark{font-size:clamp(1.6rem,4vw,2.7rem);font-weight:950;letter-spacing:.03em;color:#fbbf24}
+.rpgx-wurst-more{display:block;margin:18px auto 0;border:1px solid #fbbf24;border-radius:999px;background:transparent;color:#fbbf24;padding:10px 18px;font-weight:900;cursor:pointer}
+.rpgx-wurst-community{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;margin:32px 0 8px;padding:clamp(20px,4vw,34px);border:1px solid rgba(251,191,36,.3);border-radius:20px;background:linear-gradient(135deg,#111827,#070b12)}.rpgx-wurst-community-copy h2{margin:.3rem 0 .5rem;color:#fbbf24;font-size:clamp(1.5rem,4vw,2.35rem);font-weight:950}.rpgx-wurst-community-copy p{margin:0;color:#cbd5e1;line-height:1.6}.rpgx-wurst-community-btn{align-self:center;justify-self:end;border:0;border-radius:999px;background:#fbbf24;color:#111827;padding:12px 17px;font-weight:950;cursor:pointer}
+.rpgx-wurst-submit{display:flex;flex-direction:column;gap:10px}.rpgx-wurst-submit label{display:flex;flex-direction:column;gap:5px;color:#cbd5e1;font-size:.74rem;font-weight:800}.rpgx-wurst-submit input,.rpgx-wurst-submit textarea{width:100%;border:1px solid #334155;border-radius:10px;background:#060b13;color:#f8fafc;padding:9px 10px;font:inherit}.rpgx-wurst-submit textarea{min-height:84px;resize:vertical}.rpgx-wurst-submit-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.rpgx-wurst-submit-actions{display:flex;justify-content:flex-end;gap:8px}.rpgx-wurst-submit-actions button{border:1px solid #334155;border-radius:999px;background:#111827;color:#e5e7eb;padding:8px 12px;font-weight:850}.rpgx-wurst-submit-actions .primary{border-color:#fbbf24;background:#fbbf24;color:#111827}.rpgx-wurst-submit-error{color:#fca5a5;font-size:.8rem}.rpgx-wurst-submit-success{align-self:center;padding:15px;border:1px solid rgba(45,212,191,.35);border-radius:14px;background:rgba(13,148,136,.08);color:#ccfbf1}.rpgx-wurst-submit-success p{margin:.3rem 0 0;color:#99f6e4}.rpgx-wurst-hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+@media(min-width:901px){.rpgx-wurst-hero h1{font-size:50px}.rpgx-wurst-hero> .rpgx-wurst-hero-inner>p{font-size:17px}.rpgx-wurst-hero-inner{padding:44px 34px 24px}}
+@media(max-width:900px){.rpgx-wurst-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.rpgx-wurst-community{grid-template-columns:1fr}.rpgx-wurst-community-btn{justify-self:start}.rpgx-wurst-toolbar{top:62px;align-items:stretch;flex-direction:column}.rpgx-wurst-sort{justify-content:space-between}}
+@media(max-width:620px){.rpgx-wurst-page{padding-left:12px;padding-right:12px}.rpgx-wurst-hero{border-radius:17px}.rpgx-wurst-hero-inner{padding:20px 16px}.rpgx-wurst-hero h1{font-size:34px}.rpgx-wurst-location-card{margin-top:16px}.rpgx-wurst-radius>div{grid-template-columns:repeat(3,minmax(0,1fr))}.rpgx-wurst-toolbar{margin-left:-2px;margin-right:-2px}.rpgx-wurst-sort select{flex:1}.rpgx-wurst-grid{grid-template-columns:1fr}.rpgx-wurst-results-head{align-items:flex-start;flex-direction:column}.rpgx-wurst-submit-grid{grid-template-columns:1fr}.rpgx-wurst-card-media{aspect-ratio:16/11}}
+
+
+/* V155 – Header interactions: search, favorites, burger drawer */
+.rpgx-wurst-search-wrap{flex:1 1 100%;min-width:0}
+.rpgx-wurst-search-wrap input{width:100%;height:42px;border:1px solid var(--rpg-border);border-radius:13px;background:#0b1627;color:#fff;padding:0 14px;font-weight:700;outline:none}
+.rpgx-wurst-search-wrap input:focus{border-color:#fbbf24;box-shadow:0 0 0 2px rgba(251,191,36,.15)}
+.rpgx-favorites-backdrop{position:fixed;z-index:120;inset:0;background:rgba(2,6,14,.82);backdrop-filter:blur(8px);display:flex;justify-content:flex-end}
+.rpgx-favorites-panel{width:min(430px,100%);height:100%;overflow:auto;background:#081322;border-left:1px solid var(--rpg-border);color:#fff;box-shadow:-20px 0 60px rgba(0,0,0,.35)}
+.rpgx-favorites-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:16px;border-bottom:1px solid var(--rpg-border);background:rgba(8,19,34,.96)}
+.rpgx-favorites-head strong{font-size:20px}.rpgx-favorites-head button{border:0;background:#f59e0b;color:#111827;border-radius:999px;width:36px;height:36px;font-size:24px;font-weight:900;cursor:pointer}
+.rpgx-favorites-list{padding:12px;display:grid;gap:9px}.rpgx-favorite-row{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:10px;align-items:center;padding:9px;border:1px solid var(--rpg-border);border-radius:14px;background:#0f1b2d}
+.rpgx-favorite-row img,.rpgx-favorite-fallback{width:64px;height:64px;border-radius:10px;object-fit:cover;background:#17243a;display:grid;place-items:center;color:#dbe4ef}.rpgx-favorite-copy{min-width:0;display:grid;gap:4px}.rpgx-favorite-copy strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.rpgx-favorite-copy span{color:#dbe4ef;font-size:11px}.rpgx-favorite-row>button{border:0;background:transparent;color:#fbbf24;font-size:11px;font-weight:800;cursor:pointer}.rpgx-favorites-empty{padding:30px 18px;color:#cbd5e1}.rpgx-favorites-empty p{color:#dbe4ef}
+@media(max-width:700px){.rpgx-favorite-row{grid-template-columns:54px minmax(0,1fr)}.rpgx-favorite-row img,.rpgx-favorite-fallback{width:54px;height:54px}.rpgx-favorite-row>button{grid-column:2;text-align:left;padding:0}}
+
+
+/* ============================================================
+   V156 – Home banner: "Hier geht's um die Wurst"
+   Directly below the Büdchen-Radar banner and before Events.
+   ============================================================ */
+.rg-home-wurst-teaser{margin:6px 0 22px}
+.rg-home-wurst-teaser-link{display:block;color:inherit;text-decoration:none}
+.rg-home-wurst-teaser-media{
+  position:relative;overflow:hidden;min-height:190px;aspect-ratio:16 / 4.8;
+  border:1px solid rgba(251,191,36,.28);border-radius:22px;background:#050913;
+  box-shadow:0 14px 36px rgba(0,0,0,.24)
+}
+.rg-home-wurst-teaser-art{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(90deg,rgba(2,6,23,.94) 0%,rgba(2,6,23,.67) 40%,rgba(2,6,23,.12) 72%,rgba(2,6,23,.03) 100%),
+    url('../assets/wurst-hero-daylight.jpg') center 49% / cover no-repeat;
+  transition:transform .35s ease
+}
+.rg-home-wurst-teaser-link:hover .rg-home-wurst-teaser-art{transform:scale(1.018)}
+.rg-home-wurst-teaser-shade{
+  position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(2,6,23,.72) 0%,rgba(2,6,23,.34) 45%,rgba(2,6,23,.02) 82%,rgba(2,6,23,0) 100%);
+  pointer-events:none
+}
+.rg-home-wurst-teaser-copy{
+  position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;
+  justify-content:center;align-items:flex-start;padding:clamp(20px,3vw,34px)
+}
+.rg-home-wurst-kicker{
+  color:#fbbf24;font-size:.68rem;line-height:1;font-weight:950;
+  letter-spacing:.13em;margin-bottom:8px
+}
+.rg-home-wurst-teaser-copy h2{
+  margin:0;max-width:620px;color:#fff;font-size:clamp(1.75rem,4vw,3.15rem);
+  line-height:.98;font-weight:950;letter-spacing:-.035em
+}
+.rg-home-wurst-teaser-copy p{
+  margin:8px 0 0;max-width:560px;color:#d7dee9;font-size:.92rem
+}
+.rg-home-wurst-teaser-cta{
+  display:inline-flex;margin-top:12px;color:#fbbf24;font-size:.9rem;font-weight:900
+}
+@media(max-width:640px){
+  .rg-home-wurst-teaser{margin:6px 0 22px}
+  .rg-home-wurst-teaser-media{min-height:155px;aspect-ratio:16 / 6.4;border-radius:18px}
+  .rg-home-wurst-teaser-art{background-position:62% 49%}
+  .rg-home-wurst-teaser-shade{
+    background:linear-gradient(0deg,rgba(2,6,23,.94) 0%,rgba(2,6,23,.64) 54%,rgba(2,6,23,.16) 100%)
+  }
+  .rg-home-wurst-teaser-copy{padding:15px 17px}
+  .rg-home-wurst-teaser-copy h2{font-size:clamp(1.4rem,7vw,1.95rem);max-width:78%}
+  .rg-home-wurst-teaser-copy p{font-size:.78rem;max-width:72%}
+}
+
+
+/* V157 – Community data/image contributions + approved image slider */
+.rpgx-place-community{border-top:1px solid #334155;padding-top:15px;margin-top:4px}.rpgx-place-community h3{margin:0 0 6px;color:#fff;font-size:14px}
+.rpgx-contribution-form input[type="text"],.rpgx-contribution-form input[type="email"],.rpgx-contribution-form input[type="url"],.rpgx-contribution-form input[type="tel"],.rpgx-contribution-form input[type="file"],.rpgx-contribution-form select,.rpgx-contribution-form textarea{display:block;width:100%;box-sizing:border-box;margin-top:5px;border:1px solid #334155;border-radius:10px;background:#111c2c;color:#fff;padding:10px;font:inherit}
+.rpgx-contribution-images{margin:14px 0;border:1px solid #334155;border-radius:12px;padding:12px}.rpgx-contribution-images legend{padding:0 6px;color:#fff;font-weight:900}.rpgx-contribution-images>p{margin:0 0 8px;color:#dbe4ef;font-size:11px;line-height:1.5}.rpgx-contribution-image-row{display:grid;grid-template-columns:minmax(120px,.7fr) minmax(190px,1.3fr);gap:10px;align-items:end;padding:9px 0;border-top:1px solid #243244}.rpgx-contribution-image-row>span{font-size:11px;color:#cbd5e1;overflow:hidden;text-overflow:ellipsis}.rpgx-contribution-rights{display:flex!important;gap:9px;align-items:flex-start;padding:11px;border:1px solid #475569;border-radius:10px;background:#0b1322}.rpgx-contribution-rights input{width:18px!important;height:18px;margin:1px 0 0!important;flex:none}.rpgx-contribution-rights span{font-size:11px;line-height:1.45;color:#e2e8f0}.rpgx-contribution-form .rpgx-bude-primary:disabled{opacity:.62;cursor:wait}.rpgx-contribution-validation{margin:8px 0 0;color:#fbbf24;font-size:11px;font-weight:800;line-height:1.45}
+.rpgx-gallery-nav{position:absolute;z-index:6;top:50%;transform:translateY(-50%);width:40px;height:40px;border:1px solid rgba(255,255,255,.28);border-radius:999px;background:rgba(2,6,23,.72);color:#fff;font-size:28px;line-height:1;display:flex;align-items:center;justify-content:center;cursor:pointer}.rpgx-gallery-nav.prev{left:12px}.rpgx-gallery-nav.next{right:12px}.rpgx-gallery-dots{position:absolute;z-index:7;left:50%;bottom:10px;transform:translateX(-50%);display:flex;gap:6px;padding:5px 7px;border-radius:999px;background:rgba(2,6,23,.55)}.rpgx-gallery-dots button{width:7px;height:7px;padding:0;border:0;border-radius:99px;background:#64748b;cursor:pointer}.rpgx-gallery-dots button.active{background:#fbbf24}.rpgx-gallery-credit{position:absolute;z-index:7;right:10px;bottom:10px;max-width:55%;padding:4px 7px;border-radius:7px;background:rgba(2,6,23,.72);color:#cbd5e1;font-size:9px;line-height:1.2}
+@media(max-width:640px){.rpgx-contribution-image-row{grid-template-columns:1fr}.rpgx-gallery-nav{width:36px;height:36px}.rpgx-gallery-credit{bottom:36px;max-width:75%}}
+
+/* V159 – Büdchen community CTA matches all other detail views */
+.rpgx-bude-community button.rpgx-report-item{margin-top:0;border:0;background:transparent;color:#fbbf24;border-radius:0;padding:3px 0;font-weight:700;font-size:12px;text-decoration:underline;text-underline-offset:3px;text-align:left;box-shadow:none}
+
+
+/* V170 – standalone Pott-Quiz */
+.rpgx-quiz-page{max-width:920px;margin:0 auto;padding-bottom:34px}.rpgx-quiz-hero{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:28px clamp(20px,4vw,36px);margin:4px 0 18px;border:1px solid #334155;border-radius:26px;background:radial-gradient(circle at 90% 10%,rgba(245,158,11,.18),transparent 34%),linear-gradient(135deg,#0f172a,#111827 55%,#1c1917);box-shadow:0 18px 40px rgba(0,0,0,.22)}.rpgx-quiz-kicker{display:block;margin-bottom:8px;color:#f59e0b;font-size:.7rem;font-weight:950;letter-spacing:.14em}.rpgx-quiz-hero h1{margin:0;color:#fff;font-size:clamp(1.75rem,5vw,3rem);line-height:1.02;font-weight:950;letter-spacing:-.035em}.rpgx-quiz-hero h1 em{color:#f59e0b;font-style:normal}.rpgx-quiz-hero p{max-width:620px;margin:10px 0 0;color:#cbd5e1;font-size:.92rem;line-height:1.55}.rpgx-quiz-crown{display:flex;align-items:center;justify-content:center;width:88px;height:88px;flex:0 0 88px;border:1px solid rgba(245,158,11,.35);border-radius:22px;background:rgba(245,158,11,.08);font-size:2.8rem}.rpgx-quiz-panel{padding:clamp(20px,4vw,34px);border:1px solid #334155;border-radius:26px;background:#0f172a;box-shadow:0 16px 36px rgba(0,0,0,.18)}.rpgx-quiz-panel h2{margin:0 0 10px;color:#fff;font-size:clamp(1.35rem,3vw,2rem);line-height:1.22;font-weight:900}.rpgx-quiz-panel>p{margin:0;color:#cbd5e1;line-height:1.6}.rpgx-quiz-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}.rpgx-quiz-facts div,.rpgx-quiz-result-stats div{padding:15px;border:1px solid #334155;border-radius:16px;background:#020617;text-align:center}.rpgx-quiz-facts strong,.rpgx-quiz-result-stats strong{display:block;color:#f59e0b;font-size:1.55rem;font-weight:950}.rpgx-quiz-facts span,.rpgx-quiz-result-stats span{display:block;margin-top:3px;color:#dbe4ef;font-size:.72rem;font-weight:700}.rpgx-quiz-highscore{margin:0 0 18px!important;color:#dbe4ef!important;font-size:.84rem}.rpgx-quiz-highscore strong{color:#fbbf24}.rpgx-quiz-primary,.rpgx-quiz-secondary{min-height:46px;padding:11px 18px;border-radius:13px;font:inherit;font-size:.88rem;font-weight:900;cursor:pointer;transition:transform .15s ease,background .15s ease,opacity .15s ease}.rpgx-quiz-primary{border:1px solid #f59e0b;background:#f59e0b;color:#111827}.rpgx-quiz-primary:hover:not(:disabled){background:#fbbf24;transform:translateY(-1px)}.rpgx-quiz-primary:disabled{opacity:.42;cursor:not-allowed}.rpgx-quiz-secondary{border:1px solid #475569;background:#111827;color:#e2e8f0}.rpgx-quiz-secondary:hover{background:#1e293b}.rpgx-quiz-meta{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:9px;font-size:.73rem}.rpgx-quiz-meta span{color:#f59e0b;font-weight:900;text-transform:uppercase;letter-spacing:.08em}.rpgx-quiz-meta strong{color:#dbe4ef}.rpgx-quiz-progress{height:9px;margin-bottom:24px;overflow:hidden;border-radius:99px;background:#1e293b}.rpgx-quiz-progress span{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,#f59e0b,#fbbf24);transition:width .25s ease}.rpgx-quiz-options{display:grid;gap:10px;margin-top:20px}.rpgx-quiz-option{display:flex;align-items:flex-start;gap:12px;width:100%;padding:15px;border:1px solid #334155;border-radius:16px;background:#020617;color:#e2e8f0;text-align:left;font:inherit;font-size:.88rem;line-height:1.45;cursor:pointer;transition:border-color .15s ease,background .15s ease,transform .15s ease}.rpgx-quiz-option:hover:not(:disabled){background:#111827;border-color:#475569;transform:translateY(-1px)}.rpgx-quiz-option.is-selected{border-color:#f59e0b;background:rgba(245,158,11,.12);color:#fde68a}.rpgx-quiz-option.is-correct{border-color:#10b981;background:rgba(16,185,129,.13);color:#a7f3d0;font-weight:800}.rpgx-quiz-option.is-wrong{border-color:#f43f5e;background:rgba(244,63,94,.12);color:#fecdd3}.rpgx-quiz-option.is-muted{opacity:.48}.rpgx-quiz-letter{display:flex;align-items:center;justify-content:center;width:27px;height:27px;flex:0 0 27px;border-radius:8px;background:#1e293b;color:#cbd5e1;font-size:.72rem;font-weight:950}.rpgx-quiz-option.is-selected .rpgx-quiz-letter{background:#f59e0b;color:#111827}.rpgx-quiz-option.is-correct .rpgx-quiz-letter{background:#10b981;color:#052e16}.rpgx-quiz-option-copy{flex:1;padding-top:3px}.rpgx-quiz-mark{font-size:1.25rem;font-weight:950}.rpgx-quiz-explanation{margin-top:16px;padding:14px 16px;border:1px solid rgba(245,158,11,.32);border-radius:15px;background:rgba(245,158,11,.08);color:#fde68a}.rpgx-quiz-explanation.is-right{border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.08);color:#a7f3d0}.rpgx-quiz-explanation strong{font-size:.78rem;text-transform:uppercase;letter-spacing:.05em}.rpgx-quiz-explanation p{margin:5px 0 0;font-size:.84rem;line-height:1.55}.rpgx-quiz-bottom{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-top:22px;padding-top:18px;border-top:1px solid #334155;color:#dbe4ef;font-size:.78rem}.rpgx-quiz-bottom strong{color:#f59e0b}.rpgx-quiz-result{text-align:center}.rpgx-quiz-result-badge{font-size:4.5rem;line-height:1;margin-bottom:12px}.rpgx-quiz-result-label{display:inline-block;margin-bottom:8px;padding:5px 9px;border-radius:99px;background:#f59e0b;color:#111827;font-size:.66rem;font-weight:950;letter-spacing:.08em}.rpgx-quiz-result>p{max-width:560px;margin:0 auto;color:#cbd5e1}.rpgx-quiz-result-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;max-width:480px;margin:24px auto}.rpgx-quiz-actions{display:flex;justify-content:center;gap:10px;flex-wrap:wrap}.rpgx-quiz-discover{margin-top:28px;padding-top:20px;border-top:1px solid #334155}.rpgx-quiz-discover>span{display:block;margin-bottom:10px;color:#dbe4ef;font-size:.72rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em}.rpgx-quiz-discover>div{display:flex;justify-content:center;gap:8px;flex-wrap:wrap}.rpgx-quiz-discover a{padding:7px 10px;border:1px solid #334155;border-radius:10px;background:#020617;color:#fbbf24;font-size:.76rem;font-weight:800;text-decoration:none}.rpgx-quiz-discover a:hover{border-color:#f59e0b}
+@media(max-width:640px){.rpgx-quiz-page{padding-left:10px;padding-right:10px}.rpgx-quiz-hero{padding:20px 18px;border-radius:20px}.rpgx-quiz-crown{width:60px;height:60px;flex-basis:60px;border-radius:16px;font-size:2rem}.rpgx-quiz-hero p{font-size:.8rem}.rpgx-quiz-panel{padding:19px 16px;border-radius:20px}.rpgx-quiz-facts{gap:7px}.rpgx-quiz-facts div{padding:11px 6px}.rpgx-quiz-facts strong{font-size:1.25rem}.rpgx-quiz-option{padding:13px 12px;font-size:.82rem}.rpgx-quiz-bottom{align-items:stretch;flex-direction:column}.rpgx-quiz-bottom .rpgx-quiz-primary{width:100%}.rpgx-quiz-result-stats{gap:8px}.rpgx-quiz-actions{flex-direction:column}.rpgx-quiz-actions button{width:100%}}
+
+
+/* V184 Route Industriekultur: every tile shows its city. Unmatched route
+   entries keep the same visual card geometry instead of collapsing to text. */
+.rpgx-card-city{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.rpgx-route-fallback-card{cursor:default;border:1px solid var(--rpg-border);}
+.rpgx-route-fallback-card .rpgx-image-fallback{font-size:44px;}
+.rpgx-route-card-link{margin-left:auto;color:#fbbf24;text-decoration:none;font-weight:800;white-space:nowrap;}
+.rpgx-route-card-link:hover,.rpgx-route-card-link:focus-visible{text-decoration:underline;outline:none;}
+.rpgx-route-image-credit{position:absolute;z-index:2;top:7px;right:7px;max-width:80%;padding:3px 5px;border-radius:6px;background:rgba(2,6,14,.62);color:#dbe4ef;font-size:7px;line-height:1.15;text-align:right;pointer-events:none}.rpgx-route-fallback-card .rpgx-card-meta{align-items:center}.rpgx-route-fallback-card .rpgx-route-card-link{margin-left:auto;color:#fbbf24;text-decoration:none;font-weight:800}
+
+/* V188 – RDI type badges and clean card footer */
+.rpgx-route-type-badge{position:absolute;z-index:4;left:10px;top:10px;display:inline-flex;align-items:center;min-height:25px;padding:4px 8px;border-radius:999px;background:rgba(2,6,23,.9);border:1px solid rgba(245,158,11,.65);color:#fbbf24;font-size:10px;font-weight:900;letter-spacing:.02em;box-shadow:0 3px 12px rgba(0,0,0,.25)}
+.rpgx-route-fallback-card .rpgx-card-meta{justify-content:space-between}.rpgx-route-card-link{display:none!important}
+
+
+/* V192 – Community-Beiträge */
+.rpgx-community-stories{border:1px solid #334155;border-radius:18px;background:#0b1220;padding:16px}.rpgx-community-stories-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.rpgx-community-stories h3{margin:0;color:#fff;font-size:16px;font-weight:900}.rpgx-community-stories-head p,.rpgx-community-empty{margin:4px 0 0;color:#dbe4ef;font-size:12px}.rpgx-community-stories-head button{border:0;border-radius:999px;background:#f59e0b;color:#111827;padding:10px 13px;font-size:12px;font-weight:900;cursor:pointer;white-space:nowrap}.rpgx-community-story-list{display:grid;gap:10px;margin-top:14px}.rpgx-community-story{display:grid;grid-template-columns:auto 1fr;gap:12px;padding:12px;border:1px solid #253247;border-radius:14px;background:#111827}.rpgx-community-story>img{width:88px;height:88px;border-radius:10px;object-fit:cover}.rpgx-community-story h4{margin:0 0 3px;color:#fff;font-size:14px}.rpgx-community-story p{margin:4px 0 0;color:#cbd5e1;font-size:12px;line-height:1.55}.rpgx-community-story .rpgx-community-by{color:#fbbf24;font-weight:800}.rpgx-community-story-form>label{display:grid;gap:6px;margin-top:10px;color:#e2e8f0;font-size:12px;font-weight:800}.rpgx-community-story-form input[type=text],.rpgx-community-story-form input[type=email],.rpgx-community-story-form textarea{width:100%;border:1px solid #334155;border-radius:10px;background:#0f172a;color:#fff;padding:10px}.rpgx-community-story-form textarea{resize:vertical}.rpgx-community-story-form .rpgx-contribution-rights{display:flex;grid-template-columns:none;align-items:flex-start;gap:8px;font-weight:600;line-height:1.4}@media(max-width:600px){.rpgx-community-stories-head{flex-direction:column}.rpgx-community-story{grid-template-columns:1fr}.rpgx-community-story>img{width:100%;height:160px}}
+
+
+/* V193 – Community form upload UX + Home icon */
+.rpgx-footer-icon svg{width:18px;height:18px;display:block}
+.rpgx-community-upload{display:grid;gap:7px;margin-top:10px}
+.rpgx-community-upload-label{color:#e2e8f0;font-size:12px;font-weight:800}
+.rpgx-community-file-input{position:absolute!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+.rpgx-community-file-button{justify-self:start;border:1px solid #475569;border-radius:9px;background:#101b2b;color:#f8fafc;padding:9px 12px;font-size:12px;font-weight:800;cursor:pointer}
+.rpgx-community-file-button:disabled{opacity:.5;cursor:not-allowed}
+.rpgx-community-file-list{display:grid;gap:6px}
+.rpgx-community-file-row{display:flex;align-items:center;justify-content:space-between;gap:10px;min-width:0;border:1px solid #26364b;border-radius:9px;background:#111d2e;padding:8px 9px}
+.rpgx-community-file-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#dbe4ef;font-size:12px}
+.rpgx-community-file-row button{flex:0 0 auto;border:0;background:transparent;color:#cbd5e1;font-size:20px;line-height:1;cursor:pointer;padding:0 2px}
+
+/* V198 – Mobile header logo sizing fix.
+   rpg-react-source.css loads after the visual base and previously forced
+   the custom logo back to height:38px. Keep the header layout, but allow
+   the wide RuhrpottGuru wordmark to use the available mobile width. */
+@media (max-width: 430px) {
+  .rpgx-header-inner { height: 82px; }
+  .rpgx-brand { flex: 0 0 auto; min-width: 0; }
+  .rpgx-brand-logo {
+    width: 178px !important;
+    height: auto !important;
+    max-width: 178px !important;
+    max-height: 68px !important;
+    object-fit: contain;
+  }
+  .rpgx-header-actions { flex: 0 0 auto; gap: 5px; }
+  .rpgx-icon-btn {
+    width: 41px;
+    height: 41px;
+    border-radius: 13px;
+    font-size: 23px;
+    display: inline-grid;
+    place-items: center;
+    padding: 0;
+  }
+  .rpgx-icon-btn svg { width: 23px; height: 23px; }
+}
+/* V214 – Öffnungszeiten global für alle Places */
+.rpgx-opening-chip,.rg-home-opening-chip{display:inline-flex;align-items:center;gap:5px;width:max-content;max-width:100%;margin-top:7px;padding:4px 7px;border-radius:999px;font-size:9px;font-weight:900;line-height:1.2;white-space:normal;box-shadow:0 4px 14px rgba(0,0,0,.22)}
+.rpgx-opening-chip.is-open,.rg-home-opening-chip.is-open{background:rgba(20,184,166,.18);border:1px solid rgba(45,212,191,.45);color:#99f6e4}
+.rpgx-opening-chip.is-closed,.rg-home-opening-chip.is-closed{background:rgba(245,158,11,.16);border:1px solid rgba(251,191,36,.42);color:#fde68a}
+.rpgx-opening-chip.is-known,.rg-home-opening-chip.is-known{background:rgba(71,85,105,.62);border:1px solid rgba(148,163,184,.35);color:#e2e8f0}
+.rg-home-opening-chip{backdrop-filter:blur(8px)}
+.rpgx-opening-detail-status{display:flex;align-items:center;gap:6px;margin-top:3px;font-size:13px;font-weight:900;line-height:1.35}
+.rpgx-opening-detail-status.is-open{color:#5eead4}.rpgx-opening-detail-status.is-closed{color:#fbbf24}.rpgx-opening-detail-status.is-known{color:#cbd5e1}
+@media(max-width:430px){.rpgx-opening-chip,.rg-home-opening-chip{font-size:8px;padding:3px 6px}.rpgx-card-overlay{padding:12px}.rpgx-card-meta{margin-top:6px}}
+
+/* V203 – Desktop logo larger; mobile/tablet remain untouched. */
+@media (min-width: 821px) {
+  .rpgx-header-inner { height: 82px; }
+  .rpgx-brand-logo {
+    width: auto !important;
+    height: 62px !important;
+    max-width: 180px !important;
+    max-height: 62px !important;
+    object-fit: contain;
+  }
+}
+
+/* V204 – Desktop header visual size uplift.
+   Match the stronger desktop balance requested by the user:
+   larger wordmark and more prominent right-side action icons.
+   Mobile remains untouched. */
+@media (min-width: 821px) {
+  .rpgx-header-inner {
+    height: 92px;
+    padding-left: 22px;
+    padding-right: 22px;
+  }
+  .rpgx-brand-logo {
+    width: auto !important;
+    height: 70px !important;
+    max-width: 220px !important;
+    max-height: 70px !important;
+    object-fit: contain;
+  }
+  .rpgx-header-actions {
+    gap: 9px;
+  }
+  .rpgx-icon-btn {
+    width: 48px;
+    height: 48px;
+    border-radius: 14px;
+    font-size: 26px;
+    line-height: 1;
+    display: inline-grid;
+    place-items: center;
+    padding: 0;
+  }
+  .rpgx-icon-btn svg {
+    width: 24px;
+    height: 24px;
+  }
+  .rpgx-location-line {
+    padding: 0 22px 10px;
+    font-size: 12px;
+  }
+}
+
+/* V205 – Desktop location/weather strip + explicit sticky header.
+   Mobile/tablet keep the previous compact location line unchanged. */
+.rpgx-location-line-desktop{display:none}
+.rpgx-location-line-mobile{display:block}
+@media (min-width:821px){
+  .rpgx-header{
+    position:-webkit-sticky;
+    position:sticky;
+    top:0;
+    z-index:80;
+  }
+  .rpgx-location-line{
+    min-height:42px;
+    padding:0 22px 10px;
+    display:flex;
+    align-items:center;
+  }
+  .rpgx-location-line-mobile{display:none}
+  .rpgx-location-line-desktop{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    min-width:0;
+  }
+  .rpgx-location-current{
+    color:#f8fafc;
+    font-size:15px;
+    line-height:1;
+    font-weight:900;
+    letter-spacing:.01em;
+  }
+  .rpgx-location-change{
+    appearance:none;
+    border:1px solid #f59e0b;
+    border-radius:999px;
+    background:#f59e0b;
+    color:#111827;
+    padding:6px 10px;
+    font-size:11px;
+    line-height:1;
+    font-weight:900;
+    cursor:pointer;
+  }
+  .rpgx-location-change:hover{filter:brightness(1.06)}
+  .rpgx-header-weather{
+    display:inline-flex;
+    align-items:center;
+    min-height:26px;
+    padding-left:2px;
+    color:#dbe4ef;
+    font-size:12px;
+    line-height:1.2;
+    font-weight:800;
+    white-space:nowrap;
+  }
+}
+
+
+/* V210 – Mobile header location + change + weather.
+   Same location/weather treatment as desktop; weather remains cached by
+   active coordinates for 15 minutes and refreshes immediately on location change. */
+@media (max-width:820px){
+  .rpgx-location-line{
+    min-height:38px;
+    padding:0 12px 9px;
+    display:flex;
+    align-items:center;
+  }
+  .rpgx-location-line-mobile{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    min-width:0;
+    width:100%;
+    overflow:hidden;
+  }
+  .rpgx-location-line-mobile .rpgx-location-current{
+    color:#f8fafc;
+    font-size:12px;
+    line-height:1;
+    font-weight:900;
+    white-space:nowrap;
+  }
+  .rpgx-location-line-mobile .rpgx-location-change{
+    appearance:none;
+    border:0;
+    background:transparent;
+    color:#f59e0b;
+    padding:3px 0;
+    font-size:11px;
+    line-height:1;
+    font-weight:900;
+    cursor:pointer;
+    white-space:nowrap;
+  }
+  .rpgx-location-line-mobile .rpgx-header-weather{
+    display:inline-flex;
+    align-items:center;
+    min-width:0;
+    margin-left:auto;
+    color:#dbe4ef;
+    font-size:11px;
+    line-height:1.15;
+    font-weight:800;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+}
+@media (max-width:430px){
+  .rpgx-location-line-mobile{gap:7px}
+  .rpgx-location-line-mobile .rpgx-location-current{font-size:11px}
+  .rpgx-location-line-mobile .rpgx-location-change{font-size:10px}
+  .rpgx-location-line-mobile .rpgx-header-weather{font-size:10px}
+}
+
+/* V211 – Header remains visible while scrolling on every viewport;
+   category headings get stronger visual hierarchy. */
+.rpgx-header{
+  position:-webkit-sticky !important;
+  position:sticky !important;
+  top:0 !important;
+  z-index:120 !important;
+  width:100%;
+  align-self:flex-start;
+}
+.rpgx-section-head h2{
+  font-size:32px;
+  line-height:1.04;
+  font-weight:950;
+  letter-spacing:-.025em;
+}
+@media(max-width:820px){
+  .rpgx-section-head h2{
+    font-size:29px;
+    line-height:1.04;
+  }
+}
+
+/* V212 – Robust global sticky header fix.
+   Use viewport-fixed positioning plus a measured spacer instead of CSS sticky.
+   This is resilient to WordPress/browser ancestor overflow and works on mobile + desktop. */
+.rpgx-header{
+  position:fixed !important;
+  top:0 !important;
+  left:0 !important;
+  right:0 !important;
+  width:100% !important;
+  z-index:120 !important;
+}
+.rpgx-header-spacer{
+  display:block;
+  width:100%;
+  height:134px;
+  flex:0 0 auto;
+  pointer-events:none;
+}
+@media(max-width:820px){
+  .rpgx-header-spacer{height:102px;}
+}
+@media(max-width:430px){
+  .rpgx-header-spacer{height:120px;}
+}
+/* V236 – Header bündig am sichtbaren Viewport.
+   WordPress kann body.admin-bar gesetzt lassen, obwohl die Toolbar auf dem
+   Gerät nicht sichtbar ist. Ein statisches 32/46px-top ließ dann den
+   Seiteninhalt oberhalb des festen Headers durchscheinen. Der tatsächliche
+   Toolbar-Offset wird deshalb in components.js gemessen; ohne sichtbare
+   Toolbar bleibt er exakt 0px. */
+.rpgx-header{top:var(--rpg-admin-bar-offset,0px) !important;}
+
+/* V216 – Fixed header / overlay stacking correction.
+   The viewport-fixed header (z-index 120) must stay sticky on normal pages,
+   but dialogs/details must always open ABOVE it so titles and close controls
+   can never disappear behind the header on desktop or mobile. */
+.rpgx-global-detail-overlay,
+.rpgx-detail-backdrop,
+.rpgx-modal-backdrop,
+.rpgx-favorites-backdrop,
+.rpgx-feedback-backdrop {
+  z-index: 10060 !important;
+}
+
+/* The normal React detail uses the utility class z-50. This explicit class
+   wins over that utility without changing the detail layout itself. */
+.rpgx-global-detail-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+}
+
+/* V217 – Desktop detail offset below the fixed header.
+   Mobile already behaves correctly. On desktop, tall detail panels must not
+   be vertically centered because that can push their top/close bar above the
+   visible viewport. Use the measured real header bottom (incl. WP admin bar)
+   as the safe start edge instead. */
+@media (min-width: 821px) {
+  .rpgx-global-detail-overlay,
+  .rpgx-detail-backdrop {
+    align-items: flex-start !important;
+    padding-top: calc(var(--rpg-fixed-header-bottom, 120px) + 16px) !important;
+    padding-bottom: 32px !important;
+  }
+  .rpgx-detail {
+    max-height: calc(100vh - var(--rpg-fixed-header-bottom, 120px) - 48px) !important;
+  }
+}
+
+
+/* V218 – Community presentation finalization.
+   Two-column teasers stay visible while the selected contribution unfolds
+   full-width directly below its own row. No second detail layer is opened. */
+.rpgx-community-stories{
+  margin-top:12px;
+  padding:clamp(16px,2.3vw,22px);
+  border:1px solid #334155;
+  border-radius:20px;
+  background:#0b1220;
+}
+.rpgx-community-stories-head{align-items:center;gap:16px;margin-bottom:16px}
+.rpgx-community-stories h3{font-size:clamp(18px,2vw,22px);line-height:1.1;letter-spacing:-.015em}
+.rpgx-community-stories-head p,.rpgx-community-empty{margin-top:6px;font-size:12px;line-height:1.45}
+.rpgx-community-stories-head button{min-height:40px;padding:10px 15px}
+.rpgx-community-story-list{display:grid;gap:14px;margin-top:0}
+.rpgx-community-story-row{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;align-items:start}
+.rpgx-community-story-list.is-single .rpgx-community-story-row{grid-template-columns:1fr}
+.rpgx-community-story-teaser{
+  display:grid;
+  grid-template-rows:auto 1fr;
+  min-width:0;
+  width:100%;
+  padding:0;
+  overflow:hidden;
+  border:1px solid #2c3a50;
+  border-radius:15px;
+  background:#111827;
+  color:inherit;
+  text-align:left;
+  cursor:pointer;
+  box-shadow:none;
+  transition:border-color .16s ease,transform .16s ease,background .16s ease;
+}
+.rpgx-community-story-teaser:hover,.rpgx-community-story-teaser:focus-visible{border-color:#cbd5e1;outline:none;transform:translateY(-1px)}
+.rpgx-community-story-teaser.is-active{border-color:#f59e0b;background:#121a29}
+.rpgx-community-story-teaser>img,.rpgx-community-story-placeholder{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;background:#07101e}
+.rpgx-community-story-placeholder{display:grid;place-items:center;color:#cbd5e1;font-size:12px;font-weight:900}
+.rpgx-community-story-teaser-body{display:flex;flex-direction:column;min-width:0;padding:12px}
+.rpgx-community-story-title{display:block;color:#fff;font-size:14px;line-height:1.25;font-weight:900;letter-spacing:-.01em}
+.rpgx-community-story-teaser .rpgx-community-by,.rpgx-community-story-expanded .rpgx-community-by{display:block;margin-top:5px;color:#fbbf24;font-size:11px;line-height:1.3;font-weight:850}
+.rpgx-community-story-excerpt{display:-webkit-box;margin-top:8px;overflow:hidden;color:#cbd5e1;font-size:12px;line-height:1.45;-webkit-line-clamp:3;-webkit-box-orient:vertical}
+.rpgx-community-story-open{display:block;margin-top:auto;padding-top:10px;color:#fbbf24;font-size:11px;font-weight:900}
+.rpgx-community-story-expanded{
+  grid-column:1/-1;
+  width:100%;
+  margin-top:2px;
+  padding:clamp(15px,2vw,20px);
+  border:1px solid rgba(245,158,11,.45);
+  border-radius:17px;
+  background:#080f1c;
+  animation:rpgCommunityOpen .16s ease-out;
+}
+@keyframes rpgCommunityOpen{from{opacity:.4;transform:translateY(-5px)}to{opacity:1;transform:none}}
+.rpgx-community-story-expanded-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin-bottom:14px}
+.rpgx-community-story-expanded-head h4{margin:0;color:#fff;font-size:clamp(17px,2vw,21px);line-height:1.2;font-weight:950;letter-spacing:-.015em}
+.rpgx-community-story-expanded-head button{flex:0 0 auto;display:grid;place-items:center;width:34px;height:34px;border:1px solid #334155;border-radius:999px;background:#111827;color:#fff;font-size:22px;line-height:1;cursor:pointer}
+.rpgx-community-story-copy{margin-top:16px;color:#d7e0eb;font-size:13px;line-height:1.65}
+.rpgx-community-story-copy p{margin:0 0 12px;color:inherit;font-size:inherit;line-height:inherit}
+.rpgx-community-story-copy p:last-child{margin-bottom:0}
+.rpgx-community-gallery{display:grid;gap:9px}
+.rpgx-community-gallery-main{position:relative;overflow:hidden;border-radius:14px;background:#020617;border:1px solid #26364b}
+.rpgx-community-gallery-main>img{display:block;width:100%;max-height:460px;aspect-ratio:16/10;object-fit:cover}
+.rpgx-community-gallery-count{position:absolute;right:9px;bottom:9px;padding:4px 7px;border-radius:999px;background:rgba(2,6,23,.84);color:#fff;font-size:10px;font-weight:900}
+.rpgx-community-gallery-thumbs{display:flex;gap:8px;overflow-x:auto;padding:1px 1px 3px;scrollbar-width:thin}
+.rpgx-community-gallery-thumbs button{flex:0 0 72px;width:72px;height:54px;padding:0;overflow:hidden;border:2px solid transparent;border-radius:9px;background:#020617;cursor:pointer}
+.rpgx-community-gallery-thumbs button.is-active{border-color:#f59e0b}
+.rpgx-community-gallery-thumbs img{display:block;width:100%;height:100%;object-fit:cover}
+.rpgx-community-upload-note{display:block;margin-top:-2px;color:#dbe4ef;font-size:11px;line-height:1.4}
+
+/* The user's target layout is intentionally two columns even on mobile.
+   Only typography/padding becomes more compact; the two teasers remain 50:50. */
+@media(max-width:600px){
+  .rpgx-community-stories{padding:14px;border-radius:17px}
+  .rpgx-community-stories-head{align-items:flex-start;margin-bottom:14px}
+  .rpgx-community-stories-head button{align-self:flex-start}
+  .rpgx-community-story-row{gap:9px}
+  .rpgx-community-story-teaser-body{padding:9px}
+  .rpgx-community-story-title{font-size:12.5px;line-height:1.22}
+  .rpgx-community-story-teaser .rpgx-community-by{font-size:10px}
+  .rpgx-community-story-excerpt{margin-top:6px;font-size:10.5px;line-height:1.35;-webkit-line-clamp:2}
+  .rpgx-community-story-open{padding-top:8px;font-size:10px}
+  .rpgx-community-story-expanded{padding:14px}
+  .rpgx-community-story-expanded-head h4{font-size:17px}
+  .rpgx-community-story-copy{font-size:13px}
+  .rpgx-community-gallery-main>img{aspect-ratio:4/3;max-height:360px}
+  .rpgx-community-gallery-thumbs button{flex-basis:62px;width:62px;height:47px}
+}
+
+/* ============================================================
+   V222 – Category card calm/consistency pass (presentation only)
+   Shared priorities: title -> opening state -> place/distance/date.
+   No query, ranking or data-source logic changes.
+   ============================================================ */
+.rpgx-card-media img,
+.rg-home-mag-media > img,
+.rg-home-culture-media img{
+  object-fit:cover !important;
+  object-position:center center !important;
+}
+
+/* Long names no longer change card geometry. */
+.rpgx-card-overlay h3,
+.rg-home-mag-copy > strong,
+.rg-home-culture-copy > strong{
+  display:-webkit-box;
+  -webkit-box-orient:vertical;
+  -webkit-line-clamp:2;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  overflow-wrap:anywhere;
+}
+.rpgx-card-overlay h3{min-height:2.3em}
+.rg-home-mag-copy > strong{min-height:2.36em}
+.rg-home-culture-copy > strong{min-height:2.4em}
+.rpgx-card-overlay p{
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+/* One compact meta language on Home + category pages. */
+.rpgx-card-meta,
+.rg-home-mag-meta{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  flex-wrap:wrap;
+  gap:3px 9px;
+  min-width:0;
+}
+.rpgx-card-meta > span,
+.rg-home-mag-meta > span{
+  display:inline-flex;
+  align-items:center;
+  min-width:0;
+  max-width:100%;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+.rpgx-card-city,
+.rg-home-meta-city{max-width:46%}
+.rpgx-card-distance,
+.rg-home-meta-distance{flex:0 0 auto}
+.rpgx-card-date,
+.rg-home-meta-date{flex:0 1 auto}
+
+/* Opening state is a primary usability signal, but never changes card height
+   just because the label is long. */
+.rpgx-opening-chip,
+.rg-home-opening-chip{
+  max-width:100%;
+  white-space:nowrap !important;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+
+/* Grids/tracks stretch peers consistently. Magazine feature cards keep their
+   intentional featured size; peers inside a row remain equal. */
+.rpgx-grid,
+.rg-home-food-grid,
+.rg-home-events-track,
+.rg-home-activities-track,
+.rg-home-highlight-mosaic{
+  align-items:stretch;
+}
+.rpgx-grid > .rpgx-card,
+.rg-home-food-grid > .rg-home-food-mag-card,
+.rg-home-events-track > .rg-home-event-mag-card,
+.rg-home-activities-track > .rg-home-event-mag-card{
+  height:100%;
+}
+.rg-home-culture-list{align-items:stretch}
+.rg-home-culture-row{height:100%}
+.rg-home-culture-main{height:100%}
+
+/* Keep badges compact and prevent them from becoming accidental multi-line
+   blocks. Empty/generic values are already filtered before rendering. */
+.rg-home-experience-tags > span,
+.rg-home-culture-tags > span,
+.rpgx-route-type-badge{
+  max-width:100%;
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+@media (max-width:820px){
+  .rpgx-card-city,.rg-home-meta-city{max-width:52%}
+  .rpgx-card-meta,.rg-home-mag-meta{gap:3px 7px}
+}
+@media (max-width:430px){
+  .rpgx-card-city,.rg-home-meta-city{max-width:58%}
+  .rpgx-card-overlay h3{min-height:2.3em}
+  .rg-home-mag-copy > strong{min-height:2.36em}
+}
+
+/* ============================================================
+   V223 – Desktop Pass
+   Desktop-only refinement: wider editorial canvas, deliberate card sizing,
+   true desktop detail dialog, horizontal sticky footer navigation.
+   Mobile/tablet <= 1023px remain unchanged.
+   ============================================================ */
+@media (min-width:1024px){
+  :root{
+    --rpg-desktop-canvas:1320px;
+    --rpg-desktop-gap:18px;
+  }
+
+  /* Align header, location strip and content to one desktop canvas. */
+  .rpgx-header-inner,
+  .rpgx-location-line,
+  .rpgx-main{
+    width:min(var(--rpg-desktop-canvas),calc(100% - 48px));
+    max-width:var(--rpg-desktop-canvas);
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .rpgx-header-inner{padding-left:0;padding-right:0}
+  .rpgx-location-line{padding-left:0;padding-right:0}
+  .rpgx-main{
+    padding-left:0!important;
+    padding-right:0!important;
+    padding-top:20px!important;
+    padding-bottom:86px!important;
+  }
+
+  /* Stronger desktop section rhythm and hierarchy. */
+  .rpgx-section{margin-bottom:52px}
+  .rpgx-section-head{
+    align-items:flex-end;
+    margin-bottom:18px;
+    gap:24px;
+  }
+  .rpgx-section-head h2{
+    font-size:34px;
+    line-height:1;
+  }
+  .rpgx-section-head p{
+    display:block;
+    margin-top:7px;
+    font-size:14px;
+    line-height:1.35;
+  }
+  .rpgx-section-actions{gap:12px}
+  .rpgx-section-location{font-size:12px;font-weight:800}
+  .rpgx-all-link,.rpgx-text-link{font-size:12px}
+
+  /* Home rows: show four complete cards instead of a phone-like partial card. */
+  .rpgx-card-row{
+    grid-auto-columns:calc((100% - (3 * var(--rpg-desktop-gap))) / 4);
+    gap:var(--rpg-desktop-gap);
+    scroll-padding-inline:0;
+    padding-bottom:8px;
+  }
+  .rpgx-card-row .rpgx-card{
+    min-height:342px;
+    aspect-ratio:4/5;
+  }
+
+  /* Category/search grids use desktop proportions with stable card heights. */
+  .rpgx-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr));
+    gap:20px;
+    align-items:stretch;
+  }
+  .rpgx-grid .rpgx-card{
+    min-height:350px;
+    height:100%;
+    aspect-ratio:4/5;
+  }
+  .rpgx-card-overlay{padding:17px}
+  .rpgx-card-overlay h3{font-size:18px;line-height:1.12}
+  .rpgx-card-meta{font-size:11px;gap:9px}
+
+  /* Highlights keep magazine hierarchy, but with a calmer desktop composition. */
+  .rpgx-highlight-layout{
+    grid-template-columns:minmax(0,1.8fr) minmax(0,1fr) minmax(0,1fr);
+    grid-template-rows:repeat(2,235px);
+    gap:18px;
+    min-height:488px;
+  }
+  .rpgx-highlight-layout .rpgx-card{min-height:235px}
+  .rpgx-highlight-layout .rpgx-card-large{min-height:488px}
+
+  /* Category heads/tools no longer sit in a narrow mobile-derived column. */
+  .rpgx-category-header,
+  .rpgx-route-head{margin-bottom:24px}
+  .rpgx-category-header h1,
+  .rpgx-route-head h1{font-size:40px;line-height:1.02}
+  .rpgx-category-header p,
+  .rpgx-route-head p{font-size:14px;margin-top:8px}
+  .rpgx-category-tools{
+    max-width:none;
+    grid-template-columns:minmax(360px,1fr) minmax(220px,320px);
+    gap:14px;
+    margin-bottom:22px;
+  }
+
+  /* The direct detail layer becomes a proper desktop dialog rather than a
+     stretched mobile sheet. It stays below the fixed header and scrolls inside. */
+  .rpgx-global-detail-overlay{
+    padding-left:32px!important;
+    padding-right:32px!important;
+  }
+  .rpgx-direct-detail-panel{
+    width:min(1080px,calc(100vw - 72px))!important;
+    max-width:1080px!important;
+    max-height:calc(100vh - var(--rpg-fixed-header-bottom,120px) - 40px)!important;
+    margin:0!important;
+    border-radius:24px!important;
+    overflow:auto!important;
+    box-shadow:0 34px 110px rgba(0,0,0,.58)!important;
+  }
+  .rpgx-direct-detail-panel > .sticky{
+    border-radius:24px 24px 0 0;
+  }
+  .rpgx-direct-detail-hero{
+    height:360px!important;
+    min-height:360px;
+  }
+  .rpgx-direct-detail-body{
+    padding:28px 30px 34px!important;
+    gap:24px!important;
+  }
+  .rpgx-direct-detail-body > .grid.grid-cols-1.sm\:grid-cols-2{
+    gap:18px!important;
+  }
+
+  /* Sticky footer remains bottom navigation, but reads like desktop navigation:
+     icon + label horizontally, not a blown-up phone tab bar. */
+  .rpgx-footer-nav{
+    position:fixed!important;
+    left:0!important;
+    right:0!important;
+    bottom:0!important;
+    top:auto!important;
+    transform:none!important;
+    width:100%!important;
+    min-height:58px!important;
+    padding:7px 24px!important;
+    gap:6px!important;
+    justify-content:center!important;
+    background:rgba(7,17,31,.96)!important;
+    border:0!important;
+    border-top:1px solid var(--rpg-border)!important;
+    border-radius:0!important;
+    box-shadow:0 -12px 32px rgba(0,0,0,.22)!important;
+  }
+  .rpgx-footer-link{
+    flex:0 1 170px!important;
+    max-width:170px!important;
+    min-width:120px!important;
+    min-height:42px;
+    flex-direction:row!important;
+    justify-content:center!important;
+    gap:8px!important;
+    padding:8px 14px!important;
+    border-radius:11px!important;
+    font-size:12px!important;
+  }
+  .rpgx-footer-icon{font-size:18px!important}
+  .rpgx-footer-link:hover,
+  .rpgx-footer-link:focus-visible{
+    background:#132238;
+    color:#fff;
+    outline:none;
+  }
+
+  /* Desktop editorial/banner blocks should align with the same canvas. */
+  .rpgx-home-wp-editorial,
+  .rg-home-module,
+  .rg-home-buedchen-teaser,
+  .rg-home-route-teaser,
+  .rpgx-home-editorial-insert{
+    width:100%;
+    max-width:100%;
+  }
+}
+
+@media (min-width:1440px){
+  :root{--rpg-desktop-canvas:1360px}
+  .rpgx-card-row{
+    grid-auto-columns:calc((100% - (4 * var(--rpg-desktop-gap))) / 5);
+  }
+  .rpgx-card-row .rpgx-card{min-height:322px}
+}
+
+
+/* V226 – semantic heading tag parity; no visual change. */
+.rpgx-home-semantic-title{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.rg-home-wurst-teaser-copy h3{margin:0;max-width:620px;color:#fff;font-size:clamp(1.75rem,4vw,3.15rem);line-height:.98;font-weight:950;letter-spacing:-.035em}
+@media(max-width:640px){.rg-home-wurst-teaser-copy h3{font-size:clamp(1.4rem,7vw,1.95rem);max-width:78%}}
+\n\n/* V228 – Events category date filter: icon between search and event type. */
+.rpgx-event-category-tools{
+  grid-template-columns:minmax(0,1fr) 46px minmax(0,1fr);
+  align-items:start;
+  position:relative;
+}
+.rpgx-event-calendar-btn{
+  width:46px;
+  height:100%;
+  min-height:44px;
+  display:grid;
+  place-items:center;
+  padding:0;
+  border:1px solid #30415c;
+  border-radius:12px;
+  background:#0f1b2d;
+  color:#e2e8f0;
+  cursor:pointer;
+  transition:border-color .16s ease,background .16s ease,color .16s ease;
+}
+.rpgx-event-calendar-btn:hover,
+.rpgx-event-calendar-btn:focus-visible{
+  border-color:#f59e0b;
+  color:#fbbf24;
+  outline:none;
+}
+.rpgx-event-calendar-btn.is-active{
+  border-color:#f59e0b;
+  background:rgba(245,158,11,.14);
+  color:#fbbf24;
+}
+.rpgx-event-calendar-panel{
+  grid-column:1/-1;
+  width:min(620px,100%);
+  padding:14px;
+  border:1px solid #30415c;
+  border-radius:16px;
+  background:#0b1728;
+  box-shadow:0 18px 50px rgba(0,0,0,.28);
+}
+.rpgx-event-date-presets{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.rpgx-event-date-presets button{
+  border:1px solid #30415c;
+  border-radius:999px;
+  background:#132238;
+  color:#e2e8f0;
+  padding:8px 12px;
+  font-size:12px;
+  font-weight:800;
+  cursor:pointer;
+}
+.rpgx-event-date-presets button:hover,
+.rpgx-event-date-presets button.is-active{
+  border-color:#f59e0b;
+  color:#fbbf24;
+  background:rgba(245,158,11,.12);
+}
+.rpgx-event-range-title{
+  margin:14px 0 8px;
+  color:#cbd5e1;
+  font-size:12px;
+  font-weight:800;
+}
+.rpgx-event-date-range{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+}
+.rpgx-event-date-range label{
+  display:grid;
+  gap:5px;
+  color:#dbe4ef;
+  font-size:11px;
+  font-weight:700;
+}
+.rpgx-event-date-range input[type=date]{
+  color-scheme:dark;
+  min-height:42px;
+  background:#0f1b2d;
+  color:#f8fafc;
+  border:1px solid #30415c;
+  border-radius:11px;
+  padding:9px 10px;
+}
+.rpgx-event-calendar-actions{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  margin-top:12px;
+}
+.rpgx-event-calendar-actions button{
+  border-radius:11px;
+  padding:9px 12px;
+  font-size:12px;
+  font-weight:900;
+  cursor:pointer;
+}
+.rpgx-event-calendar-reset{
+  border:1px solid #30415c;
+  background:#132238;
+  color:#e2e8f0;
+}
+.rpgx-event-calendar-apply{
+  border:1px solid #f59e0b;
+  background:#f59e0b;
+  color:#111827;
+}
+.rpgx-event-calendar-apply:disabled{
+  opacity:.45;
+  cursor:not-allowed;
+}
+.rpgx-event-date-chip{
+  grid-column:1/-1;
+  justify-self:start;
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  max-width:100%;
+  border:1px solid rgba(245,158,11,.58);
+  border-radius:999px;
+  background:rgba(245,158,11,.12);
+  color:#fbbf24;
+  padding:6px 10px;
+  font-size:11px;
+  font-weight:850;
+  cursor:pointer;
+}
+.rpgx-event-date-chip svg{width:15px;height:15px;flex:0 0 auto}
+.rpgx-event-date-chip span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rpgx-event-date-chip strong{font-size:16px;line-height:1;font-weight:600}
+
+@media (min-width:821px){
+  .rpgx-event-category-tools{
+    grid-template-columns:minmax(360px,1fr) 48px minmax(220px,320px)!important;
+    gap:12px!important;
+  }
+  .rpgx-event-calendar-btn{width:48px;min-height:46px}
+}
+@media (max-width:600px){
+  .rpgx-event-category-tools{
+    grid-template-columns:48px minmax(0,1fr)!important;
+    gap:7px!important;
+  }
+  .rpgx-event-category-tools > #rpgx-category-search{
+    grid-column:1/-1;
+  }
+  .rpgx-event-calendar-btn{
+    grid-column:1;
+    grid-row:2;
+    width:48px;
+    min-height:42px;
+  }
+  .rpgx-event-category-tools > select{
+    grid-column:2;
+    grid-row:2;
+  }
+  .rpgx-event-calendar-panel,
+  .rpgx-event-date-chip{
+    grid-column:1/-1;
+  }
+  .rpgx-event-date-range{
+    grid-template-columns:1fr;
+  }
+  .rpgx-event-calendar-panel{padding:12px}
+  .rpgx-event-date-presets{gap:6px}
+  .rpgx-event-date-presets button{flex:1 1 auto;padding:8px 9px}
+}
+@media (max-width:360px){
+  .rpgx-event-category-tools{
+    grid-template-columns:46px minmax(0,1fr)!important;
+  }
+}
+
+/* V255 — Desktop readability pass.
+   Increase small desktop UI text sizes in the React app/category views while
+   keeping mobile untouched and preserving the current layout logic. */
+@media (min-width:821px){
+  .rpgx-location-line{
+    min-height:46px;
+    padding:0 22px 11px;
+  }
+  .rpgx-location-line-desktop{
+    gap:12px;
+  }
+  .rpgx-location-current{
+    font-size:18px;
+    line-height:1.1;
+  }
+  .rpgx-location-change{
+    padding:8px 13px;
+    font-size:13px;
+  }
+  .rpgx-header-weather{
+    min-height:28px;
+    font-size:14px;
+    line-height:1.25;
+  }
+  .rpgx-category-header h1,
+  .rpgx-route-head h1{
+    font-size:44px;
+    line-height:1.02;
+  }
+  .rpgx-category-header p,
+  .rpgx-route-head p{
+    font-size:16px;
+    line-height:1.38;
+    margin-top:9px;
+  }
+  .rpgx-card-overlay{
+    padding:18px;
+  }
+  .rpgx-card-overlay h3{
+    font-size:20px;
+    line-height:1.12;
+  }
+  .rpgx-card-overlay p{
+    font-size:12px;
+  }
+  .rpgx-card-meta{
+    font-size:12.5px;
+    gap:10px;
+    margin-top:9px;
+  }
+  .rpgx-opening-chip,
+  .rg-home-opening-chip{
+    gap:6px;
+    margin-top:9px;
+    padding:6px 10px;
+    font-size:11px;
+    line-height:1.22;
+  }
+}
+\n\n/* V257 — Accessibility: AAA-oriented text contrast + visible keyboard focus.\n   The audit reported insufficient enhanced contrast on muted text. These\n   overrides keep the dark visual language while lifting small text above the\n   high-contrast threshold on the darkest and medium slate surfaces. */\n.text-slate-400,.text-slate-500{color:#dbe4ef!important}\n.rpgx-location-line,.rpgx-section-head p,.rpgx-section-location,\n.rpgx-category-header p,.rpgx-route-head p,.rpgx-location-or,\n.rpgx-radius-help,.rpgx-loading,.rpgx-empty,\n.rpgx-bude-address,.rpgx-bude-opening,.rpgx-bude-culture p,\n.rpgx-bude-detail-title p,.rpgx-bude-disclaimer{color:#dbe4ef}\n.rpgx-card-overlay p,.rpgx-card-meta{color:#f8fafc}\n.rpgx-opening-chip.is-closed{color:#fff1f2}\ninput::placeholder,textarea::placeholder{color:#dbe4ef!important;opacity:1}\n:where(a,button,input,select,textarea,[tabindex]):focus-visible{\n  outline:3px solid #fbbf24!important;\n  outline-offset:3px!important;\n}\n
+/* ============================================================
+   V259 – Accessibility final pass from Eye-Able PDF evidence.
+   - Footer category navigation receives a deterministic opaque background and
+     high-contrast text instead of a translucent surface that automated tools
+     can only classify as "manual contrast check".
+   - SureCookie controls named in the report get explicit AAA-capable foreground
+     / background pairs. This does not alter consent behaviour.
+   ============================================================ */
+.rpgx-footer-nav{
+  background:#07111f!important;
+  backdrop-filter:none!important;
+  -webkit-backdrop-filter:none!important;
+}
+.rpgx-footer-link,
+.rpgx-footer-link:visited{
+  color:#f8fafc!important;
+  opacity:1!important;
+}
+.rpgx-footer-icon{color:currentColor!important}
+
+/* SureCookie branding: dark readable text on the light banner surface. */
+.surecookie-banner-inner a.surecookie-branding-mobile,
+.surecookie-banner-inner a.surecookie-branding-desktop,
+.surecookie-banner-inner a.surecookie-branding-mobile span,
+.surecookie-banner-inner a.surecookie-branding-desktop span{
+  color:#111827!important;
+  opacity:1!important;
+}
+
+/* Primary/essential consent actions: white on dark green = > 8:1. */
+.surecookie-banner-inner button.surecookie-accept-all-btn,
+.surecookie-banner-inner button.surecookie-accept-btn,
+.surecookie-banner-inner button.surecookie-accept-all-btn:hover,
+.surecookie-banner-inner button.surecookie-accept-btn:hover,
+.surecookie-banner-inner button.surecookie-accept-all-btn:focus-visible,
+.surecookie-banner-inner button.surecookie-accept-btn:focus-visible{
+  background:#245500!important;
+  border-color:#245500!important;
+  color:#ffffff!important;
+  opacity:1!important;
+}
+
+/* Decline remains visually distinct while retaining AAA-capable contrast. */
+.surecookie-banner-inner button.surecookie-decline-btn,
+.surecookie-banner-inner button.surecookie-decline-btn:hover,
+.surecookie-banner-inner button.surecookie-decline-btn:focus-visible{
+  background:#7f1d1d!important;
+  border-color:#7f1d1d!important;
+  color:#ffffff!important;
+  opacity:1!important;
+}
+
+/* Preferences stays a secondary light control with dark text. */
+.surecookie-banner-inner button.surecookie-preferences-btn,
+.surecookie-banner-inner button.surecookie-preferences-btn:hover,
+.surecookie-banner-inner button.surecookie-preferences-btn:focus-visible{
+  background:#ffffff!important;
+  border-color:#475569!important;
+  color:#111827!important;
+  opacity:1!important;
+}
+
+
+/* V264 — PLZ location method inside the canonical location modal. */
+.rpgx-location-methods{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:8px;
+  width:100%;
+}
+.rpgx-location-methods .rpgx-primary-btn,
+.rpgx-location-methods .rpgx-secondary-btn{
+  width:100%;
+  min-height:44px;
+}
+.rpgx-postcode-toggle[aria-expanded="true"]{
+  border-color:#f59e0b;
+  color:#fbbf24;
+}
+.rpgx-postcode-form{
+  margin:10px 0 4px;
+  padding:12px;
+  border:1px solid #30415c;
+  border-radius:12px;
+  background:#0f1b2d;
+}
+.rpgx-postcode-form label{
+  display:block;
+  margin:0 0 7px;
+  color:#f8fafc;
+  font-size:12px;
+  font-weight:800;
+}
+.rpgx-postcode-controls{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) auto;
+  gap:8px;
+  align-items:center;
+}
+.rpgx-postcode-controls input{
+  width:100%;
+  min-height:42px;
+  border:1px solid #475569;
+  border-radius:11px;
+  background:#132238;
+  color:#fff;
+  padding:9px 11px;
+  font-size:16px;
+}
+.rpgx-postcode-help{
+  display:block;
+  margin-top:7px;
+  color:#dbe4ef;
+  font-size:11px;
+  line-height:1.35;
+}
+@media(max-width:430px){
+  .rpgx-location-methods{grid-template-columns:1fr 1fr;gap:6px}
+  .rpgx-location-methods .rpgx-primary-btn,
+  .rpgx-location-methods .rpgx-secondary-btn{padding:9px 8px;font-size:11px}
+}
+@media(max-width:340px){
+  .rpgx-location-methods{grid-template-columns:1fr}
+  .rpgx-postcode-controls{grid-template-columns:1fr}
+}
+
+
+/* V265 – Food price/cuisine intelligence restored from explicit source data. */
+.rpgx-food-facts{display:flex;align-items:center;flex-wrap:wrap;gap:4px;margin-top:7px;max-width:100%}
+.rpgx-food-price,.rpgx-food-tag{display:inline-flex;align-items:center;min-height:20px;padding:3px 7px;border-radius:999px;background:rgba(2,6,23,.76);border:1px solid rgba(251,191,36,.34);color:#fde68a;font-size:9px;line-height:1.1;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.rpgx-food-price{color:#fef3c7;border-color:rgba(245,158,11,.58);letter-spacing:.04em}
+.rg-home-food-facts .is-price{color:#fef3c7;border-color:rgba(245,158,11,.58);letter-spacing:.04em}
+@media(max-width:430px){.rpgx-food-facts{gap:3px;margin-top:6px}.rpgx-food-price,.rpgx-food-tag{font-size:8px;padding:3px 6px}}
+
+/* V266 – detail tag navigation: cards stay informational; detail chips are full touch targets. */
+.rpgx-detail-tag-list{display:flex;flex-wrap:wrap;gap:8px}
+.rpgx-detail-tag-filter,.rpgx-detail-tag-static{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:9px 13px;border-radius:12px;border:1px solid #334155;background:#1e293b;color:#e2e8f0;font-size:12px;line-height:1.15;font-weight:800;text-decoration:none}
+.rpgx-detail-tag-filter{cursor:pointer;transition:background .15s ease,border-color .15s ease,color .15s ease,transform .15s ease}
+.rpgx-detail-tag-filter:hover,.rpgx-detail-tag-filter:focus-visible{background:#273449;border-color:rgba(251,191,36,.55);color:#fde68a;outline:none}
+.rpgx-detail-tag-filter:active{transform:scale(.98)}
+.rpgx-detail-tag-arrow{color:#fbbf24;font-size:14px;line-height:1}
+.rpgx-active-place-tag-wrap{display:flex;align-items:center;margin:-2px 0 14px}
+.rpgx-active-place-tag{display:inline-flex;align-items:center;gap:9px;min-height:44px;max-width:100%;padding:9px 13px;border-radius:999px;border:1px solid rgba(251,191,36,.55);background:rgba(251,191,36,.12);color:#fde68a;font:inherit;font-size:13px;font-weight:800;cursor:pointer}
+.rpgx-active-place-tag span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.rpgx-active-place-tag strong{font-size:18px;line-height:1}
+.rpgx-active-place-tag:hover,.rpgx-active-place-tag:focus-visible{background:rgba(251,191,36,.2);outline:none}
+@media(max-width:430px){.rpgx-detail-tag-list{gap:7px}.rpgx-detail-tag-filter,.rpgx-detail-tag-static{min-height:44px;padding:9px 12px;font-size:12px}.rpgx-active-place-tag{min-height:44px;font-size:12px}}
+
+
+/* ============================================================
+   V269 – Activities final QS
+   Community-photo CTA + public-outdoor availability semantics.
+   ============================================================ */
+.rpgx-community-photo-placeholder{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:flex-start;
+  gap:8px;
+  padding:34px 14px 96px;
+  background:radial-gradient(circle at 50% 30%,rgba(245,158,11,.14),transparent 36%),linear-gradient(145deg,#14233a,#08111f 72%);
+  color:#e2e8f0;
+  text-align:center;
+}
+.rpgx-community-photo-placeholder svg{width:34px;height:34px;color:#fbbf24;filter:drop-shadow(0 4px 14px rgba(245,158,11,.18));flex:0 0 auto}
+.rpgx-community-photo-copy{display:block;max-width:180px;font-size:11.5px;font-weight:800;line-height:1.3;color:#f1f5f9;text-wrap:balance}
+.rpgx-card-community-photo{cursor:default}
+.rpgx-card-community-photo .rpgx-card-open{position:absolute;inset:0;width:100%;height:100%;border:0;padding:0;background:transparent;color:inherit;text-align:left;cursor:pointer}
+.rpgx-community-photo-cta{position:absolute;z-index:4;left:50%;top:55%;transform:translate(-50%,-50%);display:inline-flex;align-items:center;justify-content:center;min-width:142px;min-height:46px;max-width:calc(100% - 28px);padding:11px 18px;border:1px solid rgba(251,191,36,.62);border-radius:999px;background:rgba(7,17,31,.92);box-shadow:0 8px 24px rgba(0,0,0,.3);color:#fbbf24;font-size:11.5px;font-weight:900;line-height:1.1;white-space:nowrap;cursor:pointer;backdrop-filter:blur(8px)}
+.rpgx-community-photo-cta:hover,.rpgx-community-photo-cta:focus-visible{background:#f59e0b;color:#111827;border-color:#f59e0b;outline:none}
+.rpgx-home-community-photo{position:relative;display:block;overflow:hidden}
+.rpgx-home-community-photo .rpgx-home-card-open{display:block;width:100%;height:100%;border:0;padding:0;background:transparent;color:inherit;text-align:left;cursor:pointer}
+.rpgx-home-community-photo .rg-home-mag-media{display:block;width:100%;height:100%}
+.rpgx-home-community-photo .rpgx-community-photo-placeholder{position:absolute;inset:0;padding:30px 14px 98px}
+.rpgx-home-community-photo .rpgx-community-photo-cta.is-home{top:54%;min-width:136px;min-height:46px;padding:11px 16px;font-size:11px}
+.rpgx-contribution-form.is-photo-only .rpgx-contribution-images{margin-top:4px}
+.rpgx-contribution-form.is-photo-only .rpgx-bude-report-warning{margin-bottom:12px}
+
+/* Public outdoor Activities use access/usage language instead of business
+   opening language. Explicit source hours are retained; unknown never means 24/7. */
+.rpgx-opening-chip.is-public,.rg-home-opening-chip.is-public{background:rgba(20,184,166,.12);border:1px solid rgba(45,212,191,.34);color:#ccfbf1}
+.rpgx-opening-detail-status.is-public{color:#99f6e4}
+
+@media(max-width:430px){
+  .rpgx-community-photo-placeholder{gap:7px;padding:26px 10px 92px}
+  .rpgx-community-photo-placeholder svg{width:30px;height:30px}
+  .rpgx-community-photo-copy{max-width:150px;font-size:10.5px}
+  .rpgx-community-photo-cta{min-width:136px;min-height:44px;padding:10px 14px;font-size:10.5px}
+  .rpgx-home-community-photo .rpgx-community-photo-placeholder{padding:24px 10px 92px}
+  .rpgx-home-community-photo .rpgx-community-photo-cta.is-home{top:53%;min-height:44px}
+}
+
+/* V273 — perceived-performance skeletons for live Home/category data.
+   The skeleton keeps final card geometry reserved and uses only a soft opacity
+   pulse; users who prefer reduced motion get a static placeholder. */
+.rpgx-sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+.rpgx-skeleton-set{pointer-events:none;user-select:none}
+.rpgx-skeleton-card{position:relative;overflow:hidden;background:#0f172a!important;border-color:#22324a!important;box-shadow:none!important;transform:none!important}
+.rpgx-skeleton-media{position:absolute;inset:0;display:block;background:linear-gradient(145deg,#17243a,#0b1322 72%);animation:rpgx-skeleton-pulse 1.65s ease-in-out infinite}
+.rpgx-skeleton-copy{position:absolute;z-index:2;left:0;right:0;bottom:0;display:flex;flex-direction:column;gap:8px;padding:14px;background:linear-gradient(transparent,rgba(2,6,23,.92) 48%,rgba(2,6,23,.98))}
+.rpgx-skeleton-line{display:block;height:9px;border-radius:999px;background:#334155;animation:rpgx-skeleton-pulse 1.65s ease-in-out infinite}
+.rpgx-skeleton-line.is-title{width:74%;height:14px;background:#475569}
+.rpgx-skeleton-line.is-medium{width:58%}
+.rpgx-skeleton-line.is-short{width:38%}
+.rpgx-skeleton-culture-row{display:grid;grid-template-columns:86px minmax(0,1fr);gap:.72rem;align-items:center;min-height:88px;padding:.45rem .7rem .45rem .45rem}
+.rpgx-skeleton-culture-media{display:block;width:78px;height:78px;border-radius:.72rem;background:linear-gradient(145deg,#17243a,#0b1322);animation:rpgx-skeleton-pulse 1.65s ease-in-out infinite}
+.rpgx-skeleton-culture-copy{display:flex;flex-direction:column;gap:10px;min-width:0}
+.rpgx-skeleton-culture-copy .rpgx-skeleton-line.is-title{width:min(78%,320px)}
+.rpgx-skeleton-culture-copy .rpgx-skeleton-line.is-short{width:min(48%,210px)}
+@keyframes rpgx-skeleton-pulse{0%,100%{opacity:.62}50%{opacity:1}}
+@media(max-width:640px){.rpgx-skeleton-culture-row{grid-template-columns:72px minmax(0,1fr);min-height:76px;gap:.58rem}.rpgx-skeleton-culture-media{width:66px;height:66px}.rpgx-skeleton-copy{padding:12px;gap:7px}}
+@media(prefers-reduced-motion:reduce){.rpgx-skeleton-media,.rpgx-skeleton-line,.rpgx-skeleton-culture-media{animation:none!important;opacity:.82}}
+
+/* V276 — Halloween im Pott seasonal special (theme-only). */
+.rpgx-halloween-home{
+  margin:0 0 18px;
+}
+.rpgx-halloween-home-link{
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(150px, .8fr) minmax(0, 1.7fr);
+  min-height:210px;
+  overflow:hidden;
+  border:1px solid rgba(249,115,22,.38);
+  border-radius:24px;
+  background:
+    radial-gradient(circle at 18% 38%,rgba(249,115,22,.24),transparent 34%),
+    linear-gradient(125deg,#120c1d 0%,#171024 48%,#08111f 100%);
+  color:#fff;
+  text-decoration:none;
+  box-shadow:0 18px 45px rgba(2,6,23,.32);
+}
+.rpgx-halloween-home-link:hover{border-color:rgba(249,115,22,.72);}
+.rpgx-halloween-home-art{
+  position:relative;
+  min-height:210px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  isolation:isolate;
+}
+.rpgx-halloween-home-art::before{
+  content:"";
+  position:absolute;
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  background:rgba(249,115,22,.15);
+  filter:blur(2px);
+  z-index:-1;
+}
+.rpgx-halloween-home-art span{position:absolute;font-size:clamp(2rem,5vw,4.6rem);filter:drop-shadow(0 12px 20px rgba(0,0,0,.35));}
+.rpgx-halloween-home-art span:nth-child(1){font-size:clamp(4.2rem,9vw,7.2rem);transform:translate(-4px,8px) rotate(-6deg);}
+.rpgx-halloween-home-art span:nth-child(2){transform:translate(70px,-47px) rotate(8deg);}
+.rpgx-halloween-home-art span:nth-child(3){transform:translate(-78px,-60px) rotate(-12deg);}
+.rpgx-halloween-home-copy{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:flex-start;
+  padding:28px 32px 28px 12px;
+}
+.rpgx-halloween-kicker{
+  display:inline-flex;
+  align-items:center;
+  min-height:30px;
+  padding:5px 10px;
+  border-radius:999px;
+  border:1px solid rgba(249,115,22,.38);
+  background:rgba(249,115,22,.11);
+  color:#fdba74;
+  font-size:.72rem;
+  font-weight:900;
+  letter-spacing:.065em;
+  text-transform:uppercase;
+}
+.rpgx-halloween-home-copy h2{margin:10px 0 8px;color:#fff;font-size:clamp(1.8rem,4vw,3rem);line-height:1;font-weight:950;letter-spacing:-.035em;}
+.rpgx-halloween-home-copy p{margin:0;color:#d8dee9;line-height:1.55;}
+.rpgx-halloween-home-copy strong{margin-top:16px;color:#fdba74;font-size:.92rem;}
+
+.rpgx-halloween-page{max-width:1280px;margin:0 auto;padding-top:12px;}
+.rpgx-halloween-hero{
+  position:relative;
+  display:grid;
+  grid-template-columns:minmax(180px,.75fr) minmax(0,1.8fr);
+  overflow:hidden;
+  min-height:300px;
+  margin-bottom:18px;
+  border:1px solid rgba(249,115,22,.4);
+  border-radius:26px;
+  background:
+    radial-gradient(circle at 15% 45%,rgba(249,115,22,.22),transparent 34%),
+    radial-gradient(circle at 88% 18%,rgba(124,58,237,.16),transparent 28%),
+    linear-gradient(128deg,#0b0712,#171024 53%,#07111f);
+  box-shadow:0 22px 54px rgba(2,6,23,.34);
+}
+.rpgx-halloween-hero-art{position:relative;display:flex;align-items:center;justify-content:center;min-height:300px;isolation:isolate;}
+.rpgx-halloween-hero-art::before{content:"";position:absolute;width:185px;height:185px;border-radius:50%;background:rgba(249,115,22,.16);z-index:-1;}
+.rpgx-halloween-hero-art span{position:absolute;font-size:4rem;filter:drop-shadow(0 14px 22px rgba(0,0,0,.38));}
+.rpgx-halloween-hero-art span:nth-child(1){font-size:8rem;transform:translate(-2px,20px) rotate(-7deg);}
+.rpgx-halloween-hero-art span:nth-child(2){transform:translate(88px,-68px) rotate(10deg);}
+.rpgx-halloween-hero-art span:nth-child(3){transform:translate(-92px,-72px) rotate(-12deg);}
+.rpgx-halloween-hero-copy{display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:38px 42px 38px 8px;}
+.rpgx-halloween-hero-copy h1{margin:12px 0 10px;color:#fff;font-size:clamp(2.45rem,6vw,4.8rem);line-height:.94;font-weight:950;letter-spacing:-.05em;}
+.rpgx-halloween-hero-copy>p{max-width:780px;margin:0;color:#d6dce7;font-size:clamp(.96rem,2vw,1.08rem);line-height:1.65;}
+.rpgx-halloween-location{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-top:20px;color:#f8fafc;font-size:.83rem;font-weight:850;}
+.rpgx-halloween-location button{min-height:36px;padding:0 12px;border:1px solid rgba(249,115,22,.48);border-radius:10px;background:rgba(249,115,22,.12);color:#fdba74;font-weight:900;cursor:pointer;}
+.rpgx-halloween-location button:hover{background:rgba(249,115,22,.2);}
+.rpgx-halloween-controls{display:flex;flex-direction:column;gap:12px;margin:0 0 18px;padding:14px;border:1px solid #263149;border-radius:18px;background:#0b1322;}
+.rpgx-halloween-radius,.rpgx-halloween-filters{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.rpgx-halloween-radius strong{margin-right:4px;color:#e5e7eb;font-size:.78rem;text-transform:uppercase;letter-spacing:.055em;}
+.rpgx-halloween-radius button,.rpgx-halloween-filters button,.rpgx-halloween-empty button{min-height:38px;padding:0 12px;border:1px solid #334155;border-radius:999px;background:#111c2d;color:#e2e8f0;font-size:.78rem;font-weight:850;cursor:pointer;}
+.rpgx-halloween-radius button:hover,.rpgx-halloween-filters button:hover,.rpgx-halloween-empty button:hover{border-color:rgba(249,115,22,.62);color:#fff;}
+.rpgx-halloween-radius button.is-active,.rpgx-halloween-filters button.is-active{border-color:#f97316;background:#f97316;color:#150b04;}
+.rpgx-halloween-summary{display:flex;align-items:baseline;gap:6px;margin:2px 0 14px;color:#aeb9ca;font-size:.86rem;}
+.rpgx-halloween-summary strong{color:#f8fafc;font-size:1rem;}
+.rpgx-halloween-grid{margin-bottom:20px;}
+.rpgx-halloween-empty{display:flex;flex-direction:column;align-items:flex-start;gap:10px;margin:10px 0 22px;padding:24px;border:1px dashed rgba(249,115,22,.42);border-radius:18px;background:rgba(20,13,28,.62);color:#cbd5e1;}
+.rpgx-halloween-empty>span{font-size:2rem;}
+.rpgx-halloween-empty strong{color:#fff;font-size:1rem;}
+.rpgx-halloween-empty p{max-width:740px;margin:0;line-height:1.55;}
+
+@media (max-width:760px){
+  .rpgx-halloween-home-link{grid-template-columns:116px minmax(0,1fr);min-height:178px;border-radius:20px;}
+  .rpgx-halloween-home-art{min-height:178px;}
+  .rpgx-halloween-home-art span:nth-child(1){font-size:4.6rem;}
+  .rpgx-halloween-home-art span:nth-child(2){font-size:2rem;transform:translate(42px,-45px) rotate(8deg);}
+  .rpgx-halloween-home-art span:nth-child(3){font-size:1.8rem;transform:translate(-42px,-50px) rotate(-12deg);}
+  .rpgx-halloween-home-copy{padding:18px 14px 18px 0;}
+  .rpgx-halloween-home-copy h2{font-size:1.65rem;}
+  .rpgx-halloween-home-copy p{font-size:.82rem;line-height:1.4;}
+  .rpgx-halloween-home-copy strong{margin-top:10px;font-size:.8rem;}
+  .rpgx-halloween-kicker{font-size:.62rem;min-height:27px;}
+  .rpgx-halloween-page{padding-top:4px;}
+  .rpgx-halloween-hero{grid-template-columns:1fr;min-height:0;border-radius:20px;}
+  .rpgx-halloween-hero-art{min-height:175px;}
+  .rpgx-halloween-hero-art span:nth-child(1){font-size:6.4rem;transform:translate(0,14px) rotate(-6deg);}
+  .rpgx-halloween-hero-art span:nth-child(2){font-size:3rem;transform:translate(78px,-50px) rotate(9deg);}
+  .rpgx-halloween-hero-art span:nth-child(3){font-size:2.7rem;transform:translate(-78px,-54px) rotate(-11deg);}
+  .rpgx-halloween-hero-copy{padding:4px 18px 24px;}
+  .rpgx-halloween-hero-copy h1{font-size:2.55rem;}
+  .rpgx-halloween-location{align-items:stretch;}
+  .rpgx-halloween-location button{width:100%;}
+  .rpgx-halloween-controls{padding:12px;}
+  .rpgx-halloween-radius,.rpgx-halloween-filters{gap:6px;}
+  .rpgx-halloween-radius strong{width:100%;}
+  .rpgx-halloween-radius button,.rpgx-halloween-filters button{min-height:36px;padding:0 10px;font-size:.73rem;}
+}
+
+/* V277 – Community / UGC final frontend pass. Backend/place_media untouched. */
+.rpgx-community-file-info{display:flex;min-width:0;flex:1;align-items:center;justify-content:space-between;gap:10px}
+.rpgx-community-file-size{flex:0 0 auto;color:#94a3b8;font-size:10px;font-weight:700}
+.rpgx-community-submit-success{display:grid;gap:10px;padding:18px;border:1px solid rgba(245,158,11,.45);border-radius:14px;background:#0b1322;color:#e2e8f0}
+.rpgx-community-submit-success>strong{color:#fff;font-size:18px;line-height:1.2}
+.rpgx-community-submit-success>p{margin:0;color:#dbe4ef;font-size:12px;line-height:1.55}
+.rpgx-community-submit-success .rpgx-community-submit-note{color:#94a3b8;font-size:11px}
+.rpgx-community-submit-success .rpgx-bude-primary{justify-self:start;margin-top:3px}
+.rpgx-community-load-error{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;padding:11px 12px;border:1px solid #334155;border-radius:12px;background:#101827}
+.rpgx-community-load-error p{margin:0;color:#dbe4ef;font-size:12px;line-height:1.45}
+.rpgx-community-load-error button{flex:0 0 auto;border:1px solid #475569;border-radius:999px;background:#111827;color:#fff;padding:8px 11px;font-size:11px;font-weight:850;cursor:pointer}
+.rpgx-community-story-expanded .rpgx-community-by a{color:#fbbf24;text-decoration:underline;text-underline-offset:2px}
+@media(max-width:600px){.rpgx-community-file-info{align-items:flex-start;flex-direction:column;gap:2px}.rpgx-community-load-error{align-items:flex-start;flex-direction:column}}
+
+/* ============================================================
+   V288 – SINGLE PAGE SCROLL PATH
+   The V117 horizontal containment rule used overflow-x:hidden on both
+   html and body. Per CSS overflow-axis coupling that computes the other
+   axis to auto, so html and body can become nested vertical scrollers.
+   Normal pages use the documentElement as the sole scroll owner; body
+   remains non-scrolling. Dialog/detail modes keep explicit page locking.
+   ============================================================ */
+html:not(.rpgx-modal-open):not(.rg-direct-detail-open){
+  overflow-x:hidden;
+  overflow-y:auto;
+}
+body:not(.rpgx-modal-open):not(.rg-direct-detail-open):not(.rg-location-layer-open){
+  overflow-x:clip;
+  overflow-y:visible;
+}
+html.rpgx-modal-open,
+body.rpgx-modal-open{
+  overflow:hidden!important;
+  max-width:100vw!important;
+}
+
+
+
+/* V326 — canonical location modal: split address form; address lookup is server-side via Geoapify EU. */
+.rpgx-location-methods{grid-template-columns:repeat(3,minmax(0,1fr))}
+.rpgx-address-toggle[aria-expanded="true"]{border-color:#f59e0b;color:#fbbf24}
+.rpgx-address-panel{margin:10px 0 4px;padding:12px;border:1px solid #30415c;border-radius:12px;background:#0f1b2d}
+.rpgx-address-title{display:block;color:#f8fafc;font-size:12px;font-weight:800;margin-bottom:5px}
+.rpgx-address-help{margin:0 0 10px;color:#dbe4ef;font-size:11px;line-height:1.4}
+.rpgx-address-grid{display:grid;grid-template-columns:minmax(0,2fr) minmax(90px,.7fr) minmax(100px,.8fr) minmax(140px,1fr);gap:8px;align-items:end}
+.rpgx-address-grid label{display:flex;flex-direction:column;gap:5px;color:#f8fafc;font-size:10px;font-weight:800}
+.rpgx-address-grid input{width:100%;min-width:0;height:38px;padding:8px 9px;border:1px solid #30415c;border-radius:9px;background:#132238;color:#fff;font-size:11px}
+.rpgx-address-grid input::placeholder{color:#cbd5e1!important}
+.rpgx-address-submit{margin-top:9px}
+.rpgx-address-source{display:block;margin-top:7px;color:#dbe4ef;font-size:10px;line-height:1.35}
+@media(max-width:620px){.rpgx-location-methods{grid-template-columns:1fr}.rpgx-address-grid{grid-template-columns:minmax(0,1fr) 92px}.rpgx-address-grid label:nth-child(3),.rpgx-address-grid label:nth-child(4){grid-column:auto}}
+
+
+/* V323 — full address stays private to the location layer; no category-page exposure. */
+.rpgx-location-current-box{display:flex;flex-direction:column;gap:2px;margin:0 0 10px;padding:9px 11px;border:1px solid rgba(148,163,184,.28);border-radius:12px;background:rgba(15,23,42,.46)}
+.rpgx-location-current-box small{font-size:.72rem;color:#94a3b8}
+.rpgx-location-current-box strong{font-size:.86rem;line-height:1.35;color:#f8fafc;overflow-wrap:anywhere}
+
+/* Home Events time selector (QA): isolated from CategoryView and Specials. */
+.rg-home-category-module-events .rg-home-event-time-switch{
+  display:flex;align-items:center;flex-wrap:wrap;gap:7px;margin:0 0 12px;
+}
+.rg-home-category-module-events .rg-home-event-time-button{
+  min-height:38px;padding:7px 16px;border:1px solid rgba(255,255,255,.32);
+  border-radius:999px;color:#f3f4f6;background:#12192a;font:inherit;
+  font-size:.85rem;font-weight:700;line-height:1.2;cursor:pointer;
+}
+.rg-home-category-module-events .rg-home-event-time-button.is-active{
+  color:#0a0d19;background:#ffab08;border-color:#ffab08;
+}
+.rg-home-category-module-events .rg-home-event-time-button:focus-visible{
+  outline:3px solid #fff;outline-offset:3px;
+}
+.rg-home-category-module-events .rg-home-event-time-hint{
+  display:inline-flex;align-self:flex-start;max-width:100%;padding:3px 7px;
+  border-radius:5px;color:#0d1422;background:#ffc44d;
+  font-size:.72rem;font-weight:800;line-height:1.2;white-space:nowrap;
+}
+@media(max-width:430px){
+  .rg-home-category-module-events .rg-home-event-time-switch{gap:5px}
+  .rg-home-category-module-events .rg-home-event-time-button{min-height:40px;padding:7px 12px;font-size:.79rem}
+  .rg-home-category-module-events .rg-home-event-time-hint{font-size:.68rem}
+}
+
+/* Beta notice applies only to the Home Events tomorrow selector. */
+.rg-home-category-module-events .rg-home-event-beta-note{margin:0 0 10px;color:#cbd5e1;font-size:.76rem;line-height:1.4}
+
+/* V329 – Home → Events priority is visible but never a restrictive filter. */
+.rpgx-event-home-priority-note{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding:10px 14px;margin:0 0 16px;border:1px solid #3b475a;border-radius:12px;background:#111b2d;color:#f8fafc;font-size:.875rem}
+.rpgx-event-home-priority-note button{appearance:none;cursor:pointer;border:1px solid #b78d36;background:#2a2215;color:#fbbf24;border-radius:999px;padding:6px 12px;font-size:.8125rem}
+.rpgx-event-home-priority-note button:focus-visible{outline:2px solid #f59e0b;outline-offset:2px}
+.rpgx-event-priority-section{margin:0 0 24px}
+.rpgx-event-priority-section>h2{font-size:1.2rem;font-weight:750;line-height:1.3;margin:0 0 12px;color:#f8fafc}
+
+/* P0 v334: override v223 desktop dialog rules ONLY in the Event landing.
+   The normal internal detail overlay intentionally keeps all prior geometry. */
+.rpgx-detail-landing-page .rpgx-detail-landing .rpgx-direct-detail-panel{
+  box-sizing:border-box;
+  display:block;
+  width:100%!important;
+  max-width:none!important;
+  max-height:none!important;
+  min-height:0!important;
+  margin:0!important;
+  overflow:visible!important;
+  border-radius:22px!important;
+  box-shadow:0 16px 48px rgba(0,0,0,.17)!important;
+}
+.rpgx-detail-landing-page .rpgx-detail-landing .rpgx-direct-detail-hero{height:clamp(260px,35vw,440px)!important;min-height:260px!important;}
+@media(max-width:700px){
+  .rpgx-detail-landing-page .rpgx-detail-landing .rpgx-direct-detail-panel{border-radius:16px!important;}
+  .rpgx-detail-landing-page .rpgx-detail-landing .rpgx-direct-detail-hero{height:270px!important;min-height:270px!important;}
+}
+
+
+/* Komm rum MVP: shared, accessible share dialog; scoped to detail actions only. */
+.rpgx-kommrum-trigger{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:1px solid #d97706;border-radius:12px;background:#451a03;color:#fef3c7;font-size:12px;font-weight:800;cursor:pointer;min-height:40px;white-space:normal;text-align:left}
+.rpgx-kommrum-trigger:hover{background:#78350f}
+.rpgx-kommrum-trigger:focus-visible,.rpgx-share-dialog button:focus-visible,.rpgx-share-dialog input:focus-visible,.rpgx-share-dialog textarea:focus-visible{outline:3px solid #fbbf24;outline-offset:3px}
+body.rpgx-share-dialog-open{overflow:hidden!important}
+.rpgx-share-dialog-backdrop{position:fixed;inset:0;z-index:10080!important;display:flex;justify-content:center;align-items:center;padding:16px;background:rgba(2,6,23,.86);overflow-y:auto}
+.rpgx-share-dialog{width:min(100%,460px);max-height:calc(100dvh - 32px);overflow-y:auto;padding:22px;border:1px solid #475569;border-radius:20px;background:#0f172a;color:#f8fafc;box-shadow:0 20px 80px rgba(0,0,0,.5);font-family:inherit}
+.rpgx-share-dialog-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:18px}
+.rpgx-share-dialog-head h2{margin:0;font-size:1.2rem;font-weight:800;color:#fff}
+.rpgx-share-dialog-head button{background:transparent;border:0;color:#e2e8f0;font-size:26px;line-height:1;cursor:pointer;min-width:42px;min-height:42px}
+.rpgx-share-dialog-options{display:grid;gap:10px;margin-bottom:18px}
+.rpgx-share-dialog-options label,.rpgx-share-dialog-invite fieldset label{display:flex;align-items:center;gap:10px;cursor:pointer;min-height:36px;color:#f8fafc;font-weight:650;font-size:.9rem}
+.rpgx-share-dialog input[type="radio"]{accent-color:#f59e0b;width:18px;height:18px;flex:none;margin:0}
+.rpgx-share-dialog-invite>label,.rpgx-share-dialog-invite legend{display:block;margin-bottom:8px;font-size:.88rem;font-weight:750;color:#e2e8f0}
+.rpgx-share-dialog-invite textarea{display:block;box-sizing:border-box;width:100%;min-height:82px;padding:12px;border:1px solid #64748b;border-radius:10px;background:#020617;color:#fff;resize:vertical;font:inherit;font-size:.95rem;line-height:1.45}
+.rpgx-share-dialog-invite fieldset{border:0;margin:18px 0 0;padding:0;min-width:0;display:grid;gap:6px}
+.rpgx-share-dialog-invite legend{margin-bottom:8px}
+.rpgx-share-dialog-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:10px;margin-top:22px}
+.rpgx-share-dialog-actions button{min-height:44px;border-radius:10px;padding:10px 15px;font:inherit;font-size:.88rem;font-weight:800;cursor:pointer}
+.rpgx-share-dialog-cancel{background:#1e293b;color:#f8fafc;border:1px solid #475569}
+.rpgx-share-dialog-submit{background:#f59e0b;color:#111827;border:1px solid #f59e0b}
+@media(max-width:420px){.rpgx-share-dialog{padding:16px}.rpgx-share-dialog-actions button{flex:1 1 auto}}
+
+/* V345: Keep Buedchen sharing buttons inside the narrow radar detail panel. */
+.rpgx-bude-share-actions{flex-wrap:wrap;align-items:center}
+.rpgx-bude-share-actions .rpgx-bude-secondary,.rpgx-bude-share-actions .rpgx-kommrum-trigger{min-height:44px;cursor:pointer}

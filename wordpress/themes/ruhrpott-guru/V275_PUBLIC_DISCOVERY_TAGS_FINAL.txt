@@ -1,0 +1,20 @@
+RuhrpottGuru Theme v275 – Public Discovery Tags FINAL
+
+Basis
+- Directly based on Theme v274 Place Tag Coverage FINAL.
+- Places Backend baseline: v1.10.93 Data Quality FINAL.
+
+Change
+- Internal intelligence label "Bekannter Ort" is no longer exposed literally to visitors.
+- Highlights: because the item already passed Highlight Experience admission, the public discovery label becomes "Sehenswürdigkeit".
+- Culture: canonical culture destinations carrying the existing notability signal are exposed as "Sehenswert". Broad/generic culture venues require stronger destination evidence (Wikipedia, attraction, heritage/historic) before that label is shown.
+- Food/Activities: internal "Bekannter Ort" is hidden rather than translated.
+- Ranking/backend intelligence stays unchanged.
+- The public label is used by both detail chips and the existing radius tag filter, so clicking "Sehenswert" / "Sehenswürdigkeit" filters by the same visitor-facing rule.
+
+Unchanged
+- v274 Culture/Food/Highlights/Activities tag coverage.
+- v273 skeletons, detail continuation and banner counts.
+- Activities V2/media/opening-hours behavior.
+- Card tags remain informational; detail tags remain the navigation action.
+- GPS/city, radius and distance ordering.

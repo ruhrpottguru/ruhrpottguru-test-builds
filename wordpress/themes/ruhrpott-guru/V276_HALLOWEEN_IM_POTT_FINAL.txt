@@ -1,0 +1,38 @@
+RuhrpottGuru Theme v276 – Halloween im Pott
+=============================================
+
+Scope
+-----
+Theme-only seasonal special. Places Backend / workers / resolver / event import are unchanged.
+Base: Theme v275 Public Discovery Tags.
+
+Implemented
+-----------
+1. Dedicated React view "Halloween im Pott".
+2. Automatic WordPress page creation at /halloween-im-pott/ when no page exists.
+   Existing pages are never overwritten.
+3. Seasonal Home teaser visible from 15 September through 1 November.
+4. Reuses the existing saved location and radius state.
+5. Radius selector: 1 / 2.5 / 5 / 10 / 25 / 50 km.
+6. Theme-side Halloween detection over already delivered event data.
+7. Filters: Alle / Familie / Party & Nacht / Grusel & Horror.
+8. Existing event cards, detail overlay, ET4 images, dates, source data and direct links remain unchanged.
+9. Countdown to 31 October.
+10. Empty-state radius expansion without backend fallback changes.
+
+Safety / boundaries
+-------------------
+- No new REST route.
+- No backend migration.
+- No event writes.
+- No resolver / import / reprocessing calls.
+- No modification of the Events endpoint contract.
+- Theme v275 behavior remains the base outside the seasonal additions.
+
+Verification
+------------
+- node --check on runtime.js, api.js, location.js, components.js, views.js, main.js: PASS
+- PHP syntax check on all theme PHP files: PASS
+- Theme version: 276.0
+- package version: 276.0.0
+- ZIP integrity: verified after packaging

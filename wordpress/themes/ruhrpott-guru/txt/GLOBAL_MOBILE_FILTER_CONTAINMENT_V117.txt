@@ -1,0 +1,13 @@
+RuhrpottGuru v117
+
+Globaler Mobile-Fix für alle Filter und Auswahlfelder.
+
+- Nicht nur Events: alle input/select/textarea/button innerhalb der RuhrpottGuru-App sind auf den Viewport begrenzt.
+- Standort-Layer und Detail-Layer können den Viewport nicht mehr horizontal verbreitern.
+- Radius-Auswahl verwendet ein minmax-Grid statt eines potenziell überbreiten Flex-Layouts.
+- Stadt-Buttons dürfen lange Ortsnamen umbrechen, ohne die Grid-Spalte zu verbreitern.
+- Route-der-Industriekultur-Filter sind ebenfalls responsive abgesichert.
+- Kategorie-Suche und Kategorie-Select aus v116 bleiben geschützt.
+- Bei geöffnetem Standort-Layer wird horizontaler Overflow zusätzlich auf html/body gesperrt.
+- Unter sehr kleinen Displaybreiten wechseln problematische Grids automatisch auf eine Spalte.
+- Dieser Fix ist als Grundregel für auch künftig hinzukommende Filter/Selects formuliert.

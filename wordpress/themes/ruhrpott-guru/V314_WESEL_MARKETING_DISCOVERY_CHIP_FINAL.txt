@@ -1,0 +1,7 @@
+RuhrpottGuru Theme v314 — Wesel Marketing discovery chip
+
+- Event details from the official WeselMarketing calendar show the requested clickable chip “Wesel Marketing” inside the existing “Mehr davon entdecken” section.
+- The chip uses the existing category tag-filter flow and filters the Events view to all currently loaded events that carry the WeselMarketing source membership.
+- Linked ET4 events are supported through Backend 1.10.162 source-membership metadata.
+- No rights/permission text is shown by this feature.
+- No changes to radius, chronology, event cards, detail layout, or other category chips.

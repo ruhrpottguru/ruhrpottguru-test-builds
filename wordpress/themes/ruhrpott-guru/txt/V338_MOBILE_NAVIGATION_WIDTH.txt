@@ -1,0 +1,12 @@
+RuhrpottGuru Theme v338 – Mobile Navigation Width
+Date: 2026-10-17
+
+Scope
+- UI-only change to the existing WordPress burger drawer.
+- Drawer width: min(560px, 92vw).
+- Existing WordPress menu source, links, order, icons and interactions unchanged.
+- Burger menu item labels are kept on one line.
+- No category, filter, GPS, radius, ranking, sorting, SEO or backend logic changed.
+
+Base
+- RuhrpottGuru-Theme-v337-Detailseiten-Header-Footer-Ladefix-QA(1).zip

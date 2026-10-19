@@ -1,0 +1,23 @@
+RuhrpottGuru v112 – Original Place Media Audit
+
+Ziel: Highlights, Kultur und Aktiv sollen nach Möglichkeit echte Originalbilder des jeweiligen Ortes zeigen.
+
+Änderungen:
+- Fehlende offizielle Website wird vor der Bildsuche zusätzlich über die bestehende identity-safe Place-Info-Kette aufgelöst:
+  OSM -> Wikidata P856 -> identischer eT4-POI -> streng verifizierte Domain.
+- Für Highlights/Kultur/Aktiv gilt Originalbild-Priorität:
+  1. OSM image / explizit verknüpftes Wikimedia-Medium
+  2. Wikimedia-Commons-Kategorie des OSM-Objekts
+  3. Wikidata P18
+  4. Wikipedia-Seitenbild
+  5. offizielle Website des Ortes
+  6. identity-matched regionales Open-Data-Foto
+  7. Commons Geo + strenger Namensabgleich
+- Commons-Geo-Radius für große POIs wurde von 120 m auf 500 m erweitert, der Namensabgleich bleibt Pflicht.
+- Panoramax/KartaView werden für Highlights/Kultur/Aktiv nicht mehr als Ersatzbilder verwendet, weil das nur Umgebungsbilder und keine verifizierten Originalbilder des Ortes sind.
+- Food bleibt unverändert konservativ; symbolische Pexels-Bilder bleiben weiterhin nur Food erlaubt.
+- Personenbild-Heuristik im Frontend bleibt aktiv.
+- Neue Cache-Version verhindert, dass alte 'kein Bild gefunden'-Antworten die Verbesserung verdecken.
+
+Hinweis:
+Eine 100-%-Bildabdeckung kann seriös nicht garantiert werden, wenn für einen Ort nirgends ein identitätsgeprüftes Originalfoto existiert.

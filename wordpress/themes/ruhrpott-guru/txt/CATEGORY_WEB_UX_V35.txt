@@ -1,0 +1,18 @@
+Ruhrpott Guru V35 – Category Web UX
+
+Base: V34 Filter Radius Safe.
+
+Changes:
+- On Events, Highlights and Culture overview cards, the redundant category badge is suppressed just like Food.
+- If available, the card displays the more useful subcategory instead.
+- Safe source-linked websites are shown on overview cards.
+- Detail overlays for Events, Highlights and Culture resolve official web presence from:
+  1) source/OSM website,
+  2) OSM-linked Wikidata P856,
+  3) identity-matched destination.one/eT4 Event or POI record,
+  4) strict verified domain fallback for stable POIs only,
+  5) official Facebook/Instagram profile as last resort.
+- Events keep deep links to the exact event/exhibition page where available.
+- Search/review/directory URLs are rejected as official websites.
+- No menu, reservation, Food price or Food opening-hours logic is transferred to other categories.
+- Scene Intelligence and V34 radius handling are unchanged.

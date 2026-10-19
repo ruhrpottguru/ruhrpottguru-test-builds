@@ -1,0 +1,27 @@
+RuhrpottGuru Places Backend 1.10.33 — ET4 DB → REST image handoff
+=================================================================
+
+VERIFIZIERTE URSACHE IM CODEPFAD
+- v1.10.31 speichert das kanonische ET4-Bild per exakter global_id in rg_event_media.
+- frontend_events_query() lud diese persistierte Medienzeile korrekt.
+- Direkt danach ersetzte die v1.10.29-Raw-Payload-Schleife media_by_event jedoch erneut,
+  sobald im alten Termin-raw_payload irgendein Bildkandidat gefunden wurde.
+- Damit konnte das exakt zugeordnete Katalogbild vor dem REST-Response wieder verloren/
+  ersetzt werden. Das widersprach der gewollten global_id-Authority.
+
+FIX
+1. Persistiertes event_media hat Vorrang. raw_payload wird nur verwendet, wenn fuer
+   die konkrete event_id keine Besucher-Medienzeile vorhanden ist.
+2. event_store_authoritative_feed_media_v1022() meldet Erfolg nur noch nach
+   erfolgreichem wpdb-Write UND Ruecklesen derselben event_id+URL.
+3. Der exakte global_id-Worker laeuft einmal sauber unter der neuen Write-Verifikation.
+4. REST gibt die eine kanonische URL parallel als media_objects, rpg_event_media,
+   image und imageUrl aus. Keine neue Bildquelle und kein Matching kommen hinzu.
+5. Source-Ownership bleibt unveraendert: Master > supplemental ET4 > Essen-EMG.
+
+NICHT GEÄNDERT
+- ET4-global_id-Zuordnung
+- ET4-Katalogabfrage
+- Event-Quellenhierarchie
+- Opening-Hours-Daten/Worker
+- Theme

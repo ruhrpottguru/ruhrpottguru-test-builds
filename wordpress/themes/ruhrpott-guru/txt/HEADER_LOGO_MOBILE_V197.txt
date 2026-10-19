@@ -1,0 +1,8 @@
+RuhrpottGuru Theme v197 – Mobile Header Logo
+
+- Ausgangsbasis: v196.
+- Mobile Custom-Logo im React-Header deutlich vergrößert.
+- Bis 430 px: Logo 128 px breit, Höhe automatisch.
+- Header-Innenhöhe auf 78 px erhöht, damit das breite Skyline-Logo nicht gequetscht wird.
+- Header-Actions leicht kompakter (36 px), damit Logo + 4 Actions ohne horizontalen Überlauf nebeneinander bleiben.
+- Desktop-Layout unverändert.

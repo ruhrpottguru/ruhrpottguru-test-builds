@@ -1,0 +1,22 @@
+RUHRPOTTGURU THEME V266 – DETAIL TAG NAVIGATION
+
+Scope
+- Pure Theme / frontend change on V265.
+- Places Backend untouched.
+- Running Activities 53-municipality source-coverage worker untouched.
+
+Behaviour
+- Cards keep tags informational and non-clickable.
+- Detail tags for Food, Highlights and Culture are accessible 44px touch-target buttons.
+- Click keeps the current radius, closes the detail and filters the same category when already on it.
+- From Home/Search/other views the click opens the matching category with rg_tag + radius in the URL.
+- An active tag chip above the grid can clear the filter.
+- Search, category type selector, distance sort and opening-status logic remain intact.
+- Activities support is prepared in the generic tag helper but intentionally NOT active until the current 53-city coverage run is finished.
+
+Tag sources
+- Food: normalized cuisine/feature labels plus useful subtype.
+- Highlights: normalized highlight tags plus useful subtype; generic "Highlights & Ausflugsziele" suppressed.
+- Culture: subtype (e.g. Theater & Bühne / Streetart & Kunst im öffentlichen Raum) plus any future labels.
+
+No backend writes, imports, resolvers, cron hooks or queues are changed.

@@ -1,0 +1,7 @@
+RuhrpottGuru v73 – Places DB adapter correctness cutover
+
+- Requires RuhrpottGuru Places Backend 1.1.4.
+- Bumps the spatial cache namespace to v21_places_db_adapter_v73.
+- Prevents any v72 response cached before the adapter-category fix from surviving the update.
+- No layout, shortcode, event or media changes.
+- Food, Highlights, Kultur and Aktivitäten continue to read from the local Places DB when backend mode is database.

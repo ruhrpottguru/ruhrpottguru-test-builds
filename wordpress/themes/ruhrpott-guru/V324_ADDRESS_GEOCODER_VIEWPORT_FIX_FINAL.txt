@@ -1,0 +1,8 @@
+RuhrpottGuru Theme v324 — Address Geocoder Viewport Fix FINAL
+
+- Keeps the v323 split address form and privacy behavior.
+- Keeps map.nrw off-screen and invisible.
+- Fixes the runtime issue caused by initializing the hidden OpenLayers/map.nrw helper at only 2×2 px.
+- The helper now renders at 360×240 px off-screen, so the documented address geocoder can fit the result and update map.center reliably.
+- Helper projection is explicitly EPSG:25832, matching map.nrw temporary center coordinates.
+- No category, radius, ranking, fallback or detail logic changed.

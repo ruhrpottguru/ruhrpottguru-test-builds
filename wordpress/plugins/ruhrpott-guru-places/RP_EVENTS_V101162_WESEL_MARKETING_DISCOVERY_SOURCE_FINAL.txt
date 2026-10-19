@@ -1,0 +1,15 @@
+RuhrpottGuru Places Backend 1.10.162 — Wesel Marketing discovery source membership
+
+Purpose
+- Expose stable source membership keys to visitor event read models so the frontend can group events by the official WeselMarketing calendar.
+- Include both events owned by wesel_marketing_calendar and existing ET4 events that have a secondary WeselMarketing event_sources link.
+
+Contract
+- Public metadata contains source keys only (e.g. wesel_marketing_calendar).
+- No rights notes, permission text, credits, or source URLs are added by this feature.
+- Membership is batched for /events and global search; direct/share detail resolves the one event only.
+- Cluster representatives inherit source membership from their occurrence members.
+
+Regression scope
+- No import, dedupe, lifecycle, radius, chronology, media-rights, or event-card changes.
+- Theme v314 maps wesel_marketing_calendar to the requested visible label “Wesel Marketing” and uses the existing rg_tag filter flow.

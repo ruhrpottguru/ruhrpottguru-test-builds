@@ -1,0 +1,7 @@
+RuhrpottGuru v107
+
+- Neue vollbreite Route-der-Industriekultur-Bildfläche direkt nach Food auf der Home.
+- Gesamte Bildfläche verlinkt auf /route-industriekultur/.
+- Bild wird aus dem nächstgelegenen gematchten offiziellen Route-Standort zum aktuellen GPS-/Stadt-Standort gewählt.
+- Der kleine Route-Industriekultur-Link/Badge im Highlights-Header wurde entfernt.
+- Highlights werden nicht länger künstlich mit einem zufälligen Route-Standort auf Position 1 überschrieben; sie folgen wieder ihrer normalen Best-Around-Me-Auswahl.

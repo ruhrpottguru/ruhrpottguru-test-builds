@@ -1,0 +1,2 @@
+RUHRPOTT GURU – IMPRESSUM LINK V1
+Burger menu and React footer Impressum links point to https://www.ruhrpottguru.de/impressum/

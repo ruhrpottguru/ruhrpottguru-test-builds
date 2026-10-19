@@ -1,0 +1,24 @@
+RUHRPOTT GURU – SCENE PURE V32
+
+BASE
+- Rebuilt directly from V24 (last real-world working pre-scene build).
+
+ONLY PRODUCTION-JS CHANGES VS V24
+1. Added pure RG_sceneClassification(item, categoryKey) from the corrected V26 ruleset.
+2. Replaced only the V24 scene-trends predicate with RG_sceneClassification(...).isScene.
+
+ISOLATION GUARANTEES
+- No Object.assign into result items.
+- No item property writes by the scene classifier.
+- OSM loader $S unchanged from V24.
+- Spatial radius d4 unchanged from V24.
+- Snapshot loader fy unchanged from V24.
+- WordPress functions.php unchanged from V24.
+- All non-scene filters remain exactly V24.
+- No V27/V28/V29/V30 recovery experiments included.
+
+SCENE RULES
+- Weighted category-specific rules for Food, Events, Highlights and Culture.
+- Threshold sceneScore >= 3.
+- Hard blocks supported.
+- Lost-place/public-access safety rules supported.
