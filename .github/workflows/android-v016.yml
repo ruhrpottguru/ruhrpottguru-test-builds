@@ -2,8 +2,8 @@ name: Android v0.16.1 test APK
 on:
   workflow_dispatch:
   push:
-    branches: [android-v0.16.1-build]
-    paths: ['android-source.zip', '.github/workflows/android-v0161.yml']
+    branches: [android-v0.16.0-build]
+    paths: ['android-source.zip', 'android-v0.16.1/**', '.github/workflows/android-v016.yml']
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -15,6 +15,9 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
       - name: Install Android SDK 36
         run: |
           echo "ANDROID_HOME=$ANDROID_HOME"
@@ -23,9 +26,20 @@ jobs:
       - name: Extract Android source
         run: |
           test -s android-source.zip || { echo "Missing android-source.zip"; exit 1; }
+          echo '5ec7330535c62f81f25bb4f3fa1c3cd5263f0be2244190095c6881f48743e212  android-source.zip' | sha256sum -c
           mkdir android
           unzip -q android-source.zip -d android
           test -f android/app/build.gradle
+          python3 - <<'PY'
+          import hashlib, json, pathlib, shutil
+          root = pathlib.Path('android-v0.16.1')
+          for name, expected in json.loads((root / 'manifest.json').read_text()).items():
+              source = root / name
+              assert hashlib.sha256(source.read_bytes()).hexdigest() == expected, name
+              destination = pathlib.Path('android') / name
+              destination.parent.mkdir(parents=True, exist_ok=True)
+              shutil.copyfile(source, destination)
+          PY
       - name: Restore existing test signing key
         env:
           TEST_KEYSTORE_B64: ${{ secrets.RPG_ANDROID_TEST_KEYSTORE_B64 }}
@@ -35,19 +49,31 @@ jobs:
           printf '%s' "$TEST_KEYSTORE_B64" | base64 -d > android/signing/test-debug.jks
           chmod 600 android/signing/test-debug.jks
           grep -q "versionName '0.16.1-test'" android/app/build.gradle
+          keytool -exportcert -alias androiddebugkey -keystore android/signing/test-debug.jks -storepass android | sha256sum | grep -q '^a7a94b1dd24329607a88500698ef802a54fd96c1ed7e54710a11a9ac1677e6bf '
+      - name: Existing shared function regressions
+        working-directory: android
+        run: node --test tests/*.test.cjs
       - name: Build and unit tests
         working-directory: android
         run: |
           chmod +x gradlew
-          ./gradlew --no-daemon testReleaseUnitTest assembleRelease
+          ./gradlew --no-daemon testReleaseUnitTest assembleRelease lintRelease
       - name: Verify signed APK
         run: |
           APK=android/app/build/outputs/apk/release/app-release.apk
           test -s "$APK"
-          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose "$APK"
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose --print-certs "$APK" | tee android-signature.txt
+          grep -q 'certificate SHA-256 digest: a7a94b1dd24329607a88500698ef802a54fd96c1ed7e54710a11a9ac1677e6bf' android-signature.txt
+          "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging "$APK" | head -1 | tee android-version.txt
+          grep -q "versionCode='18' versionName='0.16.1-test'" android-version.txt
       - uses: actions/upload-artifact@v4
         with:
           name: RuhrpottGuru-0.16.1-test-apk
-          path: android/app/build/outputs/apk/release/app-release.apk
+          path: |
+            android/app/build/outputs/apk/release/app-release.apk
+            android/app/build/test-results/testReleaseUnitTest/
+            android/app/build/reports/lint-results-release.html
+            android-signature.txt
+            android-version.txt
           if-no-files-found: error
           retention-days: 14

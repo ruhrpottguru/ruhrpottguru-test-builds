@@ -1,0 +1,10 @@
+{
+  "app/build.gradle": "6c0f5c5527882b2535ee8f13bd3dbcc994286a36b5c515cf7acc2250e5ddb57b",
+  "app/src/main/java/de/ruhrpottguru/testapp/MainActivity.kt": "af68e9eb880ca9d650e2b9426b314e2b5c036ff2e74c35e86ddd3ccae5e4e222",
+  "app/src/main/java/de/ruhrpottguru/testapp/AppNavigation.kt": "80f7ffa2c1a05de5e3d2df69b0616fa6c3dc784b69966f55f61adbf10de6fe8c",
+  "app/src/main/java/de/ruhrpottguru/testapp/PottQuiz.kt": "a970f6435fc140a42eaa908f5be0db3692a1710b48f11de20f59f6ccc1037de3",
+  "app/src/main/java/de/ruhrpottguru/testapp/QuizSession.kt": "d5739de97189ffe95d39e53ba71a742d82aab2899c7a02abf0e2d6f1d3f21813",
+  "app/src/main/java/de/ruhrpottguru/testapp/PottQuizUi.kt": "ce224700fd289aee08216e5e0bc3425042a4207c4959c16fc3fa362b590d4ef3",
+  "app/src/test/java/de/ruhrpottguru/testapp/PottQuizTest.kt": "d6db0ff240ae3a954b73c3750f6a26b4ecdb50847a2eb511dced7b7d0e0d61c0",
+  "QA/v0.16.1/quiz-web-original.json": "58c46202727333e521e7ecc8b230f3dd8060b5d31fc56390de4bf5b0caa7baa2"
+}

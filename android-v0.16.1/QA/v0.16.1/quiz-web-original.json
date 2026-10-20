@@ -1,0 +1,160 @@
+{
+  "questions": [
+    {
+      "id": 1,
+      "category": "Bergbau & Tradition",
+      "question": "Was bedeutet der traditionelle Bergmannsgruß „Glückauf!“ im Ruhrgebiet?",
+      "options": [
+        "Wunsch für ein fröhliches Feierabendbier",
+        "Wunsch zum Öffnen neuer Erzgänge & gesundes Ausfahren aus dem Schacht",
+        "Hoffnung auf einen Sieg des Lieblings-Fußballvereins",
+        "Segen beim Betreten der Zeche am Morgen"
+      ],
+      "correctIndex": 1,
+      "explanation": "„Glückauf!“ drückt den Wunsch der Bergleute aus, dass sich neue Erzgänge auftun („Glück auf!“) und sie nach der Schicht wieder gesund aus der Grube ausfahren."
+    },
+    {
+      "id": 2,
+      "category": "Industriekultur",
+      "question": "Welche Zeche in Essen gilt als „die schönste Zeche der Welt“ und ist UNESCO-Welterbe?",
+      "options": [
+        "Zeche Zollverein",
+        "Zeche Ewald",
+        "Zeche Nachtigall",
+        "Zeche Consolidation"
+      ],
+      "correctIndex": 0,
+      "explanation": "Zeche Zollverein im Essener Norden ist ein herausragendes Denkmal der Industriekultur und seit 2001 UNESCO-Welterbe."
+    },
+    {
+      "id": 3,
+      "category": "Kult & Kiosk",
+      "question": "Was versteht man im Ruhrpott liebevoll unter einer „Trinkhalle“ oder einem „Büdchen“?",
+      "options": [
+        "Eine Halle zur Mineralwasser-Abfüllung",
+        "Das Nachbarschafts-Wohnzimmer für Gemischte Tüten, Kaltgetränke & Schnack",
+        "Eine überdachte Haltestelle der Straßenbahn",
+        "Eine kleine Brauerei im Hinterhof"
+      ],
+      "correctIndex": 1,
+      "explanation": "Das Büdchen ist gelebte Revierkultur: Treffpunkt für Nachbarn, Gemischte Tüte, Kaltgetränk und den schnellen Schnack."
+    },
+    {
+      "id": 4,
+      "category": "Kult-Kulinaria",
+      "question": "Welche Kombination bezeichnet man im Ruhrpott als legendäre „Manta-Platte“?",
+      "options": [
+        "Fischbrötchen mit Zwiebeln & Essiggurke",
+        "Currywurst mit Pommes rot-weiß („Schranke“)",
+        "Schnitzel mit Bratkartoffeln",
+        "Döner Kebab mit Schafskäse"
+      ],
+      "correctIndex": 1,
+      "explanation": "Die Manta-Platte besteht klassisch aus Currywurst und Pommes mit Ketchup und Mayonnaise – rot-weiß, also „Schranke“."
+    },
+    {
+      "id": 5,
+      "category": "Pott-Sprache",
+      "question": "Was meint jemand im Ruhrgebiet, wenn er sagt: „Mach nich so’n Eiertanz!“?",
+      "options": [
+        "Du sollst beim Tanzen nicht stolpern",
+        "Drucks nicht herum und komm direkt auf den Punkt!",
+        "Zerbrich keine frischen Ostereier",
+        "Lauf vorsichtiger über die Straße"
+      ],
+      "correctIndex": 1,
+      "explanation": "Ein Musterbeispiel für Ruhrpott-Direktheit: nicht lange herumreden, sondern auf den Punkt kommen."
+    },
+    {
+      "id": 6,
+      "category": "Halden & Panoramen",
+      "question": "Was sind die begrünten Bergehalden des Ruhrgebiets heute größtenteils?",
+      "options": [
+        "Abgesperrte Mülldeponien ohne Zutritt",
+        "Beliebte Freizeit- & Panoramaziele mit Haldenkunst",
+        "Unterirdische U-Bahn-Depots",
+        "Private Firmengelände"
+      ],
+      "correctIndex": 1,
+      "explanation": "Viele ehemalige Bergehalden des Bergbaus wurden zu Freizeit- und Landschaftsräumen mit Aussichtspunkten und Landmarken wie Tetraeder oder Tiger & Turtle."
+    },
+    {
+      "id": 7,
+      "category": "Pott-Sprache",
+      "question": "Woher stammt das typische Ruhrpott-Wort „Malochen“ für harte Arbeit?",
+      "options": [
+        "Aus dem Französischen",
+        "Aus dem Jiddischen beziehungsweise Rotwelschen",
+        "Aus dem Altgriechischen",
+        "Aus dem Englischen"
+      ],
+      "correctIndex": 1,
+      "explanation": "„Malochen“ geht auf jiddische beziehungsweise rotwelsche Sprachwurzeln zurück und wurde im Deutschen zum Ausdruck für schwere Arbeit."
+    },
+    {
+      "id": 8,
+      "category": "Highlights & Kultur",
+      "question": "Welcher Gasometer im Ruhrgebiet ist 117 Meter hoch und heute für große Ausstellungen bekannt?",
+      "options": [
+        "Gasometer Oberhausen",
+        "Gasometer Dortmund",
+        "Gasometer Bochum",
+        "Gasometer Duisburg"
+      ],
+      "correctIndex": 0,
+      "explanation": "Der Gasometer Oberhausen ist 117 Meter hoch und zählt zu den bekanntesten Ausstellungshallen und Industriedenkmälern des Ruhrgebiets."
+    },
+    {
+      "id": 9,
+      "category": "Bier & Brauerei",
+      "question": "Welche Bierart ist besonders eng mit traditionsreichen Ruhrgebietsmarken wie Stauder, Fiege oder Brinkhoff’s verbunden?",
+      "options": [
+        "Pils",
+        "Kölsch",
+        "Altbier",
+        "Weißbier"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pils prägt viele klassische Ruhrgebietsmarken und gehört seit Jahrzehnten zur Kneipen-, Büdchen- und Feierabendkultur des Reviers."
+    },
+    {
+      "id": 10,
+      "category": "Routen & Freizeit",
+      "question": "Wie lang ist die Route der Industriekultur ungefähr, die die großen Standorte im Ruhrgebiet verbindet?",
+      "options": [
+        "Ca. 50 km",
+        "Ca. 400 km",
+        "Ca. 1.500 km",
+        "Exakt 100 km"
+      ],
+      "correctIndex": 1,
+      "explanation": "Die Route der Industriekultur erschließt auf rund 400 Kilometern Straßenverbindung die wichtigsten Zeugnisse der Industriegeschichte im Ruhrgebiet."
+    }
+  ],
+  "ranks": [
+    {
+      "min": 80,
+      "title": "Echter Ruhrpott Guru",
+      "badge": "👑",
+      "description": "Stark! Du kennst Zechen, Halden, Pott-Sprache und Revierkultur richtig gut."
+    },
+    {
+      "min": 60,
+      "title": "Erfahrener Steiger",
+      "badge": "🕯️",
+      "description": "Starke Leistung. Im Revier macht dir so schnell keiner etwas vor."
+    },
+    {
+      "min": 35,
+      "title": "Wegbier-Genießer",
+      "badge": "🍺",
+      "description": "Du bist schon ziemlich gut auf Büdchen und Pott-Kultur eingeschworen."
+    },
+    {
+      "min": 0,
+      "title": "Gruben-Lehrling",
+      "badge": "⛏️",
+      "description": "Da geht noch was – aber jeder echte Guru hat mal am Schacht angefangen."
+    }
+  ]
+}
