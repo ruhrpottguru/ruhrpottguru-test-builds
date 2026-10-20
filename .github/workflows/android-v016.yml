@@ -22,7 +22,7 @@ jobs:
         run: |
           echo "ANDROID_HOME=$ANDROID_HOME"
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses < /dev/null || true
-          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;36.0.0"
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platforms;android-36" "build-tools;36.0.0" "platform-tools"
       - name: Extract Android source
         run: |
           test -s android-source.zip || { echo "Missing android-source.zip"; exit 1; }
@@ -69,6 +69,8 @@ jobs:
       - name: Emulator function tests
         timeout-minutes: 15
         run: |
+          export PATH="$ANDROID_HOME/platform-tools:$PATH"
+          export ADB="$ANDROID_HOME/platform-tools/adb"
           "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "emulator" "system-images;android-35;google_apis;x86_64"
           echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --force --name rpg-test --package "system-images;android-35;google_apis;x86_64" --device pixel_6
           sudo chmod a+rw /dev/kvm
