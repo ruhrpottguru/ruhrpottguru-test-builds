@@ -1,0 +1,16 @@
+{
+  "app/build.gradle": "1350a407177f97dfaa44b7368ce0e81092ffcbfccca3c8e4d6f93a3058ebac25",
+  "app/src/main/AndroidManifest.xml": "d3539b6a6b4564c4da334ea2469a52b2d784f34f53840bcd96bce9b8a3234987",
+  "app/src/main/assets/shared/native-adapter.js": "d648e721ef57248813e7c471cc6050515f14b10afaca0af7cfa2f996dce85bb5",
+  "app/src/main/java/de/ruhrpottguru/testapp/DetailUi.kt": "f7087803f60e8450dc95376e379aed2b01a91f582a324a417e60e3bc7f3f7812",
+  "app/src/main/java/de/ruhrpottguru/testapp/EventReminders.kt": "4ed5e972f6b1e0aaf96211b6ea3c7f48330de725f3299683cf3b9f992131ab6e",
+  "app/src/main/java/de/ruhrpottguru/testapp/FoodController.kt": "5ddc95959b9eb8a0f7a677ba21b7a0105c111915e91d7afe45320c50daa41cbd",
+  "app/src/main/java/de/ruhrpottguru/testapp/MainActivity.kt": "ec53942428f867a300e27ae35476dd2e8240216ed2bf1f6b09a084c28ba90d51",
+  "app/src/main/java/de/ruhrpottguru/testapp/ReminderPolicy.kt": "cadb2bd805c55a3b0e70090dcb31d1e9a02762f6c58fb984ec8407a3d76305c0",
+  "app/src/main/java/de/ruhrpottguru/testapp/ReminderUi.kt": "e55f0e91fe1fed3685e7bdfb081c46c0219151e8d3220263bc989150f73c1e69",
+  "app/src/main/java/de/ruhrpottguru/testapp/SavedStore.kt": "1f17ca6dcd612cf8ed5b959affcf9f337fec6c92f1feab9a0d21e11c1c3b3381",
+  "app/src/main/res/drawable/ic_event_reminder.xml": "95828a6241de485265cd9a09fec90feed114be268234d815dd4c6b642bb06df9",
+  "app/src/test/java/de/ruhrpottguru/testapp/ReminderPolicyTest.kt": "cbac3c81c768794596d1c1e831932253269b97c4efbcb189f23bd60c06253968",
+  "app/src/test/java/de/ruhrpottguru/testapp/SavedStoreTest.kt": "ad133da8d0f8944bb240630eaa27df496b66ec2fead8c9d7e80b72d321aa59b4",
+  "tests/shared-favorites.test.cjs": "47f432d2fa425dd1d59da6a611030affc7794afb011aeec01c9225dfdd2379e9"
+}
