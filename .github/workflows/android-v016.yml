@@ -1,0 +1,48 @@
+name: Android v0.16.0 test APK
+on:
+  workflow_dispatch:
+  push:
+    branches: [android-v0.16.0-build]
+    paths: ['android/**', '.github/workflows/android-v016.yml']
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    defaults:
+      run:
+        working-directory: android
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: android-actions/setup-android@v3
+      - name: Install Android SDK 36
+        run: sdkmanager "platforms;android-36" "build-tools;36.0.0"
+      - name: Check source and signing secret
+        env:
+          TEST_KEYSTORE_B64: ${{ secrets.RPG_ANDROID_TEST_KEYSTORE_B64 }}
+        run: |
+          test -f app/build.gradle || { echo "Missing Android source in android/"; exit 1; }
+          test -n "$TEST_KEYSTORE_B64" || { echo "Missing RPG_ANDROID_TEST_KEYSTORE_B64 repository secret"; exit 1; }
+          mkdir -p signing
+          printf '%s' "$TEST_KEYSTORE_B64" | base64 -d > signing/test-debug.jks
+          chmod 600 signing/test-debug.jks
+          grep -q "versionName '0.16.0-test'" app/build.gradle || { echo "Incorrect versionName"; exit 1; }
+      - name: Build and unit tests
+        run: |
+          chmod +x gradlew
+          ./gradlew --no-daemon testReleaseUnitTest assembleRelease
+      - name: Verify signed APK
+        run: |
+          APK=app/build/outputs/apk/release/app-release.apk
+          test -s "$APK"
+          "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose "$APK"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: RuhrpottGuru-0.16.0-test-apk
+          path: android/app/build/outputs/apk/release/app-release.apk
+          if-no-files-found: error
+          retention-days: 14
