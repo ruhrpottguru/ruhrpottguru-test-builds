@@ -1,9 +1,9 @@
-name: Android v0.16.0 test APK
+name: Android v0.16.1 test APK
 on:
   workflow_dispatch:
   push:
-    branches: [android-v0.16.0-build]
-    paths: ['android-source.zip', '.github/workflows/android-v016.yml']
+    branches: [android-v0.16.1-build]
+    paths: ['android-source.zip', '.github/workflows/android-v0161.yml']
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -34,7 +34,7 @@ jobs:
           mkdir -p android/signing
           printf '%s' "$TEST_KEYSTORE_B64" | base64 -d > android/signing/test-debug.jks
           chmod 600 android/signing/test-debug.jks
-          grep -q "versionName '0.16.0-test'" android/app/build.gradle
+          grep -q "versionName '0.16.1-test'" android/app/build.gradle
       - name: Build and unit tests
         working-directory: android
         run: |
@@ -47,7 +47,7 @@ jobs:
           "$ANDROID_HOME/build-tools/36.0.0/apksigner" verify --verbose "$APK"
       - uses: actions/upload-artifact@v4
         with:
-          name: RuhrpottGuru-0.16.0-test-apk
+          name: RuhrpottGuru-0.16.1-test-apk
           path: android/app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
           retention-days: 14
