@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [android-v0.16.0-build]
-    paths: ['android-source.zip', 'android-v0.16.1/**', '.github/workflows/android-v016.yml']
+    paths: ['android-source.zip', 'android-v0.16.1/**', 'android-ci/**', '.github/workflows/android-v016.yml']
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -66,7 +66,27 @@ jobs:
           grep -q 'certificate SHA-256 digest: a7a94b1dd24329607a88500698ef802a54fd96c1ed7e54710a11a9ac1677e6bf' android-signature.txt
           "$ANDROID_HOME/build-tools/36.0.0/aapt" dump badging "$APK" | head -1 | tee android-version.txt
           grep -q "versionCode='18' versionName='0.16.1-test'" android-version.txt
+      - name: Emulator function tests
+        timeout-minutes: 15
+        run: |
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "emulator" "system-images;android-35;google_apis;x86_64"
+          echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --force --name rpg-test --package "system-images;android-35;google_apis;x86_64" --device pixel_6
+          sudo chmod a+rw /dev/kvm
+          "$ANDROID_HOME/emulator/emulator" -avd rpg-test -no-window -no-audio -no-boot-anim -no-snapshot -gpu swiftshader_indirect -memory 2048 > android-emulator.log 2>&1 &
+          adb wait-for-device
+          for attempt in $(seq 1 120); do
+            if [ "$(adb shell getprop sys.boot_completed | tr -d '\r')" = 1 ]; then break; fi
+            sleep 2
+          done
+          test "$(adb shell getprop sys.boot_completed | tr -d '\r')" = 1
+          adb shell input keyevent 82
+          adb shell settings put global window_animation_scale 0
+          adb shell settings put global transition_animation_scale 0
+          adb shell settings put global animator_duration_scale 0
+          adb install android/app/build/outputs/apk/release/app-release.apk
+          python3 android-ci/smoke.py
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: RuhrpottGuru-0.16.1-test-apk
           path: |
@@ -75,5 +95,7 @@ jobs:
             android/app/build/reports/lint-results-release.html
             android-signature.txt
             android-version.txt
+            android-ui-test.json
+            android-emulator.log
           if-no-files-found: error
           retention-days: 14
