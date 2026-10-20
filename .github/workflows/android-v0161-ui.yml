@@ -1,0 +1,56 @@
+name: Android v0.16.1 existing APK UI verification
+on:
+  workflow_dispatch:
+  push:
+    branches: [android-v0.16.0-build]
+    paths: ['.github/workflows/android-v0161-ui.yml', 'android-ci/**']
+permissions:
+  contents: read
+  actions: read
+jobs:
+  ui:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: actions/download-artifact@v4
+        with:
+          name: RuhrpottGuru-0.16.1-test-apk
+          run-id: 39498130755
+          github-token: ${{ github.token }}
+      - name: Verify previously built APK bytes
+        run: echo 'b0b998610a79fc7dddd0fba0da847b9f8dff8be92282267e9a4aee0cb8ca8cb5  android/app/build/outputs/apk/release/app-release.apk' | sha256sum -c
+      - name: Prepare ADB
+        run: '"$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platform-tools"'
+      - name: Emulator function tests
+        run: |
+          export PATH="$ANDROID_HOME/platform-tools:$PATH"
+          export ADB="$ANDROID_HOME/platform-tools/adb"
+          "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "emulator" "system-images;android-35;google_apis;x86_64"
+          echo no | "$ANDROID_HOME/cmdline-tools/latest/bin/avdmanager" create avd --force --name rpg-test --package "system-images;android-35;google_apis;x86_64" --device pixel_6
+          sudo chmod a+rw /dev/kvm
+          "$ANDROID_HOME/emulator/emulator" -avd rpg-test -no-window -no-audio -no-boot-anim -no-snapshot -gpu swiftshader_indirect -memory 2048 > android-emulator.log 2>&1 &
+          adb wait-for-device
+          for attempt in $(seq 1 120); do
+            if [ "$(adb shell getprop sys.boot_completed | tr -d '\r')" = 1 ]; then break; fi
+            sleep 2
+          done
+          test "$(adb shell getprop sys.boot_completed | tr -d '\r')" = 1
+          adb shell input keyevent 82
+          adb shell settings put global window_animation_scale 0
+          adb shell settings put global transition_animation_scale 0
+          adb shell settings put global animator_duration_scale 0
+          adb install android/app/build/outputs/apk/release/app-release.apk
+          python3 android-ci/smoke.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: RuhrpottGuru-0.16.1-ui-results
+          path: |
+            android-ui-test.json
+            android-emulator.log
+          if-no-files-found: error
