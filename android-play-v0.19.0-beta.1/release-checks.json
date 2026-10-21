@@ -1,0 +1,44 @@
+{
+  "date": "2026-10-21",
+  "version": "0.19.0-beta.1",
+  "versionCode": 25,
+  "package": "de.ruhrpottguru.app",
+  "minSdk": 26,
+  "targetSdk": 36,
+  "baseSourceCommit": "020ea2a17851bdb6340eb3168e9fe633df527acb",
+  "aabSha256": "3b859f02ab1706fc62b09ae21f4d77cbe6923fdc1fa3400bd7a5425cb9043825",
+  "uploadCertificateSha256": "711af006271d00d8e7e8d73c607f95d58177a7da89709f6bc5730546042b5c64",
+  "releaseBuild": "passed",
+  "bundletoolVersion": "1.18.3",
+  "aabValidation": "passed",
+  "jarSignature": "passed",
+  "universalApkSignature": "passed",
+  "splitGenerationAndSignature": [
+    26,
+    36
+  ],
+  "zipAlignment16K": "passed",
+  "nativeElfAlignment16K": "passed",
+  "jvmTests": {
+    "tests": 43,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "jsSuites": 11,
+  "lintErrors": 0,
+  "lintWarnings": 8,
+  "changedSourceFiles": [
+    "app/build.gradle",
+    "app/src/main/AndroidManifest.xml"
+  ],
+  "protectedFeatureFiles": "byte-identical",
+  "website": "unchanged",
+  "privacy": "existing labeled draft unchanged; finalize before closed/public release",
+  "physicalDeviceInstall": "not tested",
+  "realNotificationDelivery": "not tested",
+  "PlayConsoleUpload": "not performed",
+  "PlayAppSigning": "choose Google-generated app signing key; supplied key is upload-only",
+  "testAppMigration": "separate package; no automatic saved-data transfer",
+  "sourceOverlayZipSha256": "ae649f3b3909e98c30eca45113561505357ad030bfca9a92f2a3ed0ebeb3350f"
+}
