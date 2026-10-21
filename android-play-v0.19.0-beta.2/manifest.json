@@ -1,0 +1,12 @@
+{
+  "app/build.gradle": "990648d58bde24cf3f4127cbccb2af73ab42be49afb79f1343c2ad0c15903d1c",
+  "app/src/main/AndroidManifest.xml": "4de3048b551aa286fba32ed0d5df9a60212da63622a85be4a3d3d454b2664a3b",
+  "app/src/main/java/de/ruhrpottguru/testapp/MainActivity.kt": "2049a4d93a929d2dda28f2c29409ad8a95dafb2835958e5a69af781d1e4b96a0",
+  "app/src/main/res/values/branding.xml": "1932d757b9b7644b01f2993bd1b1f39e62578d3a22b9c793e8abc706f385af42",
+  "app/src/main/res/drawable-nodpi/brand_badge.png": "19e4ed11ea702b9b0f2acf9501edcaabe2ec54c08d1922c8a501d0b039dbd69e",
+  "app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml": "0d12f4c6c8dbf4f92a7b10042c65437c18c099ae0cf5f112a32ca769a984518a",
+  "app/src/main/res/drawable/launcher_foreground.xml": "a2f4dea200495481d66f4b9e0d7892e5e7d42e13d5b285f0fddefddd39eb73d4",
+  "app/src/main/res/drawable/splash_window.xml": "163217617759bdd19d940af1cdd9302a4fbb4a1462b729aebf50dd1039f9c3b1",
+  "app/src/main/res/drawable/splash_logo.xml": "84da804ccacbd48c51e4aba64906e1bc50239fa142e34edf68575ba72234d697",
+  "app/src/main/res/values-v31/branding.xml": "8ad6613c242b3dae4427c361ceb3aece8711cccb920ddfb9878ec6f4a9057d9d"
+}

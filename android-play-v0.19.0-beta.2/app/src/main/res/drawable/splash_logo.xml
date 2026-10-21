@@ -1,0 +1,7 @@
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+ <item android:width="288dp" android:height="288dp" android:gravity="center">
+  <inset android:inset="48dp">
+   <bitmap android:src="@drawable/brand_badge" android:gravity="fill" android:filter="true" android:antialias="true" />
+  </inset>
+ </item>
+</layer-list>

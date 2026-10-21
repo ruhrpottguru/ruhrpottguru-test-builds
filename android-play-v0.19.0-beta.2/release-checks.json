@@ -1,0 +1,49 @@
+{
+  "date": "2026-10-21",
+  "version": "0.19.0-beta.2",
+  "versionCode": 26,
+  "package": "de.ruhrpottguru.app",
+  "minSdk": 26,
+  "targetSdk": 36,
+  "baseSourceCommit": "2a7f93fd9fbcebc1390216fd55f6c0ce8a4648fe",
+  "aabSha256": "3d2acc2537e5b4c49b3a397ed74018ab844d451332da8be818fb180376ab4172",
+  "uploadCertificateSha256": "711af006271d00d8e7e8d73c607f95d58177a7da89709f6bc5730546042b5c64",
+  "releaseBuild": "passed",
+  "bundletoolVersion": "1.18.3",
+  "aabValidation": "passed",
+  "jarSignature": "passed",
+  "universalApkSignature": "passed",
+  "splitGenerationAndSignature": [
+    26,
+    36
+  ],
+  "zipAlignment16K": "passed",
+  "nativeElfAlignment16K": "passed",
+  "jvmTests": {
+    "tests": 43,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "jsSuites": 11,
+  "lintErrors": 0,
+  "lintWarnings": 11,
+  "changedSourceFiles": [
+    "app/build.gradle",
+    "app/src/main/AndroidManifest.xml",
+    "app/src/main/java/de/ruhrpottguru/testapp/MainActivity.kt"
+  ],
+  "protectedFeatureFiles": "all unchanged except one theme-restoration call in MainActivity",
+  "packagedLogoPixels": "exact alpha and all visible RGBA pixels; invisible RGB normalized by AAPT; transparent corners",
+  "brandingResources": "adaptive launcher + API26-30/API31+ launch resources verified",
+  "physicalLauncherSplashAppearance": "phone acceptance pending",
+  "website": "unchanged",
+  "privacy": "existing labeled draft unchanged; finalize before closed/public release",
+  "physicalDeviceInstall": "not tested",
+  "realNotificationDelivery": "not tested",
+  "PlayConsoleUpload": "not performed",
+  "PlayAppSigning": "choose Google-generated app signing key; supplied key is upload-only",
+  "testAppMigration": "same Play package and upload key as code25; existing local data retained on Play update",
+  "sourceOverlayZipSha256": "a0a82cb2259e831d0089462dab94d28ae5016a561f95eb3b22839e7aca54f48f",
+  "retainedPlaySigningSettings": true
+}
