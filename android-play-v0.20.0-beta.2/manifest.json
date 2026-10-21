@@ -1,0 +1,15 @@
+{
+  "baseCommit": "51715efdb21eaef7471150bc9f1fd5a7d7a11984",
+  "version": "0.20.0-beta.2",
+  "versionCode": 28,
+  "files": [
+    {
+      "path": "app/build.gradle",
+      "sha256": "664b5f0f800939216d47465edd66cb8bebc19ed4a28d06e7046daae0c78bce99"
+    },
+    {
+      "path": "app/src/main/java/de/ruhrpottguru/testapp/MainActivity.kt",
+      "sha256": "7ed9f8da72ee2805c06eef014724e107aab11ccb1bd2576d32a146855c98898b"
+    }
+  ]
+}

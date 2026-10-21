@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-21",
+  "version": "0.20.0-beta.2",
+  "versionCode": 28,
+  "package": "de.ruhrpottguru.app",
+  "minSdk": 26,
+  "targetSdk": 36,
+  "baseSourceCommit": "51715efdb21eaef7471150bc9f1fd5a7d7a11984",
+  "aabSha256": "add76bf56babb57fbfcffdc33d1f2c7b8f36006e26a64ab9a32e8fbad580ab96",
+  "uploadCertificateSha256": "711af006271d00d8e7e8d73c607f95d58177a7da89709f6bc5730546042b5c64",
+  "releaseBuild": "passed",
+  "bundletoolVersion": "1.18.3",
+  "aabValidation": "passed",
+  "jarSignature": "passed",
+  "universalApkSignature": "passed",
+  "splitGenerationAndSignature": [
+    26,
+    36
+  ],
+  "zipAlignment16K": "passed",
+  "nativeElfAlignment16K": "passed",
+  "jvmTests": {
+    "tests": 49,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "jsSuites": 12,
+  "lintErrors": 0,
+  "lintWarnings": 11,
+  "changedSourceFiles": [
+    "app/build.gradle",
+    "app/src/main/java/de/ruhrpottguru/testapp/MainActivity.kt"
+  ],
+  "protectedFeatureFiles": "only MainActivity UI/navigation and build version changed; search API, quiz content, GPS, categories and other files unchanged",
+  "packagedLogoPixels": "exact alpha and all visible RGBA pixels; invisible RGB normalized by AAPT; transparent corners",
+  "brandingResources": "adaptive launcher + API26-30/API31+ launch resources verified",
+  "physicalLauncherSplashAppearance": "phone acceptance pending",
+  "website": "unchanged",
+  "privacy": "existing labeled draft supplemented with factual search-query transmission; finalize before closed/public release",
+  "physicalDeviceInstall": "not tested",
+  "realNotificationDelivery": "not tested",
+  "PlayConsoleUpload": "not performed",
+  "PlayAppSigning": "choose Google-generated app signing key; supplied key is upload-only",
+  "testAppMigration": "same Play package and upload key; existing local data retained on Play update",
+  "globalSearch": "existing live Web global-search endpoint, exact q+limit30 body; no search radius or ranking changes",
+  "liveSearchQueries": [
+    "Wesel",
+    "Zollverein",
+    "Topgolf Oberhausen",
+    "zzqkeintreffer987"
+  ],
+  "liveDetailFamilies": [
+    "events",
+    "food",
+    "activities",
+    "buedchen",
+    "wurst"
+  ],
+  "sourceWebsite": "public GET/POST audit only; no writes",
+  "deviceSearchUi": "phone acceptance pending",
+  "navigationChange": "header magnifier opens existing search screen; input visible only there; footer Food-Suche replaced by Pott-Quiz",
+  "liveAuditProvenance": "Queries/detail-family live audit inherited from preceding beta.1; no new backend code or network contract; 12 JS fixture suites rerun for beta.2.",
+  "preview": "Source-rendered illustration; not an Android device screenshot"
+}
