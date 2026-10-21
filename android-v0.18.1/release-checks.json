@@ -1,0 +1,22 @@
+{
+  "date": "2026-10-21",
+  "version": "0.18.1-test",
+  "versionCode": 23,
+  "build": "local release passed",
+  "tests": {
+    "tests": 43,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lintErrors": 0,
+  "lintWarnings": 11,
+  "apkSha256": "af8d1be1f487d4e51468794aadd46f5a3c23a41d5c682f796aa5fb5c7a555691",
+  "sameSigningKeyAs0180": true,
+  "certificateSha256": "a7a94b1dd24329607a88500698ef802a54fd96c1ed7e54710a11a9ac1677e6bf",
+  "packagedNewIntroVerified": true,
+  "oldIntroAbsentFromDex": true,
+  "poolAndAllOtherFeaturesUnchanged": true,
+  "deviceUiTest": "not performed; phone acceptance required",
+  "website": "unchanged"
+}
