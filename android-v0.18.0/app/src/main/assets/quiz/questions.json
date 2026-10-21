@@ -1,0 +1,2608 @@
+{
+  "schemaVersion": 1,
+  "poolVersion": "2.3.0",
+  "language": "de",
+  "questions": [
+    {
+      "id": "pott-001",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die Zeche Zollverein?",
+      "answers": [
+        "Essen",
+        "Moers",
+        "Waltrop",
+        "Bochum"
+      ],
+      "correctIndex": 0,
+      "explanation": "Zollverein liegt im Essener Stadtteil Stoppenberg. Die ehemalige Zeche und Kokerei gehören zum UNESCO-Welterbe."
+    },
+    {
+      "id": "pott-002",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du den Gasometer?",
+      "answers": [
+        "Haltern am See",
+        "Selm",
+        "Oberhausen",
+        "Kamp-Lintfort"
+      ],
+      "correctIndex": 2,
+      "explanation": "Der riesige ehemalige Gasspeicher in Oberhausen wird heute für wechselnde Ausstellungen genutzt."
+    },
+    {
+      "id": "pott-003",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was ist ein „Mottek“ im Ruhrpott?",
+      "answers": [
+        "Ein kleiner Kiosk",
+        "Eine Bergmannsmütze",
+        "Ein Hammer",
+        "Ein Grubenwagen"
+      ],
+      "correctIndex": 2,
+      "explanation": "„Mottek“ ist ein umgangssprachliches Wort für Hammer und gehört zum Wortschatz vieler Revierfamilien."
+    },
+    {
+      "id": "pott-004",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du den Landschaftspark Duisburg-Nord?",
+      "answers": [
+        "Dortmund",
+        "Herne",
+        "Duisburg",
+        "Essen"
+      ],
+      "correctIndex": 2,
+      "explanation": "Der Landschaftspark entstand auf dem Gelände eines stillgelegten Hüttenwerks im Duisburger Norden."
+    },
+    {
+      "id": "pott-005",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du den Tetraeder?",
+      "answers": [
+        "Gelsenkirchen",
+        "Dortmund",
+        "Essen",
+        "Bottrop"
+      ],
+      "correctIndex": 3,
+      "explanation": "Der begehbare Tetraeder steht auf der Halde Beckstraße in Bottrop und bietet weite Ausblicke."
+    },
+    {
+      "id": "pott-006",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die Tiger & Turtle – Magic Mountain?",
+      "answers": [
+        "Kamp-Lintfort",
+        "Hattingen",
+        "Hagen",
+        "Duisburg"
+      ],
+      "correctIndex": 3,
+      "explanation": "Die begehbare Landmarke „Tiger & Turtle“ steht auf der Heinrich-Hildebrand-Höhe im Duisburger Süden."
+    },
+    {
+      "id": "pott-007",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die Jahrhunderthalle?",
+      "answers": [
+        "Unna",
+        "Essen",
+        "Bochum",
+        "Hattingen"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die Jahrhunderthalle war einst Teil des Bochumer Stahlstandorts und dient heute als Kultur- und Veranstaltungsort."
+    },
+    {
+      "id": "pott-008",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die Zeche Zollern?",
+      "answers": [
+        "Dortmund",
+        "Essen",
+        "Duisburg",
+        "Oberhausen"
+      ],
+      "correctIndex": 0,
+      "explanation": "Die Zeche Zollern in Dortmund-Bövinghausen ist unter anderem für ihr eindrucksvolles Jugendstil-Maschinenhaus bekannt."
+    },
+    {
+      "id": "pott-009",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die Kokerei Hansa?",
+      "answers": [
+        "Mülheim an der Ruhr",
+        "Dortmund",
+        "Moers",
+        "Essen"
+      ],
+      "correctIndex": 1,
+      "explanation": "Die Kokerei Hansa in Dortmund-Huckarde zeigt, wie aus Steinkohle industriell Koks hergestellt wurde."
+    },
+    {
+      "id": "pott-010",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die Villa Hügel?",
+      "answers": [
+        "Herten",
+        "Hagen",
+        "Hattingen",
+        "Essen"
+      ],
+      "correctIndex": 3,
+      "explanation": "Villa Hügel war der Wohnsitz der Industriellenfamilie Krupp und liegt oberhalb des Baldeneysees."
+    },
+    {
+      "id": "pott-011",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die Margarethenhöhe?",
+      "answers": [
+        "Herten",
+        "Essen",
+        "Unna",
+        "Hamm"
+      ],
+      "correctIndex": 1,
+      "explanation": "Die Gartenstadt Margarethenhöhe wurde von der Margarethe-Krupp-Stiftung angestoßen und ist ein bekanntes Essener Siedlungsensemble."
+    },
+    {
+      "id": "pott-012",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du den Baldeneysee?",
+      "answers": [
+        "Hattingen",
+        "Bottrop",
+        "Essen",
+        "Unna"
+      ],
+      "correctIndex": 2,
+      "explanation": "Der Baldeneysee entstand durch das Aufstauen der Ruhr und ist heute ein wichtiges Naherholungsgebiet."
+    },
+    {
+      "id": "pott-013",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du den Phoenix-See?",
+      "answers": [
+        "Duisburg",
+        "Dortmund",
+        "Haltern am See",
+        "Waltrop"
+      ],
+      "correctIndex": 1,
+      "explanation": "Der Phoenix-See wurde auf einem ehemaligen Stahlwerksareal in Dortmund-Hörde angelegt."
+    },
+    {
+      "id": "pott-014",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt steht das markante 'U' auf einem ehemaligen Brauereiturm?",
+      "answers": [
+        "Haltern am See",
+        "Bottrop",
+        "Dortmund",
+        "Bochum"
+      ],
+      "correctIndex": 2,
+      "explanation": "Das Dortmunder U war früher ein Brauereigebäude und ist heute ein Zentrum für Kunst und Kreativität."
+    },
+    {
+      "id": "pott-015",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was meint „Kopp zu, et zieht!“ im Ruhrpott-Sprech?",
+      "answers": [
+        "Sei still!",
+        "Setz den Helm auf!",
+        "Schließ das Fenster!",
+        "Geh nach Hause!"
+      ],
+      "correctIndex": 0,
+      "explanation": "Die saloppe Aufforderung bedeutet, dass jemand aufhören soll zu reden – oft mit typisch trockenem Humor."
+    },
+    {
+      "id": "pott-016",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die Veltins-Arena?",
+      "answers": [
+        "Waltrop",
+        "Hagen",
+        "Gelsenkirchen",
+        "Herne"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die Arena in Gelsenkirchen ist vor allem als Heimspielstätte des FC Schalke 04 bekannt."
+    },
+    {
+      "id": "pott-017",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die ZOOM Erlebniswelt?",
+      "answers": [
+        "Kamp-Lintfort",
+        "Unna",
+        "Oberhausen",
+        "Gelsenkirchen"
+      ],
+      "correctIndex": 3,
+      "explanation": "Die ZOOM Erlebniswelt befindet sich auf dem Gelände des früheren Ruhr-Zoos in Gelsenkirchen."
+    },
+    {
+      "id": "pott-018",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du den Nordsternpark?",
+      "answers": [
+        "Gelsenkirchen",
+        "Hattingen",
+        "Herne",
+        "Hamm"
+      ],
+      "correctIndex": 0,
+      "explanation": "Der Nordsternpark entstand rund um ein ehemaliges Zechengelände und war Standort der Bundesgartenschau 1997."
+    },
+    {
+      "id": "pott-019",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt befindet sich die Ludwiggalerie im Schloss nahe dem Kaisergarten?",
+      "answers": [
+        "Dortmund",
+        "Mülheim an der Ruhr",
+        "Oberhausen",
+        "Hamm"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die Ludwiggalerie nutzt Schloss Oberhausen als Ausstellungsort; der Kaisergarten liegt in unmittelbarer Nähe."
+    },
+    {
+      "id": "pott-020",
+      "category": "Essen & Trinken",
+      "question": "Was meint man im Pott mit einem „Pilsken“?",
+      "answers": [
+        "Eine Bratwurst",
+        "Ein kleines Pils",
+        "Eine Limonade",
+        "Einen süßen Kuchen"
+      ],
+      "correctIndex": 1,
+      "explanation": "„Pilsken“ ist eine verniedlichende, umgangssprachliche Form von Pils – nicht zwingend eine festgelegte Glasgröße."
+    },
+    {
+      "id": "pott-021",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt wurde ein ehemaliger Industriehafen zum modernen Hafen- und Gastronomieviertel umgestaltet?",
+      "answers": [
+        "Bochum",
+        "Gelsenkirchen",
+        "Duisburg",
+        "Unna"
+      ],
+      "correctIndex": 2,
+      "explanation": "Der Duisburger Innenhafen wurde vom industriellen Hafenareal zu einem Viertel mit Museen, Büros und Gastronomie umgestaltet."
+    },
+    {
+      "id": "pott-022",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du das Museum Küppersmühle?",
+      "answers": [
+        "Dortmund",
+        "Duisburg",
+        "Unna",
+        "Bottrop"
+      ],
+      "correctIndex": 1,
+      "explanation": "Das Museum Küppersmühle zeigt moderne und zeitgenössische Kunst in einem umgebauten Speicher am Duisburger Innenhafen."
+    },
+    {
+      "id": "pott-023",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du das Schiffshebewerk Henrichenburg?",
+      "answers": [
+        "Waltrop",
+        "Moers",
+        "Duisburg",
+        "Herne"
+      ],
+      "correctIndex": 0,
+      "explanation": "Das Hebewerk liegt in Waltrop am Dortmund-Ems-Kanal und machte einst den Höhenunterschied für Schiffe überwindbar."
+    },
+    {
+      "id": "pott-024",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die Henrichshütte?",
+      "answers": [
+        "Witten",
+        "Duisburg",
+        "Herten",
+        "Hattingen"
+      ],
+      "correctIndex": 3,
+      "explanation": "Die Henrichshütte in Hattingen war ein bedeutender Eisen- und Stahlstandort; heute ist sie Industriemuseum."
+    },
+    {
+      "id": "pott-025",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt liegt die historische Altstadt mit dem bekannten Bügeleisenhaus?",
+      "answers": [
+        "Hattingen",
+        "Waltrop",
+        "Moers",
+        "Hagen"
+      ],
+      "correctIndex": 0,
+      "explanation": "Das Bügeleisenhaus ist wegen seiner ungewöhnlichen Form ein besonders bekanntes Fachwerkhaus in Hattingens Altstadt."
+    },
+    {
+      "id": "pott-026",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du das LWL-Museum für Archäologie und Kultur?",
+      "answers": [
+        "Haltern am See",
+        "Bochum",
+        "Herne",
+        "Herten"
+      ],
+      "correctIndex": 2,
+      "explanation": "Das Museum für Archäologie in Herne zeigt archäologische Funde und Geschichten aus Westfalen."
+    },
+    {
+      "id": "pott-027",
+      "category": "Kultur",
+      "question": "In welchem Ortsteil von Herne findet die Cranger Kirmes statt?",
+      "answers": [
+        "Eickel",
+        "Wanne-Süd",
+        "Crange",
+        "Sodingen"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die traditionsreiche Cranger Kirmes findet im Herner Stadtteil Crange statt."
+    },
+    {
+      "id": "pott-028",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die Halde Hoheward?",
+      "answers": [
+        "Duisburg",
+        "Hamm",
+        "Herten",
+        "Mülheim an der Ruhr"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die Halde Hoheward erstreckt sich im Raum Herten und Recklinghausen und ist für ihre Landmarken bekannt."
+    },
+    {
+      "id": "pott-029",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du das Schloss Strünkede?",
+      "answers": [
+        "Mülheim an der Ruhr",
+        "Hamm",
+        "Haltern am See",
+        "Herne"
+      ],
+      "correctIndex": 3,
+      "explanation": "Schloss Strünkede gehört zu den historischen Wahrzeichen Hernes und beherbergt Museumsausstellungen."
+    },
+    {
+      "id": "pott-030",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du den Florianturm?",
+      "answers": [
+        "Hamm",
+        "Dortmund",
+        "Mülheim an der Ruhr",
+        "Gelsenkirchen"
+      ],
+      "correctIndex": 1,
+      "explanation": "Der Florianturm steht im Dortmunder Westfalenpark und wurde zur Bundesgartenschau 1959 errichtet."
+    },
+    {
+      "id": "pott-031",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du den Westfalenpark?",
+      "answers": [
+        "Dortmund",
+        "Essen",
+        "Herten",
+        "Witten"
+      ],
+      "correctIndex": 0,
+      "explanation": "Der Westfalenpark ist eine große Grünanlage Dortmunds mit dem weithin sichtbaren Florianturm."
+    },
+    {
+      "id": "pott-032",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du den Grugapark?",
+      "answers": [
+        "Essen",
+        "Oberhausen",
+        "Dortmund",
+        "Herten"
+      ],
+      "correctIndex": 0,
+      "explanation": "Der Grugapark entwickelte sich aus der Großen Ruhrländischen Gartenbau-Ausstellung von 1929."
+    },
+    {
+      "id": "pott-033",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du das Folkwang Museum?",
+      "answers": [
+        "Essen",
+        "Dortmund",
+        "Mülheim an der Ruhr",
+        "Kamp-Lintfort"
+      ],
+      "correctIndex": 0,
+      "explanation": "Das Museum Folkwang in Essen ist international vor allem für bedeutende Kunstsammlungen bekannt."
+    },
+    {
+      "id": "pott-034",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt befindet sich das Kunstmuseum direkt am Stadtpark?",
+      "answers": [
+        "Herten",
+        "Hamm",
+        "Mülheim an der Ruhr",
+        "Bochum"
+      ],
+      "correctIndex": 3,
+      "explanation": "Das Kunstmuseum Bochum liegt am Stadtpark und zeigt Kunst verschiedener moderner Strömungen."
+    },
+    {
+      "id": "pott-035",
+      "category": "Ruhrpott-Sprache",
+      "question": "Wenn einer sagt „Mach keine Fisimatenten!“, was meint er?",
+      "answers": [
+        "Geh früher schlafen!",
+        "Stell die Musik lauter!",
+        "Mach keine Umstände!",
+        "Hol die Zeitung!"
+      ],
+      "correctIndex": 2,
+      "explanation": "„Fisimatenten“ sind unnötige Umstände oder Ausflüchte. Die Wendung ist nicht ausschließlich im Ruhrgebiet gebräuchlich."
+    },
+    {
+      "id": "pott-036",
+      "category": "Essen & Trinken",
+      "question": "Welche traditionsreiche Familienbrauerei hat ihren Sitz in Bochum?",
+      "answers": [
+        "Bitburger",
+        "Krombacher",
+        "Stauder",
+        "Moritz Fiege"
+      ],
+      "correctIndex": 3,
+      "explanation": "Moritz Fiege ist eine traditionsreiche Bochumer Privatbrauerei und eng mit der Stadt verbunden."
+    },
+    {
+      "id": "pott-037",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du den Maximilianpark?",
+      "answers": [
+        "Essen",
+        "Duisburg",
+        "Hamm",
+        "Mülheim an der Ruhr"
+      ],
+      "correctIndex": 2,
+      "explanation": "Der Maximilianpark entstand auf dem Gelände der ehemaligen Zeche Maximilian in Hamm."
+    },
+    {
+      "id": "pott-038",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du den Glaselefant?",
+      "answers": [
+        "Hamm",
+        "Kamp-Lintfort",
+        "Oberhausen",
+        "Duisburg"
+      ],
+      "correctIndex": 0,
+      "explanation": "Der Glaselefant ist das markante, aus einer früheren Industrieanlage gestaltete Wahrzeichen des Maximilianparks."
+    },
+    {
+      "id": "pott-039",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die Lindenbrauerei?",
+      "answers": [
+        "Duisburg",
+        "Selm",
+        "Unna",
+        "Haltern am See"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die ehemalige Lindenbrauerei ist ein Kulturstandort in Unna und beherbergt unter anderem Lichtkunst."
+    },
+    {
+      "id": "pott-040",
+      "category": "Essen & Trinken",
+      "question": "Was ist ein „Herrengedeck“ in der traditionellen Kneipenkultur?",
+      "answers": [
+        "Kaffee und Kuchen",
+        "Bier und Schnaps",
+        "Pommes und Bratwurst",
+        "Tee und Gebäck"
+      ],
+      "correctIndex": 1,
+      "explanation": "Ein „Herrengedeck“ meint im traditionellen Kneipenjargon eine Kombination aus Bier und einem Schnaps."
+    },
+    {
+      "id": "pott-041",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was meint man, wenn jemand „am Pütt“ malocht?",
+      "answers": [
+        "Er kauft ein",
+        "Er arbeitet im Bergwerk",
+        "Er spielt Fußball",
+        "Er steht an der Imbissbude"
+      ],
+      "correctIndex": 1,
+      "explanation": "„Pütt“ bezeichnet eine Zeche; „malochen“ heißt schwer arbeiten. Zusammen ergibt das klassische Bergmannssprache."
+    },
+    {
+      "id": "pott-042",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du das Muttental?",
+      "answers": [
+        "Waltrop",
+        "Dortmund",
+        "Hamm",
+        "Witten"
+      ],
+      "correctIndex": 3,
+      "explanation": "Das Muttental bei Witten gilt als bedeutender Schauplatz der frühen Steinkohlegewinnung an der Ruhr."
+    },
+    {
+      "id": "pott-043",
+      "category": "Essen & Trinken",
+      "question": "Was steckt traditionell in „Himmel und Erde“?",
+      "answers": [
+        "Käse und Brot",
+        "Kartoffeln und Äpfel",
+        "Nudeln und Fisch",
+        "Reis und Bohnen"
+      ],
+      "correctIndex": 1,
+      "explanation": "Der Name spielt mit „Himmel“ für Äpfel und „Erde“ für Kartoffeln; regionale Varianten sind verbreitet."
+    },
+    {
+      "id": "pott-044",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was ist ein „Kumpel“ ursprünglich in der Bergmannssprache?",
+      "answers": [
+        "Ein Kohlenwagen",
+        "Ein Förderseil",
+        "Ein Bergarbeiter",
+        "Ein Grubenschacht"
+      ],
+      "correctIndex": 2,
+      "explanation": "Im Bergbau waren „Kumpel“ zunächst Arbeitskameraden beziehungsweise Bergleute – daraus entstand die heutige Bedeutung Freund."
+    },
+    {
+      "id": "pott-045",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du das Schloss Hohenlimburg?",
+      "answers": [
+        "Witten",
+        "Hattingen",
+        "Essen",
+        "Hagen"
+      ],
+      "correctIndex": 3,
+      "explanation": "Schloss Hohenlimburg liegt im Hagener Stadtteil Hohenlimburg hoch über dem Lennetal."
+    },
+    {
+      "id": "pott-046",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du das Aquarius Wassermuseum?",
+      "answers": [
+        "Essen",
+        "Gelsenkirchen",
+        "Bochum",
+        "Mülheim an der Ruhr"
+      ],
+      "correctIndex": 3,
+      "explanation": "Das Aquarius Wassermuseum befindet sich in einem ehemaligen Wasserturm in Mülheim an der Ruhr."
+    },
+    {
+      "id": "pott-047",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die Camera Obscura?",
+      "answers": [
+        "Mülheim an der Ruhr",
+        "Oberhausen",
+        "Bottrop",
+        "Herne"
+      ],
+      "correctIndex": 0,
+      "explanation": "Die Camera Obscura in Mülheim nutzt ein historisches optisches Prinzip und befindet sich in einem ehemaligen Wasserturm."
+    },
+    {
+      "id": "pott-048",
+      "category": "Essen & Trinken",
+      "question": "Was steckt im klassischen „Muckefuck“ statt echter Kaffeebohnen?",
+      "answers": [
+        "Kartoffeln und Speck",
+        "Milch und Honig",
+        "Hopfen und Malz",
+        "Kaffeeersatz aus Getreide oder Zichorie"
+      ],
+      "correctIndex": 3,
+      "explanation": "Muckefuck bezeichnet Kaffeeersatz, etwa aus gerösteter Zichorie oder Getreide, nicht unbedingt echten Bohnenkaffee."
+    },
+    {
+      "id": "pott-049",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du das Red Dot Design Museum?",
+      "answers": [
+        "Hagen",
+        "Mülheim an der Ruhr",
+        "Essen",
+        "Selm"
+      ],
+      "correctIndex": 2,
+      "explanation": "Das Red Dot Design Museum befindet sich auf dem Gelände des UNESCO-Welterbes Zollverein in Essen."
+    },
+    {
+      "id": "pott-050",
+      "category": "Ruhrpott-Sprache",
+      "question": "Wie nennt man im Ruhrgebiet scherzhaft einen passionierten Taubenzüchter?",
+      "answers": [
+        "Pilsminister",
+        "Taubenvatta",
+        "Kirmeskönig",
+        "Schachtmeister"
+      ],
+      "correctIndex": 1,
+      "explanation": "Brieftaubenhaltung hatte in vielen Bergarbeitersiedlungen einen festen Platz; „Taubenvatta“ ist eine liebevolle Bezeichnung."
+    },
+    {
+      "id": "pott-051",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du den Zechenpark Friedrich Heinrich?",
+      "answers": [
+        "Waltrop",
+        "Oberhausen",
+        "Kamp-Lintfort",
+        "Hamm"
+      ],
+      "correctIndex": 2,
+      "explanation": "Der Zechenpark erinnert an die Bergbauvergangenheit des Standorts Friedrich Heinrich in Kamp-Lintfort."
+    },
+    {
+      "id": "pott-052",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die Halde Rheinpreußen mit Geleucht?",
+      "answers": [
+        "Dortmund",
+        "Witten",
+        "Selm",
+        "Moers"
+      ],
+      "correctIndex": 3,
+      "explanation": "Das leuchtende „Geleucht“ auf der Halde Rheinpreußen ist eine begehbare Landmarke bei Moers."
+    },
+    {
+      "id": "pott-053",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die Halde Haniel?",
+      "answers": [
+        "Hagen",
+        "Mülheim an der Ruhr",
+        "Bottrop",
+        "Bochum"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die Halde Haniel zählt zu den bekannten Aussichtspunkten bei Bottrop und ist mit dem Bergbau verbunden."
+    },
+    {
+      "id": "pott-054",
+      "category": "Essen & Trinken",
+      "question": "Was sind „Reibekuchen“ an einer westfälischen Imbissbude?",
+      "answers": [
+        "Aus geriebenen Kartoffeln gebratene Fladen",
+        "Gefüllte Nudeltaschen",
+        "Brot mit Schmalz",
+        "Frittierte Apfelringe"
+      ],
+      "correctIndex": 0,
+      "explanation": "Reibekuchen bestehen aus geriebenen Kartoffeln und werden in der Pfanne ausgebacken, häufig mit Apfelmus serviert."
+    },
+    {
+      "id": "pott-055",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die Burg Vondern?",
+      "answers": [
+        "Hattingen",
+        "Hamm",
+        "Oberhausen",
+        "Bochum"
+      ],
+      "correctIndex": 2,
+      "explanation": "Burg Vondern liegt im Oberhausener Stadtteil Osterfeld und erinnert an die vormoderne Geschichte der Region."
+    },
+    {
+      "id": "pott-056",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du die Zeche Ewald?",
+      "answers": [
+        "Herten",
+        "Selm",
+        "Bottrop",
+        "Essen"
+      ],
+      "correctIndex": 0,
+      "explanation": "Die Zeche Ewald in Herten ist heute ein erhaltenes Ensemble der Industriekultur."
+    },
+    {
+      "id": "pott-057",
+      "category": "Sehenswürdigkeiten",
+      "question": "In welcher Stadt findest du das LWL-Museum Zeche Hannover?",
+      "answers": [
+        "Bochum",
+        "Hamm",
+        "Dortmund",
+        "Bottrop"
+      ],
+      "correctIndex": 0,
+      "explanation": "Die frühere Zeche Hannover in Bochum ist besonders für ihr erhaltenes Fördermaschinenhaus bekannt."
+    },
+    {
+      "id": "pott-058",
+      "category": "Essen & Trinken",
+      "question": "Was bedeutet „ein Korn“ an der traditionellen Theke?",
+      "answers": [
+        "Ein Malzbier",
+        "Ein Brötchen",
+        "Ein klarer Getreideschnaps",
+        "Eine Tüte Erdnüsse"
+      ],
+      "correctIndex": 2,
+      "explanation": "Korn ist ein klarer Getreidebrand; an traditionellen Theken wird er häufig pur serviert."
+    },
+    {
+      "id": "pott-059",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was bedeutet „dat is mir latte“?",
+      "answers": [
+        "Das schmeckt nach Kaffee",
+        "Das ist mir egal",
+        "Das wird teuer",
+        "Das ist verboten"
+      ],
+      "correctIndex": 1,
+      "explanation": "„Ist mir latte“ bedeutet „ist mir egal“ – eine saloppe Redewendung, die über das Ruhrgebiet hinaus bekannt ist."
+    },
+    {
+      "id": "pott-060",
+      "category": "Sehenswürdigkeiten",
+      "question": "Zu welcher Stadt gehört der große Stausee an der Stever?",
+      "answers": [
+        "Unna",
+        "Bottrop",
+        "Haltern am See",
+        "Dortmund"
+      ],
+      "correctIndex": 2,
+      "explanation": "Der Halterner Stausee liegt an der Stever und dient unter anderem der Trinkwasserversorgung und Erholung."
+    },
+    {
+      "id": "pott-061",
+      "category": "Geschichte",
+      "question": "Welches Material wurde in den Zechen des Ruhrgebiets vor allem gefördert?",
+      "answers": [
+        "Kupfer",
+        "Salz",
+        "Braunkohle",
+        "Steinkohle"
+      ],
+      "correctIndex": 3,
+      "explanation": "Die Steinkohle war der wichtigste heimische Energierohstoff der industriellen Entwicklung des Ruhrgebiets."
+    },
+    {
+      "id": "pott-062",
+      "category": "Geschichte",
+      "question": "Wofür steht die Abkürzung RVR?",
+      "answers": [
+        "Rheinischer Verkehrsrat",
+        "Regionalverein Rheinland",
+        "Ruhr-Veranstaltungsrat",
+        "Regionalverband Ruhr"
+      ],
+      "correctIndex": 3,
+      "explanation": "Der Regionalverband Ruhr übernimmt regionale Aufgaben, etwa in Planung, Freiraumentwicklung und Tourismus."
+    },
+    {
+      "id": "pott-063",
+      "category": "Geschichte",
+      "question": "Wie nennt man einen künstlich aufgeschütteten Berg aus Bergbaumaterial?",
+      "answers": [
+        "Düne",
+        "Deich",
+        "Mole",
+        "Halde"
+      ],
+      "correctIndex": 3,
+      "explanation": "Bergehalden entstanden, weil beim Kohleabbau große Mengen nicht nutzbaren Gesteins anfielen."
+    },
+    {
+      "id": "pott-064",
+      "category": "Geschichte",
+      "question": "Welcher Fluss gab dem Ruhrgebiet seinen Namen?",
+      "answers": [
+        "Ruhr",
+        "Emscher",
+        "Lippe",
+        "Rhein"
+      ],
+      "correctIndex": 0,
+      "explanation": "Die Ruhr fließt von Osten nach Westen und mündet bei Duisburg in den Rhein."
+    },
+    {
+      "id": "pott-065",
+      "category": "Geschichte",
+      "question": "Welcher große Strom fließt durch Duisburg?",
+      "answers": [
+        "Rhein",
+        "Weser",
+        "Elbe",
+        "Main"
+      ],
+      "correctIndex": 0,
+      "explanation": "Der Rhein verläuft durch Duisburg und ist zentral für den Gütertransport und die Hafenwirtschaft."
+    },
+    {
+      "id": "pott-066",
+      "category": "Geschichte",
+      "question": "Welcher Fluss wurde im Ruhrgebiet lange stark industriell genutzt und renaturiert?",
+      "answers": [
+        "Isar",
+        "Emscher",
+        "Saale",
+        "Lech"
+      ],
+      "correctIndex": 1,
+      "explanation": "Die Emscher wurde lange als industrieller Abwasserlauf genutzt und anschließend umfassend umgebaut und renaturiert."
+    },
+    {
+      "id": "pott-067",
+      "category": "Geschichte",
+      "question": "Was ist eine Kokerei?",
+      "answers": [
+        "Anlage zur Herstellung von Koks aus Kohle",
+        "Werk zur Salzgewinnung",
+        "Brauerei für Malzbier",
+        "Fabrik für Glasflaschen"
+      ],
+      "correctIndex": 0,
+      "explanation": "Eine Kokerei erhitzt Steinkohle unter Luftabschluss; dabei entsteht Koks für die Eisen- und Stahlindustrie."
+    },
+    {
+      "id": "pott-068",
+      "category": "Geschichte",
+      "question": "Was entsteht im Hochofen hauptsächlich?",
+      "answers": [
+        "Kunststoff",
+        "Kochsalz",
+        "Roheisen",
+        "Zement"
+      ],
+      "correctIndex": 2,
+      "explanation": "Im Hochofen werden Eisenerze unter Einsatz von Koks zu flüssigem Roheisen reduziert."
+    },
+    {
+      "id": "pott-069",
+      "category": "Geschichte",
+      "question": "Wofür wurde ein Förderturm an einer Zeche gebraucht?",
+      "answers": [
+        "Zur Stromerzeugung aus Wind",
+        "Als Wasserturm",
+        "Zum Heben und Senken im Schacht",
+        "Zum Trocknen von Kohle"
+      ],
+      "correctIndex": 2,
+      "explanation": "Über Fördergerüste und Schachtanlagen wurden Menschen, Material und Kohle transportiert."
+    },
+    {
+      "id": "pott-070",
+      "category": "Geschichte",
+      "question": "Wie heißt die traditionelle Grußformel der Bergleute?",
+      "answers": [
+        "Glück auf!",
+        "Moin Moin!",
+        "Servus!",
+        "Ahoi!"
+      ],
+      "correctIndex": 0,
+      "explanation": "„Glück auf!“ ist ein historischer Bergmannsgruß und drückt unter anderem den Wunsch nach sicherer Arbeit aus."
+    },
+    {
+      "id": "pott-071",
+      "category": "Geschichte",
+      "question": "Welche Schutzleuchte war im Bergbau wichtig?",
+      "answers": [
+        "Leuchtturm",
+        "Straßenlaterne",
+        "Schreibtischlampe",
+        "Grubenlampe"
+      ],
+      "correctIndex": 3,
+      "explanation": "Grubenlampen sorgten unter Tage für Licht; einige Bauarten dienten auch als Warnsignal bei Grubengas."
+    },
+    {
+      "id": "pott-072",
+      "category": "Geschichte",
+      "question": "Was bezeichnet eine Lore im Bergbau?",
+      "answers": [
+        "Bohrmaschine",
+        "Schutzhelm",
+        "Ein kleiner Transportwagen",
+        "Förderseil"
+      ],
+      "correctIndex": 2,
+      "explanation": "Mit Loren transportierten Bergleute Kohle, Gestein und anderes Material über Schienen."
+    },
+    {
+      "id": "pott-073",
+      "category": "Geschichte",
+      "question": "Was ist eine Zeche?",
+      "answers": [
+        "Bergwerk",
+        "Gießerei",
+        "Schiffswerft",
+        "Markthalle"
+      ],
+      "correctIndex": 0,
+      "explanation": "„Zeche“ bedeutet im Revier ein Bergwerk, in dem vor allem Steinkohle gewonnen wurde."
+    },
+    {
+      "id": "pott-074",
+      "category": "Geschichte",
+      "question": "Welcher Rohstoff prägte zusammen mit Kohle die Schwerindustrie im Ruhrgebiet?",
+      "answers": [
+        "Kork",
+        "Kakao",
+        "Eisen",
+        "Baumwolle"
+      ],
+      "correctIndex": 2,
+      "explanation": "Kohle lieferte die Energie, Eisen und später Stahl waren Grundstoffe der industriellen Produktion."
+    },
+    {
+      "id": "pott-075",
+      "category": "Geschichte",
+      "question": "Was ist ein Pütt im Ruhrgebiets-Sprachgebrauch?",
+      "answers": [
+        "Stadion",
+        "Fluss",
+        "Straßenbahn",
+        "Bergwerk"
+      ],
+      "correctIndex": 3,
+      "explanation": "„Pütt“ ist ein verbreiteter regionaler Ausdruck für die Zeche beziehungsweise das Bergwerk."
+    },
+    {
+      "id": "pott-076",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was bedeutet 'malochen' im Ruhrpott?",
+      "answers": [
+        "Leise singen",
+        "Spazieren gehen",
+        "Einparken",
+        "Hart arbeiten"
+      ],
+      "correctIndex": 3,
+      "explanation": "Das Verb „malochen“ bedeutet körperlich hart arbeiten und ist eng mit der Arbeitersprache verbunden."
+    },
+    {
+      "id": "pott-077",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was ist eine Bude beziehungsweise ein Büdchen?",
+      "answers": [
+        "Kohleförderanlage",
+        "Bergwerksschacht",
+        "Kleiner Kiosk",
+        "Fußballplatz"
+      ],
+      "correctIndex": 2,
+      "explanation": "Büdchen waren und sind Kioske, häufig auch Nachbarschaftstreffpunkte mit Süßigkeiten und Getränken."
+    },
+    {
+      "id": "pott-078",
+      "category": "Essen & Trinken",
+      "question": "Was bestellt man mit einer 'Pommes Schranke'?",
+      "answers": [
+        "Pommes mit Gurken",
+        "Pommes mit Senf",
+        "Pommes mit Käse",
+        "Pommes mit Ketchup und Mayo"
+      ],
+      "correctIndex": 3,
+      "explanation": "„Schranke“ steht für die roten und weißen Soßen Ketchup und Mayonnaise auf den Pommes."
+    },
+    {
+      "id": "pott-079",
+      "category": "Essen & Trinken",
+      "question": "Was ist eine Currywurst?",
+      "answers": [
+        "Wurst mit würziger Currysauce",
+        "Kartoffelsuppe",
+        "Brot mit Käse",
+        "Süßer Kuchen"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bei Currywurst wird geschnittene oder ganze Wurst mit gewürzter Soße serviert."
+    },
+    {
+      "id": "pott-080",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was bezeichnet 'anne Bude'?",
+      "answers": [
+        "An der Halde",
+        "Am Kiosk",
+        "Im Stadion",
+        "Auf der Zeche"
+      ],
+      "correctIndex": 1,
+      "explanation": "„Anne Bude“ ist die verkürzte umgangssprachliche Form von „an der Bude“."
+    },
+    {
+      "id": "pott-081",
+      "category": "Fußball",
+      "question": "Welche Farben trägt Borussia Dortmund traditionell?",
+      "answers": [
+        "Blau und Weiß",
+        "Grün und Schwarz",
+        "Schwarz und Gelb",
+        "Rot und Weiß"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die schwarz-gelben Farben prägen Trikots, Fahnen und den Auftritt von Borussia Dortmund."
+    },
+    {
+      "id": "pott-082",
+      "category": "Fußball",
+      "question": "Welche Farben verbindet man mit dem FC Schalke 04?",
+      "answers": [
+        "Rot und Schwarz",
+        "Gelb und Schwarz",
+        "Blau und Weiß",
+        "Grün und Weiß"
+      ],
+      "correctIndex": 2,
+      "explanation": "Schalke 04 ist für seine blau-weißen Vereinsfarben und den Beinamen „Königsblau“ bekannt."
+    },
+    {
+      "id": "pott-083",
+      "category": "Fußball",
+      "question": "Welcher Fußballverein ist als BVB bekannt?",
+      "answers": [
+        "Borussia Dortmund",
+        "Rot-Weiss Essen",
+        "MSV Duisburg",
+        "VfL Bochum"
+      ],
+      "correctIndex": 0,
+      "explanation": "BVB steht für Ballspielverein Borussia; der Klub wurde 1909 in Dortmund gegründet."
+    },
+    {
+      "id": "pott-084",
+      "category": "Fußball",
+      "question": "Welcher Verein wird 'die Königsblauen' genannt?",
+      "answers": [
+        "MSV Duisburg",
+        "FC Schalke 04",
+        "VfL Bochum",
+        "Borussia Dortmund"
+      ],
+      "correctIndex": 1,
+      "explanation": "„Die Königsblauen“ ist ein traditioneller Spitzname des FC Schalke 04."
+    },
+    {
+      "id": "pott-085",
+      "category": "Fußball",
+      "question": "Welcher Fußballclub spielt traditionell an der Castroper Straße?",
+      "answers": [
+        "VfL Bochum",
+        "Borussia Dortmund",
+        "MSV Duisburg",
+        "FC Schalke 04"
+      ],
+      "correctIndex": 0,
+      "explanation": "Der VfL Bochum trägt seine Heimspiele traditionell im Stadion an der Castroper Straße aus."
+    },
+    {
+      "id": "pott-086",
+      "category": "Fußball",
+      "question": "In welcher Stadt tragen die Fußballer mit dem Spitznamen 'Zebras' ihre Heimspiele aus?",
+      "answers": [
+        "Bochum",
+        "Essen",
+        "Duisburg",
+        "Hamm"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die „Zebras“ sind der MSV Duisburg; der Beiname erinnert an die gestreiften Trikots."
+    },
+    {
+      "id": "pott-087",
+      "category": "Kultur",
+      "question": "Welches Musical ist besonders eng mit Bochum verbunden?",
+      "answers": [
+        "Der König der Löwen",
+        "Starlight Express",
+        "Hamilton",
+        "Cats"
+      ],
+      "correctIndex": 1,
+      "explanation": "Das Rollschuh-Musical „Starlight Express“ besitzt in Bochum eine eigens dafür gebaute Spielstätte."
+    },
+    {
+      "id": "pott-088",
+      "category": "Kultur",
+      "question": "Womit rasen die Darsteller von 'Starlight Express' über die Bühne?",
+      "answers": [
+        "Pferden",
+        "Fahrrädern",
+        "Rollschuhen",
+        "Skiern"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die Darsteller des Musicals verkörpern rasende Züge auf Rollschuhen."
+    },
+    {
+      "id": "pott-089",
+      "category": "Kultur",
+      "question": "Welches große Festival findet traditionell in Bochum statt?",
+      "answers": [
+        "Bochum Total",
+        "Wacken Open Air",
+        "Hurricane",
+        "Rock am Ring"
+      ],
+      "correctIndex": 0,
+      "explanation": "Bochum Total ist ein bekanntes Musikfestival in der Innenstadt von Bochum."
+    },
+    {
+      "id": "pott-090",
+      "category": "Kultur",
+      "question": "Wie heißt die bekannte große Kirmes in Herne?",
+      "answers": [
+        "Cranger Kirmes",
+        "Rheinkirmes",
+        "Send",
+        "Libori"
+      ],
+      "correctIndex": 0,
+      "explanation": "Die Cranger Kirmes ist eines der bekanntesten großen Volksfeste Nordrhein-Westfalens."
+    },
+    {
+      "id": "pott-091",
+      "category": "Geschichte",
+      "question": "Wie heißt das touristische Netzwerk, das bedeutende Zechen und Industrieanlagen im Ruhrgebiet verbindet?",
+      "answers": [
+        "Romantische Straße",
+        "Burgenstraße",
+        "Deutsche Weinstraße",
+        "Route der Industriekultur"
+      ],
+      "correctIndex": 3,
+      "explanation": "Die Route der Industriekultur verknüpft zahlreiche Stationen der Industriegeschichte im Ruhrgebiet."
+    },
+    {
+      "id": "pott-092",
+      "category": "Geschichte",
+      "question": "Wofür ist Zollverein international ausgezeichnet?",
+      "answers": [
+        "UN-Hauptquartier",
+        "UNESCO-Welterbe",
+        "Olympiastützpunkt",
+        "Nationalpark"
+      ],
+      "correctIndex": 1,
+      "explanation": "Die Zeche und Kokerei Zollverein gehören seit 2001 zum UNESCO-Welterbe."
+    },
+    {
+      "id": "pott-093",
+      "category": "Geschichte",
+      "question": "Welche Funktion hatte der Gasometer Oberhausen ursprünglich?",
+      "answers": [
+        "Förderung von Kohle",
+        "Betrieb einer Eisenbahn",
+        "Speicherung von Gas",
+        "Herstellung von Bier"
+      ],
+      "correctIndex": 2,
+      "explanation": "Der Gasometer diente einst dazu, Gas zwischenzuspeichern; heute wird er als Ausstellungshalle genutzt."
+    },
+    {
+      "id": "pott-094",
+      "category": "Geschichte",
+      "question": "Was war der Landschaftspark Duisburg-Nord früher?",
+      "answers": [
+        "Universitätscampus",
+        "Hüttenwerk",
+        "Flughafen",
+        "Kloster"
+      ],
+      "correctIndex": 1,
+      "explanation": "Der Landschaftspark Duisburg-Nord bewahrt Anlagen eines früheren Eisenhüttenwerks."
+    },
+    {
+      "id": "pott-095",
+      "category": "Geschichte",
+      "question": "Welche Form hat die Landmarke 'Tetraeder'?",
+      "answers": [
+        "Kugel",
+        "Dreieckige Pyramidenstruktur",
+        "Zylinder",
+        "Würfel"
+      ],
+      "correctIndex": 1,
+      "explanation": "Die Landmarke auf der Bottroper Halde Beckstraße besteht aus einer offenen, tetraederartigen Stahlkonstruktion."
+    },
+    {
+      "id": "pott-096",
+      "category": "Kultur",
+      "question": "Woran erinnert 'Tiger & Turtle' mit seiner Form?",
+      "answers": [
+        "Schiff",
+        "Kirchturm",
+        "Achterbahn",
+        "Förderturm"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die geschwungenen Wege von „Tiger & Turtle“ erinnern an eine Achterbahn, werden aber zu Fuß begangen."
+    },
+    {
+      "id": "pott-097",
+      "category": "Geschichte",
+      "question": "Wo befinden sich zahlreiche Aussichtspunkte des Ruhrgebiets?",
+      "answers": [
+        "An Sandstränden",
+        "Auf Vulkaninseln",
+        "Auf Gletschern",
+        "Auf ehemaligen Bergehalden"
+      ],
+      "correctIndex": 3,
+      "explanation": "Viele Bergehalden wurden nach dem Bergbau zu begrünten Aussichtspunkten und Freizeitorten."
+    },
+    {
+      "id": "pott-098",
+      "category": "Geschichte",
+      "question": "Was verbindet die Route der Industriekultur?",
+      "answers": [
+        "Nur Einkaufszentren",
+        "Nur Fußballstadien",
+        "Industriedenkmäler und Kulturlandschaften",
+        "Nur Wasserparks"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die Route verbindet Zeugnisse von Zechen, Stahlwerken, Siedlungen und industriell geprägten Landschaften."
+    },
+    {
+      "id": "pott-099",
+      "category": "Kultur",
+      "question": "Welches Verkehrsmittel passt besonders gut zum RuhrtalRadweg?",
+      "answers": [
+        "Fahrrad",
+        "U-Boot",
+        "Segelflugzeug",
+        "Seilbahn"
+      ],
+      "correctIndex": 0,
+      "explanation": "Der RuhrtalRadweg folgt dem Fluss von der Quelle bis zur Mündung und ist für Radtouren gedacht."
+    },
+    {
+      "id": "pott-100",
+      "category": "Kultur",
+      "question": "Welche Landschaft verbindet man mit dem Süden des Ruhrgebiets?",
+      "answers": [
+        "Lüneburger Heide",
+        "Alpenhauptkamm",
+        "Ostseeküste",
+        "Ruhrtal"
+      ],
+      "correctIndex": 3,
+      "explanation": "Das Ruhrtal bietet im südlichen Ruhrgebiet Flusslandschaften, Radwege und bewaldete Hänge."
+    },
+    {
+      "id": "pott-101",
+      "category": "Geschichte",
+      "question": "In welchem Jahr wurde der Regionalverband Ruhr gegründet – damals als Siedlungsverband Ruhrkohlenbezirk?",
+      "answers": [
+        "1990",
+        "1871",
+        "1949",
+        "1920"
+      ],
+      "correctIndex": 3,
+      "explanation": "Der heutige Regionalverband Ruhr entstand 1920 als Siedlungsverband Ruhrkohlenbezirk."
+    },
+    {
+      "id": "pott-102",
+      "category": "Geschichte",
+      "question": "In welchem Jahr wurde die Zeche Zollverein als UNESCO-Welterbe anerkannt?",
+      "answers": [
+        "2001",
+        "2010",
+        "1989",
+        "1975"
+      ],
+      "correctIndex": 0,
+      "explanation": "Die UNESCO nahm die Zeche und Kokerei Zollverein 2001 in die Welterbeliste auf."
+    },
+    {
+      "id": "pott-103",
+      "category": "Geschichte",
+      "question": "In welchem Jahr endete die Steinkohleförderung auf Prosper-Haniel?",
+      "answers": [
+        "2018",
+        "1998",
+        "2024",
+        "2007"
+      ],
+      "correctIndex": 0,
+      "explanation": "Mit der Schließung von Prosper-Haniel in Bottrop endete 2018 die deutsche Steinkohleförderung im Bergbau unter Tage."
+    },
+    {
+      "id": "pott-104",
+      "category": "Geschichte",
+      "question": "In welcher Stadt befand sich das zuletzt aktive deutsche Steinkohlebergwerk Prosper-Haniel?",
+      "answers": [
+        "Dortmund",
+        "Bottrop",
+        "Hamm",
+        "Herne"
+      ],
+      "correctIndex": 1,
+      "explanation": "Prosper-Haniel lag in Bottrop und war das letzte aktive Steinkohlenbergwerk Deutschlands."
+    },
+    {
+      "id": "pott-105",
+      "category": "Geschichte",
+      "question": "Welche Stadt war 2010 zusammen mit dem Ruhrgebiet Kulturhauptstadt Europas?",
+      "answers": [
+        "Dortmund",
+        "Essen",
+        "Duisburg",
+        "Bochum"
+      ],
+      "correctIndex": 1,
+      "explanation": "Essen stand 2010 stellvertretend für die gesamte Region als Kulturhauptstadt Europas im Mittelpunkt."
+    },
+    {
+      "id": "pott-106",
+      "category": "Geschichte",
+      "question": "Wie hieß die europäische Kulturhauptstadt-Kampagne im Ruhrgebiet 2010?",
+      "answers": [
+        "RUHR.2000",
+        "METRO.2005",
+        "POTT.2020",
+        "RUHR.2010"
+      ],
+      "correctIndex": 3,
+      "explanation": "Unter dem Namen RUHR.2010 präsentierte sich die Region als Europäische Kulturhauptstadt."
+    },
+    {
+      "id": "pott-107",
+      "category": "Geschichte",
+      "question": "Wozu diente ein Malakowturm im frühen Bergbau?",
+      "answers": [
+        "Als massiver Förderturm über dem Schacht",
+        "Als Kirchturm",
+        "Als Kühlturm eines Kraftwerks",
+        "Als Bergarbeiterwohnheim"
+      ],
+      "correctIndex": 0,
+      "explanation": "Malakowtürme waren massive, oft gemauerte Fördertürme früher Schachtanlagen."
+    },
+    {
+      "id": "pott-108",
+      "category": "Geschichte",
+      "question": "Was bezeichnet der Ausdruck „Kumpel“ ursprünglich im Revier besonders?",
+      "answers": [
+        "Einen Hafenkran",
+        "Einen Eisenbahnzug",
+        "Einen Förderkorb",
+        "Einen Bergmann beziehungsweise Arbeitskameraden"
+      ],
+      "correctIndex": 3,
+      "explanation": "Im bergmännischen Umfeld bezeichnete „Kumpel“ die Kollegen auf der Zeche."
+    },
+    {
+      "id": "pott-109",
+      "category": "Geschichte",
+      "question": "Welche Essener Zechenanlage ist für ihre sachlich-moderne Industriearchitektur bekannt?",
+      "answers": [
+        "Zeche Hannover",
+        "Zeche Nachtigall",
+        "Zollverein Schacht XII",
+        "Zeche Ewald"
+      ],
+      "correctIndex": 2,
+      "explanation": "Schacht XII von Zollverein ist ein berühmtes Beispiel funktionaler Industriearchitektur der Moderne."
+    },
+    {
+      "id": "pott-110",
+      "category": "Geschichte",
+      "question": "Welche Industrie prägte Duisburg-Rheinhausen über Jahrzehnte besonders?",
+      "answers": [
+        "Seidenweberei",
+        "Uhrenbau",
+        "Stahlindustrie",
+        "Porzellanindustrie"
+      ],
+      "correctIndex": 2,
+      "explanation": "Duisburg-Rheinhausen war jahrzehntelang ein bedeutender Standort der Eisen- und Stahlproduktion."
+    },
+    {
+      "id": "pott-111",
+      "category": "Geschichte",
+      "question": "Wozu dient ein Förderkorb in einem Bergwerk?",
+      "answers": [
+        "Zum Aufbewahren von Speisen",
+        "Zum Transport von Menschen und Material im Schacht",
+        "Zum Kühlen von Stahl",
+        "Zum Sortieren von Briefen"
+      ],
+      "correctIndex": 1,
+      "explanation": "Der Förderkorb hängt an der Schachtförderanlage und befördert Personen sowie Material auf und ab."
+    },
+    {
+      "id": "pott-112",
+      "category": "Geschichte",
+      "question": "Was bedeutet „Schicht“ im traditionellen Zechenbetrieb?",
+      "answers": [
+        "Die Tiefe eines Flusses",
+        "Ein festgelegter Arbeitsabschnitt",
+        "Eine Kohlesorte",
+        "Ein Förderband-Typ"
+      ],
+      "correctIndex": 1,
+      "explanation": "Eine Schicht bezeichnet eine festgelegte Arbeitszeit, etwa die Früh-, Spät- oder Nachtschicht."
+    },
+    {
+      "id": "pott-113",
+      "category": "Geschichte",
+      "question": "Wofür war eine Waschkaue auf einer Zeche gedacht?",
+      "answers": [
+        "Reinigen der geförderten Kohle",
+        "Waschen von Lokomotiven",
+        "Wässern der Halden",
+        "Umkleiden und Waschen der Bergleute"
+      ],
+      "correctIndex": 3,
+      "explanation": "In der Waschkaue wechselten Bergleute ihre Kleidung und reinigten sich nach der Arbeit."
+    },
+    {
+      "id": "pott-114",
+      "category": "Geschichte",
+      "question": "Welche Aufgabe hatte ein Steiger unter Tage?",
+      "answers": [
+        "Fahren der Straßenbahn",
+        "Ausschank in der Kantine",
+        "Beaufsichtigung bergmännischer Arbeiten",
+        "Verkauf von Eintrittskarten"
+      ],
+      "correctIndex": 2,
+      "explanation": "Steiger waren im Bergbau für die Leitung und Aufsicht bestimmter Arbeitsbereiche verantwortlich."
+    },
+    {
+      "id": "pott-115",
+      "category": "Geschichte",
+      "question": "Aus welchem Rohstoff entsteht in einer Kokerei vor allem Hochofenkoks?",
+      "answers": [
+        "Sand",
+        "Kalkstein",
+        "Erdöl",
+        "Steinkohle"
+      ],
+      "correctIndex": 3,
+      "explanation": "Aus Steinkohle entsteht beim Verkoken der für Hochöfen wichtige Koks."
+    },
+    {
+      "id": "pott-116",
+      "category": "Geschichte",
+      "question": "Warum entstanden im Ruhrgebiet viele Arbeitersiedlungen?",
+      "answers": [
+        "Um Weinberge anzulegen",
+        "Um Beschäftigte nahe den Industrieanlagen unterzubringen",
+        "Um Militärübungen durchzuführen",
+        "Um Hafenzölle einzuziehen"
+      ],
+      "correctIndex": 1,
+      "explanation": "Zechen und Hüttenwerke errichteten oft Siedlungen, damit Arbeitskräfte nahe an ihren Betrieben wohnten."
+    },
+    {
+      "id": "pott-117",
+      "category": "Geschichte",
+      "question": "Was bezeichnet „Pinge“ in der Bergbaugeschichte?",
+      "answers": [
+        "Eine Zechenkapelle",
+        "Eine Fördermaschine",
+        "Ein Stahlträger",
+        "Eine durch frühen Bergbau entstandene Bodenvertiefung"
+      ],
+      "correctIndex": 3,
+      "explanation": "Eine Pinge ist eine Vertiefung an der Erdoberfläche, die mit früher Bergbautätigkeit zusammenhängt."
+    },
+    {
+      "id": "pott-118",
+      "category": "Geschichte",
+      "question": "Wie heißt das historische Bergbaurevier an der Ruhr bei Witten?",
+      "answers": [
+        "Teutoburger Wald",
+        "Emscherbruch",
+        "Sauerlandring",
+        "Muttental"
+      ],
+      "correctIndex": 3,
+      "explanation": "Im Muttental bei Witten lassen sich besonders frühe Formen des Ruhrbergbaus nachvollziehen."
+    },
+    {
+      "id": "pott-119",
+      "category": "Geschichte",
+      "question": "Welche Energiequelle nutzte man im frühen Ruhrbergbau, bevor Dampfmaschinen verbreitet waren?",
+      "answers": [
+        "Kernkraftwerke",
+        "Windturbinen auf Halden",
+        "Muskelkraft und Wasserkraft",
+        "Solarparks"
+      ],
+      "correctIndex": 2,
+      "explanation": "Vor der breiten Mechanisierung halfen Menschen, Tiere und teilweise Wasserkraft bei der Förderung."
+    },
+    {
+      "id": "pott-120",
+      "category": "Geschichte",
+      "question": "Was trugen Bergleute bei der Arbeit unter Tage als wichtigen Kopfschutz?",
+      "answers": [
+        "Strohhut",
+        "Schutzhelm",
+        "Fahrradkappe",
+        "Wollmütze"
+      ],
+      "correctIndex": 1,
+      "explanation": "Schutzhelme vermindern das Risiko von Kopfverletzungen durch herabfallende Gegenstände oder Stöße."
+    },
+    {
+      "id": "pott-121",
+      "category": "Fußball",
+      "question": "Welcher Klub aus dem Ruhrgebiet trägt den Spitznamen „Kleeblätter“?",
+      "answers": [
+        "VfL Bochum",
+        "MSV Duisburg",
+        "FC Schalke 04",
+        "Rot-Weiß Oberhausen"
+      ],
+      "correctIndex": 3,
+      "explanation": "Rot-Weiß Oberhausen trägt traditionell den Beinamen „Kleeblätter“."
+    },
+    {
+      "id": "pott-122",
+      "category": "Fußball",
+      "question": "Wofür steht „VfL“ im Namen des VfL Bochum?",
+      "answers": [
+        "Verband für Ligafußball",
+        "Verein für Leibesübungen",
+        "Verein für Leistungsförderung",
+        "Vereinigung freier Läufer"
+      ],
+      "correctIndex": 1,
+      "explanation": "Die Abkürzung VfL steht beim VfL Bochum für „Verein für Leibesübungen“."
+    },
+    {
+      "id": "pott-123",
+      "category": "Fußball",
+      "question": "Welcher Ruhrgebietsclub ist mit der „Südtribüne“ und der „Gelben Wand“ verbunden?",
+      "answers": [
+        "Borussia Dortmund",
+        "MSV Duisburg",
+        "VfL Bochum",
+        "Rot-Weiss Essen"
+      ],
+      "correctIndex": 0,
+      "explanation": "Die Südtribüne des Dortmunder Stadions ist als „Gelbe Wand“ international bekannt."
+    },
+    {
+      "id": "pott-124",
+      "category": "Fußball",
+      "question": "Welcher Verein hat das Vereinsmotto „Echte Liebe“ besonders geprägt?",
+      "answers": [
+        "Borussia Dortmund",
+        "VfL Bochum",
+        "Rot-Weiß Oberhausen",
+        "FC Schalke 04"
+      ],
+      "correctIndex": 0,
+      "explanation": "„Echte Liebe“ wurde zum markanten Vereins- und Werbemotto von Borussia Dortmund."
+    },
+    {
+      "id": "pott-125",
+      "category": "Fußball",
+      "question": "Was ist ein „Revierderby“ im Fußball meist?",
+      "answers": [
+        "Ein Pokalspiel im Ausland",
+        "Ein Freundschaftsspiel ohne Zuschauer",
+        "Ein Spiel nur zwischen Nationalteams",
+        "Ein Spiel zwischen Schalke und Dortmund"
+      ],
+      "correctIndex": 3,
+      "explanation": "Wenn im deutschen Fußball vom Revierderby die Rede ist, sind meist Dortmund und Schalke gemeint."
+    },
+    {
+      "id": "pott-126",
+      "category": "Fußball",
+      "question": "Wie heißt das Dortmunder Stadion im Bundesliga-Spielbetrieb?",
+      "answers": [
+        "Vonovia Ruhrstadion",
+        "Schauinsland-Reisen-Arena",
+        "Signal Iduna Park",
+        "Stadion an der Hafenstraße"
+      ],
+      "correctIndex": 2,
+      "explanation": "Der Signal Iduna Park ist die Heimspielstätte von Borussia Dortmund und auch als Westfalenstadion bekannt."
+    },
+    {
+      "id": "pott-127",
+      "category": "Fußball",
+      "question": "Wie heißt das traditionsreiche Fußballstadion des VfL Bochum?",
+      "answers": [
+        "Westfalenstadion in Essen",
+        "Stadion Rote Erde in Duisburg",
+        "Vonovia Ruhrstadion",
+        "Veltins-Arena"
+      ],
+      "correctIndex": 2,
+      "explanation": "Das Bochumer Stadion an der Castroper Straße heißt aktuell Vonovia Ruhrstadion; Namensrechte können sich ändern."
+    },
+    {
+      "id": "pott-128",
+      "category": "Fußball",
+      "question": "In welcher Stadt steht das Stadion an der Hafenstraße?",
+      "answers": [
+        "Essen",
+        "Dortmund",
+        "Duisburg",
+        "Bochum"
+      ],
+      "correctIndex": 0,
+      "explanation": "An der Hafenstraße in Essen liegt die traditionelle Heimspielstätte von Rot-Weiss Essen."
+    },
+    {
+      "id": "pott-129",
+      "category": "Fußball",
+      "question": "Welcher Verein trägt seine Heimspiele im Stadion an der Hafenstraße aus?",
+      "answers": [
+        "Rot-Weiss Essen",
+        "MSV Duisburg",
+        "FC Schalke 04",
+        "VfL Bochum"
+      ],
+      "correctIndex": 0,
+      "explanation": "Rot-Weiss Essen trägt seine Heimspiele im Stadion an der Hafenstraße aus."
+    },
+    {
+      "id": "pott-130",
+      "category": "Fußball",
+      "question": "In welcher Stadt steht die Schauinsland-Reisen-Arena?",
+      "answers": [
+        "Duisburg",
+        "Hamm",
+        "Hagen",
+        "Herne"
+      ],
+      "correctIndex": 0,
+      "explanation": "Die Schauinsland-Reisen-Arena liegt in Duisburg und ist die Heimspielstätte des MSV Duisburg; Stadionnamen können wechseln."
+    },
+    {
+      "id": "pott-131",
+      "category": "Fußball",
+      "question": "Was ist die traditionelle Vereinsfarbe von Rot-Weiss Essen?",
+      "answers": [
+        "Rot und Weiß",
+        "Gelb und Blau",
+        "Grün und Weiß",
+        "Schwarz und Orange"
+      ],
+      "correctIndex": 0,
+      "explanation": "Rot-Weiss Essen ist vor allem mit den Vereinsfarben Rot und Weiß verbunden."
+    },
+    {
+      "id": "pott-132",
+      "category": "Fußball",
+      "question": "Wie heißt das traditionelle Heimstadion des FC Schalke 04?",
+      "answers": [
+        "Westfalenparkstadion",
+        "Ruhrstadion",
+        "Stadion an der Hafenstraße",
+        "Veltins-Arena"
+      ],
+      "correctIndex": 3,
+      "explanation": "Schalke spielt seine Heimspiele in der Arena in Gelsenkirchen, die seit Jahren unter dem Namen Veltins-Arena bekannt ist."
+    },
+    {
+      "id": "pott-133",
+      "category": "Fußball",
+      "question": "Wie heißt die traditionelle Heimspielstätte der SG Wattenscheid 09?",
+      "answers": [
+        "Stadion an der Hafenstraße",
+        "Ruhrstadion",
+        "Lohrheidestadion",
+        "Stadion Rote Erde"
+      ],
+      "correctIndex": 2,
+      "explanation": "Das Lohrheidestadion liegt in Bochum-Wattenscheid und gehört zur Fußballgeschichte der SG Wattenscheid 09."
+    },
+    {
+      "id": "pott-134",
+      "category": "Fußball",
+      "question": "In welcher Stadt wurde Borussia Dortmund gegründet?",
+      "answers": [
+        "Essen",
+        "Gelsenkirchen",
+        "Dortmund",
+        "Bochum"
+      ],
+      "correctIndex": 2,
+      "explanation": "Borussia Dortmund wurde im Jahr 1909 in Dortmund gegründet."
+    },
+    {
+      "id": "pott-135",
+      "category": "Fußball",
+      "question": "In welchem Jahr wurde Borussia Dortmund gegründet?",
+      "answers": [
+        "1927",
+        "1909",
+        "1912",
+        "1904"
+      ],
+      "correctIndex": 1,
+      "explanation": "Die Zahl 1909 steckt auch in der Vereinsidentität von Borussia Dortmund."
+    },
+    {
+      "id": "pott-136",
+      "category": "Fußball",
+      "question": "In welchem Jahr wurde der FC Schalke 04 gegründet?",
+      "answers": [
+        "1899",
+        "1920",
+        "1909",
+        "1904"
+      ],
+      "correctIndex": 3,
+      "explanation": "Die „04“ im Vereinsnamen FC Schalke 04 verweist auf das Gründungsjahr 1904."
+    },
+    {
+      "id": "pott-137",
+      "category": "Fußball",
+      "question": "Wie heißt die Frauenfußball-Mannschaft aus Essen, die in der Bundesliga spielte?",
+      "answers": [
+        "SC Paderborn",
+        "Borussia Herne",
+        "SGS Essen",
+        "MSV Düsseldorf"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die SGS Essen ist ein bekannter Verein des Frauenfußballs aus Essen."
+    },
+    {
+      "id": "pott-138",
+      "category": "Fußball",
+      "question": "Welche Farbe dominiert traditionell die Trikots des VfL Bochum?",
+      "answers": [
+        "Blau",
+        "Grün",
+        "Orange",
+        "Gelb"
+      ],
+      "correctIndex": 0,
+      "explanation": "Blau ist die charakteristische Trikotfarbe des VfL Bochum."
+    },
+    {
+      "id": "pott-139",
+      "category": "Fußball",
+      "question": "Wofür steht die Abkürzung „RWE“ im Ruhrgebietsfußball?",
+      "answers": [
+        "Revier-West Emscher",
+        "Rot-Weiß Erkenschwick",
+        "Rot-Weiss Essen",
+        "Rhein-West Energie"
+      ],
+      "correctIndex": 2,
+      "explanation": "„RWE“ ist eine gebräuchliche Kurzform für den Fußballclub Rot-Weiss Essen."
+    },
+    {
+      "id": "pott-140",
+      "category": "Fußball",
+      "question": "Welche Dortmunder Mannschaft gewann 1997 die UEFA Champions League?",
+      "answers": [
+        "Rot-Weiss Essen",
+        "Borussia Dortmund",
+        "VfL Bochum",
+        "MSV Duisburg"
+      ],
+      "correctIndex": 1,
+      "explanation": "Borussia Dortmund gewann 1997 die Champions League im Finale gegen Juventus Turin."
+    },
+    {
+      "id": "pott-141",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was bedeutet „Et gibt gleich Kasalla!“ in einer angespannten Situation?",
+      "answers": [
+        "Es gibt gleich Kuchen",
+        "Es beginnt zu regnen",
+        "Die Straßenbahn fährt ab",
+        "Es gibt gleich Ärger"
+      ],
+      "correctIndex": 3,
+      "explanation": "„Kasalla“ steht umgangssprachlich für Krawall, Ärger oder eine kräftige Auseinandersetzung."
+    },
+    {
+      "id": "pott-142",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was bezeichnet „Plüschmors“ in manchen westfälischen Mundarten?",
+      "answers": [
+        "Einen Igel",
+        "Einen Regenwurm",
+        "Eine Hummel",
+        "Einen Fuchs"
+      ],
+      "correctIndex": 2,
+      "explanation": "„Plüschmors“ ist eine niederdeutsche Bezeichnung für eine Hummel und nicht ausschließlich Ruhrpott-Slang."
+    },
+    {
+      "id": "pott-143",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was meint man mit „Kommse?“",
+      "answers": [
+        "Kennst du sie?",
+        "Kannst du lesen?",
+        "Kaufst du ein?",
+        "Kommst du?"
+      ],
+      "correctIndex": 3,
+      "explanation": "„Kommse?“ ist eine zusammengezogene Form von „Kommst du?“ in der gesprochenen Alltagssprache."
+    },
+    {
+      "id": "pott-144",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was bedeutet „Hömma“?",
+      "answers": [
+        "Schau hoch",
+        "Sei still",
+        "Geh weg",
+        "Hör mal"
+      ],
+      "correctIndex": 3,
+      "explanation": "„Hömma“ steht für „Hör mal“ und leitet oft eine direkte Ansprache ein."
+    },
+    {
+      "id": "pott-145",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was heißt „Pillepalle“ im lockeren Sprachgebrauch?",
+      "answers": [
+        "Ein großer Streit",
+        "Ein Fußballstadion",
+        "Eine Kleinigkeit oder Nichtigkeit",
+        "Ein alter Förderturm"
+      ],
+      "correctIndex": 2,
+      "explanation": "„Pillepalle“ bezeichnet etwas Unwichtiges oder eine Kleinigkeit."
+    },
+    {
+      "id": "pott-146",
+      "category": "Ruhrpott-Sprache",
+      "question": "Ein Kumpel sagt „Hömma, dat is Kokolores!“ – was meint er?",
+      "answers": [
+        "Das ist ein guter Witz!",
+        "Das ist Unsinn!",
+        "Das ist schon erledigt!",
+        "Das ist besonders teuer!"
+      ],
+      "correctIndex": 1,
+      "explanation": "„Kokolores“ meint Quatsch oder Unsinn – auch außerhalb des Reviers."
+    },
+    {
+      "id": "pott-147",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was ist mit „Männeken“ meist gemeint?",
+      "answers": [
+        "Eine Grubenlampe",
+        "Ein kleiner Mann",
+        "Eine Pommesbude",
+        "Ein Bagger"
+      ],
+      "correctIndex": 1,
+      "explanation": "„Männeken“ ist eine verniedlichende Form für einen kleinen Mann oder eine kleine Figur."
+    },
+    {
+      "id": "pott-148",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was bedeutet „Pille“ in der Fußballsprache des Reviers?",
+      "answers": [
+        "Schiedsrichter",
+        "Trikot",
+        "Fußball",
+        "Rote Karte"
+      ],
+      "correctIndex": 2,
+      "explanation": "„Pille“ kann im Fußballjargon scherzhaft den Ball beziehungsweise das Fußballspielen bezeichnen."
+    },
+    {
+      "id": "pott-149",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was bedeutet „Knifte“ im Ruhrpott-Sprech?",
+      "answers": [
+        "Belegtes Brot beziehungsweise Brotscheibe",
+        "Straßenbahn",
+        "Fahrradklingel",
+        "Kohlewagen"
+      ],
+      "correctIndex": 0,
+      "explanation": "Eine „Knifte“ ist eine Scheibe Brot, oft ein belegtes Pausenbrot."
+    },
+    {
+      "id": "pott-150",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was heißt „Schmackes“ in „mit Schmackes“?",
+      "answers": [
+        "Ohne Absicht",
+        "Ganz langsam",
+        "Mit Kraft oder Schwung",
+        "Ganz leise"
+      ],
+      "correctIndex": 2,
+      "explanation": "„Mit Schmackes“ heißt mit Wucht, Kraft oder ordentlich Schwung."
+    },
+    {
+      "id": "pott-151",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was meint „Killefit“?",
+      "answers": [
+        "Eine Kirmesbude",
+        "Unnötiger Kleinkram",
+        "Ein Bergwerksstollen",
+        "Ein Fußballtor"
+      ],
+      "correctIndex": 1,
+      "explanation": "„Killefit“ beschreibt unnötiges Zeug oder Kleinkram."
+    },
+    {
+      "id": "pott-152",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was heißt „verkasematuckeln“ ungefähr?",
+      "answers": [
+        "Etwas backen",
+        "Etwas verstecken",
+        "Schnell losrennen",
+        "Etwas ausführlich erklären"
+      ],
+      "correctIndex": 3,
+      "explanation": "„Verkasematuckeln“ heißt, jemandem etwas ausführlich auseinanderzusetzen oder zu erklären."
+    },
+    {
+      "id": "pott-153",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was ist ein „Dönekes“?",
+      "answers": [
+        "Ein Trinkglas",
+        "Ein Fahrschein",
+        "Eine kleine lustige Geschichte",
+        "Eine Currywurst"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ein „Dönekes“ ist eine kleine, oft lustige Anekdote."
+    },
+    {
+      "id": "pott-154",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was meint „inne Stadt“?",
+      "answers": [
+        "Innerhalb der Schule",
+        "Neben die Halde",
+        "In die Stadt",
+        "In der Zeche"
+      ],
+      "correctIndex": 2,
+      "explanation": "„Inne“ zieht „in die“ in der gesprochenen Umgangssprache zusammen."
+    },
+    {
+      "id": "pott-155",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was heißt „auffe Arbeit“?",
+      "answers": [
+        "Auf dem Platz",
+        "Auf dem Weg",
+        "Auf dem Markt",
+        "Auf der Arbeit"
+      ],
+      "correctIndex": 3,
+      "explanation": "„Auffe“ ist eine umgangssprachliche Zusammenziehung von „auf der“."
+    },
+    {
+      "id": "pott-156",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was heißt „sich einen Ast lachen“?",
+      "answers": [
+        "Früh aufstehen",
+        "Laut schimpfen",
+        "Sich verirren",
+        "Heftig lachen"
+      ],
+      "correctIndex": 3,
+      "explanation": "Wer sich „einen Ast lacht“, muss über etwas besonders heftig lachen."
+    },
+    {
+      "id": "pott-157",
+      "category": "Ruhrpott-Sprache",
+      "question": "Wenn ein Kumpel sagt „Mach keinen Rabatz!“, was sollst du lassen?",
+      "answers": [
+        "Die Schuhe putzen",
+        "Das Tor abschließen",
+        "In die Stadt fahren",
+        "Lärm und Ärger machen"
+      ],
+      "correctIndex": 3,
+      "explanation": "„Rabatz“ steht für Lärm, Tumult oder Ärger."
+    },
+    {
+      "id": "pott-158",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was bedeutet „flöten gehen“?",
+      "answers": [
+        "Früh aufstehen",
+        "Verloren gehen",
+        "Zu Fuß gehen",
+        "Musik machen"
+      ],
+      "correctIndex": 1,
+      "explanation": "Wenn etwas „flöten geht“, geht es verloren oder misslingt."
+    },
+    {
+      "id": "pott-159",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was ist ein „Klüngel“ im allgemeinen Sprachgebrauch?",
+      "answers": [
+        "Ein Förderkorb",
+        "Ein Würstchen",
+        "Ein kleiner See",
+        "Ein enges Beziehungsnetzwerk"
+      ],
+      "correctIndex": 3,
+      "explanation": "„Klüngel“ meint informelle Beziehungen oder Netzwerke, die sich gegenseitig helfen können."
+    },
+    {
+      "id": "pott-160",
+      "category": "Ruhrpott-Sprache",
+      "question": "Was meint man im Revier mit „auf Zeche“ gehen?",
+      "answers": [
+        "Zur Universität gehen",
+        "Ins Kino gehen",
+        "Ins Schwimmbad gehen",
+        "In einem Bergwerk arbeiten"
+      ],
+      "correctIndex": 3,
+      "explanation": "„Auf Zeche gehen“ heißt im Revier traditionell, zur Arbeit im Bergwerk zu gehen."
+    },
+    {
+      "id": "pott-161",
+      "category": "Essen & Trinken",
+      "question": "Welche Speise wird zur Currywurst im Ruhrgebiet besonders oft als Beilage bestellt?",
+      "answers": [
+        "Milchreis",
+        "Pommes frites",
+        "Kartoffelklöße",
+        "Couscous"
+      ],
+      "correctIndex": 1,
+      "explanation": "Pommes sind die klassische Beilage zur Currywurst an vielen Imbissbuden."
+    },
+    {
+      "id": "pott-162",
+      "category": "Essen & Trinken",
+      "question": "Was ist der „Taxiteller“ vor allem?",
+      "answers": [
+        "Ein üppiger Imbissteller",
+        "Ein spezieller Kaffeebecher",
+        "Ein Nachtisch",
+        "Ein Frühstücksteller"
+      ],
+      "correctIndex": 0,
+      "explanation": "Ein Taxiteller kombiniert oft mehrere Imbiss-Klassiker zu einer reichhaltigen Portion."
+    },
+    {
+      "id": "pott-163",
+      "category": "Essen & Trinken",
+      "question": "Welche Zutat steckt traditionell in einer Frikadelle?",
+      "answers": [
+        "Marzipan",
+        "Reisnudeln",
+        "Rote Bete",
+        "Hackfleisch"
+      ],
+      "correctIndex": 3,
+      "explanation": "Die traditionelle Frikadelle besteht überwiegend aus gewürztem Hackfleisch."
+    },
+    {
+      "id": "pott-164",
+      "category": "Essen & Trinken",
+      "question": "Was meint man an der Imbissbude meist mit „Manta-Platte“?",
+      "answers": [
+        "Pizza mit Salat",
+        "Fischbrötchen mit Tee",
+        "Currywurst mit Pommes und Mayo",
+        "Bratkartoffeln mit Ei"
+      ],
+      "correctIndex": 2,
+      "explanation": "„Manta-Platte“ ist ein scherzhafter Name für Currywurst mit Pommes, häufig rot-weiß."
+    },
+    {
+      "id": "pott-165",
+      "category": "Essen & Trinken",
+      "question": "Was ist ein „Pott“ beim Kaffee, wenn jemand einen großen Pott bestellt?",
+      "answers": [
+        "Eine Kanne für zehn Personen",
+        "Eine Espressotasse",
+        "Ein Milchkännchen",
+        "Ein großer Becher"
+      ],
+      "correctIndex": 3,
+      "explanation": "Ein „Pott Kaffee“ meint einen großen Becher und keine winzige Espressotasse."
+    },
+    {
+      "id": "pott-166",
+      "category": "Essen & Trinken",
+      "question": "Was ist der Unterschied zwischen Bratwurst und Currywurst an der Bude?",
+      "answers": [
+        "Currywurst wird grundsätzlich gekocht",
+        "Die Currywurst wird mit Currysauce serviert",
+        "Bratwurst ist immer kalt",
+        "Die Currywurst besteht nur aus Gemüse"
+      ],
+      "correctIndex": 1,
+      "explanation": "Typisch für Currywurst ist die gewürzte Sauce; Bratwurst wird oft ohne diese serviert."
+    },
+    {
+      "id": "pott-167",
+      "category": "Essen & Trinken",
+      "question": "Was wird bei einem „Taxiteller“ typischerweise mit Currywurst und Pommes kombiniert?",
+      "answers": [
+        "Pfannkuchen",
+        "Räucherlachs",
+        "Sushi",
+        "Gyros"
+      ],
+      "correctIndex": 3,
+      "explanation": "Beim Taxiteller landen oft Gyros, Currywurst und Pommes zusammen auf einem Teller."
+    },
+    {
+      "id": "pott-168",
+      "category": "Essen & Trinken",
+      "question": "Was steckt bei einem klassischen Schaschlik an der Imbissbude am Spieß?",
+      "answers": [
+        "Gekochte Nudeln",
+        "Schokoladenwürfel",
+        "Fleischstücke",
+        "Waffelteig"
+      ],
+      "correctIndex": 2,
+      "explanation": "Ein klassischer Schaschlikspieß besteht aus Fleischstücken, häufig mit weiteren Zutaten wie Zwiebeln."
+    },
+    {
+      "id": "pott-169",
+      "category": "Essen & Trinken",
+      "question": "Welches Getränk wird im Ruhrgebiet häufig als „Pils“ bestellt?",
+      "answers": [
+        "Bier",
+        "Apfelsaft",
+        "Milchkaffee",
+        "Mineralwasser"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pils ist eine helle, hopfenbetonte Bierart, die an vielen Reviertheken angeboten wird."
+    },
+    {
+      "id": "pott-170",
+      "category": "Essen & Trinken",
+      "question": "Was bedeutet „auf die Hand“ beim Imbiss?",
+      "answers": [
+        "Essen ohne Teller zum Mitnehmen",
+        "Speisen vorbestellen",
+        "Essen nur im Lokal",
+        "Nur mit Besteck essen"
+      ],
+      "correctIndex": 0,
+      "explanation": "„Auf die Hand“ meint Essen, das man ohne Besteck oder Teller direkt mitnehmen und verzehren kann."
+    },
+    {
+      "id": "pott-171",
+      "category": "Essen & Trinken",
+      "question": "Welcher Snack besteht aus einer Wurst im aufgeschnittenen Brötchen?",
+      "answers": [
+        "Gemüsequiche",
+        "Bratwurst im Brötchen",
+        "Reibekuchen mit Apfelmus",
+        "Grießbrei"
+      ],
+      "correctIndex": 1,
+      "explanation": "Die Bratwurst im Brötchen ist ein Imbissklassiker, der sich gut unterwegs essen lässt."
+    },
+    {
+      "id": "pott-172",
+      "category": "Essen & Trinken",
+      "question": "Wie heißt ein klassisches Gericht aus geriebenen, gebratenen Kartoffeln?",
+      "answers": [
+        "Reibekuchen",
+        "Grießklöße",
+        "Dampfnudeln",
+        "Milchreis"
+      ],
+      "correctIndex": 0,
+      "explanation": "Für Reibekuchen werden Kartoffeln gerieben, gewürzt und in Fett ausgebacken."
+    },
+    {
+      "id": "pott-173",
+      "category": "Essen & Trinken",
+      "question": "Was serviert man häufig zu Reibekuchen?",
+      "answers": [
+        "Vanilleeis mit Schokosauce",
+        "Schlagsahne mit Kakao",
+        "Apfelmus",
+        "Tomatensuppe"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die Kombination von knusprigen Reibekuchen und süßem Apfelmus ist vielerorts beliebt."
+    },
+    {
+      "id": "pott-174",
+      "category": "Essen & Trinken",
+      "question": "Was ist „Stielmus“ beziehungsweise „Rübstiel“ in der westfälischen Küche?",
+      "answers": [
+        "Ein Apfelschnaps",
+        "Ein geräucherter Fisch",
+        "Ein süßer Hefekuchen",
+        "Ein Gemüse aus jungen Blättern und Stielen von Rüben"
+      ],
+      "correctIndex": 3,
+      "explanation": "Stielmus oder Rübstiel verwendet junge Blätter und Stiele bestimmter Rübenarten als Gemüse."
+    },
+    {
+      "id": "pott-175",
+      "category": "Essen & Trinken",
+      "question": "Was ist „Pfefferpotthast“?",
+      "answers": [
+        "Ein westfälischer Rindfleischeintopf",
+        "Ein Weizenbrot",
+        "Ein Vanilledessert",
+        "Ein Fischsalat"
+      ],
+      "correctIndex": 0,
+      "explanation": "Pfefferpotthast ist ein westfälischer Klassiker mit geschmortem Rindfleisch und würziger Sauce."
+    },
+    {
+      "id": "pott-176",
+      "category": "Essen & Trinken",
+      "question": "Welche Süßigkeit bekommt man klassisch an einer Kirmesbude?",
+      "answers": [
+        "Rohes Gemüse",
+        "Gekochte Linsen",
+        "Tiefkühlpizza",
+        "Gebrannte Mandeln"
+      ],
+      "correctIndex": 3,
+      "explanation": "Gebrannte Mandeln werden in Zucker geröstet und gehören zum typischen Kirmesduft."
+    },
+    {
+      "id": "pott-177",
+      "category": "Essen & Trinken",
+      "question": "Was ist ein „Backfisch“ vom Kirmesstand?",
+      "answers": [
+        "Kartoffelpuffer",
+        "Frittierter Fisch",
+        "Gegrilltes Hähnchen",
+        "Käsebrötchen"
+      ],
+      "correctIndex": 1,
+      "explanation": "Backfisch ist in Backteig ausgebackener Fisch und wird häufig an Jahrmarktständen angeboten."
+    },
+    {
+      "id": "pott-178",
+      "category": "Essen & Trinken",
+      "question": "Was meint man mit „Klümpkes“ an der Bude?",
+      "answers": [
+        "Bratwürstchen",
+        "Salzgurken",
+        "Bonbons",
+        "Kartoffelpuffer"
+      ],
+      "correctIndex": 2,
+      "explanation": "„Klümpkes“ ist ein regionales Wort für Bonbons oder kleine Süßigkeiten."
+    },
+    {
+      "id": "pott-179",
+      "category": "Essen & Trinken",
+      "question": "Welche Zutat ist typisch für eine klassische Currywurst-Sauce?",
+      "answers": [
+        "Vanille",
+        "Schokolade",
+        "Joghurt mit Minze",
+        "Tomate"
+      ],
+      "correctIndex": 3,
+      "explanation": "Tomaten bilden bei vielen Rezepten die Grundlage der gewürzten Currywurstsauce."
+    },
+    {
+      "id": "pott-180",
+      "category": "Essen & Trinken",
+      "question": "Was bestellt man an der Bude mit „'ne Tüte gemischt“ häufig?",
+      "answers": [
+        "Eine Portion Nudeln",
+        "Eine Käseplatte",
+        "Eine gemischte Tüte Süßigkeiten",
+        "Eine Suppe"
+      ],
+      "correctIndex": 2,
+      "explanation": "Bei einer „gemischten Tüte“ stellt die Bude verschiedene Süßigkeiten zusammen."
+    },
+    {
+      "id": "pott-181",
+      "category": "Kultur",
+      "question": "Zu welcher Epoche gehören viele Werke im Museum Folkwang in Essen?",
+      "answers": [
+        "Nur römische Antike",
+        "Moderne Kunst",
+        "Altägyptische Frühdynastik",
+        "Mittelalterliche Buchmalerei ausschließlich"
+      ],
+      "correctIndex": 1,
+      "explanation": "Das Museum Folkwang besitzt eine bedeutende Sammlung moderner Kunst, Fotografie und weiterer Werke."
+    },
+    {
+      "id": "pott-182",
+      "category": "Kultur",
+      "question": "Welcher Schauspieler spielte den Duisburger Tatort-Kommissar Horst Schimanski?",
+      "answers": [
+        "Götz George",
+        "Mario Adorf",
+        "Uwe Ochsenknecht",
+        "Heinz Rühmann"
+      ],
+      "correctIndex": 0,
+      "explanation": "Götz George spielte den rauen Duisburger Tatort-Kommissar Horst Schimanski."
+    },
+    {
+      "id": "pott-183",
+      "category": "Kultur",
+      "question": "Wie heißt das bekannte Schauspielhaus in Bochum?",
+      "answers": [
+        "Opernhaus Waltrop",
+        "Schauspielhaus Bochum",
+        "Theater am Rhein Duisburg",
+        "Burgtheater Essen"
+      ],
+      "correctIndex": 1,
+      "explanation": "Das Schauspielhaus Bochum ist eines der bekanntesten Sprechtheater im Ruhrgebiet."
+    },
+    {
+      "id": "pott-184",
+      "category": "Kultur",
+      "question": "Welches Museum in Essen beschäftigt sich mit der Geschichte der Region?",
+      "answers": [
+        "Ruhr Museum",
+        "Schokoladenmuseum",
+        "Deutsches Hygiene-Museum",
+        "Römisch-Germanisches Museum"
+      ],
+      "correctIndex": 0,
+      "explanation": "Das Ruhr Museum auf Zollverein zeigt Natur-, Kultur- und Industriegeschichte der Region."
+    },
+    {
+      "id": "pott-185",
+      "category": "Kultur",
+      "question": "Wofür ist das Dortmunder U heute besonders bekannt?",
+      "answers": [
+        "Wasseraufbereitung",
+        "Kunst und Kreativwirtschaft",
+        "Steinkohleförderung unter Tage",
+        "Flughafenterminal"
+      ],
+      "correctIndex": 1,
+      "explanation": "Das Dortmunder U ist heute ein Ort für Kunst, Ausstellungen und die Kreativszene."
+    },
+    {
+      "id": "pott-186",
+      "category": "Kultur",
+      "question": "Welcher Ruhrgebiets-Künstler schrieb das Lied „Bochum“?",
+      "answers": [
+        "Wolfgang Petry",
+        "Udo Lindenberg",
+        "Peter Maffay",
+        "Herbert Grönemeyer"
+      ],
+      "correctIndex": 3,
+      "explanation": "Herbert Grönemeyers Lied „Bochum“ wurde zu einer musikalischen Hymne auf die Stadt."
+    },
+    {
+      "id": "pott-187",
+      "category": "Kultur",
+      "question": "Welche Form der Kunst steht im Zentrum des Museums Küppersmühle?",
+      "answers": [
+        "Automobiltechnik",
+        "Moderne und zeitgenössische Kunst",
+        "Antike Münzprägung",
+        "Naturkundliche Präparate"
+      ],
+      "correctIndex": 1,
+      "explanation": "Im Museum Küppersmühle sind Werke moderner und zeitgenössischer Kunst zu sehen."
+    },
+    {
+      "id": "pott-188",
+      "category": "Kultur",
+      "question": "Wie heißt das Essener Konzerthaus am Stadtgarten?",
+      "answers": [
+        "Tonhalle Düsseldorf",
+        "Philharmonie Essen",
+        "Elbphilharmonie",
+        "Gewandhaus Leipzig"
+      ],
+      "correctIndex": 1,
+      "explanation": "Die Philharmonie Essen ist ein Konzerthaus im Umfeld des Essener Stadtgartens."
+    },
+    {
+      "id": "pott-189",
+      "category": "Kultur",
+      "question": "Wie heißt das traditionsreiche Opern- und Balletttheater in Essen?",
+      "answers": [
+        "Theater Oberhausen-Nord",
+        "Aalto-Theater",
+        "Musiktheater Hamm",
+        "Stadttheater Witten"
+      ],
+      "correctIndex": 1,
+      "explanation": "Das Aalto-Theater in Essen ist nach seinem Architekten Alvar Aalto benannt."
+    },
+    {
+      "id": "pott-190",
+      "category": "Kultur",
+      "question": "Welche Ruhrgebietsstadt ist für die Ruhrfestspiele bekannt?",
+      "answers": [
+        "Hamm",
+        "Recklinghausen",
+        "Bottrop",
+        "Herne"
+      ],
+      "correctIndex": 1,
+      "explanation": "Die Ruhrfestspiele sind ein bedeutendes Theaterfestival in Recklinghausen."
+    },
+    {
+      "id": "pott-191",
+      "category": "Kultur",
+      "question": "In welchem früheren Industriebau ist das Zentrum für Internationale Lichtkunst in Unna untergebracht?",
+      "answers": [
+        "Gasometer Oberhausen",
+        "Jahrhunderthalle",
+        "Lindenbrauerei",
+        "Zeche Zollern"
+      ],
+      "correctIndex": 2,
+      "explanation": "Das Zentrum für Internationale Lichtkunst liegt in den Räumen der ehemaligen Lindenbrauerei in Unna."
+    },
+    {
+      "id": "pott-192",
+      "category": "Kultur",
+      "question": "Welcher aus Mülheim an der Ruhr stammende Musiker ist für skurrilen Humor und „Katzeklo“ bekannt?",
+      "answers": [
+        "Campino",
+        "Peter Maffay",
+        "Herbert Grönemeyer",
+        "Helge Schneider"
+      ],
+      "correctIndex": 3,
+      "explanation": "Helge Schneider stammt aus Mülheim an der Ruhr und ist für Musik, Comedy und eigenwilligen Humor bekannt."
+    },
+    {
+      "id": "pott-193",
+      "category": "Kultur",
+      "question": "Welcher bekannte Ruhrgebiets-Tatort-Ermittler hieß Horst Schimanski?",
+      "answers": [
+        "Der Duisburger Kommissar",
+        "Der Dortmunder Stadionwart",
+        "Der Bochumer Museumsdirektor",
+        "Der Essener Steiger"
+      ],
+      "correctIndex": 0,
+      "explanation": "Schimanski ermittelte als Tatort-Kommissar in Duisburg und wurde zur Kultfigur des Ruhrgebiets."
+    },
+    {
+      "id": "pott-194",
+      "category": "Kultur",
+      "question": "Welche Kunstform verbindet man mit den Ruhrfestspielen in Recklinghausen?",
+      "answers": [
+        "Eiskunstlauf",
+        "Autorennen",
+        "Theater",
+        "Schachturniere"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die Ruhrfestspiele zeigen vor allem Theater, ergänzt durch weitere Bühnen- und Kulturformate."
+    },
+    {
+      "id": "pott-195",
+      "category": "Kultur",
+      "question": "Wie heißt das zentrale Theatergebäude der Ruhrfestspiele auf dem grünen Hügel in Recklinghausen?",
+      "answers": [
+        "Musiktheater im Revier",
+        "Ruhrfestspielhaus",
+        "Aalto-Theater",
+        "Schauspielhaus Bochum"
+      ],
+      "correctIndex": 1,
+      "explanation": "Das Ruhrfestspielhaus ist ein zentraler Spielort der Ruhrfestspiele auf dem Recklinghäuser Hügel."
+    },
+    {
+      "id": "pott-196",
+      "category": "Kultur",
+      "question": "Welches historische Bauwerk beherbergt in Oberhausen ein Kunstmuseum?",
+      "answers": [
+        "Schloss Oberhausen",
+        "Schloss Nordkirchen",
+        "Schloss Drachenburg",
+        "Schloss Benrath"
+      ],
+      "correctIndex": 0,
+      "explanation": "Die Ludwiggalerie zeigt Kunst und Ausstellungen im Schloss Oberhausen."
+    },
+    {
+      "id": "pott-197",
+      "category": "Kultur",
+      "question": "Welches Museum in Dortmund widmet sich dem Fußball?",
+      "answers": [
+        "Deutsches Bergbau-Museum",
+        "Ruhr Museum",
+        "Deutsches Fußballmuseum",
+        "Red Dot Design Museum"
+      ],
+      "correctIndex": 2,
+      "explanation": "Das Deutsche Fußballmuseum in Dortmund widmet sich der Geschichte des deutschen Fußballs."
+    },
+    {
+      "id": "pott-198",
+      "category": "Kultur",
+      "question": "Welches jährlich stattfindende internationale Festival ist für Kurzfilme in Oberhausen bekannt?",
+      "answers": [
+        "Berlinale",
+        "DOK Leipzig",
+        "Internationale Kurzfilmtage Oberhausen",
+        "Filmfest München"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die Internationalen Kurzfilmtage Oberhausen zählen zu den traditionsreichen Kurzfilmfestivals."
+    },
+    {
+      "id": "pott-199",
+      "category": "Kultur",
+      "question": "Welche Veranstaltungshalle im Landschaftspark Duisburg-Nord hat ihren Namen von einer früheren Hochofenanlage?",
+      "answers": [
+        "Tonhalle Düsseldorf",
+        "Gebläsehalle",
+        "Westfalenhalle",
+        "Aalto-Theater"
+      ],
+      "correctIndex": 1,
+      "explanation": "Die Gebläsehalle liegt im ehemaligen Hüttenwerksgelände des Landschaftsparks Duisburg-Nord."
+    },
+    {
+      "id": "pott-200",
+      "category": "Kultur",
+      "question": "Wie heißt die große Veranstaltungshalle auf dem früheren Bochumer Stahlwerksgelände?",
+      "answers": [
+        "Mercatorhalle Essen",
+        "Grugahalle Dortmund",
+        "Jahrhunderthalle Bochum",
+        "Westfalenhalle Oberhausen"
+      ],
+      "correctIndex": 2,
+      "explanation": "Die Jahrhunderthalle Bochum nutzt eine frühere Industriehalle als großen Veranstaltungsort."
+    }
+  ],
+  "editorialNote": "Alle 200 Datensätze haben individuelle Erklärungstexte; redaktionelle Faktenprüfung aller Aussagen und Web/App-Integration noch ausstehend."
+}

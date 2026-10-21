@@ -1,0 +1,31 @@
+{
+  "date": "2026-10-21",
+  "version": "0.18.0-test",
+  "versionCode": 22,
+  "build": "local release passed",
+  "tests": {
+    "tests": 43,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "sharedRegressionSuites": 10,
+  "lintErrors": 0,
+  "lintWarnings": 11,
+  "apkSha256": "53a7f4a14bedaa6697ef18cd7a3117014f9414fa211c21d8fd0e596583b905d4",
+  "signatureCertificateSha256": "a7a94b1dd24329607a88500698ef802a54fd96c1ed7e54710a11a9ac1677e6bf",
+  "sameKeyAs0172": true,
+  "permissionsUnchanged": true,
+  "poolVersion": "2.3.0",
+  "questions": 200,
+  "roundSize": 10,
+  "poolSha256": "b014ec634dec73298e26b5e7868f9e717cd47293c17761b5b01289ee32fb3c1a",
+  "poolByteIdenticalToWebPlugin": true,
+  "poolIdenticalToLiveRest": true,
+  "roundParity": "five deterministic exact Web reference rounds; 1000 balanced rounds; all 800 answer choices scored and locked",
+  "savedState": "round IDs, answer order and score survive serialization; legacy/invalid state discarded safely",
+  "protectedFilesUnchanged": true,
+  "deviceUiTest": "not performed; device acceptance required",
+  "questionFactCheck": "existing content reused unchanged; not independently re-audited",
+  "website": "unchanged"
+}

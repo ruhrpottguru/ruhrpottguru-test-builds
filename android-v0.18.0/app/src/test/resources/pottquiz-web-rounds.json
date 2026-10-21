@@ -1,0 +1,527 @@
+[
+  {
+    "seed": 0,
+    "round": [
+      {
+        "id": "pott-194",
+        "options": [
+          "Autorennen",
+          "Theater",
+          "Schachturniere",
+          "Eiskunstlauf"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "pott-012",
+        "options": [
+          "Unna",
+          "Bottrop",
+          "Hattingen",
+          "Essen"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "pott-035",
+        "options": [
+          "Mach keine Umstände!",
+          "Geh früher schlafen!",
+          "Hol die Zeitung!",
+          "Stell die Musik lauter!"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "pott-074",
+        "options": [
+          "Kork",
+          "Eisen",
+          "Baumwolle",
+          "Kakao"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "pott-137",
+        "options": [
+          "MSV Düsseldorf",
+          "SGS Essen",
+          "SC Paderborn",
+          "Borussia Herne"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "pott-079",
+        "options": [
+          "Wurst mit würziger Currysauce",
+          "Kartoffelsuppe",
+          "Süßer Kuchen",
+          "Brot mit Käse"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "pott-128",
+        "options": [
+          "Dortmund",
+          "Essen",
+          "Bochum",
+          "Duisburg"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "pott-044",
+        "options": [
+          "Ein Grubenschacht",
+          "Ein Kohlenwagen",
+          "Ein Förderseil",
+          "Ein Bergarbeiter"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "pott-014",
+        "options": [
+          "Dortmund",
+          "Haltern am See",
+          "Bottrop",
+          "Bochum"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "pott-188",
+        "options": [
+          "Philharmonie Essen",
+          "Tonhalle Düsseldorf",
+          "Gewandhaus Leipzig",
+          "Elbphilharmonie"
+        ],
+        "correctIndex": 0
+      }
+    ]
+  },
+  {
+    "seed": 1,
+    "round": [
+      {
+        "id": "pott-100",
+        "options": [
+          "Lüneburger Heide",
+          "Ostseeküste",
+          "Alpenhauptkamm",
+          "Ruhrtal"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "pott-151",
+        "options": [
+          "Unnötiger Kleinkram",
+          "Ein Fußballtor",
+          "Eine Kirmesbude",
+          "Ein Bergwerksstollen"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "pott-012",
+        "options": [
+          "Bottrop",
+          "Essen",
+          "Hattingen",
+          "Unna"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "pott-131",
+        "options": [
+          "Grün und Weiß",
+          "Rot und Weiß",
+          "Gelb und Blau",
+          "Schwarz und Orange"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "pott-179",
+        "options": [
+          "Schokolade",
+          "Vanille",
+          "Tomate",
+          "Joghurt mit Minze"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "pott-102",
+        "options": [
+          "1975",
+          "2010",
+          "2001",
+          "1989"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "pott-130",
+        "options": [
+          "Hamm",
+          "Herne",
+          "Hagen",
+          "Duisburg"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "pott-095",
+        "options": [
+          "Würfel",
+          "Zylinder",
+          "Kugel",
+          "Dreieckige Pyramidenstruktur"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "pott-027",
+        "options": [
+          "Sodingen",
+          "Crange",
+          "Wanne-Süd",
+          "Eickel"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "pott-019",
+        "options": [
+          "Oberhausen",
+          "Mülheim an der Ruhr",
+          "Dortmund",
+          "Hamm"
+        ],
+        "correctIndex": 0
+      }
+    ]
+  },
+  {
+    "seed": 42,
+    "round": [
+      {
+        "id": "pott-071",
+        "options": [
+          "Grubenlampe",
+          "Leuchtturm",
+          "Schreibtischlampe",
+          "Straßenlaterne"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "pott-078",
+        "options": [
+          "Pommes mit Gurken",
+          "Pommes mit Ketchup und Mayo",
+          "Pommes mit Käse",
+          "Pommes mit Senf"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "pott-126",
+        "options": [
+          "Schauinsland-Reisen-Arena",
+          "Vonovia Ruhrstadion",
+          "Signal Iduna Park",
+          "Stadion an der Hafenstraße"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "pott-013",
+        "options": [
+          "Duisburg",
+          "Dortmund",
+          "Haltern am See",
+          "Waltrop"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "pott-144",
+        "options": [
+          "Geh weg",
+          "Sei still",
+          "Schau hoch",
+          "Hör mal"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "pott-186",
+        "options": [
+          "Udo Lindenberg",
+          "Wolfgang Petry",
+          "Herbert Grönemeyer",
+          "Peter Maffay"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "pott-005",
+        "options": [
+          "Essen",
+          "Bottrop",
+          "Gelsenkirchen",
+          "Dortmund"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "pott-101",
+        "options": [
+          "1920",
+          "1949",
+          "1871",
+          "1990"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "pott-041",
+        "options": [
+          "Er steht an der Imbissbude",
+          "Er kauft ein",
+          "Er arbeitet im Bergwerk",
+          "Er spielt Fußball"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "pott-195",
+        "options": [
+          "Musiktheater im Revier",
+          "Aalto-Theater",
+          "Schauspielhaus Bochum",
+          "Ruhrfestspielhaus"
+        ],
+        "correctIndex": 3
+      }
+    ]
+  },
+  {
+    "seed": 12345,
+    "round": [
+      {
+        "id": "pott-124",
+        "options": [
+          "Rot-Weiß Oberhausen",
+          "Borussia Dortmund",
+          "FC Schalke 04",
+          "VfL Bochum"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "pott-172",
+        "options": [
+          "Dampfnudeln",
+          "Grießklöße",
+          "Milchreis",
+          "Reibekuchen"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "pott-149",
+        "options": [
+          "Straßenbahn",
+          "Belegtes Brot beziehungsweise Brotscheibe",
+          "Kohlewagen",
+          "Fahrradklingel"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "pott-001",
+        "options": [
+          "Essen",
+          "Waltrop",
+          "Bochum",
+          "Moers"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "pott-100",
+        "options": [
+          "Ruhrtal",
+          "Ostseeküste",
+          "Alpenhauptkamm",
+          "Lüneburger Heide"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "pott-116",
+        "options": [
+          "Um Beschäftigte nahe den Industrieanlagen unterzubringen",
+          "Um Hafenzölle einzuziehen",
+          "Um Weinberge anzulegen",
+          "Um Militärübungen durchzuführen"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "pott-128",
+        "options": [
+          "Essen",
+          "Bochum",
+          "Dortmund",
+          "Duisburg"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "pott-196",
+        "options": [
+          "Schloss Oberhausen",
+          "Schloss Nordkirchen",
+          "Schloss Benrath",
+          "Schloss Drachenburg"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "pott-167",
+        "options": [
+          "Pfannkuchen",
+          "Räucherlachs",
+          "Gyros",
+          "Sushi"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "pott-068",
+        "options": [
+          "Zement",
+          "Kunststoff",
+          "Roheisen",
+          "Kochsalz"
+        ],
+        "correctIndex": 2
+      }
+    ]
+  },
+  {
+    "seed": 4294967295,
+    "round": [
+      {
+        "id": "pott-064",
+        "options": [
+          "Emscher",
+          "Rhein",
+          "Ruhr",
+          "Lippe"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "pott-083",
+        "options": [
+          "Rot-Weiss Essen",
+          "MSV Duisburg",
+          "Borussia Dortmund",
+          "VfL Bochum"
+        ],
+        "correctIndex": 2
+      },
+      {
+        "id": "pott-099",
+        "options": [
+          "U-Boot",
+          "Fahrrad",
+          "Segelflugzeug",
+          "Seilbahn"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "pott-145",
+        "options": [
+          "Eine Kleinigkeit oder Nichtigkeit",
+          "Ein großer Streit",
+          "Ein Fußballstadion",
+          "Ein alter Förderturm"
+        ],
+        "correctIndex": 0
+      },
+      {
+        "id": "pott-170",
+        "options": [
+          "Essen nur im Lokal",
+          "Essen ohne Teller zum Mitnehmen",
+          "Speisen vorbestellen",
+          "Nur mit Besteck essen"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "pott-012",
+        "options": [
+          "Hattingen",
+          "Bottrop",
+          "Unna",
+          "Essen"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "pott-090",
+        "options": [
+          "Rheinkirmes",
+          "Cranger Kirmes",
+          "Send",
+          "Libori"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "pott-010",
+        "options": [
+          "Hagen",
+          "Essen",
+          "Hattingen",
+          "Herten"
+        ],
+        "correctIndex": 1
+      },
+      {
+        "id": "pott-126",
+        "options": [
+          "Schauinsland-Reisen-Arena",
+          "Stadion an der Hafenstraße",
+          "Vonovia Ruhrstadion",
+          "Signal Iduna Park"
+        ],
+        "correctIndex": 3
+      },
+      {
+        "id": "pott-115",
+        "options": [
+          "Sand",
+          "Steinkohle",
+          "Kalkstein",
+          "Erdöl"
+        ],
+        "correctIndex": 1
+      }
+    ]
+  }
+]

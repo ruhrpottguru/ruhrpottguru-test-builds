@@ -1,0 +1,11 @@
+{
+  "app/build.gradle": "50ee10cd96b860d5c1a44c0d25e7cb9c0cd396310700f55e9567a684a2fcf23e",
+  "app/src/main/assets/quiz/questions.json": "b014ec634dec73298e26b5e7868f9e717cd47293c17761b5b01289ee32fb3c1a",
+  "app/src/main/java/de/ruhrpottguru/testapp/PottQuiz.kt": "80571b9153535c65b6f92ec464c701a9e6315f94a65683d1c90d8e7d11568561",
+  "app/src/main/java/de/ruhrpottguru/testapp/PottQuizUi.kt": "e44f5a7910ab5acd1c237b563335aff6eab7f3cc7231a7854faa462e3160bbba",
+  "app/src/main/java/de/ruhrpottguru/testapp/QuizSession.kt": "a634975df67fc7ddfd64d88523c1e11f9358ba7d513e186a38ca39d3b73eb1fa",
+  "app/src/test/java/de/ruhrpottguru/testapp/PottQuizTest.kt": "7bf796a1f7d7c7bc750111045feedfa29c1329caf1ca805cf7b23805a3aa9884",
+  "app/src/test/resources/pottquiz-web-rounds.json": "ec022c04111fc4617a9926c96743430dd756e1ee9d463a4b2c2bd27f4b1912d7",
+  "tests/fixtures/quiz-web-round-selection.js": "d625c851238a22e6f8ef8b853eb32076b29664b2d568a0de38c2d94918305d56",
+  "tools/quiz-web-goldens.cjs": "8ce09fd9c170ac6c30528397e95a029034ab8444231e1baa59fdda0a026a941e"
+}
