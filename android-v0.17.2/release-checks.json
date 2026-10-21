@@ -1,0 +1,30 @@
+{
+  "date": "2026-10-21",
+  "version": "0.17.2-test",
+  "versionCode": 21,
+  "build": "local release passed",
+  "tests": {
+    "tests": 38,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lintErrors": 0,
+  "lintWarnings": 13,
+  "apkSha256": "1cc130adf73905a7b13009eef341fecd75f55124ff7e828c6fd9b543c31e7c01",
+  "signatureCertificateSha256": "a7a94b1dd24329607a88500698ef802a54fd96c1ed7e54710a11a9ac1677e6bf",
+  "sameKeyAs0171": true,
+  "packagedPrivacyAssetByteIdentical": true,
+  "offlineHtmlCheck": "12 sections; no remote resources; https/mailto links; explicit draft status",
+  "changedFiles": [
+    "app/build.gradle",
+    "app/src/main/assets/datenschutz.json",
+    "app/src/main/java/de/ruhrpottguru/testapp/MainActivity.kt",
+    "app/src/main/java/de/ruhrpottguru/testapp/InfoScreen.kt",
+    "app/src/main/java/de/ruhrpottguru/testapp/CommunityUi.kt"
+  ],
+  "deviceUiTest": "not performed; phone acceptance required",
+  "legalStatus": "DRAFT; operator/processor facts and publication legal basis require verification; not legal/public release approval",
+  "website": "unchanged",
+  "currentUserAcceptance": "prior version 0.17.1 functions accepted by user; privacy dialogs not device tested"
+}

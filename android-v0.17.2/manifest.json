@@ -1,0 +1,7 @@
+{
+  "app/build.gradle": "025f9f64ab6493d223bdeb7f760118009b6542c331994825ddfde8e211f2903b",
+  "app/src/main/assets/datenschutz.json": "ac93b7c30724ef2d435af33829d727f9b81e302f7c100a17c9425554fb3ecfd0",
+  "app/src/main/java/de/ruhrpottguru/testapp/InfoScreen.kt": "829fb4fbc00e0f44dd8989524ff95e0af0e2ca824e0d72c677cb9282aa5c75db",
+  "app/src/main/java/de/ruhrpottguru/testapp/CommunityUi.kt": "eb6eb386dd787ef4e64b163b94296de732fc853dfa18fbe75ef0e781711a4926",
+  "app/src/main/java/de/ruhrpottguru/testapp/MainActivity.kt": "41f212a16d1bf5766b3dc8d21d9c0d94698fbb6e6110f76643427ae360be2e30"
+}
