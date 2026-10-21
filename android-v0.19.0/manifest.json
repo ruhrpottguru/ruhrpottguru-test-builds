@@ -1,0 +1,9 @@
+{
+  "tests/shared-food.test.cjs": "19f32955fbf1fed306fbe45a9f1f8b4a7c3dd9f33e4f704187e1bc7a570fbeb6",
+  "app/build.gradle": "b1cdbc14e93327120f728b33c9c486d477edaa86907dbc99b333f87675471680",
+  "app/src/main/assets/shared/native-adapter.js": "acd26199e1d2846c5c40d77b44b44fa75731f452a0c5acc1f3f04f85318cd4a7",
+  "app/src/main/java/de/ruhrpottguru/testapp/EventUi.kt": "3d9634c9c78f79b64a371fd5a25c1414bea002a275e6ee4312cdeb777154e219",
+  "app/src/main/java/de/ruhrpottguru/testapp/FoodController.kt": "ce68d94e73f34ab706410b86ecd9fa3958d648dfc4d62e74514bafc2c0b997c4",
+  "app/src/main/java/de/ruhrpottguru/testapp/MainActivity.kt": "96875c13943889426667ff56b7269d3242f77421caf6446731da3c44c4b1373c",
+  "tests/shared-food-radius.test.cjs": "50f5ee531f744a96adc9bfb4b12765d96a983af135b43159f70709257ced41c8"
+}

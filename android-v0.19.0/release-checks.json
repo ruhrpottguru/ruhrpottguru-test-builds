@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-21",
+  "version": "0.19.0-test",
+  "versionCode": 24,
+  "build": "local release passed",
+  "tests": {
+    "tests": 43,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lintErrors": 0,
+  "lintWarnings": 10,
+  "apkSha256": "aaa9580fd50e71aa60a6f851498e186100bcab8f30e3fc8ce8647caf8fa9203c",
+  "sameSigningKeyAs0181": true,
+  "certificateSha256": "a7a94b1dd24329607a88500698ef802a54fd96c1ed7e54710a11a9ac1677e6bf",
+  "packagedNewIntroVerified": true,
+  "oldIntroAbsentFromDex": true,
+  "protectedSourceFilesUnchanged": true,
+  "deviceUiTest": "not performed; phone acceptance required",
+  "website": "unchanged",
+  "jsSuites": 11,
+  "radiusRegression": "260 candidates -> 159 at 5 km, 260 at 10 km; Restaurant, unknown distance, empty radius and location change passed",
+  "liveFoodWithin5km": 159,
+  "activitiesPhotoCoverage": "2 live media requests not-found; no reliable image from source",
+  "imageDisplayChanges": false,
+  "sourceOverlayZipSha256": "5c6652e62bc87e398d48c2a1417a0c47b3f74c7b6817f7e60f29b6c197768d4f"
+}
