@@ -1,0 +1,34 @@
+{
+  "date": "2026-10-21",
+  "version": "0.17.1-test",
+  "versionCode": 20,
+  "package": "package: name='de.ruhrpottguru.testapp' versionCode='20' versionName='0.17.1-test' platformBuildVersionName='16' platformBuildVersionCode='36' compileSdkVersion='36' compileSdkVersionCodename='16'",
+  "build": "local release build successful",
+  "unitTests": {
+    "tests": 38,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "lintErrors": 0,
+  "lintWarnings": 12,
+  "apkSha256": "e00fdf09f6a4a93ff1b66eef24bb3215a74245386d25f01f591b0cbc81bffc6d",
+  "signatureCertificateSha256": "a7a94b1dd24329607a88500698ef802a54fd96c1ed7e54710a11a9ac1677e6bf",
+  "sameKeyAs0170": true,
+  "changedAppSources": [
+    "app/src/main/java/de/ruhrpottguru/testapp/ReminderUi.kt"
+  ],
+  "otherChanges": [
+    "app/build.gradle versionCode/versionName only"
+  ],
+  "unchanged": [
+    "reminder scheduling and source refresh",
+    "saved favorites storage",
+    "GPS, categories, search",
+    "website"
+  ],
+  "deviceUiTest": "not performed; acceptance on phone required",
+  "notificationDeliveryDeviceTest": "not performed",
+  "rollback": "restore prior ReminderUi.kt and rebuild with higher versionCode and same key; retain app data, do not uninstall",
+  "testCommand": "testReleaseUnitTest --rerun (fresh execution, passed)"
+}
