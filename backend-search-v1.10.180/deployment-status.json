@@ -1,0 +1,13 @@
+{
+  "release": "1.10.180",
+  "date": "2026-10-21",
+  "sourceCommit": "41f6891f7487d237c7f63269f932ed4998948ef3",
+  "zipSha256": "db492a2eada200b5772f959fefdb24289e92a7c96e34d9bb43073c5980c6f0ed",
+  "archiveReadback": "ZIP byte-exact SHA256 verified",
+  "localTests": 174,
+  "lastLiveVersion": "1.10.179",
+  "deployment": "not performed",
+  "reason": "WPVibe Free rolling daily call limit rejected deploy begin; no session created, chunks sent, finalize or server writes",
+  "delivery": "Install supplied ZIP as update for existing Places Backend. No Android or theme update needed.",
+  "remainingTests": "Live MySQL queries and Web/Android phone acceptance after installation; no false claim of live correction."
+}
