@@ -1,0 +1,100 @@
+--- v1.10.179/ruhrpott-guru-places.php
++++ v1.10.180/ruhrpott-guru-places.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: RuhrpottGuru Places Backend
+  * Description: Persistenter Places-Katalog für Food, Highlights, Kultur und Aktivitäten sowie Spezial-Inventare für Büdchen und „Hier geht’s um die Wurst“ in der Metropole Ruhr. OSM wird nur für Import/Sync verwendet; Besucher lesen aus MySQL. Mit automatischem OSM-Rollback bis der Katalog vollständig validiert ist.
+- * Version: 1.10.179
++ * Version: 1.10.180
+  * Author: RuhrpottGuru
+  * License: GPL-2.0-or-later
+  */
+@@ -179,7 +179,7 @@
+     // 0-14 Tage alle 4 Stunden, 0-90 Tage taeglich, kompletter 0-365-Tage-
+     // Master woechentlich. Laufende Master-/Supplemental-Wellen werden nie
+     // abgebrochen; der Dispatcher wartet, bis der Event-Importpfad frei ist.
+-    const VERSION = '1.10.179';
++    const VERSION = '1.10.180';
+     const ACTIVITY_V2_SPEC_VERSION = '1.4';
+     const SCHEMA_VERSION = '1.10.129';
+     const OPTION_STATUS = 'rg_places_status';
+@@ -2950,12 +2950,77 @@
+         global $wpdb;
+         $terms = preg_split('/\s+/u', trim((string)$query), -1, PREG_SPLIT_NO_EMPTY);
+         if (!$terms) $terms = array((string)$query);
++        // Same cuisine vocabulary as existing public Food labels. This is a
++        // search alias only: never rewrite source tags or category admission.
++        $cuisines = array(
++            'italienisch'=>'italian', 'deutsch'=>'german', 'griechisch'=>'greek',
++            'türkisch'=>'turkish', 'chinesisch'=>'chinese', 'asiatisch'=>'asian',
++            'japanisch'=>'japanese', 'indisch'=>'indian', 'mexikanisch'=>'mexican',
++            'vietnamesisch'=>'vietnamese', 'koreanisch'=>'korean',
++            'französisch'=>'french', 'spanisch'=>'spanish', 'mediterran'=>'mediterranean', 'thai'=>'thai',
++        );
++        $aliases = array();
++        foreach ($cuisines as $german=>$source) {
++            $aliases[$source] = array($source, $german);
++            $german_key = $this->normalize_text($german);
++            foreach (array('', 'e', 'er', 'es', 'en', 'em') as $ending) {
++                $aliases[$german_key.$ending] = array($source, $german);
++            }
++        }
++        $cuisine_terms = array();
++        foreach ($terms as $term) {
++            $key = $this->normalize_text(mb_strtolower($term, 'UTF-8'));
++            if (isset($aliases[$key])) $cuisine_terms[$term] = $aliases[$key];
++        }
+         $clauses = array();
+         $args = array();
++        if ($cuisine_terms) {
++            // Only cuisine searches gain explicit municipal scope. Name-only
++            // and all other existing finder requests retain their exact SQL.
++            $normalized = $this->normalize_text(mb_strtolower((string)$query, 'UTF-8'));
++            $cities = $this->municipalities_seed();
++            usort($cities, function($a,$b) { return strlen($b[0])-strlen($a[0]); });
++            $city_terms = array();
++            foreach ($cities as $city) {
++                $name = (string)$city[0];
++                $variants = array($name, preg_replace('/\s*\([^)]*\)|\/Ruhr$/u', '', $name));
++                if ($name === 'Mülheim an der Ruhr') $variants[] = 'Mülheim';
++                foreach (array_unique($variants) as $variant) {
++                    $key = $this->normalize_text(mb_strtolower($variant, 'UTF-8'));
++                    if ($key === '' || !preg_match('/(?:^| )'.preg_quote($key, '/').'(?: |$)/', $normalized)) continue;
++                    $clauses[] = '(p.municipality_slug = %s OR p.city = %s)';
++                    $args[] = sanitize_title($name); $args[] = $name;
++                    $city_terms[$key] = true;
++                    foreach (explode(' ', $key) as $part) $city_terms[$part] = true;
++                    $normalized = trim(preg_replace('/(?:^| )'.preg_quote($key, '/').'(?: |$)/', ' ', $normalized));
++                    break;
++                }
++            }
++            if ($city_terms) {
++                $terms = array_values(array_filter($terms, function($term) use ($city_terms) {
++                    $key = $this->normalize_text(mb_strtolower($term, 'UTF-8'));
++                    return !isset($city_terms[$key]) && $key !== 'in';
++                }));
++            }
++            $clauses[] = "p.primary_category = 'food'";
++        }
+         foreach (array_unique($terms) as $term) {
+             $like = '%' . $wpdb->esc_like($term) . '%';
+-            $clauses[] = '(p.name LIKE %s OR p.city LIKE %s OR p.district LIKE %s OR p.street LIKE %s OR p.primary_subcategory LIKE %s OR p.raw_tags LIKE %s)';
+-            foreach (range(1, 6) as $_) $args[] = $like;
++            $literal = '(p.name LIKE %s OR p.city LIKE %s OR p.district LIKE %s OR p.street LIKE %s OR p.primary_subcategory LIKE %s OR p.raw_tags LIKE %s)';
++            if (isset($cuisine_terms[$term])) {
++                $args[] = $like; $args[] = $like;
++                // Match whole cuisine tokens inside the JSON cuisine field,
++                // not e.g. an italian substring in a website or another tag.
++                $tokens = $cuisine_terms[$term];
++                foreach ($cuisine_terms[$term] as $value) $tokens[] = substr(wp_json_encode($value), 1, -1);
++                $values = implode('|', array_map(function($value) { return preg_quote($value, '/'); }, array_unique($tokens)));
++                $pattern = '"cuisine"[[:space:]]*:[[:space:]]*"[[:space:]]*([^"\\\\]*[;,|/][[:space:]]*)?('.$values.')[[:space:]]*([;,|/][^"\\\\]*)?"';
++                $clauses[] = '(p.name LIKE %s OR p.primary_subcategory LIKE %s OR LOWER(p.raw_tags) REGEXP %s)';
++                $args[] = $pattern;
++            } else {
++                $clauses[] = $literal;
++                foreach (range(1, 6) as $_) $args[] = $like;
++            }
+         }
+         return array('sql' => '(' . implode(' AND ', $clauses) . ')', 'args' => $args);
+     }

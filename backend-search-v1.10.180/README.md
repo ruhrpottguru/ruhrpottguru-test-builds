@@ -1,0 +1,7 @@
+# Shared Web/Android finder correction 1.10.180
+
+User authorized fixing the German cuisine + explicit-city search in Web and Android on 2026-10-21. Both reuse the existing global-search endpoint. Full reproducible plugin source and QA are in the accompanying ZIP; changes.patch is the minimal production diff against the original v179 archive. Private signing keys, website settings, database dumps and project documents are not included. No Android rebuild or theme change.
+
+Live bridge status reported active1.10.179. WPVibe cannot read the1.9MB live PHP due to its64KiB source cap; matching-version original archive was recovered and public live response fixtures captured. This is not an exact server file hash or full staging/MySQL/phone proof. Local production PHP tests on SQLite:174 assertions including53 cities,15 existing cuisine labels, real Wesel rows, zero-results, wildcard escaping and exact generic-query SQL parity. All original files outside the one helper/version metadata are byte-identical. Do not imply deployed/installed from the release filename.
+
+Before installation verify the current active base is still1.10.179. Keep the existing Bridge backup or v179 ZIP for rollback; no DB reset. On install, run POST global-search for Italienisch Wesel, italian Wesel, Griechisch Wesel, Topgolf Oberhausen, Top Golf Oberhausen and generic zero-result/regression queries; inspect exact returned cities, native/browser detail navigation and search UI on phone. See release-checks.json for evidence boundaries.
