@@ -1,0 +1,22 @@
+{
+  "Zollverein": {
+    "sourceSha256": "d71eb02b6c5afd11b92eed5cd7d4930667790262e3e836690516d036e4633d50",
+    "total": 61,
+    "method": "POST global-search q/limit30; exact row order and relevant identity/display columns retained"
+  },
+  "Wesel": {
+    "sourceSha256": "7cbbf10b6e66883e1e236ae189c63fdc28a9aac3f50ce6530c4ab116e27e1224",
+    "total": 107,
+    "method": "POST global-search q/limit30; exact row order and relevant identity/display columns retained"
+  },
+  "Topgolf-Oberhausen": {
+    "sourceSha256": "d32c089f02bec4eda81068d9f6811446b06535c96f265102efc9f18410e505da",
+    "total": 1,
+    "method": "POST global-search q/limit30; exact row order and relevant identity/display columns retained"
+  },
+  "zzqkeintreffer987": {
+    "sourceSha256": "0c98eb716d8ddc88a25e3a77b499b8e8c5257645a48f20973c19a22e3b0c0720",
+    "total": 0,
+    "method": "POST global-search q/limit30; exact row order and relevant identity/display columns retained"
+  }
+}

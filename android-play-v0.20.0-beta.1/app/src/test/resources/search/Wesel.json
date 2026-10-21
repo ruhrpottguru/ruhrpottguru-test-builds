@@ -1,0 +1,879 @@
+{
+  "ok": true,
+  "query": "Wesel",
+  "total": 107,
+  "groups": {
+    "events": [
+      {
+        "id": "event:19383",
+        "kind": "event",
+        "category": "events",
+        "title": "Paul Schwer – Soziale Skulptur „Weststream 8“ transformiert den Weseler Rathausvorplatz",
+        "subtitle": "Ratskeller",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19408",
+        "kind": "event",
+        "category": "events",
+        "title": "Spielarten der Abstraktion",
+        "subtitle": "Dritter Ort Wesel Stadtwerke Wasserturm",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19409",
+        "kind": "event",
+        "category": "events",
+        "title": "MiniARTtour - 160 Meter Museumsmeile der Miniaturkunst",
+        "subtitle": "Musik- und Kunstschule",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19520",
+        "kind": "event",
+        "category": "events",
+        "title": "VESALIA HOSPITALIS - Geschichte live erleben!",
+        "subtitle": "",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:14701",
+        "kind": "event",
+        "category": "events",
+        "title": "KUMMERSCHALEN von YOUNG-JAE LEE",
+        "subtitle": "Großer Markt 46483 Wesel",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19430",
+        "kind": "event",
+        "category": "events",
+        "title": "Rund um den Straßenverkehr",
+        "subtitle": "Mehrgenerationenhaus Bogen",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19345",
+        "kind": "event",
+        "category": "events",
+        "title": "Das Kriminal Dinner in Wesel: Spannung, Genuss und ein rätselhafter Fall",
+        "subtitle": "Restaurant ART",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19526",
+        "kind": "event",
+        "category": "events",
+        "title": "Historisches Hansefest",
+        "subtitle": "",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:14787",
+        "kind": "event",
+        "category": "events",
+        "title": "Nostalgiefahrt auf Schiene & Wasser",
+        "subtitle": "Bahnsteig Rheinpromenade",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19431",
+        "kind": "event",
+        "category": "events",
+        "title": "Nostalgie auf Schiene & Wasser des Historischen Schienenverkehr Wesel e.V.",
+        "subtitle": "Bahnsteig Rheinpromenade",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:14791",
+        "kind": "event",
+        "category": "events",
+        "title": "Historisches Hansefest in Wesel",
+        "subtitle": "Berliner-Tor-Platz 46483 Wesel",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19432",
+        "kind": "event",
+        "category": "events",
+        "title": "Kalligraphie - Die Kunst des Schönschreibens",
+        "subtitle": "Mehrgenerationenhaus Bogen",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:14646",
+        "kind": "event",
+        "category": "events",
+        "title": "Jahreskreisfest in der Wildnisschule in Schermbeck",
+        "subtitle": "Wildnisschule",
+        "city": "Schermbeck"
+      },
+      {
+        "id": "event:416",
+        "kind": "event",
+        "category": "events",
+        "title": "Flashlight-Tour zum Historischen Hansefest",
+        "subtitle": "Großer Markt 11 46483 Wesel",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:14782",
+        "kind": "event",
+        "category": "events",
+        "title": "Offene Stadtführung Hansestadt Wesel",
+        "subtitle": "Großer Markt 11 46483 Wesel",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19391",
+        "kind": "event",
+        "category": "events",
+        "title": "Offener Stadtrundgang",
+        "subtitle": "Stadtinformation Wesel",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19392",
+        "kind": "event",
+        "category": "events",
+        "title": "Silent Reading Party in der Stadtbücherei",
+        "subtitle": "Stadtbücherei Wesel",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19346",
+        "kind": "event",
+        "category": "events",
+        "title": "Silent Dancing - Die Kopfhörerparty",
+        "subtitle": "SCALA Kulturspielhaus",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:417",
+        "kind": "event",
+        "category": "events",
+        "title": "Orgelherbst am Niederrhein | Internationales Orgelfestival | Konzert IV",
+        "subtitle": "Großer Markt 46483 Wesel",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19630",
+        "kind": "event",
+        "category": "events",
+        "title": "Konzert",
+        "subtitle": "Musik- und Kunstschule",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:14609",
+        "kind": "event",
+        "category": "events",
+        "title": "Lehrstollen - offene Gästeführung",
+        "subtitle": "Lehrstollen, Kamp-Lintfort",
+        "city": "Kamp-Lintfort"
+      },
+      {
+        "id": "event:19433",
+        "kind": "event",
+        "category": "events",
+        "title": "Reparatur-Café",
+        "subtitle": "Mehrgenerationenhaus Bogen",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19434",
+        "kind": "event",
+        "category": "events",
+        "title": "Kaffeeklatsch & Gedächtnistraining",
+        "subtitle": "Mehrgenerationenhaus Bogen",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19435",
+        "kind": "event",
+        "category": "events",
+        "title": "Literarische Stunde",
+        "subtitle": "Mehrgenerationenhaus Bogen",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19595",
+        "kind": "event",
+        "category": "events",
+        "title": "Kleber, Quatsch und Kaltgetränke das Netzwerktreffen",
+        "subtitle": "Alon Akademie gUG",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19436",
+        "kind": "event",
+        "category": "events",
+        "title": "Kalligraphie - Die Kunst des Schönschreibens",
+        "subtitle": "Mehrgenerationenhaus Bogen",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19592",
+        "kind": "event",
+        "category": "events",
+        "title": "Verbundenheit, die bewegt – 35 Jahre Partnerschaft Wesel–El Salvador",
+        "subtitle": "Dritter Ort Wesel Stadtwerke Wasserturm",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:19437",
+        "kind": "event",
+        "category": "events",
+        "title": "Pinktober - Infotag Prävention",
+        "subtitle": "Dritter Ort Wesel Stadtwerke Wasserturm",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:18847",
+        "kind": "event",
+        "category": "events",
+        "title": "Halloween – Party",
+        "subtitle": "Krachgarten Indoor",
+        "city": "Wesel"
+      },
+      {
+        "id": "event:505",
+        "kind": "event",
+        "category": "events",
+        "title": "Erlebnis der Stille in Kloster Kamp - ein Tag der Stille",
+        "subtitle": "Kloster Kamp, Kamp-Lintfort",
+        "city": "Kamp-Lintfort"
+      }
+    ],
+    "culture": [
+      {
+        "id": "place:4228",
+        "kind": "place",
+        "category": "culture",
+        "title": "LWL-Römermuseum",
+        "subtitle": "Museum & Ausstellung",
+        "city": "Haltern am See"
+      },
+      {
+        "id": "place:7038",
+        "kind": "place",
+        "category": "culture",
+        "title": "Fritz-Büttner-Begegnungsstätte",
+        "subtitle": "Kulturhaus & Bühne",
+        "city": "Moers"
+      },
+      {
+        "id": "place:10353",
+        "kind": "place",
+        "category": "culture",
+        "title": "LVR-Niederrheinmuseum Wesel",
+        "subtitle": "Museum & Ausstellung",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10371",
+        "kind": "place",
+        "category": "culture",
+        "title": "Stadtbücherei Wesel",
+        "subtitle": "Bibliothek & Literatur",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:7077",
+        "kind": "place",
+        "category": "culture",
+        "title": "AWO - Ortsverein Moers-Kapellen",
+        "subtitle": "Kulturhaus & Bühne",
+        "city": "Moers"
+      },
+      {
+        "id": "place:7031",
+        "kind": "place",
+        "category": "culture",
+        "title": "AWO Begegnungsstätte Moers Jakob-Hanßen-Haus",
+        "subtitle": "Kulturhaus & Bühne",
+        "city": "Moers"
+      },
+      {
+        "id": "place:7070",
+        "kind": "place",
+        "category": "culture",
+        "title": "Jugendzentrum Zoff",
+        "subtitle": "Kulturzentren & Szene",
+        "city": "Moers"
+      },
+      {
+        "id": "place:7078",
+        "kind": "place",
+        "category": "culture",
+        "title": "Seniorenbegegnungs- und Beratungszentrum Eick Quartierszentrum AWO-Caritas",
+        "subtitle": "Kulturhaus & Bühne",
+        "city": "Moers"
+      },
+      {
+        "id": "place:7112",
+        "kind": "place",
+        "category": "culture",
+        "title": "Begegnungs- und Beratungszentrum Moers-Repelen",
+        "subtitle": "Kulturhaus & Bühne",
+        "city": "Moers"
+      },
+      {
+        "id": "place:22903",
+        "kind": "place",
+        "category": "culture",
+        "title": "Bürgerhalle Flüren",
+        "subtitle": "Kulturhaus & Bühne",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10525",
+        "kind": "place",
+        "category": "culture",
+        "title": "Darthouse Collosseum Wesel",
+        "subtitle": "Kulturzentren & Szene",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10425",
+        "kind": "place",
+        "category": "culture",
+        "title": "Baby Doll",
+        "subtitle": "Club & Szene",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10407",
+        "kind": "place",
+        "category": "culture",
+        "title": "Scala Kulturspielhaus",
+        "subtitle": "Theater & Bühne",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10506",
+        "kind": "place",
+        "category": "culture",
+        "title": "Comet Kinos Wesel",
+        "subtitle": "Kino & Film",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10594",
+        "kind": "place",
+        "category": "culture",
+        "title": "Ezidisches Kulturzentrum Wesel",
+        "subtitle": "Kulturhaus & Bühne",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10483",
+        "kind": "place",
+        "category": "culture",
+        "title": "Städtisches Museum - Galerie im Centrum",
+        "subtitle": "Museum & Ausstellung",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10575",
+        "kind": "place",
+        "category": "culture",
+        "title": "Lutherhaus",
+        "subtitle": "Kulturhaus & Bühne",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10465",
+        "kind": "place",
+        "category": "culture",
+        "title": "Städtisches Bühnenhaus",
+        "subtitle": "Theater & Bühne",
+        "city": "Wesel"
+      }
+    ],
+    "highlights": [
+      {
+        "id": "place:1235",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Tüshausmühle",
+        "subtitle": "Highlights & Ausflugsziele",
+        "city": "Dorsten"
+      },
+      {
+        "id": "place:9275",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Sankt Georg",
+        "subtitle": "Highlights & Ausflugsziele",
+        "city": "Schermbeck"
+      },
+      {
+        "id": "place:10543",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Schloß Diersfordt",
+        "subtitle": "Schloss & Burg",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10640",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Feuchtgebiet bei Menzelen-Ost",
+        "subtitle": "Park & Natur",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:5314",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Lange Renne",
+        "subtitle": "Park & Natur",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10641",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Renaturierungsgelände Büdericher Ziegelei",
+        "subtitle": "Park & Natur",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10551",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Gut Bossigt",
+        "subtitle": "Schloss, Burg & Geschichte",
+        "city": "Wesel"
+      }
+    ],
+    "buedchen": [
+      {
+        "id": "place:22451",
+        "kind": "place",
+        "category": "buedchen",
+        "title": "WaBüMat Kiosk Wasserbüffelfleisch",
+        "subtitle": "Büdchen-Radar · Tier A",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:22442",
+        "kind": "place",
+        "category": "buedchen",
+        "title": "Wenkler",
+        "subtitle": "Büdchen-Radar · Tier C",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:22667",
+        "kind": "place",
+        "category": "buedchen",
+        "title": "Aral",
+        "subtitle": "Büdchen-Radar · Tier C",
+        "city": "Duisburg"
+      },
+      {
+        "id": "place:22441",
+        "kind": "place",
+        "category": "buedchen",
+        "title": "Reformhaus Goll",
+        "subtitle": "Büdchen-Radar · Tier C",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:22436",
+        "kind": "place",
+        "category": "buedchen",
+        "title": "avec",
+        "subtitle": "Büdchen-Radar · Tier C",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:22453",
+        "kind": "place",
+        "category": "buedchen",
+        "title": "Raiffeisen-Markt",
+        "subtitle": "Büdchen-Radar · Tier C",
+        "city": "Wesel"
+      }
+    ],
+    "food": [
+      {
+        "id": "place:10377",
+        "kind": "place",
+        "category": "food",
+        "title": "Antonella",
+        "subtitle": "Gastronomie",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10405",
+        "kind": "place",
+        "category": "food",
+        "title": "Cafe Extrablatt",
+        "subtitle": "Café & Eis",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10375",
+        "kind": "place",
+        "category": "food",
+        "title": "Chun’s China Restaurant",
+        "subtitle": "Gastronomie",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:8053",
+        "kind": "place",
+        "category": "food",
+        "title": "Gasthaus zum Ansitz",
+        "subtitle": "Gastronomie",
+        "city": "Oberhausen"
+      },
+      {
+        "id": "place:10417",
+        "kind": "place",
+        "category": "food",
+        "title": "Hellas",
+        "subtitle": "Gastronomie",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10411",
+        "kind": "place",
+        "category": "food",
+        "title": "Müller´s Grill-Ecke",
+        "subtitle": "Imbiss & Streetfood",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:4220",
+        "kind": "place",
+        "category": "food",
+        "title": "Pizzeria Toscana",
+        "subtitle": "Gastronomie",
+        "city": "Haltern am See"
+      },
+      {
+        "id": "place:4257",
+        "kind": "place",
+        "category": "food",
+        "title": "Sanders",
+        "subtitle": "Café & Eis",
+        "city": "Haltern am See"
+      },
+      {
+        "id": "place:4211",
+        "kind": "place",
+        "category": "food",
+        "title": "Syrtaki",
+        "subtitle": "Gastronomie",
+        "city": "Haltern am See"
+      },
+      {
+        "id": "place:10457",
+        "kind": "place",
+        "category": "food",
+        "title": "Veganland Çiğköfte",
+        "subtitle": "Imbiss & Streetfood",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10604",
+        "kind": "place",
+        "category": "food",
+        "title": "Wissing Schnellrestaurant",
+        "subtitle": "Gastronomie",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10430",
+        "kind": "place",
+        "category": "food",
+        "title": "Antep Grill",
+        "subtitle": "Gastronomie",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10089",
+        "kind": "place",
+        "category": "food",
+        "title": "Gambrinus",
+        "subtitle": "Gastronomie",
+        "city": "Voerde (Niederrhein)"
+      },
+      {
+        "id": "place:962",
+        "kind": "place",
+        "category": "food",
+        "title": "Gasthof Ortmann",
+        "subtitle": "Gastronomie",
+        "city": "Dinslaken"
+      },
+      {
+        "id": "place:10512",
+        "kind": "place",
+        "category": "food",
+        "title": "Haus Erika",
+        "subtitle": "Gastronomie",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10587",
+        "kind": "place",
+        "category": "food",
+        "title": "La Roma",
+        "subtitle": "Gastronomie",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10566",
+        "kind": "place",
+        "category": "food",
+        "title": "Restaurant Cafe zum Bootshaus",
+        "subtitle": "Gastronomie",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:859",
+        "kind": "place",
+        "category": "food",
+        "title": "Schnellimbiss Ortmann",
+        "subtitle": "Imbiss & Streetfood",
+        "city": "Dinslaken"
+      },
+      {
+        "id": "place:10502",
+        "kind": "place",
+        "category": "food",
+        "title": "Teehaus & Atelier Clostermann",
+        "subtitle": "Café & Eis",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10398",
+        "kind": "place",
+        "category": "food",
+        "title": "UMI Papami",
+        "subtitle": "Gastronomie",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10485",
+        "kind": "place",
+        "category": "food",
+        "title": "Walter Bräu Büderich",
+        "subtitle": "Bar & Biergarten",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10378",
+        "kind": "place",
+        "category": "food",
+        "title": "Auerbachs Keller",
+        "subtitle": "Gastronomie",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10387",
+        "kind": "place",
+        "category": "food",
+        "title": "Bislicher Fährimbiss",
+        "subtitle": "Imbiss & Streetfood",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10419",
+        "kind": "place",
+        "category": "food",
+        "title": "Lohschelder",
+        "subtitle": "Café & Eis",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:25751",
+        "kind": "place",
+        "category": "food",
+        "title": "Sweetspot Auesee",
+        "subtitle": "Bar & Biergarten",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:23109",
+        "kind": "place",
+        "category": "food",
+        "title": "Loma",
+        "subtitle": "Bar & Biergarten",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10542",
+        "kind": "place",
+        "category": "food",
+        "title": "Restaurant & Cafe Weseler Kanu-Club",
+        "subtitle": "Café & Eis",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10606",
+        "kind": "place",
+        "category": "food",
+        "title": "Standcafe Storchennest",
+        "subtitle": "Café & Eis",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:4256",
+        "kind": "place",
+        "category": "food",
+        "title": "Achilles",
+        "subtitle": "Gastronomie",
+        "city": "Haltern am See"
+      },
+      {
+        "id": "place:10522",
+        "kind": "place",
+        "category": "food",
+        "title": "Cafe Landluft",
+        "subtitle": "Café & Eis",
+        "city": "Wesel"
+      }
+    ],
+    "activities": [
+      {
+        "id": "place:10528",
+        "kind": "place",
+        "category": "activities",
+        "title": "RheinBad Wesel",
+        "subtitle": "Wasser & Badespaß",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10390",
+        "kind": "place",
+        "category": "activities",
+        "title": "Tanzschule Casino",
+        "subtitle": "Sport & Bewegung",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10474",
+        "kind": "place",
+        "category": "activities",
+        "title": "Aqua-Silva Spa",
+        "subtitle": "Wasser & Badespaß",
+        "city": "Wesel"
+      },
+      {
+        "id": "place:10631",
+        "kind": "place",
+        "category": "activities",
+        "title": "Strandbad Auesee",
+        "subtitle": "Wasser & Badespaß",
+        "city": "Wesel"
+      }
+    ],
+    "wurst": [
+      {
+        "id": "wurst:10387",
+        "kind": "place",
+        "category": "wurst",
+        "title": "Bislicher Fährimbiss",
+        "subtitle": "Klassischer Imbiss",
+        "city": "Wesel"
+      },
+      {
+        "id": "wurst:859",
+        "kind": "place",
+        "category": "wurst",
+        "title": "Schnellimbiss Ortmann",
+        "subtitle": "Klassischer Imbiss",
+        "city": "Dinslaken"
+      }
+    ],
+    "articles": [
+      {
+        "id": "wp:3691",
+        "kind": "article",
+        "category": "articles",
+        "title": "Freizeit in Wesel",
+        "subtitle": "Freizeitaktivitäten in Wesel auf RuhrpottGuru entdecken.",
+        "url": "https://www.ruhrpottguru.de/stadt/wesel/freizeit/"
+      },
+      {
+        "id": "wp:3690",
+        "kind": "article",
+        "category": "articles",
+        "title": "Kultur in Wesel",
+        "subtitle": "Kultur und Kulturorte in Wesel auf RuhrpottGuru entdecken.",
+        "url": "https://www.ruhrpottguru.de/stadt/wesel/kultur/"
+      },
+      {
+        "id": "wp:3689",
+        "kind": "article",
+        "category": "articles",
+        "title": "Sehenswürdigkeiten in Wesel",
+        "subtitle": "Sehenswürdigkeiten und Highlights in Wesel auf RuhrpottGuru entdecken.",
+        "url": "https://www.ruhrpottguru.de/stadt/wesel/sehenswuerdigkeiten/"
+      },
+      {
+        "id": "wp:3688",
+        "kind": "article",
+        "category": "articles",
+        "title": "Restaurants in Wesel",
+        "subtitle": "Restaurants und Food-Spots in Wesel auf RuhrpottGuru entdecken.",
+        "url": "https://www.ruhrpottguru.de/stadt/wesel/restaurants/"
+      },
+      {
+        "id": "wp:3533",
+        "kind": "article",
+        "category": "articles",
+        "title": "Veranstaltungen in Wesel",
+        "subtitle": "Veranstaltungen und Events in Wesel auf RuhrpottGuru entdecken.",
+        "url": "https://www.ruhrpottguru.de/stadt/wesel/veranstaltungen/"
+      },
+      {
+        "id": "wp:3409",
+        "kind": "article",
+        "category": "articles",
+        "title": "Wesel",
+        "subtitle": "Entdecke Wesel mit Veranstaltungen, Restaurants, Sehenswürdigkeiten, Kultur und Freizeitaktivitäten – aktuell und lokal auf RuhrpottGuru.",
+        "url": "https://www.ruhrpottguru.de/stadt/wesel/"
+      },
+      {
+        "id": "wp:3355",
+        "kind": "article",
+        "category": "articles",
+        "title": "Städte im Ruhrgebiet",
+        "subtitle": "Entdecke die Städte und Gemeinden im Ruhrgebiet mit Events, Restaurants, Sehenswürdigkeiten, Kultur und Freizeit auf RuhrpottGuru.",
+        "url": "https://www.ruhrpottguru.de/stadt/"
+      },
+      {
+        "id": "wp:3027",
+        "kind": "article",
+        "category": "articles",
+        "title": "Ruhrpott-Lexikon",
+        "subtitle": "Von A wie „anne Bude“ bis Z wie Zeche Im Ruhrgebiet gibt es Wörter, Orte und Eigenheiten, die…",
+        "url": "https://www.ruhrpottguru.de/ruhrpott-lexikon/"
+      },
+      {
+        "id": "wp:2785",
+        "kind": "article",
+        "category": "articles",
+        "title": "Datenschutzerklärung",
+        "subtitle": "1. Verantwortlicher Verantwortlich für die Datenverarbeitung auf dieser Website ist: Jürgen PflugMoltkestr. 746483 WeselE-Mail: kontakt(at)ruhrpottguru.de Website: ruhrpottguru.de 2.…",
+        "url": "https://www.ruhrpottguru.de/datenschutzerklaerung/"
+      },
+      {
+        "id": "wp:2783",
+        "kind": "article",
+        "category": "articles",
+        "title": "Impressum",
+        "subtitle": "Angaben gemäß § 5 DDG Betreiber der Webseite:Jürgen PflugMoltkestr. 746483 Wesel Kontakt:E-Mail: kontakt(at)ruhrpottguru.deWebseite: www.ruhrpottguru.de Verantwortlich für den Inhalt…",
+        "url": "https://www.ruhrpottguru.de/impressum/"
+      }
+    ]
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "date": "2026-10-21",
+  "version": "0.20.0-beta.1",
+  "versionCode": 27,
+  "package": "de.ruhrpottguru.app",
+  "minSdk": 26,
+  "targetSdk": 36,
+  "baseSourceCommit": "6bc1bcdc2013ceb956b0d8e27a4e9d38c6388c9d",
+  "aabSha256": "d4675844d442b44243de4225674d1d24cffccf1e5e425071e26f9da1efd1a7a6",
+  "uploadCertificateSha256": "711af006271d00d8e7e8d73c607f95d58177a7da89709f6bc5730546042b5c64",
+  "releaseBuild": "passed",
+  "bundletoolVersion": "1.18.3",
+  "aabValidation": "passed",
+  "jarSignature": "passed",
+  "universalApkSignature": "passed",
+  "splitGenerationAndSignature": [
+    26,
+    36
+  ],
+  "zipAlignment16K": "passed",
+  "nativeElfAlignment16K": "passed",
+  "jvmTests": {
+    "tests": 49,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "jsSuites": 12,
+  "lintErrors": 0,
+  "lintWarnings": 11,
+  "changedSourceFiles": [
+    "app/build.gradle",
+    "app/src/main/assets/datenschutz.json",
+    "app/src/main/java/de/ruhrpottguru/testapp/MainActivity.kt",
+    "app/src/main/java/de/ruhrpottguru/testapp/FoodController.kt",
+    "app/src/main/java/de/ruhrpottguru/testapp/AppNavigation.kt"
+  ],
+  "protectedFeatureFiles": "all category/quiz/reminder/GPS JS rules unchanged; only native search UI, request state and shared detail opening adapted",
+  "packagedLogoPixels": "exact alpha and all visible RGBA pixels; invisible RGB normalized by AAPT; transparent corners",
+  "brandingResources": "adaptive launcher + API26-30/API31+ launch resources verified",
+  "physicalLauncherSplashAppearance": "phone acceptance pending",
+  "website": "unchanged",
+  "privacy": "existing labeled draft supplemented with factual search-query transmission; finalize before closed/public release",
+  "physicalDeviceInstall": "not tested",
+  "realNotificationDelivery": "not tested",
+  "PlayConsoleUpload": "not performed",
+  "PlayAppSigning": "retain existing Play App Signing configuration; local key is upload-only",
+  "testAppMigration": "same Play package and upload key; existing local data retained on Play update",
+  "globalSearch": "existing live Web global-search endpoint, exact q+limit30 body; no search radius or ranking changes",
+  "liveSearchQueries": [
+    "Wesel",
+    "Zollverein",
+    "Topgolf Oberhausen",
+    "zzqkeintreffer987"
+  ],
+  "liveDetailFamilies": [
+    "events",
+    "food",
+    "activities",
+    "buedchen",
+    "wurst"
+  ],
+  "sourceWebsite": "public GET/POST audit only; no writes",
+  "deviceSearchUi": "phone acceptance pending",
+  "sourceOverlayZipSha256": "5ad250a0319d6f282700ca5e7f4177b466ec646b4cab391422dd54794bf93822"
+}

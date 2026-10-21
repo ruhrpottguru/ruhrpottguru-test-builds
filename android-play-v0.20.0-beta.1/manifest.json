@@ -1,0 +1,20 @@
+{
+  "app/build.gradle": "1a8861a6dc19f1ccbc7ee50e5756492869fdb0f43d92b8f6342df1efd682e0aa",
+  "app/src/main/assets/datenschutz.json": "908cf58d0ac42a586fa2261eb94f9b898b9ac73540c12343b6b6495e200bec27",
+  "app/src/main/java/de/ruhrpottguru/testapp/MainActivity.kt": "6bfed44ab0436bad35949d194ec2e075b5bd84dd46a58c86036aef9ae91f6792",
+  "app/src/main/java/de/ruhrpottguru/testapp/FoodController.kt": "e7aae1084a8c92de62a310c7e86f6c7ad21e2eec0d40d1a26a54f8dd123f7132",
+  "app/src/main/java/de/ruhrpottguru/testapp/AppNavigation.kt": "712aff35ceec8c2bec07e25c3e47e22c30a19793de1a69d65aebf79c37ad78eb",
+  "app/src/main/java/de/ruhrpottguru/testapp/GlobalSearchPolicy.kt": "1837e994d45cc7c937a320ec2ed5ecce1c68f8ff50a78afa85ec2d0aafe05e60",
+  "app/src/main/java/de/ruhrpottguru/testapp/GlobalSearchUi.kt": "a36c8146c29f569574928bfd89eb9addc14f1f7d8e8a4a1ade03d942cb1acefe",
+  "app/src/test/resources/search/share-p10387.json": "b7dd303576ab9d03cb955b795f5c744cce82923f756e96d38777abb88d916fc1",
+  "app/src/test/resources/search/Zollverein.json": "7401b523180ddf33b91cf40d9afd5b84887af45240bd8fca7eca11eb066502a6",
+  "app/src/test/resources/search/share-p8577.json": "cd4a286f927edb2a5da1b12e20b8c860377026a8b3afb63ab9840585a739c833",
+  "app/src/test/resources/search/share-p22451.json": "7fa18d995ea1c705564ee50d02be63aed8d3fd67dfc114782e7559fcb4f93805",
+  "app/src/test/resources/search/Topgolf-Oberhausen.json": "e7438a8c954f0116c5049ae215296177028bccfd0ef937b07e26f861b0494007",
+  "app/src/test/resources/search/share-e19383.json": "f8cd091bbb68dd89269e75ecd9ce6bd2744d2efa265d3515997fee0ef9c8dbc3",
+  "app/src/test/resources/search/Wesel.json": "e17e1ecc525b8130bde71aa823e9a6d1307f1b0b7c62bad1558eb952b16156f4",
+  "app/src/test/resources/search/share-p10377.json": "920b9c7031cc5fb95d1a862b07bf7f7c5bb8abd6e739428d43ee0f9f79af8b21",
+  "app/src/test/resources/search/zzqkeintreffer987.json": "87d8f113249d326924e39c00a8ddf62f001e04f287596fba7dcb42e42bb6805e",
+  "app/src/test/java/de/ruhrpottguru/testapp/GlobalSearchPolicyTest.kt": "bfadbad126cb3c4b11fe90b1ce6f1db3855558462064716eeba7b11d18516e6a",
+  "tests/shared-global-search.test.cjs": "bc56debf20852c4acc7568b48958fea007be5e9055c2e917278661df25f831a3"
+}

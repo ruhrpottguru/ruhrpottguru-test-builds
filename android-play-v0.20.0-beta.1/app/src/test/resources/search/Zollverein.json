@@ -1,0 +1,505 @@
+{
+  "ok": true,
+  "query": "Zollverein",
+  "total": 61,
+  "groups": {
+    "events": [
+      {
+        "id": "event:8347",
+        "kind": "event",
+        "category": "events",
+        "title": "überLeben in der Eiszeit",
+        "subtitle": "Ruhr Museum",
+        "city": "Essen"
+      },
+      {
+        "id": "event:8477",
+        "kind": "event",
+        "category": "events",
+        "title": "Wie man lebt – wo man lebt. Dokumentarfotografien von Brigitte Kraemer",
+        "subtitle": "Ruhr Museum",
+        "city": "Essen"
+      },
+      {
+        "id": "event:8691",
+        "kind": "event",
+        "category": "events",
+        "title": "Rätsel-Reise Ruhr Museum",
+        "subtitle": "Kohlenwäsche",
+        "city": "Essen"
+      },
+      {
+        "id": "event:9032",
+        "kind": "event",
+        "category": "events",
+        "title": "Gelb ist Geschichte – Fotografien von Alexander Lackmann",
+        "subtitle": "Kohlenwäsche",
+        "city": "Essen"
+      },
+      {
+        "id": "event:9088",
+        "kind": "event",
+        "category": "events",
+        "title": "Führungen auf dem Welterbe Zollverein",
+        "subtitle": "Besucherzentrum Ruhr",
+        "city": "Essen"
+      },
+      {
+        "id": "event:9454",
+        "kind": "event",
+        "category": "events",
+        "title": "Ruhr Museum: Dauerausstellung",
+        "subtitle": "Kohlenwäsche",
+        "city": "Essen"
+      },
+      {
+        "id": "event:9775",
+        "kind": "event",
+        "category": "events",
+        "title": "Portal der Industriekultur",
+        "subtitle": "Kohlenwäsche",
+        "city": "Essen"
+      },
+      {
+        "id": "event:10116",
+        "kind": "event",
+        "category": "events",
+        "title": "Red Dot Milestones 2026",
+        "subtitle": "Red Dot Design Museum",
+        "city": "Essen"
+      },
+      {
+        "id": "event:10859",
+        "kind": "event",
+        "category": "events",
+        "title": "Ausgezeichnet. Design on Stage 2026.",
+        "subtitle": "Red Dot Design Museum",
+        "city": "Essen"
+      },
+      {
+        "id": "event:14058",
+        "kind": "event",
+        "category": "events",
+        "title": "Fifty Years Iconic. 50 Jahre Schweizer Design",
+        "subtitle": "Red Dot Design Museum",
+        "city": "Essen"
+      },
+      {
+        "id": "event:11129",
+        "kind": "event",
+        "category": "events",
+        "title": "Unter Tage. Unter Zwang. NS-Zwangsarbeit im Ruhrbergbau",
+        "subtitle": "Halle 8",
+        "city": "Essen"
+      },
+      {
+        "id": "event:11276",
+        "kind": "event",
+        "category": "events",
+        "title": "HOLO-VOICES",
+        "subtitle": "Halle 8",
+        "city": "Essen"
+      },
+      {
+        "id": "event:10368",
+        "kind": "event",
+        "category": "events",
+        "title": "Familienschicht in der Mitmachzeche",
+        "subtitle": "Besucherzentrum Ruhr",
+        "city": "Essen"
+      },
+      {
+        "id": "event:10795",
+        "kind": "event",
+        "category": "events",
+        "title": "Über Kohle und Kumpel",
+        "subtitle": "UNESCO-Welterbe Zollverein - Schacht XII - Halle 14, Ruhr Museum [Kohlenwäsche]",
+        "city": "Essen"
+      },
+      {
+        "id": "event:11532",
+        "kind": "event",
+        "category": "events",
+        "title": "Grubenlicht und Wetterzug",
+        "subtitle": "Kohlenwäsche",
+        "city": "Essen"
+      },
+      {
+        "id": "event:12370",
+        "kind": "event",
+        "category": "events",
+        "title": "Kohlenwäsche mit Ausblick",
+        "subtitle": "Besucherzentrum Ruhr",
+        "city": "Essen"
+      },
+      {
+        "id": "event:16032",
+        "kind": "event",
+        "category": "events",
+        "title": "PACT Café",
+        "subtitle": "PACT Zollverein",
+        "city": "Essen"
+      },
+      {
+        "id": "event:15403",
+        "kind": "event",
+        "category": "events",
+        "title": "Parkour: Mädchentraining",
+        "subtitle": "Parkour-Anlage",
+        "city": "Essen"
+      },
+      {
+        "id": "event:12943",
+        "kind": "event",
+        "category": "events",
+        "title": "Erlebnisrundfahrt Essen",
+        "subtitle": "Essen Hbf - Haus der Technik",
+        "city": "Essen"
+      },
+      {
+        "id": "event:13008",
+        "kind": "event",
+        "category": "events",
+        "title": "Einladung zum Bilderhängen",
+        "subtitle": "Ruhr Museum",
+        "city": "Essen"
+      },
+      {
+        "id": "event:15889",
+        "kind": "event",
+        "category": "events",
+        "title": "Ein Palast der Ideen und Träume",
+        "subtitle": "Salzlager",
+        "city": "Essen"
+      },
+      {
+        "id": "event:13123",
+        "kind": "event",
+        "category": "events",
+        "title": "Doppelschicht",
+        "subtitle": "Besucherzentrum Ruhr",
+        "city": "Essen"
+      },
+      {
+        "id": "event:13260",
+        "kind": "event",
+        "category": "events",
+        "title": "Zollverein-Rundfahrt",
+        "subtitle": "UNESCO-Welterbe Zollverein 45309 Essen",
+        "city": "Essen"
+      },
+      {
+        "id": "event:13293",
+        "kind": "event",
+        "category": "events",
+        "title": "Parkour: Kindertraining",
+        "subtitle": "Parkour-Anlage",
+        "city": "Essen"
+      },
+      {
+        "id": "event:13302",
+        "kind": "event",
+        "category": "events",
+        "title": "Hauerschicht",
+        "subtitle": "Welterbe Forum",
+        "city": "Essen"
+      },
+      {
+        "id": "event:15845",
+        "kind": "event",
+        "category": "events",
+        "title": "Community Dinner",
+        "subtitle": "PACT Zollverein",
+        "city": "Essen"
+      },
+      {
+        "id": "event:13390",
+        "kind": "event",
+        "category": "events",
+        "title": "Parkour: Jugendjam",
+        "subtitle": "Parkour-Anlage",
+        "city": "Essen"
+      },
+      {
+        "id": "event:16134",
+        "kind": "event",
+        "category": "events",
+        "title": "Sticky Fragments: DRONETALE",
+        "subtitle": "Wiegeturm",
+        "city": "Essen"
+      },
+      {
+        "id": "event:13411",
+        "kind": "event",
+        "category": "events",
+        "title": "Radtour rund um Zollverein",
+        "subtitle": "Kokskohlenbunker",
+        "city": "Essen"
+      },
+      {
+        "id": "event:10060",
+        "kind": "event",
+        "category": "events",
+        "title": "Soccer-Golf im Zollverein Park",
+        "subtitle": "Infopunkt Parkplatz A2",
+        "city": "Essen"
+      }
+    ],
+    "highlights": [
+      {
+        "id": "place:19034",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Kinder- und Familienzentrum BLAUER ELEFANT Zollverein",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:18683",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Mischanlage [C70]",
+        "subtitle": "Highlights & Ausflugsziele",
+        "city": "Essen"
+      },
+      {
+        "id": "place:18673",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Zeche Zollverein",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:17830",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Skulpturenpark Zollverein",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:19035",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Zollvereinschule",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:18833",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Maschinenhaus Schacht 10",
+        "subtitle": "Industriekultur & Landmarken",
+        "city": "Essen"
+      },
+      {
+        "id": "place:17427",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Kolonie Zollverein III (Schlägel & Eisen)",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:17824",
+        "kind": "place",
+        "category": "highlights",
+        "title": "UNESCO-Welterbe Zollverein",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:17145",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Zeche Zollverein (Schacht 4/5/11)",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:17013",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Kokerei Zollverein",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:18671",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Kokerei Zollverein",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:17240",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Seilscheibe von Zeche Zollverein",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:19321",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Sonnenrad",
+        "subtitle": "Highlights & Ausflugsziele",
+        "city": "Essen"
+      },
+      {
+        "id": "place:17010",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Zollverein / Kraftwerk Scholven",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:17140",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Zollverein Schacht 10",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:18724",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Bürger- u. Handwerkerpark Zeche Zollverein 3/7/10",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:19417",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Experiment Kleingarten - \"Zollverein mittendrin\"",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:17632",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Zollverein Schacht 2",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:17634",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Zollverein Schacht 3",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:17636",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Zollverein Schacht 6",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:19378",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Zollverein Schacht 7",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:17633",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Zollverein Schacht 8",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      },
+      {
+        "id": "place:17637",
+        "kind": "place",
+        "category": "highlights",
+        "title": "Zollverein Schacht 9",
+        "subtitle": "Route Industriekultur · Ankerpunkt",
+        "city": "Essen"
+      }
+    ],
+    "culture": [
+      {
+        "id": "place:18698",
+        "kind": "place",
+        "category": "culture",
+        "title": "Schaudepot Ruhr Museum",
+        "subtitle": "Museum & Ausstellung",
+        "city": "Essen"
+      },
+      {
+        "id": "place:18209",
+        "kind": "place",
+        "category": "culture",
+        "title": "Kunstschacht Zollverein",
+        "subtitle": "Kulturzentrum & Kunst",
+        "city": "Essen"
+      },
+      {
+        "id": "place:18490",
+        "kind": "place",
+        "category": "culture",
+        "title": "Orbit",
+        "subtitle": "Kulturzentrum & Kunst",
+        "city": "Essen"
+      },
+      {
+        "id": "place:18781",
+        "kind": "place",
+        "category": "culture",
+        "title": "pact zollverein",
+        "subtitle": "Theater & Bühne",
+        "city": "Essen"
+      }
+    ],
+    "food": [
+      {
+        "id": "place:17018",
+        "kind": "place",
+        "category": "food",
+        "title": "Schacht XII, Bistro",
+        "subtitle": "Imbiss & Streetfood",
+        "city": "Essen"
+      },
+      {
+        "id": "place:16845",
+        "kind": "place",
+        "category": "food",
+        "title": "Casino Zollverein",
+        "subtitle": "Gastronomie",
+        "city": "Essen"
+      }
+    ],
+    "articles": [
+      {
+        "id": "wp:3027",
+        "kind": "article",
+        "category": "articles",
+        "title": "Ruhrpott-Lexikon",
+        "subtitle": "Von A wie „anne Bude“ bis Z wie Zeche Im Ruhrgebiet gibt es Wörter, Orte und Eigenheiten, die…",
+        "url": "https://www.ruhrpottguru.de/ruhrpott-lexikon/"
+      },
+      {
+        "id": "wp:2892",
+        "kind": "article",
+        "category": "articles",
+        "title": "Die 10 besten Aktivitätsspots im Revier",
+        "subtitle": "Der Ruhrpott hat sein verstaubtes Kohle-Image längst abgelegt! Wo früher Hochöfen glühten und der Bergbau den Takt angab,…",
+        "url": "https://www.ruhrpottguru.de/die-top-10-highlights-fuer-dein-pott-abenteuer/"
+      }
+    ]
+  }
+}

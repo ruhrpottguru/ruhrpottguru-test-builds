@@ -1,0 +1,17 @@
+{
+  "ok": true,
+  "query": "Topgolf Oberhausen",
+  "total": 1,
+  "groups": {
+    "activities": [
+      {
+        "id": "place:8577",
+        "kind": "place",
+        "category": "activities",
+        "title": "Topgolf",
+        "subtitle": "Outdoor & Entdecken",
+        "city": "Oberhausen"
+      }
+    ]
+  }
+}
