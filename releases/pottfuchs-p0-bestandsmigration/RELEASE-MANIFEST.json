@@ -1,0 +1,15 @@
+{
+  "name": "PottFuchs P0 SEO Bestandsmigration",
+  "version": "1.0.0",
+  "artifact": "PottFuchs-P0-SEO-Bestandsmigration-v1.0.0.zip",
+  "sha256": "4cc7f8a26ff227725a883c31e6229e6373dd5b09181a0292d0535dbe1f16ecb2",
+  "source_branch": "release/pottfuchs-p0-seo-owner-migration-1.0.0",
+  "ci_run": "https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40356024244",
+  "archive": "pottfuchs-p0-seo-migration-v1.0.0-candidate",
+  "tests": "PHP lint and archived v1.10.169 integration fixture with simulated v1.10.185 version, source guard, rollback and failure injection; not tested against actual installed v1.10.185 bytes",
+  "installation_status": "NOT_INSTALLED; ACTUAL LIVE 1.10.185 SOURCE NOT AVAILABLE",
+  "scope": "WPCode posts 3343/4102 + Places detail SEO owner; no theme/app modification",
+  "preflight": "Activation aborts if 3343/4102 owner signatures or live version 1.10.185/186 do not match; no second execution",
+  "rollback": "Tools -> PottFuchs P0 Rollback while migration plugin is active; refuses if post-migration owner code changed",
+  "risk": "Activation can rewrite current owner PHP and DB snippets when guards pass. Without real v1.10.185 source and staging E2E, this is a guarded release candidate, not a proven production fix."
+}
