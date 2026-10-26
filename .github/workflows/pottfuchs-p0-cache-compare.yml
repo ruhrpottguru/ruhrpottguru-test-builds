@@ -1,0 +1,28 @@
+name: PottFuchs P0 Post-Activation Cache Compare (read-only)
+on:
+  push:
+    paths:
+      - 'tools/pottfuchs_p0_cache_compare.py'
+      - '.github/workflows/pottfuchs-p0-cache-compare.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-cache-compare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read-only public SEO cache bypass comparison
+        run: python tools/pottfuchs_p0_cache_compare.py
+      - name: Archive public SEO metadata
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pottfuchs-p0-cache-comparison
+          path: audit/p0-post-activation/cache-compare.json
+          retention-days: 30
+          if-no-files-found: warn
