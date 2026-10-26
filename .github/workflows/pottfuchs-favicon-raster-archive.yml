@@ -1,0 +1,41 @@
+name: Archive exact PottFuchs legacy favicon as WordPress Site Icon PNG
+on:
+  push:
+    paths:
+      - '.github/workflows/pottfuchs-favicon-raster-archive.yml'
+permissions:
+  contents: write
+jobs:
+  raster-from-original:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Convert unchanged original SVG to WordPress 512x512 PNG (archive only)
+        run: |
+          python3 -m pip install --quiet cairosvg Pillow
+          python3 - <<'PY'
+          import hashlib, pathlib, cairosvg
+          from PIL import Image
+          src=pathlib.Path('wordpress/themes/ruhrpott-guru/favicon.svg')
+          raw=src.read_bytes()
+          expected='16bf0971d5c1bf85e22f7898d78ee5ea7fb9dd05b133fe3f705b6fb96b6333ad'
+          assert hashlib.sha256(raw).hexdigest()==expected, 'Original SVG changed; archive cancelled'
+          output=pathlib.Path('docs/assets/pottfuchs-bestehendes-favicon-512.png')
+          output.parent.mkdir(parents=True,exist_ok=True)
+          cairosvg.svg2png(bytestring=raw,write_to=str(output),output_width=512,output_height=512)
+          img=Image.open(output)
+          assert img.size==(512,512) and img.mode=='RGBA'
+          print('Original file SHA-256:',expected)
+          print('PNG size:',output.stat().st_size)
+          print('PNG SHA-256:',hashlib.sha256(output.read_bytes()).hexdigest())
+          PY
+      - name: Commit ONLY new rasterized icon to SEO working branch, not main
+        run: |
+          git config user.name "PottFuchs Automation"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/assets/pottfuchs-bestehendes-favicon-512.png
+          if ! git diff --cached --quiet; then
+            git commit -m "assets: preserve faithful 512px raster of verified live SVG favicon"
+            git push origin HEAD:pottfuchs-seo-fix
+          fi
