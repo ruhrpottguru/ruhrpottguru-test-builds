@@ -33,6 +33,22 @@ jobs:
       - name: P0 migration/rollback WordPress stub integration on REAL v1.10.188 owner file
         run: |
           php releases/pottfuchs-p0-bestandsmigration/tests/test-pottfuchs-p0.php wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php
+      - name: Diagnostic only on signature failure from actual source
+        if: failure()
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          src=Path('wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php').read_text()
+          st=src.find('    private function seo_render_detail_html_v101096($data) {')
+          en=src.find('    public function maybe_render_seo_landing_v101096() {',st)
+          print('SOURCE SIGNATURE LENGTH',len(src),'SEO BOUNDS',st,en)
+          segment=src[st:en] if st>=0 and en>st else ''
+          for i,line in enumerate(segment.splitlines(),1):
+              if any(t in line for t in ('static function','seo_title','og:site_name','RuhrpottGuru','get_bloginfo','esc_html($title','seo_render_detail_html_v101096','\$title=','\$desc=')):
+                  print('RENDER %04d %s'%(i,line[:320]))
+          for needle in ("$this->seo_render_detail_html_v101096(array('title'=>$title", "const VERSION = '1.10.188'"):
+              print('SOURCE NEEDLE',needle,src.count(needle))
+          PY
       - name: Build installable, single-plugin WordPress ZIP and SHA256
         run: |
           mkdir -p dist/staging/pottfuchs-p0-bestandsmigration dist/release
