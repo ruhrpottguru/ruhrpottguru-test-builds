@@ -43,6 +43,14 @@ function assert(b,msg){if(!b)throw Error(msg);}
         descriptionCount:document.querySelectorAll('meta[name="description"]').length,
         footerVisible:[...document.querySelectorAll('footer')].some(visible),
         headerVisible:[...document.querySelectorAll('header')].some(visible),
+        chromeNodes:['header','footer','.rpgx-header','.rpgx-footer','#ruhrpott-guru-root'].map(sel=>({
+          sel,nodes:[...document.querySelectorAll(sel)].slice(0,2).map(el=>({class:el.className||'',
+            display:getComputedStyle(el).display,visibility:getComputedStyle(el).visibility,
+            rect:el.getBoundingClientRect().toJSON(),htmlSnippet:el.outerHTML.slice(0,200)}))})),
+        bodyClass:document.body.className,
+        htmlClass:document.documentElement.className,
+        rawFooterCount:document.querySelectorAll('footer').length,
+        rawHeaderCount:document.querySelectorAll('header').length,
         detailVisible:[...document.querySelectorAll('.rpgx-detail-landing,.rpgx-direct-detail-panel,.rpgx-direct-ssr')].some(visible),
         mobileOverflow:document.documentElement.scrollWidth>innerWidth+8,
         ldScripts:schemas.filter(Boolean).length,
@@ -53,7 +61,7 @@ function assert(b,msg){if(!b)throw Error(msg);}
     assert(m.h1===1,'direct detail H1 count '+m.h1);
     assert(m.canonicals.length===1&&m.canonicals[0]===BASE+route,'canonical mismatch');
     assert(m.descriptionCount===1,'meta description duplicate/missing');
-    assert(m.footerVisible&&m.headerVisible,'header/footer not visible after hydration');
+    assert(m.footerVisible&&m.headerVisible,'header/footer not visible after hydration '+JSON.stringify({chrome:m.chromeNodes,bodyClass:m.bodyClass,htmlClass:m.htmlClass}));
     assert(m.detailVisible,'detail not visible after hydration');
     assert(!m.mobileOverflow,'horizontal overflow');
     if(type==='event')assert(/Lichtwochen/i.test(raw),'event description absent initial response');
