@@ -2,6 +2,28 @@
 
 **Stand:** 26.10.2026. PottFuchs ist die neue Marke; `https://www.pottfuchs.de` ist die primäre Domain. `ruhrpottguru.de` bleibt für 301. Der Domainwechsel und der Adresswechsel in Google Search Console fanden bereits statt. Keine Wiederholung.
 
+## Aktuellster geprüfter Stand – 26.10.2026, nach Abschluss der v2.3-Prüfungen
+
+| Bereich | Status | Unabhängiger Nachweis |
+|---|---|---|
+| HTTPS/SSL | **Erledigt: 4/4 gültig** | pottfuchs.de/www: Zertifikat gültig bis **21.01.2027**; ruhrpottguru.de/www: bis **11.01.2027**; gültige Hostnamen und Let's Encrypt; automatische Erneuerung selbst nicht getestet |
+| Öffentliche 301 | **14/14 erfolgreich** | Alte öffentliche Domain/URL-Familien auf www.pottfuchs.de pfadgleich; REST-Ausnahme ausdrücklich beibehalten |
+| Sitemap und robots | **7/7 Sitemap-Unterdateien gelesen**, 0 falsche Hostnamen | **15.058 Places-, 10.356 Event-URLs** im RPG-Sitemapteil; **346** weitere WordPress-Sitemap-URLs; alle erfassten `<loc>` auf www.pottfuchs.de; robots.txt verweist auf beide vorhandenen Indizes |
+| Öffentliche Such-POST-Kompatibilität | **8/8 erfolgreich** | Auf alter und neuer Domain je 4 gültige JSON-POST-Suchanfragen, HTTP 200 ohne Redirect; inklusive null Treffer bei Unsinnssuche; andere REST-POST-Methoden weiter separat offen |
+| Historischer Topgolf-Suchfehler | **Für drei konkrete Eingaben nicht mehr reproduzierbar** | `topgolf`, `topgolf oberhausen`, `top golf oberhausen`: je **genau ein identischer Place** Topgolf, Oberhausen, ID `1051311896` – REST und tatsächlicher Browser |
+| Mobile Website/Funktionen | **11/11 Browser-E2E bestanden** | Fünf Kategorien, Consent, Detailchip/Filter, Kalender, Standort Essen/Reload, Radius 10 km/Reload, PLZ 45888, Suche 3 Varianten, www/Apex-Wechsel, GPS-Verweigerung mit 0 Karten vor Stadtwahl und manuellem Fallback, vier Specials |
+| Google-/SEO-Markenfelder | **Offen** | In 13 Seiten **23 Altmarken-Feldbefunde**; keine automatische Reparatur durch Site-Name-Option; siehe SEO-Owner #3343/#4102/Places |
+| Aktuelle Live-Plugin-/Theme-Releasequelle | **Blockiert** | Auf GitHub verfügbar sind historische Theme v345 / Places v1.10.169. Library listet neuere ZIPs bis Places v1.10.185, Materialisierung der tatsächlichen Bytes weiterhin verweigert. Kein sicheres Installations-ZIP daraus erzeugbar |
+| Synchronisierungs-Laufprotokolle / Backup-Restore | **Offen** | Cron eingeplant und Spawn historisch bestätigt; jüngster erfolgreicher abgeschlossener Import oder echte Rücksicherung bisher **nicht** belegt |
+
+**Neue Nachweise:**
+[TLS und alle Sitemap-Unterdateien – GitHub Actions 40322949565](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40322949565);
+[REST-Suche alt/neu – 40322085271](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40322085271);
+[11/11 Browser-Journeys – 40322506314](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40322506314).
+Die resultierenden ZIPs wurden wieder heruntergeladen; SHA-256 und ZIP-Integrität erfolgreich überprüft (TLS/Sitemaps: `8b6c3386698cef2a9960161678644d1d1748d6d93ae190b3d4e7d61decbfb2fc`; REST: `cac8abb0ec3af17c29a4a6777a335503db1a70780673676d51c0b405fb45e628`; Browser: `f51244402e1ca30f4912b42c3d786edd41cf92dd9c8af18204e2aac7a43518da`).
+
+**Freigabegrenze:** Kein WordPress-/WPCode-/Hosting-/Datenbank-/App-Livewrite und keine ungefragte WPVibe-Nutzung. Alle Repo-Änderungen dieser Runde betreffen Prüfskripte, Tests oder Dokumentation. Keine als produktionsreif deklarierte SEO-ZIP. Website und App-Bestand sind getrennt zu bewerten.
+
 ## Verifizierte Prüfergebnisse
 
 Ein unabhängiger, schreibfreier GitHub-Actions-Runner hat am 26.10.2026 öffentlich erreichbare URLs mit geprüftem HTTPS abgerufen:
