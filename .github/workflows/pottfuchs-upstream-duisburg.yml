@@ -1,0 +1,17 @@
+name: PottFuchs upstream Duisburg read-only
+on:
+  push:
+    paths: ['tools/pottfuchs_upstream_duisburg.py', '.github/workflows/pottfuchs-upstream-duisburg.yml']
+permissions:
+  contents: read
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python tools/pottfuchs_upstream_duisburg.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: upstream-duisburg-readonly
+          path: audit/upstream-duisburg/
+          retention-days: 30
