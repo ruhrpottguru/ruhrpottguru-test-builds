@@ -50,3 +50,18 @@ Der Entwicklungszweig [`pottfuchs-seo-fix`](https://github.com/ruhrpottguru/ruhr
 - Die Dateibibliothek listet weiterhin die neueren v1.10.184-/v351-ZIPs, deren Originalbytes beim Materialisierungsversuch nicht freigegeben waren. Vor einem Produktionsrelease bleibt der Original-Dateiabgleich zwingend.
 - Eine read-only Abfrage von Google-Suchtreffern am 26.10. zeigt für eine auf `pottfuchs.de` adressierte Veranstaltungsseite den alten Titelzusatz `| RuhrpottGuru`. Such-Cache/Index ist kein Beweis, welche HTML-Tags der Server zum Prüfzeitpunkt ausliefert. Direkte HTTP-Abfrage lieferte in der verfügbaren Browserumgebung keinen verifizierbaren Response.
 - Der verbundene GSC-Wizard-Zugriff verweigerte schon die lesende Property-Liste wegen abgelaufener Test-/Aboperiode. Es wurde weder ein kostenpflichtiger Dienst aktiviert noch Search-Console-Daten erfunden.
+
+
+## Live-SEO-Domainbefund und Favicon 26.10.2026
+
+Die früher formulierte Einschränkung, dass kein direkter öffentlicher HTML-Response vorliege, wurde durch spätere **GitHub-Actions-GET-Prüfungen** am 26.10. aufgehoben. Beleg: [Live-SEO-HTML und Weiterleitungen](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40324316764), [Live-REST-Site-Icon](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40328351939). Vollständiger [Befundbericht](docs/POTTFUCHS-SEO-DOMAIN-LIVEBEFUND-2026-10-26.md).
+
+- HTML-Hauptseite trägt PottFuchs im Titel und og:site_name; **WebSite- und Organization-JSON-LD tragen noch RuhrpottGuru**.
+- Erfolgreiche Place-/Event-/Kategorieseiten tragen teilweise **noch RuhrpottGuru** als HTML-Titel und/oder og:site_name, u. a. `/ort/16936/essen/zum-schwarzen/`. Keine alleinige Google-Cache-Ursache.
+- `/favicon.ico` (www) liefert **302** auf WordPress-W. Das richtige, unveränderte SVG wird im HTML-Head mit `rel=icon` eingebunden und antwortet 200; Live- und Repository-Bytes identisch.
+- `/wp-json/` auf der neuen Primärdomain meldet **site_icon=0**, **site_icon_url=""**, aber `site_logo=4215`; die WordPress-Admin-Oberfläche zeigt nach Betreiber-Screenshot dagegen das gelbe Icon. Die Einstellung ist also aus Live-Core-Sicht nicht wirksam; den Zustand nicht als „korrekt konfiguriert“ ausgeben. Kein Administratorzugriff erfolgte.
+- Ein ICO mit demselben alten Motiv ist ausschließlich als [geprüftes Development-Asset](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/blob/pottfuchs-seo-fix/docs/assets/pottfuchs-bestehendes-favicon.ico) gespeichert; **nicht** auf dem Webserver abgelegt.
+- Pfadgleiche 301-Beispiele, TLS-Zertifikate und 9 Sitemaps mit ausschließlich neuem Host wurden öffentlich erfolgreich geprüft. Keine Änderung erforderlich, solange dies so bleibt.
+- Der vorhandene Places-SEO-Patch auf Archivquelle v1.10.169 hat einen [bestandenen GitHub-PHP-Lint-/Regressionstest](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40324097670); weiterhin **nicht installierbar auf dem aktuelleren Live-Stand**. Fehlende Originaldateien v351/v1.10.184 und aktuelle WPCode-Bodies bleiben Release-Sperre.
+
+**Keine Live-WordPress-/Hosting-/WPVibe-Änderungen.** Bevor eine neue ZIP als final bezeichnet wird, aktuellen Theme-/Places-/WPCode-Quellstand beschaffen und mit Tests vollständig abgleichen.
