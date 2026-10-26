@@ -183,10 +183,13 @@ def main():
         report["pages"].append({"start":url, **clean(x),"seo":seo,"issues":issues})
         report["issues"].extend("PAGE "+url+": "+i for i in issues)
     icons.add("https://www.pottfuchs.de/wp-content/themes/ruhrpott-guru/favicon.svg")
+    icons.add("https://www.pottfuchs.de/favicon.ico")
     for url in sorted(icons):
         x=get(url)
         issues=[]
         if x.get("error") or x.get("status")!=200: issues.append("ICON_UNREACHABLE")
+        if url.endswith("/favicon.ico") and "/wp-includes/images/w-logo-" in x.get("url",""):
+            issues.append("WORDPRESS_DEFAULT_FAVICON_FALLBACK")
         # Project decision 23.10.: the existing orange mining-tower SVG is the APPROVED favicon.
         # Its presence is a pass/identity marker, not a branding defect.
         intended_tower="<!-- Main A-frame tower -->" in x.get("body","")
