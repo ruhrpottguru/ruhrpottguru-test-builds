@@ -158,8 +158,10 @@ def main():
         x=get(url)
         issues=[]
         if x.get("error") or x.get("status")!=200: issues.append("ICON_UNREACHABLE")
-        if "<!-- Main A-frame tower -->" in x.get("body",""): issues.append("OLD_MINING_TOWER_SVG")
-        report["resources"].append({"start":url,**clean(x),"issues":issues})
+        # Project decision 23.10.: the existing orange mining-tower SVG is the APPROVED favicon.
+        # Its presence is a pass/identity marker, not a branding defect.
+        intended_tower="<!-- Main A-frame tower -->" in x.get("body","")
+        report["resources"].append({"start":url,**clean(x),"approved_tower_favicon_present":intended_tower,"issues":issues})
         report["issues"].extend("ICON "+url+": "+i for i in issues)
     for url in ("https://www.pottfuchs.de/robots.txt","https://www.pottfuchs.de/wp-sitemap.xml",
                 "https://www.pottfuchs.de/rpg-sitemap.xml"):
