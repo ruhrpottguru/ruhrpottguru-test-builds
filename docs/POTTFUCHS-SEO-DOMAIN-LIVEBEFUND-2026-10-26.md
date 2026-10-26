@@ -47,3 +47,11 @@ Google: [Websitenamen](https://developers.google.com/search/docs/appearance/site
 GitHub `main` enthält lediglich Theme v345 und Places v1.10.169 als Archiv. Der unfreigegebene Zweig [`pottfuchs-seo-fix`](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/tree/pottfuchs-seo-fix) baut auf diesem **veralteten** Places-Code auf. Neuere Library-ZIPs v351 und v1.10.184 sind anhand von Dateinamen bekannt, aber beim Rohbyte-Download über den verfügbaren Library-Zugriff derzeit nicht zugänglich. **Kein Downgrade, kein installierbares Plugin aus der v1.10.169-Basis.** Nicht behaupten, dass die aktuellen PHP-/WPCode-Quellen identisch sind.
 
 Priorität nächste sichere Entwicklung: aktuelle originale Betreiberdateien über eine autorisierte Quelle wiederabrufen/archivieren; bestehende Snippet-Owner bei Titeln/JSON-LD minimal korrigieren; Tests; ein finales installierbares ZIP samt SHA-256 und GitHub Release.
+
+## Favicon: konkrete vorbereitete Abhilfe (ohne neues Motiv)
+
+Am 26.10. wurde **das exakt gleiche** SVG-Motiv in ein WordPress-kompatibles PNG (512×512 Pixel) gerendert. Die Live-SVG-Datei und GitHub-Vorlage wurden zuvor per SHA-256 als byteidentisch geprüft. PNG-SHA-256: `e0df54cd75052526ff5ac26cc16296b10985ab6da630f41d69c87cba086a9ca9`, 26.726 Bytes. Die Original-Datei `favicon.svg` bleibt unverändert; das PNG ändert lediglich das Dateiformat, nicht das Motiv.
+
+**Dauerhaftes GitHub-Archiv, rückgelesener Tree-Blob**: [`docs/assets/pottfuchs-bestehendes-favicon-512.png`](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/blob/pottfuchs-seo-fix/docs/assets/pottfuchs-bestehendes-favicon-512.png) (Entwicklungszweig; Git-Blob `7e35808e7b7310bc65b99f5ae6d6057a9217cb97`). [Github-Render-und-Archivierungsnachweis](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40325394310).
+
+**Einmaliger Betreiber-Schritt**, da keine Berechtigung für ungefragte WordPress-Administration besteht: Im vorhandenen WordPress-Website-Icon-Feld das vorbereitete PNG auswählen/einsetzen. Bestehendes Theme-SVG nicht löschen. Danach prüfen, ob `/favicon.ico` nicht mehr zum WordPress-W führt; Googles Suchdarstellung benötigt erneutes Crawling und kann nicht garantiert werden. Eine Korrektur der JSON-LD-Marken und der HTML-Titel wird dadurch **nicht** ersetzt.
