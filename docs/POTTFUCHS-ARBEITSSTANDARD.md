@@ -6,7 +6,7 @@ Herkunft: bestehende Projektvereinbarungen (Projektvertrag, Entscheidungsregiste
 
 ## 1. Verlässlicher Einstieg – auch in neuen Projekt-Chats
 
-1. Bei jeder technischen PottFuchs-Aufgabe zuerst dieses Dokument, `AGENTS.md`, `docs/storage-policy.md`, `docs/current-state.md` und die relevanten GitHub-Quelldateien tatsächlich öffnen. Nicht behaupten, etwas gelesen zu haben, das nicht erreichbar war.
+1. Bei jeder technischen PottFuchs-Aufgabe zuerst dieses Dokument, `AGENTS.md`, `docs/POTTFUCHS-GLOBALE-STANDORT-UND-SICHTBARKEITSREGELN-2026-10-26.md`, `docs/storage-policy.md`, `docs/current-state.md` und die relevanten GitHub-Quelldateien tatsächlich öffnen. Nicht behaupten, etwas gelesen zu haben, das nicht erreichbar war.
 2. Aktuelle Projektanweisungen, Projektvertrag, neuestes erreichbares Entscheidungsregister, operative Masterliste und spätere Nutzerentscheidungen berücksichtigen. Insbesondere: PottFuchs ist die Nachfolgemarke und `www.pottfuchs.de` die neue primäre öffentliche Domain; `ruhrpottguru.de` ist Alt-Domain für Weiterleitungen. Historische technische IDs dürfen erhalten bleiben.
 3. Ein neuer Chat muss nicht die ZIP-Historie aus anderen Chats kennen: GitHub dient als reproduzierbarer Quellbestand. Niemals Chat-Erinnerung als Nachweis für einen aktuellen Release- oder Live-Stand verwenden.
 4. Keine Zusage automatischer Wiedervorlage: Projektkontext und GitHub sind Hilfen, aber eine neue Unterhaltung außerhalb des Projekts oder ohne GitHub-Zugriff lädt diese Regeln nicht garantiert. Ist der Einstieg nicht möglich, Lücke einmal klar kennzeichnen.
