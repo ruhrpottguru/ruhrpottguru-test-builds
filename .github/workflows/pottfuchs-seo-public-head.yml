@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 8
     steps:
+      - uses: actions/checkout@v4
       - name: Inspect public SEO HTML and legacy redirects (GET only)
         shell: bash
         run: |
@@ -81,4 +82,11 @@ jobs:
                   print(json.dumps(info,ensure_ascii=False),flush=True)
               except Exception as e:
                   print(json.dumps({'url':u,'error':str(e)[:180]},ensure_ascii=False),flush=True)
+          import hashlib, pathlib
+          local=pathlib.Path('wordpress/themes/ruhrpott-guru/favicon.svg').read_bytes()
+          try:
+              live=urllib.request.urlopen('https://www.pottfuchs.de/wp-content/themes/ruhrpott-guru/favicon.svg', timeout=16).read()
+              print(json.dumps({'asset':'favicon.svg', 'live_sha256':hashlib.sha256(live).hexdigest(),'archive_sha256':hashlib.sha256(local).hexdigest(),'identical':live==local,'live_bytes':len(live)},ensure_ascii=False),flush=True)
+          except Exception as e:
+              print(json.dumps({'asset':'favicon.svg','error':str(e)[:180]}),flush=True)
           PY
