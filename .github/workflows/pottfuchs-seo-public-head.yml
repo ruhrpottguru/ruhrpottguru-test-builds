@@ -48,7 +48,9 @@ jobs:
             'https://www.pottfuchs.de/stadt/wesel/sehenswuerdigkeiten/',
             'https://www.ruhrpottguru.de/ort/16936/essen/zum-schwarzen/',
             'http://ruhrpottguru.de/ort/16936/essen/zum-schwarzen/',
-            'https://pottfuchs.de/ort/16936/essen/zum-schwarzen/'
+            'https://pottfuchs.de/ort/16936/essen/zum-schwarzen/',
+            'https://www.pottfuchs.de/wp-content/themes/ruhrpott-guru/favicon.svg',
+            'https://www.pottfuchs.de/favicon.ico'
           ]
           for u in targets:
               request=urllib.request.Request(u,headers={'User-Agent':'PottFuchsPublicSEOReadOnly/1.0','Accept':'text/html'})
