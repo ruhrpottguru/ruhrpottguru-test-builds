@@ -2230,7 +2230,7 @@ final class RuhrpottGuru_Places_Backend {
             // logo source, burger drawer, WordPress menu data and footer hooks.
             // get_header/get_footer are the SAME entry points used on WP pages:
             // no parallel Header/Footer, no shadow WordPress page or redirect.
-            $canonical_head = static function () use ($title, $desc, $canonical, $image, $schema_json, $esc) {
+            $canonical_head = static function () use ($title, $seo_title, $desc, $canonical, $image, $schema_json, $esc) {
                 echo '<title>'.esc_html($seo_title.' | '.get_bloginfo('name')).'</title><meta name="description" content="'.$esc($desc).'"><link rel="canonical" href="'.$esc($canonical).'">';
                 echo '<meta property="og:locale" content="de_DE"><meta property="og:type" content="website"><meta property="og:site_name" content="'.esc_attr(get_bloginfo('name')).'"><meta property="og:title" content="'.$esc($title).'"><meta property="og:description" content="'.$esc($desc).'"><meta property="og:url" content="'.$esc($canonical).'">';
                 if ($image !== '') echo '<meta property="og:image" content="'.$esc($image).'"><meta property="og:image:secure_url" content="'.$esc($image).'">';
