@@ -150,4 +150,5 @@ const tick = ms => new Promise(ok=>setTimeout(ok,ms));
  await browser.close();
  fs.writeFileSync(OUT+'/public-browser-e2e.json',JSON.stringify(report,null,2)+'\n');
  console.log('SUMMARY',JSON.stringify({pass:report.tests.filter(x=>x.status==='PASS').length,fail:report.tests.filter(x=>x.status==='FAIL').length,total:report.tests.length,errors:pageErrors.length}));
+ if(report.tests.some(x=>x.status==='FAIL'))process.exitCode=1;
 })().catch(e=>{console.error(e);process.exit(1)});
