@@ -1,0 +1,31 @@
+name: PottFuchs Public Geo and Visibility Sample (read-only)
+on:
+  push:
+    paths:
+      - 'tools/pottfuchs_public_geo_quality.py'
+      - 'tests/test_pottfuchs_public_geo_quality.py'
+      - '.github/workflows/pottfuchs-geo-visibility.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  geo-sample:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read-only geodata parser unit tests
+        run: python -m unittest discover -s tests -p 'test_pottfuchs_public_geo_quality.py' -v
+      - name: Public visitor geo-data smoke sample, no writes
+        run: python tools/pottfuchs_public_geo_quality.py
+      - name: Archive aggregate evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pottfuchs-public-geo-quality
+          path: audit/geo/pottfuchs-public-geo-quality.json
+          retention-days: 30
+          if-no-files-found: warn
