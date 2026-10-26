@@ -1,0 +1,82 @@
+name: PottFuchs SEO live HEAD checks (read-only)
+on:
+  push:
+    paths:
+      - '.github/workflows/pottfuchs-seo-public-head.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-seo-head:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - name: Inspect public SEO HTML and legacy redirects (GET only)
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json, re, urllib.request, urllib.error, ssl
+          from html.parser import HTMLParser
+          from urllib.parse import urljoin
+          class Head(HTMLParser):
+              def __init__(self):
+                  super().__init__()
+                  self.titles=[];self.meta=[];self.links=[];self.scripts=[];self._tag=None;self._buf=[]
+              def handle_starttag(self,tag,attrs):
+                  a=dict(attrs)
+                  if tag=='title': self._tag='title';self._buf=[]
+                  if tag=='meta':self.meta.append(a)
+                  if tag=='link':self.links.append(a)
+                  if tag=='script' and a.get('type')=='application/ld+json':self._tag='ld';self._buf=[]
+              def handle_data(self,data):
+                  if self._tag:self._buf.append(data)
+              def handle_endtag(self,tag):
+                  if (tag=='title' and self._tag=='title') or (tag=='script' and self._tag=='ld'):
+                      val=''.join(self._buf).strip()
+                      if self._tag=='title':self.titles.append(val)
+                      else:self.scripts.append(val)
+                      self._tag=None
+          class NoRedirect(urllib.request.HTTPRedirectHandler):
+              def redirect_request(self,*args,**kwargs):return None
+          opener=urllib.request.build_opener(NoRedirect)
+          targets=[
+            'https://www.pottfuchs.de/',
+            'https://www.pottfuchs.de/ort/16936/essen/zum-schwarzen/',
+            'https://www.pottfuchs.de/ort/10523/wesel/weseler-wirtshaus/',
+            'https://www.pottfuchs.de/veranstaltung/6936/essen/77-essener-lichtwochen/',
+            'https://www.pottfuchs.de/veranstaltungen/',
+            'https://www.pottfuchs.de/stadt/wesel/sehenswuerdigkeiten/',
+            'https://www.ruhrpottguru.de/ort/16936/essen/zum-schwarzen/',
+            'http://ruhrpottguru.de/ort/16936/essen/zum-schwarzen/',
+            'https://pottfuchs.de/ort/16936/essen/zum-schwarzen/'
+          ]
+          for u in targets:
+              request=urllib.request.Request(u,headers={'User-Agent':'PottFuchsPublicSEOReadOnly/1.0','Accept':'text/html'})
+              try:
+                  try:r=opener.open(request,timeout=17)
+                  except urllib.error.HTTPError as e:r=e
+                  status=r.status;headers=dict(r.headers);body=r.read(380000) if status==200 else b''
+                  info={'url':u,'status':status,'location':headers.get('Location'),'content_type':headers.get('Content-Type')}
+                  if body and b'<html' in body[:1500].lower():
+                      p=Head();p.feed(body.decode('utf-8','replace'))
+                      m=lambda key,val:[x.get('content') for x in p.meta if x.get(key)==val]
+                      info.update({'title':p.titles,'canonicals':[x.get('href') for x in p.links if 'canonical' in x.get('rel','').split()],
+                                   'og_site_name':m('property','og:site_name'),'icons':[{k:x.get(k) for k in ('rel','href','type')} for x in p.links if 'icon' in x.get('rel','').split()],
+                                   'ld_names':[]})
+                      for script in p.scripts:
+                          try:
+                              data=json.loads(script)
+                              def scan(v):
+                                  if isinstance(v,dict):
+                                      if 'WebSite' in str(v.get('@type','')) or 'Organization' in str(v.get('@type','')):
+                                          info['ld_names'].append({'type':v.get('@type'),'name':v.get('name'),'url':v.get('url')})
+                                      for w in v.values():scan(w)
+                                  elif isinstance(v,list):
+                                      for w in v:scan(w)
+                              scan(data)
+                          except Exception:pass
+                      info['brand_old_in_head']=any('RuhrpottGuru' in str(x) for x in (info['title']+info['og_site_name']+[info['ld_names']]))
+                  print(json.dumps(info,ensure_ascii=False),flush=True)
+              except Exception as e:
+                  print(json.dumps({'url':u,'error':str(e)[:180]},ensure_ascii=False),flush=True)
+          PY
