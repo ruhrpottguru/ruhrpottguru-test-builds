@@ -14,7 +14,9 @@ page.on('response',r=>{if(r.status()>=500)errors.push('HTTP '+r.status()+' '+r.u
 async function check(place,radius){
  const q='?place='+place+'&radius='+radius;
  const res=await page.goto('https://www.pottfuchs.de/'+q,{waitUntil:'domcontentloaded',timeout:35000});
- await page.waitForTimeout(10500);
+ const essential=page.getByRole('button',{name:/Nur Wesentliche/i}).first();
+ if(await essential.count() && await essential.isVisible())await essential.click({timeout:12000});
+ await page.waitForTimeout(9500);
  const d=await page.evaluate(()=>{
    const categoryLinks=[...document.querySelectorAll('.rg-home-event-mag-card')];
    const first=categoryLinks.slice(0,4).map(x=>(x.innerText||'').trim().slice(0,110));
