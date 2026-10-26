@@ -24,6 +24,26 @@ info={"utc":datetime.now(timezone.utc).isoformat(),
       "bytes":len(raw), "sha256":sha,
       "equals_approved_vector_png_bytes":sha==DOCUMENTED_APPROVED_SVG_PNG_SHA256}
 if w!=512 or h!=512:raise ValueError(f"Favicon has dimensions {w}x{h}, not 512x512")
+# Public Core REST and root favicon comparison, no login/no caching assumptions.
+from urllib.error import HTTPError
+from urllib.request import build_opener, HTTPRedirectHandler
+class NoRedirect(HTTPRedirectHandler):
+    def redirect_request(self,request,fp,code,message,headers,url):
+        return None
+with urlopen(Request("https://www.pottfuchs.de/wp-json/?pottfuchs_readonly=4309",
+                     headers={"User-Agent":"PottFuchsReadOnlyFaviconAssetAudit/1.0"}),timeout=20) as r:
+    core=json.load(r)
+info["core_site_icon"]=core.get("site_icon")
+info["core_site_icon_url"]=core.get("site_icon_url")
+info["core_site_logo"]=core.get("site_logo")
+try:
+    with build_opener(NoRedirect()).open(Request("https://www.pottfuchs.de/favicon.ico",
+                   headers={"User-Agent":"PottFuchsReadOnlyFaviconAssetAudit/1.0"}),timeout=20) as r:
+        info["favicon_root_status"]=r.status
+        info["favicon_root_redirect"]=r.headers.get("Location")
+except HTTPError as e:
+    info["favicon_root_status"]=e.code
+    info["favicon_root_redirect"]=e.headers.get("Location")
 (out/"existing-4309.png").write_bytes(raw)
 (out/"result.json").write_text(json.dumps(info,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
 print("POTTFUCHS_EXISTING_FAVICON_MEDIA",json.dumps(info,ensure_ascii=False))
