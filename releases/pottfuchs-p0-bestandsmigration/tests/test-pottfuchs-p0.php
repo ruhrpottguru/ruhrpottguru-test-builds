@@ -106,8 +106,11 @@ pf_assert(get_option(pf_p0_backup_record(),false)!==false,'activation preserves 
 pf_assert(strpos(get_post(3343)->post_content,"'name'=>get_bloginfo('name')")!==false,'activation updates existing WPCode 3343');
 pf_assert(strpos(get_post(4102)->post_content,"' | '.get_bloginfo('name')")!==false,'activation updates existing WPCode 4102');
 pf_assert(strpos(file_get_contents(pf_p0_get_backend_path()),"'seo_title'=>((int)\$row['id']===16936")!==false,'activation patches existing Places file');
-try{call_user_func($GLOBALS['p0_fake_activation']);throw new RuntimeException('Second activation permitted');}
-catch(RuntimeException $e){pf_assert(strpos($e->getMessage(),'bereits')!==false,'second activation prevented');}
+$fileAfterActivation=file_get_contents(pf_p0_get_backend_path());
+$codeAfterActivation=get_post(3343)->post_content;
+call_user_func($GLOBALS['p0_fake_activation']);
+pf_assert(file_get_contents(pf_p0_get_backend_path())===$fileAfterActivation && get_post(3343)->post_content===$codeAfterActivation,
+    'second activation is a harmless no-op for successful v1.0.1 migration');
 
 // Rollback must refuse later edits rather than silently overwrite owner changes.
 $GLOBALS['p0_fake_posts'][4102]->post_content .= "\n// concurrent operator edit";
