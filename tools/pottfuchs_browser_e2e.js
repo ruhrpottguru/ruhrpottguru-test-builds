@@ -205,6 +205,7 @@ const tick = ms => new Promise(ok=>setTimeout(ok,ms));
     await page.waitForTimeout(2800);
     const h1=await page.locator('h1').allTextContents();
     records.push({path:p,http:r.status(),h1:h1.slice(0,2)});
+    requireThat(r.status()===200,'special HTTP '+r.status()+' '+p);
    }
    return {records};
  });
