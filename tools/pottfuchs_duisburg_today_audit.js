@@ -18,7 +18,7 @@ async function check(place,radius){
  if(await essential.count() && await essential.isVisible())await essential.click({timeout:12000});
  await page.waitForTimeout(9500);
  const d=await page.evaluate(()=>{
-   const categoryLinks=[...document.querySelectorAll('.rg-home-event-mag-card')];
+   const categoryLinks=[...document.querySelectorAll('section.rg-home-category-module-events .rg-home-events-track .rg-home-event-mag-card')];
    const first=categoryLinks.slice(0,4).map(x=>(x.innerText||'').trim().slice(0,110));
    const body=document.body.innerText||'';
    const active=[...document.querySelectorAll('button.rg-home-event-time-button')].map(x=>({text:(x.innerText||'').trim(),pressed:x.getAttribute('aria-pressed')}));
