@@ -48,6 +48,13 @@ jobs:
                   print('RENDER %04d %s'%(i,line[:320]))
           for needle in ("$this->seo_render_detail_html_v101096(array('title'=>$title", "const VERSION = '1.10.188'"):
               print('SOURCE NEEDLE',needle,src.count(needle))
+              i=-1
+              while True:
+                  i=src.find(needle,i+1)
+                  if i<0:break
+                  print('NEEDLE CONTEXT',i,repr(src[max(0,i-380):i+310]))
+          for needle in ("'seo_title'=>", "function maybe_render_seo_landing_v101096", "$this->seo_render_detail_html_v101096(array("):
+              print('SOURCE COUNT',needle,src.count(needle))
           PY
       - name: Build installable, single-plugin WordPress ZIP and SHA256
         run: |
