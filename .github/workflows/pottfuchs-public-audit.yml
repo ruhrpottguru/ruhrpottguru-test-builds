@@ -1,0 +1,31 @@
+name: PottFuchs Public Read-only Audit
+on:
+  push:
+    paths:
+      - 'tools/pottfuchs_public_audit.py'
+      - 'tests/test_pottfuchs_public_audit.py'
+      - '.github/workflows/pottfuchs-public-audit.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Local parser unit tests
+        run: python -m unittest discover -s tests -p 'test_pottfuchs_public_audit.py' -v
+      - name: Read-only public website checks
+        run: python tools/pottfuchs_public_audit.py
+      - name: Archive public check results
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pottfuchs-public-audit
+          path: audit/pottfuchs-public-audit.json
+          retention-days: 30
+          if-no-files-found: warn
