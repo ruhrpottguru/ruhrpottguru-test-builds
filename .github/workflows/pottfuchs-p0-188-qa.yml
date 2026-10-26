@@ -1,0 +1,66 @@
+name: PottFuchs P0 SEO v1.0.1 Real Places 1.10.188 QA
+on:
+  push:
+    branches:
+      - release/pottfuchs-p0-seo-v1.0.1-places188
+    paths:
+      - 'releases/pottfuchs-p0-bestandsmigration/**'
+      - '.github/workflows/pottfuchs-p0-188-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  actual-source-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo_sqlite
+          coverage: none
+      - name: Exact source header and original import control
+        run: |
+          grep -m 1 -E 'Version: 1\.10\.188' wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php
+          grep -Fq "const VERSION = '1.10.188'" wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php
+          php tests/manual_import_priority.php
+      - name: PHP syntax of complete archived 1.10.188 Places and migration
+        run: |
+          find wordpress/plugins/ruhrpott-guru-places -type f -name '*.php' -print0 | xargs -0 -n1 php -l
+          php -l releases/pottfuchs-p0-bestandsmigration/pottfuchs-p0-bestandsmigration.php
+          php -l releases/pottfuchs-p0-bestandsmigration/tests/test-pottfuchs-p0.php
+      - name: P0 migration/rollback WordPress stub integration on REAL v1.10.188 owner file
+        run: |
+          php releases/pottfuchs-p0-bestandsmigration/tests/test-pottfuchs-p0.php wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php
+      - name: Build installable, single-plugin WordPress ZIP and SHA256
+        run: |
+          mkdir -p dist/staging/pottfuchs-p0-bestandsmigration dist/release
+          cp releases/pottfuchs-p0-bestandsmigration/pottfuchs-p0-bestandsmigration.php dist/staging/pottfuchs-p0-bestandsmigration/
+          cp releases/pottfuchs-p0-bestandsmigration/README.txt dist/staging/pottfuchs-p0-bestandsmigration/
+          (cd dist/staging && zip -qr ../release/PottFuchs-P0-SEO-Bestandsmigration-v1.0.1.zip pottfuchs-p0-bestandsmigration)
+          unzip -t dist/release/PottFuchs-P0-SEO-Bestandsmigration-v1.0.1.zip
+          unzip -p dist/release/PottFuchs-P0-SEO-Bestandsmigration-v1.0.1.zip pottfuchs-p0-bestandsmigration/pottfuchs-p0-bestandsmigration.php | grep -Fq ' * Version: 1.0.1'
+          sha256sum dist/release/PottFuchs-P0-SEO-Bestandsmigration-v1.0.1.zip | tee dist/release/PottFuchs-P0-SEO-Bestandsmigration-v1.0.1.zip.sha256
+      - name: Save installable WordPress plugin ZIP as CI artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: pottfuchs-p0-v1.0.1-places188-verified
+          path: dist/release/
+          retention-days: 90
+          if-no-files-found: error
+      - name: Archive verified plugin as reproducible GitHub prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=pottfuchs-p0-seo-migration-v1.0.1-places188
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Tag already exists; do not overwrite immutable release."
+          else
+            gh release create "$TAG" \
+              dist/release/PottFuchs-P0-SEO-Bestandsmigration-v1.0.1.zip \
+              dist/release/PottFuchs-P0-SEO-Bestandsmigration-v1.0.1.zip.sha256 \
+              --target "$GITHUB_SHA" --prerelease \
+              --title "PottFuchs P0 SEO Migration 1.0.1 – live Places 1.10.188 compatible" \
+              --notes "Real original Places 1.10.188 PHP source from GitHub branch fix/manual-supplemental-priority. PHP 8.4 syntax, existing import-priority regression, complete SEO owner fixture migration, atomic writing rollback, wrong-version checks and ZIP integrity tested in CI. This is a genuinely installable migration plugin. Installation and real live SEO verification by operator still separate; no automatic WordPress writes by CI. Automatic preflight aborts without data writes if current owner signature or WPCode source deviates."
+          fi
