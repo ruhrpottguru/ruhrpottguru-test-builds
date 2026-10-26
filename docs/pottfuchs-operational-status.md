@@ -10,6 +10,8 @@
 
 **Browser-Regression:** [Mobilbrowser-Lauf 40349052727, Wiederholung](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40349052727) bestätigt 8/8 Initialansichten, 11/11 Interaktionsjourneys und 14/14 mobile/Desktop-Detail-/Overlay-Prüffälle, keine JS-Fehler, korrekte 404 bei ungültiger Detail-ID. Nach SEO-Migration blieb die bekannte App-/REST-Konfiguration unverändert. In der Specials-Stichprobe trat einmalig `/imbissbuden/` mit HTTP 500 auf, obwohl der Test mangels Statusassertion noch Grün meldete; spätere **drei unabhängige GET-Varianten** des Pfads lieferten HTTP 200 ([Lauf 40399885102](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40399885102)). Die E2E-Testlücke wurde in GitHub beseitigt, Sonderseiten müssen künftig HTTP 200 liefern.
 
+**Abschließende Wiederholung nach Reparatur der Testassertion:** [GitHub Actions 40400226520](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40400226520) erfolgreich: **11/11 interaktive Mobile-Tests**, **14/14 Mobile-/Desktop-Detailregressionen**, **8/8 Smoke-Ansichten**, **0 JS-Fehler**. Alle vier Specials inklusive Imbissbuden HTTP **200**; der frühere sporadische 500er ist bei diesem unabhängigen Durchlauf nicht reproduzierbar. Der Browser-Test fordert jetzt ausdrücklich HTTP 200 und kann dadurch kein falsch-grünes 500 mehr melden. **Das ändert die 16 noch offenen SEO-Feldbefunde nicht.**
+
 **Rollback/Schutz:** Migration v1.0.1 wird nicht automatisch erneut ausgeführt. Vor einem weiteren SEO-Eingriff existierende WordPress-Sicherungsoptionen und den gemeldeten Livezustand schützen. Bisher kein weiterer ungefragter WordPress-, WPCode-, Hosting- oder Datenbank-Schreibvorgang.
 
 
