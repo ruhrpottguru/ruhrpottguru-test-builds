@@ -55,14 +55,18 @@ const tick = ms => new Promise(ok=>setTimeout(ok,ms));
   const evidence=[];
   for(const path of paths){
    await open('https://www.pottfuchs.de'+path+'?place=wesel&radius=5');
+   // Skeletons use the same card class; require an actual clickable card with title.
+   await page.locator('.rpgx-grid a.rpgx-card h3').first().waitFor({state:'visible',timeout:25000}).catch(()=>{});
    const data=await page.evaluate(()=>{
-    const els=[...document.querySelectorAll('.rpgx-grid .rpgx-card')];
-    return {cards:els.length,first:els[0]?.querySelector('h3')?.textContent||'',
+    const all=[...document.querySelectorAll('.rpgx-grid .rpgx-card')];
+    const els=[...document.querySelectorAll('.rpgx-grid a.rpgx-card')].filter(x=>x.querySelector('h3')?.textContent?.trim());
+    return {cards:els.length,skeletonOrOtherCards:all.length-els.length,
+      first:els[0]?.querySelector('h3')?.textContent?.trim()||'',
       renderedVisible:els.some(el=>{const style=getComputedStyle(el);const box=el.getBoundingClientRect();return box.width>10&&box.height>10&&style.visibility!=='hidden'&&style.display!=='none'}),
       hasCategoryHeading:!!document.querySelector('main h1')};
    });
    evidence.push({path,...data});
-   requireThat(data.cards>0&&data.renderedVisible,'missing visible cards '+path);
+   requireThat(data.cards>0&&data.renderedVisible,'missing LOADED clickable cards '+path);
   }
   await page.screenshot({path:OUT+'/activities-after-consent.png'});
   return {paths:evidence};
