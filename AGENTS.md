@@ -4,7 +4,7 @@
 
 ## Start jeder Aufgabe
 
-1. `docs/POTTFUCHS-ARBEITSSTANDARD.md`, `README.md`, `docs/storage-policy.md`, `docs/current-state.md` und `docs/source-inventory.json` tatsächlich lesen.
+1. `docs/POTTFUCHS-ARBEITSSTANDARD.md`, `docs/POTTFUCHS-GLOBALE-STANDORT-UND-SICHTBARKEITSREGELN-2026-10-26.md`, `README.md`, `docs/storage-policy.md`, `docs/current-state.md` und `docs/source-inventory.json` tatsächlich lesen. Die globalen Standort-, Sichtbarkeits- und Routenregeln sind für alle Kategorien, Specials, Städte und zugelassenen Quellen verbindlich; fachliche Entscheidung und noch ausstehende Implementierung strikt trennen.
 2. Aktuellen Projektvertrag, Architekturregister, Masterliste und relevante spätere Nutzerentscheidungen aus den Projektquellen abgleichen. Die Dateien dieses Repositories ersetzen keine späteren Entscheidungen. Fehlen verbindliche Unterlagen, ausdrücklich kennzeichnen und vor widersprechenden Änderungen klären.
 3. Vorhandene Implementierung und Tests zuerst prüfen. GitHub ist die primäre Quellbasis; WPVibe nicht ungefragt verwenden oder zur Voraussetzung machen. Live-Stände nur aus belegten Quellen behaupten.
 4. Archiviert, lokal geprüft, vom Nutzer installiert gemeldet und live verifiziert strikt unterscheiden. Keine Version aus einem Dateinamen als live behaupten.
