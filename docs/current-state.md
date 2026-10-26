@@ -65,3 +65,9 @@ Die früher formulierte Einschränkung, dass kein direkter öffentlicher HTML-Re
 - Der vorhandene Places-SEO-Patch auf Archivquelle v1.10.169 hat einen [bestandenen GitHub-PHP-Lint-/Regressionstest](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40324097670); weiterhin **nicht installierbar auf dem aktuelleren Live-Stand**. Fehlende Originaldateien v351/v1.10.184 und aktuelle WPCode-Bodies bleiben Release-Sperre.
 
 **Keine Live-WordPress-/Hosting-/WPVibe-Änderungen.** Bevor eine neue ZIP als final bezeichnet wird, aktuellen Theme-/Places-/WPCode-Quellstand beschaffen und mit Tests vollständig abgleichen.
+
+## Live-Abnahme Favicon nach Betreiber-Upload, 26.10.2026
+
+**Öffentliches Favicon-Problem /favicon.ico erfolgreich gelöst und geprüft.** Echte Root-ICO im Host `www.pottfuchs.de` antwortet HTTP 200 ohne Redirect, MIME `image/vnd.microsoft.icon`, ICO-Signatur 00 00 01 00, 6 Einträge, 28.849 Bytes und SHA-256 `a367a6ea0b7ba28b4bdf34ebf4f1e82e6ebcb6e10f08619329bcb68e9bada9c5`. Live-Hash entspricht exakt dem archivierten GitHub-Entwicklungsasset. Alte Domainvarianten behalten 301 zu neuer Domain. **Nachweis:** [Read-only GitHub Action 40341937067](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40341937067). Betreiber hat die Datei installiert, der Assistent hat ausschließlich gelesen. Details im [SEO-Livebefund](docs/POTTFUCHS-SEO-DOMAIN-LIVEBEFUND-2026-10-26.md).
+
+**Restzustand getrennt:** WordPress-REST `site_icon=0` weiterhin vorhanden, jedoch jetzt kein /favicon.ico-Fehler mehr. Nicht das funktionierende Favicon nochmals ändern. Alte `RuhrpottGuru`-SEO-Titel und WebSite-/Organization-Strukturdaten bleiben ein eigener Auftrag mit fehlendem aktuellem Snippet-/Plugin-Originalquellstand; kein neues Plugin-Release freigegeben.
