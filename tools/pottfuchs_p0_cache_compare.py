@@ -7,7 +7,7 @@ sys.path.insert(0,str(Path(__file__).parent))
 from pottfuchs_public_audit import parse_seo
 
 base="https://www.pottfuchs.de"
-paths=["/","/veranstaltungen/","/food/","/ort/16936/essen/zum-schwarzen/","/veranstaltung/6936/essen/77-essener-lichtwochen/"]
+paths=["/","/veranstaltungen/","/food/","/ort/16936/essen/zum-schwarzen/","/veranstaltung/6936/essen/77-essener-lichtwochen/","/imbissbuden/","/buedchen-radar/"]
 stamp=dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%S")
 result={"at_utc":dt.datetime.now(dt.timezone.utc).isoformat(),"read_only":True,"checks":[]}
 for path in paths:
