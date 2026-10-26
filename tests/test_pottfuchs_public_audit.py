@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 import unittest
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
-from pottfuchs_public_audit import SEO, parse_seo, clean
+from pottfuchs_public_audit import SEO, parse_seo, clean, is_compatibility_endpoint
 
 class AuditTests(unittest.TestCase):
     def test_head_and_jsonld(self):
@@ -23,6 +23,11 @@ class AuditTests(unittest.TestCase):
         seo=parse_seo('<h1>A</h1><h1>B</h1><meta name="description" content="A"><meta name="description" content="B">')
         self.assertEqual(seo["h1"],2)
         self.assertEqual(len(seo["descriptions"]),2)
+    def test_legacy_rest_exception_from_cutover_runbook(self):
+        self.assertTrue(is_compatibility_endpoint("https://www.ruhrpottguru.de/wp-json/"))
+        self.assertTrue(is_compatibility_endpoint("https://www.ruhrpottguru.de/wp-json/ruhrpottguru/v1/"))
+        self.assertFalse(is_compatibility_endpoint("https://www.ruhrpottguru.de/ort/16936/essen/zum-schwarzen/"))
+
     def test_discard_response_body(self):
         self.assertEqual(clean({"body":"secret raw HTML","status":200,"url":"/"}), {"status":200,"url":"/"})
 
