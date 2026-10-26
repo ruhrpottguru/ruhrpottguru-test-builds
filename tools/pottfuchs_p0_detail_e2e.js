@@ -100,7 +100,7 @@ function assert(b,msg){if(!b)throw Error(msg);}
     const r=await page.goto(BASE+'/ort/999999999999/test/kein-ort/',{waitUntil:'domcontentloaded',timeout:35000});
     const status=r.status();const text=(await page.locator('body').innerText()).slice(0,220);
     assert([404,410].includes(status),'invalid place must be 404/410; got '+status);
-    return {status,text};
+    return {httpStatus:status,text};
   });
   report.checks.push({viewport:variant.name,name:'js-runtime-errors',status:errors.length?'FAIL':'PASS',errors});
   await ctx.close();
