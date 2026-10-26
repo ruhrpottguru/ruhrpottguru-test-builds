@@ -74,6 +74,10 @@ Aktuellster, korrigierter Nachweis: [HTTP/SEO-Audit-Lauf 40311669897](https://gi
 
 **Offen (P0):** echte öffentliche SEO-Markenfixes im neuesten freigegebenen Places-/WPCode-Original, insbesondere Titel/OG/Organization/Sitenamen und Zeitreise-Text; P0-Sicherheits-/Releasegates beibehalten. **Offen (P1):** reale GPS-/Android-POST-/Chipvollregression, Event-/Places-Importabschlusslogs, tatsächliche Backup-Restoreprobe, GSC-Indexierung. Für diese Themen sind keine stillen Liveeingriffe erlaubt.
 
+## Android-Quellabgleich am 26.10.2026
+
+Der archivierte Play-Quellstand 0.20.0-beta.2 verwendet weiterhin dieselbe Paketkennung. Der für diesen Stand ererbte Manifest-Intent-Filter nennt nur die beiden alten RuhrpottGuru-Hosts für Zeitreise-Links, nicht pottfuchs.de. Die aktuelle installierte APK ist damit nicht bewiesen. Kein Manifest- oder Server-Change ohne vollständigen Versionsabgleich.
+
 ## Offene Aufgaben in fester Reihenfolge
 
 | Priorität | Aufgabe | Nächste sichere Aktion / Grenze |
