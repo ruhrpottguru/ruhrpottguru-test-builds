@@ -41,6 +41,14 @@ try:
                    headers={"User-Agent":"PottFuchsReadOnlyFaviconAssetAudit/1.0"}),timeout=20) as r:
         info["favicon_root_status"]=r.status
         info["favicon_root_redirect"]=r.headers.get("Location")
+        info["favicon_root_type"]=r.headers.get("Content-Type","")
+        favicon_data=r.read(200000)
+        info["favicon_root_bytes"]=len(favicon_data)
+        info["favicon_root_sha256"]=hashlib.sha256(favicon_data).hexdigest()
+        info["favicon_root_is_ico"]=favicon_data.startswith(b"\x00\x00\x01\x00")
+        if info["favicon_root_is_ico"]:
+            info["favicon_root_icon_count"]=struct.unpack_from("<H",favicon_data,4)[0]
+        (out/"public-favicon.ico").write_bytes(favicon_data)
 except HTTPError as e:
     info["favicon_root_status"]=e.code
     info["favicon_root_redirect"]=e.headers.get("Location")
