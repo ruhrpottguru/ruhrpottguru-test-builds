@@ -52,6 +52,22 @@ try:
 except HTTPError as e:
     info["favicon_root_status"]=e.code
     info["favicon_root_redirect"]=e.headers.get("Location")
+# Verify migration-related hosts all ultimately serve the approved favicon.
+info["favicon_host_checks"]=[]
+for host in ("https://pottfuchs.de","https://www.ruhrpottguru.de",
+             "https://ruhrpottguru.de"):
+    url=host+"/favicon.ico"
+    try:
+        with urlopen(Request(url,headers={"User-Agent":"PottFuchsReadOnlyFaviconAssetAudit/1.0"}),timeout=20) as r:
+            body=r.read(200000)
+            info["favicon_host_checks"].append({
+                "requested_url":url,
+                "final_url":r.url,"status":r.status,
+                "bytes":len(body),
+                "sha256":hashlib.sha256(body).hexdigest(),
+                "matches_canonical":hashlib.sha256(body).hexdigest()==info.get("favicon_root_sha256")})
+    except Exception as e:
+        info["favicon_host_checks"].append({"requested_url":url,"error":str(e)[:190]})
 (out/"existing-4309.png").write_bytes(raw)
 (out/"result.json").write_text(json.dumps(info,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
 print("POTTFUCHS_EXISTING_FAVICON_MEDIA",json.dumps(info,ensure_ascii=False))
