@@ -1,0 +1,27 @@
+name: PottFuchs SEO archived candidate PHP lint
+on:
+  push:
+    branches:
+      - pottfuchs-seo-fix
+    paths:
+      - 'wordpress/plugins/ruhrpott-guru-places/**/*.php'
+      - '.github/workflows/pottfuchs-seo-candidate-lint.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  archive-only-syntax:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check PHP interpreter
+        run: php -v
+      - name: Lint complete archived Places plugin
+        run: |
+          find wordpress/plugins/ruhrpott-guru-places -type f -name '*.php' -print0 |
+          xargs -0 -n 1 php -l
+      - name: Verify original plugin version is archived only
+        run: |
+          grep -nE 'Version:|Version ' wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php | head -n 5
+          echo "NOTE: archival PHP lint is NOT a production release test"
