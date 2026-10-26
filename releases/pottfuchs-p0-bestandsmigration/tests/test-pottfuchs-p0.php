@@ -108,6 +108,19 @@ pf_assert(strpos(file_get_contents(pf_p0_get_backend_path()),"'seo_title'=>((int
 try{call_user_func($GLOBALS['p0_fake_activation']);throw new RuntimeException('Second activation permitted');}
 catch(RuntimeException $e){pf_assert(strpos($e->getMessage(),'bereits')!==false,'second activation prevented');}
 
+// Rollback must refuse later edits rather than silently overwrite owner changes.
+$GLOBALS['p0_fake_posts'][4102]->post_content .= "\n// concurrent operator edit";
+try{pf_p0_restore_backup();throw new RuntimeException('Rollback wrongly overwrote concurrent changes');}
+catch(RuntimeException $e){pf_assert(strpos($e->getMessage(),'zwischenzeitlich veraendert')!==false,
+   'rollback refuses post-install snippet changes');}
+$GLOBALS['p0_fake_posts'][4102]->post_content=pf_p0_patch_wpcode(4102,pf_fixture(4102));
+pf_assert(pf_p0_restore_backup()===true,'administrator rollback operation succeeds');
+pf_assert(file_get_contents(pf_p0_get_backend_path())===$testSource,'successful rollback restores exact file bytes');
+pf_assert(get_post(3343)->post_content===pf_fixture(3343),'successful rollback restores WPCode 3343');
+pf_assert(get_post(4102)->post_content===pf_fixture(4102),'successful rollback restores WPCode 4102');
+pf_assert(get_option(pf_p0_backup_record(),false)===false,'successful rollback clears stored backup');
+pf_assert(get_option(pf_p0_state_record(),false)===false,'successful rollback clears one-time run state');
+
 pf_reset_post_fixtures();
 file_put_contents(pf_p0_get_backend_path(),$testSource);
 $GLOBALS['p0_fake_post_failure']=true;
