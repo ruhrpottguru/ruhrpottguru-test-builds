@@ -2036,7 +2036,7 @@ final class RuhrpottGuru_Places_Backend {
 
     private function seo_category_label_v101096($cat) {
         $map=array('food'=>'Food & Drinks','highlights'=>'Sehenswürdigkeit','culture'=>'Kultur','activities'=>'Aktivität','events'=>'Event');
-        return $map[$cat]??'RuhrpottGuru-Tipp';
+        return $map[$cat]??get_bloginfo('name').'-Tipp';
     }
 
     /** 1.10.140: SEO/GEO presentation only. Derive a useful public type label from the
@@ -2124,7 +2124,7 @@ final class RuhrpottGuru_Places_Backend {
 
     private function seo_render_not_found_v101096() {
         nocache_headers();status_header(404);header('X-Robots-Tag: noindex, follow',true);header('Content-Type: text/html; charset='.get_bloginfo('charset'));
-        echo '<!doctype html><html lang="de"><head><meta charset="'.esc_attr(get_bloginfo('charset')).'"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><title>Nicht gefunden | RuhrpottGuru</title></head><body><main><h1>Nicht gefunden</h1><p>Dieser Eintrag ist nicht mehr öffentlich verfügbar.</p></main></body></html>';exit;
+        echo '<!doctype html><html lang="de"><head><meta charset="'.esc_attr(get_bloginfo('charset')).'"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,follow"><title>Nicht gefunden | '.esc_html(get_bloginfo('name')).'</title></head><body><main><h1>Nicht gefunden</h1><p>Dieser Eintrag ist nicht mehr öffentlich verfügbar.</p></main></body></html>';exit;
     }
 
     private function seo_detail_value_v101148($value) {
@@ -2212,7 +2212,7 @@ final class RuhrpottGuru_Places_Backend {
 
     private function seo_render_detail_html_v101096($data) {
         $title=trim((string)($data['title']??''));$seo_title=trim((string)($data['seo_title']??$title));if($seo_title==='')$seo_title=$title;$desc=$this->share_trim_description((string)($data['description']??''),'Entdecke diesen Ort bei '.get_bloginfo('name').'.');
-        $canonical=esc_url_raw((string)($data['canonical']??''));$image=esc_url_raw((string)($data['image']??''));$label=(string)($data['label']??'RuhrpottGuru-Tipp');
+        $canonical=esc_url_raw((string)($data['canonical']??''));$image=esc_url_raw((string)($data['image']??''));$label=(string)($data['label']??get_bloginfo('name').'-Tipp');
         $city=$this->seo_detail_value_v101148($data['city']??'');$address=$this->seo_detail_value_v101148($data['address']??'');$hours=$this->seo_detail_value_v101148($data['hours']??'');$when=$this->seo_detail_value_v101148($data['when']??'');
         $website=esc_url_raw((string)($data['website']??''));$ticket=esc_url_raw((string)($data['ticket_url']??''));$route=esc_url_raw((string)($data['route_url']??''));$overview=esc_url_raw((string)($data['overview_url']??home_url('/')));$venue=$this->seo_detail_value_v101148($data['venue']??'');$menu=esc_url_raw((string)($data['menu_url']??''));$reservation=esc_url_raw((string)($data['reservation_url']??''));$program=esc_url_raw((string)($data['program_url']??''));$start_iso=trim((string)($data['start_iso']??''));$end_iso=trim((string)($data['end_iso']??''));$price=$this->seo_detail_value_v101148($data['price']??'');$organizers=is_array($data['organizers']??null)?$data['organizers']:array();$participants=is_array($data['participants']??null)?$data['participants']:array();
         $schema=is_array($data['schema']??null)?$data['schema']:array();$schema_json=wp_json_encode($schema,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
@@ -2290,7 +2290,7 @@ final class RuhrpottGuru_Places_Backend {
         echo '<meta name="twitter:card" content="'.($image!==''?'summary_large_image':'summary').'"><meta name="twitter:title" content="'.$esc($title).'"><meta name="twitter:description" content="'.$esc($desc).'">';if($image!=='')echo '<meta name="twitter:image" content="'.$esc($image).'">';
         if($schema_json)echo '<script type="application/ld+json">'.$schema_json.'</script>';
         echo '<style>:root{color-scheme:dark}*{box-sizing:border-box}body{margin:0;background:#020617;color:#f8fafc;font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}a{color:inherit}.rpg-detail{max-width:980px;margin:auto;padding:18px 16px 72px}.rpg-top{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:16px}.rpg-brand{color:#f59e0b;font-weight:900;letter-spacing:.08em;text-decoration:none}.rpg-back{color:#cbd5e1;text-decoration:none;font-weight:700}.rpg-card{border:1px solid #334155;border-radius:24px;overflow:hidden;background:#0f172a;box-shadow:0 20px 60px rgba(0,0,0,.25)}.rpg-hero{width:100%;max-height:560px;aspect-ratio:16/9;object-fit:cover;display:block;background:#111827}.rpg-body{padding:clamp(20px,4vw,36px)}.rpg-kicker{color:#fbbf24;font-weight:850;text-transform:none}.rpg-title{font-size:clamp(30px,5vw,52px);line-height:1.06;margin:7px 0 16px;letter-spacing:-.025em}.rpg-facts{display:flex;gap:9px;flex-wrap:wrap;margin:0 0 18px}.rpg-fact{background:#111c30;border:1px solid #334155;border-radius:999px;padding:8px 12px;font-weight:650}.rpg-address{color:#cbd5e1;margin:0 0 22px}.rpg-copy{font-size:17px;max-width:760px;white-space:pre-line}.rpg-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}.rpg-btn{display:inline-flex;align-items:center;justify-content:center;min-height:46px;padding:11px 17px;border-radius:999px;border:1px solid #475569;background:#111c30;color:#f8fafc;text-decoration:none;font-weight:850;cursor:pointer;font:inherit}.rpg-btn--primary{background:#f59e0b;border-color:#f59e0b;color:#020617}.rpg-btn:hover{filter:brightness(1.08)}.rpg-section{border-top:1px solid #273449;margin-top:28px;padding-top:22px}.rpg-section h2{font-size:19px;margin:0 0 8px}.rpg-muted{color:#94a3b8}@media(max-width:600px){.rpg-detail{padding:12px 10px 48px}.rpg-card{border-radius:18px}.rpg-body{padding:20px}.rpg-actions .rpg-btn{flex:1 1 calc(50% - 10px)}.rpg-actions .rpg-btn--primary{flex-basis:100%}}</style></head><body>';
-        echo '<main class="rpg-detail"><div class="rpg-top"><a class="rpg-brand" href="'.esc_url(home_url('/')).'">RUHRPOTTGURU</a><a class="rpg-back" href="'.esc_url($overview).'">× Schließen</a></div><article class="rpg-card">';
+        echo '<main class="rpg-detail"><div class="rpg-top"><a class="rpg-brand" href="'.esc_url(home_url('/')).'">'.esc_html(get_bloginfo('name')).'</a><a class="rpg-back" href="'.esc_url($overview).'">× Schließen</a></div><article class="rpg-card">';
         if($image!=='')echo '<img class="rpg-hero" src="'.esc_url($image).'" alt="'.esc_attr($title).'" loading="eager" fetchpriority="high">';
         echo '<div class="rpg-body"><div class="rpg-kicker">'.esc_html($label).'</div><h1 class="rpg-title">'.esc_html($title).'</h1><div class="rpg-facts">';
         if($city!=='')echo '<span class="rpg-fact">'.esc_html($city).'</span>';if($when!=='')echo '<span class="rpg-fact">'.esc_html($when).'</span>';if($hours!=='')echo '<span class="rpg-fact">Öffnungszeiten: '.esc_html($hours).'</span>';if($price!=='')echo '<span class="rpg-fact">'.esc_html($price).'</span>';echo '</div>';
