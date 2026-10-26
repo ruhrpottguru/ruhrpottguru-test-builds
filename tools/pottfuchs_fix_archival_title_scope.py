@@ -3,7 +3,7 @@
 import pathlib, subprocess, hashlib
 path=pathlib.Path('wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php')
 raw=path.read_bytes()
-assert b' * Version: 1.10.169' in raw[:400], 'Only historical archived version allowed'
+assert b' * Version: 1.10.169' in raw[:1024], 'Only historical archived version allowed'
 sha=hashlib.sha1(b'blob '+str(len(raw)).encode()+b'\0'+raw).hexdigest()
 assert sha=='11a94086d01e0a43038a57c477f297437b0dc309', f'Unexpected input SHA {sha}'
 s=raw.decode('utf-8')
