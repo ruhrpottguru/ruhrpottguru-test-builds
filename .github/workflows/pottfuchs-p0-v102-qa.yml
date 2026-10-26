@@ -1,0 +1,60 @@
+name: PottFuchs P0 v1.0.2 Native WPCode Cache and Zeitreise QA
+on:
+  push:
+    branches:
+      - fix/pottfuchs-p0-wpcode-cache-v1.0.2
+    paths:
+      - 'releases/pottfuchs-p0-bestandsmigration/**'
+      - '.github/workflows/pottfuchs-p0-v102-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verified-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          coverage: none
+      - name: Syntax of owner and both regression suites
+        run: |
+          php -l releases/pottfuchs-p0-bestandsmigration/pottfuchs-p0-bestandsmigration.php
+          php -l releases/pottfuchs-p0-bestandsmigration/tests/test-pottfuchs-p0.php
+          php -l releases/pottfuchs-p0-bestandsmigration/tests/test-pottfuchs-p0-cache.php
+      - name: Existing migration and exact-byte rollback on actual archived v1.10.188 source
+        run: php releases/pottfuchs-p0-bestandsmigration/tests/test-pottfuchs-p0.php wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php
+      - name: Native WPCode cache rebuild, one-time idempotence, public label and rollback unit tests
+        run: php releases/pottfuchs-p0-bestandsmigration/tests/test-pottfuchs-p0-cache.php
+      - name: Build installable replacement ZIP and integrity checksum
+        run: |
+          mkdir -p dist/staging/pottfuchs-p0-bestandsmigration dist/release
+          cp releases/pottfuchs-p0-bestandsmigration/pottfuchs-p0-bestandsmigration.php dist/staging/pottfuchs-p0-bestandsmigration/
+          cp releases/pottfuchs-p0-bestandsmigration/README.txt dist/staging/pottfuchs-p0-bestandsmigration/
+          (cd dist/staging && zip -qr ../release/PottFuchs-P0-SEO-Bestandsmigration-v1.0.2.zip pottfuchs-p0-bestandsmigration)
+          unzip -t dist/release/PottFuchs-P0-SEO-Bestandsmigration-v1.0.2.zip
+          unzip -p dist/release/PottFuchs-P0-SEO-Bestandsmigration-v1.0.2.zip pottfuchs-p0-bestandsmigration/pottfuchs-p0-bestandsmigration.php | grep -Fq ' * Version: 1.0.2'
+          sha256sum dist/release/PottFuchs-P0-SEO-Bestandsmigration-v1.0.2.zip | tee dist/release/PottFuchs-P0-SEO-Bestandsmigration-v1.0.2.zip.sha256
+      - name: Store tested WordPress ZIP
+        uses: actions/upload-artifact@v4
+        with:
+          name: pottfuchs-p0-seo-102-tested-zip
+          path: dist/release/
+          retention-days: 90
+      - name: Archive candidate and SHA256 permanently
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG=pottfuchs-p0-wpcode-cache-v1.0.2
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Never overwrite an existing immutable prerelease."
+          else
+            gh release create "$TAG" \
+              dist/release/PottFuchs-P0-SEO-Bestandsmigration-v1.0.2.zip \
+              dist/release/PottFuchs-P0-SEO-Bestandsmigration-v1.0.2.zip.sha256 \
+              --target "$GITHUB_SHA" --prerelease \
+              --title "PottFuchs SEO 1.0.2 – existing WPCode preload refresh (candidate)" \
+              --notes "Only update the already installed P0 migration v1.0.1. Native WPCode cache_all_loaded_snippets from pre-existing published 3343/4102 and one literal on existing published Zeitreise page 4115. Guarded source checks, backup, rollback and error gate. No frontend SEO hooks, no Places v1.10.189 file changes, no WPVibe. Not installed, not P0 complete: five public category titles need separately identified current owner."
+          fi
