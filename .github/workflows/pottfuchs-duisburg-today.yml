@@ -1,0 +1,33 @@
+name: PottFuchs Duisburg Today Browser Case (read-only)
+on:
+  push:
+    paths:
+      - 'tools/pottfuchs_duisburg_today_audit.js'
+      - '.github/workflows/pottfuchs-duisburg-today.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install temporary public browser tooling
+        run: npm install --prefix "$RUNNER_TEMP/pf-browser" --no-audit --no-fund playwright@1.56.0
+      - name: Install temporary Chromium
+        run: |
+          "$RUNNER_TEMP/pf-browser/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Read-only Duisburg today and Wesel control case
+        run: NODE_PATH="$RUNNER_TEMP/pf-browser/node_modules" node tools/pottfuchs_duisburg_today_audit.js
+      - name: Save results and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pottfuchs-duisburg-today-browser
+          path: audit/duisburg/
+          retention-days: 30
+          if-no-files-found: warn
