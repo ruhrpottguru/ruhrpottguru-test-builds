@@ -26,6 +26,8 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: pottfuchs-public-audit
-          path: audit/pottfuchs-public-audit.json
+          path: |
+            audit/pottfuchs-public-audit.json
+            audit/assets/*.png
           retention-days: 30
           if-no-files-found: warn
