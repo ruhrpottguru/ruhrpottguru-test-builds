@@ -97,6 +97,11 @@ def parse_seo(html):
     return {"title":p.title.strip(),"h1":p.h1,"canonical":canon,"descriptions":descriptions,
             "icons":icons,"og_site_name":og,"brand_schema":brand,"schema_types":sorted(types)}
 
+def is_compatibility_endpoint(url):
+    # Cutover runbook v1.0 §3.2: preserve API/App clients on the old host.
+    # Their POST redirects are not interchangeable with a public-page 301.
+    return urlparse(url).path.startswith("/wp-json/")
+
 def clean(x):
     return {k:v for k,v in x.items() if k!="body"}
 
@@ -120,13 +125,23 @@ def main():
         expected=urlparse(url).path
         final=urlparse(x["url"])
         issues=[]
+        is_api=is_compatibility_endpoint(url)
         if x.get("error"): issues.append("REQUEST_ERROR "+x["error"])
         else:
             if x.get("status")!=200: issues.append("FINAL_STATUS_"+str(x["status"]))
-            if final.hostname!=HOST or final.scheme!="https": issues.append("NOT_CANONICAL_HOST")
             if final.path!=expected: issues.append("PATH_CHANGED")
-            if old and (not x["chain"] or x["chain"][0]["status"]!=301): issues.append("OLD_DOMAIN_FIRST_HOP_NOT_301")
-        report["redirects"].append({"start":url, **clean(x),"issues":issues})
+            if is_api:
+                # A deliberate old-host REST API exception is not a broken
+                # public-page redirect. This is a GET-only reachability probe.
+                if final.scheme!="https": issues.append("REST_HTTPS_REQUIRED")
+                if final.hostname not in (HOST,"www.ruhrpottguru.de","ruhrpottguru.de"):
+                    issues.append("REST_WRONG_HOST")
+            else:
+                if final.hostname!=HOST or final.scheme!="https": issues.append("NOT_CANONICAL_HOST")
+                if old and (not x["chain"] or x["chain"][0]["status"]!=301): issues.append("OLD_DOMAIN_FIRST_HOP_NOT_301")
+        report["redirects"].append({"start":url, **clean(x),
+                                    "legacy_rest_compatibility_exception":is_api,
+                                    "requires_post_contract_test":is_api, "issues":issues})
         report["issues"].extend("REDIRECT "+url+": "+i for i in issues)
     pages=[
         "https://www.pottfuchs.de/",
