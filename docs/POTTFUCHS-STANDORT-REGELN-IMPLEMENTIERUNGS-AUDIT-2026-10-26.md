@@ -28,3 +28,11 @@ Sieben statische Quelltext-Vertragsprüfungen für die oben genannten Bedingunge
 
 ## Ablage der vollständigen Führungsdokumente
 Die aktualisierten **privaten** Gesamtfassungen `PottFuchs-03-Architektur-und-Entscheidungsregister-v2.0-2026-10-26.md` und `PottFuchs-01-Projektleiter-Masterliste-v2.0-2026-10-26.md` sind als Projektdateien vorhanden. Wegen `docs/storage-policy.md` werden sie **nicht ungefragt vollständig in das öffentliche GitHub-Repository veröffentlicht**. Die öffentlich geeignete verbindliche Regel und dieser technische Audit sind im Repository abrufbar.
+
+## Reproduzierbarer lokaler Basistest (zusätzliche Prüfung)
+
+Am 26.10.2026 wurde das tatsächlich vorliegende v1.10.186-PHP-Original erneut statisch geprüft: **12/12 Vertragsprüfungen bestanden** (Python `unittest`, 0,006 s). Die Prüfungen decken Wesel-Stadt-Gate, Quellen-Gate, fehlende Koordinaten, City-Scope-Markierung, Entfernung `null`, internes 99999-Sortiersentinel, Haversine-Radiusprüfung, fehlende Medienpflicht und das 500er-Kandidatenlimit ab. Diese Tests belegen den **alten Zustand**, nicht die gewünschte globale Implementierung. Der Prüfcode liegt lokal unter `/mnt/data/pottfuchs-audit/test_location_contract_v186.py` und ist noch kein reproduzierbares CI-Artefakt im Repository.
+
+**Zusätzliche Risikostelle:** Der city-scoped-Kandidatenpfad enthält `LIMIT 500` ohne Seitenaufteilung; eine allgemeine Übertragung auf alle Städte/Quellen darf dadurch nicht unbeabsichtigt zulässige Treffer abschneiden. Die öffentliche Event-Metadaten-Ausgabe setzt bei City-Scope `distanceKm=null`, obwohl intern ein Sortiersentinel 99999 genutzt wird. Beide Verträge bei jeder Änderung absichern.
+
+**Duisburg-P0:** Kein direkter DB-/Live-Nachweis in diesem Test. Nicht als behoben oder als sicher auf die Wesel-Sonderregel zurückgeführt kennzeichnen.
