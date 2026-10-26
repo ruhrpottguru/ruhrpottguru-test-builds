@@ -1,5 +1,9 @@
 # PottFuchs – operativer Prüfstand und aktuelle Aufgaben
 
+## Korrektur zum historischen P0-Faviconstatus – finale Live-Abnahme 26.10.2026
+
+**Der ältere Favicon-P0-offen-Eintrag auf dieser Seite ist überholt.** Betreiber hat das bestätigte bestehende Förderturm-Motiv als echte `/www/favicon.ico` abgelegt; [unabhängiger Live-GET-Test 40341937067](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40341937067) bestätigt kanonische neue URL `/favicon.ico` HTTP 200, `image/vnd.microsoft.icon`, sechs ICO-Einträge, 28.849 Bytes, SHA-256 `a367a6ea0b7ba28b4bdf34ebf4f1e82e6ebcb6e10f08619329bcb68e9bada9c5`; alte Domains leiten weiterhin per 301 zur neuen. **Favicon-Root-Auslieferung erledigt**. WordPress-REST-Option `site_icon=0` bleibt davon getrennt. Keine weitere Favicon-Installation erforderlich.
+
 **Stand:** 26.10.2026. PottFuchs ist die neue Marke; `https://www.pottfuchs.de` ist die primäre Domain. `ruhrpottguru.de` bleibt für 301. Der Domainwechsel und der Adresswechsel in Google Search Console fanden bereits statt. Keine Wiederholung.
 
 ## P0-Favicon – neuer unabhängiger Livebeleg um 15:11 UTC (26.10.2026)
