@@ -80,6 +80,28 @@ def analyze_items(items,center,event=False):
       "no_full_address_evidence":missing_address,"no_image_tag_evidence":missing_image,
       "cityscope_flag":cityscope,"coord_within_5km":found_5km,"coord_within_10km":found_10km,
       "max_distance_of_geocoded_rows":round(max(dists),2) if dists else None}
+def event_calendar_evidence(rows):
+    from collections import Counter
+    from zoneinfo import ZoneInfo
+    today=dt.datetime.now(ZoneInfo("Europe/Berlin")).date()
+    sources=Counter()
+    time_slots=Counter()
+    for x in rows:
+        if not isinstance(x,dict):continue
+        sources[str(x.get("source_name") or x.get("sourceName") or "unspecified")[:64]]+=1
+        start=str(x.get("start") or "")[:10]
+        end=str(x.get("end") or "")[:10]
+        try: start_day=dt.date.fromisoformat(start)
+        except ValueError: time_slots["unparsed_start"]+=1;continue
+        try: end_day=dt.date.fromisoformat(end) if end else start_day
+        except ValueError: end_day=start_day
+        if start_day<=today<=end_day:time_slots["intersects_today"]+=1
+        if start_day==today:time_slots["starts_today"]+=1
+        if start_day>today:time_slots["starts_future"]+=1
+        if start_day<today:time_slots["started_before_today"]+=1
+    return {"local_date":str(today),"source_counts":dict(sources.most_common(12)),
+            "date_buckets":dict(time_slots)}
+
 def summarize(city,cat,resp,center):
     out={"city":city,"category":cat,"status":resp.get("status")}
     if "error" in resp:return {**out,"error":resp["error"]}
@@ -87,7 +109,7 @@ def summarize(city,cat,resp,center):
     if not isinstance(j,dict):return {**out,"error":"response_not_object"}
     items=j.get("items") if cat=="events" else j.get("elements")
     if not isinstance(items,list):return {**out,"error":"missing_items_or_elements","keys":sorted(j.keys())[:30]}
-    return {**out,**analyze_items(items,center,cat=="events"),"keys":sorted(j.keys())[:16]}
+    return {**out,**analyze_items(items,center,cat=="events"),"keys":sorted(j.keys())[:16],**(event_calendar_evidence(items) if cat=="events" else {})}
 def main():
     result={"utc":dt.datetime.now(dt.timezone.utc).isoformat(),
       "limitations":"Public visitor payload only; not full importer/db; no invented distances for unlocated rows; cityscope counted separately.",
