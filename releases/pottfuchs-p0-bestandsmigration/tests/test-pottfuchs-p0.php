@@ -143,7 +143,7 @@ $wrongVersion=preg_replace('/^\s*\* Version: 1\.10\.188\s*$/m',' * Version: 1.10
 pf_assert($replacementCount===1,'old version fixture generated');
 file_put_contents(pf_p0_get_backend_path(),$wrongVersion);
 try{call_user_func($GLOBALS['p0_fake_activation']);throw new RuntimeException('Wrong version accepted');}
-catch(RuntimeException $e){pf_assert(strpos($e->getMessage(),'Backend-Versionen')!==false,'historical version rejected before writes');}
+catch(RuntimeException $e){pf_assert(strpos($e->getMessage(),'Live-Backend')!==false,'historical version rejected before writes');}
 
 // Refuse a source that claims 1.10.188 in its header but an older app constant.
 pf_reset_post_fixtures();
