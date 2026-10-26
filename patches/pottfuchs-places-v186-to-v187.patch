@@ -1,0 +1,93 @@
+--- a/ruhrpott-guru-places/ruhrpott-guru-places.php
++++ b/ruhrpott-guru-places/ruhrpott-guru-places.php
+@@ -2,7 +2,7 @@
+ /**
+  * Plugin Name: RuhrpottGuru Places Backend
+  * Description: Persistenter Places-Katalog für Food, Highlights, Kultur und Aktivitäten sowie Spezial-Inventare für Büdchen und „Hier geht’s um die Wurst“ in der Metropole Ruhr. OSM wird nur für Import/Sync verwendet; Besucher lesen aus MySQL. Mit automatischem OSM-Rollback bis der Katalog vollständig validiert ist.
+- * Version: 1.10.186
++ * Version: 1.10.187
+  * Author: RuhrpottGuru
+  * License: GPL-2.0-or-later
+  */
+@@ -179,7 +179,7 @@
+     // 0-14 Tage alle 4 Stunden, 0-90 Tage taeglich, kompletter 0-365-Tage-
+     // Master woechentlich. Laufende Master-/Supplemental-Wellen werden nie
+     // abgebrochen; der Dispatcher wartet, bis der Event-Importpfad frei ist.
+-    const VERSION = '1.10.186';
++    const VERSION = '1.10.187';
+     const ACTIVITY_V2_SPEC_VERSION = '1.4';
+     const SCHEMA_VERSION = '1.10.129';
+     const OPTION_STATUS = 'rg_places_status';
+@@ -15354,24 +15354,36 @@
+             }
+         }
+ 
+-        // 1.10.165: the activated official Wesel source may contain legitimate
+-        // future city events without a safe point coordinate. When the request is
+-        // explicitly scoped to Wesel, append those rows as city-scoped candidates.
+-        // They carry no fabricated lat/lng and therefore no visitor distance.
+-        if(strcasecmp(trim((string)$city),'Wesel')===0){
+-            $city_scope_rows=(array)$wpdb->get_results($wpdb->prepare(
+-                "SELECT e.id,e.canonical_key,e.external_id,e.source,e.last_master_run,e.title,e.start_at,e.end_at,e.venue_name,e.city,e.lat,e.lng,
+-                        CASE WHEN e.description IS NULL OR e.description='' THEN '' ELSE '1' END AS description,
+-                        CASE WHEN e.ticket_url IS NULL OR e.ticket_url='' THEN '' ELSE '1' END AS ticket_url,
+-                        CASE WHEN e.price_text IS NULL OR e.price_text='' THEN '' ELSE '1' END AS price_text
+-                 FROM $events e
+-                 WHERE e.status='active' AND e.source='wesel_marketing_calendar' AND e.city=%s
+-                   AND (e.lat IS NULL OR e.lng IS NULL)
+-                   AND (e.end_at>=%s OR (e.end_at IS NULL AND DATE(e.start_at)>=DATE(%s)))
+-                 ORDER BY e.start_at ASC,e.id ASC LIMIT 500",
+-                'Wesel',$now,$now
+-            ),ARRAY_A);
+-            foreach($city_scope_rows as $cr){$cr['distance_km']=99999.0;$cr['_rpg_city_scope']=1;$cr=$this->event_apply_curated_visitor_data_to_row($cr);$cluster_input[]=$cr;}
++        // 1.10.187: City-level discoverability is a separate admission mode.
++        // Apply equally to all approved/imported active event sources and cities.
++        // The radius filter above stays exact; these records have no invented
++        // point or distance and are marked as city-scoped in the public payload.
++        $requested_city=trim((string)$city);
++        if($requested_city!=='' && strlen($requested_city)<=120){
++            // Seek-page by primary key to avoid dropping valid city-only rows
++            // at a fixed LIMIT 500, without one unbounded DB result set.
++            $city_scope_cursor=0;
++            do {
++                $city_scope_rows=(array)$wpdb->get_results($wpdb->prepare(
++                    "SELECT e.id,e.canonical_key,e.external_id,e.source,e.last_master_run,e.title,e.start_at,e.end_at,e.venue_name,e.city,e.lat,e.lng,
++                            CASE WHEN e.description IS NULL OR e.description='' THEN '' ELSE '1' END AS description,
++                            CASE WHEN e.ticket_url IS NULL OR e.ticket_url='' THEN '' ELSE '1' END AS ticket_url,
++                            CASE WHEN e.price_text IS NULL OR e.price_text='' THEN '' ELSE '1' END AS price_text
++                     FROM $events e
++                     WHERE e.status='active' AND e.city=%s AND e.id>%d
++                       AND (e.lat IS NULL OR e.lng IS NULL)
++                       AND (e.end_at>=%s OR (e.end_at IS NULL AND DATE(e.start_at)>=DATE(%s)))
++                     ORDER BY e.id ASC LIMIT 300",
++                    $requested_city,$city_scope_cursor,$now,$now
++                ),ARRAY_A);
++                foreach($city_scope_rows as $cr){
++                    $city_scope_cursor=max($city_scope_cursor,(int)($cr['id']??0));
++                    $cr['distance_km']=99999.0; // sorting sentinel, never visitor distance
++                    $cr['_rpg_city_scope']=1;
++                    $cr=$this->event_apply_curated_visitor_data_to_row($cr);
++                    $cluster_input[]=$cr;
++                }
++            } while(count($city_scope_rows)===300);
+         }
+         usort($cluster_input,function($a,$b){
+             $ta=strtotime((string)$a['start_at']); $tb=strtotime((string)$b['start_at']);
+@@ -15568,7 +15580,7 @@
+             $raw['category'] = (string)$row['event_category'];
+             $cityScope=!empty($row['_rpg_city_scope'])||!is_numeric($row['lat'])||!is_numeric($row['lng']);
+             if(!$cityScope){$raw['latitude']=(float)$row['lat'];$raw['longitude']=(float)$row['lng'];$raw['geo']=array('latitude'=>(float)$row['lat'],'longitude'=>(float)$row['lng']);unset($raw['rpg_geo_scope'],$raw['rpg_geo_label']);}
+-            else{unset($raw['latitude'],$raw['longitude'],$raw['lat'],$raw['lng'],$raw['geo']);$raw['rpg_geo_scope']='city';$raw['rpg_geo_label']=(string)($row['city']?:'Wesel');}
++            else{unset($raw['latitude'],$raw['longitude'],$raw['lat'],$raw['lng'],$raw['geo']);$raw['rpg_geo_scope']='city';$raw['rpg_geo_label']=(string)($row['city']??'');}
+             $raw['address'] = array(
+                 'street'=>(string)$row['street'], 'houseNumber'=>(string)$row['house_number'],
+                 'postalCode'=>(string)$row['postcode'], 'city'=>(string)$row['city'],
+@@ -17469,7 +17481,7 @@
+         unset($item);
+         $wait=get_option('rg_events_tier_dispatch_wait_v101101',array());
+         return array('generated_at'=>current_time('mysql'),'timezone'=>wp_timezone_string(),
+-            'backend_version'=>'1.10.186','states'=>$states,'queue'=>$safe_queue,'lock'=>$lock,
++            'backend_version'=>'1.10.187','states'=>$states,'queue'=>$safe_queue,'lock'=>$lock,
+             'dispatcher_wait'=>is_array($wait)?array_intersect_key($wait,array_flip(array('reason','at'))):array(),
+             'operator_manual_mode'=>(bool)get_option('rg_events_operator_manual_mode_v101185',false),
+             'operator_selected_tier'=>(string)get_option('rg_events_operator_selected_tier_v101185',''),
