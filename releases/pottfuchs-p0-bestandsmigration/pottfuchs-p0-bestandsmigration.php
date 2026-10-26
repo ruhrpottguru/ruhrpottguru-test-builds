@@ -241,30 +241,38 @@ add_action('admin_menu',function(){
         echo '<form method="post">';wp_nonce_field('pf_p0_rollback_action');echo '<input type="hidden" name="pf_p0_action" value="rollback">';submit_button('Letzte Migration rueckgaengig machen','secondary');echo '</form></div>';
     });
 });
-add_action('admin_init',function(){
-    if(!isset($_POST['pf_p0_action'])||$_POST['pf_p0_action']!=='rollback')return;
-    if(!current_user_can('manage_options')||!check_admin_referer('pf_p0_rollback_action'))wp_die('Berechtigung fehlt');
+/** Rollback pure admin-side operation, guarded by exact post-migration SHA-256. */
+function pf_p0_restore_backup() {
     $backup=get_option(pf_p0_backup_record(),false);
     $state=get_option(pf_p0_state_record(),false);
-    if(!is_array($backup)||!is_array($state))wp_die('Keine dokumentierte erfolgreiche Migration zum Rollback.');
+    if(!is_array($backup)||!is_array($state))throw new RuntimeException('Keine dokumentierte erfolgreiche Migration zum Rollback');
     $path=pf_p0_get_backend_path();
     $current=@file_get_contents($path);
     if(!is_string($current)||hash('sha256',$current)!==$state['plugin_sha256']) {
-        wp_die('Rollback blockiert: Plugin wurde nach Migration anderweitig veraendert. Backup bleibt erhalten.');
+        throw new RuntimeException('Places-Datei nach der Migration anderweitig veraendert; Rollback verweigert');
     }
     foreach(array(3343,4102) as $id) {
         $p=get_post($id);
         if(!$p||hash('sha256',$p->post_content)!==$state['snippet'.$id.'_sha256']) {
-            wp_die('Rollback blockiert: SEO-Snippet '.$id.' inzwischen geaendert. Backup bleibt erhalten.');
+            throw new RuntimeException('WPCode-Snippet '.$id.' zwischenzeitlich veraendert; Rollback verweigert');
         }
     }
-    if(!pf_p0_write_atomic($path,$backup['file'])) wp_die('Originaldatei konnte nicht wiederhergestellt werden.');
+    if(!pf_p0_write_atomic($path,$backup['file'])) {
+        throw new RuntimeException('Originaldatei konnte nicht wiederhergestellt werden; Backup bewahrt');
+    }
     foreach(array(3343,4102) as $id) {
         $r=wp_update_post(wp_slash(array('ID'=>$id,'post_content'=>$backup['snippets'][$id])),true);
-        if(is_wp_error($r) || get_post($id)->post_content!==$backup['snippets'][$id]) {
-            wp_die('Rollback unvollstaendig, Backup bleibt erhalten. Bitte Eintraege pruefen.');
+        if(!$r || is_wp_error($r) || get_post($id)->post_content!==$backup['snippets'][$id]) {
+            throw new RuntimeException('Rollback unvollstaendig: Backup bewahrt, bitte WordPress-Code pruefen');
         }
     }
     delete_option(pf_p0_state_record());delete_option(pf_p0_backup_record());
+    return true;
+}
+add_action('admin_init',function(){
+    if(!isset($_POST['pf_p0_action'])||$_POST['pf_p0_action']!=='rollback')return;
+    if(!current_user_can('manage_options')||!check_admin_referer('pf_p0_rollback_action'))wp_die('Berechtigung fehlt');
+    try {pf_p0_restore_backup();}
+    catch(Throwable $e) {wp_die(esc_html($e->getMessage()));}
     wp_safe_redirect(admin_url('plugins.php?pf_p0_rollback=done'));exit;
 });
