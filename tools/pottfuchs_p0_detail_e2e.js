@@ -41,15 +41,15 @@ function assert(b,msg){if(!b)throw Error(msg);}
       const schemas=[...document.querySelectorAll('script[type="application/ld+json"]')].map(x=>{try{return JSON.parse(x.textContent)}catch(_){return null}});
       return {h1:document.querySelectorAll('h1').length,canonicals:canonical,
         descriptionCount:document.querySelectorAll('meta[name="description"]').length,
-        footerVisible:[...document.querySelectorAll('footer')].some(visible),
+        footerVisible:[...document.querySelectorAll('nav.rpgx-footer-nav, footer')].some(visible),
         headerVisible:[...document.querySelectorAll('header')].some(visible),
-        chromeNodes:['header','footer','.rpgx-header','.rpgx-footer','#ruhrpott-guru-root'].map(sel=>({
+        chromeNodes:['header','footer','nav.rpgx-footer-nav','.rpgx-header','.rpgx-footer','#ruhrpott-guru-root'].map(sel=>({
           sel,nodes:[...document.querySelectorAll(sel)].slice(0,2).map(el=>({class:el.className||'',
             display:getComputedStyle(el).display,visibility:getComputedStyle(el).visibility,
             rect:el.getBoundingClientRect().toJSON(),htmlSnippet:el.outerHTML.slice(0,200)}))})),
         bodyClass:document.body.className,
         htmlClass:document.documentElement.className,
-        rawFooterCount:document.querySelectorAll('footer').length,
+        rawFooterCount:document.querySelectorAll('footer, nav.rpgx-footer-nav').length,
         rawHeaderCount:document.querySelectorAll('header').length,
         detailVisible:[...document.querySelectorAll('.rpgx-detail-landing,.rpgx-direct-detail-panel,.rpgx-direct-ssr')].some(visible),
         mobileOverflow:document.documentElement.scrollWidth>innerWidth+8,
