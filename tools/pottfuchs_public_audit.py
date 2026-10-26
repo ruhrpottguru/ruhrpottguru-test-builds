@@ -108,7 +108,12 @@ def main():
            "https://www.pottfuchs.de/","http://ruhrpottguru.de/","https://ruhrpottguru.de/",
            "http://www.ruhrpottguru.de/","https://www.ruhrpottguru.de/",
            "https://www.ruhrpottguru.de/impressum/",
-           "https://www.ruhrpottguru.de/ort/16936/essen/zum-schwarzen/"]
+           "https://www.ruhrpottguru.de/ort/16936/essen/zum-schwarzen/",
+           "https://www.ruhrpottguru.de/veranstaltungen/",
+           "https://www.ruhrpottguru.de/food/",
+           "https://www.ruhrpottguru.de/stadt/wesel/sehenswuerdigkeiten/",
+           "https://www.ruhrpottguru.de/halloween-im-pott/",
+           "https://www.ruhrpottguru.de/wp-json/"]
     for url in roots:
         x=get(url)
         old="ruhrpottguru.de" in url
