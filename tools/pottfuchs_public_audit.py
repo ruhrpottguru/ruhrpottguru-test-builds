@@ -128,6 +128,11 @@ def main():
         "https://www.pottfuchs.de/ort/16936/essen/zum-schwarzen/",
         "https://www.pottfuchs.de/ort/10523/wesel/weseler-wirtshaus/",
         "https://www.pottfuchs.de/veranstaltung/6936/essen/77-essener-lichtwochen/",
+        "https://www.pottfuchs.de/veranstaltungen/",
+        "https://www.pottfuchs.de/food/",
+        "https://www.pottfuchs.de/highlights/",
+        "https://www.pottfuchs.de/kultur/",
+        "https://www.pottfuchs.de/aktiv/",
         "https://www.pottfuchs.de/datenschutzerklaerung/",
         "https://www.pottfuchs.de/impressum/",
         "https://www.pottfuchs.de/zeitreise-von-oben/",
@@ -144,6 +149,7 @@ def main():
             if len(seo["descriptions"])>1: issues.append("DUPLICATE_META_DESCRIPTION")
             if any(urlparse(c or "").hostname not in (None,HOST) for c in seo["canonical"]): issues.append("OLD_OR_FOREIGN_CANONICAL")
             if re.search("RuhrpottGuru",seo["title"],re.I): issues.append("OLD_BRAND_TITLE")
+            if any(re.search("RuhrpottGuru",str(name or ""),re.I) for name in seo["og_site_name"]): issues.append("OLD_BRAND_OG_SITE_NAME")
             if any(re.search("RuhrpottGuru",str(b.get("name","")),re.I) for b in seo["brand_schema"]): issues.append("OLD_BRAND_SCHEMA")
             if "RuhrpottGuru-Standort" in x.get("body",""): issues.append("OLD_BRAND_VISIBLE_TIME_TRAVEL")
             if "/ort/" in url or "/veranstaltung/" in url:
