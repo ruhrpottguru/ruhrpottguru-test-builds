@@ -55,3 +55,29 @@ Am 26.10. wurde **das exakt gleiche** SVG-Motiv in ein WordPress-kompatibles PNG
 **Dauerhaftes GitHub-Archiv, rückgelesener Tree-Blob**: [`docs/assets/pottfuchs-bestehendes-favicon-512.png`](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/blob/pottfuchs-seo-fix/docs/assets/pottfuchs-bestehendes-favicon-512.png) (Entwicklungszweig; Git-Blob `7e35808e7b7310bc65b99f5ae6d6057a9217cb97`). [Github-Render-und-Archivierungsnachweis](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40325394310).
 
 **Einmaliger Betreiber-Schritt**, da keine Berechtigung für ungefragte WordPress-Administration besteht: Im vorhandenen WordPress-Website-Icon-Feld das vorbereitete PNG auswählen/einsetzen. Bestehendes Theme-SVG nicht löschen. Danach prüfen, ob `/favicon.ico` nicht mehr zum WordPress-W führt; Googles Suchdarstellung benötigt erneutes Crawling und kann nicht garantiert werden. Eine Korrektur der JSON-LD-Marken und der HTML-Titel wird dadurch **nicht** ersetzt.
+
+## Nachtrag: Favicon-Ursache aus öffentlicher WordPress-REST-API ermittelt
+
+Im rein lesenden GitHub-Action-Test am 26.10.2026 meldet `https://www.pottfuchs.de/wp-json/` ausdrücklich:
+
+- `name = "PottFuchs"`, `url = "https://www.pottfuchs.de"`
+- `site_logo = 4215` (**Logo**-Kennung, keine Site-Icon-Kennung)
+- `site_icon = 0`
+- `site_icon_url = ""` (leer)
+
+Damit ist erklärt, **warum WordPress Core den Aufruf `/favicon.ico` mit 302 zur WordPress-W-Grafik schickt**: Die öffentlich ausgelieferte Website hat derzeit aus Core-Sicht kein registriertes Website-Icon. Das korrekte `favicon.svg` im HTML-Head kommt separat aus dem Theme. WordPress-Core-Hintergrund: [`do_favicon()`](https://developer.wordpress.org/reference/functions/do_favicon/) benutzt bei fehlender Website-Icon-Option das Standard-W. [Live-REST-Prüfnachweis](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40328351939).
+
+Das Screenshot des WordPress-Einstellungsdialogs zeigt trotzdem den gelben Förderturm als Website-Icon. **Dieser Widerspruch ist weiterhin offen**: Was der Admin-Dialog zeigt, ist nicht identisch mit der von Besuchern über REST ausgelieferten `site_icon`-Option. Ein reines Ersetzen der Theme-Datei oder Neudesign des Icons wäre die falsche Lösung; auch das HTML-Head-Link ist nicht defekt. Nur ein autorisierter WordPress-Admin-/Hosting-Schritt kann den produktiven Icon-Zustand ändern.
+
+**Minimaler, sicherer Betreiberpfad (ohne neues Motiv):**
+1. Im bestehenden WordPress-Einstellungsdialog das bereits vorhandene gelbe Förderturm-Icon erneut auswählen und die Seite wirklich speichern; dabei kein neues Bild gestalten. Anschließend zuerst den öffentlichen REST-Wert `site_icon` und die `/favicon.ico`-Weiterleitung nachprüfen. Ergibt der Wert weiterhin `0`, nicht durch wiederholte Uploads experimentieren; dann konkrete WordPress-Options-/Media-Zuordnung gesondert diagnostizieren.
+2. Als **separater technischer Fallback** ist eine echte Root-Datei `favicon.ico` aus genau demselben SVG generiert, die ein Administrator ohne zusätzliches Plugin im Webroot ablegen könnte. WordPress/Core lässt reale Dateien durch den Webserver direkt ausliefern. Das ist derzeit **nur eine geprüfte Datei, keine Installation oder Freigabe zum unkontrollierten Überschreiben**.
+
+Abgeleitet aus exakt dem Live-SVG mit SHA-256 `16bf0971d5c1bf85e22f7898d78ee5ea7fb9dd05b133fe3f705b6fb96b6333ad`:
+
+- [Originalgetreues Favicon-ICO, GitHub-Entwicklungszweig](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/blob/pottfuchs-seo-fix/docs/assets/pottfuchs-bestehendes-favicon.ico)
+- ICO-Formate enthalten **16, 32, 48, 64, 128 und 256 Pixel**; Dateigröße **28.849 Byte**.
+- ICO-SHA-256 `a367a6ea0b7ba28b4bdf34ebf4f1e82e6ebcb6e10f08619329bcb68e9bada9c5`; identisch zwischen GitHub-Actions-Build und lokal unabhängig erstellter Datei.
+- [GitHub-Build- und Archivierungsnachweis](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40328688469). Der Datei-Blob ist dauerhaft im Branch versioniert.
+
+Es erfolgte **keine Änderung an der Live-Website**, an der Datenbank oder an Hosting. Eine Bereitstellung im Root wäre eine separate Freigabe-/Betreiberhandlung; kein neues Plugin.
