@@ -1,0 +1,71 @@
+name: PottFuchs global city-scope release
+on:
+  push:
+    branches: [fix/global-city-scope-190]
+permissions:
+  contents: write
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    services:
+      database:
+        image: mariadb:10.11
+        env:
+          MARIADB_ROOT_PASSWORD: testonly
+          MARIADB_DATABASE: pottfuchs_test
+        ports: ['3306:3306']
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=10s --health-timeout=5s --health-retries=10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: mysqli, mbstring, pdo_mysql
+          coverage: none
+      - name: Syntax and retained import/search regression
+        run: |
+          find wordpress/plugins/ruhrpott-guru-places -name '*.php' -print0 | xargs -0 -n1 php -l
+          php -l tests/city_scope_wordpress.php
+          php tests/manual_import_priority.php
+          php tests/supplemental_watchdog.php
+          php wordpress/plugins/ruhrpott-guru-places/QA/search-cuisine-city-v180/search-cuisine-city.php wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php
+      - name: Build final install and byte-exact rollback ZIPs
+        run: python tools/build_cityscope_release.py
+      - name: Four global admission requirements
+        env:
+          POTTFUCHS_BACKEND_ZIP: cityscope-release/PottFuchs-Places-v1.10.190-Stadtsichtbarkeit.zip
+        run: python -m unittest discover -s tests -p test_global_city_scope_requirements.py -v
+      - name: Real disposable WordPress installation
+        env:
+          POTTFUCHS_TEST_WP: /tmp/pf-wp
+        run: |
+          curl --fail --silent --show-error -L https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -o /tmp/wp
+          php /tmp/wp core download --path=/tmp/pf-wp --version=6.8.3
+          php /tmp/wp config create --path=/tmp/pf-wp --dbname=pottfuchs_test --dbuser=root --dbpass=testonly --dbhost=127.0.0.1:3306 --skip-check --extra-php <<'PHP'
+          define('DISABLE_WP_CRON', true);
+          define('WP_HTTP_BLOCK_EXTERNAL', true);
+          PHP
+          php /tmp/wp core install --path=/tmp/pf-wp --url=http://localhost --title=Disposable --admin_user=fixture --admin_password=local-test-only --admin_email=test@example.org --skip-email
+          php /tmp/wp plugin install "$PWD/cityscope-release/PottFuchs-Places-v1.10.190-Stadtsichtbarkeit.zip" --path=/tmp/pf-wp --force
+          php tests/city_scope_wordpress.php
+      - name: Web and Android payload compatibility
+        run: node tests/city_scope_clients.cjs
+      - name: Existing web city-scope and radius regression
+        run: |
+          node wordpress/themes/ruhrpott-guru/tests/wesel-cityscope-description.cjs
+          node wordpress/themes/ruhrpott-guru/tests/v332-event-cityscope-distance-fallback.cjs
+          node wordpress/themes/ruhrpott-guru/tests/v331-event-distance-priority.cjs
+          node wordpress/themes/ruhrpott-guru/tests/v332-halloween-day-distance.cjs
+      - name: Archive test evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pottfuchs-cityscope-integration
+          path: cityscope-release/
+      - name: Publish tested release and rollback
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create pottfuchs-places-v1.10.190 cityscope-release/*.zip cityscope-release/SHA256SUMS.txt cityscope-release/release-manifest.json --target "$GITHUB_SHA" --title "PottFuchs Places 1.10.190 – Stadtsichtbarkeit" --notes-file docs/POTTFUCHS-STADTSICHTBARKEIT-v1.10.190.md

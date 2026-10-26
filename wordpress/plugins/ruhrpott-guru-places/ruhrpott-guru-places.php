@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RuhrpottGuru Places Backend
  * Description: Persistenter Places-Katalog für Food, Highlights, Kultur und Aktivitäten sowie Spezial-Inventare für Büdchen und „Hier geht’s um die Wurst“ in der Metropole Ruhr. OSM wird nur für Import/Sync verwendet; Besucher lesen aus MySQL. Mit automatischem OSM-Rollback bis der Katalog vollständig validiert ist.
- * Version: 1.10.189
+ * Version: 1.10.190
  * Author: RuhrpottGuru
  * License: GPL-2.0-or-later
  */
@@ -179,7 +179,7 @@ final class RuhrpottGuru_Places_Backend {
     // 0-14 Tage alle 4 Stunden, 0-90 Tage taeglich, kompletter 0-365-Tage-
     // Master woechentlich. Laufende Master-/Supplemental-Wellen werden nie
     // abgebrochen; der Dispatcher wartet, bis der Event-Importpfad frei ist.
-    const VERSION = '1.10.189';
+    const VERSION = '1.10.190';
     const ACTIVITY_V2_SPEC_VERSION = '1.4';
     const SCHEMA_VERSION = '1.10.129';
     const OPTION_STATUS = 'rg_places_status';
@@ -15360,24 +15360,35 @@ RuhrpottGuru";
             }
         }
 
-        // 1.10.165: the activated official Wesel source may contain legitimate
-        // future city events without a safe point coordinate. When the request is
-        // explicitly scoped to Wesel, append those rows as city-scoped candidates.
-        // They carry no fabricated lat/lng and therefore no visitor distance.
-        if(strcasecmp(trim((string)$city),'Wesel')===0){
-            $city_scope_rows=(array)$wpdb->get_results($wpdb->prepare(
-                "SELECT e.id,e.canonical_key,e.external_id,e.source,e.last_master_run,e.title,e.start_at,e.end_at,e.venue_name,e.city,e.lat,e.lng,
-                        CASE WHEN e.description IS NULL OR e.description='' THEN '' ELSE '1' END AS description,
-                        CASE WHEN e.ticket_url IS NULL OR e.ticket_url='' THEN '' ELSE '1' END AS ticket_url,
-                        CASE WHEN e.price_text IS NULL OR e.price_text='' THEN '' ELSE '1' END AS price_text
-                 FROM $events e
-                 WHERE e.status='active' AND e.source='wesel_marketing_calendar' AND e.city=%s
-                   AND (e.lat IS NULL OR e.lng IS NULL)
-                   AND (e.end_at>=%s OR (e.end_at IS NULL AND DATE(e.start_at)>=DATE(%s)))
-                 ORDER BY e.start_at ASC,e.id ASC LIMIT 500",
-                'Wesel',$now,$now
-            ),ARRAY_A);
-            foreach($city_scope_rows as $cr){$cr['distance_km']=99999.0;$cr['_rpg_city_scope']=1;$cr=$this->event_apply_curated_visitor_data_to_row($cr);$cluster_input[]=$cr;}
+        // 1.10.190: reuse the established city-scope contract for any explicitly
+        // selected city and its active canonical events, regardless of source.
+        // These are city matches, not proven radius matches: no point/distance
+        // is fabricated. Exact-coordinate candidates above remain unchanged.
+        // Page the lightweight projection by stable ID before normal clustering;
+        // a busy city's valid events must not disappear behind a fixed 500 cap.
+        $scope_city=trim((string)$city);
+        if($scope_city!==''){
+            $scope_after_id=0;
+            do{
+                $city_scope_rows=(array)$wpdb->get_results($wpdb->prepare(
+                    "SELECT e.id,e.canonical_key,e.external_id,e.source,e.last_master_run,e.title,e.start_at,e.end_at,e.venue_name,e.city,e.lat,e.lng,
+                            CASE WHEN e.description IS NULL OR e.description='' THEN '' ELSE '1' END AS description,
+                            CASE WHEN e.ticket_url IS NULL OR e.ticket_url='' THEN '' ELSE '1' END AS ticket_url,
+                            CASE WHEN e.price_text IS NULL OR e.price_text='' THEN '' ELSE '1' END AS price_text
+                     FROM $events e
+                     WHERE e.status='active' AND e.city=%s AND e.id>%d
+                       AND (e.lat IS NULL OR e.lng IS NULL)
+                       AND (e.end_at>=%s OR (e.end_at IS NULL AND DATE(e.start_at)>=DATE(%s)))
+                     ORDER BY e.id ASC LIMIT 300",
+                    $scope_city,$scope_after_id,$now,$now
+                ),ARRAY_A);
+                foreach($city_scope_rows as $cr){
+                    $scope_after_id=max($scope_after_id,(int)$cr['id']);
+                    $cr['distance_km']=99999.0;$cr['_rpg_city_scope']=1;
+                    $cr=$this->event_apply_curated_visitor_data_to_row($cr);
+                    $cluster_input[]=$cr;
+                }
+            }while(count($city_scope_rows)===300);
         }
         usort($cluster_input,function($a,$b){
             $ta=strtotime((string)$a['start_at']); $tb=strtotime((string)$b['start_at']);
@@ -15574,7 +15585,7 @@ RuhrpottGuru";
             $raw['category'] = (string)$row['event_category'];
             $cityScope=!empty($row['_rpg_city_scope'])||!is_numeric($row['lat'])||!is_numeric($row['lng']);
             if(!$cityScope){$raw['latitude']=(float)$row['lat'];$raw['longitude']=(float)$row['lng'];$raw['geo']=array('latitude'=>(float)$row['lat'],'longitude'=>(float)$row['lng']);unset($raw['rpg_geo_scope'],$raw['rpg_geo_label']);}
-            else{unset($raw['latitude'],$raw['longitude'],$raw['lat'],$raw['lng'],$raw['geo']);$raw['rpg_geo_scope']='city';$raw['rpg_geo_label']=(string)($row['city']?:'Wesel');}
+            else{unset($raw['latitude'],$raw['longitude'],$raw['lat'],$raw['lng'],$raw['geo']);$raw['rpg_geo_scope']='city';$raw['rpg_geo_label']=(string)($row['city']??'');}
             $raw['address'] = array(
                 'street'=>(string)$row['street'], 'houseNumber'=>(string)$row['house_number'],
                 'postalCode'=>(string)$row['postcode'], 'city'=>(string)$row['city'],

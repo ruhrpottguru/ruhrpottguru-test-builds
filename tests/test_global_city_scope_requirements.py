@@ -16,7 +16,7 @@ class GlobalCityScopeRequirements(unittest.TestCase):
     def setUpClass(cls):
         with zipfile.ZipFile(ARCHIVE) as z:
             cls.source = z.read(MAIN).decode("utf-8")
-        start = cls.source.index("// 1.10.165: the activated official Wesel source")
+        start = cls.source.index("public function frontend_events_query(")
         end = cls.source.index("usort($cluster_input", start)
         cls.admission = cls.source[start:end]
 

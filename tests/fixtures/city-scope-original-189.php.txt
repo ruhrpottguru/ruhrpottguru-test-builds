@@ -1,0 +1,19 @@
+        // 1.10.165: the activated official Wesel source may contain legitimate
+        // future city events without a safe point coordinate. When the request is
+        // explicitly scoped to Wesel, append those rows as city-scoped candidates.
+        // They carry no fabricated lat/lng and therefore no visitor distance.
+        if(strcasecmp(trim((string)$city),'Wesel')===0){
+            $city_scope_rows=(array)$wpdb->get_results($wpdb->prepare(
+                "SELECT e.id,e.canonical_key,e.external_id,e.source,e.last_master_run,e.title,e.start_at,e.end_at,e.venue_name,e.city,e.lat,e.lng,
+                        CASE WHEN e.description IS NULL OR e.description='' THEN '' ELSE '1' END AS description,
+                        CASE WHEN e.ticket_url IS NULL OR e.ticket_url='' THEN '' ELSE '1' END AS ticket_url,
+                        CASE WHEN e.price_text IS NULL OR e.price_text='' THEN '' ELSE '1' END AS price_text
+                 FROM $events e
+                 WHERE e.status='active' AND e.source='wesel_marketing_calendar' AND e.city=%s
+                   AND (e.lat IS NULL OR e.lng IS NULL)
+                   AND (e.end_at>=%s OR (e.end_at IS NULL AND DATE(e.start_at)>=DATE(%s)))
+                 ORDER BY e.start_at ASC,e.id ASC LIMIT 500",
+                'Wesel',$now,$now
+            ),ARRAY_A);
+            foreach($city_scope_rows as $cr){$cr['distance_km']=99999.0;$cr['_rpg_city_scope']=1;$cr=$this->event_apply_curated_visitor_data_to_row($cr);$cluster_input[]=$cr;}
+        }
