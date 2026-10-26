@@ -1,5 +1,8 @@
 # Bestandsstatus vom 19.10.2026
 
+> **Live-Stand 26.10.2026, nach ausdrücklicher rein lesender WordPress-Freigabe:** WPVibe `site_info`/Pluginliste bestätigt **Theme v351.0** (Slug `ruhrpott-guru`), **Places-Backend v1.10.185** und **WPCode Lite v2.4.0 aktiv**. Die tatsächlichen WPCode-Posts **#3343** und **#4102** (`post_status=publish`) wurden lesend aus WordPress geprüft. Daraus sind **vier** öffentliche Altmarken-Literale in #3343 (Taxonomie-Fallback, Organization, WebSite, Breadcrumb) und **ein** Event-Titelsuffix in #4102 exakt lokalisiert. Der Place-Teil von #4102 ändert keinen Titel: Für `Zum Schwarzen Essen | PottFuchs` ist der aktuelle Places-Detail-SEO-Owner nötig. `site_icon=0` ist weiterhin direkt bestätigt. **Keine Liveänderungen:** Genehmigung umfasst nur Lesen. Detailnachweis und bewahrte Freigabegrenze: [docs/pottfuchs-operational-status.md](pottfuchs-operational-status.md). Der Export der vollständigen installierten Theme-/Plugin-Dateien ist weiter nicht gelungen; neuere Library-ZIP-Materialisierung meldet nach erneutem Versuch fehlende autorisierte Rohbyte-Pfade. WPVibe-Free-Kontingent derzeit erschöpft; kein kostenpflichtiges Upgrade.
+
+
 ## Tatsächlich wiedergewonnene Archive
 
 | Komponente | Archivstand | Beleg |
