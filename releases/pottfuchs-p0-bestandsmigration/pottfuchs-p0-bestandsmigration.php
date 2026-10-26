@@ -2,7 +2,7 @@
 /**
  * Plugin Name: PottFuchs P0 – einmalige SEO-Bestandsmigration
  * Description: Einmalige Migration EXISTIERENDER WPCode- und Places-SEO-Owner. Kein eigener SEO-Renderer und kein REST-Änderer. Bricht bei unbekanntem Quellstand vor jeder Änderung ab.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Requires PHP: 7.4
  * Author: PottFuchs
  * License: GPL-2.0-or-later
@@ -151,7 +151,8 @@ function pf_p0_install() {
         wp_die('Sicherheitsabbruch: Webseite oder Markenname stimmt nicht. Es wurde nichts geaendert.');
     }
     if(get_option(pf_p0_state_record(),false)) {
-        wp_die('Sicherheitsabbruch: Migration wurde bereits ausgefuehrt. Kein zweiter Lauf.');
+        // v1.0.1 already completed; never re-run an older Places patch.
+        return;
     }
     if(get_option(pf_p0_backup_record(),false)) {
         wp_die('Sicherheitsabbruch: Vorhandenes Backup muss zuerst geklaert werden.');
@@ -280,4 +281,166 @@ add_action('admin_init',function(){
     try {pf_p0_restore_backup();}
     catch(Throwable $e) {wp_die(esc_html($e->getMessage()));}
     wp_safe_redirect(admin_url('plugins.php?pf_p0_rollback=done'));exit;
+});
+
+/**
+ * v1.0.2: refresh WPCode's EXISTING active-snippet cache after the v1.0.1
+ * wp_update_post() owner migration. Absolutely no new frontend SEO hooks.
+ * Uses wpcode()->cache->cache_all_loaded_snippets() (WPCode's own API);
+ * never deletes wpcode_snippets or modifies Places 1.10.189 or the app.
+ */
+function pf_p0_102_opt($key) { return 'pottfuchs_p0_102_'.$key; }
+function pf_p0_102_cached($value,$depth=0) {
+    if($depth>12||(!is_array($value)&&!is_object($value)))return array();
+    $value=(array)$value;$out=array();
+    if(isset($value['id'],$value['code'])&&is_numeric($value['id'])&&is_string($value['code'])){
+        $id=(int)$value['id'];if($id===3343||$id===4102)$out[$id]=$value['code'];
+    }
+    foreach($value as $item)if(is_array($item)||is_object($item))
+        foreach(pf_p0_102_cached($item,$depth+1) as $id=>$src)$out[$id]=$src;
+    return $out;
+}
+function pf_p0_102_source_good($id,$code) {
+    if(!is_string($code)||strlen($code)<500)return false;
+    if($id===3343)return substr_count($code,"'name'=>get_bloginfo('name')")>=3
+      && strpos($code,'auf PottFuchs')!==false
+      && strpos($code,"'name'=>'RuhrpottGuru'")===false
+      && strpos($code,'rpg_seo_core_canonical')!==false;
+    if($id===4102)return strpos($code,"\$seo_title .= ' | '.get_bloginfo('name');")!==false
+      && strpos($code,"\$seo_title .= ' | RuhrpottGuru';")===false
+      && strpos($code,'rpg_seo_v3_filter')!==false;
+    return false;
+}
+function pf_p0_102_preflight() {
+    if(!current_user_can('manage_options')||get_bloginfo('name')!=='PottFuchs'
+       ||rtrim(home_url('/'),'/')!=='https://www.pottfuchs.de')
+        throw new RuntimeException('Website/Administrator stimmt nicht.');
+    if(!get_option(pf_p0_state_record(),false))
+        throw new RuntimeException('Vorherige P0-Migration nicht dokumentiert.');
+    if(!function_exists('wpcode'))throw new RuntimeException('WPCode ist nicht aktiv.');
+    $wpcode=wpcode();
+    if(!is_object($wpcode)||!isset($wpcode->cache)||!is_object($wpcode->cache)
+       ||!is_callable(array($wpcode->cache,'cache_all_loaded_snippets')))
+        throw new RuntimeException('Native WPCode Cache-API nicht nachgewiesen.');
+    $sha=array();
+    foreach(array(3343,4102) as $id){
+        $p=get_post($id);
+        if(!$p||$p->post_type!=='wpcode'||$p->post_status!=='publish'
+           ||!pf_p0_102_source_good($id,$p->post_content))
+            throw new RuntimeException('SEO-Owner '.$id.' ist nicht im freigegebenen Quellstand.');
+        $sha[$id]=hash('sha256',$p->post_content);
+    }
+    $p=get_post(4115);
+    if(!$p||$p->post_type!=='page'||$p->post_name!=='zeitreise-von-oben'||$p->post_status!=='publish')
+        throw new RuntimeException('Zeitreise-Owner nicht mehr eindeutig.');
+    $page=(string)$p->post_content;
+    if(substr_count($page,'RuhrpottGuru-Standort')>1
+       ||(strpos($page,'RuhrpottGuru-Standort')===false && strpos($page,'PottFuchs-Standort')===false))
+        throw new RuntimeException('Zeitreise-Originaltext entspricht nicht dem geprüften Bestand.');
+    $cache=get_option('wpcode_snippets',false);
+    if(!is_array($cache)||!$cache||strlen(serialize($cache))>5000000)
+        throw new RuntimeException('WPCode-Preload fehlt oder ist unzulässig.');
+    $old=pf_p0_102_cached($cache);
+    if(!isset($old[3343],$old[4102]))
+        throw new RuntimeException('SEO-Owner sind im WPCode-Preload nicht nachgewiesen.');
+    return array('wpcode'=>$wpcode,'cache'=>$cache,'sources'=>$sha,'page'=>$page,
+      'newpage'=>str_replace('RuhrpottGuru-Standort','PottFuchs-Standort',$page));
+}
+function pf_p0_102_rebuild() {
+    if(get_option(pf_p0_102_opt('state'),false))return true;
+    if(get_option(pf_p0_102_opt('backup'),false))
+        throw new RuntimeException('Ältere Sicherung vorhanden, keine Wiederholung.');
+    $p=pf_p0_102_preflight();
+    $oldsha=hash('sha256',serialize($p['cache']));
+    $backup=array('at'=>gmdate('c'),'cache'=>$p['cache'],'cache_sha'=>$oldsha,
+      'page'=>$p['page'],'page_sha'=>hash('sha256',$p['newpage']),'sources'=>$p['sources']);
+    if(!add_option(pf_p0_102_opt('backup'),$backup,'','no'))
+        throw new RuntimeException('Backup konnte nicht erstellt werden.');
+    try {
+        $p['wpcode']->cache->cache_all_loaded_snippets();
+        wp_cache_delete('wpcode_snippets','options');
+        $fresh=get_option('wpcode_snippets',false);
+        $codes=pf_p0_102_cached($fresh);
+        if(!isset($codes[3343],$codes[4102])||
+           !pf_p0_102_source_good(3343,$codes[3343])||
+           !pf_p0_102_source_good(4102,$codes[4102]))
+            throw new RuntimeException('Native WPCode-Neuerstellung hat Owner nicht übernommen.');
+        if($p['page']!==$p['newpage']){
+            $actual=get_post(4115);
+            if(!$actual||$actual->post_content!==$p['page'])
+                throw new RuntimeException('Zeitreise zwischenzeitlich verändert.');
+            $updated=wp_update_post(wp_slash(array('ID'=>4115,'post_content'=>$p['newpage'])),true);
+            if(!$updated||is_wp_error($updated)||get_post(4115)->post_content!==$p['newpage'])
+                throw new RuntimeException('Zeitreise-Text konnte nicht atomar verifiziert werden.');
+        }
+        if(!add_option(pf_p0_102_opt('state'),array('at'=>gmdate('c'),
+           'cache_sha'=>hash('sha256',serialize($fresh)),
+           'page_sha'=>hash('sha256',$p['newpage']),'sources'=>$p['sources']),'','no'))
+            throw new RuntimeException('Cache-Abnahmezustand nicht speicherbar.');
+        return true;
+    } catch(Throwable $e){
+        $actual=get_post(4115);
+        if($actual&&$actual->post_content===$p['newpage']&&$p['page']!==$p['newpage'])
+            wp_update_post(wp_slash(array('ID'=>4115,'post_content'=>$p['page'])),true);
+        update_option('wpcode_snippets',$p['cache'],false);
+        wp_cache_delete('wpcode_snippets','options');
+        $actual=get_post(4115);
+        $restored=$actual&&$actual->post_content===$p['page']&&
+          hash('sha256',serialize(get_option('wpcode_snippets'))) === $oldsha;
+        if($restored){delete_option(pf_p0_102_opt('state'));delete_option(pf_p0_102_opt('backup'));}
+        throw new RuntimeException($e->getMessage().($restored?' Vorzustand wiederhergestellt.':' Backup bewahrt, Rollback nötig.'));
+    }
+}
+function pf_p0_102_restore(){
+    if(!current_user_can('manage_options'))throw new RuntimeException('Keine Berechtigung.');
+    $b=get_option(pf_p0_102_opt('backup'),false);$s=get_option(pf_p0_102_opt('state'),false);
+    if(!is_array($b)||!is_array($s))throw new RuntimeException('Kein bestätigter Cache-Abgleich.');
+    foreach(array(3343,4102) as $id){
+        $p=get_post($id);
+        if(!$p||hash('sha256',$p->post_content)!==$s['sources'][$id])
+            throw new RuntimeException('WPCode-Quellen inzwischen verändert: '.$id);
+    }
+    $p=get_post(4115);
+    if(!$p||hash('sha256',$p->post_content)!==$s['page_sha']
+       ||hash('sha256',serialize(get_option('wpcode_snippets')))!==$s['cache_sha'])
+        throw new RuntimeException('Zeitreise/Cache inzwischen verändert; Rollback verweigert.');
+    $result=wp_update_post(wp_slash(array('ID'=>4115,'post_content'=>$b['page'])),true);
+    if(!$result||is_wp_error($result)||get_post(4115)->post_content!==$b['page'])
+        throw new RuntimeException('Zeitreise-Rollback fehlgeschlagen, Backup erhalten.');
+    update_option('wpcode_snippets',$b['cache'],false);
+    wp_cache_delete('wpcode_snippets','options');
+    if(hash('sha256',serialize(get_option('wpcode_snippets')))!==$b['cache_sha'])
+        throw new RuntimeException('Cache-Rollback fehlgeschlagen, Backup erhalten.');
+    delete_option(pf_p0_102_opt('state'));delete_option(pf_p0_102_opt('backup'));
+    return true;
+}
+// WordPress replacing an already active v1.0.1 plugin does NOT re-run activation.
+add_action('admin_init',function(){
+    if(!current_user_can('manage_options'))return;
+    if(isset($_POST['pf_p0_102_action']) && $_POST['pf_p0_102_action']==='rollback'){
+        if(!check_admin_referer('pf_p0_102_rollback'))wp_die('Sicherheits-Nonce fehlt.');
+        try{pf_p0_102_restore();wp_safe_redirect(admin_url('plugins.php?pf_p0_102_rollback=done'));exit;}
+        catch(Throwable $e){wp_die(esc_html($e->getMessage()));}
+    }
+    if(get_option(pf_p0_102_opt('state'),false)||get_option(pf_p0_102_opt('error'),false))return;
+    try{pf_p0_102_rebuild();set_transient('pf_p0_102_notice','P0-Bestands-SEO: vorhandenen WPCode-Cache neu erstellt und Zeitreise-Text korrigiert.',600);}
+    catch(Throwable $e){add_option(pf_p0_102_opt('error'),$e->getMessage(),'','no');}
+},20);
+add_action('admin_notices',function(){
+    if(!current_user_can('manage_options'))return;
+    $error=get_option(pf_p0_102_opt('error'),false);
+    if($error)echo '<div class="notice notice-error"><p>PottFuchs P0 – Sicherheitsabbruch: '.esc_html($error).'</p></div>';
+    $msg=get_transient('pf_p0_102_notice');
+    if($msg){delete_transient('pf_p0_102_notice');echo '<div class="notice notice-success"><p>'.esc_html($msg).'</p></div>';}
+});
+add_action('admin_menu',function(){
+    add_management_page('PottFuchs P0 Cache-Rollback','PottFuchs P0 Cache-Rollback','manage_options','pf-p0-102-rollback',function(){
+        $state=get_option(pf_p0_102_opt('state'),false);
+        echo '<div class="wrap"><h1>PottFuchs P0 – WPCode-Cache</h1><p>'.
+         ($state?'Einmalige Aktualisierung abgeschlossen und gesichert.':'Keine erfolgreiche Migration dokumentiert.').'</p>';
+        if($state){echo '<form method="post">';wp_nonce_field('pf_p0_102_rollback');
+         echo '<input type="hidden" name="pf_p0_102_action" value="rollback">';
+         submit_button('Cache und Zeitreise wiederherstellen','secondary');echo '</form>';}
+        echo '</div>';
+    });
 });
