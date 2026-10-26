@@ -30,7 +30,7 @@ for url in targets:
            'cache_control':response.headers.get('Cache-Control')}
         if '/favicon.ico' in url or 'PottFuchs-Favicon-512x512' in url:
             import struct
-            kind=('ico' if data[:4]==b'\\x00\\x00\\x01\\x00' else 'png' if data[:8]==b'\\x89PNG\\r\\n\\x1a\\n' else 'html' if data[:40].lstrip().lower().startswith((b'<!doctype',b'<html')) else 'unknown')
+            kind=('ico' if data[:4]==b'\x00\x00\x01\x00' else 'png' if data[:8]==b'\x89PNG\r\n\x1a\n' else 'html' if data[:40].lstrip().lower().startswith((b'<!doctype',b'<html')) else 'unknown')
             count=struct.unpack_from('<H',data,4)[0] if kind=='ico' and len(data)>=6 else None
             o.update({'body_kind':kind,'body_length':len(data),'sha256':hashlib.sha256(data).hexdigest() if data else None,
                       'ico_entries':count,'matches_archived_ico':hashlib.sha256(data).hexdigest()=='a367a6ea0b7ba28b4bdf34ebf4f1e82e6ebcb6e10f08619329bcb68e9bada9c5'})
