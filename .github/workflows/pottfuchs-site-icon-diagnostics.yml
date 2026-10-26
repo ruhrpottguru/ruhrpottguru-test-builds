@@ -1,0 +1,19 @@
+name: PottFuchs Cross-Host Site Icon Diagnostics (read-only)
+on:
+  push:
+    paths:
+      - '.github/workflows/pottfuchs-site-icon-diagnostics.yml'
+      - 'tools/pottfuchs_site_icon_probe.py'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  icon-probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 7
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check script syntax (no writes)
+        run: python3 -m py_compile tools/pottfuchs_site_icon_probe.py
+      - name: Read-only public cross-domain REST and favicon requests
+        run: python3 tools/pottfuchs_site_icon_probe.py
