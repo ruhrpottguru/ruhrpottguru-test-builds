@@ -1,0 +1,28 @@
+name: PottFuchs P0 Public SEO Owner Provenance
+on:
+  push:
+    paths:
+      - 'tools/pottfuchs_p0_owner_provenance.py'
+      - '.github/workflows/pottfuchs-p0-owner-provenance.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  owner-evidence:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Read-only category title source comparison
+        run: python tools/pottfuchs_p0_owner_provenance.py
+      - name: Archive evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pottfuchs-p0-owner-provenance
+          path: audit/p0-owner/provenance.json
+          retention-days: 30
+          if-no-files-found: warn
