@@ -89,4 +89,12 @@ jobs:
               print(json.dumps({'asset':'favicon.svg', 'live_sha256':hashlib.sha256(live).hexdigest(),'archive_sha256':hashlib.sha256(local).hexdigest(),'identical':live==local,'live_bytes':len(live)},ensure_ascii=False),flush=True)
           except Exception as e:
               print(json.dumps({'asset':'favicon.svg','error':str(e)[:180]}),flush=True)
+          try:
+              wp=urllib.request.urlopen(urllib.request.Request('https://www.pottfuchs.de/wp-json/',headers={'User-Agent':'PottFuchsPublicSEOReadOnly/1.0'}),timeout=16)
+              rest=json.load(wp)
+              print(json.dumps({'endpoint':'public_wp_rest_index','http':wp.status,
+                 'site_icon':rest.get('site_icon'),'site_icon_url':rest.get('site_icon_url'),
+                 'site_logo':rest.get('site_logo'),'name':rest.get('name'),'url':rest.get('url'),'home':rest.get('home'),
+                 'rest_icon_fields_present':[n for n in ('site_icon','site_icon_url') if n in rest]},ensure_ascii=False),flush=True)
+          except Exception as e:print(json.dumps({'endpoint':'public_wp_rest_index','error':str(e)[:180]}),flush=True)
           PY
