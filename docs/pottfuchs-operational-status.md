@@ -2,6 +2,32 @@
 
 **Stand:** 26.10.2026. PottFuchs ist die neue Marke; `https://www.pottfuchs.de` ist die primäre Domain. `ruhrpottguru.de` bleibt für 301. Der Domainwechsel und der Adresswechsel in Google Search Console fanden bereits statt. Keine Wiederholung.
 
+## P0-SEO: erstmals aktive Original-WPCode-Quellen lesend abgeglichen (26.10.2026)
+
+**Freigabeumfang:** Der Betreiber hat nach dem Arbeitsbericht v2.5 den **einmaligen rein lesenden WordPress-Zugriff** genehmigt. Diese Genehmigung umfasst **keine Liveänderung, kein WPCode-Update, keine Deployment-Aktion und keinen Datenbankschreibzugriff**. Ausgeführt wurden nur lesende WPVibe-Abfragen. Danach meldete WPVibe Free ein ausgeschöpftes 24-Stunden-Kontingent; weitere Aufrufe wurden eingestellt, kein kostenpflichtiges Upgrade.
+
+**Tatsächlich bestätigte aktive WordPress-Installation (Quelle WPVibe site_info / plugin list):**
+- Theme-Slug `ruhrpott-guru` **v351.0**, öffentlich als PottFuchs bezeichnet.
+- Places-Backend **v1.10.185**, nicht die historische GitHub-Basis v1.10.169.
+- WPCode Lite **v2.4.0** aktiv; WPCode-Beiträge **#3343** („RuhrpottGuru SEO Core“, 8.395 Bytes laut Datenbank) und **#4102** („RuhrpottGuru Direct Detail SEO v3“, 10.154 Bytes) stehen auf `publish`.
+- Website-Icon-Option **`site_icon=0`** erneut direkt über `wp option get` bestätigt. Vorhandenes WordPress-Website-Logo mit Medien-ID 4215 ist **keine** Site-Icon-Einstellung. Fehlender Core-Icon-Wert passt zum öffentlich nachgewiesenen WordPress-W auf `/favicon.ico`.
+
+**Eindeutig lokalisierter Minimal-Diff in den echten WPCode-Inhalten (noch NICHT ausgeführt):**
+
+| Originalinhaber | Aktuelle Originalstelle | Zulässige Änderung |
+|---|---|---|
+| WPCode #3343 Zeile 32 | Taxonomie-Fallbackbeschreibung mit `auf RuhrpottGuru – Tipps` | **Nur** öffentliches Wort `RuhrpottGuru` → `PottFuchs` in diesem Fallbacksatz |
+| WPCode #3343 Zeile 97 | `Organization.name = RuhrpottGuru` | Name zu `PottFuchs` ändern; `@id`, URL, Beschreibung, Schema-Kontext unverändert |
+| WPCode #3343 Zeile 100 | `WebSite.name = RuhrpottGuru` | Name zu `PottFuchs` ändern; `SearchAction`, `urlTemplate`, Verknüpfungen unverändert |
+| WPCode #3343 Zeile 118 | Start-Breadcrumb `ListItem.name = RuhrpottGuru` | Nur den sichtbaren Namen zu `PottFuchs` ändern |
+| WPCode #4102 Zeile 75 | Event-SEO-Titelsuffix `$seo_title .= ' \| RuhrpottGuru';` | Ausschließlich Suffix ` \| PottFuchs`, übrige Event-/Datums-/HTML-Buffer-Funktion unverändert |
+
+**Wichtige präzisierte SEO-Zuständigkeit:** Das ausgelesene WPCode #4102 berechnet einen eigenen `title` nur für **Veranstaltungen**; der Place-Zweig `rpg_seo_v3_place()` gibt **nur `body`** zurück. Sein HTML-Filter überschreibt den `<title>` ebenfalls **nur bei Veranstaltungen**. Folglich wäre ein pauschaler Place-Titelpatch in #4102 eine neue oder konkurrierende Zuständigkeit und ist **nicht zulässig**. Der Titel `Zum Schwarzen \| RuhrpottGuru` und die vereinbarte Korrektur `Zum Schwarzen Essen \| PottFuchs` gehören dem bestehenden **Places-Backend-/Detail-SEO-Owner** und benötigen den **tatsächlich installierten v1.10.185-Quellstand**. Dass das GitHub-Archiv nur v1.10.169 enthält, ist unverändert eine echte Release-Sperre.
+
+**Schutzregeln bestätigt:** WPCode #3343 besitzt die Ausnahmen für `/stadt/`, `/ort/`, `/veranstaltung/` und vermeidet die Home-Meta-Description-Doppelung. Bei einer späteren konkreten Schreibfreigabe nur die fünf Markenliterale anfassen; keine Kommentare/technischen Kennungen pauschal ersetzen; insbesondere **Snippet #4152 unangetastet lassen**, keine zweite SEO-Engine und keine Änderung an JSON-LD-Vertragsstruktur, REST, Canonicals, Suche, Quellen oder Filtern.
+
+**Freigabe- und Lieferstatus:** **5 eindeutig belegte Änderungen vorbereitet, 0 live ausgeführt**. Kein neues WordPress-ZIP als fertig deklarieren. Für ein v1.10.185-konformes Backend-Release fehlen die vollständigen aktuellen Originalbytes und weitere Regressionen. WPVibe Free meldete bei der weiteren read-only Prüfung das 24h-Kontingent erreicht (Rückkehr weiterer Kapazität voraussichtlich ab ca. 16:40 UTC laut Dienst); kein kostenpflichtiger Dienst bestellt. Für Schreibschritte ist **eine separate ausdrückliche Freigabe** erforderlich.
+
 ## Diagnose Duisburg „Heute noch“ – tatsächliche Ursache abgegrenzt (26.10.2026)
 
 Die neue verbindliche globale Standort-/Sichtbarkeitsentscheidung bleibt **nicht implementiert**, bis aktueller Theme-/Backend-/App-Code und die geschützten Verträge gemeinsam abgeglichen sind. **Keine Produktionsänderung.**
@@ -33,7 +59,7 @@ Die neue verbindliche globale Standort-/Sichtbarkeitsentscheidung bleibt **nicht
 | Mobile Website/Funktionen | **11/11 Browser-E2E bestanden** | Fünf Kategorien, Consent, Detailchip/Filter, Kalender, Standort Essen/Reload, Radius 10 km/Reload, PLZ 45888, Suche 3 Varianten, www/Apex-Wechsel, GPS-Verweigerung mit 0 Karten vor Stadtwahl und manuellem Fallback, vier Specials |
 | Google-/SEO-Markenfelder | **Offen** | In 13 Seiten **23 Altmarken-Feldbefunde**; keine automatische Reparatur durch Site-Name-Option; siehe SEO-Owner #3343/#4102/Places |
 | Favicon-Core-Fallback | **P0 offen, trotz Betreiber-Speicherung** | Theme-Förderturm-SVG ist erreichbar, aber `/favicon.ico` zeigt nach erneutem Speichern weiter das WordPress-W; `/wp-json/` meldet weiterhin `site_icon=0`. Keine weiteren Bild-Uploads auf Verdacht. [Kontrolle 40337026066](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40337026066). |
-| Aktuelle Live-Plugin-/Theme-Releasequelle | **Blockiert** | Auf GitHub verfügbar sind historische Theme v345 / Places v1.10.169. Library listet neuere ZIPs bis Places v1.10.185, Materialisierung der tatsächlichen Bytes weiterhin verweigert. Kein sicheres Installations-ZIP daraus erzeugbar |
+| Aktuelle Live-Plugin-/Theme-Releasequelle | **Versionen bestätigt, Originalbytes blockiert** | WPVibe bestätigt Theme **v351.0** und Places **v1.10.185** als aktiv. WPCode #3343/#4102 konnte lesend als tatsächlich veröffentlichter Inhalt untersucht werden; vollständiger aktueller Theme-/Backend-Source fehlt weiterhin als autorisierter exportierbarer ZIP-Quellstand. Kein Downgrade. |
 | Synchronisierungs-Laufprotokolle / Backup-Restore | **Offen** | Cron eingeplant und Spawn historisch bestätigt; jüngster erfolgreicher abgeschlossener Import oder echte Rücksicherung bisher **nicht** belegt |
 
 **Neue Nachweise:**
