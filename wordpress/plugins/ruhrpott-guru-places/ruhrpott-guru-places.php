@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RuhrpottGuru Places Backend
  * Description: Persistenter Places-Katalog für Food, Highlights, Kultur und Aktivitäten sowie Spezial-Inventare für Büdchen und „Hier geht’s um die Wurst“ in der Metropole Ruhr. OSM wird nur für Import/Sync verwendet; Besucher lesen aus MySQL. Mit automatischem OSM-Rollback bis der Katalog vollständig validiert ist.
- * Version: 1.10.169
+ * Version: 1.10.188
  * Author: RuhrpottGuru
  * License: GPL-2.0-or-later
  */
@@ -179,7 +179,7 @@ final class RuhrpottGuru_Places_Backend {
     // 0-14 Tage alle 4 Stunden, 0-90 Tage taeglich, kompletter 0-365-Tage-
     // Master woechentlich. Laufende Master-/Supplemental-Wellen werden nie
     // abgebrochen; der Dispatcher wartet, bis der Event-Importpfad frei ist.
-    const VERSION = '1.10.169';
+    const VERSION = '1.10.188';
     const ACTIVITY_V2_SPEC_VERSION = '1.4';
     const SCHEMA_VERSION = '1.10.129';
     const OPTION_STATUS = 'rg_places_status';
@@ -261,12 +261,16 @@ final class RuhrpottGuru_Places_Backend {
         add_action('init', array($this, 'ensure_schema_and_schedule'), 2);
         add_action('init', array($this, 'ensure_data_hygiene_v101156'), 3);
         add_action('rest_api_init', array($this, 'register_rest_routes'));
+        add_action('rest_api_init', array($this, 'register_event_control_diagnostics_v101183'));
+        add_action('admin_post_rpg_event_control_v101183', array($this, 'event_control_post_v101183'));
         add_filter('ruhrpott_runtime_settings', array($this, 'filter_runtime_settings'));
         add_filter('robots_txt', array($this, 'filter_robots_txt_v101096'), 20, 2);
         add_action('template_redirect', array($this, 'maybe_render_rpg_sitemap_v101096'), -40);
         add_action('template_redirect', array($this, 'maybe_render_seo_landing_v101096'), -30);
         add_action('template_redirect', array($this, 'prepare_city_guide_seo_v101144'), -25);
         add_action('wp_head', array($this, 'render_city_guide_seo_head_v101144'), 1);
+        add_filter('the_content', array($this, 'append_essen_food_links_pilot_v101173'), 19);
+        add_filter('the_content', array($this, 'append_city_event_cards_v101177'), 19);
         add_filter('cron_schedules', array($this, 'cron_schedules'));
         add_action(self::CRON_HOOK, array($this, 'cron_sync_tick'));
         add_action(self::ACTIVITY_COVERAGE_HOOK, array($this, 'cron_activity_source_coverage_tick_v1089'));
@@ -1740,6 +1744,11 @@ final class RuhrpottGuru_Places_Backend {
         $places = $this->table('places');
         $row = $wpdb->get_row($wpdb->prepare("SELECT p.*,p.primary_subcategory AS subcategory FROM $places p WHERE p.id=%d AND p.active=1 LIMIT 1", $place_id), ARRAY_A);
         if (!$row) return null;
+        if((string)($row['primary_category']??'')==='buedchen'){
+            $row=$this->seo_public_place_row_v101096($place_id);
+            if(!$row)return null;
+            $category='buedchen';
+        }
         $category = $this->share_category_from_value($category);
         if ($category === 'events' || $category === '') $category = $this->share_category_from_value((string)($row['primary_category'] ?? ''));
         if (!in_array($category, array('food','highlights','culture','activities','wurst','buedchen'), true)) $category = 'highlights';
@@ -2005,9 +2014,34 @@ final class RuhrpottGuru_Places_Backend {
         return $output;
     }
 
+    // The existing radar eligibility predicate is shared with canonical details.
+    // Only the request-specific radius, ranking and limit stay in rest_buedchen.
+    private function buedchen_public_where_v101172() {
+        return "p.active=1
+               AND p.lifecycle_status='active'
+               AND p.primary_category='buedchen'
+               AND (o.override_data IS NULL OR LOCATE('\"review_status\":\"rejected\"',o.override_data)=0)
+               AND (
+                    LOCATE('\"rg:buedchen_tier\":\"A\"',p.raw_tags)>0
+                    OR LOCATE('\"rg:buedchen_tier\":\"B\"',p.raw_tags)>0
+                    OR LOCATE('\"review_status\":\"verified\"',o.override_data)>0
+               )";
+    }
+
+    private function seo_public_buedchen_id_v101172($place_id) {
+        global $wpdb;
+        $where = $this->buedchen_public_where_v101172();
+        return (bool)$wpdb->get_var($wpdb->prepare(
+            "SELECT p.id FROM {$this->table('places')} p
+             LEFT JOIN {$this->table('place_overrides')} o ON o.place_id=p.id AND o.status='active'
+             WHERE p.id=%d AND $where LIMIT 1", absint($place_id)
+        ));
+    }
+
     private function seo_public_place_category_v101096($row) {
         if(!is_array($row) || empty($row['active']) || (string)($row['lifecycle_status']??'active')!=='active')return '';
         $primary=sanitize_key((string)($row['primary_category']??''));
+        if($primary==='buedchen')return !empty($row['_rg_buedchen_public']) || $this->seo_public_buedchen_id_v101172((int)($row['id']??0)) ? 'buedchen' : '';
         $passes=function($cat)use($row){
             if($cat==='food')return true;
             if($cat==='activities')return $this->activity_v2_public_projection($row)!==null;
@@ -2035,7 +2069,7 @@ final class RuhrpottGuru_Places_Backend {
     }
 
     private function seo_category_label_v101096($cat) {
-        $map=array('food'=>'Food & Drinks','highlights'=>'Sehenswürdigkeit','culture'=>'Kultur','activities'=>'Aktivität','events'=>'Event');
+        $map=array('food'=>'Food & Drinks','highlights'=>'Sehenswürdigkeit','culture'=>'Kultur','activities'=>'Aktivität','buedchen'=>'Trinkhalle','events'=>'Event');
         return $map[$cat]??'RuhrpottGuru-Tipp';
     }
 
@@ -2043,6 +2077,7 @@ final class RuhrpottGuru_Places_Backend {
      * existing visitor/OSM truth without creating a second classification source. */
     private function seo_place_type_label_v101140($row,$tags,$cat) {
         $tags=is_array($tags)?$tags:array();
+        if($cat==='buedchen')return 'Trinkhalle';
         $eq=function($key,$value)use($tags){return strtolower(trim((string)($tags[$key]??'')))===$value;};
         $has=function($key,$value)use($tags){$v=strtolower((string)($tags[$key]??''));return $v!==''&&strpos(';'.$v.';',';'.$value.';')!==false;};
         if($eq('tourism','museum'))return 'Museum';
@@ -2083,12 +2118,17 @@ final class RuhrpottGuru_Places_Backend {
         return function_exists('esc_xml')?esc_xml((string)$value):htmlspecialchars((string)$value,ENT_XML1|ENT_QUOTES,'UTF-8');
     }
 
-    private function seo_sitemap_cache_key_v101096($kind) { return 'rg_seo_sitemap_v101096_'.sanitize_key($kind); }
+    private function seo_sitemap_cache_key_v101096($kind) { return ($kind==='places'?'rg_seo_sitemap_v101172_':'rg_seo_sitemap_v101096_').sanitize_key($kind); }
 
     private function seo_place_sitemap_entries_v101096() {
         $cached=get_transient($this->seo_sitemap_cache_key_v101096('places'));if(is_array($cached))return $cached;
         global $wpdb;$places=$this->table('places');
         $rows=(array)$wpdb->get_results("SELECT * FROM $places WHERE active=1 AND lifecycle_status='active' AND primary_category IN ('food','highlights','culture','activities') ORDER BY id ASC LIMIT 45000",ARRAY_A);
+        $public_where=$this->buedchen_public_where_v101172();
+        $buedchen_rows=(array)$wpdb->get_results("SELECT p.* FROM $places p
+            LEFT JOIN {$this->table('place_overrides')} o ON o.place_id=p.id AND o.status='active'
+            WHERE $public_where ORDER BY p.id ASC LIMIT 45000",ARRAY_A);
+        foreach($buedchen_rows as $buedchen_row){$buedchen_row['_rg_buedchen_public']=1;$rows[]=$buedchen_row;}
         $out=array();
         foreach($rows as $row){$cat=$this->seo_public_place_category_v101096($row);if($cat==='')continue;$out[]=array('loc'=>$this->seo_place_url_v101096((int)$row['id'],(string)$row['name'],(string)$row['city']),'lastmod'=>(string)($row['updated_at']??''));}
         set_transient($this->seo_sitemap_cache_key_v101096('places'),$out,6*HOUR_IN_SECONDS);return $out;
@@ -2203,12 +2243,24 @@ final class RuhrpottGuru_Places_Backend {
         return $html;
     }
 
+    // Reuse the visitor element already resolved for this exact canonical request.
+    // No second database query, category engine or client fetch is required.
+    private function seo_direct_bootstrap_json_v101172($data) {
+        if(($data['direct_category']??'')!=='buedchen')return '';
+        $token=(string)($data['direct_token']??'');
+        if(!preg_match('/^p([1-9][0-9]*)$/',$token,$match))return '';
+        $element=$data['direct_element']??null;
+        if(!is_array($element) || (string)($element['tags']['rg:place_id']??'')!==$match[1])return '';
+        return wp_json_encode(array('kind'=>'place','token'=>$token,'category'=>'buedchen','element'=>$element),JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT|JSON_UNESCAPED_UNICODE);
+    }
+
     private function seo_render_detail_html_v101096($data) {
         $title=trim((string)($data['title']??''));$desc=$this->share_trim_description((string)($data['description']??''),'Entdecke diesen Ort bei RuhrpottGuru.');
         $canonical=esc_url_raw((string)($data['canonical']??''));$image=esc_url_raw((string)($data['image']??''));$label=(string)($data['label']??'RuhrpottGuru-Tipp');
         $city=$this->seo_detail_value_v101148($data['city']??'');$address=$this->seo_detail_value_v101148($data['address']??'');$hours=$this->seo_detail_value_v101148($data['hours']??'');$when=$this->seo_detail_value_v101148($data['when']??'');
         $website=esc_url_raw((string)($data['website']??''));$ticket=esc_url_raw((string)($data['ticket_url']??''));$route=esc_url_raw((string)($data['route_url']??''));$overview=esc_url_raw((string)($data['overview_url']??home_url('/')));$venue=$this->seo_detail_value_v101148($data['venue']??'');$menu=esc_url_raw((string)($data['menu_url']??''));$reservation=esc_url_raw((string)($data['reservation_url']??''));$program=esc_url_raw((string)($data['program_url']??''));$start_iso=trim((string)($data['start_iso']??''));$end_iso=trim((string)($data['end_iso']??''));$price=$this->seo_detail_value_v101148($data['price']??'');$organizers=is_array($data['organizers']??null)?$data['organizers']:array();$participants=is_array($data['participants']??null)?$data['participants']:array();
         $schema=is_array($data['schema']??null)?$data['schema']:array();$schema_json=wp_json_encode($schema,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
+        $bootstrap_json=$this->seo_direct_bootstrap_json_v101172($data);
         nocache_headers();status_header(200);header('Content-Type: text/html; charset='.get_bloginfo('charset'));header('X-Robots-Tag: index, follow',true);
         $esc=function($v){return esc_attr((string)$v);};
         // 1.10.149: Single-source detail rendering. If the active RuhrpottGuru theme exposes
@@ -2223,13 +2275,18 @@ final class RuhrpottGuru_Places_Backend {
             // logo source, burger drawer, WordPress menu data and footer hooks.
             // get_header/get_footer are the SAME entry points used on WP pages:
             // no parallel Header/Footer, no shadow WordPress page or redirect.
-            $canonical_head = static function () use ($title, $desc, $canonical, $image, $schema_json, $esc) {
+            $canonical_head = static function () use ($title, $desc, $canonical, $image, $schema_json, $esc, $bootstrap_json) {
                 echo '<title>'.esc_html($title.' | RuhrpottGuru').'</title><meta name="description" content="'.$esc($desc).'"><link rel="canonical" href="'.$esc($canonical).'">';
                 echo '<meta property="og:locale" content="de_DE"><meta property="og:type" content="website"><meta property="og:site_name" content="RuhrpottGuru"><meta property="og:title" content="'.$esc($title).'"><meta property="og:description" content="'.$esc($desc).'"><meta property="og:url" content="'.$esc($canonical).'">';
                 if ($image !== '') echo '<meta property="og:image" content="'.$esc($image).'"><meta property="og:image:secure_url" content="'.$esc($image).'">';
                 echo '<meta name="twitter:card" content="'.($image !== '' ? 'summary_large_image' : 'summary').'"><meta name="twitter:title" content="'.$esc($title).'"><meta name="twitter:description" content="'.$esc($desc).'">';
                 if ($image !== '') echo '<meta name="twitter:image" content="'.$esc($image).'">';
                 if ($schema_json) echo '<script type="application/ld+json">'.$schema_json.'</script>';
+                if ($bootstrap_json) {
+                    echo '<script type="application/json" id="rpg-direct-detail-bootstrap">'.$bootstrap_json.'</script>';
+                    // Critical first-paint styling applies only to this initial article.
+                    echo '<style id="rpg-trinkhalle-initial-style">#rpgx-direct-ssr{padding:24px 16px;color:#f8fafc;font:16px/1.55 system-ui,sans-serif}#rpgx-direct-ssr .rpgx-ssr-article{max-width:768px;margin:auto;border:1px solid #334155;border-radius:24px;overflow:hidden;background:#0f172a;box-shadow:0 18px 50px #0003}#rpgx-direct-ssr .rpgx-ssr-content{padding:clamp(20px,4vw,30px)}#rpgx-direct-ssr h1{font-size:clamp(22px,3vw,30px);line-height:1.2;margin:0 0 12px;color:#fff}#rpgx-direct-ssr h2{font-size:16px;margin:20px 0 8px;color:#f8fafc}#rpgx-direct-ssr .rpgx-ssr-image{display:block;width:100%;height:auto;max-height:360px;object-fit:cover}#rpgx-direct-ssr .rpgx-ssr-facts{display:flex;flex-wrap:wrap;gap:8px;padding:0;list-style:none;color:#dbe4ef}#rpgx-direct-ssr .rpgx-ssr-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}#rpgx-direct-ssr .rpgx-ssr-actions a{display:inline-flex;align-items:center;min-height:44px;padding:10px 16px;border:1px solid #475569;border-radius:12px;color:#f8fafc;text-decoration:none;font-weight:700}#rpgx-direct-ssr .rpgx-ssr-actions a:first-child{background:#f59e0b;color:#020617;border-color:#f59e0b}</style>';
+                }
             };
             $event_body_class = static function ($classes) {
                 $classes[] = 'rpg-canonical-detail';
@@ -2311,8 +2368,8 @@ final class RuhrpottGuru_Places_Backend {
             $row=$this->seo_public_place_row_v101096((int)$m[1]);if(!$row)$this->seo_render_not_found_v101096();$canonical=$this->seo_place_url_v101096((int)$row['id'],(string)$row['name'],(string)$row['city']);$expected=trim((string)wp_parse_url($canonical,PHP_URL_PATH),'/');$home=trim((string)wp_parse_url(home_url('/'),PHP_URL_PATH),'/');if($home!==''&&strpos($expected,$home.'/')===0)$expected=substr($expected,strlen($home)+1);if($path!==$expected){wp_safe_redirect($canonical,301);exit;}
             $elements=$this->rows_to_elements(array($row));if(!$elements)$this->seo_render_not_found_v101096();$tags=(array)($elements[0]['tags']??array());$cat=(string)($row['_rg_response_category']??$row['primary_category']);$title=(string)$row['name'];$city=(string)$row['city'];$address=trim(implode(' ',array_filter(array((string)$row['street'],(string)$row['house_number'],(string)$row['postcode'],$city))));$image=(string)($tags['image:url']??($tags['image']??($tags['wikimedia_commons']??'')));if($image===''){$_raw_tags=json_decode((string)($row['raw_tags']??''),true);if(is_array($_raw_tags))$image=(string)($_raw_tags['image:url']??($_raw_tags['image']??($_raw_tags['wikimedia_commons']??'')));}if(stripos($image,'File:')===0)$image='https://commons.wikimedia.org/wiki/Special:FilePath/'.rawurlencode(substr($image,5)).'?width=1600';elseif($image!==''&&!preg_match('#^https?://#i',$image))$image='';$hours=(string)($tags['opening_hours']??'');$type=$this->seo_place_type_label_v101140($row,$tags,$cat);$source_desc=(string)($tags['description']??($tags['description:de']??''));$desc=$this->seo_place_description_v101140($title,$type,$city,$address,$hours,$source_desc);$code=$this->share_category_code($cat);$open=add_query_arg(array('rg_open'=>'p'.(int)$row['id'],'rgc'=>$code),home_url('/'));
             $postal=array('@type'=>'PostalAddress');if($row['street']!=='')$postal['streetAddress']=trim($row['street'].' '.$row['house_number']);if($row['postcode']!=='')$postal['postalCode']=$row['postcode'];if($city!=='')$postal['addressLocality']=$city;$schema=array('@context'=>'https://schema.org','@type'=>'Place','name'=>$title,'url'=>$canonical,'mainEntityOfPage'=>$canonical,'description'=>$this->share_trim_description($desc));if($image!=='')$schema['image']=$image;if(count($postal)>1)$schema['address']=$postal;if($row['lat']!==null&&$row['lng']!==null)$schema['geo']=array('@type'=>'GeoCoordinates','latitude'=>(float)$row['lat'],'longitude'=>(float)$row['lng']);$same_as=array();foreach(array((string)($row['website']??''),(string)($row['wikipedia']??'')) as $u){$u=esc_url_raw($u);if($u!=='')$same_as[]=$u;}if(!empty($row['wikidata'])&&preg_match('/^Q\d+$/i',(string)$row['wikidata']))$same_as[]='https://www.wikidata.org/wiki/'.strtoupper((string)$row['wikidata']);$same_as=array_values(array_unique($same_as));if($same_as)$schema['sameAs']=$same_as;
-            $route='';if($row['lat']!==null&&$row['lng']!==null)$route='https://www.google.com/maps/search/?api=1&query='.rawurlencode((string)$row['lat'].','.(string)$row['lng']);elseif($address!=='')$route='https://www.google.com/maps/search/?api=1&query='.rawurlencode($address);$website=esc_url_raw((string)($tags['website']??($row['website']??'')));$menu=esc_url_raw((string)($tags['menu']??''));$reservation=esc_url_raw((string)($tags['reservation:website']??''));$overview=home_url('/');
-            $this->seo_render_detail_html_v101096(array('title'=>$title,'description'=>$desc,'full_description'=>$source_desc,'canonical'=>$canonical,'image'=>$image,'label'=>$type,'city'=>$city,'address'=>$address,'hours'=>$hours,'website'=>$website,'menu_url'=>$menu,'reservation_url'=>$reservation,'route_url'=>$route,'overview_url'=>$overview,'schema'=>$schema,'direct_token'=>'p'.(int)$row['id'],'direct_category'=>$cat));
+            $route='';if($row['lat']!==null&&$row['lng']!==null)$route='https://www.google.com/maps/search/?api=1&query='.rawurlencode((string)$row['lat'].','.(string)$row['lng']);elseif($address!=='')$route='https://www.google.com/maps/search/?api=1&query='.rawurlencode($address);$website=esc_url_raw((string)($tags['website']??($row['website']??'')));$menu=esc_url_raw((string)($tags['menu']??''));$reservation=esc_url_raw((string)($tags['reservation:website']??''));$overview=home_url($cat==='buedchen'?'/buedchen-radar/':'/');
+            $this->seo_render_detail_html_v101096(array('title'=>$title,'description'=>$desc,'full_description'=>$source_desc,'canonical'=>$canonical,'image'=>$image,'label'=>$type,'city'=>$city,'address'=>$address,'hours'=>$hours,'website'=>$website,'menu_url'=>$menu,'reservation_url'=>$reservation,'route_url'=>$route,'overview_url'=>$overview,'schema'=>$schema,'direct_token'=>'p'.(int)$row['id'],'direct_category'=>$cat,'direct_element'=>$cat==='buedchen'?$elements[0]:null));
         }
         if(preg_match('#^veranstaltung/(\d+)(?:/([^/]+))?(?:/([^/]+))?/?$#iu',$path,$m)){
             $row=$this->seo_public_event_row_v101096((int)$m[1]);if(!$row)$this->seo_render_not_found_v101096();$canonical=$this->seo_event_url_v101096((int)$row['id'],(string)$row['title'],(string)$row['city']);$expected=trim((string)wp_parse_url($canonical,PHP_URL_PATH),'/');$home=trim((string)wp_parse_url(home_url('/'),PHP_URL_PATH),'/');if($home!==''&&strpos($expected,$home.'/')===0)$expected=substr($expected,strlen($home)+1);if($path!==$expected){wp_safe_redirect($canonical,301);exit;}
@@ -2885,6 +2942,91 @@ final class RuhrpottGuru_Places_Backend {
         return is_array($decoded)?$decoded:null;
     }
 
+    /**
+     * Match every whitespace-separated Place search term across the existing
+     * searchable fields. A single word retains the original LIKE behaviour.
+     * In particular, "Top Golf Oberhausen" matches Topgolf in Oberhausen.
+     * This does not change admission, category projection, ordering or limits.
+     */
+    private function global_search_place_terms_sql($query) {
+        global $wpdb;
+        $terms = preg_split('/\s+/u', trim((string)$query), -1, PREG_SPLIT_NO_EMPTY);
+        if (!$terms) $terms = array((string)$query);
+        // Same cuisine vocabulary as existing public Food labels. This is a
+        // search alias only: never rewrite source tags or category admission.
+        $cuisines = array(
+            'italienisch'=>'italian', 'deutsch'=>'german', 'griechisch'=>'greek',
+            'türkisch'=>'turkish', 'chinesisch'=>'chinese', 'asiatisch'=>'asian',
+            'japanisch'=>'japanese', 'indisch'=>'indian', 'mexikanisch'=>'mexican',
+            'vietnamesisch'=>'vietnamese', 'koreanisch'=>'korean',
+            'französisch'=>'french', 'spanisch'=>'spanish', 'mediterran'=>'mediterranean', 'thai'=>'thai',
+        );
+        $aliases = array();
+        foreach ($cuisines as $german=>$source) {
+            $aliases[$source] = array($source, $german);
+            $german_key = $this->normalize_text($german);
+            foreach (array('', 'e', 'er', 'es', 'en', 'em') as $ending) {
+                $aliases[$german_key.$ending] = array($source, $german);
+            }
+        }
+        $cuisine_terms = array();
+        foreach ($terms as $term) {
+            $key = $this->normalize_text(mb_strtolower($term, 'UTF-8'));
+            if (isset($aliases[$key])) $cuisine_terms[$term] = $aliases[$key];
+        }
+        $clauses = array();
+        $args = array();
+        if ($cuisine_terms) {
+            // Only cuisine searches gain explicit municipal scope. Name-only
+            // and all other existing finder requests retain their exact SQL.
+            $normalized = $this->normalize_text(mb_strtolower((string)$query, 'UTF-8'));
+            $cities = $this->municipalities_seed();
+            usort($cities, function($a,$b) { return strlen($b[0])-strlen($a[0]); });
+            $city_terms = array();
+            foreach ($cities as $city) {
+                $name = (string)$city[0];
+                $variants = array($name, preg_replace('/\s*\([^)]*\)|\/Ruhr$/u', '', $name));
+                if ($name === 'Mülheim an der Ruhr') $variants[] = 'Mülheim';
+                foreach (array_unique($variants) as $variant) {
+                    $key = $this->normalize_text(mb_strtolower($variant, 'UTF-8'));
+                    if ($key === '' || !preg_match('/(?:^| )'.preg_quote($key, '/').'(?: |$)/', $normalized)) continue;
+                    $clauses[] = '(p.municipality_slug = %s OR p.city = %s)';
+                    $args[] = sanitize_title($name); $args[] = $name;
+                    $city_terms[$key] = true;
+                    foreach (explode(' ', $key) as $part) $city_terms[$part] = true;
+                    $normalized = trim(preg_replace('/(?:^| )'.preg_quote($key, '/').'(?: |$)/', ' ', $normalized));
+                    break;
+                }
+            }
+            if ($city_terms) {
+                $terms = array_values(array_filter($terms, function($term) use ($city_terms) {
+                    $key = $this->normalize_text(mb_strtolower($term, 'UTF-8'));
+                    return !isset($city_terms[$key]) && $key !== 'in';
+                }));
+            }
+            $clauses[] = "p.primary_category = 'food'";
+        }
+        foreach (array_unique($terms) as $term) {
+            $like = '%' . $wpdb->esc_like($term) . '%';
+            $literal = '(p.name LIKE %s OR p.city LIKE %s OR p.district LIKE %s OR p.street LIKE %s OR p.primary_subcategory LIKE %s OR p.raw_tags LIKE %s)';
+            if (isset($cuisine_terms[$term])) {
+                $args[] = $like; $args[] = $like;
+                // Match whole cuisine tokens inside the JSON cuisine field,
+                // not e.g. an italian substring in a website or another tag.
+                $tokens = $cuisine_terms[$term];
+                foreach ($cuisine_terms[$term] as $value) $tokens[] = substr(wp_json_encode($value), 1, -1);
+                $values = implode('|', array_map(function($value) { return preg_quote($value, '/'); }, array_unique($tokens)));
+                $pattern = '"cuisine"[[:space:]]*:[[:space:]]*"[[:space:]]*([^"\\\\]*[;,|/][[:space:]]*)?('.$values.')[[:space:]]*([;,|/][^"\\\\]*)?"';
+                $clauses[] = '(p.name LIKE %s OR p.primary_subcategory LIKE %s OR LOWER(p.raw_tags) REGEXP %s)';
+                $args[] = $pattern;
+            } else {
+                $clauses[] = $literal;
+                foreach (range(1, 6) as $_) $args[] = $like;
+            }
+        }
+        return array('sql' => '(' . implode(' AND ', $clauses) . ')', 'args' => $args);
+    }
+
     public function rest_global_search(WP_REST_Request $request) {
         global $wpdb;
         $data = $request->get_method() === 'GET' ? $request->get_params() : (array)$request->get_json_params();
@@ -2966,14 +3108,16 @@ final class RuhrpottGuru_Places_Backend {
                 )
             " : '';
 
+        $place_terms = $this->global_search_place_terms_sql($q);
+        $place_terms_sql = $place_terms['sql'];
         $place_rows = (array)$wpdb->get_results($wpdb->prepare(
             "SELECT p.*, pm.id image_media_id,pm.url image_url,pm.source image_source,pm.source_url image_source_url,pm.credit image_credit,pm.license image_license
              FROM $places p
              LEFT JOIN $media pm ON pm.id=(SELECT pm2.id FROM $media pm2 WHERE pm2.place_id=p.id AND pm2.relation_type='place' AND pm2.moderation_status='active' ORDER BY CASE WHEN pm2.source='editorial-place-upload' THEN 0 ELSE 1 END ASC, pm2.is_primary DESC, pm2.id ASC LIMIT 1)
              WHERE p.active=1 AND p.lifecycle_status='active'
-               AND (p.name LIKE %s OR p.city LIKE %s OR p.district LIKE %s OR p.street LIKE %s OR p.primary_subcategory LIKE %s OR p.raw_tags LIKE %s $skate_alias_sql)
+               AND ($place_terms_sql $skate_alias_sql)
              ORDER BY p.quality_score DESC,p.name ASC LIMIT %d",
-            $like,$like,$like,$like,$like,$like,max($limit*4,40)
+            array_merge($place_terms['args'], array(max($limit*4,40)))
         ), ARRAY_A);
         // 1.10.157: global search used to serialize raw place columns directly.
         // That bypassed category intelligence and the media resolver, so e.g. a
@@ -2981,10 +3125,31 @@ final class RuhrpottGuru_Places_Backend {
         // its normal category/detail representation was an Industriekultur anchor with media.
         $map=array('food'=>'food','highlights'=>'highlights','culture'=>'culture','activities'=>'activities','aktiv'=>'activities','buedchen'=>'buedchen');
         $projectedPlaceRows=array();$projectedPlaceCategory=array();
+        // Honor the existing public admission + the Activities name/150m
+        // same-site equivalence. Search SQL quality order stays unchanged.
+        $searchActivitySeen=array();
         foreach($place_rows as $r){
             $cat=$map[(string)($r['primary_category']??'')]??(string)($r['primary_category']??'');
             if(!in_array($cat,array('food','highlights','culture','activities','buedchen'),true))continue;
             $r=$this->global_search_place_projection_v101157($r,$cat);
+            if($cat==='activities'){
+                // Reject candidate details whose category visitor admission
+                // would be missing, resulting in a broken public 404.
+                if((string)($r['_rg_activity_v2_admission']??'')!=='rein')continue;
+                $nameA=trim($this->normalize_text((string)($r['name']??'')));
+                $duplicate=false;
+                foreach($searchActivitySeen as $kept){
+                    $nameB=trim($this->normalize_text((string)($kept['name']??'')));
+                    if($nameA===''||$nameB==='')continue;
+                    $nameMatch=($nameA===$nameB)||(strlen($nameA)>=6&&strlen($nameB)>=6&&(strpos($nameA,$nameB)===0||strpos($nameB,$nameA)===0));
+                    if(!$nameMatch)continue;
+                    $latA=(float)($r['lat']??0);$lngA=(float)($r['lng']??0);$latB=(float)($kept['lat']??0);$lngB=(float)($kept['lng']??0);
+                    $dy=($latA-$latB)*110.574;$dx=($lngA-$lngB)*111.320*max(0.2,cos(deg2rad(($latA+$latB)/2)));
+                    if(sqrt($dx*$dx+$dy*$dy)<=0.15){$duplicate=true;break;}
+                }
+                if($duplicate)continue;
+                $searchActivitySeen[]=$r;
+            }
             $projectedPlaceRows[]=$r;$projectedPlaceCategory[(int)$r['id']]=$cat;
         }
         $placeElements=$this->rows_to_elements($projectedPlaceRows);$placeElementById=array();
@@ -3075,6 +3240,180 @@ final class RuhrpottGuru_Places_Backend {
     private function sanitize_category($category) {
         $category = strtolower(trim((string) $category));
         return in_array($category, array('food','highlights','culture','activities'), true) ? $category : '';
+    }
+
+    /** Pilot only: reuse the public Food resolver and its canonical URLs.
+     * Runs before the existing city-category shell (WPCode 3421, priority 20).
+     * No REST contract, category selection, ranking or location writes change.
+     */
+    public function append_essen_food_links_pilot_v101173($content) {
+        if (is_admin() || (defined('REST_REQUEST') && REST_REQUEST) || is_feed()
+            || !is_singular('page') || !is_main_query() || !in_the_loop()
+            || (int)get_the_ID() !== (int)get_queried_object_id()
+            || get_page_uri(get_queried_object_id()) !== 'stadt/essen/restaurants'
+            || strpos($content, 'id="rpg-essen-food-detail-links"') !== false) return $content;
+        try {
+            $request = new WP_REST_Request('POST', '/ruhrpottguru/v1/places/home');
+            $request->set_header('content-type', 'application/json');
+            $request->set_body(wp_json_encode(array('category'=>'food', 'lat'=>51.45657, 'lng'=>7.01228, 'radiusKm'=>10, 'limit'=>12)));
+            $response = $this->rest_home($request);
+            if (is_wp_error($response)) return $content;
+            $response = rest_ensure_response($response);
+            if ($response->get_status() !== 200) return $content;
+            $data = $response->get_data();
+            if (!is_array($data) || empty($data['ok']) || !isset($data['elements']) || !is_array($data['elements'])) return $content;
+            return $content . $this->seo_city_food_links_html_v101173($data['elements']);
+        } catch (Throwable $error) {
+            // An unavailable data feed must not break the existing city page.
+            return $content;
+        }
+    }
+
+    private function seo_city_food_links_html_v101173($elements) {
+        $links = array();
+        foreach (array_slice($elements, 0, 12) as $element) {
+            $tags = is_array($element) && isset($element['tags']) && is_array($element['tags']) ? $element['tags'] : array();
+            $id = (string)($tags['rg:place_id'] ?? '');
+            $name = trim((string)($tags['name'] ?? ''));
+            $url = (string)($tags['rg:canonical_url'] ?? '');
+            if (!preg_match('/^[1-9][0-9]*$/', $id) || $name === ''
+                || strpos($url, home_url('/ort/' . $id . '/')) !== 0) continue;
+            $links[] = '<li><a href="' . esc_url($url) . '">' . esc_html($name) . '</a></li>';
+        }
+        if (!$links) return '';
+        return '<section id="rpg-essen-food-detail-links" aria-labelledby="rpg-essen-food-links-title">'
+            . '<h2 id="rpg-essen-food-links-title">Food &amp; Drinks im 10-km-Umkreis von Essen</h2>'
+            . '<ul>' . implode('', $links) . '</ul></section>';
+    }
+
+    /** City SEO P0: a presentation of the already-established visitor event read model.
+     * No second source, classifier, geocoder, ranking, URL resolver or media rules.
+     */
+    public function append_city_event_cards_v101177($content) {
+        if (is_admin() || (defined('REST_REQUEST') && REST_REQUEST) || is_feed()
+            || !is_singular('page') || !is_main_query() || !in_the_loop()
+            || (int)get_the_ID() !== (int)get_queried_object_id()
+            || strpos($content, 'id="rpg-city-event-cards"') !== false) return $content;
+        // Use the existing authoritative city-guide context and the existing catalog
+        // centers.  Do not derive a city from URL guesses or introduce geocoding.
+        $ctx = $this->city_guide_seo_context_v101144();
+        if (!is_array($ctx) || ($ctx['kind'] ?? '') !== 'veranstaltungen') return $content;
+        $city_name = (string)$ctx['city_name'];
+        $valid_city = false;
+        foreach ($this->municipalities_seed() as $municipality) {
+            if ($city_name === (string)($municipality[0] ?? '')) { $valid_city = true; break; }
+        }
+        if (!$valid_city) return $content;
+        $center = $this->rp_labor_city_center($city_name);
+        if (!is_array($center) || !$this->valid_coordinate((float)$center['lat'], (float)$center['lng'])) return $content;
+        try {
+            // Same DB-backed, source-owned, deduplicated and rights-aware visitor model as events UI.
+            $data = $this->frontend_events_query((float)$center['lat'], (float)$center['lng'], 25.0, $city_name);
+            if (empty($data['ok']) || empty($data['ready']) || !is_array($data['items'] ?? null)) return $content;
+            $cards = array();
+            foreach ($data['items'] as $item) {
+                if (!is_array($item)) continue;
+                $city = trim((string)($item['address']['city'] ?? $item['address']['addressLocality'] ?? ''));
+                $details = (array)($item['rpg_event_details'] ?? array());
+                $url = (string)($details['canonicalUrl'] ?? '');
+                $event_id = (int)($item['rpg_event_db']['eventId'] ?? 0);
+                if ($event_id <= 0 || strpos($url, home_url('/veranstaltung/'.$event_id.'/')) !== 0) continue;
+                $title = trim((string)($item['title'] ?? ''));
+                if ($title === '') continue;
+                $iso = trim((string)($item['start'] ?? ''));
+                $ts = $iso !== '' ? strtotime($iso) : false;
+                if (!$ts) continue;
+                $end = strtotime((string)($item['end'] ?? ''));
+                if (($end ?: $ts) < time()) continue;
+                $image = esc_url_raw((string)($item['rpg_event_media']['imageUrl'] ?? $item['imageUrl'] ?? ''));
+                $venue = trim((string)($item['venueName'] ?? ''));
+                $cards[] = array('start' => $ts, 'id' => $event_id, 'title' => $title, 'url' => $url, 'image' => $image, 'venue' => $venue);
+            }
+            // SEO-P0 v1.10.175: the visitor list can collapse recurring daily
+            // occurrences while the canonical link resolves to a different DB
+            // instance. Read only the existing, linked event rows so that a card
+            // and its direct detail page always describe the same occurrence.
+            if ($cards) {
+                global $wpdb;
+                $event_ids = array_values(array_unique(array_map('intval', array_column($cards, 'id'))));
+                $event_table = $this->table('events');
+                $by_id = array();
+                foreach (array_chunk($event_ids, 200) as $chunk) {
+                    $id_list = implode(',', array_map('intval', $chunk));
+                    foreach ((array)$wpdb->get_results("SELECT id,start_at,end_at,status FROM {$event_table} WHERE id IN ({$id_list})", ARRAY_A) as $event_row) {
+                        $by_id[(int)$event_row['id']] = $event_row;
+                    }
+                }
+                $berlin = new DateTimeZone('Europe/Berlin');
+                $utc = new DateTimeZone('UTC');
+                $corrected = array();
+                foreach ($cards as $card) {
+                    $event_row = $by_id[$card['id']] ?? null;
+                    if (!$event_row || ($event_row['status'] ?? '') !== 'active') continue;
+                    try {
+                        $start_utc = new DateTimeImmutable((string)$event_row['start_at'], $utc);
+                        $end_utc = !empty($event_row['end_at']) ? new DateTimeImmutable((string)$event_row['end_at'], $utc) : $start_utc;
+                    } catch (Throwable $e) { continue; }
+                    if ($end_utc->getTimestamp() < time()) continue;
+                    // Mirror the established web event presentation: individual
+                    // appointments first, long-running exhibitions afterwards.
+                    // Data eligibility and canonical occurrence remain unchanged.
+                    $card['start'] = $start_utc->getTimestamp();
+                    $card['end'] = $end_utc->getTimestamp();
+                    $card['long_running'] = ($card['end'] - $card['start']) >= 20 * HOUR_IN_SECONDS;
+                    $card['start_iso'] = $start_utc->setTimezone($berlin)->format(DateTimeInterface::ATOM);
+                    if ($card['long_running']) {
+                        $card['start_label'] = $card['start'] <= time()
+                            ? 'Läuft bis ' . $end_utc->setTimezone($berlin)->format('d.m.Y')
+                            : 'Ab ' . $start_utc->setTimezone($berlin)->format('d.m.Y');
+                    } else {
+                        $card['start_label'] = $start_utc->setTimezone($berlin)->format('d.m.Y · H:i') . ' Uhr';
+                    }
+                    $corrected[$card['id']] = $card; // one card per canonical detail page
+                }
+                $cards = array_values($corrected);
+            }
+            // Same four urgency buckets as the existing web eventUrgencyCompare()
+            // (theme src/react-app/views.js, V296). Do not push ongoing exhibitions
+            // behind tomorrow's appointments. Presentation only; the admitted
+            // catalog, event identity and canonical URLs remain unchanged.
+            $now_ts = time();
+            $today_key = wp_date('Y-m-d', $now_ts, new DateTimeZone('Europe/Berlin'));
+            $rank = static function($card) use ($now_ts, $today_key) {
+                $start = (int)$card['start'];
+                $end = (int)$card['end'];
+                $start_day = wp_date('Y-m-d', $start, new DateTimeZone('Europe/Berlin'));
+                $end_day = wp_date('Y-m-d', $end, new DateTimeZone('Europe/Berlin'));
+                $running = $start <= $now_ts && $end >= $now_ts;
+                $multi_day = $start_day !== $end_day;
+                if ($running && !$multi_day && $start_day === $today_key) return array(0, $start);
+                if ($start > $now_ts && $start_day === $today_key) return array(1, $start);
+                if ($running) return array(2, $end);
+                return array(3, $start);
+            };
+            usort($cards, static function($a, $b) use ($rank) {
+                $ar = $rank($a);
+                $br = $rank($b);
+                return ($ar[0] <=> $br[0]) ?: ($ar[1] <=> $br[1]) ?: ($a['id'] <=> $b['id']);
+            });
+            $cards = array_slice($cards, 0, 12);
+            if (!$cards) return $content;
+            $html = '<section id="rpg-city-event-cards" class="rpg-city-event-preview" aria-labelledby="rpg-city-event-cards-heading"><h2 id="rpg-city-event-cards-heading">Veranstaltungen in '.esc_html($city_name).' und Umgebung</h2><div class="rpg-city-event-preview-grid">';
+            foreach ($cards as $c) {
+                $html .= '<a class="rpg-city-event-preview-card" href="'.esc_url($c['url']).'">';
+                if ($c['image'] !== '') $html .= '<img src="'.esc_url($c['image']).'" alt="" loading="lazy" decoding="async">';
+                $html .= '<span class="rpg-city-event-preview-info"><time datetime="'.esc_attr($c['start_iso']).'">'.esc_html($c['start_label']).'</time>';
+                $html .= '<strong>'.esc_html($c['title']).'</strong>';
+                if ($c['venue'] !== '') $html .= '<span>'.esc_html($c['venue']).'</span>';
+                $html .= '</span></a>';
+            }
+            $html .= '</div></section>';
+            // Scoped CSS, no alterations to the existing JS cards/category renderer.
+            $html .= '<style>.rpg-city-event-preview{margin:24px 0;color:#f1f5f9}.rpg-city-event-preview h2{font-size:clamp(1.25rem,2.4vw,1.75rem);margin:0 0 16px}.rpg-city-event-preview-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));gap:16px}.rpg-city-event-preview-card{display:flex;flex-direction:column;overflow:hidden;border:1px solid #334155;border-radius:14px;background:#172033;color:#f8fafc;text-decoration:none;min-width:0}.rpg-city-event-preview-card:hover,.rpg-city-event-preview-card:focus-visible{border-color:#fb923c;outline-offset:3px}.rpg-city-event-preview-card img{aspect-ratio:16/9;width:100%;object-fit:cover;background:#293548}.rpg-city-event-preview-info{padding:14px;display:flex;flex-direction:column;gap:5px}.rpg-city-event-preview-info time{font-size:.85rem;color:#fdba74}.rpg-city-event-preview-info strong{font-size:1rem;line-height:1.4}.rpg-city-event-preview-info>span{font-size:.9rem;color:#cbd5e1}@media(max-width:560px){.rpg-city-event-preview-grid{grid-template-columns:1fr}}</style>';
+            return $content.$html;
+        } catch (Throwable $error) {
+            return $content; // The public city page must still render on an unavailable feed.
+        }
     }
 
     public function rest_home(WP_REST_Request $request) {
@@ -3519,6 +3858,18 @@ final class RuhrpottGuru_Places_Backend {
         $verified_model_flying = (bool)preg_match('/\bmodellflugplatz r c club bottrop\b/u',$name);
         $verified_jump_academy = (bool)preg_match('/\bjump academy\b/u',$name);
         $verified_activity_landscape = (bool)preg_match('/\bspiel und sportlandschaft jacobi\b/u',$name);
+        // Visitor evidence for exactly the Topgolf Oberhausen clubhouse from
+        // the verified operator website (booking + walk-ins). Do not broaden
+        // admission to the other OSM components or generic golf locations.
+        $topgolf_website = trim((string)($tags['website']??($row['website']??'')));
+        $topgolf_host = strtolower((string)(parse_url($topgolf_website, PHP_URL_HOST) ?: ''));
+        $verified_topgolf_oberhausen = $name === 'topgolf'
+            && $this->normalize_text((string)($row['city']??'')) === 'oberhausen'
+            && (string)($row['primary_osm_type']??'') === 'w'
+            && (string)($row['primary_osm_id']??'') === '1051311896'
+            && strtolower(trim((string)($tags['golf']??''))) === 'clubhouse'
+            && $topgolf_host === 'topgolfoberhausen.com'
+            && $has_hours && !$private_access;
         $inactive = (array_key_exists('active',$row) && empty($row['active']))
             || (!empty($row['lifecycle_status']) && (string)$row['lifecycle_status'] !== 'active')
             || $this->is_inactive_tags($tags);
@@ -3656,7 +4007,7 @@ final class RuhrpottGuru_Places_Backend {
         if ($has_sport('athletics'))
             $add_exp('athletics',($visitor_offer||$public_access)?'rein':'bedingt',0.78,array('solo_friendly','friends_friendly','active',$outdoor?'outdoor':'indoor'),array('athletics access unclear'),!$core_assigned);
         if ($has_sport('golf'))
-            $add_exp('golf',($visitor_offer||$public_access)?'rein':'bedingt',0.78,array('solo_friendly','friends_friendly','pair_friendly','active','outdoor','booking_required'),array('golf'),!$core_assigned);
+            $add_exp('golf',($visitor_offer||$public_access||$verified_topgolf_oberhausen)?'rein':'bedingt',0.78,array('solo_friendly','friends_friendly','pair_friendly','active','outdoor','booking_required'),array('golf'),!$core_assigned);
         if ($verified_jump_academy || preg_match('/\b(tanzschule|dance academy|dance studio)\b/u',$name))
             $add_exp('dance_fitness',($verified_jump_academy||$visitor_offer||$has_website||$has_hours)?'rein':'bedingt',0.90,array('solo_friendly','friends_friendly','active','indoor','weatherproof','booking_required'),array($verified_jump_academy?'verified course offer':'dance/fitness course identity'),true);
         // A public park/recreation ground with several concrete sport experiences is itself
@@ -9365,19 +9716,12 @@ RuhrpottGuru";
         $lng_delta = $radius / (111.320 * $cos);
         $distance = "(6371.0088 * 2 * ASIN(SQRT(POWER(SIN(RADIANS(p.lat - %f)/2),2) + COS(RADIANS(%f)) * COS(RADIANS(p.lat)) * POWER(SIN(RADIANS(p.lng - %f)/2),2))))";
         $distance_sql = $wpdb->prepare($distance,$lat,$lat,$lng);
+        $public_where = $this->buedchen_public_where_v101172();
         $rows = (array)$wpdb->get_results($wpdb->prepare(
             "SELECT p.*, $distance_sql AS distance_km
              FROM $places p
              LEFT JOIN {$this->table('place_overrides')} o ON o.place_id=p.id AND o.status='active'
-             WHERE p.active=1
-               AND p.lifecycle_status='active'
-               AND p.primary_category='buedchen'
-               AND (o.override_data IS NULL OR LOCATE('\"review_status\":\"rejected\"',o.override_data)=0)
-               AND (
-                    LOCATE('\"rg:buedchen_tier\":\"A\"',p.raw_tags)>0
-                    OR LOCATE('\"rg:buedchen_tier\":\"B\"',p.raw_tags)>0
-                    OR LOCATE('\"review_status\":\"verified\"',o.override_data)>0
-               )
+             WHERE $public_where
                AND p.lat BETWEEN %f AND %f
                AND p.lng BETWEEN %f AND %f
              HAVING distance_km<=%f
@@ -14441,10 +14785,54 @@ RuhrpottGuru";
         delete_option(self::EVENT_IMPORT_LOCK);return true;
     }
 
+    /** 1.10.182: queued short refreshes may run between completed supplemental cities. */
+    private function event_supplemental_wake_v101182() {
+        if(get_option('rg_events_supplemental_operator_pause_v101183',false))return;
+        $supp=get_option('rg_events_supplemental_state',array());
+        if(!is_array($supp)||($supp['status']??'')!=='running'||empty($supp['yield_for_short_refresh']))return;
+        wp_clear_scheduled_hook(self::EVENT_SUPPLEMENTAL_BATCH_HOOK);
+        wp_schedule_single_event(time()+5,self::EVENT_SUPPLEMENTAL_BATCH_HOOK);
+    }
+
+    private function event_supplemental_short_refresh_pending_v101182() {
+        $queue=get_option(self::EVENT_TIER_QUEUE,array());
+        if(!is_array($queue))return false;
+        // Manual mode holds unselected requests; only a selected short tier can yield the city feed.
+        if(get_option('rg_events_operator_manual_mode_v101185',false)){
+            $selected=(string)get_option('rg_events_operator_selected_tier_v101185','');
+            return in_array($selected,array('hot14','plan90'),true)&&isset($queue[$selected]);
+        }
+        return isset($queue['hot14'])||isset($queue['plan90']);
+    }
+
+    private function event_supplemental_yield_v101182(&$state) {
+        // Only called at a city boundary. Never relinquish an in-flight provider call.
+        if(!empty($state['inflight_city']))return false;
+        $lock=$this->event_import_lock_v101101();
+        $owner=(string)($lock['owner']??'');
+        if($owner!==''&&$owner!=='supplemental')return false;
+        if($owner==='supplemental'&&!$this->event_import_lock_release_v101101('supplemental'))return false;
+        $state['yield_for_short_refresh']=true;
+        $state['wait_reason']='Kurzfristiger ET4-Refresh hat Vorrang';
+        $state['last_wait_at']=current_time('mysql');
+        update_option('rg_events_supplemental_state',$state,false);
+        wp_clear_scheduled_hook(self::EVENT_SUPPLEMENTAL_BATCH_HOOK);
+        wp_schedule_single_event(time()+120,self::EVENT_SUPPLEMENTAL_BATCH_HOOK);
+        $this->event_sync_schedule_dispatch_v101101(3);
+        return true;
+    }
+
     /** Return an explanatory blocker for ET4 source imports, or an empty string. */
     private function event_import_busy_reason_v101101() {
         $night=get_option('rg_events_nightly_state',array());if(is_array($night)&&($night['status']??'')==='running')return '365-Tage-Masterimport läuft';
-        $supp=get_option('rg_events_supplemental_state',array());if(is_array($supp)&&($supp['status']??'')==='running')return '53-Städte-Zusatzfeed läuft';
+        $supp=get_option('rg_events_supplemental_state',array());
+        if(is_array($supp)&&($supp['status']??'')==='running'){
+            $queue=get_option(self::EVENT_TIER_QUEUE,array());
+            $short=is_array($queue)&&(isset($queue['hot14'])||isset($queue['plan90']));
+            $lock=$this->event_import_lock_v101101();
+            $yielded=(!empty($supp['yield_for_short_refresh'])||get_option('rg_events_supplemental_operator_pause_v101183',false))&&empty($supp['inflight_city'])&&empty($lock);
+            if(!$short||!$yielded)return '53-Städte-Zusatzfeed läuft';
+        }
         $tier=get_option(self::EVENT_TIER_STATE,array());if(is_array($tier)&&($tier['status']??'')==='running')return 'ET4-'.(string)($tier['label']??'Kurzrefresh').' läuft';
         $lock=$this->event_import_lock_v101101();if($lock)return 'Import-Lock: '.(string)($lock['owner']??'unbekannt');
         return '';
@@ -14478,6 +14866,10 @@ RuhrpottGuru";
      */
     public function cron_events_tier_dispatch_v101101() {
         $queue=get_option(self::EVENT_TIER_QUEUE,array());if(!is_array($queue)||!$queue)return;
+        // Operator mode holds scheduled jobs until one explicitly selected tier is dispatched.
+        $manual=(bool)get_option('rg_events_operator_manual_mode_v101185',false);
+        $selected=(string)get_option('rg_events_operator_selected_tier_v101185','');
+        if($manual&&($selected===''||!isset($queue[$selected])))return;
         if(get_option(self::OPTION_STATUS)!=='ready'){$this->event_sync_schedule_dispatch_v101101(30*MINUTE_IN_SECONDS);return;}
         $busy=$this->event_import_busy_reason_v101101();
         if($busy!==''){
@@ -14485,13 +14877,20 @@ RuhrpottGuru";
             $this->event_sync_schedule_dispatch_v101101(10*MINUTE_IN_SECONDS);return;
         }
         delete_option('rg_events_tier_dispatch_wait_v101101');
-        $tier=isset($queue['full365'])?'full365':(isset($queue['plan90'])?'plan90':(isset($queue['hot14'])?'hot14':''));
+        // 1.10.182: near-term events first; never launch full365 while a 53-city wave is paused.
+        $tier=$manual?$selected:(isset($queue['hot14'])?'hot14':(isset($queue['plan90'])?'plan90':(isset($queue['full365'])?'full365':'')));
+        $supp=get_option('rg_events_supplemental_state',array());
+        if($tier==='full365'&&is_array($supp)&&($supp['status']??'')==='running'){
+            $this->event_sync_schedule_dispatch_v101101(10*MINUTE_IN_SECONDS);return;
+        }
         if($tier==='')return;
         if(!$this->event_import_lock_acquire_v101101($tier)){$this->event_sync_schedule_dispatch_v101101(5*MINUTE_IN_SECONDS);return;}
+        if($manual)update_option('rg_events_operator_selected_tier_v101185','',false);
 
         // A broader snapshot satisfies any narrower request that was already queued
         // before this start. New requests arriving during the run remain queued.
-        if($tier==='full365'){unset($queue['full365'],$queue['plan90'],$queue['hot14']);}
+        if($manual){unset($queue[$tier]);}
+        elseif($tier==='full365'){unset($queue['full365'],$queue['plan90'],$queue['hot14']);}
         elseif($tier==='plan90'){unset($queue['plan90'],$queue['hot14']);}
         else unset($queue['hot14']);
         update_option(self::EVENT_TIER_QUEUE,$queue,false);
@@ -14541,7 +14940,7 @@ RuhrpottGuru";
                 $state['errors']=(int)($state['errors']??0)+1;$state['last_error']=(string)$r['error'];$state['last_attempt_at']=current_time('mysql');
                 if($state['errors']>=5){
                     $state['status']='failed';$state['finished_at']=current_time('mysql');update_option(self::EVENT_TIER_STATE,$state,false);
-                    wp_clear_scheduled_hook(self::EVENT_TIER_BATCH_HOOK);$this->event_master_seen_clear();$this->event_import_lock_release_v101101($owner);$this->event_sync_schedule_dispatch_v101101(30);return;
+                    wp_clear_scheduled_hook(self::EVENT_TIER_BATCH_HOOK);$this->event_master_seen_clear();$this->event_import_lock_release_v101101($owner);$this->event_sync_schedule_dispatch_v101101(30);$this->event_supplemental_wake_v101182();return;
                 }
                 update_option(self::EVENT_TIER_STATE,$state,false);wp_clear_scheduled_hook(self::EVENT_TIER_BATCH_HOOK);wp_schedule_single_event(time()+180,self::EVENT_TIER_BATCH_HOOK);return;
             }
@@ -14565,7 +14964,7 @@ RuhrpottGuru";
                 $state['status']='finished';$state['finished_at']=current_time('mysql');$state['offset']=0;
                 update_option(self::EVENT_TIER_STATE,$state,false);update_option('rg_events_tier_last_complete_v101101',$state,false);
                 wp_clear_scheduled_hook(self::EVENT_TIER_BATCH_HOOK);$this->event_master_seen_clear();$this->event_cleanup_expired(true);
-                $this->event_import_lock_release_v101101($owner);$this->event_sync_schedule_dispatch_v101101(10);return;
+                $this->event_import_lock_release_v101101($owner);$this->event_sync_schedule_dispatch_v101101(10);$this->event_supplemental_wake_v101182();return;
             }
             update_option(self::EVENT_TIER_STATE,$state,false);wp_clear_scheduled_hook(self::EVENT_TIER_BATCH_HOOK);wp_schedule_single_event(time()+60,self::EVENT_TIER_BATCH_HOOK);
         }finally{$this->event_master_batch_lock_release();}
@@ -16974,7 +17373,7 @@ RuhrpottGuru";
         if(!is_admin())return false;
         $page=sanitize_key((string)($_GET['page']??''));
         $post_type=sanitize_key((string)($_GET['post_type']??''));
-        if(in_array($page,array('rp-redaktion','rp-places','rp-redaktion-medien','rp-events','rp-labor','rp-opening-hours'),true))return true;
+        if(in_array($page,array('rp-redaktion','rp-places','rp-redaktion-medien','rp-events','rp-event-control','rp-labor','rp-opening-hours'),true))return true;
         if($post_type==='rpg_community')return true;
         global $typenow;return sanitize_key((string)$typenow)==='rpg_community';
     }
@@ -16982,7 +17381,7 @@ RuhrpottGuru";
     private function rp_redaktion_active_v101109() {
         $page=sanitize_key((string)($_GET['page']??''));$post_type=sanitize_key((string)($_GET['post_type']??''));
         global $typenow;if($post_type==='rpg_community'||sanitize_key((string)$typenow)==='rpg_community')return 'community';
-        $map=array('rp-redaktion'=>'data','rp-places'=>'places','rp-redaktion-medien'=>'media','rp-events'=>'events','rp-labor'=>'labor','rp-opening-hours'=>'hours');
+        $map=array('rp-redaktion'=>'data','rp-places'=>'places','rp-redaktion-medien'=>'media','rp-events'=>'events','rp-event-control'=>'imports','rp-labor'=>'labor','rp-opening-hours'=>'hours');
         return $map[$page]??'';
     }
 
@@ -16995,6 +17394,7 @@ RuhrpottGuru";
             'places'=>array('Places',add_query_arg(array('page'=>'rp-places'),admin_url('admin.php'))),
             'media'=>array('Medien',add_query_arg(array('page'=>'rp-redaktion-medien'),admin_url('admin.php'))),
             'events'=>array('Events',add_query_arg(array('page'=>'rp-events'),admin_url('admin.php'))),
+            'imports'=>array('Importzentrale',add_query_arg(array('page'=>'rp-event-control'),admin_url('admin.php'))),
             'labor'=>array('Labor',add_query_arg(array('page'=>'rp-labor'),admin_url('admin.php'))),
             'hours'=>array('Öffnungszeiten',add_query_arg(array('page'=>'rp-opening-hours'),admin_url('admin.php'))),
             'community'=>array('Community',admin_url('edit.php?post_type=rpg_community')),
@@ -17015,6 +17415,197 @@ RuhrpottGuru";
         echo '<script id="rg-redaktion-ui-v101109">(function(){"use strict";const active='.wp_json_encode($active).';const q=s=>document.querySelector(s),qa=s=>Array.from(document.querySelectorAll(s));const wrap=q(".wrap");if(!wrap)return;function makeDetails(summaryHtml,nodes,id,extra){if(!nodes||!nodes.length)return null;const d=document.createElement("details");d.className="rg-redaktion-fold rg-redaktion-auto-section"+(extra?" "+extra:"");if(id)d.id=id;const s=document.createElement("summary");s.innerHTML=summaryHtml;const b=document.createElement("div");b.className="rg-redaktion-fold-body";nodes[0].parentNode.insertBefore(d,nodes[0]);d.appendChild(s);d.appendChild(b);nodes.forEach(n=>b.appendChild(n));return d;}function foldDirectH2(){const heads=Array.from(wrap.children).filter(el=>el.tagName==="H2"&&!el.closest("details"));heads.forEach(h=>{if(!h.parentNode||h.closest("details"))return;const id=h.id||"";let nodes=[h],n=h.nextElementSibling;while(n&&n.tagName!=="H2"){const next=n.nextElementSibling;nodes.push(n);n=next;}const title=h.innerHTML;h.removeAttribute("id");makeDetails(title,nodes,id,"");});}function foldDataCards(){if(active!=="data")return;Array.from(wrap.children).forEach(card=>{if(card.tagName!=="DIV"||card.classList.contains("notice")||card.closest("details"))return;const h=card.querySelector("h2");if(!h)return;const meta=h.parentElement&&h.parentElement.nextElementSibling?h.parentElement.parentElement.textContent:"";const title=h.textContent.trim();const subtitleEl=h.parentElement?h.parentElement.querySelector("div"):null;const subtitle=subtitleEl?subtitleEl.textContent:"";const d=document.createElement("details");d.className="rg-redaktion-fold rg-redaktion-data-card";const sm=document.createElement("summary");sm.innerHTML="<span class=\\"rg-redaktion-submission-summary\\"><strong></strong><span class=\\"rg-redaktion-submission-meta\\"></span></span>";sm.querySelector("strong").textContent=title;sm.querySelector(".rg-redaktion-submission-meta").textContent=subtitle.trim();const body=document.createElement("div");body.className="rg-redaktion-fold-body";card.parentNode.insertBefore(d,card);d.appendChild(sm);d.appendChild(body);body.appendChild(card);card.style.maxWidth="none";card.style.border="0";card.style.margin="0";card.style.padding="0";});}function foldPlaceCards(){if(active!=="places")return;const candidates=Array.from(wrap.children).filter(el=>el.classList&&el.classList.contains("rg-admin-card"));candidates.forEach(card=>{if(card.closest("details"))return;const strong=card.querySelector(":scope > strong");const h=card.querySelector(":scope > h2");const title=(strong?strong.textContent:(h?h.textContent:"Details")).trim();const d=document.createElement("details");d.className="rg-redaktion-fold rg-redaktion-place-card";const sm=document.createElement("summary");sm.textContent=title;const body=document.createElement("div");body.className="rg-redaktion-fold-body";card.parentNode.insertBefore(d,card);d.appendChild(sm);d.appendChild(body);body.appendChild(card);});}if(["media","events","labor","hours"].includes(active))foldDirectH2();if(active==="events"){Array.from(wrap.children).forEach(card=>{if(card.tagName!=="DIV"||card.closest("details"))return;const h=card.querySelector(":scope > h2");if(!h)return;const title=h.textContent.trim();const d=document.createElement("details");d.className="rg-redaktion-fold rg-redaktion-event-card";const sm=document.createElement("summary");sm.textContent=title;const body=document.createElement("div");body.className="rg-redaktion-fold-body";card.parentNode.insertBefore(d,card);d.appendChild(sm);d.appendChild(body);body.appendChild(card);});}foldDataCards();foldPlaceCards();const params=new URLSearchParams(location.search);if(location.hash){const target=q(location.hash);if(target&&target.tagName==="DETAILS")target.open=true;}if(active==="events"&&params.get("event_detail")){const d=q("#rg-event-audit");if(d)d.open=true;}if(active==="events"&&params.has("event_final_audit")){const d=q("#rg-event-ops");if(d)d.open=true;}if(active==="places"&&params.has("media_coverage")){const d=q("#rg-places-tech");if(d)d.open=true;}if(active==="media"&&(params.has("submission_id")||params.has("rg_media_reviewed"))){const d=qa(".rg-redaktion-fold").find(x=>(x.querySelector("summary")?.textContent||"").includes("Neue Bilder zur Freigabe"));if(d)d.open=true;}if(active==="hours"&&params.has("rg_oh_case")){const d=qa(".rg-redaktion-fold").find(x=>(x.querySelector("summary")?.textContent||"").includes("Recherche-Restfälle"));if(d)d.open=true;}const all=()=>qa("details.rg-redaktion-fold");function update(){const a=all(),open=a.filter(d=>d.open).length,c=q("#rg-redaktion-fold-count");if(c)c.textContent=a.length?(open+" / "+a.length+" Bereiche offen"):"kompakte Ansicht";const bc=q("#rg-redaktion-fold-close"),bo=q("#rg-redaktion-fold-open");if(bc)bc.style.display=a.length?"":"none";if(bo)bo.style.display=a.length?"":"none";}const close=q("#rg-redaktion-fold-close"),open=q("#rg-redaktion-fold-open");if(close)close.addEventListener("click",()=>{all().forEach(d=>d.open=false);update();window.scrollTo({top:0,behavior:"smooth"});});if(open)open.addEventListener("click",()=>{all().forEach(d=>d.open=true);update();});all().forEach(d=>d.addEventListener("toggle",update));update();})();</script>';
     }
 
+    /** Admin-only diagnostics; never exposes raw payloads, API tokens or credentials. */
+    public function register_event_control_diagnostics_v101183() {
+        register_rest_route('ruhrpottguru/v1', '/admin/event-import-diagnostics', array(
+            'methods'=>'GET', 'callback'=>array($this,'event_control_diagnostics_rest_v101183'),
+            'permission_callback'=>static function(){return current_user_can('manage_options');}
+        ));
+    }
+
+    public function event_control_diagnostics_rest_v101183() {
+        return rest_ensure_response($this->event_control_snapshot_v101183());
+    }
+
+    private function event_control_snapshot_v101183() {
+        $options=array(
+            'hot_plan'=>'rg_events_tier_refresh_state_v101101',
+            'hot_plan_last_complete'=>'rg_events_tier_last_complete_v101101',
+            'master'=>'rg_events_nightly_state',
+            'supplemental'=>'rg_events_supplemental_state',
+            'selm'=>'rg_events_selm_calendar_state_v101102',
+            'media_et4'=>'rg_events_et4_catalog_media_state_v1024',
+            'media_raw'=>'rg_events_raw_feed_media_state_v1028',
+            'media_local'=>'rg_events_et4_local_media_state_v1039',
+            'media_fallback'=>'rg_events_fallback_media_state_v1044',
+            'media_context'=>'rg_events_context_upgrade_state_v1048',
+            'media_hash'=>'rg_events_candidate_hash_state_v1049',
+            'coverage'=>'rg_events_coverage_state_v1051',
+            'rich_fields'=>'rg_events_rich_fields_backfill_state_v1059'
+        );
+        $fields=array('status','tier','label','started_at','finished_at','last_progress_at','last_worker_at','last_error','errors','pages_done','inserted','updated','invalid','cancelled','events_ingested','raw_seen','cities_done','cities_total','city_index','wait_reason','last_wait_at','last_result','processed','processed_count','total','done','checked','attempted','success','failed');
+        $states=array();
+        foreach($options as $key=>$option){
+            $raw=get_option($option,array());$item=array();
+            if(is_array($raw))foreach($fields as $field){if(isset($raw[$field])&&(is_scalar($raw[$field])||$raw[$field]===null))$item[$field]=$raw[$field];}
+            $start=isset($item['started_at'])?strtotime((string)$item['started_at']):false;
+            $end=isset($item['finished_at'])?strtotime((string)$item['finished_at']):false;
+            if($start&&$end&&$end>=$start)$item['duration_seconds']=$end-$start;
+            $states[$key]=$item;
+        }
+        $queue=get_option(self::EVENT_TIER_QUEUE,array());
+        $queue=is_array($queue)?array_intersect_key($queue,array_flip(array('hot14','plan90','full365'))):array();
+        $safe_queue=array();foreach($queue as $k=>$v){$safe_queue[$k]=array('requested_at'=>is_array($v)?(string)($v['requested_at']??''):'');}
+        $lock=get_option(self::EVENT_IMPORT_LOCK,array());
+        $lock=is_array($lock)?array_intersect_key($lock,array_flip(array('owner','started_at','touched_at','expires_at'))):array();
+        $cron=array();$events=_get_cron_array();
+        if(is_array($events))foreach($events as $ts=>$hooks)foreach($hooks as $hook=>$items){
+            if(strpos($hook,'rg_events_')!==0&&strpos($hook,'rg_event_')!==0)continue;
+            $cron[$hook]=array('next_at'=>wp_date('Y-m-d H:i:s',(int)$ts),'timestamp'=>(int)$ts,'instances'=>count($items));
+        }
+        ksort($cron);
+        $wait=get_option('rg_events_tier_dispatch_wait_v101101',array());
+        return array('generated_at'=>current_time('mysql'),'timezone'=>wp_timezone_string(),
+            'backend_version'=>'1.10.185','states'=>$states,'queue'=>$safe_queue,'lock'=>$lock,
+            'dispatcher_wait'=>is_array($wait)?array_intersect_key($wait,array_flip(array('reason','at'))):array(),
+            'operator_manual_mode'=>(bool)get_option('rg_events_operator_manual_mode_v101185',false),
+            'operator_selected_tier'=>(string)get_option('rg_events_operator_selected_tier_v101185',''),
+            'supplemental_operator_paused'=>(bool)get_option('rg_events_supplemental_operator_pause_v101183',false),
+            'cron'=>$cron);
+    }
+
+    public function event_control_post_v101183() {
+        if(!current_user_can('manage_options'))wp_die('Keine Berechtigung',403);
+        check_admin_referer('rpg_event_control_v101183');
+        $action=isset($_POST['control_action'])?sanitize_key(wp_unslash($_POST['control_action'])):'';
+        if($action==='manual_mode'){
+            update_option('rg_events_operator_manual_mode_v101185',true,false);
+            update_option('rg_events_operator_selected_tier_v101185','',false);
+            update_option('rg_events_supplemental_operator_pause_v101183',true,false);
+            wp_schedule_single_event(time()+2,self::EVENT_SUPPLEMENTAL_BATCH_HOOK);
+        } elseif($action==='automatic_mode'){
+            update_option('rg_events_operator_manual_mode_v101185',false,false);
+            update_option('rg_events_operator_selected_tier_v101185','',false);
+            // Do not resume a deliberately paused supplemental feed implicitly.
+            $this->event_sync_schedule_dispatch_v101101(3);
+        } elseif($action==='pause_supplemental'){
+            update_option('rg_events_supplemental_operator_pause_v101183',true,false);
+            wp_schedule_single_event(time()+2,self::EVENT_SUPPLEMENTAL_BATCH_HOOK);
+        } elseif($action==='resume_supplemental'){
+            update_option('rg_events_supplemental_operator_pause_v101183',false,false);
+            $supp=get_option('rg_events_supplemental_state',array());
+            if(is_array($supp)&&($supp['status']??'')==='running'){
+                $supp['operator_paused']=false;update_option('rg_events_supplemental_state',$supp,false);
+                wp_clear_scheduled_hook(self::EVENT_SUPPLEMENTAL_BATCH_HOOK);
+                wp_schedule_single_event(time()+5,self::EVENT_SUPPLEMENTAL_BATCH_HOOK);
+            }
+        } elseif(in_array($action,array('hot14','plan90','full365'),true)) {
+            if(get_option('rg_events_operator_manual_mode_v101185',false)){
+                $lock=$this->event_import_lock_v101101();
+                $night=get_option('rg_events_nightly_state',array());
+                $tierstate=get_option(self::EVENT_TIER_STATE,array());
+                $supp=get_option('rg_events_supplemental_state',array());
+                $blocked=!empty($lock)||(is_array($night)&&($night['status']??'')==='running')||(is_array($tierstate)&&($tierstate['status']??'')==='running');
+                if($action==='full365'&&is_array($supp)&&($supp['status']??'')==='running')$blocked=true;
+                if(is_array($supp)&&!empty($supp['inflight_city']))$blocked=true;
+                if($blocked)wp_die('Ein anderer Import ist noch aktiv oder der Master benötigt einen abgeschlossenen Zusatzfeed. Bitte den sicheren Abschluss abwarten.',409);
+                $this->event_sync_request_v101101($action,'operator');
+                update_option('rg_events_operator_selected_tier_v101185',$action,false);
+                $this->event_sync_schedule_dispatch_v101101(2);
+            }else{$this->event_sync_request_v101101($action,'manual');}
+        } else wp_die('Unbekannte Aktion',400);
+        wp_safe_redirect(admin_url('admin.php?page=rp-event-control&requested='.rawurlencode($action)));
+        exit;
+    }
+
+    /** v1.10.185: human-readable, per-process dashboard; existing actions and worker state are unchanged. */
+    private function event_control_duration_v101184($seconds) {
+        if(!is_numeric($seconds))return 'Nicht erfasst';
+        $seconds=max(0,(int)$seconds);
+        $days=intdiv($seconds,86400);$hours=intdiv($seconds%86400,3600);$minutes=intdiv($seconds%3600,60);
+        return ($days?$days.' T ':'').($hours?$hours.' Std. ':'').($minutes?$minutes.' Min. ':'').($seconds%60).' Sek.';
+    }
+
+    private function event_control_card_v101184($key,$name,$description,$snapshot,$actions=array()) {
+        $state=$snapshot['states'][$key]??array();
+        $status=(string)($state['status']??'nicht erfasst');
+        $queued=in_array($key,array('hot14','plan90','full365'),true)&&isset($snapshot['queue'][$key]);
+        if($queued&&$status!=='running')$status='queued';
+        $status_labels=array('finished'=>'Abgeschlossen','finished_with_failures'=>'Mit Fehlern beendet','running'=>'Läuft laut Status','waiting'=>'Wartet','waiting_lock'=>'Wartet auf Lock','queued'=>'In Warteschlange','idle'=>'Inaktiv','paused_scope'=>'Pausiert','paused'=>'Pausiert');
+        $label=$status_labels[$status]??($status==='nicht erfasst'?'Nicht erfasst':$status);
+        $color=in_array($status,array('finished'),true)?'#16803d':(in_array($status,array('running','queued','waiting','waiting_lock','paused_scope','paused','finished_with_failures'),true)?'#9a6000':'#50575e');
+        $start=(string)($state['started_at']??'');$finish=(string)($state['finished_at']??'');
+        $duration=$state['duration_seconds']??null;
+        $display_time=static function($raw){if(!$raw)return 'Nicht erfasst';$time=strtotime((string)$raw);return $time?wp_date('d.m.Y · H:i:s',$time):$raw;};
+        echo '<article class="pf-import-card"><div class="pf-import-head"><div><h3>'.esc_html($name).'</h3><p>'.esc_html($description).'</p></div><span class="pf-import-status" style="--pf-status:'.esc_attr($color).'">'.esc_html($label).'</span></div>';
+        if($key==='supplemental'){
+            $done=max(0,(int)($state['cities_done']??0));$total=max(0,(int)($state['cities_total']??0));$percent=$total?min(100,round(100*$done/$total)):0;
+            echo '<div class="pf-import-progress-label"><strong>Städte</strong><span>'.esc_html($done.' / '.$total).' ('.esc_html($percent).' %)</span></div><div class="pf-import-track" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'.esc_attr($percent).'"><span style="width:'.esc_attr($percent).'%"></span></div>';
+            if($snapshot['supplemental_operator_paused'])echo '<p class="pf-import-note">Manuelle Pause angefordert – wird an einer sicheren Stadtgrenze wirksam.</p>';
+        }
+        echo '<div class="pf-import-metrics">';
+        $metrics=array('Letzter Start'=>$display_time($start),'Letztes Ende'=>$display_time($finish),'Dauer'=>$this->event_control_duration_v101184($duration),'Neu'=>isset($state['inserted'])?number_format_i18n((int)$state['inserted']):'Nicht erfasst','Aktualisiert'=>isset($state['updated'])?number_format_i18n((int)$state['updated']):'Nicht erfasst','Verarbeitet'=>isset($state['events_ingested'])?number_format_i18n((int)$state['events_ingested']):(isset($state['processed'])?number_format_i18n((int)$state['processed']):'Nicht erfasst'),'Fehler'=>isset($state['errors'])?number_format_i18n((int)$state['errors']):'Nicht erfasst');
+        foreach($metrics as $title=>$value)echo '<div class="pf-import-metric"><span>'.esc_html($title).'</span><strong>'.esc_html($value).'</strong></div>';
+        echo '</div>';
+        if($queued){$requested=$snapshot['queue'][$key]['requested_at']??'';echo '<p class="pf-import-note">Bereits angefordert'.($requested?' am '.esc_html($display_time($requested)):'').'. Der Dispatcher entscheidet über den sicheren Start.</p>';}
+        if(!empty($state['last_error']))echo '<p class="pf-import-error"><strong>Letzter Fehler:</strong> '.esc_html((string)$state['last_error']).'</p>';
+        if(!empty($state['wait_reason']))echo '<p class="pf-import-note"><strong>Wartegrund:</strong> '.esc_html((string)$state['wait_reason']).'</p>';
+        echo '<div class="pf-import-actions">';
+        foreach($actions as $action=>$button){
+            $manual=!empty($snapshot['operator_manual_mode']);
+            $selected=(string)($snapshot['operator_selected_tier']??'');
+            $disabled=in_array($action,array('hot14','plan90','full365'),true)&&(($manual&&$selected!=='')||(!$manual&&isset($snapshot['queue'][$action])));
+            echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'"><input type="hidden" name="action" value="rpg_event_control_v101183"><input type="hidden" name="control_action" value="'.esc_attr($action).'">';
+            wp_nonce_field('rpg_event_control_v101183');
+            $caption=($manual&&in_array($action,array('hot14','plan90','full365'),true))?'Jetzt starten':$button;
+            echo '<button type="submit" class="button '.($action==='pause_supplemental'?'button-secondary':'button-primary').'"'.disabled($disabled,true,false).'>'.esc_html($caption).'</button></form>';
+        }
+        if(!$actions)echo '<span class="pf-import-note">Nur Überwachung – keine sichere Einzelsteuerung freigegeben.</span>';
+        echo '</div></article>';
+    }
+
+    public function render_event_control_v101183() {
+        if(!current_user_can('manage_options'))return;
+        $snapshot=$this->event_control_snapshot_v101183();
+        echo '<div class="wrap pf-import-dashboard"><h1>PottFuchs · Importzentrale</h1>';
+        echo '<p>Jeder Prozess mit Status, letzter Laufzeit und Eventzahlen. Ein manueller Start fordert einen Auftrag an; er erzwingt keinen parallelen Import.</p>';
+        echo '<style>
+        .pf-import-dashboard{max-width:1450px}.pf-import-dashboard .pf-import-summary{display:flex;gap:12px;flex-wrap:wrap;margin:16px 0 24px}.pf-import-dashboard .pf-import-summary>span{background:#fff;border:1px solid #dcdcde;border-radius:8px;padding:11px 14px}.pf-import-dashboard .pf-import-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,370px),1fr));gap:16px;margin:16px 0 28px}.pf-import-dashboard .pf-import-card{background:#fff;border:1px solid #dcdcde;border-radius:12px;padding:18px;box-shadow:0 1px 3px rgba(0,0,0,.04)}.pf-import-dashboard .pf-import-head{display:flex;align-items:flex-start;justify-content:space-between;gap:12px}.pf-import-dashboard .pf-import-head h3{font-size:17px;margin:0 0 5px}.pf-import-dashboard .pf-import-head p{margin:0 0 14px;color:#646970}.pf-import-dashboard .pf-import-status{font-size:12px;white-space:nowrap;color:var(--pf-status);border:1px solid var(--pf-status);border-radius:20px;padding:4px 9px;font-weight:650}.pf-import-dashboard .pf-import-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.pf-import-dashboard .pf-import-metric{padding:10px;background:#f6f7f7;border-radius:7px;min-width:0}.pf-import-dashboard .pf-import-metric span{display:block;font-size:12px;color:#50575e;margin-bottom:5px}.pf-import-dashboard .pf-import-metric strong{display:block;overflow-wrap:anywhere}.pf-import-dashboard .pf-import-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.pf-import-dashboard .pf-import-actions form{margin:0}.pf-import-dashboard .pf-import-note{color:#646970;font-size:12px}.pf-import-dashboard .pf-import-error{color:#b32d2e;overflow-wrap:anywhere}.pf-import-dashboard .pf-import-progress-label{display:flex;justify-content:space-between;margin:6px 0}.pf-import-dashboard .pf-import-track{height:10px;border-radius:8px;background:#e5e5e5;overflow:hidden;margin-bottom:14px}.pf-import-dashboard .pf-import-track span{display:block;background:#3858e9;height:100%}.pf-import-dashboard details.pf-import-tech{margin:18px 0;background:#fff;border:1px solid #dcdcde;border-radius:9px;padding:12px}.pf-import-dashboard details.pf-import-tech summary{cursor:pointer;font-weight:650}.pf-import-dashboard details.pf-import-tech table{margin-top:14px}@media(max-width:782px){.pf-import-dashboard .pf-import-grid{grid-template-columns:1fr}.pf-import-dashboard .pf-import-head{flex-wrap:wrap}}
+        </style>';
+        if(isset($_GET['requested']))echo '<div class="notice notice-success"><p>Aktion angefordert. Der tatsächliche Status steht in der jeweiligen Karte.</p></div>';
+        $lock_owner=(string)($snapshot['lock']['owner']??'');
+        echo '<div class="pf-import-summary"><span><strong>Stand:</strong> '.esc_html($snapshot['generated_at']).'</span><span><strong>Globaler Lock:</strong> '.esc_html($lock_owner?:'Frei').'</span><span><strong>Warteschlange:</strong> '.esc_html(count($snapshot['queue'])).' Aufträge</span><span><strong>Zusatzfeed-Pause:</strong> '.($snapshot['supplemental_operator_paused']?'Angefordert':'Nein').'</span></div>';
+        if(!empty($snapshot['dispatcher_wait']['reason']))echo '<div class="notice notice-warning inline"><p><strong>Dispatcher wartet:</strong> '.esc_html($snapshot['dispatcher_wait']['reason']).' ('.esc_html($snapshot['dispatcher_wait']['at']??'').')</p></div>';
+        $manual=!empty($snapshot['operator_manual_mode']);
+        echo '<div class="pf-import-card"><h2>Betriebsart: '.($manual?'Manuelle Einzelsteuerung':'Automatischer Zeitplan').'</h2>';
+        echo '<p>'.($manual?'Geplante Aufträge bleiben gespeichert, starten aber nicht selbst. Wähle nach dem sicheren Ende eines Imports den nächsten Auftrag.':'Automatische Zeitpläne und vorhandene Warteschlange bleiben aktiv.').'</p>';
+        echo '<form method="post" action="'.esc_url(admin_url('admin-post.php')).'">';
+        echo '<input type="hidden" name="action" value="rpg_event_control_v101183"><input type="hidden" name="control_action" value="'.($manual?'automatic_mode':'manual_mode').'">';
+        wp_nonce_field('rpg_event_control_v101183');
+        echo '<button class="button button-primary" type="submit">'.($manual?'Automatik wieder aktivieren':'Manuelle Steuerung aktivieren und Zusatzfeed pausieren').'</button></form>';
+        if($manual)echo '<p class="pf-import-note">Nach einer manuellen Auswahl startet ausschließlich dieser Import, sobald Lock und Quellstatus frei sind. Der 365-Tage-Master bleibt bei offenem Zusatzfeed aus Lifecycle-Schutzgründen gesperrt. „Pausieren“ beendet keine laufende HTTP-Anfrage.</p>';
+        echo '</div>';
+        echo '<h2>Event-Importe</h2><div class="pf-import-grid">';
+        $this->event_control_card_v101184('hot_plan','0–14 / 15–90 Tage · letzter Lauf','Gemeinsamer gespeicherter Tier-Status; die einzelnen Aufträge werden unten getrennt gesteuert.',$snapshot);
+        $this->event_control_card_v101184('master','365-Tage-Master','Vollständiger 0–365-Tage-Bestand und Lifecycle-Basis.',$snapshot,array('full365'=>'365-Tage-Master anfordern'));
+        $this->event_control_card_v101184('supplemental','53-Städte-Zusatzfeed','destination.one + Essen · Fortschritt bleibt beim Pausieren erhalten.',$snapshot,array('pause_supplemental'=>'Pausieren','resume_supplemental'=>'Fortsetzen'));
+        echo '</div><h2>Einzelne Importaufträge</h2><div class="pf-import-grid">';
+        $this->event_control_card_v101184('hot14','0–14 Tage','Kurzfristige Events · regulär alle vier Stunden.',$snapshot,array('hot14'=>'0–14 Tage anfordern'));
+        $this->event_control_card_v101184('plan90','15–90 Tage','Planungs-Events · regulär täglich.',$snapshot,array('plan90'=>'15–90 Tage anfordern'));
+        echo '</div><p class="description">Für die beiden Einzelaufträge gibt der bestehende Tier-Status derzeit keine getrennte Laufhistorie her. Fehlende Werte bleiben bewusst „Nicht erfasst“; der gemeinsame letzte Lauf steht darüber.</p>';
+        echo '<h2>Kommunale Kalender und Abgleich</h2><div class="pf-import-grid">';
+        $this->event_control_card_v101184('selm','Selm · kommunaler Kalender','Quellenabhängiger Kalender-Import.',$snapshot);
+        $this->event_control_card_v101184('coverage','Kommunaler Zusatzabgleich','Ergänzende Coverage- und Stadtverarbeitung.',$snapshot);
+        echo '</div><h2>Eventbilder und Datenpflege</h2><details><summary><strong>Bild- und Wartungsworker anzeigen</strong></summary><div class="pf-import-grid">';
+        foreach(array('media_et4'=>array('ET4-Bildzuordnung','Abgleich offizieller Katalogbilder.'),'media_raw'=>array('Rohfeed-Bildverarbeitung','Medien aus bestehenden Eventquellen.'),'media_local'=>array('Lokaler Eventbild-Cache','Lokale Speicherung verfügbarer Eventbilder.'),'media_fallback'=>array('Bild-Fallback-Audit','Prüfung zusätzlicher zulässiger Bilder.'),'media_context'=>array('Event-Ort-Bildzuordnung','Kontext- und Ortsbildzuordnung.'),'media_hash'=>array('Bild-Dublettenprüfung','Hash- und Dublettenanalyse.'),'rich_fields'=>array('Event-Zusatzfelder','Ergänzung vorhandener Eventdaten.')) as $key=>$info)$this->event_control_card_v101184($key,$info[0],$info[1],$snapshot);
+        echo '</div></details>';
+        echo '<details class="pf-import-tech"><summary>Technische Details · Cron-Hooks, Warteschlange und Diagnose-API</summary>';
+        echo '<p>Eine Anzeige „Läuft laut Status“ ist kein Beweis für einen aktiven PHP-Prozess. Für laufende Provider-Aufrufe gibt es kein hartes Stoppen. Alle Aktionen verwenden weiterhin die bestehende Event-Import-Sperre.</p>';
+        echo '<h3>Geplante Worker</h3><table class="widefat striped"><thead><tr><th>Cron-Hook</th><th>Nächster Termin</th></tr></thead><tbody>';
+        foreach($snapshot['cron'] as $hook=>$info)echo '<tr><td><code>'.esc_html($hook).'</code></td><td>'.esc_html($info['next_at']).'</td></tr>';
+        echo '</tbody></table><h3>Geschützte Diagnose-API</h3><p><code>'.esc_html(rest_url('ruhrpottguru/v1/admin/event-import-diagnostics')).'</code></p><p>Authentifizierte Administratoren, nur lesend. Der Zugriff aus ChatGPT erfordert weiterhin eine separate sichere Verbindung.</p></details></div>';
+    }
+
     public function admin_menu() {
         add_management_page('RuhrpottGuru Places', 'RuhrpottGuru Places', 'manage_options', 'ruhrpottguru-places', array($this,'render_admin_page'));
         add_menu_page(
@@ -17030,6 +17621,7 @@ RuhrpottGuru";
         add_submenu_page('rp-redaktion','RP Redaktion · Places','Places','manage_options','rp-places',array($this,'render_places_workspace_v1077'));
         add_submenu_page('rp-redaktion','RP Redaktion · Medien','Medien','manage_options','rp-redaktion-medien',array($this,'render_rp_editor_media_page'));
         add_submenu_page('rp-redaktion','RP Redaktion · Events','Events','manage_options','rp-events',array($this,'render_rp_events_page'));
+        add_submenu_page('rp-redaktion','RP Redaktion · Importzentrale','Importzentrale','manage_options','rp-event-control',array($this,'render_event_control_v101183'));
         add_submenu_page('rp-redaktion','RP Redaktion · Labor','Labor','manage_options','rp-labor',array($this,'render_rp_labor_page'));
         add_submenu_page('rp-redaktion','RP Redaktion · Öffnungszeiten','Öffnungszeiten','manage_options','rp-opening-hours',array($this,'render_opening_hours_page'));
         add_submenu_page('rp-redaktion','RP Redaktion · Community','Community','edit_posts','edit.php?post_type=rpg_community');
@@ -18085,6 +18677,31 @@ RuhrpottGuru";
     public function cron_events_supplemental_refresh_batch() {
         $state=get_option('rg_events_supplemental_state',array());
         if(!is_array($state)||($state['status']??'')!=='running'){return;}
+        // 1.10.183: operator pause is honored only at a safe city boundary.
+        if (get_option('rg_events_supplemental_operator_pause_v101183', false)) {
+            if (empty($state['inflight_city'])) {
+                $this->event_import_lock_release_v101101('supplemental');
+                $state['operator_paused']=true;
+                $state['wait_reason']='Manuell pausiert (Stadt-Cursor bleibt erhalten)';
+                update_option('rg_events_supplemental_state',$state,false);
+                wp_clear_scheduled_hook(self::EVENT_SUPPLEMENTAL_BATCH_HOOK);
+                return;
+            }
+        }
+        // 1.10.182: yield only between city requests; retain cursor, token and lifecycle state.
+        // Do not take the lock back while a short ET4 wave is running.
+        $tierState=get_option(self::EVENT_TIER_STATE,array());
+        if(is_array($tierState)&&($tierState['status']??'')==='running'){
+            $state['yield_for_short_refresh']=true;
+            $state['wait_reason']='ET4-Kurzrefresh läuft';
+            $state['last_wait_at']=current_time('mysql');
+            update_option('rg_events_supplemental_state',$state,false);
+            wp_clear_scheduled_hook(self::EVENT_SUPPLEMENTAL_BATCH_HOOK);
+            wp_schedule_single_event(time()+120,self::EVENT_SUPPLEMENTAL_BATCH_HOOK);
+            return;
+        }
+        if($this->event_supplemental_short_refresh_pending_v101182() &&
+           $this->event_supplemental_yield_v101182($state))return;
         // 1.10.160: a newly requested/resuming WeselMarketing run gets the next
         // serial event-import slot. The 53-city supplemental wave is resumable by
         // city_index, so yielding here loses no data and prevents lock ping-pong.
@@ -18095,6 +18712,11 @@ RuhrpottGuru";
             wp_clear_scheduled_hook(self::EVENT_SUPPLEMENTAL_BATCH_HOOK);wp_schedule_single_event(time()+300,self::EVENT_SUPPLEMENTAL_BATCH_HOOK);return;
         }
         $this->event_import_lock_touch_v101101('supplemental');
+        if(!empty($state['yield_for_short_refresh'])){
+            $state['yield_for_short_refresh']=false;
+            $state['wait_reason']='';
+            update_option('rg_events_supplemental_state',$state,false);
+        }
         $this->pause_event_enrichment_for_supplemental();
 
         if($this->places_import_actively_running()){
@@ -18232,6 +18854,13 @@ RuhrpottGuru";
         $this->pause_event_enrichment_for_supplemental();
         $next=wp_next_scheduled(self::EVENT_SUPPLEMENTAL_BATCH_HOOK);$overdue=$next && $next < time()-30;
         $last=0;foreach(array('last_progress_at','last_attempt_at','last_wait_at','started_at') as $tf){if(!empty($state[$tf])){$tt=strtotime((string)$state[$tf]);if($tt)$last=max($last,$tt);}}$stale=$last>0&&$last<time()-15*MINUTE_IN_SECONDS;
+        if(!empty($state['yield_for_short_refresh'])&&is_array(get_option(self::EVENT_TIER_STATE,array()))){
+            $tier=get_option(self::EVENT_TIER_STATE,array());
+            if(($tier['status']??'')==='running'){
+                if(!$next)wp_schedule_single_event(time()+120,self::EVENT_SUPPLEMENTAL_BATCH_HOOK);
+                return;
+            }
+        }
         if(!$next || $overdue || $stale){
             if($stale){$state['watchdog_recovered_at']=current_time('mysql');$state['watchdog_reason']='Supplemental-Heartbeat älter als 15 Minuten';update_option('rg_events_supplemental_state',$state,false);}
             wp_clear_scheduled_hook(self::EVENT_SUPPLEMENTAL_BATCH_HOOK);wp_schedule_single_event(time()+3,self::EVENT_SUPPLEMENTAL_BATCH_HOOK);if(function_exists('spawn_cron'))spawn_cron();

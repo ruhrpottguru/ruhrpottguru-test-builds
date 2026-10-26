@@ -1,0 +1,441 @@
+{
+  "captured": "2026-10-21",
+  "route": "POST /wp-json/ruhrpottguru/v1/global-search",
+  "limit": 50,
+  "queries": [
+    {
+      "q": "italian Wesel",
+      "total": 7,
+      "rows": [
+        {
+          "id": "place:10377",
+          "name": "Antonella",
+          "city": "Wesel",
+          "street": "Kornmarkt",
+          "primary_category": "food",
+          "primary_subcategory": "Gastronomie",
+          "raw_tags": "{\"addr:city\": \"Wesel\", \"addr:street\": \"Kornmarkt\", \"amenity\": \"restaurant\", \"cuisine\": \"italian\", \"name\": \"Antonella\", \"website\": \"https://www.restaurant-antonella.com/\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:4220",
+          "name": "Pizzeria Toscana",
+          "city": "Haltern am See",
+          "street": "Weseler Straße",
+          "primary_category": "food",
+          "primary_subcategory": "Gastronomie",
+          "raw_tags": "{\"addr:city\": \"Haltern am See\", \"addr:street\": \"Weseler Straße\", \"amenity\": \"restaurant\", \"cuisine\": \"italian\", \"name\": \"Pizzeria Toscana\", \"website\": \"http://www.toscana-haltern.de/\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:10587",
+          "name": "La Roma",
+          "city": "Wesel",
+          "street": "Isselstraße",
+          "primary_category": "food",
+          "primary_subcategory": "Gastronomie",
+          "raw_tags": "{\"addr:city\": \"Wesel\", \"addr:street\": \"Isselstraße\", \"amenity\": \"restaurant\", \"cuisine\": \"italian\", \"name\": \"La Roma\", \"website\": \"https://pizzeria-la-roma-wesel.order.dish.co/menus\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:10521",
+          "name": "Gusto",
+          "city": "Wesel",
+          "street": "Rudolf-Diesel-Straße",
+          "primary_category": "food",
+          "primary_subcategory": "Gastronomie",
+          "raw_tags": "{\"addr:city\": \"Wesel\", \"addr:street\": \"Rudolf-Diesel-Straße\", \"amenity\": \"restaurant\", \"cuisine\": \"italian\", \"name\": \"Gusto\", \"website\": \"https://gusto-cubes.de/\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:10386",
+          "name": "Café-Bistro Oliv",
+          "city": "Wesel",
+          "street": "Kreuzstraße",
+          "primary_category": "food",
+          "primary_subcategory": "Gastronomie",
+          "raw_tags": "{\"addr:city\": \"Wesel\", \"addr:street\": \"Kreuzstraße\", \"amenity\": \"restaurant\", \"cuisine\": \"italian\", \"name\": \"Café-Bistro Oliv\", \"website\": \"https://www.kreis-wesel.de/\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:10382",
+          "name": "Pizzeria Stefano",
+          "city": "Wesel",
+          "street": "Fluthgrafstraße",
+          "primary_category": "food",
+          "primary_subcategory": "Gastronomie",
+          "raw_tags": "{\"addr:city\": \"Wesel\", \"addr:street\": \"Fluthgrafstraße\", \"amenity\": \"restaurant\", \"cuisine\": \"italian\", \"name\": \"Pizzeria Stefano\", \"website\": \"https://pizzeria-stefano-wesel.order.app.hd.digital/local/hours\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:4360",
+          "name": "Rendezvous Haltern",
+          "city": "Haltern am See",
+          "street": "Weseler Straße",
+          "primary_category": "food",
+          "primary_subcategory": "Gastronomie",
+          "raw_tags": "{\"addr:city\": \"Haltern am See\", \"addr:street\": \"Weseler Straße\", \"amenity\": \"restaurant\", \"cuisine\": \"italian\", \"name\": \"Rendezvous Haltern\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        }
+      ],
+      "responseSha256": "c24b4bbe31185364fcb306cbf8f0be7e11e5106585d95c3123afa3cd3ef38ec4"
+    },
+    {
+      "q": "Italienisch Wesel",
+      "total": 0,
+      "rows": [],
+      "responseSha256": "60767c35cc46328f198c2f60f78260ff9b0040fac76da74e0fe873bc7751f590"
+    },
+    {
+      "q": "Topgolf Oberhausen",
+      "total": 1,
+      "rows": [
+        {
+          "id": "place:8577",
+          "name": "Topgolf",
+          "city": "Oberhausen",
+          "street": "Brammenring",
+          "primary_category": "activities",
+          "primary_subcategory": "Outdoor & Entdecken",
+          "raw_tags": "{\"addr:city\": \"Oberhausen\", \"addr:street\": \"Brammenring\", \"name\": \"Topgolf\", \"website\": \"https://topgolfoberhausen.com/\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        }
+      ],
+      "responseSha256": "e625fa517579968ae08fc78bd8e82d66fd5284e8cede6e5ac9f9604f88e9aa42"
+    },
+    {
+      "q": "Zollverein",
+      "total": 73,
+      "rows": [
+        {
+          "id": "place:19034",
+          "name": "Kinder- und Familienzentrum BLAUER ELEFANT Zollverein",
+          "city": "Essen",
+          "street": "Viktoriastraße",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"addr:city\": \"Essen\", \"addr:street\": \"Viktoriastraße\", \"amenity\": \"kindergarten\", \"name\": \"Kinder- und Familienzentrum BLAUER ELEFANT Zollverein\", \"website\": \"https://www.dksb-essen.de/kinderbetreuung/kitas-familienzentren/katernberg/\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:18683",
+          "name": "Mischanlage [C70]",
+          "city": "Essen",
+          "street": "Kokereiallee",
+          "primary_category": "highlights",
+          "primary_subcategory": "Highlights & Ausflugsziele",
+          "raw_tags": "{\"addr:city\": \"Essen\", \"addr:street\": \"Kokereiallee\", \"name\": \"Mischanlage [C70]\", \"website\": \"https://www.zollverein.de/\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:18673",
+          "name": "Zeche Zollverein",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Zeche Zollverein\", \"website\": \"https://www.zollverein.de/\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:17830",
+          "name": "Skulpturenpark Zollverein",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Skulpturenpark Zollverein\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:19035",
+          "name": "Zollvereinschule",
+          "city": "Essen",
+          "street": "Heinrich-Lersch-Straße",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"addr:city\": \"Essen\", \"addr:street\": \"Heinrich-Lersch-Straße\", \"amenity\": \"school\", \"name\": \"Zollvereinschule\", \"website\": \"https://zollvereinschule.de/\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:18833",
+          "name": "Maschinenhaus Schacht 10",
+          "city": "Essen",
+          "street": "Am Handwerkerpark",
+          "primary_category": "highlights",
+          "primary_subcategory": "Industriekultur & Landmarken",
+          "raw_tags": "{\"addr:city\": \"Essen\", \"addr:street\": \"Am Handwerkerpark\", \"name\": \"Maschinenhaus Schacht 10\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:17427",
+          "name": "Kolonie Zollverein III (Schlägel & Eisen)",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Kolonie Zollverein III (Schlägel & Eisen)\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\", \"website\": \"https://de-academic.com/dic.nsf/dewiki/784661\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:17824",
+          "name": "UNESCO-Welterbe Zollverein",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"UNESCO-Welterbe Zollverein\", \"website\": \"https://www.zollverein.de/\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:17145",
+          "name": "Zeche Zollverein (Schacht 4/5/11)",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Zeche Zollverein (Schacht 4/5/11)\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\", \"website\": \"https://www.zollverein.de/\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:17013",
+          "name": "Kokerei Zollverein",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Kokerei Zollverein\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:18671",
+          "name": "Kokerei Zollverein",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Kokerei Zollverein\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\", \"website\": \"http://www.zollverein.de/\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:17240",
+          "name": "Seilscheibe von Zeche Zollverein",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Seilscheibe von Zeche Zollverein\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:19321",
+          "name": "Sonnenrad",
+          "city": "Essen",
+          "street": "",
+          "primary_category": "highlights",
+          "primary_subcategory": "Highlights & Ausflugsziele",
+          "raw_tags": "{\"name\": \"Sonnenrad\", \"addr:city\": \"Essen\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:17010",
+          "name": "Zollverein / Kraftwerk Scholven",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Zollverein / Kraftwerk Scholven\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:17140",
+          "name": "Zollverein Schacht 10",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Zollverein Schacht 10\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:18724",
+          "name": "Bürger- u. Handwerkerpark Zeche Zollverein 3/7/10",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Bürger- u. Handwerkerpark Zeche Zollverein 3/7/10\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\", \"website\": \"https://www.mypacer.com/parks/184966/burger-u-handwerkerpark-zeche-zollverein-3-7-10-essen\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:19417",
+          "name": "Experiment Kleingarten - \"Zollverein mittendrin\"",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Experiment Kleingarten - \\\"Zollverein mittendrin\\\"\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:17632",
+          "name": "Zollverein Schacht 2",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Zollverein Schacht 2\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\", \"website\": \"https://zechenkarte.de/wiki/index.php?title=Zollverein_Schacht_2\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:17634",
+          "name": "Zollverein Schacht 3",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Zollverein Schacht 3\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\", \"website\": \"https://www.essen.de/organisationen/detail_1189055.de.html\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:17636",
+          "name": "Zollverein Schacht 6",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Zollverein Schacht 6\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\", \"website\": \"http://zechenkarte.de/wiki/index.php?title=Zollverein_Schacht_6\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:19378",
+          "name": "Zollverein Schacht 7",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Zollverein Schacht 7\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\", \"website\": \"http://zechenkarte.de/wiki/index.php?title=Zollverein_Schacht_7\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:17633",
+          "name": "Zollverein Schacht 8",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Zollverein Schacht 8\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:17637",
+          "name": "Zollverein Schacht 9",
+          "city": "Essen",
+          "street": "Gelsenkirchener Str.",
+          "primary_category": "highlights",
+          "primary_subcategory": "Route Industriekultur · Ankerpunkt",
+          "raw_tags": "{\"name\": \"Zollverein Schacht 9\", \"addr:street\": \"Gelsenkirchener Str.\", \"addr:city\": \"Essen\", \"website\": \"https://zechenkarte.de/wiki/index.php?title=Zollverein_Schacht_9\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:18698",
+          "name": "Schaudepot Ruhr Museum",
+          "city": "Essen",
+          "street": "Heinrich-Imig-Straße",
+          "primary_category": "culture",
+          "primary_subcategory": "Museum & Ausstellung",
+          "raw_tags": "{\"addr:city\": \"Essen\", \"addr:street\": \"Heinrich-Imig-Straße\", \"name\": \"Schaudepot Ruhr Museum\", \"website\": \"https://www.zollverein.de/erleben/ruhr-museum/schaudepot-ruhr-museum/\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:18209",
+          "name": "Kunstschacht Zollverein",
+          "city": "Essen",
+          "street": "Bullmannaue",
+          "primary_category": "culture",
+          "primary_subcategory": "Kulturzentrum & Kunst",
+          "raw_tags": "{\"addr:city\": \"Essen\", \"addr:street\": \"Bullmannaue\", \"amenity\": \"arts_centre\", \"name\": \"Kunstschacht Zollverein\", \"website\": \"https://www.zollverein.de/\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:18490",
+          "name": "Orbit",
+          "city": "Essen",
+          "street": "Gelsenkirchener Straße",
+          "primary_category": "culture",
+          "primary_subcategory": "Kulturzentrum & Kunst",
+          "raw_tags": "{\"addr:city\": \"Essen\", \"addr:street\": \"Gelsenkirchener Straße\", \"amenity\": \"arts_centre\", \"name\": \"Orbit\", \"website\": \"https://www.zollverein.de/\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:18781",
+          "name": "pact zollverein",
+          "city": "Essen",
+          "street": "Bullmannaue",
+          "primary_category": "culture",
+          "primary_subcategory": "Theater & Bühne",
+          "raw_tags": "{\"addr:city\": \"Essen\", \"addr:street\": \"Bullmannaue\", \"amenity\": \"theatre\", \"name\": \"pact zollverein\", \"website\": \"https://www.pact-zollverein.de/\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:17018",
+          "name": "Schacht XII, Bistro",
+          "city": "Essen",
+          "street": "Gelsenkirchener Straße",
+          "primary_category": "food",
+          "primary_subcategory": "Imbiss & Streetfood",
+          "raw_tags": "{\"addr:city\": \"Essen\", \"addr:street\": \"Gelsenkirchener Straße\", \"amenity\": \"fast_food\", \"cuisine\": \"regional\", \"name\": \"Schacht XII, Bistro\", \"website\": \"https://www.zollverein.de/besuch-planen/essentrinken/bistro-schacht-xii/\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        },
+        {
+          "id": "place:16845",
+          "name": "Casino Zollverein",
+          "city": "Essen",
+          "street": "Gelsenkirchener Straße",
+          "primary_category": "food",
+          "primary_subcategory": "Gastronomie",
+          "raw_tags": "{\"addr:city\": \"Essen\", \"addr:street\": \"Gelsenkirchener Straße\", \"amenity\": \"restaurant\", \"name\": \"Casino Zollverein\", \"website\": \"https://casino-zollverein.de/\"}",
+          "active": 1,
+          "lifecycle_status": "active"
+        }
+      ],
+      "responseSha256": "7e3010579206ee2858244df413e92ca787caef1e12bee7ec759ab1f62603ccc3"
+    }
+  ]
+}

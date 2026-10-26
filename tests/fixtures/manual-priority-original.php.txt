@@ -1,0 +1,5 @@
+    private function event_supplemental_short_refresh_pending_v101182() {
+        $queue=get_option(self::EVENT_TIER_QUEUE,array());
+        return is_array($queue)&&(isset($queue['hot14'])||isset($queue['plan90']));
+    }
+

@@ -1,0 +1,27 @@
+name: PottFuchs manual import priority
+on:
+  push:
+    branches: [fix/manual-supplemental-priority]
+  pull_request:
+    paths: ['tests/manual_import_priority.php', '.github/workflows/pottfuchs-manual-priority.yml']
+permissions:
+  contents: read
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: PHP syntax and functional regression
+        run: |
+          find wordpress/plugins/ruhrpott-guru-places -name '*.php' -print0 | xargs -0 -n1 php -l
+          php tests/manual_import_priority.php
+      - name: Confirm original fails the new acceptance criterion
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php').read_text()
+          start=p.index('    private function event_supplemental_short_refresh_pending_v101182(')
+          end=p.index('    private function event_supplemental_yield_v101182(',start)
+          Path('/tmp/original.php').write_text(p[:start]+Path('tests/fixtures/manual-priority-original.php.txt').read_text()+p[end:])
+          PY
+          if php tests/manual_import_priority.php /tmp/original.php; then echo 'Expected original to fail'; exit 1; fi

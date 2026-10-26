@@ -1,0 +1,17 @@
+{
+    "status": "passed",
+    "assertions": 174,
+    "engine": "8.5.10",
+    "fixtureQueries": 4,
+    "fixtureRows": 50,
+    "italianWeselIds": [
+        "place:10377",
+        "place:10382",
+        "place:10386",
+        "place:10521",
+        "place:10587",
+        "test:compact",
+        "test:seq"
+    ],
+    "scope": "production PHP SQL-builder and SQLite fixtures; no claim of live MySQL deployment"
+}
