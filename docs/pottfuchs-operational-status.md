@@ -77,7 +77,7 @@ Aktuellster, korrigierter Nachweis: [HTTP/SEO-Audit-Lauf 40311669897](https://gi
 
 ## Android-Quellabgleich am 26.10.2026
 
-Der archivierte Play-Quellstand 0.20.0-beta.2 verwendet weiterhin dieselbe Paketkennung. Der für diesen Stand ererbte Manifest-Intent-Filter nennt nur die beiden alten RuhrpottGuru-Hosts für Zeitreise-Links, nicht pottfuchs.de. Die aktuelle installierte APK ist damit nicht bewiesen. Kein Manifest- oder Server-Change ohne vollständigen Versionsabgleich.
+**Quellenbeleg:** Archivzweig `android-play-v0.20.0-beta.2-source`, `release-checks.json` bestätigt die bisherige Paketkennung `de.ruhrpottguru.app` (v0.20.0-beta.2, Stand 21.10.). `AndroidManifest.xml` des ererbten v0.19.0-beta.2-Quellstands nennt für Zeitreise nur `www.ruhrpottguru.de` und `ruhrpottguru.de` sowie die Pfade `/z/` und `/zeitreise-von-oben`, mit `android:autoVerify=false`; **kein Intent-Host für pottfuchs.de**. Auch das öffentliche App-Label ist dort noch `RuhrpottGuru`. Das belegt ein **Migrationsrisiko im archivierten Quellzweig**, nicht das Verhalten einer tatsächlich installierten APK. Die Paketkennung, alten Hosts und technischen REST-Verträge dürfen nicht entfernt werden. Vor einer nächsten App-Version neuen Domain-Intent gezielt ergänzen, vorhandene Intent-Filter erhalten und App-Link-/Signatur-Verifizierung gesondert testen. Kein App-Release aus diesem Audit.
 
 ## Offene Aufgaben in fester Reihenfolge
 
