@@ -1,0 +1,28 @@
+name: Correct archived SEO title scope (development branch only)
+on:
+  push:
+    branches:
+      - pottfuchs-seo-fix
+    paths:
+      - 'tools/pottfuchs_fix_archival_title_scope.py'
+      - '.github/workflows/pottfuchs-correct-archival-seo-scope.yml'
+permissions:
+  contents: write
+jobs:
+  safe-archive-patch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Guard target branch
+        run: test "$GITHUB_REF_NAME" = "pottfuchs-seo-fix"
+      - name: Exact archived SEO fix with PHP lint
+        run: python3 tools/pottfuchs_fix_archival_title_scope.py
+      - name: Commit only guarded archive correction
+        run: |
+          git config user.name "PottFuchs Automation"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php
+          git diff --cached --check
+          git commit -m "fix(seo): limit approved title-locality exception to Place ID 16936"
+          git push origin HEAD:pottfuchs-seo-fix
