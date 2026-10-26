@@ -1,0 +1,183 @@
+#!/usr/bin/env python3
+"""PottFuchs public READ-ONLY HTTP/SEO smoke audit. No WordPress credentials or writes."""
+import datetime as dt
+import hashlib
+import json
+import re
+from html.parser import HTMLParser
+from pathlib import Path
+from urllib.error import HTTPError, URLError
+from urllib.parse import urljoin, urlparse
+from urllib.request import HTTPRedirectHandler, Request, build_opener
+
+HOST = "www.pottfuchs.de"
+MAX_HOPS = 8
+LIMIT = 2500000
+
+class NoRedirect(HTTPRedirectHandler):
+    def redirect_request(self, req, fp, code, msg, headers, newurl):
+        return None
+
+def get(url):
+    opener = build_opener(NoRedirect())
+    seen, chain = set(), []
+    for _ in range(MAX_HOPS + 1):
+        if url in seen:
+            return {"chain": chain, "error": "redirect loop", "url": url}
+        seen.add(url)
+        try:
+            response = opener.open(Request(url, headers={"User-Agent":"PottFuchsReadOnlyAudit/1.0"}), timeout=15)
+        except HTTPError as exc:
+            response = exc
+        except (URLError, TimeoutError, OSError) as exc:
+            return {"chain": chain, "error": str(exc)[:220], "url": url}
+        with response as r:
+            status = r.status
+            location = r.headers.get("Location")
+            chain.append({"url": url, "status": status, "location": location})
+            if status in (301,302,303,307,308) and location:
+                url = urljoin(url,location)
+                continue
+            data = r.read(LIMIT+1)
+            return {"chain":chain, "url":url, "status":status,
+                    "truncated":len(data)>LIMIT,
+                    "sha256":hashlib.sha256(data).hexdigest(),
+                    "body":data[:LIMIT].decode("utf-8","replace")}
+    return {"chain":chain, "error":"too many redirects", "url":url}
+
+class SEO(HTMLParser):
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.title = ""
+        self.intitle = False
+        self.h1 = 0
+        self.meta = []
+        self.links = []
+        self.inschema = False
+        self.schema = []
+    def handle_starttag(self,tag,attrs):
+        a = dict(attrs)
+        if tag=="title": self.intitle=True
+        if tag=="h1": self.h1+=1
+        if tag=="meta": self.meta.append(a)
+        if tag=="link": self.links.append(a)
+        if tag=="script" and a.get("type","").lower()=="application/ld+json":
+            self.inschema=True
+            self.schema.append("")
+    def handle_endtag(self,tag):
+        if tag=="title": self.intitle=False
+        if tag=="script": self.inschema=False
+    def handle_data(self,data):
+        if self.intitle: self.title+=data
+        if self.inschema and self.schema: self.schema[-1]+=data
+
+def parse_seo(html):
+    p=SEO()
+    p.feed(html)
+    canon=[x.get("href") for x in p.links if "canonical" in x.get("rel","").lower().split()]
+    icons=[x.get("href") for x in p.links if "icon" in x.get("rel","").lower().split()]
+    descriptions=[x.get("content") for x in p.meta if x.get("name","").lower()=="description"]
+    og=[x.get("content") for x in p.meta if x.get("property","").lower()=="og:site_name"]
+    brand=[]
+    types=set()
+    for raw in p.schema:
+        try: stack=[json.loads(raw)]
+        except ValueError: continue
+        while stack:
+            obj=stack.pop()
+            if isinstance(obj,list): stack.extend(obj)
+            if isinstance(obj,dict):
+                ts=obj.get("@type",[])
+                if isinstance(ts,str): ts=[ts]
+                if isinstance(ts,list):
+                    types.update(str(v) for v in ts)
+                    if any(x in ("WebSite","Organization") for x in ts):
+                        brand.append({"type":ts, "name":obj.get("name")})
+                stack.extend(v for v in obj.values() if isinstance(v,(dict,list)))
+    return {"title":p.title.strip(),"h1":p.h1,"canonical":canon,"descriptions":descriptions,
+            "icons":icons,"og_site_name":og,"brand_schema":brand,"schema_types":sorted(types)}
+
+def clean(x):
+    return {k:v for k,v in x.items() if k!="body"}
+
+def main():
+    report={"at_utc":dt.datetime.now(dt.timezone.utc).isoformat(),
+            "method":"Public HTTP GET + TLS verification + HTML smoke test; no browser/Google indexing verification",
+            "redirects":[],"pages":[],"resources":[],"issues":[]}
+    roots=["http://pottfuchs.de/","https://pottfuchs.de/","http://www.pottfuchs.de/",
+           "https://www.pottfuchs.de/","http://ruhrpottguru.de/","https://ruhrpottguru.de/",
+           "http://www.ruhrpottguru.de/","https://www.ruhrpottguru.de/",
+           "https://www.ruhrpottguru.de/impressum/",
+           "https://www.ruhrpottguru.de/ort/16936/essen/zum-schwarzen/"]
+    for url in roots:
+        x=get(url)
+        old="ruhrpottguru.de" in url
+        expected=urlparse(url).path
+        final=urlparse(x["url"])
+        issues=[]
+        if x.get("error"): issues.append("REQUEST_ERROR "+x["error"])
+        else:
+            if x.get("status")!=200: issues.append("FINAL_STATUS_"+str(x["status"]))
+            if final.hostname!=HOST or final.scheme!="https": issues.append("NOT_CANONICAL_HOST")
+            if final.path!=expected: issues.append("PATH_CHANGED")
+            if old and (not x["chain"] or x["chain"][0]["status"]!=301): issues.append("OLD_DOMAIN_FIRST_HOP_NOT_301")
+        report["redirects"].append({"start":url, **clean(x),"issues":issues})
+        report["issues"].extend("REDIRECT "+url+": "+i for i in issues)
+    pages=[
+        "https://www.pottfuchs.de/",
+        "https://www.pottfuchs.de/ort/16936/essen/zum-schwarzen/",
+        "https://www.pottfuchs.de/ort/10523/wesel/weseler-wirtshaus/",
+        "https://www.pottfuchs.de/veranstaltung/6936/essen/77-essener-lichtwochen/",
+        "https://www.pottfuchs.de/datenschutzerklaerung/",
+        "https://www.pottfuchs.de/impressum/",
+        "https://www.pottfuchs.de/zeitreise-von-oben/",
+        "https://www.pottfuchs.de/stadt/wesel/sehenswuerdigkeiten/"]
+    icons=set()
+    for url in pages:
+        x=get(url)
+        seo=parse_seo(x.get("body","")) if x.get("status")==200 else {}
+        issues=[]
+        if x.get("error"): issues.append("REQUEST_ERROR "+x["error"])
+        elif x.get("status")!=200: issues.append("HTTP_"+str(x["status"]))
+        else:
+            if len(seo["canonical"])>1: issues.append("DUPLICATE_CANONICAL")
+            if len(seo["descriptions"])>1: issues.append("DUPLICATE_META_DESCRIPTION")
+            if any(urlparse(c or "").hostname not in (None,HOST) for c in seo["canonical"]): issues.append("OLD_OR_FOREIGN_CANONICAL")
+            if re.search("RuhrpottGuru",seo["title"],re.I): issues.append("OLD_BRAND_TITLE")
+            if any(re.search("RuhrpottGuru",str(b.get("name","")),re.I) for b in seo["brand_schema"]): issues.append("OLD_BRAND_SCHEMA")
+            if "RuhrpottGuru-Standort" in x.get("body",""): issues.append("OLD_BRAND_VISIBLE_TIME_TRAVEL")
+            if "/ort/" in url or "/veranstaltung/" in url:
+                if len(seo["canonical"])!=1: issues.append("DETAIL_CANONICAL_COUNT")
+                if len(seo["descriptions"])!=1: issues.append("DETAIL_DESCRIPTION_COUNT")
+                if seo["h1"]!=1: issues.append("DETAIL_H1_COUNT")
+            icons.update(urljoin(url,i) for i in seo["icons"] if i)
+        report["pages"].append({"start":url, **clean(x),"seo":seo,"issues":issues})
+        report["issues"].extend("PAGE "+url+": "+i for i in issues)
+    icons.add("https://www.pottfuchs.de/wp-content/themes/ruhrpott-guru/favicon.svg")
+    for url in sorted(icons):
+        x=get(url)
+        issues=[]
+        if x.get("error") or x.get("status")!=200: issues.append("ICON_UNREACHABLE")
+        if "<!-- Main A-frame tower -->" in x.get("body",""): issues.append("OLD_MINING_TOWER_SVG")
+        report["resources"].append({"start":url,**clean(x),"issues":issues})
+        report["issues"].extend("ICON "+url+": "+i for i in issues)
+    for url in ("https://www.pottfuchs.de/robots.txt","https://www.pottfuchs.de/wp-sitemap.xml",
+                "https://www.pottfuchs.de/rpg-sitemap.xml"):
+        x=get(url)
+        issues=[]
+        if x.get("error") or x.get("status")!=200: issues.append("RESOURCE_UNREACHABLE")
+        if "sitemap" in url and re.search(r"<loc>\s*https?://(?:www\.)?ruhrpottguru\.de",x.get("body",""),re.I):
+            issues.append("OLD_DOMAIN_SITEMAP_SAMPLE")
+        report["resources"].append({"start":url,**clean(x),"issues":issues})
+        report["issues"].extend("RESOURCE "+url+": "+i for i in issues)
+    output=Path("audit/pottfuchs-public-audit.json")
+    output.parent.mkdir(parents=True,exist_ok=True)
+    output.write_text(json.dumps(report,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
+    print("POTT FUCHS PUBLIC READ-ONLY AUDIT",report["at_utc"])
+    print("REDIRECT CHAINS",len(report["redirects"]),"HTML PAGES",len(report["pages"]),
+          "RESOURCES",len(report["resources"]),"ISSUES",len(report["issues"]))
+    for issue in report["issues"]: print("-",issue)
+    print("FULL REPORT",output)
+    return 0
+
+if __name__=="__main__": raise SystemExit(main())
