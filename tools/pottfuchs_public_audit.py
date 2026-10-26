@@ -118,7 +118,9 @@ def main():
            "https://www.ruhrpottguru.de/food/",
            "https://www.ruhrpottguru.de/stadt/wesel/sehenswuerdigkeiten/",
            "https://www.ruhrpottguru.de/halloween-im-pott/",
-           "https://www.ruhrpottguru.de/wp-json/"]
+           "https://www.ruhrpottguru.de/wp-json/",
+           "https://www.ruhrpottguru.de/veranstaltungen/?place=wesel&radius=10",
+           "https://www.ruhrpottguru.de/ort/16936/essen/zum-schwarzen/?utm_source=oldbrand"]
     for url in roots:
         x=get(url)
         old="ruhrpottguru.de" in url
@@ -130,6 +132,7 @@ def main():
         else:
             if x.get("status")!=200: issues.append("FINAL_STATUS_"+str(x["status"]))
             if final.path!=expected: issues.append("PATH_CHANGED")
+            if final.query!=urlparse(url).query: issues.append("QUERY_CHANGED")
             if is_api:
                 # A deliberate old-host REST API exception is not a broken
                 # public-page redirect. This is a GET-only reachability probe.
