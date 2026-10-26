@@ -24,3 +24,12 @@ Laut Nutzer funktioniert `topgolf`; `topgolf oberhausen` und `top golf oberhause
 ## GitHub-Übernahme am 19.10.2026
 
 Nach Installation der GitHub-App war der tatsächliche Blob-Schreibtest erfolgreich. Dieser Commit übernimmt den unveränderten Archivbestand samt Ablageregeln und Dateiinventar. Anschließend werden der gespeicherte Git-Tree und der Wiederabruf gegen den lokalen Bestand geprüft. WordPress wird dadurch nicht verändert.
+
+
+## Domainwechsel-SEO Entwicklungszweig 26.10.2026 – nicht installieren
+
+Branch `pottfuchs-seo-fix` enthält eine gezielte, noch nicht freigegebene Änderung am archivierten Places-Backend v1.10.169: Ortsnamen plus Stadt nur im HTML-SEO-Titel; WordPress-Sitenamen in bestehenden öffentlich sichtbaren Detail-, Share- und Stadt-Metadaten; kein Eingriff in URL, H1, Canonical, JSON-LD-Entity-Namen, Kategorien oder Ranking. Das vorhandene SVG-Favicon bleibt unverändert.
+
+**Beispiel:** Bei WordPress-Sitenamen `PottFuchs` wird aus dem Datensatzname `Zum Schwarzen` in `Essen` der Dokumenttitel `Zum Schwarzen Essen | PottFuchs`.
+
+**Keine Produktionsfreigabe:** Archivstand ist älter als der im Audit vom 23.10. dokumentierte Live-Stand (Theme v350, Places v1.10.181). Das aktuelle Places-Original und aktive WPCode-Snippets #3343/#4102 sind hier noch nicht vollständig archiviert; keine sichere Live-Installations-ZIP daraus ableiten. Vollständiger PHP-Lint, isolierte Titel-/Kanonikal-Regressionen und Google-HTML-E2E müssen vor Release nachgewiesen werden. Auch der tatsächliche neue-Domain-Redirect, HTTP/HTTPS, Sitemap/robots und Android-App-Verträge benötigen gesonderte Prüfung. Weder WPVibe noch WordPress-Live wurden für diesen Entwicklungsschritt verändert.
