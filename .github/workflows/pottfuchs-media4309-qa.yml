@@ -1,0 +1,30 @@
+name: PottFuchs existing Favicon 4309 verification (read-only)
+on:
+  push:
+    branches:
+      - pottfuchs-wpcode-branding-readonly-20261026
+    paths:
+      - 'tools/pottfuchs_media4309_readonly.py'
+      - '.github/workflows/pottfuchs-media4309-qa.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-image:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Verify already existing published media bytes, no WordPress write
+        run: python tools/pottfuchs_media4309_readonly.py
+      - name: Preserve asset for comparison with approved Favicon
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pottfuchs-existing-media4309-readonly
+          path: audit/media4309/
+          retention-days: 30
+          if-no-files-found: warn
