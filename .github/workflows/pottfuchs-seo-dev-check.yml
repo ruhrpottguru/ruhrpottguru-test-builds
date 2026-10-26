@@ -1,0 +1,32 @@
+name: PottFuchs SEO archived candidate tests
+on:
+  push:
+    paths:
+      - '.github/workflows/pottfuchs-seo-dev-check.yml'
+      - 'tests/pottfuchs-seo-*.php'
+      - 'wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  archived-candidate-check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify archived only, no production release
+        run: |
+          grep -q 'Version: 1.10.169' wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php
+          echo 'WARNING: Archival Places v1.10.169 candidate, NOT approved for installation.'
+      - name: Lint all affected PHP files
+        run: |
+          php -v
+          php -l wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php
+          php -l wordpress/themes/ruhrpott-guru/functions.php
+          php -l wordpress/themes/ruhrpott-guru/header.php
+          php -l tests/pottfuchs-seo-title-20261026.php
+          php -l tests/pottfuchs-seo-source-contract.php
+      - name: Isolated title behavior
+        run: php tests/pottfuchs-seo-title-20261026.php
+      - name: Static source contracts
+        run: php tests/pottfuchs-seo-source-contract.php
