@@ -28,3 +28,11 @@ Neuere Versionen im GitHub-Branch `backend-search-v1.10.180` enthalten die Backe
 3. Gesamten Plugin- und Theme-PHP-Lint, Regressionen sowie vollständige HTML-SEO-Ausgabe prüfen.
 4. Nur dann releasefähiges ZIP, Quellcommit, SHA-256 und verifizierten GitHub-Release bereitstellen.
 5. Betreiber installiert selbst. Keine unangekündigten Live-Adminzugriffe und kein Eingriff in die Android-API.
+
+## Sicherheitskorrektur und reproduzierte PHP-Abnahme 26.10.2026
+
+Die erste Archiv-Entwicklungsversion verwendete irrtümlich eine allgemeine Stadt-Suffixregel für **alle** Places. Diese nicht freigegebene allgemeine Regel wurde **vor jeder Installation** korrigiert. Jetzt gilt im Archivzweig ausschließlich die ausdrücklich vereinbarte Place-ID `16936`: `Zum Schwarzen` → SEO-Dokumenttitel `Zum Schwarzen Essen | PottFuchs`. Alle anderen Orte, etwa das Weseler Wirtshaus, behalten ihren bisherigen Entity-/SEO-Basisnamen; nur der öffentliche Markensuffix des SEO-Dokumenttitels wird nach WordPress-Sitenamen aktualisiert. Fach-Entity-Titel, H1, JSON-LD, Canonical, URL, REST und GPS bleiben unberührt.
+
+**CI-Nachweis:** [GitHub Actions 40346373196](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40346373196), `success`: PHP-Lint auf gesamter archivierter Places-Hauptdatei sowie Theme-`functions.php`, `header.php` und beiden SEO-PHP-Testdateien; 12 isolierte Titel-Fälle; 9 statische Quellcodevertragsprüfungen. Erwarteter Archiv-Code-Blob: `4ccbb36e97c28e3afa16a8dfb281e8ad7d39c95c`. Der allgemeine City-Title-Helper ist nicht mehr vorhanden. Der Test ist eine **Archiv-/Codeprüfung**, keine Integration mit der aktuellen Live-Installation.
+
+**Sicherheitsgrenze bleibt:** Dieses Backend ist Version **1.10.169**. Neuere 1.10.186-/Theme-351-/WPCode-Originalarchive liegen nur als in diesem Lauf nicht materialisierbare persönliche Library-ZIPs vor. Die aktive WordPress-Installation und WPCode-Snippets konnten nicht versionsgleich nachgewiesen werden. Nicht als Installations-ZIP verteilen oder WordPress-Deployment freigeben; keinesfalls ältere Version über aktuellen Stand installieren.
