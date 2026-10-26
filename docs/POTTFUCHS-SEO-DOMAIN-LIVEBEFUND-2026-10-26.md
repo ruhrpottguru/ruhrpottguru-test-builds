@@ -119,3 +119,16 @@ Nach Betreiberbestätigung einer neuen Datei im gemeinsamen 1blu-Webroot `/www` 
 **Eine einmalige, konkrete Korrektur:** `/www/favicon.ico` **durch die echte, bereits erstellte ICO-Datei** ersetzen (nicht PNG umbenennen), archiviert unter [docs/assets/pottfuchs-bestehendes-favicon.ico](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/blob/pottfuchs-seo-fix/docs/assets/pottfuchs-bestehendes-favicon.ico). Erwartete ICO-Magic: `00 00 01 00`, Größe 28.849 Bytes, sechs Icon-Einträge, SHA-256 `a367a6ea0b7ba28b4bdf34ebf4f1e82e6ebcb6e10f08619329bcb68e9bada9c5`. Danach öffentlich erneut prüfen.
 
 Unverändert offen: Core-REST `site_icon=0`; Root-ICO umgeht nur den Fallback, setzt die WordPress-Option nicht. SEO-Markenreste sind separat zu korrigieren.
+
+## Abnahme Favicon-Rootdatei nach Betreiberupload – 26.10.2026
+
+**Live-Fix erfolgreich nachgewiesen.** Der Betreiber hat die zuvor fälschlich nur umbenannte PNG unter `/www/favicon.ico` durch die tatsächlich generierte ICO-Datei ersetzt. Danach bestand der neue, rein lesende, Cache-umgehende öffentliche GitHub-Actions-Test: [Run 40341937067](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40341937067).
+
+- `https://www.pottfuchs.de/favicon.ico`: **HTTP 200**, **ohne Redirect**, `Content-Type: image/vnd.microsoft.icon`.
+- **Echtes ICO**, Dateikennung `00 00 01 00`, **6 Icon-Einträge**.
+- **28.849 Bytes**; SHA-256 **`a367a6ea0b7ba28b4bdf34ebf4f1e82e6ebcb6e10f08619329bcb68e9bada9c5`** — exakt identisch mit dem GitHub-Original des bereits vereinbarten Förderturm-Motivs auf dem Entwicklungszweig.
+- Die alte Domain und Non-www bleiben auf ihren geprüften Favicon-Pfaden beim gewünschten **301** zur neuen kanonischen Domain.
+- Einschränkung: WordPress-REST meldet weiterhin **`site_icon: 0`** und leere `site_icon_url`. Das separate Root-ICO behebt **die öffentliche /favicon.ico-Auslieferung**, nicht die interne Site-Icon-Option. Googles konkrete Auswahl ist nicht unmittelbar verifizierbar und kann nach Crawling zeitversetzt aktualisiert werden.
+- **Keine weiteren Betreiberhandlungen am Favicon nötig.** Nicht nochmals Datei umbenennen/hochladen, nicht an der 301-Konfiguration drehen. Spätere WordPress-Optionsdiagnose nur bei tatsächlich benötigter Core-Icon-Funktion und mit gesonderter Freigabe.
+
+**Status:** Öffentliche Favicon-Rootauslieferung 🟢 bestanden und abgeschlossen. Allgemeine SEO-Rebranding-Korrektur (Titel, WebSite-/Organization-JSON-LD) bleibt separat offen.
