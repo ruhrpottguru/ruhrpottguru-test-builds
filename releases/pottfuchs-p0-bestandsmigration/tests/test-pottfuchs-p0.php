@@ -46,7 +46,9 @@ function submit_button($text,$type){return true;}
 function add_management_page($page,$menu,$cap,$slug,$callback){return true;}
 
 define('WP_PLUGIN_DIR',sys_get_temp_dir().'/pf-p0-test-'.getmypid());
-require $base.'/pottfuchs-p0-bestandsmigration/pottfuchs-p0-bestandsmigration.php';
+$pluginFile=$base.'/pottfuchs-p0-bestandsmigration.php';
+if(!is_file($pluginFile))$pluginFile=$base.'/pottfuchs-p0-bestandsmigration/pottfuchs-p0-bestandsmigration.php';
+require $pluginFile;
 function pf_assert($condition,$message){if(!$condition)throw new RuntimeException('TEST FAILED: '.$message);echo 'PASS: '.$message."\n";}
 function pf_fixture($id){
  $x=str_repeat("/* Reference safe long PHP comment */\n",40);
