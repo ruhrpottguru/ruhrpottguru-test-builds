@@ -1,0 +1,31 @@
+name: PottFuchs Public REST and Sitemap (read-only)
+on:
+  push:
+    paths:
+      - 'tools/pottfuchs_rest_sitemap_probe.py'
+      - 'tests/test_pottfuchs_rest_sitemap.py'
+      - '.github/workflows/pottfuchs-rest-sitemap.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  rest-sitemap:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Parser unit tests
+        run: python -m unittest discover -s tests -p 'test_pottfuchs_rest_sitemap.py' -v
+      - name: Probe public REST search and sitemap locations
+        run: python tools/pottfuchs_rest_sitemap_probe.py
+      - name: Archive evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pottfuchs-rest-sitemap-audit
+          path: audit/rest/pottfuchs-rest-sitemap.json
+          retention-days: 30
+          if-no-files-found: warn
