@@ -20,7 +20,15 @@ const tick = ms => new Promise(ok=>setTimeout(ok,ms));
  async function test(name,action){
   const start=Date.now();
   try{const evidence=await action();report.tests.push({...result(name,'PASS',evidence),duration_ms:Date.now()-start});}
-  catch(e){report.tests.push({...result(name,'FAIL',{},String(e).slice(0,900)),duration_ms:Date.now()-start});}
+  catch(e){
+    const diagnostics=await page.evaluate(()=>({url:location.href,headings:[...document.querySelectorAll('h1')].map(x=>x.textContent.trim()).slice(0,3),
+      modalError:document.querySelector('.rpgx-location-error')?.textContent?.trim()||null,
+      loading:!!document.querySelector('.rpgx-loading'),
+      cards:document.querySelectorAll('.rpgx-grid .rpgx-card').length,
+      visibleText:(document.body.innerText||'').slice(0,450)})).catch(()=>({}));
+    await page.screenshot({path:OUT+'/failure-'+name+'.png'}).catch(()=>{});
+    report.tests.push({...result(name,'FAIL',diagnostics,String(e).slice(0,900)),duration_ms:Date.now()-start});
+  }
   console.log(JSON.stringify(report.tests[report.tests.length-1]));
  }
  const select=()=>page.locator('.rpgx-location-modal');
@@ -62,7 +70,8 @@ const tick = ms => new Promise(ok=>setTimeout(ok,ms));
  await test('filter-chip-from-category-detail',async()=>{
   await open('https://www.pottfuchs.de/highlights/?place=wesel&radius=10');
   const cards=page.locator('.rpgx-grid a.rpgx-card');
-  requireThat(await cards.count()>0,'no clickable card');
+  await cards.first().waitFor({state:'visible',timeout:18000}).catch(()=>{});
+  requireThat(await cards.count()>0,'no clickable card in highlights after 18s');
   const label=(await cards.first().locator('h3').textContent())?.trim();
   await cards.first().click({timeout:12000});
   await page.waitForTimeout(700);
@@ -128,7 +137,7 @@ const tick = ms => new Promise(ok=>setTimeout(ok,ms));
   await select().locator('button.rpgx-postcode-toggle').click();
   await select().locator('#rpgx-postcode-input').fill('45888');
   await select().locator('form.rpgx-postcode-form button[type="submit"]').click();
-  await page.waitForTimeout(2600);
+  await page.waitForFunction(()=>!document.querySelector('.rpgx-location-modal'),null,{timeout:12500}).catch(()=>{});
   const stillModal=await select().count();
   const location=await page.locator('.rpgx-location-current').first().textContent();
   requireThat(!stillModal&&/Gelsenkirchen|45888/i.test(location||''),'postcode lookup failed or modal stayed open: modal='+stillModal+' location='+JSON.stringify(location));
