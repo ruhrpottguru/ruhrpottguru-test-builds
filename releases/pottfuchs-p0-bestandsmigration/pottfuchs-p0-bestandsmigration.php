@@ -216,8 +216,9 @@ function pf_p0_install() {
                 if(is_wp_error($x)||get_post($id)->post_content!==$records[$id])$restored=false;
             }
         }
-        if($written && !pf_p0_write_atomic($path,$original))$restored=false;
-        if($restored)delete_option(pf_p0_backup_record());
+        $onDisk=@file_get_contents($path);
+        if($onDisk!==$original && !pf_p0_write_atomic($path,$original))$restored=false;
+        if($restored){delete_option(pf_p0_backup_record());delete_option(pf_p0_state_record());}
         wp_die('Patch abgebrochen: '.esc_html($e->getMessage()).($restored?' Alle Aenderungen zurueckgerollt.':' Automatisches Rollback unvollstaendig: Backup bewahrt, manuelle Wiederherstellung notwendig.'));
     }
 }
