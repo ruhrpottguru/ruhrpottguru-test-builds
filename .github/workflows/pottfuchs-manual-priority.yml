@@ -5,16 +5,22 @@ on:
   pull_request:
     paths: ['tests/manual_import_priority.php', '.github/workflows/pottfuchs-manual-priority.yml']
 permissions:
-  contents: read
+  contents: write
 jobs:
   regression:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo_sqlite
+          coverage: none
       - name: PHP syntax and functional regression
         run: |
           find wordpress/plugins/ruhrpott-guru-places -name '*.php' -print0 | xargs -0 -n1 php -l
           php tests/manual_import_priority.php
+          php wordpress/plugins/ruhrpott-guru-places/QA/search-cuisine-city-v180/search-cuisine-city.php wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php
       - name: Confirm original fails the new acceptance criterion
         run: |
           python - <<'PY'
@@ -25,3 +31,10 @@ jobs:
           Path('/tmp/original.php').write_text(p[:start]+Path('tests/fixtures/manual-priority-original.php.txt').read_text()+p[end:])
           PY
           if php tests/manual_import_priority.php /tmp/original.php; then echo 'Expected original to fail'; exit 1; fi
+      - name: Build and verify install and rollback ZIPs
+        run: python tools/build_manual_priority_release.py
+      - name: Archive versioned release
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create pottfuchs-places-v1.10.188 release-output/* --target "$GITHUB_SHA" --title "PottFuchs Places 1.10.188 – manuelle Importsteuerung" --notes-file docs/POTTFUCHS-IMPORT-PRIORITAET-v1.10.188.md
