@@ -98,11 +98,12 @@ jobs:
                  'rest_icon_fields_present':[n for n in ('site_icon','site_icon_url') if n in rest]},ensure_ascii=False),flush=True)
           except Exception as e:print(json.dumps({'endpoint':'public_wp_rest_index','error':str(e)[:180]}),flush=True)
           try:
-              u='https://www.pottfuchs.de/wp-json/?pottfuchs_readonly_probe=20261026_1318'
+              u='https://www.pottfuchs.de/wp-json/?pottfuchs_readonly_probe='+str(__import__('time').time_ns())
               resp=urllib.request.urlopen(urllib.request.Request(u,headers={'User-Agent':'PottFuchsPublicSEOReadOnly/1.0','Cache-Control':'no-cache'}),timeout=16)
               data=json.load(resp)
               print(json.dumps({'endpoint':'uncached_public_wp_rest_index','site_icon':data.get('site_icon'),'site_icon_url':data.get('site_icon_url'),
                  'site_logo':data.get('site_logo'),'cache_control':resp.headers.get('Cache-Control'),'age':resp.headers.get('Age'),
-                 'x_cache':resp.headers.get('X-Cache'),'x_litespeed_cache':resp.headers.get('X-LiteSpeed-Cache')},ensure_ascii=False),flush=True)
+                 'x_cache':resp.headers.get('X-Cache'),'x_litespeed_cache':resp.headers.get('X-LiteSpeed-Cache'),
+                'icon_active':bool(data.get('site_icon') and data.get('site_icon_url'))},ensure_ascii=False),flush=True)
           except Exception as e: print(json.dumps({'endpoint':'uncached_public_wp_rest_index','error':str(e)[:180]}),flush=True)
           PY
