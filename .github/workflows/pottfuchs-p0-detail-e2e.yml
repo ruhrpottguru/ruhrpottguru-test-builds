@@ -21,7 +21,7 @@ jobs:
       - name: Prepare ephemeral Playwright
         run: npm install --prefix "$RUNNER_TEMP/pf-browser" --no-audit --no-fund playwright@1.56.0
       - name: Install isolated Chromium
-        run: "$RUNNER_TEMP/pf-browser/node_modules/.bin/playwright" install --with-deps chromium
+        run: |\n          "$RUNNER_TEMP/pf-browser/node_modules/.bin/playwright" install --with-deps chromium
       - name: Execute P0 read-only browser regression
         run: NODE_PATH="$RUNNER_TEMP/pf-browser/node_modules" node tools/pottfuchs_p0_detail_e2e.js
       - name: Archive P0 results including failures
