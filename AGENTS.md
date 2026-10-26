@@ -1,10 +1,12 @@
 # Arbeitsanweisungen RuhrpottGuru
 
+> **PottFuchs ab 26.10.2026:** Bei jeder neuen Projektaufgabe zuerst [docs/POTTFUCHS-ARBEITSSTANDARD.md](docs/POTTFUCHS-ARBEITSSTANDARD.md) lesen. GitHub zuerst für Quellcode/Archive nutzen; fertige installierbare ZIPs statt Anleitungs-ZIPs liefern. WPVibe nicht ungefragt nutzen oder als Voraussetzung behandeln. Aktuellen Live-Stand nicht aus archivierten Versionen ableiten.
+
 ## Start jeder Aufgabe
 
-1. `README.md`, `docs/storage-policy.md`, `docs/current-state.md` und `docs/source-inventory.json` tatsächlich lesen.
+1. `docs/POTTFUCHS-ARBEITSSTANDARD.md`, `README.md`, `docs/storage-policy.md`, `docs/current-state.md` und `docs/source-inventory.json` tatsächlich lesen.
 2. Aktuellen Projektvertrag, Architekturregister, Masterliste und relevante spätere Nutzerentscheidungen aus den Projektquellen abgleichen. Die Dateien dieses Repositories ersetzen keine späteren Entscheidungen. Fehlen verbindliche Unterlagen, ausdrücklich kennzeichnen und vor widersprechenden Änderungen klären.
-3. Vorhandene Implementierung und Tests zuerst prüfen. WPVibe ist kein Voraussetzung für lokale Codeanalyse; Live-Zugriff dient dem belegten Versions-/Daten-/Integrationsabgleich.
+3. Vorhandene Implementierung und Tests zuerst prüfen. GitHub ist die primäre Quellbasis; WPVibe nicht ungefragt verwenden oder zur Voraussetzung machen. Live-Stände nur aus belegten Quellen behaupten.
 4. Archiviert, lokal geprüft, vom Nutzer installiert gemeldet und live verifiziert strikt unterscheiden. Keine Version aus einem Dateinamen als live behaupten.
 
 ## Geschützte Bereiche
