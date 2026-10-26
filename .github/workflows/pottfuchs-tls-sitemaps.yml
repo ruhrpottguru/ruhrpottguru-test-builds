@@ -1,0 +1,28 @@
+name: PottFuchs TLS and Full Sitemap Health (read-only)
+on:
+  push:
+    paths:
+      - 'tools/pottfuchs_tls_sitemap_audit.py'
+      - '.github/workflows/pottfuchs-tls-sitemaps.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  public-tls-sitemaps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Public TLS and sitemap child files (GET only)
+        run: python tools/pottfuchs_tls_sitemap_audit.py
+      - name: Save independent report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pottfuchs-tls-sitemap-audit
+          path: audit/public/pottfuchs-tls-sitemap-complete.json
+          retention-days: 30
+          if-no-files-found: warn
