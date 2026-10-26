@@ -1,4 +1,4 @@
-name: Archive exact PottFuchs legacy favicon as WordPress Site Icon PNG
+name: Archive PottFuchs original favicon as PNG and ICO (no live changes)
 on:
   push:
     paths:
@@ -11,7 +11,7 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
-      - name: Convert unchanged original SVG to WordPress 512x512 PNG (archive only)
+      - name: Render unchanged original SVG to WordPress PNG and root ICO (archive only)
         run: |
           python3 -m pip install --quiet cairosvg Pillow
           python3 - <<'PY'
@@ -29,13 +29,25 @@ jobs:
           print('Original file SHA-256:',expected)
           print('PNG size:',output.stat().st_size)
           print('PNG SHA-256:',hashlib.sha256(output.read_bytes()).hexdigest())
+          ico_path=pathlib.Path('docs/assets/pottfuchs-bestehendes-favicon.ico')
+          from io import BytesIO
+          png256=cairosvg.svg2png(bytestring=raw,output_width=256,output_height=256)
+          icon=Image.open(BytesIO(png256)).convert('RGBA')
+          icon.save(ico_path,format='ICO',sizes=[(16,16),(32,32),(48,48),(64,64),(128,128),(256,256)])
+          restored=Image.open(ico_path)
+          sizes=restored.ico.sizes()
+          assert (16,16) in sizes and (32,32) in sizes and (48,48) in sizes and (256,256) in sizes
+          assert ico_path.stat().st_size>1000
+          print('ICO sizes:',sorted(sizes))
+          print('ICO size:',ico_path.stat().st_size)
+          print('ICO SHA-256:',hashlib.sha256(ico_path.read_bytes()).hexdigest())
           PY
-      - name: Commit ONLY new rasterized icon to SEO working branch, not main
+      - name: Archive PNG and ICO on SEO working branch, not main
         run: |
           git config user.name "PottFuchs Automation"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add docs/assets/pottfuchs-bestehendes-favicon-512.png
+          git add docs/assets/pottfuchs-bestehendes-favicon-512.png docs/assets/pottfuchs-bestehendes-favicon.ico
           if ! git diff --cached --quiet; then
-            git commit -m "assets: preserve faithful 512px raster of verified live SVG favicon"
+            git commit -m "assets: archive faithful PNG and ICO of verified original SVG favicon"
             git push origin HEAD:pottfuchs-seo-fix
           fi
