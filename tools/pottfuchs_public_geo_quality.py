@@ -34,6 +34,9 @@ def coords_event(x):
     for c in (x.get("geo"),x.get("location"),x.get("address"),x):
         p=coords_place(c)
         if p:return p
+    geo=x.get("geo")
+    if isinstance(geo,dict):
+        return coords_place(geo.get("main"))
     return None
 def distance(a,b):
     lat1,lng1,lat2,lng2=map(math.radians,(a[0],a[1],b[0],b[1]))
