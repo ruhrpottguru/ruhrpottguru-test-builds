@@ -65,8 +65,8 @@ function pf_p0_patch_places($source) {
         throw new RuntimeException('SEO-Titel-Eintritt weicht vom geprueften Eigentuemer ab');
     }
     $render=str_replace($titleOld,$titleNew,$render);
-    $closureOld='static function () use ($title, $desc, $canonical, $image, $schema_json, $esc)';
-    $closureNew='static function () use ($title, $seo_title, $desc, $canonical, $image, $schema_json, $esc)';
+    $closureOld='static function () use ($title, $desc, $canonical, $image, $schema_json, $esc, $bootstrap_json)';
+    $closureNew='static function () use ($title, $seo_title, $desc, $canonical, $image, $schema_json, $esc, $bootstrap_json)';
     if (substr_count($render,$closureOld)!==1) {
         throw new RuntimeException('SEO-Header-Closure-Owner weicht ab');
     }
