@@ -1,0 +1,51 @@
+name: PottFuchs supplemental watchdog
+on:
+  push:
+    branches: [fix/supplemental-watchdog-189]
+  pull_request:
+    paths: ['tests/manual_import_priority.php', '.github/workflows/pottfuchs-manual-priority.yml']
+permissions:
+  contents: write
+jobs:
+  regression:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.4'
+          extensions: pdo_sqlite
+          coverage: none
+      - name: PHP syntax and functional regression
+        run: |
+          find wordpress/plugins/ruhrpott-guru-places -name '*.php' -print0 | xargs -0 -n1 php -l
+          php tests/manual_import_priority.php
+          php tests/supplemental_watchdog.php
+          php wordpress/plugins/ruhrpott-guru-places/QA/search-cuisine-city-v180/search-cuisine-city.php wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php
+      - name: Confirm original fails the new acceptance criterion
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php').read_text()
+          start=p.index('    private function event_supplemental_short_refresh_pending_v101182(')
+          end=p.index('    private function event_supplemental_yield_v101182(',start)
+          Path('/tmp/original.php').write_text(p[:start]+Path('tests/fixtures/manual-priority-original.php.txt').read_text()+p[end:])
+          PY
+          if php tests/manual_import_priority.php /tmp/original.php; then echo 'Expected original to fail'; exit 1; fi
+      - name: Confirm old watchdog fails acceptance
+        run: |
+          python - <<'PY2'
+          from pathlib import Path
+          s=Path('wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php').read_text()
+          a=s.index('    public function ensure_event_supplemental_worker()')
+          b=s.index('    private function event_region_forensic_snapshot()',a)
+          Path('/tmp/oldwatch.php').write_text(s[:a]+Path('tests/fixtures/watchdog-original-188.php.txt').read_text()+s[b:])
+          PY2
+          if php tests/supplemental_watchdog.php /tmp/oldwatch.php; then exit 1; fi
+      - name: Build and verify install and rollback ZIPs
+        run: python tools/build_watchdog_release.py
+      - name: Archive versioned release
+        if: github.event_name == 'push'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh release create pottfuchs-places-v1.10.189 watchdog-release/* --target "$GITHUB_SHA" --title "PottFuchs Places 1.10.189 – Watchdog" --notes-file docs/POTTFUCHS-WATCHDOG-v1.10.189.md

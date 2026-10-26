@@ -1,0 +1,24 @@
+    public function ensure_event_supplemental_worker() {
+        $night=get_option('rg_events_nightly_state',array());if(!is_array($night)||($night['status']??'')!=='finished')return;$token=sanitize_key((string)($night['run_token']??''));if($token==='')return;$state=get_option('rg_events_supplemental_state',array());if(!is_array($state))$state=array();
+        if(($state['status']??'')==='waiting_events_sync'){$this->start_event_supplemental_wave($token);return;}
+        if((string)($state['master_run_token']??'')!==$token && ($state['status']??'')!=='running'){$this->start_event_supplemental_wave($token);return;}
+        if(($state['status']??'')!=='running')return;
+        // A supplemental run has priority over enrichment. Repair missing/overdue
+        // cron hooks and stale heartbeats instead of leaving the 53-city wave
+        // permanently in running state after a provider/PHP abort.
+        $this->pause_event_enrichment_for_supplemental();
+        $next=wp_next_scheduled(self::EVENT_SUPPLEMENTAL_BATCH_HOOK);$overdue=$next && $next < time()-30;
+        $last=0;foreach(array('last_progress_at','last_attempt_at','last_wait_at','started_at') as $tf){if(!empty($state[$tf])){$tt=strtotime((string)$state[$tf]);if($tt)$last=max($last,$tt);}}$stale=$last>0&&$last<time()-15*MINUTE_IN_SECONDS;
+        if(!empty($state['yield_for_short_refresh'])&&is_array(get_option(self::EVENT_TIER_STATE,array()))){
+            $tier=get_option(self::EVENT_TIER_STATE,array());
+            if(($tier['status']??'')==='running'){
+                if(!$next)wp_schedule_single_event(time()+120,self::EVENT_SUPPLEMENTAL_BATCH_HOOK);
+                return;
+            }
+        }
+        if(!$next || $overdue || $stale){
+            if($stale){$state['watchdog_recovered_at']=current_time('mysql');$state['watchdog_reason']='Supplemental-Heartbeat älter als 15 Minuten';update_option('rg_events_supplemental_state',$state,false);}
+            wp_clear_scheduled_hook(self::EVENT_SUPPLEMENTAL_BATCH_HOOK);wp_schedule_single_event(time()+3,self::EVENT_SUPPLEMENTAL_BATCH_HOOK);if(function_exists('spawn_cron'))spawn_cron();
+        }
+    }
+
