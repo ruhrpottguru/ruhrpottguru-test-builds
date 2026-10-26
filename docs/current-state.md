@@ -24,3 +24,19 @@ Laut Nutzer funktioniert `topgolf`; `topgolf oberhausen` und `top golf oberhause
 ## GitHub-Übernahme am 19.10.2026
 
 Nach Installation der GitHub-App war der tatsächliche Blob-Schreibtest erfolgreich. Dieser Commit übernimmt den unveränderten Archivbestand samt Ablageregeln und Dateiinventar. Anschließend werden der gespeicherte Git-Tree und der Wiederabruf gegen den lokalen Bestand geprüft. WordPress wird dadurch nicht verändert.
+
+
+## Bestandsnachtrag 26.10.2026 – verfügbare Dateien und tatsächliche Zugriffsgrenze
+
+Lesende Inventur der Projekt-Dateibibliothek hat folgende **Dateinamen/Metadaten**, aber noch keine extrahierten Originalbytes bestätigt:
+
+- `PottFuchs-Places-Backend-v1.10.184-Importzentrale-Karten-FINAL.zip` (Library; neuer als Repo-Archiv v1.10.169; nicht als live bestätigt)
+- `PottFuchs-Theme-v351.0-Markenreste-FINAL-2026-10-24.zip` (Library; neuer als Repo-Archiv v345; nicht als live bestätigt)
+- `PottFuchs-WPCode-SEO-Markenfix-v1.0-2026-10-24.zip` (Library; Inhalt nicht geprüft)
+- Weitere alte Backend-/Theme-/Domain-Cutover-ZIPs sind in der Library-Liste nachgewiesen, aber noch nicht in GitHub archiviert.
+
+Die Dateiliste und Library-Einträge sind zugänglich. Der Raw-Byte-Materialisierungsaufruf für die drei genannten ZIPs wurde am 26.10. tatsächlich versucht und mit `This Project file does not have an authorized raw-byte materialization path` abgewiesen. Eine Dateilistung ersetzt keinen herunterladbaren Source-Stand; installierbare ZIPs dürfen nicht aus deren Namen rekonstruiert werden. Diese Grenze ist **keine WPVibe-Grenze**.
+
+Der Entwicklungszweig [`pottfuchs-seo-fix`](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/tree/pottfuchs-seo-fix) enthält einen minimalen **nicht zur Liveinstallation freigegebenen** SEO-Titel-/Branding-Patch gegen das älteste GitHub-Archiv v1.10.169. Neun statische Quellcode-Vertragsprüfungen wurden über die GitHub-Rücklesung durchgeführt; ein isolierter PHP-Helfertest mit neun Fällen wurde lokal bestanden; vollständiger PHP-Lint der 1,95-MB-Plugin-Hauptdatei und aktuelle Live-E2E sind nicht nachgewiesen. Das unveränderte Theme-Asset `favicon.svg` ist im Repository gefunden worden. WPCode #3343/#4102 fehlen als geprüfte aktive Originalsnippets weiterhin im GitHub-Quellarchiv.
+
+**Nächster zwingender Schritt für sicheren WordPress-Release:** zugängliche Originalbytes des aktuell beauftragten Theme-/Plugin-Ausgangspakets gewinnen, Version/Hash gegen dokumentierten Installationsstand abgleichen und minimale SEO-Korrektur auf genau diesem Stand mit vollständigem PHP-/Regressionslauf integrieren. Kein Downgrade durch Installation des Archivstands. Keine Live-Admin-Zugriffe beauftragt oder vorgenommen.
