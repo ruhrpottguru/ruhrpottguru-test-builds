@@ -1,0 +1,24 @@
+name: PottFuchs v190 live acceptance (read-only)
+on:
+  push:
+    paths: ['tools/pottfuchs_v190_live_acceptance.py', '.github/workflows/pottfuchs-v190-live.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  read-only-acceptance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Query existing public visitor endpoint
+        run: python tools/pottfuchs_v190_live_acceptance.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pottfuchs-v190-live-acceptance
+          path: audit/v190/
+          retention-days: 30
