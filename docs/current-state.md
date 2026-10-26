@@ -17,9 +17,11 @@ Das Register v1.6 berichtet frühere Live-Prüfungen des Backends v1.10.169 sowi
 
 Noch nicht importiert: aktuelle aktive WPCode-Snippets samt Aktivstatus, weitere eigene Plugins, Hosting-/Cron-Konfiguration und vollständiger heutiger Live-Dateiabgleich. Keine Zugangsdaten oder Datenbankinhalte übernehmen. Dieser Bestand ist deshalb noch keine vollständige reproduzierbare Sicherung des produktiven WordPress-Systems.
 
-## Offener Suchfall Topgolf
+## Historischer Suchfall Topgolf – öffentlich reproduziert und am 26.10.2026 nicht mehr vorhanden
 
 Laut Nutzer funktioniert `topgolf`; `topgolf oberhausen` und `top golf oberhausen` funktionieren nicht. Drei Treffer sind gemeldet, ihre Place-IDs und die Ursache der Mehrfachausgabe sind noch zu prüfen. Keine Umbenennung und keine Löschung. Nächster Code-Schritt: tatsächlichen `/global-search`-Handler im importierten Backend und dessen Aufruf im Theme untersuchen; Mehrwort-/Name+Stadt-Verhalten gezielt prüfen. Historische isolierte Tests ersetzen keine Integration. Dieser Archivimport enthält keinen Suchpatch und keine Änderung von Kategorie-, Ranking-, Entfernungs- oder SEO-Regeln.
+
+**Nachweis vom 26.10.2026 – kein neuer Suchpatch:** Die produktive, lesende öffentliche POST-Suche `/wp-json/ruhrpottguru/v1/global-search` ergab für `topgolf`, `topgolf oberhausen` und `top golf oberhausen` auf **beiden Hosts** (pottfuchs.de und alte ruhrpottguru.de) jeweils **HTTP 200 und genau einen identischen Treffer** (ID `1051311896`, Topgolf, Oberhausen). Zusätzlich zeigte der echte mobile Chromium-Browser bei allen drei Anfragen jeweils nur **eine** Karte „Topgolf“ (Oberhausen). Das vorherige Fehlverhalten aus dem historischen Bestand war bei diesen Abfragen am 26.10. nicht mehr reproduzierbar. Kein Eingriff in Suche, Ranking oder Backend. [REST-Prüfung](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40322085271) · [Browser-E2E](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40322506314).
 
 ## GitHub-Übernahme am 19.10.2026
 
