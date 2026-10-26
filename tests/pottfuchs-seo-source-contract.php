@@ -1,5 +1,7 @@
 <?php
-/** Offline source-contract checks; run from root of GitHub SEO development branch. */
+/** Offline source-contract checks; run from root of GitHub SEO development branch.
+ * Only Place ID 16936 may receive an SEO title exception; never a site-wide city suffix.
+ */
 $root=dirname(__DIR__);
 $backend=$root.'/wordpress/plugins/ruhrpott-guru-places/ruhrpott-guru-places.php';
 $theme=$root.'/wordpress/themes/ruhrpott-guru/functions.php';
