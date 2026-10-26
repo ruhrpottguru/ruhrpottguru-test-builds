@@ -148,6 +148,55 @@ const tick = ms => new Promise(ok=>setTimeout(ok,ms));
   await page.screenshot({path:OUT+'/postcode-45888.png'});
   return {location};
  });
+ await test('global-search-topgolf-variants-in-real-browser',async()=>{
+   const queries=['topgolf','topgolf oberhausen','top golf oberhausen'];
+   const checks=[];
+   for(const term of queries){
+     const url='https://www.pottfuchs.de/suche/?q='+encodeURIComponent(term);
+     await open(url);
+     await page.locator('.rpgx-search-summary').waitFor({state:'visible',timeout:14000});
+     const count=await page.locator('.rpgx-search-result').count();
+     const text=await page.locator('.rpgx-search-result-copy').allInnerTexts();
+     checks.push({term,count,items:text.slice(0,4)});
+     requireThat(count===1 && /Topgolf/i.test(text.join(' ')) && /Oberhausen/i.test(text.join(' ')),
+       'global search does not show exactly one Topgolf Oberhausen for '+term);
+   }
+   await page.screenshot({path:OUT+'/topgolf-global-search.png'});
+   return {checks};
+ });
+ await test('apex-domain-city-radius-state-after-301',async()=>{
+   // Selection from earlier 45888 postcode check is expected to persist at 10 km.
+   const old=await page.locator('.rpgx-location-current').first().textContent().catch(()=>null);
+   const status=await open('https://pottfuchs.de/food/');
+   const finalUrl=page.url();
+   const after=await page.locator('.rpgx-location-current').first().textContent().catch(()=>null);
+   requireThat(/^https:\/\/www\.pottfuchs\.de\/food\/?/.test(finalUrl),'apex did not arrive at HTTPS www');
+   requireThat(/45888/i.test(after||'') && /10\s*km/i.test(after||''),'selected location/radius lost after apex redirect');
+   return {status,finalUrl,old,after};
+ });
+ await test('denied-gps-first-load-fallback-manual-city',async()=>{
+   const denied=await browser.newContext({viewport:{width:390,height:844},isMobile:true,hasTouch:true,locale:'de-DE',serviceWorkers:'block'});
+   await denied.clearPermissions();
+   const deniedPage=await denied.newPage();
+   try{
+     const response=await deniedPage.goto('https://www.pottfuchs.de/',{waitUntil:'domcontentloaded',timeout:35000});
+     await deniedPage.waitForTimeout(2500);
+     // Initial browser has no prior location or persisted consent.
+     const before=await deniedPage.evaluate(()=>({cards:document.querySelectorAll('.rpgx-card').length,
+       modal:!!document.querySelector('.rpgx-location-modal'),
+       text:(document.body.innerText||'').slice(0,150)}));
+     requireThat(before.cards===0,'initial cards rendered before position known');
+     await deniedPage.locator('.rpgx-location-modal').waitFor({state:'visible',timeout:16000});
+     const essential=deniedPage.getByRole('button',{name:/Nur Wesentliche/i}).first();
+     if(await essential.count() && await essential.isVisible())await essential.click();
+     await deniedPage.locator('button.rpgx-city-btn').filter({hasText:/^Essen$/}).click({timeout:14000});
+     await deniedPage.waitForTimeout(1900);
+     const after=await deniedPage.locator('.rpgx-location-current').first().textContent();
+     requireThat(/Essen/i.test(after||''),'manual city fallback failed after GPS rejection');
+     await deniedPage.screenshot({path:OUT+'/denied-gps-fallback.png'});
+     return {http:response.status(),initial:before,selected:after};
+   } finally{await denied.close();}
+ });
  await test('site-specials-read-only',async()=>{
    const paths=['/buedchen-radar/','/imbissbuden/','/halloween-im-pott/','/zeitreise-von-oben/'];
    const records=[];
