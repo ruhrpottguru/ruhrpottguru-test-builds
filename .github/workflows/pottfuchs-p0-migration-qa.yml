@@ -8,7 +8,7 @@ on:
       - '.github/workflows/pottfuchs-p0-migration-qa.yml'
   workflow_dispatch:
 permissions:
-  contents: read
+  contents: write
 jobs:
   package-test:
     runs-on: ubuntu-latest
@@ -39,3 +39,19 @@ jobs:
           path: dist/release/
           retention-days: 90
           if-no-files-found: error
+      - name: Archive tested candidate as GitHub prerelease (not live-approved)
+        if: github.ref == 'refs/heads/release/pottfuchs-p0-seo-owner-migration-1.0.0'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          TAG="pottfuchs-p0-seo-migration-v1.0.0-rc1"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Prerelease exists; preserving previously verified artifacts."
+          else
+            gh release create "$TAG" \
+              dist/release/PottFuchs-P0-SEO-Bestandsmigration-v1.0.0.zip \
+              dist/release/PottFuchs-P0-SEO-Bestandsmigration-v1.0.0.zip.sha256 \
+              --target "$GITHUB_SHA" --prerelease \
+              --title "PottFuchs P0 SEO Migration 1.0.0 (candidate only)" \
+              --notes "TESTED INSTALLABLE CANDIDATE ONLY. CI tests use archived Places v1.10.169 as fixture with simulated 1.10.185 version header; the actual installed v1.10.185 owner source was NOT available for regression. Activation has strict signature/version preflight and backup/rollback but a safe live outcome is unverified. NOT INSTALLED AND NOT P0 COMPLETE. No production change by CI."
+          fi
