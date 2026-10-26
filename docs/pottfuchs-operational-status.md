@@ -2,6 +2,18 @@
 
 **Stand:** 26.10.2026. PottFuchs ist die neue Marke; `https://www.pottfuchs.de` ist die primäre Domain. `ruhrpottguru.de` bleibt für 301. Der Domainwechsel und der Adresswechsel in Google Search Console fanden bereits statt. Keine Wiederholung.
 
+## Diagnose Duisburg „Heute noch“ – tatsächliche Ursache abgegrenzt (26.10.2026)
+
+Die neue verbindliche globale Standort-/Sichtbarkeitsentscheidung bleibt **nicht implementiert**, bis aktueller Theme-/Backend-/App-Code und die geschützten Verträge gemeinsam abgeglichen sind. **Keine Produktionsänderung.**
+
+**Read-only API-Stichprobe** [40328502197](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40328502197): Der Duisburger Veranstaltungsfeed lieferte im 10-km-Bereich **24** Datensätze aus drei bislang zugelassenen Quellen (`Open Data Finder RTG – Veranstaltungen`: 12; `destination.one Open-Data-Pool`: 6; `rpg_seasonal_editorial`: 6). **Alle 24 beginnen nach dem 26.10.2026; keiner überschneidet den 26.10.** Sechs verfügen über echte Koordinaten innerhalb 5 km. Als Kontrolle lieferte Wesel **213** Einträge, davon fünf mit heutigem Datumsüberlapp. Davon sind 39 explizit `cityScope`-Datensätze ohne verifizierten Punkt; diese dürfen nicht mit erfundener Entfernung dargestellt werden.
+
+**Unabhängiger Mobilbrowser-Test** [40328423187](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40328423187): Bei *Duisburg · 5 km* und *Duisburg · 10 km* hat „Heute noch“ auf der Startseite jeweils **0 Veranstaltungskarten**, und der Kategorie-Kalenderfilter „Heute“ ebenfalls **0**. Ohne Datumsfilter sind **6** bzw. **24** zukünftige Veranstaltungskarten sichtbar. *Wesel · 5 km* zeigt **4** heutige Startseiten-Veranstaltungskarten und **5** nach „Heute“-Kategoriefilter. **Keine JavaScript-Fehler.**
+
+**Begründete Einordnung:** Der Duisburger Heute-Leerstand ist für die geprüfte Zeit in der öffentlich ausgelieferten Quelle bereits vorhanden. Es ist **kein nachgewiesener Render- oder Datumsfilterdefekt**. Offen bleibt, ob zugelassene Duisburger/kommunale Veranstaltungskalender synchronisiert/abgedeckt sind, ob rechtlich zulässige Datensätze ohne Geo im Import oder Filter fehlen und ob die neu beschlossenen globalen Sichtbarkeitsregeln vollständig gelten. **Keine künstlichen Events, keine Punktkoordinaten, keine pauschale Radius- oder Quellenregeländerung.** Der nächste Fix muss an belegten Zulassungs-/Import-/Resolver-Ursachen ansetzen, nach aktuellem Quellabgleich.
+
+**Favicon-Regression** [40328238472](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40328238472): Altmarke in den HEAD-Ausgaben unverändert. Der zusätzliche Root-Favicon-Test meldet `WORDPRESS_DEFAULT_FAVICON_FALLBACK`: HTML-`favicon.svg` unverändert korrekt, aber `/favicon.ico` leitet auf WordPress-Standardlogo. **P0 technisch offen, nicht als erledigt markieren.**
+
 ## Neue unabhängige Nachweise aus der aktuellen Prüfrunde (26.10.2026)
 
 - **Favicon bisher zu früh abgeschlossen:** [Read-only SEO-HEAD-Lauf 40324837378](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40324837378) liefert für das vereinbarte Förderturm-`favicon.svg` HTTP 200, für `/favicon.ico` jedoch **HTTP 302** mit `Location: /wp-includes/images/w-logo-gray-white-bg.png`. Das liegt außerhalb der reinen HTML-`rel=icon`-Einbindung. Das **bestehende** Icon ist nicht auszutauschen. Der unveränderte SVG-Quellstand wurde [im GitHub-Lauf 40325394310](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40325394310) pixelgetreu in ein WordPress-kompatibles 512px PNG gerastert, SHA-256 `e0df54cd75052526ff5ac26cc16296b10985ab6da630f41d69c87cba086a9ca9`. **Nur archivierte Grafik, kein Live-Upload, keine WordPress-Einstellung gesetzt.**
