@@ -81,3 +81,13 @@ Abgeleitet aus exakt dem Live-SVG mit SHA-256 `16bf0971d5c1bf85e22f7898d78ee5ea7
 - [GitHub-Build- und Archivierungsnachweis](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40328688469). Der Datei-Blob ist dauerhaft im Branch versioniert.
 
 Es erfolgte **keine Änderung an der Live-Website**, an der Datenbank oder an Hosting. Eine Bereitstellung im Root wäre eine separate Freigabe-/Betreiberhandlung; kein neues Plugin.
+
+## Nachkontrolle nach vom Betreiber bestätigtem Speichern – 26.10.2026, 15:10 Uhr MESZ
+
+Der Betreiber hat die erneute Auswahl/Speicherung des bestehenden WordPress-Website-Icons bestätigt. Anschließend erfolgte ein **neuer, lesender öffentlicher Live-Aufruf**, mit einmaligem Zufallsparameter zur Cache-Umgehung. [GitHub-Actions-Nachweis](https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40337026066).
+
+**Beobachtet:** `/wp-json/` und die Cache-umgehende REST-Abfrage geben weiterhin `site_icon: 0`, `site_icon_url: ""`, `site_logo: 4215` zurück. Das Root-`/favicon.ico` liefert weiterhin **302 → `/wp-includes/images/w-logo-gray-white-bg.png`**. Gleichzeitig bleibt die Theme-SVG-Einbindung richtig und die Datei erreichbar (SHA-256 byteidentisch). **Kein öffentlicher Erfolg nach der WordPress-Speicherung nachweisbar.**
+
+Die bereits erfolgte Aktion nicht nochmals verlangen; **keine weiteren mehrfachen Icon-Uploads oder Try-and-Error-Schritte**. Sicherer nächster Schritt ist eine lesende Prüfung der realen Site-Icon-Option und etwaiger Filter `pre_option_site_icon`/`option_site_icon`, der WP-Admin-Werte und des tatsächlich angesprochenen WordPress-Site-Kontexts sowie der `/favicon.ico`-Behandlung. Diese WordPress-Administrations- und Hostingprüfung erfordert den ausdrücklichen Livezugriffsauftrag oder eine entsprechende vom Betreiber bereitgestellte Diagnose. Externe Lesetests allein können den falschen Core-Wert nicht beheben. Keine automatische Datenbankkorrektur und kein neues Plugin ohne ausdrückliche Freigabe.
+
+Diese Nachkontrolle betrifft nur das Favicon; die bestehenden getrennten SEO-Markenfehler in `WebSite`/`Organization` und Detailseitentiteln sind unverändert offen.
