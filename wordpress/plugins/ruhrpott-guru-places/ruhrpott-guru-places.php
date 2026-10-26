@@ -1935,7 +1935,7 @@ final class RuhrpottGuru_Places_Backend {
         if (!$payload || empty($payload['share']['title'])) return;
         $share = $payload['share'];
         $title = trim((string)$share['title']);
-        $description = $this->share_trim_description((string)($share['description'] ?? ''), 'Entdecke diesen Tipp bei RuhrpottGuru.');
+        $description = $this->share_trim_description((string)($share['description'] ?? ''), 'Entdecke diesen Tipp bei '.get_bloginfo('name').'.');
         $image = esc_url_raw((string)($share['image'] ?? ''));
         if ($image === '') $image = esc_url_raw((string)get_site_icon_url(512));
         $category_code = (string)($payload['categoryCode'] ?? $this->share_category_code($payload['category'] ?? ''));
@@ -1961,16 +1961,16 @@ final class RuhrpottGuru_Places_Backend {
         header('X-Robots-Tag: noindex, follow', true);
         $esc = function($v){ return esc_attr((string)$v); };
         echo '<!doctype html><html lang="de"><head><meta charset="'.esc_attr(get_bloginfo('charset')).'"><meta name="viewport" content="width=device-width,initial-scale=1">';
-        echo '<title>'.esc_html($title.' | RuhrpottGuru').'</title>';
+        echo '<title>'.esc_html($title.' | '.get_bloginfo('name')).'</title>';
         echo '<meta name="description" content="'.$esc($description).'">';
-        echo '<meta property="og:locale" content="de_DE"><meta property="og:type" content="website"><meta property="og:site_name" content="RuhrpottGuru">';
+        echo '<meta property="og:locale" content="de_DE"><meta property="og:type" content="website"><meta property="og:site_name" content="'.esc_attr(get_bloginfo('name')).'">';
         echo '<meta property="og:title" content="'.$esc($title).'"><meta property="og:description" content="'.$esc($description).'"><meta property="og:url" content="'.$esc($current_url).'">';
         if ($image !== '') echo '<meta property="og:image" content="'.$esc($image).'"><meta property="og:image:secure_url" content="'.$esc($image).'">';
         echo '<meta name="twitter:card" content="'.($image!==''?'summary_large_image':'summary').'"><meta name="twitter:title" content="'.$esc($title).'"><meta name="twitter:description" content="'.$esc($description).'">';
         if ($image !== '') echo '<meta name="twitter:image" content="'.$esc($image).'">';
         echo '<link rel="canonical" href="'.$esc($canonical_url).'">';
         echo '</head><body style="margin:0;background:#020617;color:#f8fafc;font-family:system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,sans-serif">';
-        echo '<main style="min-height:100vh;display:grid;place-items:center;padding:24px"><div style="max-width:560px;text-align:center"><strong style="display:block;color:#f59e0b;font-size:14px;letter-spacing:.08em">RUHRPOTTGURU</strong><h1 style="font-size:26px;margin:12px 0">'.esc_html($title).'</h1><p style="color:#cbd5e1">'.esc_html($description).'</p><p><a style="display:inline-block;margin-top:12px;padding:12px 18px;border-radius:999px;background:#f59e0b;color:#020617;font-weight:800;text-decoration:none" href="'.esc_url($open_url).'">Tipp öffnen →</a></p></div></main>';
+        echo '<main style="min-height:100vh;display:grid;place-items:center;padding:24px"><div style="max-width:560px;text-align:center"><strong style="display:block;color:#f59e0b;font-size:14px;letter-spacing:.08em">'.esc_html(get_bloginfo('name')).'</strong><h1 style="font-size:26px;margin:12px 0">'.esc_html($title).'</h1><p style="color:#cbd5e1">'.esc_html($description).'</p><p><a style="display:inline-block;margin-top:12px;padding:12px 18px;border-radius:999px;background:#f59e0b;color:#020617;font-weight:800;text-decoration:none" href="'.esc_url($open_url).'">Tipp öffnen →</a></p></div></main>';
         echo '<script>window.location.replace('.wp_json_encode($open_url).');</script></body></html>';
         exit;
     }
@@ -2198,13 +2198,20 @@ final class RuhrpottGuru_Places_Backend {
         if ($menu !== '') $html .= '<a href="'.esc_url($menu).'" rel="noopener noreferrer">Speisekarte</a>';
         if ($reservation !== '') $html .= '<a href="'.esc_url($reservation).'" rel="noopener noreferrer">Reservieren</a>';
         if ($route !== '') $html .= '<a href="'.esc_url($route).'" rel="noopener noreferrer" target="_blank">Route planen</a>';
-        $html .= '<a href="'.esc_url($overview).'">'.($is_event ? 'Weitere Veranstaltungen' : 'RuhrpottGuru entdecken').'</a></nav></div></article></main>';
+        $html .= '<a href="'.esc_url($overview).'">'.($is_event ? 'Weitere Veranstaltungen' : esc_html(get_bloginfo('name')).' entdecken').'</a></nav></div></article></main>';
 
         return $html;
     }
 
+    /** PottFuchs: SEO title gains locality; entity name, H1, schema, URLs stay unchanged. */
+    private function seo_place_title_with_city_v101170($name,$city) {
+        $name=trim((string)$name);$city=trim((string)$city);
+        if($city==='' || preg_match('/(?<![\\p{L}\\p{N}])'.preg_quote($city,'/').'(?![\\p{L}\\p{N}])/iu',$name))return $name;
+        return $name.' '.$city;
+    }
+
     private function seo_render_detail_html_v101096($data) {
-        $title=trim((string)($data['title']??''));$desc=$this->share_trim_description((string)($data['description']??''),'Entdecke diesen Ort bei RuhrpottGuru.');
+        $title=trim((string)($data['title']??''));$seo_title=trim((string)($data['seo_title']??$title));if($seo_title==='')$seo_title=$title;$desc=$this->share_trim_description((string)($data['description']??''),'Entdecke diesen Ort bei '.get_bloginfo('name').'.');
         $canonical=esc_url_raw((string)($data['canonical']??''));$image=esc_url_raw((string)($data['image']??''));$label=(string)($data['label']??'RuhrpottGuru-Tipp');
         $city=$this->seo_detail_value_v101148($data['city']??'');$address=$this->seo_detail_value_v101148($data['address']??'');$hours=$this->seo_detail_value_v101148($data['hours']??'');$when=$this->seo_detail_value_v101148($data['when']??'');
         $website=esc_url_raw((string)($data['website']??''));$ticket=esc_url_raw((string)($data['ticket_url']??''));$route=esc_url_raw((string)($data['route_url']??''));$overview=esc_url_raw((string)($data['overview_url']??home_url('/')));$venue=$this->seo_detail_value_v101148($data['venue']??'');$menu=esc_url_raw((string)($data['menu_url']??''));$reservation=esc_url_raw((string)($data['reservation_url']??''));$program=esc_url_raw((string)($data['program_url']??''));$start_iso=trim((string)($data['start_iso']??''));$end_iso=trim((string)($data['end_iso']??''));$price=$this->seo_detail_value_v101148($data['price']??'');$organizers=is_array($data['organizers']??null)?$data['organizers']:array();$participants=is_array($data['participants']??null)?$data['participants']:array();
@@ -2224,8 +2231,8 @@ final class RuhrpottGuru_Places_Backend {
             // get_header/get_footer are the SAME entry points used on WP pages:
             // no parallel Header/Footer, no shadow WordPress page or redirect.
             $canonical_head = static function () use ($title, $desc, $canonical, $image, $schema_json, $esc) {
-                echo '<title>'.esc_html($title.' | RuhrpottGuru').'</title><meta name="description" content="'.$esc($desc).'"><link rel="canonical" href="'.$esc($canonical).'">';
-                echo '<meta property="og:locale" content="de_DE"><meta property="og:type" content="website"><meta property="og:site_name" content="RuhrpottGuru"><meta property="og:title" content="'.$esc($title).'"><meta property="og:description" content="'.$esc($desc).'"><meta property="og:url" content="'.$esc($canonical).'">';
+                echo '<title>'.esc_html($seo_title.' | '.get_bloginfo('name')).'</title><meta name="description" content="'.$esc($desc).'"><link rel="canonical" href="'.$esc($canonical).'">';
+                echo '<meta property="og:locale" content="de_DE"><meta property="og:type" content="website"><meta property="og:site_name" content="'.esc_attr(get_bloginfo('name')).'"><meta property="og:title" content="'.$esc($title).'"><meta property="og:description" content="'.$esc($desc).'"><meta property="og:url" content="'.$esc($canonical).'">';
                 if ($image !== '') echo '<meta property="og:image" content="'.$esc($image).'"><meta property="og:image:secure_url" content="'.$esc($image).'">';
                 echo '<meta name="twitter:card" content="'.($image !== '' ? 'summary_large_image' : 'summary').'"><meta name="twitter:title" content="'.$esc($title).'"><meta name="twitter:description" content="'.$esc($desc).'">';
                 if ($image !== '') echo '<meta name="twitter:image" content="'.$esc($image).'">';
@@ -2256,8 +2263,8 @@ final class RuhrpottGuru_Places_Backend {
         }
         if($direct_token!=='' && shortcode_exists('ruhrpott_app')){
             echo '<!doctype html><html lang="de"><head><meta charset="'.esc_attr(get_bloginfo('charset')).'"><meta name="viewport" content="width=device-width,initial-scale=1">';
-            echo '<title>'.esc_html($title.' | RuhrpottGuru').'</title><meta name="description" content="'.$esc($desc).'"><link rel="canonical" href="'.$esc($canonical).'">';
-            echo '<meta property="og:locale" content="de_DE"><meta property="og:type" content="website"><meta property="og:site_name" content="RuhrpottGuru"><meta property="og:title" content="'.$esc($title).'"><meta property="og:description" content="'.$esc($desc).'"><meta property="og:url" content="'.$esc($canonical).'">';
+            echo '<title>'.esc_html($seo_title.' | '.get_bloginfo('name')).'</title><meta name="description" content="'.$esc($desc).'"><link rel="canonical" href="'.$esc($canonical).'">';
+            echo '<meta property="og:locale" content="de_DE"><meta property="og:type" content="website"><meta property="og:site_name" content="'.esc_attr(get_bloginfo('name')).'"><meta property="og:title" content="'.$esc($title).'"><meta property="og:description" content="'.$esc($desc).'"><meta property="og:url" content="'.$esc($canonical).'">';
             if($image!=='')echo '<meta property="og:image" content="'.$esc($image).'"><meta property="og:image:secure_url" content="'.$esc($image).'">';
             echo '<meta name="twitter:card" content="'.($image!==''?'summary_large_image':'summary').'"><meta name="twitter:title" content="'.$esc($title).'"><meta name="twitter:description" content="'.$esc($desc).'">';if($image!=='')echo '<meta name="twitter:image" content="'.$esc($image).'">';
             if($schema_json)echo '<script type="application/ld+json">'.$schema_json.'</script>';
@@ -2277,8 +2284,8 @@ final class RuhrpottGuru_Places_Backend {
             echo '</body></html>';exit;
         }
         echo '<!doctype html><html lang="de"><head><meta charset="'.esc_attr(get_bloginfo('charset')).'"><meta name="viewport" content="width=device-width,initial-scale=1">';
-        echo '<title>'.esc_html($title.' | RuhrpottGuru').'</title><meta name="description" content="'.$esc($desc).'"><link rel="canonical" href="'.$esc($canonical).'">';
-        echo '<meta property="og:locale" content="de_DE"><meta property="og:type" content="website"><meta property="og:site_name" content="RuhrpottGuru"><meta property="og:title" content="'.$esc($title).'"><meta property="og:description" content="'.$esc($desc).'"><meta property="og:url" content="'.$esc($canonical).'">';
+        echo '<title>'.esc_html($seo_title.' | '.get_bloginfo('name')).'</title><meta name="description" content="'.$esc($desc).'"><link rel="canonical" href="'.$esc($canonical).'">';
+        echo '<meta property="og:locale" content="de_DE"><meta property="og:type" content="website"><meta property="og:site_name" content="'.esc_attr(get_bloginfo('name')).'"><meta property="og:title" content="'.$esc($title).'"><meta property="og:description" content="'.$esc($desc).'"><meta property="og:url" content="'.$esc($canonical).'">';
         if($image!=='')echo '<meta property="og:image" content="'.$esc($image).'"><meta property="og:image:secure_url" content="'.$esc($image).'">';
         echo '<meta name="twitter:card" content="'.($image!==''?'summary_large_image':'summary').'"><meta name="twitter:title" content="'.$esc($title).'"><meta name="twitter:description" content="'.$esc($desc).'">';if($image!=='')echo '<meta name="twitter:image" content="'.$esc($image).'">';
         if($schema_json)echo '<script type="application/ld+json">'.$schema_json.'</script>';
@@ -2312,7 +2319,7 @@ final class RuhrpottGuru_Places_Backend {
             $elements=$this->rows_to_elements(array($row));if(!$elements)$this->seo_render_not_found_v101096();$tags=(array)($elements[0]['tags']??array());$cat=(string)($row['_rg_response_category']??$row['primary_category']);$title=(string)$row['name'];$city=(string)$row['city'];$address=trim(implode(' ',array_filter(array((string)$row['street'],(string)$row['house_number'],(string)$row['postcode'],$city))));$image=(string)($tags['image:url']??($tags['image']??($tags['wikimedia_commons']??'')));if($image===''){$_raw_tags=json_decode((string)($row['raw_tags']??''),true);if(is_array($_raw_tags))$image=(string)($_raw_tags['image:url']??($_raw_tags['image']??($_raw_tags['wikimedia_commons']??'')));}if(stripos($image,'File:')===0)$image='https://commons.wikimedia.org/wiki/Special:FilePath/'.rawurlencode(substr($image,5)).'?width=1600';elseif($image!==''&&!preg_match('#^https?://#i',$image))$image='';$hours=(string)($tags['opening_hours']??'');$type=$this->seo_place_type_label_v101140($row,$tags,$cat);$source_desc=(string)($tags['description']??($tags['description:de']??''));$desc=$this->seo_place_description_v101140($title,$type,$city,$address,$hours,$source_desc);$code=$this->share_category_code($cat);$open=add_query_arg(array('rg_open'=>'p'.(int)$row['id'],'rgc'=>$code),home_url('/'));
             $postal=array('@type'=>'PostalAddress');if($row['street']!=='')$postal['streetAddress']=trim($row['street'].' '.$row['house_number']);if($row['postcode']!=='')$postal['postalCode']=$row['postcode'];if($city!=='')$postal['addressLocality']=$city;$schema=array('@context'=>'https://schema.org','@type'=>'Place','name'=>$title,'url'=>$canonical,'mainEntityOfPage'=>$canonical,'description'=>$this->share_trim_description($desc));if($image!=='')$schema['image']=$image;if(count($postal)>1)$schema['address']=$postal;if($row['lat']!==null&&$row['lng']!==null)$schema['geo']=array('@type'=>'GeoCoordinates','latitude'=>(float)$row['lat'],'longitude'=>(float)$row['lng']);$same_as=array();foreach(array((string)($row['website']??''),(string)($row['wikipedia']??'')) as $u){$u=esc_url_raw($u);if($u!=='')$same_as[]=$u;}if(!empty($row['wikidata'])&&preg_match('/^Q\d+$/i',(string)$row['wikidata']))$same_as[]='https://www.wikidata.org/wiki/'.strtoupper((string)$row['wikidata']);$same_as=array_values(array_unique($same_as));if($same_as)$schema['sameAs']=$same_as;
             $route='';if($row['lat']!==null&&$row['lng']!==null)$route='https://www.google.com/maps/search/?api=1&query='.rawurlencode((string)$row['lat'].','.(string)$row['lng']);elseif($address!=='')$route='https://www.google.com/maps/search/?api=1&query='.rawurlencode($address);$website=esc_url_raw((string)($tags['website']??($row['website']??'')));$menu=esc_url_raw((string)($tags['menu']??''));$reservation=esc_url_raw((string)($tags['reservation:website']??''));$overview=home_url('/');
-            $this->seo_render_detail_html_v101096(array('title'=>$title,'description'=>$desc,'full_description'=>$source_desc,'canonical'=>$canonical,'image'=>$image,'label'=>$type,'city'=>$city,'address'=>$address,'hours'=>$hours,'website'=>$website,'menu_url'=>$menu,'reservation_url'=>$reservation,'route_url'=>$route,'overview_url'=>$overview,'schema'=>$schema,'direct_token'=>'p'.(int)$row['id'],'direct_category'=>$cat));
+            $this->seo_render_detail_html_v101096(array('title'=>$title,'seo_title'=>$this->seo_place_title_with_city_v101170($title,$city),'description'=>$desc,'full_description'=>$source_desc,'canonical'=>$canonical,'image'=>$image,'label'=>$type,'city'=>$city,'address'=>$address,'hours'=>$hours,'website'=>$website,'menu_url'=>$menu,'reservation_url'=>$reservation,'route_url'=>$route,'overview_url'=>$overview,'schema'=>$schema,'direct_token'=>'p'.(int)$row['id'],'direct_category'=>$cat));
         }
         if(preg_match('#^veranstaltung/(\d+)(?:/([^/]+))?(?:/([^/]+))?/?$#iu',$path,$m)){
             $row=$this->seo_public_event_row_v101096((int)$m[1]);if(!$row)$this->seo_render_not_found_v101096();$canonical=$this->seo_event_url_v101096((int)$row['id'],(string)$row['title'],(string)$row['city']);$expected=trim((string)wp_parse_url($canonical,PHP_URL_PATH),'/');$home=trim((string)wp_parse_url(home_url('/'),PHP_URL_PATH),'/');if($home!==''&&strpos($expected,$home.'/')===0)$expected=substr($expected,strlen($home)+1);if($path!==$expected){wp_safe_redirect($canonical,301);exit;}
@@ -2353,8 +2360,8 @@ final class RuhrpottGuru_Places_Backend {
         }
         if($desc===''){
             $desc=$kind==='city'
-                ? 'Entdecke '.$city_name.' mit RuhrpottGuru: Veranstaltungen, Food, Sehenswürdigkeiten, Kultur und Freizeitaktivitäten.'
-                : $kind_label.' in '.$city_name.' entdecken – aktuelle lokale Tipps und Orte bei RuhrpottGuru.';
+                ? 'Entdecke '.$city_name.' mit '.get_bloginfo('name').': Veranstaltungen, Food, Sehenswürdigkeiten, Kultur und Freizeitaktivitäten.'
+                : $kind_label.' in '.$city_name.' entdecken – aktuelle lokale Tipps und Orte bei '.get_bloginfo('name').'.';
         }
         $desc=$this->share_trim_description($desc,$desc);
         $title=$kind==='city'?$city_name.' entdecken':$kind_label.' in '.$city_name;
@@ -2371,12 +2378,12 @@ final class RuhrpottGuru_Places_Backend {
         $canonical=esc_url_raw((string)$ctx['canonical']);$desc=(string)$ctx['description'];$title=(string)$ctx['title'];$city=(string)$ctx['city_name'];$kind=(string)$ctx['kind'];
         echo "\n".'<meta name="description" content="'.esc_attr($desc).'">';
         echo "\n".'<link rel="canonical" href="'.esc_url($canonical).'">';
-        echo "\n".'<meta property="og:locale" content="de_DE"><meta property="og:type" content="website"><meta property="og:site_name" content="RuhrpottGuru">';
+        echo "\n".'<meta property="og:locale" content="de_DE"><meta property="og:type" content="website"><meta property="og:site_name" content="'.esc_attr(get_bloginfo('name')).'">';
         echo '<meta property="og:title" content="'.esc_attr($title).'"><meta property="og:description" content="'.esc_attr($desc).'"><meta property="og:url" content="'.esc_url($canonical).'">';
         echo "\n".'<meta name="twitter:card" content="summary"><meta name="twitter:title" content="'.esc_attr($title).'"><meta name="twitter:description" content="'.esc_attr($desc).'">';
         $root=home_url('/stadt/');$city_url=get_permalink((int)$ctx['city']->ID);
         $crumbs=array(
-            array('@type'=>'ListItem','position'=>1,'name'=>'RuhrpottGuru','item'=>home_url('/')),
+            array('@type'=>'ListItem','position'=>1,'name'=>get_bloginfo('name'),'item'=>home_url('/')),
             array('@type'=>'ListItem','position'=>2,'name'=>'Städte','item'=>$root),
             array('@type'=>'ListItem','position'=>3,'name'=>$city,'item'=>$city_url),
         );
@@ -2387,7 +2394,7 @@ final class RuhrpottGuru_Places_Backend {
             'name'=>$title,
             'url'=>$canonical,
             'description'=>$desc,
-            'isPartOf'=>array('@type'=>'WebSite','name'=>'RuhrpottGuru','url'=>home_url('/')),
+            'isPartOf'=>array('@type'=>'WebSite','name'=>get_bloginfo('name'),'url'=>home_url('/')),
             'about'=>array('@type'=>'City','name'=>$city),
             'breadcrumb'=>array('@type'=>'BreadcrumbList','itemListElement'=>$crumbs),
         );
