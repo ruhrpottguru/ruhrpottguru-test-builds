@@ -47,7 +47,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          TAG=pottfuchs-p0-wpcode-cache-v1.0.2
+          TAG=pottfuchs-p0-wpcode-cache-v1.0.2-final
           if gh release view "$TAG" >/dev/null 2>&1; then
             echo "Never overwrite an existing immutable prerelease."
           else
