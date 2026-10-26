@@ -170,6 +170,30 @@ def main():
             issues.append("OLD_DOMAIN_SITEMAP_SAMPLE")
         report["resources"].append({"start":url,**clean(x),"issues":issues})
         report["issues"].extend("RESOURCE "+url+": "+i for i in issues)
+    # Preserve existing public brand/favicons byte-for-byte for visual asset comparison.
+    # Only READ public media; do not create, crop, replace or upload a WordPress icon.
+    from urllib.request import urlopen
+    asset_paths = {
+        "pottfuchs-logo-2026.png": "/wp-content/uploads/2026/10/cropped-Pottfuchs_Web_Transparent.png",
+        "existing-favicon-2021-a.png": "/wp-content/uploads/2021/07/cropped-favicon-1.png",
+        "existing-favicon-2021-b.png": "/wp-content/uploads/2021/07/favicon.png",
+        "existing-favicon-2021-c.png": "/wp-content/uploads/2021/07/cropped-favicon.png"
+    }
+    report["asset_samples"]=[]
+    for filename, path in asset_paths.items():
+        try:
+            public_url="https://"+HOST+path
+            with urlopen(Request(public_url,headers={"User-Agent":"PottFuchsReadOnlyAudit/1.0"}),timeout=15) as response:
+                raw=response.read(4000000)
+                mime=response.headers.get("Content-Type","")
+            if not raw.startswith(b"\x89PNG\r\n\x1a\n"):
+                raise ValueError("not PNG")
+            target=Path("audit/assets")/filename
+            target.parent.mkdir(parents=True,exist_ok=True)
+            target.write_bytes(raw)
+            report["asset_samples"].append({"url":public_url,"file":str(target),"bytes":len(raw),"sha256":hashlib.sha256(raw).hexdigest(),"mime":mime})
+        except (URLError, TimeoutError, OSError, ValueError) as exc:
+            report["asset_samples"].append({"file":filename,"error":str(exc)[:150]})
     output=Path("audit/pottfuchs-public-audit.json")
     output.parent.mkdir(parents=True,exist_ok=True)
     output.write_text(json.dumps(report,indent=2,ensure_ascii=False)+"\n",encoding="utf-8")
