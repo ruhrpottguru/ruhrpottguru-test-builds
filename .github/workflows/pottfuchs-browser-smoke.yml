@@ -1,0 +1,32 @@
+name: PottFuchs Mobile Browser Smoke (read-only)
+on:
+  push:
+    paths:
+      - 'tools/pottfuchs_browser_smoke.js'
+      - '.github/workflows/pottfuchs-browser-smoke.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  browser-smoke:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install ephemeral Playwright (runner only)
+        run: npm install --prefix "$RUNNER_TEMP/pf-browser" --no-audit --no-fund playwright@1.56.0
+      - name: Install ephemeral Chromium (runner only)
+        run: "$RUNNER_TEMP/pf-browser/node_modules/.bin/playwright" install --with-deps chromium
+      - name: Mobile browser public read-only check with synthetic GPS
+        run: NODE_PATH="$RUNNER_TEMP/pf-browser/node_modules" node tools/pottfuchs_browser_smoke.js
+      - name: Archive DOM result and screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pottfuchs-browser-smoke
+          path: audit/browser/
+          retention-days: 30
+          if-no-files-found: warn
