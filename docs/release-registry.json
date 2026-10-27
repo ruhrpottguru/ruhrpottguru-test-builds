@@ -1,0 +1,136 @@
+{
+  "schema_version": 1,
+  "generated_at": "2026-10-27",
+  "status": "evidence_index_not_live_probe",
+  "policy": "Unknown evidence is null; never infer live install from release or main",
+  "components": [
+    {
+      "id": "wordpress-places",
+      "repository": "ruhrpottguru/ruhrpottguru-test-builds",
+      "version": "1.10.190",
+      "archived": {
+        "status": "verified_release_metadata",
+        "source_commit": "fd6e0818f67a0e7a67cc01467acefef7937bcdfc",
+        "source_ref": "fix/global-city-scope-190",
+        "release_tag": "pottfuchs-places-v1.10.190",
+        "artifact": "PottFuchs-Places-v1.10.190-Stadtsichtbarkeit.zip",
+        "artifact_sha256": "fe58db4d267e4dea92b04a0977f21488f1fdf21298cb00119d05bb27f2b4d9a0",
+        "rollback": "PottFuchs-Places-v1.10.189-Rollback.zip",
+        "rollback_sha256": "43aa7de41d0a6f4d2750df09600474b2cfb95fb2cc146ef5297d8189a2e091c5"
+      },
+      "tested": {
+        "status": "documented_pass",
+        "evidence": "https://github.com/ruhrpottguru/ruhrpottguru-test-builds/actions/runs/40407428227"
+      },
+      "operator_reported": {
+        "status": "installed",
+        "evidence": "docs/POTTFUCHS-v1.10.190-LIVE-ABNAHME-2026-10-26.md"
+      },
+      "live_verified": {
+        "status": "verified_2026-10-26",
+        "evidence": "docs/POTTFUCHS-v1.10.190-LIVE-ABNAHME-2026-10-26.md",
+        "installed_main_file_sha256": "bca751f2f85467882ce74c6599c988a633bda1127b0a4034253cffd888ca1a2d"
+      },
+      "next_source": {
+        "ref": "fd6e0818f67a0e7a67cc01467acefef7937bcdfc",
+        "gate": "diff_against_newer_verified_changes_before_patch"
+      }
+    },
+    {
+      "id": "wordpress-theme",
+      "repository": "ruhrpottguru/ruhrpottguru-test-builds",
+      "version": "351.0",
+      "archived": {
+        "status": "source_parity_not_yet_verified",
+        "source_commit": null,
+        "source_ref": null,
+        "release_tag": null,
+        "artifact": null,
+        "artifact_sha256": null,
+        "rollback": null
+      },
+      "tested": {
+        "status": "route_patch_component_tests_documented",
+        "evidence": "docs/POTTFUCHS-ADRESSROUTEN-v1.0.0-2026-10-26.md"
+      },
+      "operator_reported": {
+        "status": "unknown",
+        "evidence": null
+      },
+      "live_verified": {
+        "status": "base_theme_351_confirmed_for_route_patch_2026-10-26",
+        "evidence": "docs/POTTFUCHS-ADRESSROUTEN-v1.0.0-2026-10-26.md"
+      },
+      "next_source": {
+        "ref": null,
+        "gate": "recover_exact_full_351_source_and_compare_to_patch_bytes"
+      }
+    },
+    {
+      "id": "web-address-routes",
+      "repository": "ruhrpottguru/ruhrpottguru-android",
+      "version": "1.0.0",
+      "archived": {
+        "status": "verified_release_metadata",
+        "source_commit": "2a6af591966a0d263071feffb71f90486746488d",
+        "release_tag": "pottfuchs-address-routes-v1.0.0",
+        "artifact": "PottFuchs-Adressrouten-v1.0.0-Installation.zip",
+        "artifact_sha256": "2aa21ee6de7cb864e63765e21c6166bd579b984e03657a8bcb837d1602985241",
+        "rollback": "PottFuchs-Adressrouten-v1.0.0-Rollback.zip"
+      },
+      "tested": {
+        "status": "documented_pass",
+        "evidence": "https://github.com/ruhrpottguru/ruhrpottguru-android/actions/runs/40414232675"
+      },
+      "operator_reported": {
+        "status": "not_confirmed",
+        "evidence": null
+      },
+      "live_verified": {
+        "status": "not_confirmed",
+        "evidence": null
+      },
+      "next_source": {
+        "ref": "2a6af591966a0d263071feffb71f90486746488d",
+        "gate": "verify_web_patch_install_before_new_web_patch"
+      }
+    },
+    {
+      "id": "android-app",
+      "repository": "ruhrpottguru/ruhrpottguru-android",
+      "version": "0.20.0-beta.15",
+      "version_code": 41,
+      "archived": {
+        "status": "verified_release_metadata",
+        "source_commit": "2a6af591966a0d263071feffb71f90486746488d",
+        "source_base": "bcbd8c696f347b23ed572e568417325596bbb95f",
+        "release_tag": "pottfuchs-address-routes-v1.0.0",
+        "artifact": "PottFuchs-0.20.0-beta.15-v41.aab",
+        "artifact_sha256": "4dc00248fb54a579d6a9492c2f652f585d57eb285113126d0c3e72f82395b7cf",
+        "rollback": "rebuild_previous_source_with_versionCode_greater_than_41"
+      },
+      "tested": {
+        "status": "documented_pass",
+        "evidence": "https://github.com/ruhrpottguru/ruhrpottguru-android/actions/runs/40414232675"
+      },
+      "operator_reported": {
+        "status": "not_confirmed",
+        "evidence": null
+      },
+      "live_verified": {
+        "status": "not_confirmed",
+        "evidence": null
+      },
+      "next_source": {
+        "ref": "2a6af591966a0d263071feffb71f90486746488d",
+        "gate": "compare_against_latest_release_and_play_internal_test"
+      }
+    }
+  ],
+  "compatibility": {
+    "backend_namespace": "ruhrpottguru/v1",
+    "source_of_truth": "wordpress backend",
+    "android_release_requires": "wordpress-places 1.10.190 payload compatibility",
+    "web_address_routes_requires": "theme 351.0 matching original api.js/components.js hashes"
+  }
+}
