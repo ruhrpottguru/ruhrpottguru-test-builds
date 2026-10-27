@@ -40,3 +40,28 @@ jobs:
               if x["live_verified"]["status"].startswith("verified"): assert x["live_verified"]["evidence"]
           print("PASS: component registry schema, provenance fields, hashes and evidence gates")
           PY
+
+      - name: Verify Places release tag and immutable asset digests via GitHub API
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import os,json,urllib.request
+          d=json.load(open("docs/release-registry.json"))
+          x=next(c for c in d["components"] if c["id"]=="wordpress-places")
+          a=x["archived"]
+          repo=x["repository"]
+          base="https://api.github.com/repos/"+repo
+          def fetch(suffix):
+              req=urllib.request.Request(base+suffix,headers={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"})
+              with urllib.request.urlopen(req, timeout=20) as response: return json.load(response)
+          tag=fetch("/git/ref/tags/"+a["release_tag"])
+          assert tag["object"]["sha"]==a["source_commit"],"tag does not point to recorded source commit"
+          release=fetch("/releases/tags/"+a["release_tag"])
+          assets={item["name"]:item for item in release["assets"]}
+          for name,digest in ((a["artifact"],a["artifact_sha256"]),(a["rollback"],a["rollback_sha256"])):
+              assert name in assets and assets[name]["digest"]=="sha256:"+digest,name+" digest mismatch"
+          for name in ("release-manifest.json","SHA256SUMS.txt"):
+              assert name in assets,"missing "+name
+          print("PASS: release tag/source and GitHub-provided SHA-256 metadata (no binary download)")
+          PY
