@@ -1,0 +1,42 @@
+name: PottFuchs Source Register Guard
+on:
+  pull_request:
+    paths:
+      - 'docs/release-registry.json'
+      - 'docs/source-of-truth-gate.md'
+      - '.github/workflows/pottfuchs-source-register.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/release-registry.json'
+      - '.github/workflows/pottfuchs-source-register.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  registry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate evidence registry (offline, read-only)
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,re,pathlib
+          p=pathlib.Path("docs/release-registry.json")
+          d=json.loads(p.read_text())
+          assert d["schema_version"]==1
+          comps=d["components"]
+          assert len({x["id"] for x in comps})==len(comps)
+          sha=re.compile(r"^[a-f0-9]{64}$"); gitsha=re.compile(r"^[a-f0-9]{40}$")
+          for x in comps:
+              for key in ("archived","tested","operator_reported","live_verified","next_source"): assert key in x
+              a=x["archived"]
+              if a.get("source_commit"): assert gitsha.fullmatch(a["source_commit"])
+              if a.get("artifact_sha256"): assert sha.fullmatch(a["artifact_sha256"])
+              if a.get("rollback_sha256"): assert sha.fullmatch(a["rollback_sha256"])
+              if x["id"]=="android-app": assert x["version_code"]>=41
+              if x["id"]=="wordpress-places": assert x["live_verified"]["evidence"]
+              if x["live_verified"]["status"].startswith("verified"): assert x["live_verified"]["evidence"]
+          print("PASS: component registry schema, provenance fields, hashes and evidence gates")
+          PY
