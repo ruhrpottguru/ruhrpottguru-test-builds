@@ -1,0 +1,39 @@
+name: PottFuchs reverse address release v1.1.0
+on:
+  push:
+    branches:
+      - feature/pottfuchs-reverse-address-100-20261027
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  verify-and-package:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check PHP and isolated REST behavior
+        run: |
+          php -l wordpress/plugins/pottfuchs-address-display/pottfuchs-address-display.php
+          php tests/pottfuchs-address-display.test.php
+      - name: Create reproducible installer and checksum
+        run: |
+          set -euo pipefail
+          mkdir -p dist
+          cd wordpress/plugins
+          touch -t 202001010000 pottfuchs-address-display/pottfuchs-address-display.php pottfuchs-address-display/README.txt
+          TZ=UTC zip -q -X -9 ../../../dist/PottFuchs-Koordinaten-zu-Adresse-v1.1.0.zip pottfuchs-address-display/pottfuchs-address-display.php pottfuchs-address-display/README.txt
+          cd ../../../dist
+          sha256sum PottFuchs-Koordinaten-zu-Adresse-v1.1.0.zip > SHA256SUMS.txt
+          unzip -t PottFuchs-Koordinaten-zu-Adresse-v1.1.0.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PottFuchs-Koordinaten-zu-Adresse-v1.1.0
+          path: |
+            dist/PottFuchs-Koordinaten-zu-Adresse-v1.1.0.zip
+            dist/SHA256SUMS.txt
+      - name: Publish versioned GitHub release
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release create pottfuchs-reverse-address-v1.1.0 dist/PottFuchs-Koordinaten-zu-Adresse-v1.1.0.zip dist/SHA256SUMS.txt --target "$GITHUB_SHA" --title "PottFuchs Koordinaten zu Adresse v1.1.0" --notes "Kontrollierte Geoapify-Reverse-Geokodierung mit vorhandener Geoapify-Option, RAM/Transient-Cache und REST-Anreicherung für Web und Android. Kein Live-Deployment, keine Datenbankmutation. Rollback: Plugin deaktivieren." --latest=false
