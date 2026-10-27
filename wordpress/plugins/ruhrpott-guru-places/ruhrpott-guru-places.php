@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RuhrpottGuru Places Backend
  * Description: Persistenter Places-Katalog für Food, Highlights, Kultur und Aktivitäten sowie Spezial-Inventare für Büdchen und „Hier geht’s um die Wurst“ in der Metropole Ruhr. OSM wird nur für Import/Sync verwendet; Besucher lesen aus MySQL. Mit automatischem OSM-Rollback bis der Katalog vollständig validiert ist.
- * Version: 1.10.191
+ * Version: 1.10.192
  * Author: RuhrpottGuru
  * License: GPL-2.0-or-later
  */
@@ -179,7 +179,7 @@ final class RuhrpottGuru_Places_Backend {
     // 0-14 Tage alle 4 Stunden, 0-90 Tage taeglich, kompletter 0-365-Tage-
     // Master woechentlich. Laufende Master-/Supplemental-Wellen werden nie
     // abgebrochen; der Dispatcher wartet, bis der Event-Importpfad frei ist.
-    const VERSION = '1.10.191';
+    const VERSION = '1.10.192';
     const ACTIVITY_V2_SPEC_VERSION = '1.4';
     const SCHEMA_VERSION = '1.10.129';
     const OPTION_STATUS = 'rg_places_status';
@@ -1865,7 +1865,7 @@ final class RuhrpottGuru_Places_Backend {
         if (!empty($raw['rpg_event_media']['imageUrl'])) $image = esc_url_raw((string)$raw['rpg_event_media']['imageUrl']);
         $city = trim((string)$row['city']);
         $venue = trim((string)$row['venue_name']);
-        $fallback = trim(implode(' · ', array_filter(array($venue, $city, !empty($row['start_at']) ? wp_date('j. F Y · H:i', strtotime((string)$row['start_at'])) : ''))));
+        $fallback = trim(implode(' · ', array_filter(array($venue, $city, !empty($row['start_at']) ? $this->event_when_berlin_v101192((string)$row['start_at'], $row) : ''))));
         $description = $this->share_trim_description((string)($row['short_description'] ?: $row['description']), $fallback ?: 'Event im Ruhrgebiet');
         $address = trim(implode(' ', array_filter(array((string)$row['street'],(string)$row['house_number'],(string)$row['postcode'],$city))));
         return array(
@@ -2375,7 +2375,7 @@ final class RuhrpottGuru_Places_Backend {
         }
         if(preg_match('#^veranstaltung/(\d+)(?:/([^/]+))?(?:/([^/]+))?/?$#iu',$path,$m)){
             $row=$this->seo_public_event_row_v101096((int)$m[1]);if(!$row)$this->seo_render_not_found_v101096();$canonical=$this->seo_event_url_v101096((int)$row['id'],(string)$row['title'],(string)$row['city']);$expected=trim((string)wp_parse_url($canonical,PHP_URL_PATH),'/');$home=trim((string)wp_parse_url(home_url('/'),PHP_URL_PATH),'/');if($home!==''&&strpos($expected,$home.'/')===0)$expected=substr($expected,strlen($home)+1);if($path!==$expected){wp_safe_redirect($canonical,301);exit;}
-            $payload=$this->share_event_payload((int)$row['id']);if(!$payload)$this->seo_render_not_found_v101096();$share=(array)$payload['share'];$item=(array)$payload['item'];$title=(string)$row['title'];$city=(string)$row['city'];$address=(string)($share['address']??'');$image=(string)($share['image']??'');$desc=(string)($share['description']??'');$start=$this->event_visitor_datetime_iso((string)$row['start_at'],$row);$end=!empty($row['end_at'])?$this->event_visitor_datetime_iso((string)$row['end_at'],$row):'';$when='';$ts=strtotime((string)$row['start_at']);if($ts)$when=wp_date('j. F Y · H:i',$ts);$open_args=array('rg_open'=>'e'.(int)$row['id'],'rgc'=>'e');if($row['lat']!==null&&$row['lng']!==null){$open_args['rg_lat']=number_format((float)$row['lat'],6,'.','');$open_args['rg_lng']=number_format((float)$row['lng'],6,'.','');if($city!=='')$open_args['rg_city']=$city;}$open=add_query_arg($open_args,home_url('/veranstaltungen/'));
+            $payload=$this->share_event_payload((int)$row['id']);if(!$payload)$this->seo_render_not_found_v101096();$share=(array)$payload['share'];$item=(array)$payload['item'];$title=(string)$row['title'];$city=(string)$row['city'];$address=(string)($share['address']??'');$image=(string)($share['image']??'');$desc=(string)($share['description']??'');$start=$this->event_visitor_datetime_iso((string)$row['start_at'],$row);$end=!empty($row['end_at'])?$this->event_visitor_datetime_iso((string)$row['end_at'],$row):'';$when='';$when=$this->event_when_berlin_v101192((string)$row['start_at'],$row);$open_args=array('rg_open'=>'e'.(int)$row['id'],'rgc'=>'e');if($row['lat']!==null&&$row['lng']!==null){$open_args['rg_lat']=number_format((float)$row['lat'],6,'.','');$open_args['rg_lng']=number_format((float)$row['lng'],6,'.','');if($city!=='')$open_args['rg_city']=$city;}$open=add_query_arg($open_args,home_url('/veranstaltungen/'));
             $schema=array('@context'=>'https://schema.org','@type'=>'Event','name'=>$title,'url'=>$canonical,'description'=>$this->share_trim_description($desc),'startDate'=>$start,'eventStatus'=>'https://schema.org/EventScheduled','eventAttendanceMode'=>'https://schema.org/OfflineEventAttendanceMode');if($end!=='')$schema['endDate']=$end;if($image!=='')$schema['image']=array($image);$loc=array('@type'=>'Place','name'=>(string)$row['venue_name']);$postal=array('@type'=>'PostalAddress');if($row['street']!=='')$postal['streetAddress']=trim($row['street'].' '.$row['house_number']);if($row['postcode']!=='')$postal['postalCode']=$row['postcode'];if($city!=='')$postal['addressLocality']=$city;if(count($postal)>1)$loc['address']=$postal;$schema['location']=$loc;$ticket=esc_url_raw((string)($row['ticket_url']??''));if($ticket!=='')$schema['offers']=array('@type'=>'Offer','url'=>$ticket,'availability'=>'https://schema.org/InStock');
             $website=esc_url_raw((string)($item['website']??($item['eventWebsite']??'')));$route='';if($row['lat']!==null&&$row['lng']!==null)$route='https://www.google.com/maps/search/?api=1&query='.rawurlencode((string)$row['lat'].','.(string)$row['lng']);elseif($address!=='')$route='https://www.google.com/maps/search/?api=1&query='.rawurlencode($address);$overview=home_url('/veranstaltungen/');
             $organizers=$this->event_current_organizers_from_row_v1063($row);$participants=json_decode((string)($row['participants_json']??''),true);if(!is_array($participants))$participants=array();$raw=json_decode((string)($row['raw_payload']??''),true);if(!is_array($raw))$raw=array();$docs=$this->event_documents_from_item_v1063($raw);$program=esc_url_raw((string)($row['_rpg_program_url']??($docs[0]['url']??'')));$price=trim((string)($row['price_text']??''));
@@ -2758,6 +2758,32 @@ final class RuhrpottGuru_Places_Backend {
      * timezone: on installations configured as UTC, mysql2date() would emit
      * 10:00+00:00 and a German browser correctly turns that into 12:00 CEST.
      */
+    /**
+     * 1.10.192: sichtbare Terminangabe "j. F Y · H:i" in deutscher Zeit.
+     * start_at ist in der Datenbank UTC gespeichert (WordPress-Zeitzone UTC+0);
+     * eine Zeile mit _rpg_visitor_timezone behaelt ihre eigene Zeitzone.
+     * Ganztagstermine bleiben unveraendert (altes Verhalten), damit dort kein
+     * Stundenversatz entsteht. Vorher wurde der gespeicherte Wert 1:1 gezeigt
+     * (z. B. 19:30 statt 20:30).
+     */
+    private function event_when_berlin_v101192($value, $row=array()) {
+        $value = trim((string)$value);
+        if ($value === '') return '';
+        if (!empty($row['all_day'])) {
+            $ts = strtotime($value);
+            return $ts ? wp_date('j. F Y · H:i', $ts) : '';
+        }
+        try {
+            $zone = trim((string)($row['_rpg_visitor_timezone'] ?? ''));
+            $from = new DateTimeZone($zone !== '' ? $zone : 'UTC');
+            $dt = DateTimeImmutable::createFromFormat('Y-m-d H:i:s', $value, $from);
+            if (!($dt instanceof DateTimeImmutable)) return '';
+            return wp_date('j. F Y · H:i', $dt->getTimestamp(), new DateTimeZone('Europe/Berlin'));
+        } catch (Throwable $e) {
+            return '';
+        }
+    }
+
     private function event_visitor_datetime_iso($value, $row=array()) {
         $value=trim((string)$value);
         if($value==='') return '';
