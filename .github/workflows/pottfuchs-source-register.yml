@@ -1,0 +1,67 @@
+name: PottFuchs Source Register Guard
+on:
+  pull_request:
+    paths:
+      - 'docs/release-registry.json'
+      - 'docs/source-of-truth-gate.md'
+      - '.github/workflows/pottfuchs-source-register.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'docs/release-registry.json'
+      - '.github/workflows/pottfuchs-source-register.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  registry:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate evidence registry (offline, read-only)
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import json,re,pathlib
+          p=pathlib.Path("docs/release-registry.json")
+          d=json.loads(p.read_text())
+          assert d["schema_version"]==1
+          comps=d["components"]
+          assert len({x["id"] for x in comps})==len(comps)
+          sha=re.compile(r"^[a-f0-9]{64}$"); gitsha=re.compile(r"^[a-f0-9]{40}$")
+          for x in comps:
+              for key in ("archived","tested","operator_reported","live_verified","next_source"): assert key in x
+              a=x["archived"]
+              if a.get("source_commit"): assert gitsha.fullmatch(a["source_commit"])
+              if a.get("artifact_sha256"): assert sha.fullmatch(a["artifact_sha256"])
+              if a.get("rollback_sha256"): assert sha.fullmatch(a["rollback_sha256"])
+              if x["id"]=="android-app": assert x["version_code"]>=41
+              if x["id"]=="wordpress-places": assert x["live_verified"]["evidence"]
+              if x["live_verified"]["status"].startswith("verified"): assert x["live_verified"]["evidence"]
+          print("PASS: component registry schema, provenance fields, hashes and evidence gates")
+          PY
+
+      - name: Verify Places release tag and immutable asset digests via GitHub API
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import os,json,urllib.request
+          d=json.load(open("docs/release-registry.json"))
+          x=next(c for c in d["components"] if c["id"]=="wordpress-places")
+          a=x["archived"]
+          repo=x["repository"]
+          base="https://api.github.com/repos/"+repo
+          def fetch(suffix):
+              req=urllib.request.Request(base+suffix,headers={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json","X-GitHub-Api-Version":"2022-11-28"})
+              with urllib.request.urlopen(req, timeout=20) as response: return json.load(response)
+          tag=fetch("/git/ref/tags/"+a["release_tag"])
+          assert tag["object"]["sha"]==a["source_commit"],"tag does not point to recorded source commit"
+          release=fetch("/releases/tags/"+a["release_tag"])
+          assets={item["name"]:item for item in release["assets"]}
+          for name,digest in ((a["artifact"],a["artifact_sha256"]),(a["rollback"],a["rollback_sha256"])):
+              assert name in assets and assets[name]["digest"]=="sha256:"+digest,name+" digest mismatch"
+          for name in ("release-manifest.json","SHA256SUMS.txt"):
+              assert name in assets,"missing "+name
+          print("PASS: release tag/source and GitHub-provided SHA-256 metadata (no binary download)")
+          PY

@@ -63,3 +63,8 @@ Ein neuer Projekt-Chat lässt sich daran messen, ob der Assistent vor einer neue
 - nach einer Lieferung Quellstand, Prüfsumme, ZIP und Nachweise auffindbar hinterlegt.
 
 Dieses Dokument ist ein **Arbeitsablauf**, kein Garantieversprechen über automatisch geladene Erinnerung und keine Freigabe für technische Änderungen.
+
+
+## GitHub-Quellstand-Gate vom 27.10.2026
+
+Vor jeder neuen Codeänderung verpflichtend `docs/release-registry.json` und `docs/source-of-truth-gate.md` lesen, **beide Repositories inklusive Branches/Tags/Releases** inventarisieren und den komponentenbezogenen zuletzt vollständig nachgewiesenen Commit auswählen. `main` ist nicht automatisch die neueste Quellbasis; ein Release nicht automatisch live. Bei Widersprüchen Quellhashes und Datei-Diffs prüfen, niemals ältere Dateien über einen neueren Installationsstand überschreiben. Archiv, bestandene Tests, Betreiberinstallation und verifizierte Live-Installation bleiben getrennte Nachweisstufen. Auf unbekannt/fehlend setzen statt Versionsraten. Für Android vor jedem Build den `versionCode` gegen alle signierten Veröffentlichungen prüfen. Ein geschützter Branch/PR ist kein Installationsauftrag. Keine WPVibe-Nutzung ohne Freigabe.
