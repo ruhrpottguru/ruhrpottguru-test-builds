@@ -1,0 +1,19 @@
+name: PottFuchs GSC exclusions public indexability read-only
+on:
+  push:
+    paths:
+      - 'tools/pottfuchs_indexability_public.py'
+      - '.github/workflows/pottfuchs-gsc-exclusions.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  indexability:
+    runs-on: ubuntu-latest
+    timeout-minutes: 9
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check syntax
+        run: python3 -m py_compile tools/pottfuchs_indexability_public.py
+      - name: Sample indexability on actual public canonical hosts
+        run: python3 tools/pottfuchs_indexability_public.py
