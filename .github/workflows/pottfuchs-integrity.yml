@@ -1,0 +1,62 @@
+name: PottFuchs Repository Integrity
+on:
+  pull_request:
+  push:
+    branches: [main]
+  schedule:
+    - cron: '17 5 * * 1'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Validate registry, verified source refs and release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 - <<'PY'
+          import json,os,re,urllib.request
+          d=json.load(open("docs/release-registry.json"))
+          assert d["schema_version"]==1
+          assert len(set(c["id"] for c in d["components"]))==len(d["components"])
+          for c in d["components"]:
+              for key in ["archived","tested","operator_reported","live_verified","next_source"]: assert key in c,(c["id"],key)
+              for key in ["archived","tested","operator_reported","live_verified"]: assert "status" in c[key]
+          def fetch(repo,path):
+              request=urllib.request.Request("https://api.github.com/repos/"+repo+path,headers={"Authorization":"Bearer "+os.environ["GH_TOKEN"],"Accept":"application/vnd.github+json"})
+              with urllib.request.urlopen(request,timeout=25) as response: return json.load(response)
+          places=next(c for c in d["components"] if c["id"]=="wordpress-places")
+          p=places["archived"];repo=places["repository"]
+          tag=fetch(repo,"/git/ref/tags/"+p["release_tag"])
+          branch=fetch(repo,"/branches/"+places["next_source"]["verified_ref"])
+          assert tag["object"]["sha"]==p["source_commit"]
+          assert branch["commit"]["sha"]==p["source_commit"]
+          rel=fetch(repo,"/releases/tags/"+p["release_tag"])
+          assets={a["name"]:a for a in rel["assets"]}
+          for name,sha in [(p["artifact"],p["artifact_sha256"]),(p["rollback"],p["rollback_sha256"])]:
+              assert re.fullmatch("[a-f0-9]{64}",sha)
+              assert assets[name]["digest"]=="sha256:"+sha
+          for required in ["SHA256SUMS.txt","release-manifest.json"]: assert required in assets
+          print("PASS Places source branch, release commit, required assets, SHA metadata")
+          PY
+      - name: Block accidentally committed signing keys, env files and private configuration
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 - <<'PY'
+          import pathlib,subprocess,sys,re
+          names=subprocess.check_output(["git","ls-files"],text=True).splitlines()
+          disallowed=[]
+          for name in names:
+              p=pathlib.PurePosixPath(name)
+              base=p.name.lower()
+              if base in (".env","wp-config.php","id_rsa","id_ed25519") or base.endswith((".p12",".pfx",".jks",".keystore",".pem",".key")):
+                  disallowed.append(name)
+          if disallowed: raise SystemExit("Forbidden sensitive paths tracked: "+", ".join(disallowed))
+          print("PASS: no tracked common signing-key/private-config files")
+          PY

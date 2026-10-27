@@ -33,7 +33,8 @@
       },
       "next_source": {
         "ref": "fd6e0818f67a0e7a67cc01467acefef7937bcdfc",
-        "gate": "diff_against_newer_verified_changes_before_patch"
+        "gate": "diff_against_newer_verified_changes_before_patch",
+        "verified_ref": "source/places-v1.10.190-verified"
       }
     },
     {
@@ -92,7 +93,8 @@
       },
       "next_source": {
         "ref": "2a6af591966a0d263071feffb71f90486746488d",
-        "gate": "verify_web_patch_install_before_new_web_patch"
+        "gate": "verify_web_patch_install_before_new_web_patch",
+        "verified_ref": "source/android-beta15-v41-verified"
       }
     },
     {
@@ -123,7 +125,8 @@
       },
       "next_source": {
         "ref": "2a6af591966a0d263071feffb71f90486746488d",
-        "gate": "compare_against_latest_release_and_play_internal_test"
+        "gate": "compare_against_latest_release_and_play_internal_test",
+        "verified_ref": "source/android-beta15-v41-verified"
       }
     }
   ],
