@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RuhrpottGuru Places Backend
  * Description: Persistenter Places-Katalog für Food, Highlights, Kultur und Aktivitäten sowie Spezial-Inventare für Büdchen und „Hier geht’s um die Wurst“ in der Metropole Ruhr. OSM wird nur für Import/Sync verwendet; Besucher lesen aus MySQL. Mit automatischem OSM-Rollback bis der Katalog vollständig validiert ist.
- * Version: 1.10.192
+ * Version: 1.10.193
  * Author: RuhrpottGuru
  * License: GPL-2.0-or-later
  */
@@ -179,7 +179,7 @@ final class RuhrpottGuru_Places_Backend {
     // 0-14 Tage alle 4 Stunden, 0-90 Tage taeglich, kompletter 0-365-Tage-
     // Master woechentlich. Laufende Master-/Supplemental-Wellen werden nie
     // abgebrochen; der Dispatcher wartet, bis der Event-Importpfad frei ist.
-    const VERSION = '1.10.192';
+    const VERSION = '1.10.193';
     const ACTIVITY_V2_SPEC_VERSION = '1.4';
     const SCHEMA_VERSION = '1.10.129';
     const OPTION_STATUS = 'rg_places_status';
@@ -2759,6 +2759,32 @@ final class RuhrpottGuru_Places_Backend {
      * 10:00+00:00 and a German browser correctly turns that into 12:00 CEST.
      */
     /**
+     * 1.10.193: Preiszeilen fuer Besucher lesbar machen. Quellen liefern Rohcodes
+     * wie PRICE_ADULT mit der blanken Zahl 22 (Anzeige bisher "ADULT: 22").
+     * Bekannte Codes werden ins Deutsche uebersetzt. Das Euro-Zeichen kommt nur
+     * dazu, wenn der Preistext derselben Zeile Euro/EUR/EUR-Zeichen nennt
+     * (keine erfundene Waehrung). Unbekannte Codes, Texte und Daten bleiben
+     * unveraendert; gespeichert wird nichts.
+     */
+    private function event_prices_visitor_v101193($prices) {
+        if (!is_array($prices) || empty($prices['items']) || !is_array($prices['items'])) return $prices;
+        $map = array(
+            'ADULT' => 'Erwachsene', 'ADULTS' => 'Erwachsene', 'CHILD' => 'Kinder', 'CHILDREN' => 'Kinder',
+            'REDUCED' => 'Ermäßigt', 'CONCESSION' => 'Ermäßigt', 'STUDENT' => 'Schüler/Studierende',
+            'SENIOR' => 'Senioren', 'YOUTH' => 'Jugendliche', 'FAMILY' => 'Familien', 'GROUP' => 'Gruppen',
+        );
+        $hasEuro = (bool)preg_match('/€|\bEUR\b|Euro/iu', (string)($prices['text'] ?? ''));
+        foreach ($prices['items'] as $i => $row) {
+            if (!is_array($row) || !isset($row['label']) || !is_string($row['label'])) continue;
+            if (!preg_match('/^PRICE_([A-Z_]+)$/', trim($row['label']), $m) || !isset($map[$m[1]])) continue;
+            $prices['items'][$i]['label'] = $map[$m[1]];
+            $value = trim((string)($row['value'] ?? ''));
+            if ($hasEuro && preg_match('/^\d+(?:[.,]\d{1,2})?$/', $value)) $prices['items'][$i]['value'] = $value . ' €';
+        }
+        return $prices;
+    }
+
+    /**
      * 1.10.192: sichtbare Terminangabe "j. F Y · H:i" in deutscher Zeit.
      * start_at ist in der Datenbank UTC gespeichert (WordPress-Zeitzone UTC+0);
      * eine Zeile mit _rpg_visitor_timezone behaelt ihre eigene Zeitzone.
@@ -3089,7 +3115,7 @@ final class RuhrpottGuru_Places_Backend {
         foreach ($event_rows as $r) {
             $participants=json_decode((string)($r['participants_json']??''),true); if(!is_array($participants))$participants=array();
             $eventRaw=json_decode((string)($r['raw_payload']??''),true);if(!is_array($eventRaw))$eventRaw=array();$eventDocs=$this->event_documents_from_item_v1063($eventRaw);
-            $organizers=$this->event_current_organizers_from_row_v1063($r);$prices=json_decode((string)($r['price_json']??''),true);if(!is_array($prices))$prices=array();$info=json_decode((string)($r['event_info_json']??''),true);if(!is_array($info))$info=array();
+            $organizers=$this->event_current_organizers_from_row_v1063($r);$prices=json_decode((string)($r['price_json']??''),true);if(!is_array($prices))$prices=array();$prices=$this->event_prices_visitor_v101193($prices);$info=json_decode((string)($r['event_info_json']??''),true);if(!is_array($info))$info=array();
             $searchImage=!empty($r['image_media_id'])?(((string)($r['image_local_path']??'')!=='')?$this->event_local_media_public_url_v1039(array('local_path'=>(string)$r['image_local_path'],'local_content_hash'=>(string)($r['image_local_content_hash']??''))):esc_url_raw((string)($r['image_url']??''))):'';
             $searchSource=sanitize_key((string)($r['image_source']??''));$searchMedia=$eventSearchCropById[(int)($r['image_media_id']??0)]??array();
             if(!in_array($searchSource,array('et4-global-id','et4-feed','editorial-override','official-approved'),true)){$pool=$this->event_manual_place_pool_candidate_v1076((int)$r['id'],$globalSearchManualPoolUsed);if($pool&&!empty($pool['_public_url'])){$searchImage=(string)$pool['_public_url'];$searchMedia=$pool;}}
@@ -11808,7 +11834,7 @@ RuhrpottGuru";
         }
         $participants = json_decode((string)($row['participants_json'] ?? ''), true);
         if (is_array($participants) && $participants) $item['rpg_participants'] = $participants;
-        $prices=json_decode((string)($row['price_json']??''),true);if(!is_array($prices))$prices=array();
+        $prices=json_decode((string)($row['price_json']??''),true);if(!is_array($prices))$prices=array();$prices=$this->event_prices_visitor_v101193($prices);
         $organizers=$this->event_current_organizers_from_row_v1063($row);
         $info=json_decode((string)($row['event_info_json']??''),true);if(!is_array($info))$info=array();
         if(isset($row['description']))$item['description']=(string)$row['description'];
@@ -15690,7 +15716,7 @@ RuhrpottGuru";
             if(empty($raw['source_name']))$raw['source_name']=(string)$row['source'];
             $raw['rpg_sources']=$this->event_public_source_keys_for_row_v101162($row,$visitorSourceMap);
             $participants=json_decode((string)($row['participants_json']??''),true);if(is_array($participants)&&$participants)$raw['rpg_participants']=$participants;
-            $prices=json_decode((string)($row['price_json']??''),true);if(!is_array($prices))$prices=array();
+            $prices=json_decode((string)($row['price_json']??''),true);if(!is_array($prices))$prices=array();$prices=$this->event_prices_visitor_v101193($prices);
             $organizers=$this->event_current_organizers_from_row_v1063($row);
             $info=json_decode((string)($row['event_info_json']??''),true);if(!is_array($info))$info=array();
             $raw['rpg_event_details']=array('shortDescription'=>(string)($row['short_description']??''),'priceText'=>(string)($row['price_text']??''),'prices'=>$prices,'organizers'=>$organizers,'info'=>$info,'ticketUrl'=>(string)($row['ticket_url']??''),'website'=>$publicWebsite,'canonicalUrl'=>$this->event_canonical_share_url_v1057((int)$row['id'],(string)$row['title'],(string)($row['city']??'')),'programUrl'=>(string)($row['_rpg_program_url']??($documents[0]['url']??'')),'programLabel'=>(string)($row['_rpg_program_label']??($documents[0]['label']??'Programm')),'documents'=>$documents,'allDay'=>$allDay,'visitorHours'=>(string)($row['_rpg_visitor_hours']??''),'dayHours'=>(string)($row['_rpg_day_hours']??''),'visitorHoursSource'=>(string)($row['_rpg_visitor_hours_source']??''),'sourceCreatedAt'=>(string)($row['source_created_at']??''),'sourceChangedAt'=>(string)($row['source_changed_at']??''));
