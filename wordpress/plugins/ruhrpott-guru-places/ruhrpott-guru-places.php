@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RuhrpottGuru Places Backend
  * Description: Persistenter Places-Katalog für Food, Highlights, Kultur und Aktivitäten sowie Spezial-Inventare für Büdchen und „Hier geht’s um die Wurst“ in der Metropole Ruhr. OSM wird nur für Import/Sync verwendet; Besucher lesen aus MySQL. Mit automatischem OSM-Rollback bis der Katalog vollständig validiert ist.
- * Version: 1.10.190
+ * Version: 1.10.191
  * Author: RuhrpottGuru
  * License: GPL-2.0-or-later
  */
@@ -179,7 +179,7 @@ final class RuhrpottGuru_Places_Backend {
     // 0-14 Tage alle 4 Stunden, 0-90 Tage taeglich, kompletter 0-365-Tage-
     // Master woechentlich. Laufende Master-/Supplemental-Wellen werden nie
     // abgebrochen; der Dispatcher wartet, bis der Event-Importpfad frei ist.
-    const VERSION = '1.10.190';
+    const VERSION = '1.10.191';
     const ACTIVITY_V2_SPEC_VERSION = '1.4';
     const SCHEMA_VERSION = '1.10.129';
     const OPTION_STATUS = 'rg_places_status';
@@ -320,6 +320,8 @@ final class RuhrpottGuru_Places_Backend {
         add_filter('manage_rpg_community_posts_columns', array($this, 'community_admin_columns_v101151'));
         add_action('manage_rpg_community_posts_custom_column', array($this, 'community_admin_column_v101151'), 10, 2);
         add_filter('rest_request_after_callbacks', array($this, 'capture_food_enrichment_response'), 10, 3);
+        add_filter('rest_request_before_callbacks', array($this, 'capture_events_until_days_v101191'), 1, 3);
+        add_filter('rest_pre_serve_request', array($this, 'gzip_events_response_v101191'), 10, 4);
         add_filter('rest_request_after_callbacks', array($this, 'capture_event_feed_response'), 20, 3);
         add_filter('rest_request_after_callbacks', array($this, 'enforce_et4_global_id_media_response_v1039'), 999, 3);
         add_action('admin_post_rg_places_activity_source_coverage_start', array($this, 'admin_activity_source_coverage_start_v1089'));
@@ -11838,6 +11840,64 @@ RuhrpottGuru";
         return $item;
     }
 
+    /**
+     * 1.10.191: optional visitor request field `untilDays` (1-730) on the existing
+     * POST /ruhrpottguru/v1/events route. It only limits how far ahead events may
+     * START, using the same single query path. Absent/invalid = unchanged behaviour
+     * (web theme and installed older apps never send it).
+     */
+    private $events_until_days_v101191 = 0;
+
+    public function capture_events_until_days_v101191($response,$handler,$request) {
+        if(!($request instanceof WP_REST_Request) || $request->get_route()!=='/ruhrpottguru/v1/events')return $response;
+        $this->events_until_days_v101191 = 0;
+        $params = $request->get_json_params();
+        if(is_array($params) && isset($params['untilDays']) && is_numeric($params['untilDays'])){
+            $days = (int)$params['untilDays'];
+            if($days >= 1 && $days <= 730) $this->events_until_days_v101191 = $days;
+        }
+        return $response;
+    }
+
+    /**
+     * 1.10.191: the visitor events response was delivered uncompressed (several MB
+     * for dense cities). Compress ONLY POST/GET /ruhrpottguru/v1/events, ONLY when
+     * the client announces gzip support, and never when the server/PHP already
+     * compresses. Same JSON bytes as WordPress would send; browsers and Android
+     * HttpURLConnection decompress transparently. Kill switch: define
+     * RPG_DISABLE_EVENTS_GZIP in wp-config.php.
+     */
+    public function gzip_events_response_v101191($served,$result,$request,$server) {
+        if($served) return $served;
+        if(defined('RPG_DISABLE_EVENTS_GZIP') && RPG_DISABLE_EVENTS_GZIP) return $served;
+        if(!is_object($request) || !method_exists($request,'get_route') || $request->get_route()!=='/ruhrpottguru/v1/events') return $served;
+        if(!is_object($result) || !method_exists($result,'get_data') || !method_exists($result,'get_status') || (int)$result->get_status()!==200) return $served;
+        if(!function_exists('gzencode')) return $served;
+        $accept = isset($_SERVER['HTTP_ACCEPT_ENCODING']) ? (string)$_SERVER['HTTP_ACCEPT_ENCODING'] : '';
+        $gzip_ok = false;
+        foreach(explode(',',strtolower($accept)) as $token){
+            $parts = array_map('trim',explode(';',$token));
+            if(!in_array($parts[0],array('gzip','x-gzip'),true)) continue;
+            $q = 1.0;
+            foreach(array_slice($parts,1) as $param){ if(strpos($param,'q=')===0) $q = (float)substr($param,2); }
+            if($q > 0) $gzip_ok = true;
+        }
+        if(!$gzip_ok) return $served;
+        $zlib = ini_get('zlib.output_compression');
+        if($zlib && strtolower((string)$zlib)!=='off' && (string)$zlib!=='0') return $served;
+        if(headers_sent()) return $served;
+        foreach((array)headers_list() as $h){ if(stripos((string)$h,'content-encoding:')===0) return $served; }
+        $json = wp_json_encode($result->get_data());
+        if(!is_string($json) || $json==='') return $served;
+        $gz = gzencode($json,6);
+        if(!is_string($gz) || $gz==='' || strlen($gz) >= strlen($json)) return $served;
+        header('Content-Encoding: gzip');
+        header('Vary: Accept-Encoding',false);
+        header('Content-Length: '.strlen($gz));
+        echo $gz;
+        return true;
+    }
+
     public function capture_event_feed_response($response,$handler,$request) {
         if(!($request instanceof WP_REST_Request) || $request->get_route()!=='/ruhrpottguru/v1/events')return $response;
         $data=$response instanceof WP_REST_Response?$response->get_data():$response;
@@ -15290,6 +15350,9 @@ RuhrpottGuru";
         $min_lat=$lat-$lat_delta; $max_lat=$lat+$lat_delta;
         $min_lng=$lng-$lng_delta; $max_lng=$lng+$lng_delta;
         $now = current_time('mysql');
+        // 1.10.191: optional start horizon (see capture_events_until_days_v101191).
+        $until_days = (int)$this->events_until_days_v101191;
+        $horizon = $until_days > 0 ? gmdate('Y-m-d H:i:s', strtotime($now . ' +' . $until_days . ' days')) : '';
 
         // V1.10.85: radius-monotone DB path.
         //
@@ -15314,6 +15377,7 @@ RuhrpottGuru";
                AND (e.end_at >= %s OR (e.end_at IS NULL AND e.start_at >= %s))",
             $min_lat,$max_lat,$min_lng,$max_lng,$now,$now
         );
+        if($horizon !== '') $point_sql .= $wpdb->prepare(' AND e.start_at <= %s', $horizon);
         $candidate_points = (array)$wpdb->get_results($point_sql, ARRAY_A);
         $distance_by_id = array();
         foreach ($candidate_points as $point) {
@@ -15379,8 +15443,9 @@ RuhrpottGuru";
                      WHERE e.status='active' AND e.city=%s AND e.id>%d
                        AND (e.lat IS NULL OR e.lng IS NULL)
                        AND (e.end_at>=%s OR (e.end_at IS NULL AND DATE(e.start_at)>=DATE(%s)))
+                       AND e.start_at<=%s
                      ORDER BY e.id ASC LIMIT 300",
-                    $scope_city,$scope_after_id,$now,$now
+                    $scope_city,$scope_after_id,$now,$now,($horizon!==''?$horizon:'9999-12-31 23:59:59')
                 ),ARRAY_A);
                 foreach($city_scope_rows as $cr){
                     $scope_after_id=max($scope_after_id,(int)$cr['id']);
@@ -15659,7 +15724,7 @@ RuhrpottGuru";
         }
         return array(
             'ok'=>true,'ready'=>true,'items'=>$items,
-            'meta'=>array('source'=>'event-db','activeCount'=>$active_count,'spatialCandidates'=>count($candidate_points),'inRadiusBeforeCluster'=>count($distance_by_id),'clusteredBeforeHydration'=>count($clustered_rows),'hydratedRepresentatives'=>count($rows),'returned'=>count($items),'lastCompleteNightlyAt'=>$last_complete,'lastIngestAt'=>$last_ingest_ts,'radiusKm'=>$radius_km,'dbFresh'=>$db_fresh,'visitorModel'=>'canonical-cluster-v101132-light-first','et4LocalDirectHandoff'=>array('requestedGlobalIds'=>count($visible_et4_global_ids),'matchedGlobalIds'=>count($exact_local_media_by_gid),'matchedMasterGlobalIds'=>$exact_local_master_matches,'matchedSupplementalGlobalIds'=>$exact_local_supplemental_matches,'hydratedItems'=>$exact_local_hydrated))
+            'meta'=>array('source'=>'event-db','activeCount'=>$active_count,'spatialCandidates'=>count($candidate_points),'inRadiusBeforeCluster'=>count($distance_by_id),'clusteredBeforeHydration'=>count($clustered_rows),'hydratedRepresentatives'=>count($rows),'returned'=>count($items),'untilDays'=>$until_days,'lastCompleteNightlyAt'=>$last_complete,'lastIngestAt'=>$last_ingest_ts,'radiusKm'=>$radius_km,'dbFresh'=>$db_fresh,'visitorModel'=>'canonical-cluster-v101132-light-first','et4LocalDirectHandoff'=>array('requestedGlobalIds'=>count($visible_et4_global_ids),'matchedGlobalIds'=>count($exact_local_media_by_gid),'matchedMasterGlobalIds'=>$exact_local_master_matches,'matchedSupplementalGlobalIds'=>$exact_local_supplemental_matches,'hydratedItems'=>$exact_local_hydrated))
         );
     }
 

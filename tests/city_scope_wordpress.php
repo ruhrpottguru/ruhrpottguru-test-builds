@@ -73,6 +73,21 @@ foreach($seed as $k=>$municipality){
     check_scope($item!==null&&($item['rpg_geo_label']??'')===$city,'all 53 municipalities '.$city);
     check_scope($item['rpg_event_db']['distanceKm']===null,'no fabricated municipal distance '.$city);
 }
+// 1.10.191: optional untilDays start horizon on the existing events route.
+$far=wp_date('Y-m-d H:i:s',time()+100*DAY_IN_SECONDS);$far_end=wp_date('Y-m-d H:i:s',time()+100*DAY_IN_SECONDS+7200);
+add_event(9101,'Herne',array('lat'=>51.5388,'lng'=>7.2257,'start_at'=>$future,'end_at'=>$end));
+add_event(9102,'Herne',array('lat'=>51.5388,'lng'=>7.2257,'start_at'=>$far,'end_at'=>$far_end));
+add_event(9103,'Herne',array('start_at'=>$far,'end_at'=>$far_end));
+function until_days($days){global $backend;$req=new WP_REST_Request('POST','/ruhrpottguru/v1/events');$req->set_header('content-type','application/json');$req->set_body(wp_json_encode($days===null?array():array('untilDays'=>$days)));$backend->capture_events_until_days_v101191(null,null,$req);return $backend->frontend_events_query(51.5388,7.2257,5,'Herne');}
+$all=ids_scope(until_days(null));
+check_scope(in_array(9101,$all,true)&&in_array(9102,$all,true)&&in_array(9103,$all,true),'without untilDays every future event is returned (unchanged behaviour)');
+$near=ids_scope(until_days(60));
+check_scope(in_array(9101,$near,true),'untilDays=60 keeps event within 60 days');
+check_scope(!in_array(9102,$near,true)&&!in_array(9103,$near,true),'untilDays=60 hides precise and city-scope events starting after 60 days');
+$meta=until_days(60)['meta'];check_scope((int)$meta['untilDays']===60,'meta reports untilDays');
+check_scope(count(ids_scope(until_days(0)))===count($all),'untilDays=0 is ignored');
+check_scope(count(ids_scope(until_days(100000)))===count($all),'untilDays out of range is ignored');
+until_days(null);
 check_scope($wpdb->last_error==='','no database error');
 // Fixture output drives unmodified web and Android JavaScript contract checks.
 $out=dirname(__DIR__).'/cityscope-release';if(!is_dir($out))mkdir($out,0777,true);
