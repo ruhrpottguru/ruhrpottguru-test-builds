@@ -190,13 +190,18 @@ function rpg_special_rows($key, $items, $now, $home) {
         $city = rpg_special_item_city($item);
         $k = rpg_special_fold($item['title']) . '|' . rpg_special_fold($city);
         if (isset($seen[$k]) && $seen[$k]['ts'] <= $start->getTimestamp()) continue;
+        // Mehrtägige Termine (z. B. Kirmes): Zeitraum statt einzelner Startzeit anzeigen.
+        $endShown = $end;
+        if ($endShown && $endShown->format('H:i:s') === '00:00:00') $endShown = $endShown->modify('-1 second');
+        $multiDay = $endShown && $endShown->format('Y-m-d') !== $start->format('Y-m-d');
         $allDay = !empty($item['allDay']) && $item['allDay'] !== 'False' && $item['allDay'] !== 'false';
         $seen[$k] = array(
             'id' => isset($item['id']) ? (string) $item['id'] : '',
             'title' => trim((string) $item['title']),
             'city' => $city,
             'date' => $start->format('d.m.Y'),
-            'time' => $allDay ? '' : $start->format('H:i'),
+            'time' => ($allDay || $multiDay) ? '' : $start->format('H:i'),
+            'date_to' => $multiDay ? $endShown->format('d.m.Y') : '',
             'url' => rpg_special_item_url($item, $home),
             'ts' => $start->getTimestamp(),
             'cat' => $cats[0],
@@ -222,7 +227,7 @@ function rpg_special_html($key, $rows, $texts = null) {
         foreach ($rows as $r) {
             $label = $esc($r['title']);
             $link = $r['url'] ? '<a href="' . $escUrl($r['url']) . '">' . $label . '</a>' : $label;
-            $out .= '<li>' . $esc($r['date'] . ($r['time'] ? ', ' . $r['time'] . ' Uhr' : '')) . ': ' . $link . ($r['city'] ? ' (' . $esc($r['city']) . ')' : '') . '</li>';
+            $out .= '<li>' . $esc(!empty($r['date_to']) ? $r['date'] . ' bis ' . $r['date_to'] : $r['date'] . ($r['time'] ? ', ' . $r['time'] . ' Uhr' : '')) . ': ' . $link . ($r['city'] ? ' (' . $esc($r['city']) . ')' : '') . '</li>';
         }
         $out .= '</ul>';
     }
