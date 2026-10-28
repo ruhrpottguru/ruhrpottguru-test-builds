@@ -415,7 +415,7 @@
         try{
           if(category==='events'){
             const eventFetchRadius=(home&&radius<10)?10:radius;
-            const raw=hasCachedEvents?eventCache.current.items:await RPG.api.events(location,eventFetchRadius,mode==='martin'?martinUntilDays(new Date()):undefined);
+            const raw=hasCachedEvents?eventCache.current.items:await RPG.api.events(location,eventFetchRadius,mode==='martin'?martinUntilDays(new Date()):(mode==='weihnachten'?christmasUntilDays(new Date()):undefined));
             if(homeEventCacheKey&&!hasCachedEvents)eventCache.current={key:homeEventCacheKey,items:raw};
             let items=raw.map(x=>RPG.normalizeEvent(x,location)).filter(x=>{
               if(!x.start)return false;
@@ -2219,6 +2219,12 @@
   function christmasSeasonYear(now){
     const d=now instanceof Date?now:new Date(now||Date.now());
     return d.getMonth()===0?d.getFullYear()-1:d.getFullYear();
+  }
+  // Tage von jetzt bis 6. Januar (Ende der Weihnachtssaison); nur so weit muss die Eventquelle liefern.
+  function christmasUntilDays(now){
+    const d=now instanceof Date?now:new Date(now||Date.now());
+    const end=new Date(christmasSeasonYear(d)+1,0,6,23,59,59,999);
+    return Math.max(1,Math.ceil((end.getTime()-d.getTime())/86400000)+1);
   }
   function christmasSeasonEvent(item,now){
     const start=christmasDate(item);
