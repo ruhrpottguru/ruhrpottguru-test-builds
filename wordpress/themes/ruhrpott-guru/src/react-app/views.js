@@ -2253,6 +2253,10 @@
     const matches=useMemo(()=>s.items.map(item=>({item,categories:christmasCategories(item)})).filter(x=>x.categories.length),[s.items]);
     const visible=matches.filter(x=>x.categories.includes(filter)).map(x=>x.item);
     const counts=Object.fromEntries(CHRISTMAS_CATEGORIES.map(([key])=>[key,matches.filter(x=>x.categories.includes(key)).length]));
+    const marketMatches=matches.filter(x=>x.categories.includes('weihnachtsmaerkte')).map(x=>x.item).sort((p,q)=>christmasDate(p)-christmasDate(q));
+    const christmasLead=s.loading?'':(marketMatches.length
+      ?'Aktuell zeigen wir '+marketMatches.length+(marketMatches.length===1?' Weihnachtsmarkt':' Weihnachtsmärkte')+' im Umkreis von '+radius+' km ('+RPG.locationLabel(location)+'). Der erste beginnt am '+specialDate(christmasDate(marketMatches[0]))+(marketMatches[0].city?' in '+marketMatches[0].city:'')+'.'
+      :'Aktuell liegen für diesen Umkreis noch keine bestätigten Weihnachtsmärkte vor. Neue Termine erscheinen automatisch.');
     const radii=[1,2.5,5,10,25,50];
     useEffect(()=>{track('special_view',{special:'weihnachten',area:location.city||location.name||'',radius,placement:'special'});},[location&&location.lat,location&&location.lng,radius]);
     return h('main',{className:'rpgx-main rpgx-halloween-page rpgx-christmas-page'},
@@ -2279,11 +2283,70 @@
           h('span',{'aria-hidden':'true'},'🎄'),
           h('strong',null,'Für diesen Weihnachtsfilter gibt es hier derzeit keine bestätigten Treffer.'),
           h('p',null,'Du kannst den Umkreis vergrößern oder einen anderen Weihnachtstipp auswählen.'))
-      )
+      ),
+      h(SpecialInfo,{
+        title:'Weihnachten im Ruhrgebiet: gut zu wissen',
+        intro:'Weihnachtsmärkte, Adventsveranstaltungen, Weihnachtskonzerte, Familienaktionen, Theater, Shows und Lichterwelten im Ruhrgebiet: Diese Seite zeigt die Termine zu Advent und Weihnachten '+christmasSeasonYear(new Date())+' in deiner Nähe.',
+        faqs:[
+          {q:'Wo finde ich Weihnachtsmärkte in meiner Nähe?',a:'Wähle oben „Weihnachtsmärkte" und stelle Standort und Umkreis ein. '+christmasLead},
+          {q:'Was gehört außer Weihnachtsmärkten dazu?',a:'Konzerte und Musik, Theater und Shows, Kinder- und Familienangebote, Advent-Workshops zum Mitmachen sowie Lichterwelten und weihnachtliche Ausflüge.'},
+          {q:'Sind alle Weihnachtsmärkte täglich geöffnet?',a:'Nein. Schließtage, unterschiedliche Öffnungszeiten und wetterbedingte Änderungen sind möglich. Maßgeblich sind die Angaben des jeweiligen Veranstalters.'},
+          {q:'Wie aktuell sind die Termine?',a:'Die Termine werden automatisch aus unseren Veranstaltungsquellen übernommen. Prüfe Zeiten und Orte vor dem Besuch beim Veranstalter.'}
+        ],
+        current:'weihnachten',
+        seo:{name:'Weihnachten im Pott: Weihnachtsmärkte und Adventsveranstaltungen',crumb:'Weihnachten im Pott',url:(RPG.settings&&RPG.settings.weihnachtenPageUrl)||window.location.href,items:visible}
+      })
     );
   }
   // Pure helpers are exposed read-only for isolated regression fixtures.
   RPG.ChristmasQA={christmasSeasonYear,christmasSeasonEvent,christmasCategories,filters:CHRISTMAS_CATEGORIES.map(x=>x[0])};
+
+  // V352 – SEO/GEO building blocks shared by the seasonal specials (Christmas, Martin).
+  // The text and the structured data are derived from the same matches that the
+  // visitor sees, so there is no second list to maintain. JSON-LD only describes
+  // visible content: an ItemList of the shown events and the visible FAQ.
+  function specialDate(d){
+    try{return d.toLocaleDateString('de-DE',{day:'numeric',month:'long'});}catch(_){return '';}
+  }
+  function specialAbs(href){
+    const v=String(href||'').trim();
+    if(!v||v==='#')return '';
+    try{return new URL(v,window.location.origin).href;}catch(_){return '';}
+  }
+  function specialJsonLd(spec){
+    const graph=[];
+    const listed=(Array.isArray(spec.items)?spec.items:[]).map(item=>({item,url:specialAbs(RPG.buildShareUrl&&RPG.buildShareUrl(item))}))
+      .filter(x=>x.url&&x.item&&x.item.title).slice(0,100);
+    if(listed.length){
+      graph.push({'@type':'ItemList',name:spec.name,numberOfItems:listed.length,
+        itemListElement:listed.map((x,i)=>({'@type':'ListItem',position:i+1,url:x.url,name:String(x.item.title)}))});
+    }
+    if(Array.isArray(spec.faqs)&&spec.faqs.length){
+      graph.push({'@type':'FAQPage',mainEntity:spec.faqs.map(f=>({'@type':'Question',name:f.q,acceptedAnswer:{'@type':'Answer',text:f.a}}))});
+    }
+    graph.push({'@type':'BreadcrumbList',itemListElement:[
+      {'@type':'ListItem',position:1,name:'PottFuchs',item:specialAbs((RPG.settings&&RPG.settings.homeUrl)||'/')},
+      {'@type':'ListItem',position:2,name:spec.crumb,item:specialAbs(spec.url||window.location.href)}]});
+    return JSON.stringify({'@context':'https://schema.org','@graph':graph}).replace(/</g,'\\u003c');
+  }
+  function SpecialInfo({title,intro,faqs,current,seo}){
+    const s=RPG.settings||{};
+    const links=[
+      [s.martinPageUrl,'Martinszüge & Martinsfeste','martin'],
+      [s.weihnachtenPageUrl,'Weihnachten im Pott','weihnachten'],
+      [s.halloweenPageUrl,'Halloween im Pott','halloween'],
+      [s.eventsPageUrl||'/veranstaltungen/','Alle Veranstaltungen im Pott','events']
+    ].filter(x=>x[0]&&x[2]!==current);
+    return h('section',{className:'rpgx-special-info','aria-label':title},
+      h('h2',null,title),
+      intro?h('p',null,intro):null,
+      (faqs||[]).map((f,i)=>h(RPG.Fragment,{key:i},h('h3',null,f.q),h('p',null,f.a))),
+      links.length?h('nav',{className:'rpgx-special-links','aria-label':'Weitere Themen im Pott'},
+        h('strong',null,'Mehr im Pott: '),
+        links.map(x=>h('a',{key:x[2],href:x[0]},x[1]))):null,
+      h('script',{type:'application/ld+json',dangerouslySetInnerHTML:{__html:specialJsonLd(Object.assign({faqs},seo))}})
+    );
+  }
 
   // V352 – Seasonal special: Martinszüge & Martinsfeste. Isolated profile on the
   // existing event endpoint, cards and detail overlay. It has no radius control:
@@ -2387,6 +2450,9 @@
     const visible=(filter==='alle'?matches:matches.filter(x=>x.categories.includes(filter))).map(x=>x.item);
     const loading=s.loading||extra.loading;
     const shownFilters=[['alle','Alle']].concat(MARTIN_CATEGORIES.filter(([key])=>counts[key]>0));
+    const martinLead=loading?'':(matches.length
+      ?'Aktuell listen wir '+matches.length+' Martinstermine im Ruhrgebiet, vom '+specialDate(christmasDate(matches[0].item))+' bis zum '+specialDate(christmasDate(matches[matches.length-1].item))+'.'
+      :'Aktuell liegen uns noch keine Martinstermine vor. Neue Termine erscheinen automatisch, sobald sie in unseren Veranstaltungsquellen stehen.');
     return h('main',{className:'rpgx-main rpgx-halloween-page rpgx-christmas-page rpgx-martin-page'},
       h('section',{className:'rpgx-halloween-hero'},
         h('div',{className:'rpgx-halloween-hero-copy'},
@@ -2409,13 +2475,18 @@
           h('p',null,'Neue Martinstermine erscheinen hier automatisch, sobald sie in unseren Veranstaltungsquellen stehen.'),
           filter!=='alle'?h('button',{type:'button',onClick:()=>setFilter('alle')},'Alle Martinstermine'):null)
       ),
-      h('section',{className:'rpgx-martin-info','aria-label':'Gut zu wissen'},
-        h('h2',null,'Martinszüge im Ruhrgebiet: gut zu wissen'),
-        h('p',null,'Der Martinstag am 11. November erinnert an den heiligen Martin von Tours. Rund um den Tag ziehen Kinder mit Laternen durch die Straßen, vielerorts hinter einem Reiter als St. Martin und mit Musik. Dazu kommen Martinsfeuer, Martinsmärkte und die Martinikirmes.'),
-        h('h3',null,'Warum steht mein Martinszug nicht in der Liste?'),
-        h('p',null,'Viele Martinszüge organisieren Kindergärten, Schulen, Kirchengemeinden und Vereine. Sie stehen oft nur in den Terminkalendern der Städte und Gemeinden. Hier erscheinen die Termine aus den Veranstaltungsquellen, die wir nutzen dürfen. Neue Termine kommen automatisch dazu, sobald sie dort stehen. Frag für deinen Stadtteil am besten auch bei der Stadt oder der Gemeinde nach.'),
-        h('h3',null,'Gilt die Uhrzeit auch bei Regen?'),
-        h('p',null,'Alle Angaben ohne Gewähr. Uhrzeit, Treffpunkt und Wegstrecke legt der jeweilige Veranstalter fest und kann sie kurzfristig ändern, zum Beispiel wegen des Wetters. Prüfe sie vor dem Besuch beim Veranstalter.'))
+      h(SpecialInfo,{
+        title:'Martinszüge im Ruhrgebiet: gut zu wissen',
+        intro:'Der Martinstag am 11. November erinnert an den heiligen Martin von Tours. Rund um den Tag ziehen Kinder mit Laternen durch die Straßen, vielerorts hinter einem Reiter als St. Martin und mit Musik. Dazu kommen Martinsfeuer, Martinsmärkte und die Martinikirmes.',
+        faqs:[
+          {q:'Wann sind die Martinszüge im Ruhrgebiet?',a:'Die meisten Martinszüge finden rund um den Martinstag am 11. November statt. '+martinLead},
+          {q:'Was ist ein Martinszug?',a:'Beim Martinszug, auch Martinsumzug oder Laternenumzug genannt, ziehen Kinder mit Laternen durch die Straßen, oft mit einem Reiter als St. Martin, mit Musik und teils mit einem Martinsfeuer zum Abschluss.'},
+          {q:'Warum steht mein Martinszug nicht in der Liste?',a:'Viele Martinszüge organisieren Kindergärten, Schulen, Kirchengemeinden und Vereine. Sie stehen oft nur in den Terminkalendern der Städte und Gemeinden. Hier erscheinen die Termine aus den Veranstaltungsquellen, die wir nutzen dürfen. Neue Termine kommen automatisch dazu, sobald sie dort stehen. Frag für deinen Stadtteil am besten auch bei der Stadt oder der Gemeinde nach.'},
+          {q:'Findet der Martinszug auch bei schlechtem Wetter statt?',a:'Alle Angaben ohne Gewähr. Uhrzeit, Treffpunkt und Wegstrecke legt der jeweilige Veranstalter fest und kann sie kurzfristig ändern, zum Beispiel wegen des Wetters. Prüfe sie vor dem Besuch beim Veranstalter.'}
+        ],
+        current:'martin',
+        seo:{name:'Martinszüge und Martinsfeste im Ruhrgebiet',crumb:'Martinszüge & Martinsfeste',url:(RPG.settings&&RPG.settings.martinPageUrl)||window.location.href,items:visible}
+      })
     );
   }
   RPG.MartinQA={martinSeasonYear,martinSeasonEvent,martinCategories,filters:MARTIN_CATEGORIES.map(x=>x[0])};

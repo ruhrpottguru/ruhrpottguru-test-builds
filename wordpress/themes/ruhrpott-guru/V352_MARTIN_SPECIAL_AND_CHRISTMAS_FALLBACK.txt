@@ -7,3 +7,8 @@ V352 (Theme 352.0 auf Basis 351.0) - 28.10.2026
    die Ansicht fuer Essen-Mitte, 50 km. Echter Standort gewinnt immer. Standort-Abfrage bleibt.
 3. Unveraendert: Kategorien, Filterregeln, Ranking, Radius-Fallbacks, Halloween, normale Eventlisten.
 Dateien: page.php, functions.php, style.css (Version), css/rpg-react-source.css, src/react-app/main.js, src/react-app/views.js
+
+SEO/GEO-Ergaenzung (Theme 352):
+- Martin- und Weihnachtsseite: sichtbarer Einleitungssatz aus den echten Daten, Infobox "gut zu wissen" mit FAQ, Links zu den anderen Specials.
+- Strukturierte Daten (JSON-LD) aus denselben Treffern wie die sichtbare Liste: ItemList, FAQPage, BreadcrumbList.
+- Neue Einstellungen: martinPageUrl, weihnachtenPageUrl, eventsPageUrl, cityScopeCities.

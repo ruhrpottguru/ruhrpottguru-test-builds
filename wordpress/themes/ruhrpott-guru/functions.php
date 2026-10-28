@@ -1161,6 +1161,8 @@ function ruhrpott_guru_scripts() {
         'pottQuizPageUrl' => esc_url_raw(home_url('/pott-quiz/')),
         'halloweenPageUrl' => esc_url_raw(home_url('/halloween-im-pott/')),
         'martinPageUrl' => esc_url_raw(home_url('/martinszuege-im-pott/')),
+        'weihnachtenPageUrl' => esc_url_raw(home_url('/weihnachten-im-pott/')),
+        'eventsPageUrl' => esc_url_raw(home_url('/veranstaltungen/')),
         'cityScopeCities' => ruhrpott_guru_city_scope_cities(),
         'nightUrl' => esc_url_raw(rest_url('ruhrpottguru/v1/places/night')),
         'nightSubmitUrl' => esc_url_raw(rest_url('ruhrpottguru/v1/places/night/submit')),
@@ -2674,11 +2676,11 @@ function ruhrpott_guru_v352_ensure_martin_page() {
     $existing = get_page_by_path('martinszuege-im-pott', OBJECT, 'page');
     if (!$existing) {
         wp_insert_post(array(
-            'post_title'   => 'Martinszüge & Martinsfeste im Pott',
+            'post_title'   => 'Martinszüge & Martinsfeste im Ruhrgebiet',
             'post_name'    => 'martinszuege-im-pott',
             'post_status'  => 'publish',
             'post_type'    => 'page',
-            'post_excerpt' => 'Martinszüge, Martinsumzüge, Laternenumzüge, Martinsmärkte und Martinikirmes im Ruhrgebiet: alle Termine rund um den Martinstag auf einen Blick.',
+            'post_excerpt' => 'Martinszüge, Martinsumzüge, Laternenumzüge, Martinsmärkte und Martinikirmes im Ruhrgebiet: alle Termine rund um den Martinstag am 11. November auf einen Blick.',
             'post_content' => '<p>Martinszüge und Martinsfeste im Ruhrgebiet. Die Terminliste lädt die aktuellen PottFuchs-Events.</p>',
         ));
     }

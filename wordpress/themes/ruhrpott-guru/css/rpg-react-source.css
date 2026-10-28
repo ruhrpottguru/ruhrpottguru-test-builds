@@ -2483,10 +2483,15 @@ body.rpgx-share-dialog-open{overflow:hidden!important}
 .rpgx-martin-page .rpgx-halloween-filters button.is-active{
   background:#eab308;border-color:#eab308;color:#1a1303;
 }
-.rpgx-martin-info{
+.rpgx-special-info{
   margin:28px 0 8px;padding:18px 20px;border:1px solid rgba(148,163,184,.25);
   border-radius:16px;background:rgba(15,23,42,.55);color:#cbd5e1;
 }
-.rpgx-martin-info h2{margin:0 0 10px;color:#fff;font-size:1.2rem;}
-.rpgx-martin-info h3{margin:16px 0 6px;color:#f1f5f9;font-size:1rem;}
-.rpgx-martin-info p{margin:0 0 8px;line-height:1.55;font-size:.95rem;}
+.rpgx-special-info h2{margin:0 0 10px;color:#fff;font-size:1.2rem;}
+.rpgx-special-info h3{margin:16px 0 6px;color:#f1f5f9;font-size:1rem;}
+.rpgx-special-info p{margin:0 0 8px;line-height:1.55;font-size:.95rem;}
+
+.rpgx-special-links{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px 14px;font-size:.92rem;}
+.rpgx-special-links strong{color:#f1f5f9;}
+.rpgx-special-links a{color:#fbbf24;text-decoration:underline;text-underline-offset:3px;}
+.rpgx-special-links a:hover{color:#fde68a;}
