@@ -430,7 +430,7 @@
             // city, so they remain eligible without displaying a made-up distance.
             items=items.filter(x=>Number.isFinite(x.distanceKm)||x.cityScope===true);
             items=RPG.dedupeEventsForListing(items);
-            if(mode!=='halloween')items=eventNearTermCards(items,new Date());
+            if(mode!=='halloween'&&mode!=='weihnachten'&&mode!=='martin')items=eventNearTermCards(items,new Date());
             // V296: radius remains the eligibility boundary. Within that radius,
             // current/later-today appointments come before long-running events;
             // long-running events still remain ahead of tomorrow/later dates.
@@ -449,6 +449,8 @@
             // Otherwise late-October Halloween events disappear behind hundreds of
             // earlier September/October events even though they are in the database.
             if(mode==='halloween') visible=visible.filter(isHalloweenEvent);
+            if(mode==='weihnachten') visible=visible.filter(x=>christmasCategories(x).length>0);
+            if(mode==='martin') visible=visible.filter(x=>martinCategories(x).length>0);
             if(home&&visible.length<4&&radius<10){effective=10;visible=items.filter(x=>x.cityScope===true||x.distanceKm<=10);}
             // Rank the final radius-admitted pool, never farther-away candidates.
             if(!home&&priorityEventView)visible.sort(eventPriorityCompare(visible,eventWindow,location,new Date()));
@@ -1137,25 +1139,25 @@
     );
   }
 
-  function BudeDetail({item,onClose,origin}){
+  function BudeDetail({item,onClose,origin,standalone=false,overviewUrl=''}){
     const [report,setReport]=useState('');
     const sharing=C.useSharing(item);
     const opening=openingState(item.openingHours);
     const features=BUDE_FEATURES.filter(x=>budeFeature(item,x[0]));
-    const route=item.coords&&origin?'https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route='+encodeURIComponent(origin.lat+','+origin.lng)+'%3B'+encodeURIComponent(item.coords.lat+','+item.coords.lng):'';
-    useEffect(()=>{document.documentElement.classList.add('rpgx-modal-open');document.body.classList.add('rpgx-modal-open');return()=>{document.documentElement.classList.remove('rpgx-modal-open');document.body.classList.remove('rpgx-modal-open');};},[]);
-    return h('div',{className:'rpgx-detail-backdrop rpgx-bude-detail-backdrop',onClick:e=>{if(e.target===e.currentTarget)onClose();}},
-      h('article',{className:'rpgx-bude-detail',role:'dialog','aria-modal':'true','aria-hidden':sharing.mode?true:undefined,inert:sharing.mode?'':undefined},
+    const route=item.coords&&origin?'https://www.openstreetmap.org/directions?engine=fossgis_osrm_car&route='+encodeURIComponent(origin.lat+','+origin.lng)+'%3B'+encodeURIComponent(item.coords.lat+','+item.coords.lng):(standalone&&item.coords?'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(item.coords.lat+','+item.coords.lng):'');
+    useEffect(()=>{if(standalone)return;document.documentElement.classList.add('rpgx-modal-open');document.body.classList.add('rpgx-modal-open');return()=>{document.documentElement.classList.remove('rpgx-modal-open');document.body.classList.remove('rpgx-modal-open');};},[standalone]);
+    return h('div',{className:standalone?'rpgx-bude-detail-landing':'rpgx-detail-backdrop rpgx-bude-detail-backdrop',style:standalone?{display:'flex',justifyContent:'center',padding:'16px'}:undefined,onClick:standalone?undefined:e=>{if(e.target===e.currentTarget)onClose();}},
+      h('article',{className:'rpgx-bude-detail',style:standalone?{width:'100%',maxWidth:'768px',maxHeight:'none',overflow:'visible'}:undefined,role:standalone?undefined:'dialog','aria-modal':standalone?undefined:'true','aria-hidden':sharing.mode?true:undefined,inert:sharing.mode?'':undefined},
         h('div',{className:'sticky top-0 z-30 flex items-center gap-2 px-3 py-2 border-b backdrop-blur-md bg-slate-950/95 border-slate-800 text-white'},
           h('span',{className:'truncate flex-1 font-display text-sm font-bold'},item.title),
-          h('button',{type:'button',onClick:onClose,className:'flex items-center gap-1.5 min-h-[44px] px-3.5 py-1.5 rounded-full bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 text-xs font-extrabold transition-all shadow-md shrink-0 cursor-pointer','aria-label':'Detailansicht schließen',title:'Detailansicht schließen'},
-            h('span',{'aria-hidden':'true',className:'text-lg leading-none font-black'},'×'),
-            h('span',null,'Schließen')
+          h(standalone?'a':'button',{type:standalone?undefined:'button',href:standalone?(overviewUrl||'/buedchen-radar/'):undefined,onClick:standalone?undefined:onClose,className:'flex items-center gap-1.5 min-h-[44px] px-3.5 py-1.5 rounded-full bg-amber-500 hover:bg-amber-400 active:scale-95 text-slate-950 text-xs font-extrabold transition-all shadow-md shrink-0 cursor-pointer','aria-label':standalone?'Zum Trinkhallen-Radar':'Detailansicht schließen',title:standalone?'Zum Trinkhallen-Radar':'Detailansicht schließen'},
+            h('span',{'aria-hidden':'true',className:'text-lg leading-none font-black'},standalone?'←':'×'),
+            h('span',null,standalone?'Zum Trinkhallen-Radar':'Schließen')
           )
         ),
         h('div',{className:'rpgx-bude-detail-media'},h(C.DetailGallery,{item,image:item.imageUrl||'',fallback:h(BudePlaceholder)})),
         h('div',{className:'rpgx-bude-detail-body'},
-          h('div',{className:'rpgx-bude-detail-title'},h('div',null,h('h2',null,item.title),h('p',null,item.address||item.city)),Number.isFinite(item.distanceKm)?h('strong',null,item.distanceKm<1?Math.round(item.distanceKm*1000)+' m':item.distanceKm.toFixed(1)+' km'):null),
+          h('div',{className:'rpgx-bude-detail-title'},h('div',null,h(standalone?'h1':'h2',{style:standalone?{fontSize:'clamp(22px,3vw,30px)',margin:'0 0 4px',color:'#fff'}:undefined},item.title),h('p',null,item.address||item.city)),Number.isFinite(item.distanceKm)?h('strong',null,item.distanceKm<1?Math.round(item.distanceKm*1000)+' m':item.distanceKm.toFixed(1)+' km'):null),
           h('div',{className:'rpgx-bude-opening '+opening.state},opening.label),
           features.length?h('div',{className:'rpgx-bude-feature-row'},features.map(x=>h('span',{key:x[0]},x[1]+' '+x[2]))):null,
           h('div',{className:'rpgx-bude-actions'},
@@ -1166,9 +1168,9 @@
             h('button',{type:'button',className:'rpgx-bude-secondary',title:'Dieses Büdchen teilen',onClick:e=>sharing.open('share',e)},sharing.copied?'Kopiert ✓':'↥ Teilen'),
             h('button',{type:'button',className:'rpgx-kommrum-trigger',title:'Freunde zu diesem Büdchen einladen',onClick:e=>sharing.open('invite',e)},'🍻 Komm rum, ich bin hier!')
           ),
-          item.openingHours?h('section',{className:'rpgx-bude-detail-section'},h('h3',null,'Öffnungszeiten'),h('p',null,RPG.formatOpeningHours(item.openingHours))):h('section',{className:'rpgx-bude-unknown'},h('strong',null,'Öffnungszeiten nicht bekannt'),h('p',null,'Weißt du mehr? Hilf mit, den Radar besser zu machen.')),
-          item.description?h('section',{className:'rpgx-bude-detail-section'},h('h3',null,'Über dieses Büdchen'),h('p',null,item.description)):null,
-          h('section',{className:'rpgx-bude-community'},h('h3',null,'Gemeinsam fürs Revier'),
+          item.openingHours?h('section',{className:'rpgx-bude-detail-section'},h(standalone?'h2':'h3',{style:standalone?{fontSize:'14px',fontWeight:700,margin:'0 0 8px'}:undefined},'Öffnungszeiten'),h('p',null,RPG.formatOpeningHours(item.openingHours))):h('section',{className:'rpgx-bude-unknown'},h('strong',null,'Öffnungszeiten nicht bekannt'),h('p',null,'Weißt du mehr? Hilf mit, den Radar besser zu machen.')),
+          item.description?h('section',{className:'rpgx-bude-detail-section'},h(standalone?'h2':'h3',{style:standalone?{fontSize:'14px',fontWeight:700,margin:'0 0 8px'}:undefined},'Über dieses Büdchen'),h('p',null,item.description)):null,
+          h('section',{className:'rpgx-bude-community'},h(standalone?'h2':'h3',{style:standalone?{fontSize:'14px',fontWeight:700,margin:'0 0 8px'}:undefined},'Gemeinsam fürs Revier'),
             h('button',{type:'button',className:'rpgx-report-item',onClick:()=>setReport('contribution')},'Daten ergänzen oder Bild hochladen')
           )
         ),
@@ -1759,7 +1761,7 @@
       kind:'place',id:'rdi:'+item.slug,category:'highlights',title:item.title,subtitle:'',city:item.city||'',address:'',
       coords:Number.isFinite(lat)&&Number.isFinite(lng)?{lat,lng}:null,distanceKm:Number.isFinite(distance)?distance:null,
       tags:{},labels:[],description:'',website:'',menuUrl:'',reservationUrl:'',openingHours:'',phone:'',
-      imageUrl:image,galleryImages:image?[{url:image,credit:String(item.fallbackCredit||''),artist:'',source:image===String(item.fallbackImage||'')?'Wikimedia Commons':'RuhrpottGuru Medienresolver',license:String(item.fallbackLicense||'')}]:[],
+      imageUrl:image,galleryImages:image?[{url:image,credit:String(item.fallbackCredit||''),artist:'',source:image===String(item.fallbackImage||'')?'Wikimedia Commons':'PottFuchs Medienresolver',license:String(item.fallbackLicense||'')}]:[],
       routeIndustrial:true,routeType:item.type||'',routeTitle:item.title,routeBadge:item.typeLabel||'Primärstandort',routeOfficialUrl:String(item.officialUrl||'')
     };
     return h('button',{type:'button',className:'rpgx-card rpgx-route-fallback-card',onClick:()=>onOpen(detailItem),'aria-label':item.title+' öffnen'},
@@ -1858,7 +1860,7 @@
     return h('main',{className:'rpgx-main rpgx-search-page'},
       h('section',{className:'rpgx-search-hero'},h('span',{className:'rpgx-search-kicker'},'ALLES IM REVIER'),h('h1',null,'Suche'),h('p',null,'Durchsuche Events, Orte, Kategorien, Specials, Künstler und Beiträge im gesamten Ruhrgebiet.'),
         h('form',{className:'rpgx-search-page-form',onSubmit:submit},h('input',{type:'search',value:query,onChange:e=>setQuery(e.target.value),placeholder:'z. B. Lisa Feller, Zollverein, Currywurst …',autoFocus:true}),h('button',{type:'submit'},'Suchen'))),
-      state.loading?h('div',{className:'rpgx-loading'},'RuhrpottGuru durchsucht das Revier …'):state.error?h('div',{className:'rpgx-error'},state.error):executedQuery&&state.total===0?h('div',{className:'rpgx-smart-empty'},h('strong',null,'Keine Treffer gefunden.'),h('p',null,'Versuche einen Namen, Ort, Künstler oder ein Stichwort.')):h('div',{className:'rpgx-search-groups'},
+      state.loading?h('div',{className:'rpgx-loading'},'PottFuchs durchsucht das Revier …'):state.error?h('div',{className:'rpgx-error'},state.error):executedQuery&&state.total===0?h('div',{className:'rpgx-smart-empty'},h('strong',null,'Keine Treffer gefunden.'),h('p',null,'Versuche einen Namen, Ort, Künstler oder ein Stichwort.')):h('div',{className:'rpgx-search-groups'},
         executedQuery?h('div',{className:'rpgx-search-summary'},h('strong',null,state.total+' Treffer'),h('span',null,' für „'+executedQuery+'“')):null,
         SEARCH_GROUPS.map(([key,label])=>{const arr=state.groups[key]||[];if(!arr.length)return null;return h('section',{className:'rpgx-search-group',key},h('div',{className:'rpgx-search-group-head'},h('h2',null,label),h('span',null,arr.length)),h('div',{className:'rpgx-search-result-list'},arr.map((r,i)=>resultCard(r,key+':'+i))));})
       )
@@ -1911,8 +1913,8 @@
       setStage('result');
     }
     function shareResult(){
-      const text='🏆 Mein Pott-Quiz-Rang: '+rank.badge+' '+rank.title+' ('+percentage+' %). Teste dein Ruhrpott-Wissen auf RuhrpottGuru!';
-      if(navigator.share){navigator.share({title:'RuhrpottGuru Pott-Quiz',text,url:window.location.href}).catch(()=>{});return;}
+      const text='🏆 Mein Pott-Quiz-Rang: '+rank.badge+' '+rank.title+' ('+percentage+' %). Teste dein Ruhrpott-Wissen auf PottFuchs!';
+      if(navigator.share){navigator.share({title:'PottFuchs Pott-Quiz',text,url:window.location.href}).catch(()=>{});return;}
       if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text+' '+window.location.href).then(()=>{setCopied(true);setTimeout(()=>setCopied(false),2500);}).catch(()=>{});}
     }
 
@@ -2153,7 +2155,6 @@
     const filters=[['all','Alle'],['family','Familie'],['party','Party & Nacht'],['horror','Grusel & Horror']];
     return h('main',{className:'rpgx-main rpgx-halloween-page'},
       h('section',{className:'rpgx-halloween-hero'},
-        h('div',{className:'rpgx-halloween-hero-art','aria-hidden':'true'},h('span',null,'🎃'),h('span',null,'👻'),h('span',null,'🦇')),
         h('div',{className:'rpgx-halloween-hero-copy'},
           h('span',{className:'rpgx-halloween-kicker'},halloweenCountdown(new Date())),
           h('h1',null,'Halloween im Pott'),
@@ -2173,7 +2174,7 @@
           h('div',{className:'rpgx-halloween-empty'},
             h('span',{'aria-hidden':'true'},'🎃'),
             h('strong',null,filter==='all'?'In diesem Umkreis haben wir noch keinen klaren Halloween-Treffer.':'Für diesen Halloween-Filter gibt es im aktuellen Umkreis noch keinen Treffer.'),
-            h('p',null,filter==='all'?'Die Seite nutzt bereits die vorhandenen RuhrpottGuru-Events und zeigt nur klar passende Halloween-Inhalte.':'Wähle „Alle“ oder einen größeren Umkreis.'),
+            h('p',null,filter==='all'?'Die Seite nutzt bereits die vorhandenen PottFuchs-Events und zeigt nur klar passende Halloween-Inhalte.':'Wähle „Alle“ oder einen größeren Umkreis.'),
             filter!=='all'?h('button',{type:'button',onClick:()=>setFilter('all')},'Alle Halloween-Tipps'):next?h('button',{type:'button',onClick:()=>onRadius(next)},'Radius auf '+String(next).replace('.',',')+' km erweitern'):null
           )
       )
@@ -2185,6 +2186,240 @@
   // hook (including event source gates, lifecycle, ordering and media handling).
   // This module ONLY selects up to four same-city neighbors from its results;
   // it never changes ranking, radius fallbacks or the public Events listing.
+  // Christmas is a new isolated seasonal profile. Halloween and normal event
+  // eligibility/ranking stay completely unchanged. Never infer a market from a
+  // nearby concert mentioning its location in the description.
+  const CHRISTMAS_CATEGORIES=[
+    ['weihnachtsmaerkte','Weihnachtsmärkte'],
+    ['kinder-familie','Kinder & Familie'],
+    ['konzerte-musik','Konzerte & Musik'],
+    ['advent-mitmachen','Advent & Mitmachen'],
+    ['theater-shows','Theater & Shows'],
+    ['lichter-ausfluege','Lichter & Ausflüge']
+  ];
+  function christmasFold(value){
+    return String(value||'').toLowerCase().replace(/ä/g,'ae').replace(/ö/g,'oe').replace(/ü/g,'ue').replace(/ß/g,'ss')
+      .normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,' ').trim();
+  }
+  function christmasDate(item){
+    const value=item&&item.start;
+    const d=value instanceof Date?value:new Date(value||0);
+    return Number.isFinite(d.getTime())?d:null;
+  }
+  function christmasSeasonYear(now){
+    const d=now instanceof Date?now:new Date(now||Date.now());
+    return d.getMonth()===0?d.getFullYear()-1:d.getFullYear();
+  }
+  function christmasSeasonEvent(item,now){
+    const start=christmasDate(item);
+    if(!start)return false;
+    const year=christmasSeasonYear(now||new Date());
+    return start>=new Date(year,10,1)&&start<=new Date(year+1,0,6,23,59,59,999);
+  }
+  function christmasCategories(item,now){
+    if(!christmasSeasonEvent(item,now))return [];
+    const raw=item&&item.raw&&typeof item.raw==='object'?item.raw:{};
+    const title=christmasFold(item&&item.title);
+    const taxonomy=christmasFold([raw.keywords,raw.tags,raw.categories,raw.category,item&&item.eventType]
+      .filter(x=>typeof x==='string').join(' '));
+    const description=christmasFold([item&&item.description,item&&item.shortDescription]
+      .filter(x=>typeof x==='string').join(' '));
+    const text=title+' '+taxonomy+' '+description;
+    const seasonal=/\b(weihnacht[a-z]*|advent[a-z]*|nikolaus[a-z]*|christkind[a-z]*|christmas|xmas|winterleuchten|winterzauber)\b/;
+    if(!seasonal.test(text))return [];
+    const result=[];
+    const market=/\b(weihnachtsmarkt|weihnachtsmaerkte|adventsmarkt|adventsmaerkte|christkindlmarkt|christkindlesmarkt|nikolausmarkt|weihnachtsdorf)\b/;
+    const otherEventTitle=/\b(?:konzert|musik|chor|theater|musical|show|lesung|workshop|basteln|backen|(?:weihnachts|advents)(?:konzert|musik|theater|musical|show|maerchen))\b/;
+    // Market evidence must describe the event, not merely its venue.
+    if((market.test(title)&&!otherEventTitle.test(title))||(!otherEventTitle.test(title)&&market.test(taxonomy)))result.push('weihnachtsmaerkte');
+    if(/\b(kinder|familie|familien|kids|nikolausbesuch|weihnachtsmannbesuch)\b/.test(title+' '+taxonomy)
+       ||/\b(familienweihnacht|kinderweihnacht|familienadvent|nikolausfeier)\b/.test(text))result.push('kinder-familie');
+    if(/\b(konzert|chor|musik|oratorium|kantate|carols|weihnachtslieder)\b/.test(title+' '+taxonomy)
+       ||/\b(weihnachtskonzert|adventskonzert|weihnachtsoratorium|weihnachtsmusik)\b/.test(text))result.push('konzerte-musik');
+    if(/\b(workshop|basteln|backen|mitmachen|werkstatt|adventskranz|kreativ)\b/.test(title+' '+taxonomy)
+       ||/\b(adventswerkstatt|weihnachtswerkstatt|weihnachtsbasteln|weihnachtsbacken)\b/.test(text))result.push('advent-mitmachen');
+    // A market's generic ET4 taxonomy (e.g. 'Bühne' or 'Theater') is not evidence
+    // for an actual performance. Only the event title may opt a market into shows.
+    const hasMarketIdentity=market.test(title);
+    const theaterTitle=/\b(theater|maerchen|musical|show|nussknacker|buehne|ballett|theaterauffuehrung|weihnachtsmaerchen|weihnachtsshow|weihnachtstheater)\b/.test(title);
+    const theaterTaxonomy=/\b(theater|maerchen|musical|show|nussknacker|buehne|ballett)\b/.test(taxonomy);
+    if(theaterTitle||(!hasMarketIdentity&&theaterTaxonomy))result.push('theater-shows');
+    if(/\b(lichter|lichterwelt|lichterpark|lichterglanz|illumination|winterleuchten|christmas garden)\b/.test(title+' '+taxonomy))result.push('lichter-ausfluege');
+    return result;
+  }
+  function ChristmasView({location,radius,onRadius,onLocation,onOpen}){
+    const s=useCategoryItems('events',location,radius,false,'weihnachten');
+    const [filter,setFilter]=useState('weihnachtsmaerkte');
+    const matches=useMemo(()=>s.items.map(item=>({item,categories:christmasCategories(item)})).filter(x=>x.categories.length),[s.items]);
+    const visible=matches.filter(x=>x.categories.includes(filter)).map(x=>x.item);
+    const counts=Object.fromEntries(CHRISTMAS_CATEGORIES.map(([key])=>[key,matches.filter(x=>x.categories.includes(key)).length]));
+    const radii=[1,2.5,5,10,25,50];
+    useEffect(()=>{track('special_view',{special:'weihnachten',area:location.city||location.name||'',radius,placement:'special'});},[location&&location.lat,location&&location.lng,radius]);
+    return h('main',{className:'rpgx-main rpgx-halloween-page rpgx-christmas-page'},
+      h('section',{className:'rpgx-halloween-hero'},
+        h('div',{className:'rpgx-halloween-hero-copy'},
+          h('span',{className:'rpgx-halloween-kicker'},'Advent & Weihnachten im Ruhrgebiet'),
+          h('h1',null,'Weihnachten im Pott'),
+          h('p',null,'Entdecke Weihnachtsmärkte, Familienaktionen, Musik und weitere weihnachtliche Veranstaltungen in deiner Nähe.'))),
+      h('section',{className:'rpgx-halloween-controls','aria-label':'Weihnachten filtern'},
+        h('div',{className:'rpgx-halloween-radius'},
+          h('strong',null,'Umkreis'),
+          h('button',{type:'button',onClick:onLocation,className:'rpgx-christmas-place'},RPG.locationLabel(location)+' · Ändern'),
+          radii.map(v=>h('button',{key:v,type:'button',className:Number(radius)===v?'is-active':'',onClick:()=>onRadius(v)},String(v).replace('.',',')+' km'))),
+        h('div',{className:'rpgx-halloween-filters'},CHRISTMAS_CATEGORIES.map(([key,label])=>h('button',{
+          key,type:'button',className:filter===key?'is-active':'',
+          'aria-pressed':filter===key?'true':'false',onClick:()=>setFilter(key)
+        },label+(counts[key]?' · '+counts[key]:''))))),
+      s.loading?h(CategoryGridSkeleton):s.error?h('div',{className:'rpgx-error'},s.error):h(RPG.Fragment,null,
+        h('div',{className:'rpgx-halloween-summary'},h('strong',null,visible.length+' '+(visible.length===1?'Treffer':'Treffer')),
+          h('span',null,' · '+RPG.locationLabel(location)+' · '+radius+' km')),
+        visible.length?h('div',{className:'rpgx-grid rpgx-halloween-grid'},visible.map(item=>h(C.Card,{key:item.id,item,onOpen:x=>{
+          track('card_open',{category:'events',special:'weihnachten',area:location.city||location.name||'',radius,placement:'weihnachten',content_id:x.id});onOpen(x);
+        }}))):h('div',{className:'rpgx-halloween-empty'},
+          h('span',{'aria-hidden':'true'},'🎄'),
+          h('strong',null,'Für diesen Weihnachtsfilter gibt es hier derzeit keine bestätigten Treffer.'),
+          h('p',null,'Du kannst den Umkreis vergrößern oder einen anderen Weihnachtstipp auswählen.'))
+      )
+    );
+  }
+  // Pure helpers are exposed read-only for isolated regression fixtures.
+  RPG.ChristmasQA={christmasSeasonYear,christmasSeasonEvent,christmasCategories,filters:CHRISTMAS_CATEGORIES.map(x=>x[0])};
+
+  // V352 – Seasonal special: Martinszüge & Martinsfeste. Isolated profile on the
+  // existing event endpoint, cards and detail overlay. It has no radius control:
+  // it reads a fixed Ruhrgebiet centre (50 km, the backend maximum) and adds the
+  // coordinate-less city-scoped events of the cities the backend reports via
+  // RPG.settings.cityScopeCities (e.g. approved municipal calendars). Normal
+  // event eligibility, ranking, radius fallbacks and location logic stay unchanged.
+  const MARTIN_CATEGORIES=[
+    ['umzuege','Martinszüge & Laternenumzüge'],
+    ['maerkte-kirmes','Märkte & Kirmes'],
+    ['sonstiges','Weitere Martinsaktionen']
+  ];
+  function martinSeasonYear(now){
+    const d=now instanceof Date?now:new Date(now||Date.now());
+    return d.getMonth()===11?d.getFullYear()+1:d.getFullYear();
+  }
+  function martinSeasonEvent(item,now){
+    const start=christmasDate(item);
+    if(!start)return false;
+    const year=martinSeasonYear(now||new Date());
+    return start>=new Date(year,9,1)&&start<=new Date(year,10,30,23,59,59,999);
+  }
+  function martinCategories(item,now){
+    if(!martinSeasonEvent(item,now))return [];
+    const title=christmasFold(item&&item.title);
+    const raw=item&&item.raw&&typeof item.raw==='object'?item.raw:{};
+    const taxonomy=christmasFold([raw.keywords,raw.tags,raw.categories,raw.category,item&&item.eventType]
+      .filter(x=>typeof x==='string').join(' '));
+    const description=christmasFold([item&&item.description,item&&item.shortDescription]
+      .filter(x=>typeof x==='string').join(' '));
+    // Title/taxonomy are the evidence. A venue or church called "St. Martin"
+    // (concert, organ recital, tour) is not a Martin event.
+    const notMartin=/(konzert|orgel|\bchor|lesung|kabarett|comedy|fuehrung|gottesdienst|ausstellung|\bkino|theater|luther)/;
+    const marketTitle=/\b(martinikirmes|martinimarkt|martinsmarkt|martinsfest|martinifest|martinisonntag)\b/.test(title);
+    const parade=/\b(martinszug|martinsumzug|martinszuege|martinsumzuege|laternenumzug|laternenzug|laternenlauf|lampionumzug|martinsfeuer|martinssingen|martinsfeier)\b/;
+    const saint=/\b(st martin|st martins|sankt martin|martinus)\b/;
+    const paradeTitle=parade.test(title)||(saint.test(title)&&!notMartin.test(title));
+    const paradeText=!notMartin.test(title)&&parade.test(christmasFold(raw&&raw.keywords)+' '+description);
+    const generic=/\b(martin(s|i)[a-z]*|laternen(fest|basteln)|martinsgans|martinsgaense)\b/.test(title)&&!notMartin.test(title);
+    const result=[];
+    if(paradeTitle||paradeText)result.push('umzuege');
+    if(marketTitle)result.push('maerkte-kirmes');
+    if(!result.length&&(generic||(taxonomy&&saint.test(taxonomy)&&!notMartin.test(title))))result.push('sonstiges');
+    return result;
+  }
+  function martinHub(){
+    const pair=(RPG.CITY_CENTERS&&RPG.CITY_CENTERS['Essen'])||[51.4556,7.0116];
+    return {name:'Ruhrgebiet (Essen-Mitte)',city:'Essen',postcode:'',lat:Number(pair[0]),lng:Number(pair[1]),isGPS:false,locationMode:'default'};
+  }
+  function martinListed(item){
+    const raw=item&&item.raw&&typeof item.raw==='object'?item.raw:{};
+    return Object.assign({},item,{distanceKm:null,raw});
+  }
+  function MartinView({onOpen}){
+    const hub=useMemo(martinHub,[]);
+    const s=useCategoryItems('events',hub,50,false,'martin');
+    const scopes=Array.isArray(RPG.settings&&RPG.settings.cityScopeCities)?RPG.settings.cityScopeCities:[];
+    const scopeKey=scopes.join('|');
+    const [extra,setExtra]=useState({loading:scopes.length>0,items:[]});
+    const [filter,setFilter]=useState('alle');
+    useEffect(()=>{
+      let live=true;
+      if(!scopes.length){setExtra({loading:false,items:[]});return undefined;}
+      (async()=>{
+        const out=[];
+        for(const city of scopes){
+          const pair=RPG.CITY_CENTERS&&RPG.CITY_CENTERS[city];
+          if(!pair)continue;
+          const loc={name:city+' (Zentrum)',city,postcode:'',lat:Number(pair[0]),lng:Number(pair[1]),isGPS:false,locationMode:'manual'};
+          try{
+            const raw=await RPG.api.events(loc,1);
+            raw.map(x=>RPG.normalizeEvent(x,loc)).filter(x=>x.cityScope===true&&x.start&&(!x.end||x.end.getTime()>=Date.now()-3600000)).forEach(x=>out.push(x));
+          }catch(_){}
+        }
+        if(live)setExtra({loading:false,items:out});
+      })();
+      return()=>{live=false;};
+    },[scopeKey]);
+    useEffect(()=>{track('special_view',{special:'martin',area:'Ruhrgebiet',radius:50,placement:'special'});},[]);
+    const matches=useMemo(()=>{
+      const seen=new Set();
+      const merged=[];
+      s.items.concat(extra.items).forEach(item=>{
+        const cats=martinCategories(item);
+        if(!cats.length)return;
+        const id=String(item.id);
+        if(seen.has(id))return;
+        seen.add(id);
+        merged.push({item:martinListed(item),categories:cats});
+      });
+      // The same Martin event on several days (e.g. a Kirmes) is one listing: the
+      // next date of each title+city stays, the rest are the same event.
+      const byEvent=new Map();
+      merged.sort((a,b)=>christmasDate(a.item)-christmasDate(b.item)).forEach(x=>{
+        const key=christmasFold(x.item.title)+'|'+christmasFold(x.item.city);
+        if(!byEvent.has(key))byEvent.set(key,x);
+      });
+      return Array.from(byEvent.values());
+    },[s.items,extra.items]);
+    const counts=Object.fromEntries(MARTIN_CATEGORIES.map(([key])=>[key,matches.filter(x=>x.categories.includes(key)).length]));
+    const visible=(filter==='alle'?matches:matches.filter(x=>x.categories.includes(filter))).map(x=>x.item);
+    const loading=s.loading||extra.loading;
+    const shownFilters=[['alle','Alle']].concat(MARTIN_CATEGORIES.filter(([key])=>counts[key]>0));
+    return h('main',{className:'rpgx-main rpgx-halloween-page rpgx-christmas-page rpgx-martin-page'},
+      h('section',{className:'rpgx-halloween-hero'},
+        h('div',{className:'rpgx-halloween-hero-copy'},
+          h('span',{className:'rpgx-halloween-kicker'},'Martinstag am 11. November'),
+          h('h1',null,'Martinszüge & Martinsfeste im Pott'),
+          h('p',null,'Alle Martinszüge, Martinsumzüge, Laternenumzüge, Martinsmärkte und die Martinikirmes, die uns im Ruhrgebiet vorliegen, auf einen Blick und nach Datum sortiert.'))),
+      h('section',{className:'rpgx-halloween-controls','aria-label':'Martinstermine filtern'},
+        h('div',{className:'rpgx-halloween-filters'},shownFilters.map(([key,label])=>h('button',{
+          key,type:'button',className:filter===key?'is-active':'',
+          'aria-pressed':filter===key?'true':'false',onClick:()=>setFilter(key)
+        },label+(key==='alle'?(matches.length?' · '+matches.length:''):' · '+counts[key]))))),
+      loading?h(CategoryGridSkeleton):s.error&&!matches.length?h('div',{className:'rpgx-error'},s.error):h(RPG.Fragment,null,
+        h('div',{className:'rpgx-halloween-summary'},h('strong',null,visible.length+' '+(visible.length===1?'Termin':'Termine')),
+          h('span',null,' · Ruhrgebiet')),
+        visible.length?h('div',{className:'rpgx-grid rpgx-halloween-grid'},visible.map(item=>h(C.Card,{key:item.id,item,onOpen:x=>{
+          track('card_open',{category:'events',special:'martin',area:x.city||'',radius:50,placement:'martin',content_id:x.id});onOpen(x);
+        }}))):h('div',{className:'rpgx-halloween-empty'},
+          h('span',{'aria-hidden':'true'},'🏮'),
+          h('strong',null,'Für diesen Filter gibt es derzeit keine bestätigten Termine.'),
+          h('p',null,'Neue Martinstermine erscheinen hier automatisch, sobald sie in unseren Veranstaltungsquellen stehen.'),
+          filter!=='alle'?h('button',{type:'button',onClick:()=>setFilter('alle')},'Alle Martinstermine'):null)
+      ),
+      h('section',{className:'rpgx-martin-info','aria-label':'Gut zu wissen'},
+        h('h2',null,'Martinszüge im Ruhrgebiet: gut zu wissen'),
+        h('p',null,'Der Martinstag am 11. November erinnert an den heiligen Martin von Tours. Rund um den Tag ziehen Kinder mit Laternen durch die Straßen, vielerorts hinter einem Reiter als St. Martin und mit Musik. Dazu kommen Martinsfeuer, Martinsmärkte und die Martinikirmes.'),
+        h('h3',null,'Warum steht mein Martinszug nicht in der Liste?'),
+        h('p',null,'Viele Martinszüge organisieren Kindergärten, Schulen, Kirchengemeinden und Vereine. Sie stehen oft nur in den Terminkalendern der Städte und Gemeinden. Hier erscheinen die Termine aus den Veranstaltungsquellen, die wir nutzen dürfen. Neue Termine kommen automatisch dazu, sobald sie dort stehen. Frag für deinen Stadtteil am besten auch bei der Stadt oder der Gemeinde nach.'),
+        h('h3',null,'Gilt die Uhrzeit auch bei Regen?'),
+        h('p',null,'Alle Angaben ohne Gewähr. Uhrzeit, Treffpunkt und Wegstrecke legt der jeweilige Veranstalter fest und kann sie kurzfristig ändern, zum Beispiel wegen des Wetters. Prüfe sie vor dem Besuch beim Veranstalter.'))
+    );
+  }
+  RPG.MartinQA={martinSeasonYear,martinSeasonEvent,martinCategories,filters:MARTIN_CATEGORIES.map(x=>x[0])};
+
   function EventLandingMore({item}){
     const city=String(item&&item.city||'').trim();
     const slug=RPG.tagSlug(city);
@@ -2213,5 +2448,5 @@
 
   function PlainWpView(){const source=document.getElementById('ruhrpott-wp-page-content-source');return h('main',{className:'rpgx-main rpgx-wp-page',dangerouslySetInnerHTML:{__html:source?source.innerHTML:''}});}
 
-  RPG.Views={HomeView,CategoryView,RouteView,BuedchenRadarView,WurstView,SearchView,QuizView,HalloweenView,PlainWpView,EventLandingMore};
+  RPG.Views={HomeView,CategoryView,RouteView,BuedchenRadarView,BudeDetail,WurstView,SearchView,QuizView,HalloweenView,ChristmasView,MartinView,PlainWpView,EventLandingMore};
 })(window);

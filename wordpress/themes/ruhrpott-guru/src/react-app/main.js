@@ -47,8 +47,21 @@
       observer.observe(document.documentElement,{subtree:true,childList:true,attributes:true,attributeFilter:['aria-hidden','hidden']});
     }
   }
+  function initialDirectBuedchenItem(){
+    try{
+      const root=document.getElementById('ruhrpott-guru-root');
+      const source=document.getElementById('rpg-direct-detail-bootstrap');
+      if(!root||!source||root.dataset.directCategory!=='buedchen')return null;
+      const data=JSON.parse(source.textContent||'');
+      const path=/^\/ort\/([1-9]\d*)\/[^/]+\/[^/]+\/?$/i.exec(window.location.pathname);
+      if(!path||root.dataset.directToken!=='p'+path[1]||data.token!==root.dataset.directToken||data.kind!=='place'||data.category!=='buedchen')return null;
+      if(String(data.element&&data.element.tags&&data.element.tags['rg:place_id']||'')!==path[1])return null;
+      const item=RPG.normalizePlace(data.element,'buedchen',null);
+      return item&&(RPG.shareDescriptor(item)||{}).token===data.token?item:null;
+    }catch(_){return null;}
+  }
   function App(){
-    const [detail,setDetail]=useState(null);
+    const [detail,setDetail]=useState(initialDirectBuedchenItem);
     const relatedFromPlace=RPG.React.useRef(false);
     const [shareError,setShareError]=useState('');
     const [favoritesOpen,setFavoritesOpen]=useState(false);
@@ -71,8 +84,34 @@
     const isGlobalSearch=!!(root&&root.dataset.globalSearchShell==='1') || /\/suche\/?$/.test(window.location.pathname);
     const isQuiz=!!(root&&root.dataset.view==='quiz') || /\/pott-quiz\/?$/.test(window.location.pathname);
     const isHalloween=!!(root&&root.dataset.view==='halloween') || /\/halloween-im-pott\/?$/.test(window.location.pathname);
-    const needsLocation=(isHome||!!(categoryKey&&RPG.CATEGORIES[categoryKey])||isRoute||isBuedchen||isWurst||isHalloween)&&!shareBoot.token&&!directBoot.token;
+    const isChristmas=!!(root&&root.dataset.view==='weihnachten') || /\/weihnachten-im-pott\/?$/.test(window.location.pathname);
+    const isMartin=!!(root&&root.dataset.view==='martin') || /\/martinszuege-im-pott\/?$/.test(window.location.pathname);
+    const needsLocation=(isHome||!!(categoryKey&&RPG.CATEGORIES[categoryKey])||isRoute||isBuedchen||isWurst||isHalloween||isChristmas)&&!shareBoot.token&&!directBoot.token;
     const loc=RPG.useLocation(needsLocation);
+    // 25 km is a local-only initial default for Christmas. An explicit URL,
+    // saved preference or shared radius cookie always wins. No implicit write.
+    const [christmasRadiusOverride,setChristmasRadiusOverride]=useState(()=>{
+      if(!/\/weihnachten-im-pott\/?$/.test(window.location.pathname))return null;
+      try{
+        const qs=new URLSearchParams(window.location.search||'');
+        if(qs.has('radius')||RPG.storage.get('ruhrpottguru_radius_km_v1'))return null;
+        if(document.cookie.split(';').some(x=>x.trim().startsWith('rg_radius_km_v1=')))return null;
+      }catch(_){return null;}
+      return 25;
+    });
+    const christmasRadius=isChristmas&&christmasRadiusOverride!==null?christmasRadiusOverride:loc.radius;
+    const setChristmasRadius=n=>{setChristmasRadiusOverride(null);loc.setRadius(n);};
+    // V352: a visitor without a location (including search-engine crawlers, which
+    // have none) sees the Christmas page for a fixed Ruhrgebiet centre instead of
+    // an empty "Standort auswählen" shell. A real location always wins; the
+    // normal location prompt stays available.
+    const christmasFallback=isChristmas&&!loc.location&&!shareBoot.token&&!directBoot.token;
+    const [christmasFallbackRadius,setChristmasFallbackRadius]=useState(50);
+    const christmasFallbackLocation=RPG.React.useMemo(()=>{
+      const pair=(RPG.CITY_CENTERS&&RPG.CITY_CENTERS['Essen'])||[51.4556,7.0116];
+      return {name:'Ruhrgebiet (Essen-Mitte)',city:'Essen',postcode:'',lat:Number(pair[0]),lng:Number(pair[1]),isGPS:false,locationMode:'default'};
+    },[]);
+    
     const trackedRadius=RPG.React.useRef(null);
     useEffect(function(){
       if(!loc.location)return;
@@ -108,6 +147,8 @@
     },[]);
     useEffect(function(){
       if(!directBoot.token)return;
+      // A validated visitor element from this response is already the detail model.
+      if(detail&&detail.category==='buedchen'&&(RPG.shareDescriptor(detail)||{}).token===directBoot.token)return;
       let live=true;
       RPG.api.shareItem(directBoot.token,directBoot.category||'').then(data=>{
         if(!live)return;
@@ -130,7 +171,7 @@
     let content;
     if(directBoot.token){content=directRouteMatches&&detail?null:h('main',{className:'rpgx-main'},h('div',{className:shareError?'rpgx-error':'rpgx-loading'},shareError||'Detail wird geöffnet …'));}
     else if(shareBoot.token&&!loc.location){content=h('main',{className:'rpgx-main'},h('div',{className:shareError?'rpgx-error':'rpgx-loading'},shareError||'Geteilter Tipp wird geöffnet …'));}
-    else if(needsLocation&&!loc.location){content=h('main',{className:'rpgx-main'},h('div',{className:'rpgx-loading'},loc.status==='locating'?'Standort wird bestimmt …':'Standort auswählen …'));}
+    else if(needsLocation&&!loc.location&&!christmasFallback){content=h('main',{className:'rpgx-main'},h('div',{className:'rpgx-loading'},loc.status==='locating'?'Standort wird bestimmt …':'Standort auswählen …'));}
     else if(isHome)content=h(V.HomeView,{location:loc.location,radius:loc.radius,onOpen:setDetail,onLocation:()=>loc.setModalOpen(true)});
     else if(categoryKey&&RPG.CATEGORIES[categoryKey])content=h(V.CategoryView,{category:categoryKey,location:loc.location,radius:loc.radius,onOpen:setDetail,onRadius:loc.setRadius});
     else if(isRoute)content=h(V.RouteView,{location:loc.location,onOpen:setDetail});
@@ -139,6 +180,8 @@
     else if(isGlobalSearch)content=h(V.SearchView,{location:loc.location,onOpen:setDetail});
     else if(isQuiz)content=h(V.QuizView);
     else if(isHalloween)content=h(V.HalloweenView,{location:loc.location,radius:loc.radius,onRadius:loc.setRadius,onLocation:()=>loc.setModalOpen(true),onOpen:setDetail});
+    else if(isChristmas)content=h(V.ChristmasView,{location:christmasFallback?christmasFallbackLocation:loc.location,radius:christmasFallback?christmasFallbackRadius:christmasRadius,onRadius:christmasFallback?setChristmasFallbackRadius:setChristmasRadius,onLocation:()=>loc.setModalOpen(true),onOpen:setDetail});
+    else if(isMartin)content=h(V.MartinView,{onOpen:setDetail});
     else content=h(V.PlainWpView);
     // Verify the resolved record agrees with the backend token and route.
     // No referrer detection, category reclassification or new REST contract.
@@ -199,7 +242,7 @@
       const url=RPG.categoryTagUrl(item.category,label,loc.radius,directContext?item:null);
       if(url)window.location.assign(url);
     };
-    return h(RPG.Fragment,null,h('div',{className:'rpgx-beta-badge','aria-label':'Beta-Version'},'BETA'),h(C.Header,{location:loc.location,radius:loc.radius,onLocation:()=>loc.setModalOpen(true)}),content,standaloneDetail?h('main',{className:'rpgx-detail-landing-page'},h(C.DetailOverlay,{item:detail,onClose:closeDetail,onNavigate:null,onTagFilter:applyDetailTagFilter,standalone:true,overviewUrl:directBoot.overview}),detail.category==='events'?h(V.EventLandingMore,{item:detail}):null):null,h(C.FooterNav),h(C.FeedbackButton),h(C.LocationModal,{open:loc.modalOpen,location:loc.location,error:loc.error,radius:loc.radius,onClose:()=>loc.setModalOpen(false),onGps:loc.requestGps,onPostcode:loc.choosePostcode,onAddressResult:loc.chooseAddressResult,onCity:loc.chooseCity,onRadius:loc.setRadius}),detail&&!directBoot.token&&!standaloneDetail?h(C.DetailOverlay,{item:detail,onClose:closeDetail,onNavigate:openRelatedDetail,onTagFilter:applyDetailTagFilter}):null,h(C.FavoritesOverlay,{open:favoritesOpen,onClose:()=>setFavoritesOpen(false)}));
+    return h(RPG.Fragment,null,h('div',{className:'rpgx-beta-badge','aria-label':'Beta-Version'},'BETA'),h(C.Header,{location:loc.location,radius:isChristmas?christmasRadius:loc.radius,onLocation:()=>loc.setModalOpen(true)}),content,standaloneDetail?h('main',{className:'rpgx-detail-landing-page'},h(detail.category==='buedchen'?V.BudeDetail:C.DetailOverlay,{item:detail,onClose:closeDetail,onNavigate:null,onTagFilter:applyDetailTagFilter,standalone:true,overviewUrl:directBoot.overview}),detail.category==='events'?h(V.EventLandingMore,{item:detail}):null):null,h(C.FooterNav),h(C.FeedbackButton),h(C.LocationModal,{open:loc.modalOpen,location:loc.location,error:loc.error,radius:isChristmas?christmasRadius:loc.radius,onClose:()=>loc.setModalOpen(false),onGps:loc.requestGps,onPostcode:loc.choosePostcode,onAddressResult:loc.chooseAddressResult,onCity:loc.chooseCity,onRadius:isChristmas?setChristmasRadius:loc.setRadius}),detail&&!directBoot.token&&!standaloneDetail?h(C.DetailOverlay,{item:detail,onClose:closeDetail,onNavigate:openRelatedDetail,onTagFilter:applyDetailTagFilter}):null,h(C.FavoritesOverlay,{open:favoritesOpen,onClose:()=>setFavoritesOpen(false)}));
   }
   function installSameSiteAnchorOriginGuard(){
     if(typeof RPG.normalizeInternalAnchor!=='function')return;

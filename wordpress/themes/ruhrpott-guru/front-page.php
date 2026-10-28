@@ -30,7 +30,7 @@ if (have_posts()) :
         // rendered exactly at that position; no topic/tag/keyword based
         // automatic insertion is performed by the theme.
         ?>
-        <h1 class="rpgx-home-semantic-title"><?php echo esc_html__('RuhrpottGuru – Events, Food & Freizeit im Ruhrgebiet', 'ruhrpott-guru'); ?></h1>
+        <h1 class="rpgx-home-semantic-title"><?php echo esc_html__('PottFuchs – Events, Food & Freizeit im Ruhrgebiet', 'ruhrpott-guru'); ?></h1>
         <div
             id="ruhrpott-guru-root"
             data-wp-page-shell="1"
@@ -39,7 +39,7 @@ if (have_posts()) :
             aria-live="polite"
         >
             <div class="flex items-center justify-center p-12 text-slate-400 font-bold text-sm">
-                RuhrpottGuru Home wird geladen …
+                PottFuchs Home wird geladen …
             </div>
         </div>
         <?php

@@ -2432,3 +2432,61 @@ body.rpgx-share-dialog-open{overflow:hidden!important}
 /* V345: Keep Buedchen sharing buttons inside the narrow radar detail panel. */
 .rpgx-bude-share-actions{flex-wrap:wrap;align-items:center}
 .rpgx-bude-share-actions .rpgx-bude-secondary,.rpgx-bude-share-actions .rpgx-kommrum-trigger{min-height:44px;cursor:pointer}
+
+/* V348: Compact seasonal header (Halloween + Christmas); visual-only change. */
+.rpgx-halloween-page .rpgx-halloween-hero{
+  display:block;min-height:0;margin-bottom:10px;border-radius:16px;
+}
+.rpgx-halloween-page .rpgx-halloween-hero-copy{
+  display:block;padding:18px 22px 16px;
+}
+.rpgx-halloween-page .rpgx-halloween-hero-copy h1{
+  margin:8px 0;color:#fff;font-size:clamp(1.35rem,3vw,2.5rem);
+  line-height:1.12;letter-spacing:-.035em;white-space:nowrap;
+}
+.rpgx-halloween-page .rpgx-halloween-hero-copy>p{
+  font-size:.91rem;line-height:1.45;
+}
+.rpgx-halloween-page .rpgx-halloween-controls{margin-bottom:12px;}
+/* Christmas palette is independent of Halloween branding. */
+.rpgx-christmas-page .rpgx-halloween-hero{
+  border-color:rgba(249,115,22,.52);
+  background:linear-gradient(125deg,#1d120b,#271609 60%,#0b1322);
+}
+.rpgx-christmas-page .rpgx-halloween-filters button:hover{
+  border-color:#fb923c;color:#fff;
+}
+.rpgx-christmas-page .rpgx-halloween-filters button.is-active{
+  background:#f97316;border-color:#f97316;color:#180b04;
+}
+@media(max-width:760px){
+  .rpgx-halloween-page{padding-top:4px;}
+  .rpgx-halloween-page .rpgx-halloween-hero-copy{padding:12px 14px;}
+  .rpgx-halloween-page .rpgx-halloween-hero-copy h1{
+    font-size:clamp(1.17rem,5.25vw,1.8rem);margin:5px 0 0;line-height:1.17;
+  }
+  .rpgx-halloween-page .rpgx-halloween-hero-copy>p{display:none;}
+  .rpgx-halloween-page .rpgx-halloween-kicker{min-height:0;}
+  .rpgx-halloween-page .rpgx-halloween-controls{gap:10px;}
+}
+@media(max-width:360px){
+  .rpgx-halloween-page .rpgx-halloween-hero-copy h1{font-size:clamp(1rem,5vw,1.2rem);}
+}
+
+/* V352 – Martinszüge & Martinsfeste: own warm palette, long H1 may wrap. */
+.rpgx-martin-page .rpgx-halloween-hero{
+  border-color:rgba(234,179,8,.5);
+  background:linear-gradient(125deg,#1c1608,#251c08 60%,#0b1322);
+}
+.rpgx-martin-page .rpgx-halloween-hero-copy h1{white-space:normal;}
+.rpgx-martin-page .rpgx-halloween-filters button:hover{border-color:#facc15;color:#fff;}
+.rpgx-martin-page .rpgx-halloween-filters button.is-active{
+  background:#eab308;border-color:#eab308;color:#1a1303;
+}
+.rpgx-martin-info{
+  margin:28px 0 8px;padding:18px 20px;border:1px solid rgba(148,163,184,.25);
+  border-radius:16px;background:rgba(15,23,42,.55);color:#cbd5e1;
+}
+.rpgx-martin-info h2{margin:0 0 10px;color:#fff;font-size:1.2rem;}
+.rpgx-martin-info h3{margin:16px 0 6px;color:#f1f5f9;font-size:1rem;}
+.rpgx-martin-info p{margin:0 0 8px;line-height:1.55;font-size:.95rem;}

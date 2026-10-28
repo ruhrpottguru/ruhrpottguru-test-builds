@@ -74,7 +74,7 @@
     if(!city||!RPG.CITY_CENTERS[city])return;
     try{
       const host=String(window.location.hostname||'').toLowerCase();
-      const domain=(host==='ruhrpottguru.de'||host.endsWith('.ruhrpottguru.de'))?'; Domain=.ruhrpottguru.de':'';
+      const domain=(host==='pottfuchs.de'||host.endsWith('.pottfuchs.de'))?'; Domain=.pottfuchs.de':((host==='ruhrpottguru.de'||host.endsWith('.ruhrpottguru.de'))?'; Domain=.ruhrpottguru.de':'');
       document.cookie=FALLBACK_COOKIE+'='+encodeURIComponent(city)+'; Path=/; Max-Age=31536000; SameSite=Lax'+domain;
       document.cookie=FALLBACK_MODE_COOKIE+'='+(isGPS?'gps':'manual')+'; Path=/; Max-Age=31536000; SameSite=Lax'+domain;
     }catch(_){}
@@ -97,7 +97,7 @@
     if(!Number.isFinite(n)||n<1||n>50)return;
     try{
       const host=String(window.location.hostname||'').toLowerCase();
-      const domain=(host==='ruhrpottguru.de'||host.endsWith('.ruhrpottguru.de'))?'; Domain=.ruhrpottguru.de':'';
+      const domain=(host==='pottfuchs.de'||host.endsWith('.pottfuchs.de'))?'; Domain=.pottfuchs.de':((host==='ruhrpottguru.de'||host.endsWith('.ruhrpottguru.de'))?'; Domain=.ruhrpottguru.de':'');
       document.cookie=RADIUS_COOKIE+'='+encodeURIComponent(String(n))+'; Path=/; Max-Age=31536000; SameSite=Lax'+domain;
     }catch(_){}
   }
@@ -371,7 +371,7 @@
       const city=rpgAddressCity(point.feature);
       if(!city){
         setStatus('needs-selection');
-        setError('Diese Adresse liegt außerhalb des RuhrpottGuru-Gebiets. Bitte wähle eine Adresse innerhalb der Metropole Ruhr.');
+        setError('Diese Adresse liegt außerhalb des PottFuchs-Gebiets. Bitte wähle eine Adresse innerhalb der Metropole Ruhr.');
         setModalOpen(true);
         return false;
       }

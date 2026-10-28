@@ -48,7 +48,7 @@
         <div class="px-4 py-3 border-b flex items-center justify-between bg-slate-950/80 border-slate-800">
             <div class="flex items-center gap-2">
                 <i data-lucide="menu" class="w-4 h-4 text-amber-500"></i>
-                <span class="font-bold text-xs uppercase tracking-wider font-display">Guru Hauptmenü</span>
+                <span class="font-bold text-xs uppercase tracking-wider font-display">PottFuchs Hauptmenü</span>
             </div>
             <button
                 type="button"
@@ -93,7 +93,7 @@
 
             <!-- 2. Datenschutz -->
             <a
-                href="https://www.ruhrpottguru.de/datenschutzerklaerung/"
+                href="<?php echo esc_url(home_url('/datenschutzerklaerung/')); ?>"
                 class="w-full flex items-center justify-between p-3 rounded-2xl border transition-all text-left font-bold cursor-pointer bg-slate-800/80 hover:bg-slate-800 text-slate-100 border-slate-700"
             >
                 <div class="flex items-center gap-3">
@@ -111,7 +111,7 @@
 
             <!-- 3. Impressum -->
             <a
-                href="https://www.ruhrpottguru.de/impressum/"
+                href="<?php echo esc_url(home_url('/impressum/')); ?>"
                 class="w-full flex items-center justify-between p-3 rounded-2xl border transition-all text-left font-bold cursor-pointer bg-slate-800/80 hover:bg-slate-800 text-slate-100 border-slate-700"
             >
                 <div class="flex items-center gap-3">

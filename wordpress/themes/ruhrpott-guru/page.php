@@ -54,6 +54,7 @@ $is_app_slug = in_array($slug, array(
     'karte',
     'pott-quiz',
     'halloween-im-pott',
+    'weihnachten-im-pott',
 ), true) || strpos((string) $slug, 'aktivit') !== false;
 
 $is_app_page = $has_app_shortcode || $is_app_slug;
@@ -131,8 +132,23 @@ if ($category_match !== null) {
         data-radius="2.5"
         aria-live="polite"
     >
+        <?php
+        // Preserve the previously released server-rendered category H1 on
+        // canonical top-level category pages. React replaces this initial
+        // content with CategoryView's single H1 after hydration.
+        $rpg_initial_category_titles = array(
+            'veranstaltungen' => 'Events',
+            'food'            => 'Food & Drinks',
+            'highlights'      => 'Highlights',
+            'kultur'          => 'Kultur & Szene',
+            'aktiv'           => 'Aktivitäten',
+        );
+        if (isset($rpg_initial_category_titles[$slug])) {
+            echo '<h1 class="rpgx-category-initial-title">' . esc_html($rpg_initial_category_titles[$slug]) . '</h1>';
+        }
+        ?>
         <div class="flex items-center justify-center p-12 text-slate-400 font-bold text-sm">
-            Ruhrpott Guru App wird geladen …
+            PottFuchs App wird geladen …
         </div>
     </div>
     <?php
@@ -171,10 +187,28 @@ if ($category_match !== null) {
                     } elseif ($slug === 'halloween-im-pott') {
                         $cat  = 'Halloween';
                         $view = 'halloween';
+                    } elseif ($slug === 'weihnachten-im-pott') {
+                        $cat  = 'Weihnachten';
+                        $view = 'weihnachten';
+                    } elseif ($slug === 'martinszuege-im-pott') {
+                        $cat  = 'Martin';
+                        $view = 'martin';
                     }
 
                     echo do_shortcode('[ruhrpott_app category="' . esc_attr($cat) . '" view="' . esc_attr($view) . '"]');
-                    the_content();
+                    if ($slug === 'weihnachten-im-pott') {
+                        // The published WordPress editorial body is an earlier
+                        // landing-page placeholder. Do not render it below the live
+                        // results (duplicate filters, contradictory instructions).
+                        // A non-JS visitor still receives a useful static fallback.
+                        echo '<noscript><section class="rpgx-christmas-nojs"><h1>Weihnachten im Pott</h1><p>Hier findest du Weihnachtsmärkte und weitere Adventsveranstaltungen im Ruhrgebiet. Für die Standort- und Ergebnisfilter ist JavaScript erforderlich.</p><p><a href="/veranstaltungen/">Alle Veranstaltungen im Pott entdecken</a></p></section></noscript>';
+                    } elseif ($slug === 'martinszuege-im-pott') {
+                        // Same rule as Christmas: the editorial placeholder body is not
+                        // rendered below the live results; non-JS visitors get a fallback.
+                        echo '<noscript><section class="rpgx-martin-nojs"><h1>Martinszüge &amp; Martinsfeste im Pott</h1><p>Hier findest du Martinszüge, Martinsumzüge, Laternenumzüge und Martinsmärkte im Ruhrgebiet. Für die Terminliste ist JavaScript erforderlich.</p><p><a href="/veranstaltungen/">Alle Veranstaltungen im Pott entdecken</a></p></section></noscript>';
+                    } else {
+                        the_content();
+                    }
                 }
             endwhile;
         endif;
@@ -212,7 +246,7 @@ else :
                 aria-live="polite"
             >
                 <div class="flex items-center justify-center p-12 text-slate-400 font-bold text-sm">
-                    RuhrpottGuru Seite wird geladen …
+                    PottFuchs Seite wird geladen …
                 </div>
             </div>
             <?php

@@ -767,7 +767,7 @@ function ruhrpott_guru_postcode_location_rest(WP_REST_Request $request) {
         return new WP_REST_Response(array(
             'ok' => false,
             'errorType' => 'postcode-not-found',
-            'message' => 'Für diese PLZ wurde im RuhrpottGuru-Gebiet kein Mittelpunkt gefunden.',
+            'message' => 'Für diese PLZ wurde im PottFuchs-Gebiet kein Mittelpunkt gefunden.',
         ), 404);
     }
 
@@ -849,7 +849,7 @@ function ruhrpott_guru_postcode_location_rest(WP_REST_Request $request) {
         return new WP_REST_Response(array(
             'ok' => false,
             'errorType' => 'postcode-not-found',
-            'message' => 'Für diese PLZ wurde im RuhrpottGuru-Gebiet kein Mittelpunkt gefunden.',
+            'message' => 'Für diese PLZ wurde im PottFuchs-Gebiet kein Mittelpunkt gefunden.',
         ), 404);
     }
 
@@ -882,8 +882,27 @@ function ruhrpott_guru_register_address_location_rest_v326() {
         'callback' => 'ruhrpott_guru_address_location_rest_v326',
         'permission_callback' => '__return_true',
     ));
+    // Refresh the public visitor nonce outside cacheable HTML. This endpoint
+    // returns no address data and never calls the geocoding provider.
+    register_rest_route('ruhrpottguru/v1', '/address-location-token', array(
+        'methods' => 'GET',
+        'callback' => 'ruhrpott_guru_address_location_token_rest_v347',
+        'permission_callback' => '__return_true',
+    ));
 }
 add_action('rest_api_init', 'ruhrpott_guru_register_address_location_rest_v326');
+
+/** A fresh, uncached address nonce for visitors of cacheable WP pages. */
+function ruhrpott_guru_address_location_token_rest_v347() {
+    $response = new WP_REST_Response(array(
+        'ok' => true,
+        'token' => wp_create_nonce('rpg_address_lookup_v326'),
+    ), 200);
+    $response->header('Cache-Control', 'private, no-store, no-cache, must-revalidate, max-age=0');
+    $response->header('Pragma', 'no-cache');
+    $response->header('Expires', '0');
+    return $response;
+}
 
 function ruhrpott_guru_clean_address_part_v326($value, $max = 120) {
     $value = sanitize_text_field((string) $value);
@@ -929,7 +948,7 @@ function ruhrpott_guru_address_location_rest_v326(WP_REST_Request $request) {
 
     $expected_city = $city_input !== '' ? ruhrpott_guru_match_metropole_city_v322($city_input) : '';
     if ($city_input !== '' && $expected_city === '') {
-        return new WP_REST_Response(array('ok'=>false,'errorType'=>'outside-area','message'=>'Diese Adresse liegt außerhalb des RuhrpottGuru-Gebiets. Bitte wähle eine Adresse innerhalb der Metropole Ruhr.'), 400);
+        return new WP_REST_Response(array('ok'=>false,'errorType'=>'outside-area','message'=>'Diese Adresse liegt außerhalb des PottFuchs-Gebiets. Bitte wähle eine Adresse innerhalb der Metropole Ruhr.'), 400);
     }
 
     $api_key = trim((string) get_option('rpg_geoapify_api_key', ''));
@@ -1055,7 +1074,7 @@ function rpg_v310_page_meta_description() {
     if (is_admin()) return;
 
     if (is_front_page()) {
-        echo "\n<meta name=\"description\" content=\"" . esc_attr('RuhrpottGuru zeigt dir Events, Food, Sehenswürdigkeiten, Kultur und Aktivitäten im Ruhrgebiet – passend zu deinem Standort und Radius.') . "\">\n";
+        echo "\n<meta name=\"description\" content=\"" . esc_attr('PottFuchs zeigt dir Events, Food, Sehenswürdigkeiten, Kultur und Aktivitäten im Ruhrgebiet – passend zu deinem Standort und Radius.') . "\">\n";
         return;
     }
 
@@ -1141,13 +1160,15 @@ function ruhrpott_guru_scripts() {
         'wurstPageUrl' => esc_url_raw(home_url('/imbissbuden/')),
         'pottQuizPageUrl' => esc_url_raw(home_url('/pott-quiz/')),
         'halloweenPageUrl' => esc_url_raw(home_url('/halloween-im-pott/')),
+        'martinPageUrl' => esc_url_raw(home_url('/martinszuege-im-pott/')),
+        'cityScopeCities' => ruhrpott_guru_city_scope_cities(),
         'nightUrl' => esc_url_raw(rest_url('ruhrpottguru/v1/places/night')),
         'nightSubmitUrl' => esc_url_raw(rest_url('ruhrpottguru/v1/places/night/submit')),
         'nightPageUrl' => esc_url_raw(home_url('/unser-pott-bei-nacht/')),
         'nonce' => wp_create_nonce('wp_rest'),
         'postcodeLocationUrl' => esc_url_raw(rest_url('ruhrpottguru/v1/postcode-location')),
         'addressLocationUrl' => esc_url_raw(rest_url('ruhrpottguru/v1/address-location')),
-        'addressLocationToken' => wp_create_nonce('rpg_address_lookup_v326'),
+        'addressLocationTokenUrl' => esc_url_raw(rest_url('ruhrpottguru/v1/address-location-token')),
         'overpassProxyUrl' => esc_url_raw(rest_url('ruhrpottguru/v1/overpass')),
         'osmPoolUrl' => esc_url_raw(rest_url('ruhrpottguru/v1/osm-pool')),
         'osmTransportVersion' => 'source-react-v98',
@@ -2533,7 +2554,7 @@ function ruhrpott_app_shortcode($atts) {
          class="w-full min-h-[600px] bg-slate-950 text-slate-100 rounded-2xl overflow-visible shadow-2xl p-2 sm:p-4 my-4">
         <div class="flex items-center justify-center p-12 text-slate-400 font-bold text-sm" data-rpg-initial-loader>
             <i data-lucide="loader-2" class="w-6 h-6 animate-spin text-amber-500 mr-2"></i>
-            Ruhrpott Guru App wird geladen (OpenData & OSM Data API)...
+            PottFuchs App wird geladen (OpenData & OSM Data API)...
         </div>
     </div>
     <?php
@@ -2611,6 +2632,60 @@ function ruhrpott_guru_v276_ensure_halloween_page() {
 }
 add_action('init', 'ruhrpott_guru_v276_ensure_halloween_page', 30);
 
+/**
+ * V352 – Cities that currently have active events without coordinates (for
+ * example approved municipal calendars). The backend returns such events only
+ * when their city is selected, so the Martin special asks for these cities
+ * explicitly. Derived from the event table, cached for six hours, no manual list.
+ */
+function ruhrpott_guru_city_scope_cities() {
+    $cache_key = 'rpg_city_scope_cities_v1';
+    $cached = get_transient($cache_key);
+    if (is_array($cached)) return $cached;
+    global $wpdb;
+    $cities = array();
+    $table = $wpdb->prefix . 'rg_events';
+    if ($wpdb->get_var($wpdb->prepare('SHOW TABLES LIKE %s', $table)) === $table) {
+        $rows = $wpdb->get_col(
+            "SELECT DISTINCT city FROM {$table}
+             WHERE status = 'active' AND city <> '' AND (lat IS NULL OR lng IS NULL)
+               AND (end_at >= UTC_TIMESTAMP() OR (end_at IS NULL AND start_at >= UTC_TIMESTAMP()))
+             ORDER BY city ASC LIMIT 20"
+        );
+        if (is_array($rows)) {
+            foreach ($rows as $city) {
+                $city = trim((string) $city);
+                if ($city !== '') $cities[] = $city;
+            }
+        }
+    }
+    set_transient($cache_key, $cities, 6 * HOUR_IN_SECONDS);
+    return $cities;
+}
+
+/**
+ * V352 – Seasonal special: Martinszüge & Martinsfeste. Existing pages are never
+ * overwritten; the one-time option keeps a deliberately deleted page deleted.
+ * The body is only an editorial placeholder (not rendered), the excerpt is the
+ * meta description source like on the other special pages.
+ */
+function ruhrpott_guru_v352_ensure_martin_page() {
+    if (get_option('rpg_v352_martin_page_checked')) return;
+    $existing = get_page_by_path('martinszuege-im-pott', OBJECT, 'page');
+    if (!$existing) {
+        wp_insert_post(array(
+            'post_title'   => 'Martinszüge & Martinsfeste im Pott',
+            'post_name'    => 'martinszuege-im-pott',
+            'post_status'  => 'publish',
+            'post_type'    => 'page',
+            'post_excerpt' => 'Martinszüge, Martinsumzüge, Laternenumzüge, Martinsmärkte und Martinikirmes im Ruhrgebiet: alle Termine rund um den Martinstag auf einen Blick.',
+            'post_content' => '<p>Martinszüge und Martinsfeste im Ruhrgebiet. Die Terminliste lädt die aktuellen PottFuchs-Events.</p>',
+        ));
+    }
+    update_option('rpg_v352_martin_page_checked', '1', false);
+}
+add_action('init', 'ruhrpott_guru_v352_ensure_martin_page', 30);
+
 
 /**
  * V39 – Modular WordPress Home page.
@@ -2665,7 +2740,7 @@ function ruhrpott_guru_home_categories_shortcode() {
 
     ob_start();
     ?>
-    <section class="rg-home-module rg-home-categories" aria-label="RuhrpottGuru Kategorien">
+    <section class="rg-home-module rg-home-categories" aria-label="PottFuchs Kategorien">
         <div class="rg-home-category-grid">
             <?php foreach ($items as $item) :
                 $key = isset($item['category']) ? sanitize_key($item['category']) : '';
@@ -3024,7 +3099,7 @@ function ruhrpott_guru_night_shortcode() {
 
         <div class="rg-night-safety">
             <strong>Wichtig:</strong> Ein Ort kann nachts besonders sehenswert sein, ohne nachts geöffnet oder frei zugänglich zu sein.
-            Öffnungszeiten und Zugang bitte vor dem Besuch prüfen. Bei unbekannter Zugänglichkeit kennzeichnet RuhrpottGuru das ausdrücklich.
+            Öffnungszeiten und Zugang bitte vor dem Besuch prüfen. Bei unbekannter Zugänglichkeit kennzeichnet PottFuchs das ausdrücklich.
         </div>
     </section>
 
@@ -3081,7 +3156,7 @@ function ruhrpott_guru_night_shortcode() {
                 </label>
                 <label class="rg-night-check">
                     <input type="checkbox" required>
-                    <span>Ich bin zur Übermittlung des Fotos berechtigt und darf RuhrpottGuru die Nutzung auf der Website erlauben.</span>
+                    <span>Ich bin zur Übermittlung des Fotos berechtigt und darf PottFuchs die Nutzung auf der Website erlauben.</span>
                 </label>
                 <p class="rg-night-form-note">Bitte möglichst keine erkennbaren Personen fotografieren. Der Ort und die Nachtstimmung sollen im Mittelpunkt stehen. Das Bild wird erst nach E-Mail-Bestätigung und redaktioneller Freigabe veröffentlicht.</p>
                 <button type="submit" class="rg-night-submit">Foto zur Prüfung senden</button>
@@ -3224,13 +3299,13 @@ add_shortcode('ruhrpott_fuer_lau', function() {
                         $icon = 'shield-check';
                         $icon_box = 'bg-emerald-500/20 text-emerald-400';
                         // Always route and label the privacy menu item to the canonical WordPress page.
-                        $url = 'https://www.ruhrpottguru.de/datenschutzerklaerung/';
+                        $url = home_url('/datenschutzerklaerung/');
                         $title = 'Datenschutzerklärung';
                     } elseif (strpos($lower, 'impressum') !== false) {
                         $icon = 'file-text';
                         $icon_box = 'bg-indigo-500/20 text-indigo-400';
                         // Always route the Impressum menu item to the canonical WordPress page.
-                        $url = 'https://www.ruhrpottguru.de/impressum/';
+                        $url = home_url('/impressum/');
                     } elseif (strpos($lower, 'cookie') !== false) {
                         $icon = 'cookie';
                         $icon_box = 'bg-amber-500/20 text-amber-500';
@@ -3304,13 +3379,13 @@ add_action('admin_init', 'ruhrpott_guru_register_media_settings');
 
 function ruhrpott_guru_add_media_settings_page() {
     add_options_page(
-        'RuhrpottGuru Bilder',
-        'RuhrpottGuru Bilder',
+        'PottFuchs Bilder',
+        'PottFuchs Bilder',
         'manage_options',
         'ruhrpott-guru-media',
         function() {
             if (!current_user_can('manage_options')) return;
-            echo '<div class="wrap"><h1>RuhrpottGuru Bilder</h1>';
+            echo '<div class="wrap"><h1>PottFuchs Bilder</h1>';
             echo '<form method="post" action="options.php">';
             settings_fields('ruhrpott_guru_media');
             do_settings_sections('ruhrpott_guru_media');
@@ -7746,7 +7821,7 @@ function rpg_v121_feedback_menu(){
     }
     $bubble=$new_count>0 ? ' <span class="awaiting-mod count-'.$new_count.'"><span class="pending-count">'.min($new_count,99).'</span></span>' : '';
     add_menu_page(
-        'RuhrpottGuru Feedback',
+        'PottFuchs Feedback',
         'RPG Feedback'.$bubble,
         'manage_options',
         'rpg-feedback',
@@ -7836,7 +7911,7 @@ function rpg_v121_render_feedback_admin(){
     }
     $counts['all']=array_sum($counts);
 
-    echo '<div class="wrap"><h1>RuhrpottGuru Feedback</h1>';
+    echo '<div class="wrap"><h1>PottFuchs Feedback</h1>';
     echo '<p>Hier landet das direkte Feedback aus dem Guide. Das System bleibt auch nach der Beta bestehen. Feedback wird gemäß der aktuellen Datenschutzregel nach 12 Monaten automatisch gelöscht.</p>';
     if(!empty($_GET['updated'])) echo '<div class="notice notice-success is-dismissible"><p>Feedback aktualisiert.</p></div>';
 
@@ -8090,8 +8165,8 @@ function rpg_v230_render_analytics_admin(){
     $series=array();$cursor=strtotime($from);$end=strtotime($today);$by=array();foreach($daily as $r)$by[$r['day']]=array('views'=>(int)$r['views'],'visits'=>(int)$r['visits']);
     while($cursor<=$end){$d=date('Y-m-d',$cursor);$series[]=array('day'=>$d,'views'=>$by[$d]['views']??0,'visits'=>$by[$d]['visits']??0);$cursor+=DAY_IN_SECONDS;}
 
-    echo '<div class="wrap rpg-analytics"><h1>RuhrpottGuru Analytics</h1><p><a class="button button-primary" href="'.esc_url(admin_url('admin.php?page=rp-analytics')).'">Nutzung</a> <a class="button" href="'.esc_url(admin_url('admin.php?page=rp-marketing-tracking')).'">Marketing Tracking</a></p>';
-    echo '<p>First-Party-Nutzungsdaten ohne Analytics-Cookie, Browser-Speicher, persistente Besucher-ID oder GPS-Speicherung. <strong>Visits</strong> zählen neue Einstiege in RuhrpottGuru. Interne Navigation, Reloads und Zurück/Vorwärts-Navigation erzeugen keinen neuen Visit; Seitenaufrufe werden weiterhin als Page Impressions gezählt. Frühere Pageviews werden nicht künstlich in Visits umgerechnet.</p>';
+    echo '<div class="wrap rpg-analytics"><h1>PottFuchs Analytics</h1><p><a class="button button-primary" href="'.esc_url(admin_url('admin.php?page=rp-analytics')).'">Nutzung</a> <a class="button" href="'.esc_url(admin_url('admin.php?page=rp-marketing-tracking')).'">Marketing Tracking</a></p>';
+    echo '<p>First-Party-Nutzungsdaten ohne Analytics-Cookie, Browser-Speicher, persistente Besucher-ID oder GPS-Speicherung. <strong>Visits</strong> zählen neue Einstiege in PottFuchs. Interne Navigation, Reloads und Zurück/Vorwärts-Navigation erzeugen keinen neuen Visit; Seitenaufrufe werden weiterhin als Page Impressions gezählt. Frühere Pageviews werden nicht künstlich in Visits umgerechnet.</p>';
     echo '<div class="rpg-range">Zeitraum: ';foreach(array(1=>'Heute',7=>'7 Tage',30=>'30 Tage',90=>'90 Tage',365=>'365 Tage') as $d=>$label){$cls=$days===$d?'button button-primary':'button';echo '<a class="'.esc_attr($cls).'" href="'.esc_url(admin_url('admin.php?page=rp-analytics&days='.$d)).'">'.esc_html($label).'</a> ';}echo '</div>';
     echo '<div class="rpg-kpis">';
     $cards=array(
@@ -8249,7 +8324,7 @@ function rpg_v231_render_marketing_admin(){
     $series=array();$by=array();foreach($daily as $r)$by[$r['day']]=(int)$r['n'];$cursor=strtotime($from);$end=strtotime($today);$max=1;
     while($cursor<=$end){$d=date('Y-m-d',$cursor);$n=$by[$d]??0;$series[]=array('day'=>$d,'n'=>$n);$max=max($max,$n);$cursor+=DAY_IN_SECONDS;}
 
-    echo '<div class="wrap rpg-analytics"><h1>RuhrpottGuru Marketing Tracking</h1>';
+    echo '<div class="wrap rpg-analytics"><h1>PottFuchs Marketing Tracking</h1>';
     echo '<p><a class="button" href="'.esc_url(admin_url('admin.php?page=rp-analytics')).'">Nutzung</a> <a class="button button-primary" href="'.esc_url(admin_url('admin.php?page=rp-marketing-tracking')).'">Marketing Tracking</a></p>';
     echo '<p>Aggregierte Herkunft und Conversion-Zuordnung ohne Analytics-Cookies, Browser-Speicher oder Besucher-ID. Referrer werden nur als Domain gespeichert; Click-IDs und Suchbegriffe werden nicht persistiert.</p>';
     echo '<div class="rpg-range">Zeitraum: ';foreach(array(1=>'Heute',7=>'7 Tage',30=>'30 Tage',90=>'90 Tage',365=>'365 Tage') as $d=>$label){$cls=$days===$d?'button button-primary':'button';echo '<a class="'.esc_attr($cls).'" href="'.esc_url(admin_url('admin.php?page=rp-marketing-tracking&days='.$d)).'">'.esc_html($label).'</a> ';}echo '</div>';

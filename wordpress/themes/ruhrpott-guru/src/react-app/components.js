@@ -17,7 +17,7 @@
     const headerRef=useRef(null);
     const openDrawer = () => { const d=document.getElementById('mobile-menu-drawer'); if(d){d.classList.remove('hidden');d.classList.add('flex');try{window.RPG_ANALYTICS&&window.RPG_ANALYTICS.send('burger_open',{placement:'burger-menu',content_id:'Burger-Menü'});}catch(_){}} };
     const logoNode=document.querySelector('#ruhrpott-wp-custom-logo-source img');
-    const logo=logoNode&&logoNode.src?h('img',{className:'rpgx-brand-logo',src:logoNode.src,alt:logoNode.alt||'RuhrpottGuru'}):span({className:'rpgx-brand-mark'},'R');
+    const logo=logoNode&&logoNode.src?h('img',{className:'rpgx-brand-logo',src:logoNode.src,alt:logoNode.alt||'PottFuchs'}):span({className:'rpgx-brand-mark'},'P');
     const openSearch=()=>{setSearchOpen(true);setTimeout(()=>{if(searchRef.current)searchRef.current.focus();},30);};
     useEffect(function(){const fn=()=>openSearch();window.addEventListener('rpg:focus-search',fn);return()=>window.removeEventListener('rpg:focus-search',fn);},[]);
     useEffect(function(){
@@ -104,7 +104,7 @@
     return h(RPG.Fragment,null,
       h('header',{className:'rpgx-header',ref:headerRef},
         div({className:'rpgx-header-inner'},
-          a({className:'rpgx-brand'+(props.eventLanding?' rpgx-brand-landing':''),href:RPG.internalNavUrl?RPG.internalNavUrl(RPG.settings.homeUrl||'/'):(RPG.settings.homeUrl||'/'),'aria-label':'RuhrpottGuru Startseite'},logo),
+          a({className:'rpgx-brand'+(props.eventLanding?' rpgx-brand-landing':''),href:RPG.internalNavUrl?RPG.internalNavUrl(RPG.settings.homeUrl||'/'):(RPG.settings.homeUrl||'/'),'aria-label':'PottFuchs Startseite'},logo),
           div({className:'rpgx-header-actions'},
             button({className:'rpgx-icon-btn',type:'button','aria-label':'Globale Suche öffnen',onClick:openSearch},'⌕'),
             button({className:'rpgx-icon-btn',type:'button','aria-label':'Standort ändern',onClick:props.onLocation},'⌖'),
@@ -113,7 +113,7 @@
           )
         ),
         searchOpen?h('form',{className:'rpgx-global-search-bar',onSubmit:submitSearch},
-          h('input',{ref:searchRef,type:'search',value:searchValue,placeholder:'Events, Orte, Künstler, Büdchen …',onChange:e=>setSearchValue(e.target.value),'aria-label':'RuhrpottGuru durchsuchen'}),
+          h('input',{ref:searchRef,type:'search',value:searchValue,placeholder:'Events, Orte, Künstler, Büdchen …',onChange:e=>setSearchValue(e.target.value),'aria-label':'PottFuchs durchsuchen'}),
           h('button',{type:'submit',className:'rpgx-global-search-submit'},'Suchen'),
           !/\/suche\/?$/.test(window.location.pathname)?h('button',{type:'button',className:'rpgx-global-search-close','aria-label':'Suche schließen',onClick:()=>setSearchOpen(false)},'×'):null
         ):null,
@@ -240,20 +240,20 @@
       setAddressLoadError('');
       let street=cleanAddressPart(addressStreet),house=cleanAddressPart(addressHouse),zip=String(addressPostcode||'').replace(/\D/g,'').slice(0,5),cityInput=cleanAddressPart(addressCity);
       if(!street&&!house&&zip&&!cityInput){await props.onPostcode(zip);return;}
-      if(!street&&!house&&!zip&&cityInput){const city=matchCity(cityInput);if(city){props.onCity(city);return;}setAddressLoadError('Dieser Ort liegt außerhalb des RuhrpottGuru-Gebiets oder konnte nicht eindeutig zugeordnet werden.');return;}
+      if(!street&&!house&&!zip&&cityInput){const city=matchCity(cityInput);if(city){props.onCity(city);return;}setAddressLoadError('Dieser Ort liegt außerhalb des PottFuchs-Gebiets oder konnte nicht eindeutig zugeordnet werden.');return;}
       if(!street&&!house&&zip){await props.onPostcode(zip);return;}
       if(!street){setAddressLoadError('Für eine Adresssuche gib bitte eine Straße ein. Alternativ kannst du nur PLZ oder nur Ort verwenden.');return;}
       if(!zip&&!cityInput){setAddressLoadError('Bitte ergänze zur Straße eine PLZ oder einen Ort.');return;}
       setAddressBusy(true);
       try{
         let city=cityInput?matchCity(cityInput):'';
-        if(cityInput&&!city)throw new Error('Diese Adresse liegt außerhalb des RuhrpottGuru-Gebiets. Bitte wähle eine Adresse innerhalb der Metropole Ruhr.');
+        if(cityInput&&!city)throw new Error('Diese Adresse liegt außerhalb des PottFuchs-Gebiets. Bitte wähle eine Adresse innerhalb der Metropole Ruhr.');
         if(zip&&!/^\d{5}$/.test(zip))throw new Error('Bitte gib eine gültige 5-stellige PLZ ein.');
         if(!city&&zip){
           if(!RPG.api||typeof RPG.api.postcodeLocation!=='function')throw new Error('Die PLZ-Suche ist gerade nicht verfügbar.');
           const data=await RPG.api.postcodeLocation(zip);
           city=matchCity(data&&data.city)||'';
-          if(!city)throw new Error('Diese Adresse liegt außerhalb des RuhrpottGuru-Gebiets. Bitte wähle eine Adresse innerhalb der Metropole Ruhr.');
+          if(!city)throw new Error('Diese Adresse liegt außerhalb des PottFuchs-Gebiets. Bitte wähle eine Adresse innerhalb der Metropole Ruhr.');
         }
         if(!RPG.api||typeof RPG.api.addressLocation!=='function')throw new Error('Die Adresssuche ist gerade nicht verfügbar.');
         const data=await RPG.api.addressLocation({street:street,housenumber:house,postcode:zip,city:city});
@@ -576,7 +576,7 @@
             h('p',null,'Für Bild-Uploads benötigen wir deinen Namen und eine E-Mail-Adresse. Die E-Mail wird einmalig bestätigt und zusammen mit der Rechteerklärung als Nachweis zur Einsendung gespeichert.'),
             h('label',null,'Name / Firma *',h('input',{type:'text',required:true,value:submitterName,onChange:e=>setSubmitterName(e.target.value),autoComplete:'name'})),
             h('label',null,'E-Mail-Adresse *',h('input',{type:'email',required:true,value:submitterEmail,onChange:e=>setSubmitterEmail(e.target.value),autoComplete:'email'})),
-            h('label',{className:'rpgx-contribution-rights'},h('input',{type:'checkbox',checked:rights,onChange:e=>setRights(e.target.checked)}),h('span',null,'Ich bestätige, dass ich zur Übermittlung dieser Bilder berechtigt bin und RuhrpottGuru das Bild auf der Website verwenden darf. *'))
+            h('label',{className:'rpgx-contribution-rights'},h('input',{type:'checkbox',checked:rights,onChange:e=>setRights(e.target.checked)}),h('span',null,'Ich bestätige, dass ich zur Übermittlung dieser Bilder berechtigt bin und PottFuchs das Bild auf der Website verwenden darf. *'))
           ):null
         ),
         h('label',null,'Du meldest als',h('select',{value:sender,onChange:e=>setSender(e.target.value)},h('option',{value:'community'},'Besucher/in'),h('option',{value:'operator'},'Betreiber/in'))),
@@ -640,7 +640,7 @@
           h('button',{type:'button',className:'rpgx-community-file-button',disabled:processingImages||images.length>=maxFiles,onClick:()=>fileRef.current&&fileRef.current.click()},processingImages?'Fotos werden optimiert …':images.length>=maxFiles?'5 Fotos ausgewählt':'⇧  Dateien auswählen'),
           images.length?h('div',{className:'rpgx-community-file-list'},images.map((file,i)=>div({key:file.name+'-'+file.lastModified+'-'+i,className:'rpgx-community-file-row'},div({className:'rpgx-community-file-info'},span({className:'rpgx-community-file-name'},file.name),span({className:'rpgx-community-file-size'},Math.max(.1,file.size/1024/1024).toFixed(1)+' MB')),button({type:'button',onClick:()=>removeImage(i),'aria-label':file.name+' entfernen'},'×')))):null
         ),
-        images.length?h('label',{className:'rpgx-contribution-rights'},h('input',{type:'checkbox',checked:rights,onChange:e=>setRights(e.target.checked)}),h('span',null,'Ich bestätige, dass ich die Rechte an den hochgeladenen Bildern habe und RuhrpottGuru sie veröffentlichen darf. *')):null,
+        images.length?h('label',{className:'rpgx-contribution-rights'},h('input',{type:'checkbox',checked:rights,onChange:e=>setRights(e.target.checked)}),h('span',null,'Ich bestätige, dass ich die Rechte an den hochgeladenen Bildern habe und PottFuchs sie veröffentlichen darf. *')):null,
         h('label',{className:'rpgx-contribution-rights'},h('input',{type:'checkbox',checked:terms,onChange:e=>setTerms(e.target.checked)}),h('span',null,'Ich stimme den Einreichungsbedingungen zu. *')),
         h('label',{className:'rpgx-contribution-rights'},h('input',{type:'checkbox',checked:privacy,onChange:e=>setPrivacy(e.target.checked)}),h('span',null,'Ich stimme der Speicherung meiner Angaben zur Bearbeitung dieses Beitrags gemäß Datenschutzerklärung zu. *')),
         h('button',{type:'button',className:'rpgx-bude-primary',disabled:status==='sending'||processingImages,onClick:submit},processingImages?'Fotos werden optimiert …':status==='sending'?'Wird gesendet …':'Beitrag einreichen'),status&&status!=='sending'&&!processingImages?h('p',{className:'rpgx-bude-report-status',role:'status'},status):null
@@ -681,10 +681,10 @@
   function CommunityStoryTeaser({story,active,onToggle}){
     const text=communityPlainText(story.content);const excerpt=text.length>118?text.slice(0,115).trim()+'…':text;
     return button({type:'button',className:'rpgx-community-story-teaser'+(active?' is-active':''),onClick:onToggle,'aria-expanded':active?'true':'false'},
-      story.imageUrl?h('img',{src:story.imageUrl,alt:'',loading:'lazy',decoding:'async'}):span({className:'rpgx-community-story-placeholder','aria-hidden':'true'},'RuhrpottGuru'),
+      story.imageUrl?h('img',{src:story.imageUrl,alt:'',loading:'lazy',decoding:'async'}):span({className:'rpgx-community-story-placeholder','aria-hidden':'true'},'PottFuchs'),
       span({className:'rpgx-community-story-teaser-body'},
         span({className:'rpgx-community-story-title'},story.title),
-        span({className:'rpgx-community-by'},'von '+(story.nickname||'RuhrpottGuru-Community')),
+        span({className:'rpgx-community-by'},'von '+(story.nickname||'PottFuchs-Community')),
         excerpt?span({className:'rpgx-community-story-excerpt'},excerpt):null,
         span({className:'rpgx-community-story-open'},active?'Beitrag geöffnet ↑':'Beitrag lesen →')
       )
@@ -700,7 +700,7 @@
 
   function CommunityStoryExpanded({story,onClose}){
     const insta=communityInstagram(story.instagram);
-    const byline=['von '+(story.nickname||'RuhrpottGuru-Community')];
+    const byline=['von '+(story.nickname||'PottFuchs-Community')];
     return h('article',{className:'rpgx-community-story-expanded'},
       div({className:'rpgx-community-story-expanded-head'},div(null,h('h4',null,story.title),h('p',{className:'rpgx-community-by'},byline[0],insta?' · ':null,insta?(insta.url?h('a',{href:insta.url,target:'_blank',rel:'ugc nofollow noopener noreferrer'},insta.label):insta.label):null)),button({type:'button',onClick:onClose,'aria-label':'Beitrag einklappen'},'×')),
       h(CommunityStoryGallery,{story}),
@@ -727,7 +727,7 @@
     if(image&&!list.some(v=>v.url===image))list.unshift({url:image,credit:''});
     const [index,setIndex]=useState(0);
     useEffect(()=>setIndex(0),[item&&item.id,list.length]);
-    if(!list.length)return fallback||div({className:'w-full h-full flex items-center justify-center bg-slate-950 text-slate-500 font-black'},'RuhrpottGuru');
+    if(!list.length)return fallback||div({className:'w-full h-full flex items-center justify-center bg-slate-950 text-slate-500 font-black'},'PottFuchs');
     const current=list[Math.min(index,list.length-1)];
     return h(RPG.Fragment,null,
       h('img',{src:current.url,alt:'Foto von '+item.title,className:'w-full h-full object-cover',style:mediaCropStyle(cropForImage(item,current.url,'detail',current)),decoding:'async',referrerPolicy:'no-referrer',onLoad:mediaCropOnLoad(cropForImage(item,current.url,'detail',current),onLoad),onError:onError}),
@@ -853,7 +853,7 @@
     const content=h(RPG.Fragment,null,
       div({className:'rpgx-card-media'},mediaNode,item.category==='events'?h(EventTypeBadge,{item}):null,item.category==='events'&&eventMediaLabel?span({className:'rpgx-event-media-kind '+(eventMediaKind==='symbolic'?'is-symbolic':eventMediaKind==='context'?'is-context':'is-original')},eventMediaLabel):null,item.routeIndustrial&&usefulCardBadge(item.routeBadge,item)?span({className:'rpgx-route-type-badge'},usefulCardBadge(item.routeBadge,item)):null),
       div({className:'rpgx-card-overlay'},
-        h('h3',null,String(RPG.displayPlaceTitle(item)||item.title||'RuhrpottGuru').trim()),
+        h('h3',null,String(RPG.displayPlaceTitle(item)||item.title||'PottFuchs').trim()),
         subtitle?h('p',null,subtitle):null,
         openingStatus&&openingStatus.shortLabel?span({className:'rpgx-opening-chip is-'+openingStatus.state},span({'aria-hidden':'true'},'●'),openingStatus.shortLabel):null,
         item.category==='food'&&(foodPrice||foodLabels.length)?div({className:'rpgx-food-facts'},
@@ -1047,7 +1047,7 @@
     const description=String(item.description||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
     const officialWebsite=String(item.website||'').trim();
     const canonicalWebsite=String(item.canonicalUrl||RPG.buildShareUrl(item)||'').trim();
-    const details=[description,officialWebsite?'Offizielle Event-Seite: '+officialWebsite:'',canonicalWebsite?'RuhrpottGuru: '+canonicalWebsite:''].filter(Boolean).join('\n\n');
+    const details=[description,officialWebsite?'Offizielle Event-Seite: '+officialWebsite:'',canonicalWebsite?'PottFuchs: '+canonicalWebsite:''].filter(Boolean).join('\n\n');
     return {title:String(item.title||'Veranstaltung').trim(),start,end,allDay,location,description:details,website:canonicalWebsite||officialWebsite};
   }
 
@@ -1078,7 +1078,7 @@
     const blob=new Blob([lines.join('\r\n')],{type:'text/calendar;charset=utf-8'});
     const url=URL.createObjectURL(blob);
     const link=document.createElement('a');
-    const filename=data.title.replace(/[\/:*?"<>|]+/g,'-').replace(/\s+/g,' ').trim().slice(0,70)||'RuhrpottGuru-Event';
+    const filename=data.title.replace(/[\/:*?"<>|]+/g,'-').replace(/\s+/g,' ').trim().slice(0,70)||'PottFuchs-Event';
     link.href=url;
     link.download=filename+'.ics';
     link.rel='noopener';
@@ -1282,8 +1282,13 @@
     const displayTitle=RPG.displayPlaceTitle(item)||item.title;
     const routeUrl=RPG.settings.industrialRoutePageUrl||'/route-industriekultur/';
     const directions=item.coords?'https://www.google.com/maps/dir/?api=1&destination='+encodeURIComponent(item.coords.lat+','+item.coords.lng):'';
+    const eventDescriptionText=String(item.description||'').replace(/<\s*br\s*\/?\s*>/gi,'\n').replace(/<\/\s*(?:p|div|li|h[1-6]|section|article)\s*>/gi,'\n').replace(/<[^>]*>/g,' ').replace(/&#x20;|&#0*32;|&#0*160;|&nbsp;/gi,' ').replace(/[ \t]+/g,' ').replace(/ *\n */g,'\n').replace(/\n{3,}/g,'\n\n').trim();
     const description=item.category==='events'
-      ?String(item.description||'').replace(/<\s*br\s*\/?\s*>/gi,'\n').replace(/<\/\s*(?:p|div|li|h[1-6]|section|article)\s*>/gi,'\n').replace(/<[^>]*>/g,' ').replace(/[ \t]+/g,' ').replace(/ *\n */g,'\n').replace(/\n{3,}/g,'\n\n').trim()
+      ?eventDescriptionText.replace(/\[[^\]]+\]\(\s*(https?:\/\/[^\s)]+)\s*\)/gi,(whole,url)=>{
+        // Do not rewrite unrelated editorial Markdown links.
+        const resolved=RPG.eventTicketLink&&RPG.eventTicketLink(url);
+        return resolved&&resolved===item.ticketUrl?'Tickets über „Tickets / Buchung“ öffnen':whole;
+      })
       :String(item.description||'').replace(/<[^>]*>/g,' ').replace(/\s+/g,' ').trim();
     const tags=RPG.categoryFilterTags(item);
     const tagFilterActive=RPG.isTagFilterCategory(item.category)&&typeof onTagFilter==='function';
@@ -1325,7 +1330,12 @@
     // V319: ticket URLs sometimes arrive embedded in free-form price text (e.g.
     // "Tickets - Ticketlink: https://…; 15 € An der Abendkasse … 20 €").
     // Pull the URL out into its own action and keep only visitor-readable price facts.
-    const embeddedTicketUrl=(()=>{const m=String(displayPrice||'').match(/https?:\/\/[^\s;|•]+/i);return m?m[0].replace(/[),.]+$/,''):'';})();
+    const embeddedTicketUrl=(()=>{
+      const t=String(displayPrice||'');
+      const markdown=t.match(/\[[^\]]+\]\(\s*(https?:\/\/[^\s)]+)\s*\)/i);
+      const plain=t.match(/https?:\/\/[^\s;|•]+/i);
+      return RPG.eventTicketLink?RPG.eventTicketLink(markdown?markdown[0]:(plain?plain[0]:'')):'';
+    })();
     const eventTicketUrl=item.category==='events'?(String(item.ticketUrl||embeddedTicketUrl||'').trim()):'';
     const cleanFreePriceText=value=>{let text=String(value||'');if(embeddedTicketUrl)text=text.replace(embeddedTicketUrl,' ');text=text.replace(/\bTickets?\s*-?\s*Ticketlink\s*:?/ig,' ').replace(/\bTicketlink\s*:?/ig,' ').replace(/\s+/g,' ').trim();return text.replace(/^[;|•,:\-\s]+|[;|•,:\-\s]+$/g,'').trim();};
     const fallbackPriceRows=(()=>{if(!displayPrice||structuredPrices.length)return [];const cleaned=cleanFreePriceText(displayPrice);if(!cleaned)return [];let rows=cleaned.split(/\s*(?:;|•|\|)\s*/).filter(Boolean);rows=rows.flatMap(v=>String(v).split(/\s+(?=An der Abendkasse\b|Abendkasse\b)/i)).filter(Boolean);if(rows.length<2&&cleaned.length>90)rows=cleaned.split(/,\s+(?=[A-ZÄÖÜ0-9])/).filter(Boolean);const seen=new Set();return rows.map(cleanRepeatedText).map(v=>v.replace(/^An der Abendkasse kostet (?:der )?Einlass\s*/i,'Abendkasse: ').replace(/^An der Abendkasse\s*/i,'Abendkasse: ')).filter(v=>{const k=v.toLocaleLowerCase('de');if(!v||seen.has(k))return false;seen.add(k);return true;}).slice(0,14).map(v=>({label:'',value:v}));})();
