@@ -8355,3 +8355,36 @@ function rpg_v231_render_marketing_admin(){
     </style>';
     echo '</div>';
 }
+
+/**
+ * V352 – Martin-Seite einmalig in jedes Menü eintragen, in dem schon
+ * "Weihnachten im Pott" steht (direkt dahinter, gleiche Ebene). Es wird nichts
+ * Neues gebaut: Das Menü bleibt in WordPress → Design → Menüs änderbar.
+ */
+function ruhrpott_guru_v352_add_martin_to_menus() {
+    if (get_option('rpg_v352_martin_menu_done')) return;
+    $martin = get_page_by_path('martinszuege-im-pott', OBJECT, 'page');
+    $xmas   = get_page_by_path('weihnachten-im-pott', OBJECT, 'page');
+    if (!$martin || !$xmas) return;
+    foreach (wp_get_nav_menus() as $menu) {
+        $items = wp_get_nav_menu_items($menu->term_id);
+        if (!$items) continue;
+        $after = null; $has = false;
+        foreach ($items as $it) {
+            if ((int) $it->object_id === (int) $martin->ID) $has = true;
+            if ($it->object === 'page' && (int) $it->object_id === (int) $xmas->ID) $after = $it;
+        }
+        if ($has || !$after) continue;
+        wp_update_nav_menu_item($menu->term_id, 0, array(
+            'menu-item-title'     => 'Martinszüge',
+            'menu-item-object'    => 'page',
+            'menu-item-object-id' => $martin->ID,
+            'menu-item-type'      => 'post_type',
+            'menu-item-status'    => 'publish',
+            'menu-item-parent-id' => (int) $after->menu_item_parent,
+            'menu-item-position'  => (int) $after->menu_order + 1,
+        ));
+    }
+    update_option('rpg_v352_martin_menu_done', '1', false);
+}
+add_action('init', 'ruhrpott_guru_v352_add_martin_to_menus', 40);
