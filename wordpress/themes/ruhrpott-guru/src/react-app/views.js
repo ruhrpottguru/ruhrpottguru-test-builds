@@ -2178,6 +2178,16 @@
             filter!=='all'?h('button',{type:'button',onClick:()=>setFilter('all')},'Alle Halloween-Tipps'):next?h('button',{type:'button',onClick:()=>onRadius(next)},'Radius auf '+String(next).replace('.',',')+' km erweitern'):null
           )
       )
+      ,h(SpecialInfo,{
+        title:'Halloween im Ruhrgebiet: gut zu wissen',
+        intro:'Halloween am 31. Oktober: Familienfeste mit Kürbis und Kostümen, Partys und Nachtveranstaltungen sowie Grusel- und Horrorangebote im Ruhrgebiet. Die Termine stammen aus den PottFuchs-Veranstaltungsquellen und erscheinen hier, sobald sie dort stehen.',
+        faqs:[
+          {q:'Was ist an Halloween im Ruhrgebiet los?',a:'Rund um den 31. Oktober gibt es Kinder- und Familienfeste, Kostümpartys, Grusel- und Horrorshows und Führungen. Stelle oben Standort und Umkreis ein, dann siehst du die Termine in deiner Nähe.'},
+          {q:'Wie aktuell sind die Termine?',a:'Die Termine werden automatisch aus unseren Veranstaltungsquellen übernommen. Prüfe Zeiten, Orte und Altersangaben vor dem Besuch beim Veranstalter.'}
+        ],
+        current:'halloween',
+        seo:{name:'Halloween im Pott: Veranstaltungen im Ruhrgebiet',crumb:'Halloween im Pott',url:(RPG.settings&&RPG.settings.halloweenPageUrl)||window.location.href,items:visible}
+      })
     );
   }
 
