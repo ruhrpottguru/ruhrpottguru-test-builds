@@ -214,7 +214,9 @@ function rpg_special_html($key, $rows, $texts = null) {
     $escUrl = function ($s) { return function_exists('esc_url') ? esc_url($s) : htmlspecialchars((string) $s, ENT_QUOTES, 'UTF-8'); };
     $lead = rpg_special_lead($key, $rows);
     $h1 = $key === 'martin' ? 'Martinszüge &amp; Martinsfeste im Pott' : 'Weihnachten im Pott';
-    $out = '<section class="rpgx-special-ssr" data-rpg-special-ssr="' . $esc($key) . '"><h1>' . $h1 . '</h1><p>' . $esc($lead) . '</p>';
+    // Mit JavaScript ist der Block unsichtbar (die App ersetzt ihn); ohne JavaScript wird er angezeigt.
+    $out = '<noscript><style>.rpgx-special-ssr{position:static!important;width:auto!important;height:auto!important;overflow:visible!important;padding:1rem 1.25rem;max-width:60rem;margin:0 auto;line-height:1.6}</style></noscript>'
+        . '<section class="rpgx-special-ssr" data-rpg-special-ssr="' . $esc($key) . '"><h1>' . $h1 . '</h1><p>' . $esc($lead) . '</p>';
     if ($rows) {
         $out .= '<ul class="rpgx-special-ssr-list">';
         foreach ($rows as $r) {
