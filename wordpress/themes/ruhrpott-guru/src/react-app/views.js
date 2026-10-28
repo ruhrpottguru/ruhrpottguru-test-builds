@@ -415,7 +415,7 @@
         try{
           if(category==='events'){
             const eventFetchRadius=(home&&radius<10)?10:radius;
-            const raw=hasCachedEvents?eventCache.current.items:await RPG.api.events(location,eventFetchRadius);
+            const raw=hasCachedEvents?eventCache.current.items:await RPG.api.events(location,eventFetchRadius,mode==='martin'?martinUntilDays(new Date()):undefined);
             if(homeEventCacheKey&&!hasCachedEvents)eventCache.current={key:homeEventCacheKey,items:raw};
             let items=raw.map(x=>RPG.normalizeEvent(x,location)).filter(x=>{
               if(!x.start)return false;
@@ -2373,6 +2373,12 @@
     const d=now instanceof Date?now:new Date(now||Date.now());
     return d.getMonth()===11?d.getFullYear()+1:d.getFullYear();
   }
+  // Tage von jetzt bis Ende der Martin-Saison (30. November); nur so weit muss die Eventquelle liefern.
+  function martinUntilDays(now){
+    const d=now instanceof Date?now:new Date(now||Date.now());
+    const end=new Date(martinSeasonYear(d),10,30,23,59,59,999);
+    return Math.max(1,Math.ceil((end.getTime()-d.getTime())/86400000)+1);
+  }
   function martinSeasonEvent(item,now){
     const start=christmasDate(item);
     if(!start)return false;
@@ -2422,15 +2428,16 @@
       if(!scopes.length){setExtra({loading:false,items:[]});return undefined;}
       (async()=>{
         const out=[];
-        for(const city of scopes){
+        const days=martinUntilDays(new Date());
+        await Promise.all(scopes.map(async city=>{
           const pair=RPG.CITY_CENTERS&&RPG.CITY_CENTERS[city];
-          if(!pair)continue;
+          if(!pair)return;
           const loc={name:city+' (Zentrum)',city,postcode:'',lat:Number(pair[0]),lng:Number(pair[1]),isGPS:false,locationMode:'manual'};
           try{
-            const raw=await RPG.api.events(loc,1);
+            const raw=await RPG.api.events(loc,1,days);
             raw.map(x=>RPG.normalizeEvent(x,loc)).filter(x=>x.cityScope===true&&x.start&&(!x.end||x.end.getTime()>=Date.now()-3600000)).forEach(x=>out.push(x));
           }catch(_){}
-        }
+        }));
         if(live)setExtra({loading:false,items:out});
       })();
       return()=>{live=false;};

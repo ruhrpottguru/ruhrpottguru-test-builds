@@ -238,10 +238,15 @@ if (defined('ABSPATH')) {
     /** Läuft im Hintergrund: holt Events aus derselben Quelle wie die Anzeige und speichert die Zeilen. */
     function rpg_special_refresh($key) {
         if (!in_array($key, array('martin', 'weihnachten'), true) || !function_exists('ruhrpott_guru_event_rest')) return;
-        $call = function ($city, $km) {
+        $nowTz = new DateTimeImmutable('now', wp_timezone());
+        $seasonEnd = $key === 'martin'
+            ? new DateTimeImmutable(rpg_special_season_year($nowTz, 'martin') . '-11-30 23:59:59', wp_timezone())
+            : new DateTimeImmutable((rpg_special_season_year($nowTz, 'weihnachten') + 1) . '-01-06 23:59:59', wp_timezone());
+        $days = max(1, (int) ceil(($seasonEnd->getTimestamp() - $nowTz->getTimestamp()) / 86400) + 1);
+        $call = function ($city, $km) use ($days) {
             $req = new WP_REST_Request('POST', '/ruhrpottguru/v1/events');
             $req->set_header('content-type', 'application/json');
-            $req->set_body(wp_json_encode(array('lat' => 51.4556, 'lng' => 7.0116, 'city' => $city, 'maxRadiusKm' => $km)));
+            $req->set_body(wp_json_encode(array('lat' => 51.4556, 'lng' => 7.0116, 'city' => $city, 'maxRadiusKm' => $km, 'untilDays' => $days)));
             $res = ruhrpott_guru_event_rest($req);
             $data = $res instanceof WP_REST_Response ? $res->get_data() : $res;
             return (is_array($data) && !empty($data['items']) && is_array($data['items'])) ? $data['items'] : array();

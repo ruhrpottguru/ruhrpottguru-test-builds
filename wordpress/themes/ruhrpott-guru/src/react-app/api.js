@@ -52,9 +52,12 @@
         lat:Number.isFinite(Number(coords.lat))?Number(coords.lat):null, lng:Number.isFinite(Number(coords.lng))?Number(coords.lng):null
       });
     },
-    async events(location, maxRadiusKm) {
+    async events(location, maxRadiusKm, untilDays) {
       const url = RPG.settings.eventDataUrl || (RPG.settings.root + 'ruhrpottguru/v1/events');
-      const data = await this.post(url, { lat: location.lat, lng: location.lng, city: location.city || RPG.nearestCity(location.lat, location.lng), maxRadiusKm: maxRadiusKm || 50 });
+      const body = { lat: location.lat, lng: location.lng, city: location.city || RPG.nearestCity(location.lat, location.lng), maxRadiusKm: maxRadiusKm || 50 };
+      // V353.2: optionaler Zeithorizont (Backend ab Places 1.10.191); Specials fragen nur ihre Saison ab.
+      if (Number.isFinite(untilDays) && untilDays > 0) body.untilDays = Math.ceil(untilDays);
+      const data = await this.post(url, body);
       return Array.isArray(data.items) ? data.items : [];
     },
     async eventRelated(item) {
