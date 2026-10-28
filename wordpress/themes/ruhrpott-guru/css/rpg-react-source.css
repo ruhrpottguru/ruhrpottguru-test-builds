@@ -2495,3 +2495,11 @@ body.rpgx-share-dialog-open{overflow:hidden!important}
 .rpgx-special-links strong{color:#f1f5f9;}
 .rpgx-special-links a{color:#fbbf24;text-decoration:underline;text-underline-offset:3px;}
 .rpgx-special-links a:hover{color:#fde68a;}
+
+/* V353: Seitencode-Fassung der Special-Seiten (wird von der App ersetzt, sobald sie startet). */
+.rpgx-special-ssr{padding:1rem 1.25rem;max-width:60rem;margin:0 auto;line-height:1.6}
+.rpgx-special-ssr h1{font-size:1.75rem;font-weight:800;margin:0 0 .5rem}
+.rpgx-special-ssr h2{font-size:1.25rem;font-weight:700;margin:1.5rem 0 .5rem}
+.rpgx-special-ssr h3{font-size:1rem;font-weight:700;margin:1rem 0 .25rem}
+.rpgx-special-ssr-list{margin:.75rem 0 0 1.25rem;padding:0;list-style:disc}
+.rpgx-special-ssr a{color:#f59e0b;text-decoration:underline}

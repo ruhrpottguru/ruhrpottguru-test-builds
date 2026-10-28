@@ -264,6 +264,7 @@ if (!defined('ABSPATH')) {
 require_once get_template_directory() . '/inc/rpg-pexels-secret.php';
 require_once get_template_directory() . '/inc/rpg-et4-secret.php';
 require_once get_template_directory() . '/inc/food-place-identity.php';
+require_once get_template_directory() . '/inc/special-ssr.php';
 
 
 /**
@@ -1160,6 +1161,7 @@ function ruhrpott_guru_scripts() {
         'wurstPageUrl' => esc_url_raw(home_url('/imbissbuden/')),
         'pottQuizPageUrl' => esc_url_raw(home_url('/pott-quiz/')),
         'halloweenPageUrl' => esc_url_raw(home_url('/halloween-im-pott/')),
+        'specialTexts' => array('martin' => rpg_special_texts('martin'), 'weihnachten' => rpg_special_texts('weihnachten')),
         'martinPageUrl' => esc_url_raw(home_url('/martinszuege-im-pott/')),
         'weihnachtenPageUrl' => esc_url_raw(home_url('/weihnachten-im-pott/')),
         'eventsPageUrl' => esc_url_raw(home_url('/veranstaltungen/')),
@@ -2558,6 +2560,13 @@ function ruhrpott_app_shortcode($atts) {
             <i data-lucide="loader-2" class="w-6 h-6 animate-spin text-amber-500 mr-2"></i>
             PottFuchs App wird geladen (OpenData & OSM Data API)...
         </div>
+        <?php
+        // V353: Einleitung, Terminliste und FAQ stehen auch ohne JavaScript im Seitencode.
+        // Die App ersetzt diesen Inhalt, sobald sie startet.
+        if (in_array($view, array('martin', 'weihnachten'), true) && function_exists('rpg_special_initial_html')) {
+            echo rpg_special_initial_html($view); // phpcs:ignore -- Ausgabe in rpg_special_html() escaped.
+        }
+        ?>
     </div>
     <?php
     return ob_get_clean();

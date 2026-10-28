@@ -201,11 +201,11 @@ if ($category_match !== null) {
                         // landing-page placeholder. Do not render it below the live
                         // results (duplicate filters, contradictory instructions).
                         // A non-JS visitor still receives a useful static fallback.
-                        echo '<noscript><section class="rpgx-christmas-nojs"><h1>Weihnachten im Pott</h1><p>Hier findest du Weihnachtsmärkte und weitere Adventsveranstaltungen im Ruhrgebiet. Für die Standort- und Ergebnisfilter ist JavaScript erforderlich.</p><p><a href="/veranstaltungen/">Alle Veranstaltungen im Pott entdecken</a></p></section></noscript>';
+                        echo '<noscript><p><a href="/veranstaltungen/">Alle Veranstaltungen im Pott entdecken</a></p></noscript>';
                     } elseif ($slug === 'martinszuege-im-pott') {
                         // Same rule as Christmas: the editorial placeholder body is not
                         // rendered below the live results; non-JS visitors get a fallback.
-                        echo '<noscript><section class="rpgx-martin-nojs"><h1>Martinszüge &amp; Martinsfeste im Pott</h1><p>Hier findest du Martinszüge, Martinsumzüge, Laternenumzüge und Martinsmärkte im Ruhrgebiet. Für die Terminliste ist JavaScript erforderlich.</p><p><a href="/veranstaltungen/">Alle Veranstaltungen im Pott entdecken</a></p></section></noscript>';
+                        echo '<noscript><p><a href="/veranstaltungen/">Alle Veranstaltungen im Pott entdecken</a></p></noscript>';
                     } else {
                         the_content();
                     }

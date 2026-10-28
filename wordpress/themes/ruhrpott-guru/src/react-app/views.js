@@ -2294,18 +2294,11 @@
           h('strong',null,'Für diesen Weihnachtsfilter gibt es hier derzeit keine bestätigten Treffer.'),
           h('p',null,'Du kannst den Umkreis vergrößern oder einen anderen Weihnachtstipp auswählen.'))
       ),
-      h(SpecialInfo,{
-        title:'Weihnachten im Ruhrgebiet: gut zu wissen',
-        intro:'Weihnachtsmärkte, Adventsveranstaltungen, Weihnachtskonzerte, Familienaktionen, Theater, Shows und Lichterwelten im Ruhrgebiet: Diese Seite zeigt die Termine zu Advent und Weihnachten '+christmasSeasonYear(new Date())+' in deiner Nähe.',
-        faqs:[
-          {q:'Wo finde ich Weihnachtsmärkte in meiner Nähe?',a:'Wähle oben „Weihnachtsmärkte" und stelle Standort und Umkreis ein. '+christmasLead},
-          {q:'Was gehört außer Weihnachtsmärkten dazu?',a:'Konzerte und Musik, Theater und Shows, Kinder- und Familienangebote, Advent-Workshops zum Mitmachen sowie Lichterwelten und weihnachtliche Ausflüge.'},
-          {q:'Sind alle Weihnachtsmärkte täglich geöffnet?',a:'Nein. Schließtage, unterschiedliche Öffnungszeiten und wetterbedingte Änderungen sind möglich. Maßgeblich sind die Angaben des jeweiligen Veranstalters.'},
-          {q:'Wie aktuell sind die Termine?',a:'Die Termine werden automatisch aus unseren Veranstaltungsquellen übernommen. Prüfe Zeiten und Orte vor dem Besuch beim Veranstalter.'}
-        ],
+      (function(){const tx=specialTexts('weihnachten',christmasLead);return tx?h(SpecialInfo,{
+        title:tx.title,intro:tx.intro,faqs:tx.faqs,
         current:'weihnachten',
         seo:{name:'Weihnachten im Pott: Weihnachtsmärkte und Adventsveranstaltungen',crumb:'Weihnachten im Pott',url:(RPG.settings&&RPG.settings.weihnachtenPageUrl)||window.location.href,items:visible}
-      })
+      }):null})()
     );
   }
   // Pure helpers are exposed read-only for isolated regression fixtures.
@@ -2338,6 +2331,13 @@
       {'@type':'ListItem',position:1,name:'PottFuchs',item:specialAbs((RPG.settings&&RPG.settings.homeUrl)||'/')},
       {'@type':'ListItem',position:2,name:spec.crumb,item:specialAbs(spec.url||window.location.href)}]});
     return JSON.stringify({'@context':'https://schema.org','@graph':graph}).replace(/</g,'\\u003c');
+  }
+  // V353: Texte stehen nur in inc/special-ssr.php (PHP) und kommen per Einstellung hierher,
+  // damit Seitencode und Anzeige dieselben Worte nutzen. {lead} = Satz aus den sichtbaren Treffern.
+  function specialTexts(key,lead){
+    const t=RPG.settings&&RPG.settings.specialTexts&&RPG.settings.specialTexts[key];
+    if(!t||!Array.isArray(t.faqs))return null;
+    return {title:t.title,intro:t.intro,faqs:t.faqs.map(f=>({q:f.q,a:String(f.a).split('{lead}').join(lead||'').trim()}))};
   }
   function SpecialInfo({title,intro,faqs,current,seo}){
     const s=RPG.settings||{};
@@ -2485,18 +2485,11 @@
           h('p',null,'Neue Martinstermine erscheinen hier automatisch, sobald sie in unseren Veranstaltungsquellen stehen.'),
           filter!=='alle'?h('button',{type:'button',onClick:()=>setFilter('alle')},'Alle Martinstermine'):null)
       ),
-      h(SpecialInfo,{
-        title:'Martinszüge im Ruhrgebiet: gut zu wissen',
-        intro:'Der Martinstag am 11. November erinnert an den heiligen Martin von Tours. Rund um den Tag ziehen Kinder mit Laternen durch die Straßen, vielerorts hinter einem Reiter als St. Martin und mit Musik. Dazu kommen Martinsfeuer, Martinsmärkte und die Martinikirmes.',
-        faqs:[
-          {q:'Wann sind die Martinszüge im Ruhrgebiet?',a:'Die meisten Martinszüge finden rund um den Martinstag am 11. November statt. '+martinLead},
-          {q:'Was ist ein Martinszug?',a:'Beim Martinszug, auch Martinsumzug oder Laternenumzug genannt, ziehen Kinder mit Laternen durch die Straßen, oft mit einem Reiter als St. Martin, mit Musik und teils mit einem Martinsfeuer zum Abschluss.'},
-          {q:'Warum steht mein Martinszug nicht in der Liste?',a:'Viele Martinszüge organisieren Kindergärten, Schulen, Kirchengemeinden und Vereine. Sie stehen oft nur in den Terminkalendern der Städte und Gemeinden. Hier erscheinen die Termine aus den Veranstaltungsquellen, die wir nutzen dürfen. Neue Termine kommen automatisch dazu, sobald sie dort stehen. Frag für deinen Stadtteil am besten auch bei der Stadt oder der Gemeinde nach.'},
-          {q:'Findet der Martinszug auch bei schlechtem Wetter statt?',a:'Alle Angaben ohne Gewähr. Uhrzeit, Treffpunkt und Wegstrecke legt der jeweilige Veranstalter fest und kann sie kurzfristig ändern, zum Beispiel wegen des Wetters. Prüfe sie vor dem Besuch beim Veranstalter.'}
-        ],
+      (function(){const tx=specialTexts('martin',martinLead);return tx?h(SpecialInfo,{
+        title:tx.title,intro:tx.intro,faqs:tx.faqs,
         current:'martin',
         seo:{name:'Martinszüge und Martinsfeste im Ruhrgebiet',crumb:'Martinszüge & Martinsfeste',url:(RPG.settings&&RPG.settings.martinPageUrl)||window.location.href,items:visible}
-      })
+      }):null})()
     );
   }
   RPG.MartinQA={martinSeasonYear,martinSeasonEvent,martinCategories,filters:MARTIN_CATEGORIES.map(x=>x[0])};
