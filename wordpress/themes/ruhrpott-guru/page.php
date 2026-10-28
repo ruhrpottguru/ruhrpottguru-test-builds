@@ -55,6 +55,7 @@ $is_app_slug = in_array($slug, array(
     'pott-quiz',
     'halloween-im-pott',
     'weihnachten-im-pott',
+    'martinszuege-im-pott',
 ), true) || strpos((string) $slug, 'aktivit') !== false;
 
 $is_app_page = $has_app_shortcode || $is_app_slug;
