@@ -19,3 +19,6 @@ Dieser Zweig enthält erstmals den vollständigen Theme-351-Quellstand (Basis de
 
 ## Offen nach Installation
 Martin-Seite aufrufen, ohne Standort testen, Weihnachten ohne Standort testen, Meta-Beschreibung und Titel prüfen, Search Console: Indexierung der neuen Seite anfordern.
+
+## Nachtrag SEO/GEO
+Martin- und Weihnachtsseite haben jetzt einen datenbasierten Einleitungssatz, FAQ-Infobox, Links zu den anderen Specials und JSON-LD (ItemList, FAQPage, BreadcrumbList) aus denselben Treffern wie die sichtbare Liste. Neues ZIP: siehe SHA256SUMS in release-artifacts/pottfuchs-theme-v352.0. Nicht installiert, nicht live geprüft. Rollback: Theme 351.0.
