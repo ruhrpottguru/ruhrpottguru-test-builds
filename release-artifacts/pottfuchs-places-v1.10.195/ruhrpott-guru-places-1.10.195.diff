@@ -1,0 +1,74 @@
+5c5
+<  * Version: 1.10.194
+---
+>  * Version: 1.10.195
+182c182
+<     const VERSION = '1.10.194';
+---
+>     const VERSION = '1.10.195';
+1870a1871,1878
+>         if ($this->event_row_is_past_v101195($row)) {
+>             // 1.10.195: vorbeigegangene Termine ohne Ticket-/Buchungslinks, mit Hinweis.
+>             foreach (array('ticketUrl','ticket_url','bookingUrl','booking_url','reservationUrl','reservation_url','registrationUrl','registration_url') as $_k) unset($raw[$_k]);
+>             $_next = $this->event_next_same_title_v101195($row);
+>             $_note = 'Dieser Termin ist vorbei.'.($_next ? ' Nächster Termin: '.$_next['date'].'.' : '');
+>             if (strpos((string)($raw['description'] ?? ''), 'Dieser Termin ist vorbei.') !== 0) $raw['description'] = $_note.' '.(string)($raw['description'] ?? '');
+>             if (strpos((string)$description, 'Dieser Termin ist vorbei.') !== 0) $description = $_note.' '.(string)$description;
+>         }
+2070c2078,2107
+<         return $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->table('events')} WHERE id=%d AND status='active' AND COALESCE(end_at,start_at)>=%s LIMIT 1",$event_id,$now),ARRAY_A);
+---
+>         $row=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->table('events')} WHERE id=%d AND status='active' AND COALESCE(end_at,start_at)>=%s LIMIT 1",$event_id,$now),ARRAY_A);
+>         if($row)return $row;
+>         // 1.10.195: Vorbeigegangene Termine bleiben bis zur Loeschfrist als Seite "Termin ist vorbei" erreichbar
+>         // (statt sofort 404). Abgesagte/entfallene Events (status cancelled/inactive) bleiben 404.
+>         $row=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->table('events')} WHERE id=%d AND status IN ('active','expired') AND COALESCE(end_at,start_at)<%s LIMIT 1",$event_id,$now),ARRAY_A);
+>         if(!$row)return null;
+>         $days=(int)apply_filters('rg_event_past_page_days',10,$row);
+>         $ended=strtotime((string)($row['end_at']?:$row['start_at']));
+>         if($days<=0||!$ended||$ended<current_time('timestamp')-$days*DAY_IN_SECONDS)return null;
+>         $row['_rg_past']=1;
+>         return $row;
+>     }
+> 
+>     /** 1.10.195: naechster aktueller Termin mit gleichem Titel in der gleichen Stadt (z. B. dasselbe Fest im Folgejahr). Keine Aehnlichkeitslogik, nur exakter Titel. */
+>     private function event_next_same_title_v101195($row) {
+>         global $wpdb;
+>         if(!is_array($row)||empty($row['id'])||(string)($row['title']??'')===''||(string)($row['city']??'')==='')return null;
+>         $t=$this->table('events');$now=current_time('mysql',true);
+>         $r=$wpdb->get_row($wpdb->prepare("SELECT id,title,city,start_at FROM $t WHERE status='active' AND city=%s AND title=%s AND id<>%d AND start_at>%s AND COALESCE(end_at,start_at)>=%s ORDER BY start_at ASC, id ASC LIMIT 1",(string)$row['city'],(string)$row['title'],(int)$row['id'],(string)$row['start_at'],$now),ARRAY_A);
+>         if(!$r)return null;
+>         $ts=strtotime((string)$r['start_at']);if(!$ts)return null;
+>         return array('url'=>$this->seo_event_url_v101096((int)$r['id'],(string)$r['title'],(string)$r['city']),'date'=>date_i18n('d.m.Y',$ts));
+>     }
+> 
+>     /** 1.10.195: true, wenn ein Event-Datensatz vorbei ist (gleiche Zeitbasis wie seo_public_event_row_v101096). */
+>     private function event_row_is_past_v101195($row) {
+>         if(!is_array($row))return false;
+>         if((string)($row['status']??'')==='expired')return true;
+>         $end=(string)(($row['end_at']??'')!==''&&$row['end_at']!==null?$row['end_at']:($row['start_at']??''));
+>         return $end!==''&&$end<current_time('mysql',true);
+2213a2251,2259
+>         if (!empty($data['past'])) {
+>             // 1.10.195: Hinweis fuer vorbeigegangene Termine, ohne Ticketlink.
+>             $city_slug = sanitize_title((string)($data['city'] ?? ''));
+>             $city_page = $city_slug !== '' ? get_page_by_path('stadt/'.$city_slug.'/veranstaltungen') : null;
+>             $html .= '<p class="rpgx-ssr-past"><strong>Dieser Termin ist vorbei.</strong> ';
+>             if (!empty($data['next_url']) && !empty($data['next_date'])) $html .= '<a href="'.esc_url((string)$data['next_url']).'">Nächster Termin: '.esc_html((string)$data['next_date']).'</a> · ';
+>             if ($city_page instanceof WP_Post) $html .= '<a href="'.esc_url(get_permalink($city_page)).'">Aktuelle Veranstaltungen in '.esc_html((string)$data['city']).'</a> · ';
+>             $html .= '<a href="'.esc_url($overview).'">Alle Veranstaltungen im Ruhrgebiet</a></p>';
+>         }
+2266c2312
+<         nocache_headers();status_header(200);header('Content-Type: text/html; charset='.get_bloginfo('charset'));header('X-Robots-Tag: index, follow',true);
+---
+>         nocache_headers();status_header(200);header('Content-Type: text/html; charset='.get_bloginfo('charset'));header('X-Robots-Tag: '.(!empty($data['past'])?'noindex, follow':'index, follow'),true);
+2378,2379c2424,2425
+<             $payload=$this->share_event_payload((int)$row['id']);if(!$payload)$this->seo_render_not_found_v101096();$share=(array)$payload['share'];$item=(array)$payload['item'];$title=(string)$row['title'];$city=(string)$row['city'];$address=(string)($share['address']??'');$image=(string)($share['image']??'');$desc=(string)($share['description']??'');$start=$this->event_visitor_datetime_iso((string)$row['start_at'],$row);$end=!empty($row['end_at'])?$this->event_visitor_datetime_iso((string)$row['end_at'],$row):'';$when='';$when=$this->event_when_berlin_v101192((string)$row['start_at'],$row);$open_args=array('rg_open'=>'e'.(int)$row['id'],'rgc'=>'e');if($row['lat']!==null&&$row['lng']!==null){$open_args['rg_lat']=number_format((float)$row['lat'],6,'.','');$open_args['rg_lng']=number_format((float)$row['lng'],6,'.','');if($city!=='')$open_args['rg_city']=$city;}$open=add_query_arg($open_args,home_url('/veranstaltungen/'));
+<             $schema=array('@context'=>'https://schema.org','@type'=>'Event','name'=>$title,'url'=>$canonical,'description'=>$this->share_trim_description($desc),'startDate'=>$start,'eventStatus'=>'https://schema.org/EventScheduled','eventAttendanceMode'=>'https://schema.org/OfflineEventAttendanceMode');if($end!=='')$schema['endDate']=$end;if($image!=='')$schema['image']=array($image);$loc=array('@type'=>'Place','name'=>(string)$row['venue_name']);$postal=array('@type'=>'PostalAddress');if($row['street']!=='')$postal['streetAddress']=trim($row['street'].' '.$row['house_number']);if($row['postcode']!=='')$postal['postalCode']=$row['postcode'];if($city!=='')$postal['addressLocality']=$city;if(count($postal)>1)$loc['address']=$postal;$schema['location']=$loc;$ticket=esc_url_raw((string)($row['ticket_url']??''));if($ticket!=='')$schema['offers']=array('@type'=>'Offer','url'=>$ticket,'availability'=>'https://schema.org/InStock');
+---
+>             $past=!empty($row['_rg_past']);$next=$past?$this->event_next_same_title_v101195($row):null;$payload=$this->share_event_payload((int)$row['id']);if(!$payload)$this->seo_render_not_found_v101096();$share=(array)$payload['share'];$item=(array)$payload['item'];$title=(string)$row['title'];$city=(string)$row['city'];$address=(string)($share['address']??'');$image=(string)($share['image']??'');$desc=(string)($share['description']??'');if($past&&strpos($desc,'Dieser Termin ist vorbei.')!==0)$desc='Dieser Termin ist vorbei. '.$desc;$start=$this->event_visitor_datetime_iso((string)$row['start_at'],$row);$end=!empty($row['end_at'])?$this->event_visitor_datetime_iso((string)$row['end_at'],$row):'';$when='';$when=$this->event_when_berlin_v101192((string)$row['start_at'],$row);$open_args=array('rg_open'=>'e'.(int)$row['id'],'rgc'=>'e');if($row['lat']!==null&&$row['lng']!==null){$open_args['rg_lat']=number_format((float)$row['lat'],6,'.','');$open_args['rg_lng']=number_format((float)$row['lng'],6,'.','');if($city!=='')$open_args['rg_city']=$city;}$open=add_query_arg($open_args,home_url('/veranstaltungen/'));
+>             $schema=array('@context'=>'https://schema.org','@type'=>'Event','name'=>$title,'url'=>$canonical,'description'=>$this->share_trim_description($desc),'startDate'=>$start,'eventStatus'=>'https://schema.org/EventScheduled','eventAttendanceMode'=>'https://schema.org/OfflineEventAttendanceMode');if($end!=='')$schema['endDate']=$end;if($image!=='')$schema['image']=array($image);$loc=array('@type'=>'Place','name'=>(string)$row['venue_name']);$postal=array('@type'=>'PostalAddress');if($row['street']!=='')$postal['streetAddress']=trim($row['street'].' '.$row['house_number']);if($row['postcode']!=='')$postal['postalCode']=$row['postcode'];if($city!=='')$postal['addressLocality']=$city;if(count($postal)>1)$loc['address']=$postal;$schema['location']=$loc;$ticket=$past?'':esc_url_raw((string)($row['ticket_url']??''));if($ticket!=='')$schema['offers']=array('@type'=>'Offer','url'=>$ticket,'availability'=>'https://schema.org/InStock');
+2382c2428
+<             $this->seo_render_detail_html_v101096(array('title'=>$title,'description'=>$desc,'full_description'=>(string)($item['description']??''),'canonical'=>$canonical,'image'=>$image,'label'=>'Event','city'=>$city,'address'=>$address,'when'=>$when,'venue'=>(string)$row['venue_name'],'website'=>$website,'ticket_url'=>$ticket,'route_url'=>$route,'overview_url'=>$overview,'schema'=>$schema,'start_iso'=>$start,'end_iso'=>$end,'organizers'=>$organizers,'participants'=>$participants,'program_url'=>$program,'price'=>$price,'direct_token'=>'e'.(int)$row['id'],'direct_category'=>'events'));
+---
+>             $this->seo_render_detail_html_v101096(array('past'=>$past,'next_url'=>$next?$next['url']:'','next_date'=>$next?$next['date']:'','title'=>$title,'description'=>$desc,'full_description'=>(string)($item['description']??''),'canonical'=>$canonical,'image'=>$image,'label'=>'Event','city'=>$city,'address'=>$address,'when'=>$when,'venue'=>(string)$row['venue_name'],'website'=>$website,'ticket_url'=>$ticket,'route_url'=>$route,'overview_url'=>$overview,'schema'=>$schema,'start_iso'=>$start,'end_iso'=>$end,'organizers'=>$organizers,'participants'=>$participants,'program_url'=>$program,'price'=>$price,'direct_token'=>'e'.(int)$row['id'],'direct_category'=>'events'));
