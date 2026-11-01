@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RuhrpottGuru Places Backend
  * Description: Persistenter Places-Katalog für Food, Highlights, Kultur und Aktivitäten sowie Spezial-Inventare für Büdchen und „Hier geht’s um die Wurst“ in der Metropole Ruhr. OSM wird nur für Import/Sync verwendet; Besucher lesen aus MySQL. Mit automatischem OSM-Rollback bis der Katalog vollständig validiert ist.
- * Version: 1.10.193
+ * Version: 1.10.194
  * Author: RuhrpottGuru
  * License: GPL-2.0-or-later
  */
@@ -179,7 +179,7 @@ final class RuhrpottGuru_Places_Backend {
     // 0-14 Tage alle 4 Stunden, 0-90 Tage taeglich, kompletter 0-365-Tage-
     // Master woechentlich. Laufende Master-/Supplemental-Wellen werden nie
     // abgebrochen; der Dispatcher wartet, bis der Event-Importpfad frei ist.
-    const VERSION = '1.10.193';
+    const VERSION = '1.10.194';
     const ACTIVITY_V2_SPEC_VERSION = '1.4';
     const SCHEMA_VERSION = '1.10.129';
     const OPTION_STATUS = 'rg_places_status';
@@ -1771,7 +1771,7 @@ final class RuhrpottGuru_Places_Backend {
         if (!$elements) return null;
         $element = $elements[0];
         $tags = isset($element['tags']) && is_array($element['tags']) ? $element['tags'] : array();
-        $title = trim((string)($tags['name'] ?? $row['name'] ?? 'RuhrpottGuru-Tipp'));
+        $title = trim((string)($tags['name'] ?? $row['name'] ?? 'PottFuchs-Tipp'));
         $city = trim((string)($tags['addr:city'] ?? $row['city'] ?? ''));
         $address = trim(implode(' ', array_filter(array(
             trim((string)($tags['addr:street'] ?? '')),
@@ -1779,7 +1779,7 @@ final class RuhrpottGuru_Places_Backend {
             trim((string)($tags['addr:postcode'] ?? '')),
             $city,
         ))));
-        $desc_fallback = trim(($category === 'food' ? 'Gastronomie-Tipp' : ($category === 'activities' ? 'Aktivität' : ($category === 'culture' ? 'Kultur-Tipp' : 'RuhrpottGuru-Tipp'))) . ($city !== '' ? ' in ' . $city : ' im Ruhrgebiet'));
+        $desc_fallback = trim(($category === 'food' ? 'Gastronomie-Tipp' : ($category === 'activities' ? 'Aktivität' : ($category === 'culture' ? 'Kultur-Tipp' : 'PottFuchs-Tipp'))) . ($city !== '' ? ' in ' . $city : ' im Ruhrgebiet'));
         $description = $this->share_trim_description($tags['description'] ?? ($tags['description:de'] ?? ''), $desc_fallback);
         $image = esc_url_raw((string)($tags['image:url'] ?? ($tags['image'] ?? '')));
         return array(
@@ -1946,7 +1946,7 @@ final class RuhrpottGuru_Places_Backend {
         if (!$payload || empty($payload['share']['title'])) return;
         $share = $payload['share'];
         $title = trim((string)$share['title']);
-        $description = $this->share_trim_description((string)($share['description'] ?? ''), 'Entdecke diesen Tipp bei RuhrpottGuru.');
+        $description = $this->share_trim_description((string)($share['description'] ?? ''), 'Entdecke diesen Tipp bei PottFuchs.');
         $image = esc_url_raw((string)($share['image'] ?? ''));
         if ($image === '') $image = esc_url_raw((string)get_site_icon_url(512));
         $category_code = (string)($payload['categoryCode'] ?? $this->share_category_code($payload['category'] ?? ''));
@@ -1972,7 +1972,7 @@ final class RuhrpottGuru_Places_Backend {
         header('X-Robots-Tag: noindex, follow', true);
         $esc = function($v){ return esc_attr((string)$v); };
         echo '<!doctype html><html lang="de"><head><meta charset="'.esc_attr(get_bloginfo('charset')).'"><meta name="viewport" content="width=device-width,initial-scale=1">';
-        echo '<title>'.esc_html($title.' | RuhrpottGuru').'</title>';
+        echo '<title>'.esc_html($title.' | PottFuchs').'</title>';
         echo '<meta name="description" content="'.$esc($description).'">';
         echo '<meta property="og:locale" content="de_DE"><meta property="og:type" content="website"><meta property="og:site_name" content="'.esc_attr(get_bloginfo('name')).'">';
         echo '<meta property="og:title" content="'.$esc($title).'"><meta property="og:description" content="'.$esc($description).'"><meta property="og:url" content="'.$esc($current_url).'">';
@@ -2072,7 +2072,7 @@ final class RuhrpottGuru_Places_Backend {
 
     private function seo_category_label_v101096($cat) {
         $map=array('food'=>'Food & Drinks','highlights'=>'Sehenswürdigkeit','culture'=>'Kultur','activities'=>'Aktivität','buedchen'=>'Trinkhalle','events'=>'Event');
-        return $map[$cat]??'RuhrpottGuru-Tipp';
+        return $map[$cat]??'PottFuchs-Tipp';
     }
 
     /** 1.10.140: SEO/GEO presentation only. Derive a useful public type label from the
@@ -2240,7 +2240,7 @@ final class RuhrpottGuru_Places_Backend {
         if ($menu !== '') $html .= '<a href="'.esc_url($menu).'" rel="noopener noreferrer">Speisekarte</a>';
         if ($reservation !== '') $html .= '<a href="'.esc_url($reservation).'" rel="noopener noreferrer">Reservieren</a>';
         if ($route !== '') $html .= '<a href="'.esc_url($route).'" rel="noopener noreferrer" target="_blank">Route planen</a>';
-        $html .= '<a href="'.esc_url($overview).'">'.($is_event ? 'Weitere Veranstaltungen' : 'RuhrpottGuru entdecken').'</a></nav></div></article></main>';
+        $html .= '<a href="'.esc_url($overview).'">'.($is_event ? 'Weitere Veranstaltungen' : 'PottFuchs entdecken').'</a></nav></div></article></main>';
 
         return $html;
     }
@@ -2258,7 +2258,7 @@ final class RuhrpottGuru_Places_Backend {
 
     private function seo_render_detail_html_v101096($data) {
         $title=trim((string)($data['title']??''));$seo_title=trim((string)($data['seo_title']??$title));if($seo_title==='')$seo_title=$title;$desc=$this->share_trim_description((string)($data['description']??''),'Entdecke diesen Ort bei '.get_bloginfo('name').'.');
-        $canonical=esc_url_raw((string)($data['canonical']??''));$image=esc_url_raw((string)($data['image']??''));$label=(string)($data['label']??'RuhrpottGuru-Tipp');
+        $canonical=esc_url_raw((string)($data['canonical']??''));$image=esc_url_raw((string)($data['image']??''));$label=(string)($data['label']??'PottFuchs-Tipp');
         $city=$this->seo_detail_value_v101148($data['city']??'');$address=$this->seo_detail_value_v101148($data['address']??'');$hours=$this->seo_detail_value_v101148($data['hours']??'');$when=$this->seo_detail_value_v101148($data['when']??'');
         $website=esc_url_raw((string)($data['website']??''));$ticket=esc_url_raw((string)($data['ticket_url']??''));$route=esc_url_raw((string)($data['route_url']??''));$overview=esc_url_raw((string)($data['overview_url']??home_url('/')));$venue=$this->seo_detail_value_v101148($data['venue']??'');$menu=esc_url_raw((string)($data['menu_url']??''));$reservation=esc_url_raw((string)($data['reservation_url']??''));$program=esc_url_raw((string)($data['program_url']??''));$start_iso=trim((string)($data['start_iso']??''));$end_iso=trim((string)($data['end_iso']??''));$price=$this->seo_detail_value_v101148($data['price']??'');$organizers=is_array($data['organizers']??null)?$data['organizers']:array();$participants=is_array($data['participants']??null)?$data['participants']:array();
         $schema=is_array($data['schema']??null)?$data['schema']:array();$schema_json=wp_json_encode($schema,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
@@ -2412,8 +2412,8 @@ final class RuhrpottGuru_Places_Backend {
         }
         if($desc===''){
             $desc=$kind==='city'
-                ? 'Entdecke '.$city_name.' mit RuhrpottGuru: Veranstaltungen, Food, Sehenswürdigkeiten, Kultur und Freizeitaktivitäten.'
-                : $kind_label.' in '.$city_name.' entdecken – aktuelle lokale Tipps und Orte bei RuhrpottGuru.';
+                ? 'Entdecke '.$city_name.' mit PottFuchs: Veranstaltungen, Food, Sehenswürdigkeiten, Kultur und Freizeitaktivitäten.'
+                : $kind_label.' in '.$city_name.' entdecken – aktuelle lokale Tipps und Orte bei PottFuchs.';
         }
         $desc=$this->share_trim_description($desc,$desc);
         $title=$kind==='city'?$city_name.' entdecken':$kind_label.' in '.$city_name;
@@ -2435,7 +2435,7 @@ final class RuhrpottGuru_Places_Backend {
         echo "\n".'<meta name="twitter:card" content="summary"><meta name="twitter:title" content="'.esc_attr($title).'"><meta name="twitter:description" content="'.esc_attr($desc).'">';
         $root=home_url('/stadt/');$city_url=get_permalink((int)$ctx['city']->ID);
         $crumbs=array(
-            array('@type'=>'ListItem','position'=>1,'name'=>'RuhrpottGuru','item'=>home_url('/')),
+            array('@type'=>'ListItem','position'=>1,'name'=>'PottFuchs','item'=>home_url('/')),
             array('@type'=>'ListItem','position'=>2,'name'=>'Städte','item'=>$root),
             array('@type'=>'ListItem','position'=>3,'name'=>$city,'item'=>$city_url),
         );
