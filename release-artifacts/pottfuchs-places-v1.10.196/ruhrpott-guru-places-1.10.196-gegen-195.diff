@@ -1,0 +1,37 @@
+5c5
+<  * Version: 1.10.195
+---
+>  * Version: 1.10.196
+182c182
+<     const VERSION = '1.10.195';
+---
+>     const VERSION = '1.10.196';
+1872,1873c1872,1877
+<             // 1.10.195: vorbeigegangene Termine ohne Ticket-/Buchungslinks, mit Hinweis.
+<             foreach (array('ticketUrl','ticket_url','bookingUrl','booking_url','reservationUrl','reservation_url','registrationUrl','registration_url') as $_k) unset($raw[$_k]);
+---
+>             // 1.10.195/196: vorbeigegangene Termine ohne Ticket-/Buchungslinks. Der Hinweis steht im Kasten
+>             // "Veranstaltungshinweis" (Feld visitorHours, zwei Zeilen), nicht im Fliesstext.
+>             $_tk = array('ticketUrl','ticket_url','bookingUrl','booking_url','reservationUrl','reservation_url','registrationUrl','registration_url');
+>             foreach ($_tk as $_k) unset($raw[$_k]);
+>             if (!isset($raw['rpg_event_details']) || !is_array($raw['rpg_event_details'])) $raw['rpg_event_details'] = array();
+>             foreach ($_tk as $_k) unset($raw['rpg_event_details'][$_k]);
+1875,1877c1879,1882
+<             $_note = 'Dieser Termin ist vorbei.'.($_next ? ' Nächster Termin: '.$_next['date'].'.' : '');
+<             if (strpos((string)($raw['description'] ?? ''), 'Dieser Termin ist vorbei.') !== 0) $raw['description'] = $_note.' '.(string)($raw['description'] ?? '');
+<             if (strpos((string)$description, 'Dieser Termin ist vorbei.') !== 0) $description = $_note.' '.(string)$description;
+---
+>             $_note = 'Dieser Termin ist vorbei.'.($_next ? "\nNächster Termin: ".$_next['date'].'.' : '');
+>             $raw['rpg_event_details']['visitorHours'] = $_note; $raw['rpg_event_details']['dayHours'] = '';
+>             $raw['visitorHours'] = $_note; $raw['dayHours'] = '';
+>             if (strpos((string)$description, 'Dieser Termin ist vorbei.') !== 0) $description = str_replace("\n", ' ', $_note).' '.(string)$description;
+2311a2317
+>         $past_css=!empty($data['past'])?'<style id="rpg-past-notice-style">div.mt-2>p.leading-relaxed.text-xs{white-space:pre-line}</style>':'';
+2326c2332
+<             $canonical_head = static function () use ($title, $seo_title, $desc, $canonical, $image, $schema_json, $esc, $bootstrap_json) {
+---
+>             $canonical_head = static function () use ($title, $seo_title, $desc, $canonical, $image, $schema_json, $esc, $bootstrap_json, $past_css) {
+2332a2339
+>                 echo $past_css;
+2368a2376
+>             echo $past_css;

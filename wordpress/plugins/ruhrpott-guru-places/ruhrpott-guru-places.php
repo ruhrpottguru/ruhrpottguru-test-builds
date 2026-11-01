@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RuhrpottGuru Places Backend
  * Description: Persistenter Places-Katalog für Food, Highlights, Kultur und Aktivitäten sowie Spezial-Inventare für Büdchen und „Hier geht’s um die Wurst“ in der Metropole Ruhr. OSM wird nur für Import/Sync verwendet; Besucher lesen aus MySQL. Mit automatischem OSM-Rollback bis der Katalog vollständig validiert ist.
- * Version: 1.10.195
+ * Version: 1.10.196
  * Author: RuhrpottGuru
  * License: GPL-2.0-or-later
  */
@@ -179,7 +179,7 @@ final class RuhrpottGuru_Places_Backend {
     // 0-14 Tage alle 4 Stunden, 0-90 Tage taeglich, kompletter 0-365-Tage-
     // Master woechentlich. Laufende Master-/Supplemental-Wellen werden nie
     // abgebrochen; der Dispatcher wartet, bis der Event-Importpfad frei ist.
-    const VERSION = '1.10.195';
+    const VERSION = '1.10.196';
     const ACTIVITY_V2_SPEC_VERSION = '1.4';
     const SCHEMA_VERSION = '1.10.129';
     const OPTION_STATUS = 'rg_places_status';
@@ -1869,12 +1869,17 @@ final class RuhrpottGuru_Places_Backend {
         $description = $this->share_trim_description((string)($row['short_description'] ?: $row['description']), $fallback ?: 'Event im Ruhrgebiet');
         $address = trim(implode(' ', array_filter(array((string)$row['street'],(string)$row['house_number'],(string)$row['postcode'],$city))));
         if ($this->event_row_is_past_v101195($row)) {
-            // 1.10.195: vorbeigegangene Termine ohne Ticket-/Buchungslinks, mit Hinweis.
-            foreach (array('ticketUrl','ticket_url','bookingUrl','booking_url','reservationUrl','reservation_url','registrationUrl','registration_url') as $_k) unset($raw[$_k]);
+            // 1.10.195/196: vorbeigegangene Termine ohne Ticket-/Buchungslinks. Der Hinweis steht im Kasten
+            // "Veranstaltungshinweis" (Feld visitorHours, zwei Zeilen), nicht im Fliesstext.
+            $_tk = array('ticketUrl','ticket_url','bookingUrl','booking_url','reservationUrl','reservation_url','registrationUrl','registration_url');
+            foreach ($_tk as $_k) unset($raw[$_k]);
+            if (!isset($raw['rpg_event_details']) || !is_array($raw['rpg_event_details'])) $raw['rpg_event_details'] = array();
+            foreach ($_tk as $_k) unset($raw['rpg_event_details'][$_k]);
             $_next = $this->event_next_same_title_v101195($row);
-            $_note = 'Dieser Termin ist vorbei.'.($_next ? ' Nächster Termin: '.$_next['date'].'.' : '');
-            if (strpos((string)($raw['description'] ?? ''), 'Dieser Termin ist vorbei.') !== 0) $raw['description'] = $_note.' '.(string)($raw['description'] ?? '');
-            if (strpos((string)$description, 'Dieser Termin ist vorbei.') !== 0) $description = $_note.' '.(string)$description;
+            $_note = 'Dieser Termin ist vorbei.'.($_next ? "\nNächster Termin: ".$_next['date'].'.' : '');
+            $raw['rpg_event_details']['visitorHours'] = $_note; $raw['rpg_event_details']['dayHours'] = '';
+            $raw['visitorHours'] = $_note; $raw['dayHours'] = '';
+            if (strpos((string)$description, 'Dieser Termin ist vorbei.') !== 0) $description = str_replace("\n", ' ', $_note).' '.(string)$description;
         }
         return array(
             'ok'=>true,'kind'=>'event','token'=>'e'.$event_id,'category'=>'events','categoryCode'=>'e','item'=>$raw,
@@ -2309,6 +2314,7 @@ final class RuhrpottGuru_Places_Backend {
         $website=esc_url_raw((string)($data['website']??''));$ticket=esc_url_raw((string)($data['ticket_url']??''));$route=esc_url_raw((string)($data['route_url']??''));$overview=esc_url_raw((string)($data['overview_url']??home_url('/')));$venue=$this->seo_detail_value_v101148($data['venue']??'');$menu=esc_url_raw((string)($data['menu_url']??''));$reservation=esc_url_raw((string)($data['reservation_url']??''));$program=esc_url_raw((string)($data['program_url']??''));$start_iso=trim((string)($data['start_iso']??''));$end_iso=trim((string)($data['end_iso']??''));$price=$this->seo_detail_value_v101148($data['price']??'');$organizers=is_array($data['organizers']??null)?$data['organizers']:array();$participants=is_array($data['participants']??null)?$data['participants']:array();
         $schema=is_array($data['schema']??null)?$data['schema']:array();$schema_json=wp_json_encode($schema,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
         $bootstrap_json=$this->seo_direct_bootstrap_json_v101172($data);
+        $past_css=!empty($data['past'])?'<style id="rpg-past-notice-style">div.mt-2>p.leading-relaxed.text-xs{white-space:pre-line}</style>':'';
         nocache_headers();status_header(200);header('Content-Type: text/html; charset='.get_bloginfo('charset'));header('X-Robots-Tag: '.(!empty($data['past'])?'noindex, follow':'index, follow'),true);
         $esc=function($v){return esc_attr((string)$v);};
         // 1.10.149: Single-source detail rendering. If the active RuhrpottGuru theme exposes
@@ -2323,13 +2329,14 @@ final class RuhrpottGuru_Places_Backend {
             // logo source, burger drawer, WordPress menu data and footer hooks.
             // get_header/get_footer are the SAME entry points used on WP pages:
             // no parallel Header/Footer, no shadow WordPress page or redirect.
-            $canonical_head = static function () use ($title, $seo_title, $desc, $canonical, $image, $schema_json, $esc, $bootstrap_json) {
+            $canonical_head = static function () use ($title, $seo_title, $desc, $canonical, $image, $schema_json, $esc, $bootstrap_json, $past_css) {
                 echo '<title>'.esc_html($seo_title.' | '.get_bloginfo('name')).'</title><meta name="description" content="'.$esc($desc).'"><link rel="canonical" href="'.$esc($canonical).'">';
                 echo '<meta property="og:locale" content="de_DE"><meta property="og:type" content="website"><meta property="og:site_name" content="'.esc_attr(get_bloginfo('name')).'"><meta property="og:title" content="'.$esc($title).'"><meta property="og:description" content="'.$esc($desc).'"><meta property="og:url" content="'.$esc($canonical).'">';
                 if ($image !== '') echo '<meta property="og:image" content="'.$esc($image).'"><meta property="og:image:secure_url" content="'.$esc($image).'">';
                 echo '<meta name="twitter:card" content="'.($image !== '' ? 'summary_large_image' : 'summary').'"><meta name="twitter:title" content="'.$esc($title).'"><meta name="twitter:description" content="'.$esc($desc).'">';
                 if ($image !== '') echo '<meta name="twitter:image" content="'.$esc($image).'">';
                 if ($schema_json) echo '<script type="application/ld+json">'.$schema_json.'</script>';
+                echo $past_css;
                 if ($bootstrap_json) {
                     echo '<script type="application/json" id="rpg-direct-detail-bootstrap">'.$bootstrap_json.'</script>';
                     // Critical first-paint styling applies only to this initial article.
@@ -2366,6 +2373,7 @@ final class RuhrpottGuru_Places_Backend {
             if($image!=='')echo '<meta property="og:image" content="'.$esc($image).'"><meta property="og:image:secure_url" content="'.$esc($image).'">';
             echo '<meta name="twitter:card" content="'.($image!==''?'summary_large_image':'summary').'"><meta name="twitter:title" content="'.$esc($title).'"><meta name="twitter:description" content="'.$esc($desc).'">';if($image!=='')echo '<meta name="twitter:image" content="'.$esc($image).'">';
             if($schema_json)echo '<script type="application/ld+json">'.$schema_json.'</script>';
+            echo $past_css;
             if(!did_action('wp_enqueue_scripts'))do_action('wp_enqueue_scripts');
             wp_head();
             echo '</head><body class="rpg-canonical-detail">';

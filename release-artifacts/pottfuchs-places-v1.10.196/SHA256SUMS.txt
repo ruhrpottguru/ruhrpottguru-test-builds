@@ -1,0 +1,2 @@
+02dc34394483887a98fdc436e76f288b41aca843ce22664d62260aba5ede7650  ruhrpott-guru-places-1.10.196.zip
+d2e6550cbdffdfc0ce166f1e3234efc413b1bb03ff3ad4a3e79a42a7a2ec4c98  ruhrpott-guru-places-1.10.196-gegen-195.diff
