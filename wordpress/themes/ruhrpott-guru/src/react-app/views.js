@@ -415,7 +415,7 @@
         try{
           if(category==='events'){
             const eventFetchRadius=(home&&radius<10)?10:radius;
-            const raw=hasCachedEvents?eventCache.current.items:await RPG.api.events(location,eventFetchRadius,mode==='martin'?martinUntilDays(new Date()):(mode==='weihnachten'?christmasUntilDays(new Date()):undefined),{partnerItems:!home});
+            const raw=hasCachedEvents?eventCache.current.items:await RPG.api.events(location,eventFetchRadius,mode==='martin'?martinUntilDays(new Date()):(mode==='weihnachten'?christmasUntilDays(new Date()):undefined),{partnerItems:true});
             if(homeEventCacheKey&&!hasCachedEvents)eventCache.current={key:homeEventCacheKey,items:raw};
             let items=raw.map(x=>RPG.normalizeEvent(x,location)).filter(x=>{
               if(!x.start)return false;

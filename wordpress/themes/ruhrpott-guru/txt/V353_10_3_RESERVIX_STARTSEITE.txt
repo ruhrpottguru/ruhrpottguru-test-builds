@@ -1,0 +1,7 @@
+V353.10.3 – Reservix-Karten auch auf der Startseite (05.11.2026)
+Auftrag (Nutzer, 05.11.): Startseite zeigt bei Jetzt / Heute noch / Morgen dieselben Reservix-Karten wie die Eventübersicht; die bestehende Eventlogik (Radius, Uhrzeit, eigene Events zuerst gegen Dubletten) entscheidet.
+Änderung: src/react-app/views.js, Aufruf RPG.api.events(...): Option {partnerItems:!home} -> {partnerItems:true}. Damit sendet auch die Startseite die Fähigkeit partner-items-v1. Plugin Ticketpartner 0.4.0 bleibt unverändert (es unterschied nie zwischen Startseite und Liste, nur nach Fähigkeit und untilDays).
+Unverändert: Radius, Zeitfilter, Sortierung, Dublettenlogik, Kartenanzahl (4), Specials (Martin/Weihnachten bleiben ohne Reservix wegen untilDays).
+Test: tests/v353-10-3-home-reservix.cjs (neu), tests/partner-items.cjs angepasst.
+Nicht geprüft: Darstellung im Browser, Antwortgröße/Laufzeit der Startseite live (Reservix-Anteil je Radius: 5 km 0,23 MB, 10 km 0,29 MB, 25 km 1,15 MB, 50 km 1,66 MB laut 0.4.0-Test).
+Rollback: Theme 353.10.2 erneut installieren.

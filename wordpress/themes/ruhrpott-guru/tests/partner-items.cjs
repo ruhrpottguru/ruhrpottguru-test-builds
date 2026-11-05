@@ -59,7 +59,7 @@ const loc={lat:51.4556,lng:7.0116,city:'Essen'};
   const comp=fs.readFileSync(dir+'components.js','utf8'),views=fs.readFileSync(dir+'views.js','utf8'),apis=fs.readFileSync(dir+'api.js','utf8');
   ok(comp.includes("data-rpg-partner-dates")&&comp.includes("rel:'sponsored noopener noreferrer',onClick:()=>metric('ticket_click',item,'detail-partner-date')"),'Terminliste im Detail mit rel=sponsored und eigener Messung');
   ok((comp.match(/rpgx-event-media-kind is-partner/g)||[]).length===2,'Anzeige-Schild auf beiden Kartenarten (Liste und Startseiten-Karte)');
-  ok(views.includes('{partnerItems:!home}'),'Reservix-Karten nur in der Veranstaltungsliste, nicht auf der Startseite');
+  ok(views.includes('{partnerItems:true}')&&!views.includes('{partnerItems:!home}'),'Reservix-Karten in Veranstaltungsliste UND Startseite (353.10.3)');
   ok(apis.includes("item.raw.rpg_partner_item")&&apis.includes("k==='rpg_partner_offers'||k==='rpg_partner_item'"),'keine Live-Bildsuche je Reservix-Karte; Partnerdaten nicht als eigener Ticketlink');
   // Aufruf in views.js wirklich auswerten (Fehler 353.9: Klammer falsch gesetzt -> Option kam nie an)
   const line=views.split('\n').find(l=>l.includes('await RPG.api.events('));
@@ -67,7 +67,7 @@ const loc={lat:51.4556,lng:7.0116,city:'Essen'};
   const run=(home,mode)=>{let got=null;const API={events:(...a)=>{got=a;return 0;}};const RPGx={api:API};
     new Function('RPG','location','eventFetchRadius','mode','home','martinUntilDays','christmasUntilDays','undef','return '+expr.replace('undefined','undefined'))(RPGx,loc,10,mode,home,()=>7,()=>9);return got;};
   let g=run(false,'');ok(g[2]===undefined&&g[3]&&g[3].partnerItems===true,'Veranstaltungsliste: 3. Parameter leer, 4. Parameter {partnerItems:true}');
-  g=run(true,'');ok(g[2]===undefined&&g[3].partnerItems===false,'Startseite: keine Reservix-Karten');
+  g=run(true,'');ok(g[2]===undefined&&g[3].partnerItems===true,'Startseite: gleiche Reservix-Anfrage wie die Veranstaltungsliste (353.10.3)');
   g=run(false,'martin');ok(g[2]===7&&g[3].partnerItems===true,'Martin: untilDays bleibt erhalten');
   g=run(false,'weihnachten');ok(g[2]===9&&g[3].partnerItems===true,'Weihnachten: untilDays bleibt erhalten');
   console.log('PASS '+checks+' Reservix-Karten assertions');

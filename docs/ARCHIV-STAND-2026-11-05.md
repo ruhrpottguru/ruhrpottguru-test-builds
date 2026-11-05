@@ -5,7 +5,7 @@ Ablage auf Wunsch des Nutzers (05.11.2026). Quelle: vom Nutzer hochgeladene, von
 ## Quellcode im Repository (Stand dieses Commits)
 | Pfad | Version | Herkunft (ZIP) |
 |---|---|---|
-| wordpress/themes/ruhrpott-guru | 353.10.2 | PottFuchs-Theme-v353.10.2-Hintergrund-Fix.zip |
+| wordpress/themes/ruhrpott-guru | 353.10.3 | PottFuchs-Theme-v353.10.3-Reservix-Startseite.zip (neu gebaut 05.11., Basis 353.10.2; ersetzt 353.10.2 als Quellstand) |
 | wordpress/plugins/pottfuchs-ticketpartners | 0.4.0 | PottFuchs-Ticketpartner-Backend-v0.4.0.zip |
 | wordpress/plugins/ruhrpott-guru-places | 1.10.196 | ruhrpott-guru-places-1.10.196.zip (nachgereicht, ersetzt 1.10.194 als Quellstand) |
 Vorher im Repository: Theme 345.0, Places 1.10.169 (über die Git-Historie weiter abrufbar).
@@ -34,6 +34,9 @@ f8da2777ddf0c7ac12dd2185677e2c9261bade2d84d87b28987e145f3384f582  ruhrpott-guru-
 03175e8a9516ed13be0f7572ccd8c68ea1a399006956eeeaf97e4397a9483370  ruhrpott-guru-places-1.10.193.zip
 dccd251f36dc4567a88b3493e2bf57c3e7f88fa70d3cb38c28d8284bc3e97795  ruhrpott-guru-places-1.10.195.zip
 02dc34394483887a98fdc436e76f288b41aca843ce22664d62260aba5ede7650  ruhrpott-guru-places-1.10.196.zip
+
+Neu gebaut (05.11., NICHT installiert):
+52dba83e87b839bdd21b3bcbc5ba305900571d47872e2e08afbb9c87a0d16cfe  PottFuchs-Theme-v353.10.3-Reservix-Startseite.zip
 
 Geprüft: Die Versionsnummer in style.css bzw. Plugin-Kopf stimmt bei allen ZIPs mit dem Dateinamen überein; die Hashes von 353.8, 353.9, 353.9.1 und Ticketpartner 0.4.0 stimmen mit den früheren Lieferdokumenten im Projekt überein.
 
