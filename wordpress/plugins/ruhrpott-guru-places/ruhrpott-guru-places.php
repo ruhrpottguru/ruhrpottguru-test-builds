@@ -2,7 +2,7 @@
 /**
  * Plugin Name: RuhrpottGuru Places Backend
  * Description: Persistenter Places-Katalog für Food, Highlights, Kultur und Aktivitäten sowie Spezial-Inventare für Büdchen und „Hier geht’s um die Wurst“ in der Metropole Ruhr. OSM wird nur für Import/Sync verwendet; Besucher lesen aus MySQL. Mit automatischem OSM-Rollback bis der Katalog vollständig validiert ist.
- * Version: 1.10.194
+ * Version: 1.10.196
  * Author: RuhrpottGuru
  * License: GPL-2.0-or-later
  */
@@ -179,7 +179,7 @@ final class RuhrpottGuru_Places_Backend {
     // 0-14 Tage alle 4 Stunden, 0-90 Tage taeglich, kompletter 0-365-Tage-
     // Master woechentlich. Laufende Master-/Supplemental-Wellen werden nie
     // abgebrochen; der Dispatcher wartet, bis der Event-Importpfad frei ist.
-    const VERSION = '1.10.194';
+    const VERSION = '1.10.196';
     const ACTIVITY_V2_SPEC_VERSION = '1.4';
     const SCHEMA_VERSION = '1.10.129';
     const OPTION_STATUS = 'rg_places_status';
@@ -1868,6 +1868,19 @@ final class RuhrpottGuru_Places_Backend {
         $fallback = trim(implode(' · ', array_filter(array($venue, $city, !empty($row['start_at']) ? $this->event_when_berlin_v101192((string)$row['start_at'], $row) : ''))));
         $description = $this->share_trim_description((string)($row['short_description'] ?: $row['description']), $fallback ?: 'Event im Ruhrgebiet');
         $address = trim(implode(' ', array_filter(array((string)$row['street'],(string)$row['house_number'],(string)$row['postcode'],$city))));
+        if ($this->event_row_is_past_v101195($row)) {
+            // 1.10.195/196: vorbeigegangene Termine ohne Ticket-/Buchungslinks. Der Hinweis steht im Kasten
+            // "Veranstaltungshinweis" (Feld visitorHours, zwei Zeilen), nicht im Fliesstext.
+            $_tk = array('ticketUrl','ticket_url','bookingUrl','booking_url','reservationUrl','reservation_url','registrationUrl','registration_url');
+            foreach ($_tk as $_k) unset($raw[$_k]);
+            if (!isset($raw['rpg_event_details']) || !is_array($raw['rpg_event_details'])) $raw['rpg_event_details'] = array();
+            foreach ($_tk as $_k) unset($raw['rpg_event_details'][$_k]);
+            $_next = $this->event_next_same_title_v101195($row);
+            $_note = 'Dieser Termin ist vorbei.'.($_next ? "\nNächster Termin: ".$_next['date'].'.' : '');
+            $raw['rpg_event_details']['visitorHours'] = $_note; $raw['rpg_event_details']['dayHours'] = '';
+            $raw['visitorHours'] = $_note; $raw['dayHours'] = '';
+            if (strpos((string)$description, 'Dieser Termin ist vorbei.') !== 0) $description = str_replace("\n", ' ', $_note).' '.(string)$description;
+        }
         return array(
             'ok'=>true,'kind'=>'event','token'=>'e'.$event_id,'category'=>'events','categoryCode'=>'e','item'=>$raw,
             'share'=>array('title'=>(string)$row['title'],'description'=>$description,'image'=>$image,'city'=>$city,'address'=>$address,'id'=>$event_id),
@@ -2067,7 +2080,36 @@ final class RuhrpottGuru_Places_Backend {
 
     private function seo_public_event_row_v101096($event_id) {
         global $wpdb;$event_id=absint($event_id);if(!$event_id)return null;$now=current_time('mysql',true);
-        return $wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->table('events')} WHERE id=%d AND status='active' AND COALESCE(end_at,start_at)>=%s LIMIT 1",$event_id,$now),ARRAY_A);
+        $row=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->table('events')} WHERE id=%d AND status='active' AND COALESCE(end_at,start_at)>=%s LIMIT 1",$event_id,$now),ARRAY_A);
+        if($row)return $row;
+        // 1.10.195: Vorbeigegangene Termine bleiben bis zur Loeschfrist als Seite "Termin ist vorbei" erreichbar
+        // (statt sofort 404). Abgesagte/entfallene Events (status cancelled/inactive) bleiben 404.
+        $row=$wpdb->get_row($wpdb->prepare("SELECT * FROM {$this->table('events')} WHERE id=%d AND status IN ('active','expired') AND COALESCE(end_at,start_at)<%s LIMIT 1",$event_id,$now),ARRAY_A);
+        if(!$row)return null;
+        $days=(int)apply_filters('rg_event_past_page_days',10,$row);
+        $ended=strtotime((string)($row['end_at']?:$row['start_at']));
+        if($days<=0||!$ended||$ended<current_time('timestamp')-$days*DAY_IN_SECONDS)return null;
+        $row['_rg_past']=1;
+        return $row;
+    }
+
+    /** 1.10.195: naechster aktueller Termin mit gleichem Titel in der gleichen Stadt (z. B. dasselbe Fest im Folgejahr). Keine Aehnlichkeitslogik, nur exakter Titel. */
+    private function event_next_same_title_v101195($row) {
+        global $wpdb;
+        if(!is_array($row)||empty($row['id'])||(string)($row['title']??'')===''||(string)($row['city']??'')==='')return null;
+        $t=$this->table('events');$now=current_time('mysql',true);
+        $r=$wpdb->get_row($wpdb->prepare("SELECT id,title,city,start_at FROM $t WHERE status='active' AND city=%s AND title=%s AND id<>%d AND start_at>%s AND COALESCE(end_at,start_at)>=%s ORDER BY start_at ASC, id ASC LIMIT 1",(string)$row['city'],(string)$row['title'],(int)$row['id'],(string)$row['start_at'],$now),ARRAY_A);
+        if(!$r)return null;
+        $ts=strtotime((string)$r['start_at']);if(!$ts)return null;
+        return array('url'=>$this->seo_event_url_v101096((int)$r['id'],(string)$r['title'],(string)$r['city']),'date'=>date_i18n('d.m.Y',$ts));
+    }
+
+    /** 1.10.195: true, wenn ein Event-Datensatz vorbei ist (gleiche Zeitbasis wie seo_public_event_row_v101096). */
+    private function event_row_is_past_v101195($row) {
+        if(!is_array($row))return false;
+        if((string)($row['status']??'')==='expired')return true;
+        $end=(string)(($row['end_at']??'')!==''&&$row['end_at']!==null?$row['end_at']:($row['start_at']??''));
+        return $end!==''&&$end<current_time('mysql',true);
     }
 
     private function seo_category_label_v101096($cat) {
@@ -2211,6 +2253,15 @@ final class RuhrpottGuru_Places_Backend {
         $html = '<main><article class="rpgx-ssr-article">';
         if ($image !== '') $html .= '<img class="rpgx-ssr-image" src="'.esc_url($image).'" alt="'.esc_attr($title).'" fetchpriority="high">';
         $html .= '<div class="rpgx-ssr-content"><h1>'.esc_html($title).'</h1>';
+        if (!empty($data['past'])) {
+            // 1.10.195: Hinweis fuer vorbeigegangene Termine, ohne Ticketlink.
+            $city_slug = sanitize_title((string)($data['city'] ?? ''));
+            $city_page = $city_slug !== '' ? get_page_by_path('stadt/'.$city_slug.'/veranstaltungen') : null;
+            $html .= '<p class="rpgx-ssr-past"><strong>Dieser Termin ist vorbei.</strong> ';
+            if (!empty($data['next_url']) && !empty($data['next_date'])) $html .= '<a href="'.esc_url((string)$data['next_url']).'">Nächster Termin: '.esc_html((string)$data['next_date']).'</a> · ';
+            if ($city_page instanceof WP_Post) $html .= '<a href="'.esc_url(get_permalink($city_page)).'">Aktuelle Veranstaltungen in '.esc_html((string)$data['city']).'</a> · ';
+            $html .= '<a href="'.esc_url($overview).'">Alle Veranstaltungen im Ruhrgebiet</a></p>';
+        }
         $facts = array();
         if ($when !== '') $facts[] = $start !== '' ? '<time datetime="'.esc_attr($start).'">'.esc_html($when).'</time>' : esc_html($when);
         if (!$is_event && $label !== '') $facts[] = esc_html($label);
@@ -2263,7 +2314,8 @@ final class RuhrpottGuru_Places_Backend {
         $website=esc_url_raw((string)($data['website']??''));$ticket=esc_url_raw((string)($data['ticket_url']??''));$route=esc_url_raw((string)($data['route_url']??''));$overview=esc_url_raw((string)($data['overview_url']??home_url('/')));$venue=$this->seo_detail_value_v101148($data['venue']??'');$menu=esc_url_raw((string)($data['menu_url']??''));$reservation=esc_url_raw((string)($data['reservation_url']??''));$program=esc_url_raw((string)($data['program_url']??''));$start_iso=trim((string)($data['start_iso']??''));$end_iso=trim((string)($data['end_iso']??''));$price=$this->seo_detail_value_v101148($data['price']??'');$organizers=is_array($data['organizers']??null)?$data['organizers']:array();$participants=is_array($data['participants']??null)?$data['participants']:array();
         $schema=is_array($data['schema']??null)?$data['schema']:array();$schema_json=wp_json_encode($schema,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES);
         $bootstrap_json=$this->seo_direct_bootstrap_json_v101172($data);
-        nocache_headers();status_header(200);header('Content-Type: text/html; charset='.get_bloginfo('charset'));header('X-Robots-Tag: index, follow',true);
+        $past_css=!empty($data['past'])?'<style id="rpg-past-notice-style">div.mt-2>p.leading-relaxed.text-xs{white-space:pre-line}</style>':'';
+        nocache_headers();status_header(200);header('Content-Type: text/html; charset='.get_bloginfo('charset'));header('X-Robots-Tag: '.(!empty($data['past'])?'noindex, follow':'index, follow'),true);
         $esc=function($v){return esc_attr((string)$v);};
         // 1.10.149: Single-source detail rendering. If the active RuhrpottGuru theme exposes
         // the app shortcode with the direct-detail bridge, render the canonical URL through
@@ -2277,13 +2329,14 @@ final class RuhrpottGuru_Places_Backend {
             // logo source, burger drawer, WordPress menu data and footer hooks.
             // get_header/get_footer are the SAME entry points used on WP pages:
             // no parallel Header/Footer, no shadow WordPress page or redirect.
-            $canonical_head = static function () use ($title, $seo_title, $desc, $canonical, $image, $schema_json, $esc, $bootstrap_json) {
+            $canonical_head = static function () use ($title, $seo_title, $desc, $canonical, $image, $schema_json, $esc, $bootstrap_json, $past_css) {
                 echo '<title>'.esc_html($seo_title.' | '.get_bloginfo('name')).'</title><meta name="description" content="'.$esc($desc).'"><link rel="canonical" href="'.$esc($canonical).'">';
                 echo '<meta property="og:locale" content="de_DE"><meta property="og:type" content="website"><meta property="og:site_name" content="'.esc_attr(get_bloginfo('name')).'"><meta property="og:title" content="'.$esc($title).'"><meta property="og:description" content="'.$esc($desc).'"><meta property="og:url" content="'.$esc($canonical).'">';
                 if ($image !== '') echo '<meta property="og:image" content="'.$esc($image).'"><meta property="og:image:secure_url" content="'.$esc($image).'">';
                 echo '<meta name="twitter:card" content="'.($image !== '' ? 'summary_large_image' : 'summary').'"><meta name="twitter:title" content="'.$esc($title).'"><meta name="twitter:description" content="'.$esc($desc).'">';
                 if ($image !== '') echo '<meta name="twitter:image" content="'.$esc($image).'">';
                 if ($schema_json) echo '<script type="application/ld+json">'.$schema_json.'</script>';
+                echo $past_css;
                 if ($bootstrap_json) {
                     echo '<script type="application/json" id="rpg-direct-detail-bootstrap">'.$bootstrap_json.'</script>';
                     // Critical first-paint styling applies only to this initial article.
@@ -2320,6 +2373,7 @@ final class RuhrpottGuru_Places_Backend {
             if($image!=='')echo '<meta property="og:image" content="'.$esc($image).'"><meta property="og:image:secure_url" content="'.$esc($image).'">';
             echo '<meta name="twitter:card" content="'.($image!==''?'summary_large_image':'summary').'"><meta name="twitter:title" content="'.$esc($title).'"><meta name="twitter:description" content="'.$esc($desc).'">';if($image!=='')echo '<meta name="twitter:image" content="'.$esc($image).'">';
             if($schema_json)echo '<script type="application/ld+json">'.$schema_json.'</script>';
+            echo $past_css;
             if(!did_action('wp_enqueue_scripts'))do_action('wp_enqueue_scripts');
             wp_head();
             echo '</head><body class="rpg-canonical-detail">';
@@ -2375,11 +2429,11 @@ final class RuhrpottGuru_Places_Backend {
         }
         if(preg_match('#^veranstaltung/(\d+)(?:/([^/]+))?(?:/([^/]+))?/?$#iu',$path,$m)){
             $row=$this->seo_public_event_row_v101096((int)$m[1]);if(!$row)$this->seo_render_not_found_v101096();$canonical=$this->seo_event_url_v101096((int)$row['id'],(string)$row['title'],(string)$row['city']);$expected=trim((string)wp_parse_url($canonical,PHP_URL_PATH),'/');$home=trim((string)wp_parse_url(home_url('/'),PHP_URL_PATH),'/');if($home!==''&&strpos($expected,$home.'/')===0)$expected=substr($expected,strlen($home)+1);if($path!==$expected){wp_safe_redirect($canonical,301);exit;}
-            $payload=$this->share_event_payload((int)$row['id']);if(!$payload)$this->seo_render_not_found_v101096();$share=(array)$payload['share'];$item=(array)$payload['item'];$title=(string)$row['title'];$city=(string)$row['city'];$address=(string)($share['address']??'');$image=(string)($share['image']??'');$desc=(string)($share['description']??'');$start=$this->event_visitor_datetime_iso((string)$row['start_at'],$row);$end=!empty($row['end_at'])?$this->event_visitor_datetime_iso((string)$row['end_at'],$row):'';$when='';$when=$this->event_when_berlin_v101192((string)$row['start_at'],$row);$open_args=array('rg_open'=>'e'.(int)$row['id'],'rgc'=>'e');if($row['lat']!==null&&$row['lng']!==null){$open_args['rg_lat']=number_format((float)$row['lat'],6,'.','');$open_args['rg_lng']=number_format((float)$row['lng'],6,'.','');if($city!=='')$open_args['rg_city']=$city;}$open=add_query_arg($open_args,home_url('/veranstaltungen/'));
-            $schema=array('@context'=>'https://schema.org','@type'=>'Event','name'=>$title,'url'=>$canonical,'description'=>$this->share_trim_description($desc),'startDate'=>$start,'eventStatus'=>'https://schema.org/EventScheduled','eventAttendanceMode'=>'https://schema.org/OfflineEventAttendanceMode');if($end!=='')$schema['endDate']=$end;if($image!=='')$schema['image']=array($image);$loc=array('@type'=>'Place','name'=>(string)$row['venue_name']);$postal=array('@type'=>'PostalAddress');if($row['street']!=='')$postal['streetAddress']=trim($row['street'].' '.$row['house_number']);if($row['postcode']!=='')$postal['postalCode']=$row['postcode'];if($city!=='')$postal['addressLocality']=$city;if(count($postal)>1)$loc['address']=$postal;$schema['location']=$loc;$ticket=esc_url_raw((string)($row['ticket_url']??''));if($ticket!=='')$schema['offers']=array('@type'=>'Offer','url'=>$ticket,'availability'=>'https://schema.org/InStock');
+            $past=!empty($row['_rg_past']);$next=$past?$this->event_next_same_title_v101195($row):null;$payload=$this->share_event_payload((int)$row['id']);if(!$payload)$this->seo_render_not_found_v101096();$share=(array)$payload['share'];$item=(array)$payload['item'];$title=(string)$row['title'];$city=(string)$row['city'];$address=(string)($share['address']??'');$image=(string)($share['image']??'');$desc=(string)($share['description']??'');if($past&&strpos($desc,'Dieser Termin ist vorbei.')!==0)$desc='Dieser Termin ist vorbei. '.$desc;$start=$this->event_visitor_datetime_iso((string)$row['start_at'],$row);$end=!empty($row['end_at'])?$this->event_visitor_datetime_iso((string)$row['end_at'],$row):'';$when='';$when=$this->event_when_berlin_v101192((string)$row['start_at'],$row);$open_args=array('rg_open'=>'e'.(int)$row['id'],'rgc'=>'e');if($row['lat']!==null&&$row['lng']!==null){$open_args['rg_lat']=number_format((float)$row['lat'],6,'.','');$open_args['rg_lng']=number_format((float)$row['lng'],6,'.','');if($city!=='')$open_args['rg_city']=$city;}$open=add_query_arg($open_args,home_url('/veranstaltungen/'));
+            $schema=array('@context'=>'https://schema.org','@type'=>'Event','name'=>$title,'url'=>$canonical,'description'=>$this->share_trim_description($desc),'startDate'=>$start,'eventStatus'=>'https://schema.org/EventScheduled','eventAttendanceMode'=>'https://schema.org/OfflineEventAttendanceMode');if($end!=='')$schema['endDate']=$end;if($image!=='')$schema['image']=array($image);$loc=array('@type'=>'Place','name'=>(string)$row['venue_name']);$postal=array('@type'=>'PostalAddress');if($row['street']!=='')$postal['streetAddress']=trim($row['street'].' '.$row['house_number']);if($row['postcode']!=='')$postal['postalCode']=$row['postcode'];if($city!=='')$postal['addressLocality']=$city;if(count($postal)>1)$loc['address']=$postal;$schema['location']=$loc;$ticket=$past?'':esc_url_raw((string)($row['ticket_url']??''));if($ticket!=='')$schema['offers']=array('@type'=>'Offer','url'=>$ticket,'availability'=>'https://schema.org/InStock');
             $website=esc_url_raw((string)($item['website']??($item['eventWebsite']??'')));$route='';if($row['lat']!==null&&$row['lng']!==null)$route='https://www.google.com/maps/search/?api=1&query='.rawurlencode((string)$row['lat'].','.(string)$row['lng']);elseif($address!=='')$route='https://www.google.com/maps/search/?api=1&query='.rawurlencode($address);$overview=home_url('/veranstaltungen/');
             $organizers=$this->event_current_organizers_from_row_v1063($row);$participants=json_decode((string)($row['participants_json']??''),true);if(!is_array($participants))$participants=array();$raw=json_decode((string)($row['raw_payload']??''),true);if(!is_array($raw))$raw=array();$docs=$this->event_documents_from_item_v1063($raw);$program=esc_url_raw((string)($row['_rpg_program_url']??($docs[0]['url']??'')));$price=trim((string)($row['price_text']??''));
-            $this->seo_render_detail_html_v101096(array('title'=>$title,'description'=>$desc,'full_description'=>(string)($item['description']??''),'canonical'=>$canonical,'image'=>$image,'label'=>'Event','city'=>$city,'address'=>$address,'when'=>$when,'venue'=>(string)$row['venue_name'],'website'=>$website,'ticket_url'=>$ticket,'route_url'=>$route,'overview_url'=>$overview,'schema'=>$schema,'start_iso'=>$start,'end_iso'=>$end,'organizers'=>$organizers,'participants'=>$participants,'program_url'=>$program,'price'=>$price,'direct_token'=>'e'.(int)$row['id'],'direct_category'=>'events'));
+            $this->seo_render_detail_html_v101096(array('past'=>$past,'next_url'=>$next?$next['url']:'','next_date'=>$next?$next['date']:'','title'=>$title,'description'=>$desc,'full_description'=>(string)($item['description']??''),'canonical'=>$canonical,'image'=>$image,'label'=>'Event','city'=>$city,'address'=>$address,'when'=>$when,'venue'=>(string)$row['venue_name'],'website'=>$website,'ticket_url'=>$ticket,'route_url'=>$route,'overview_url'=>$overview,'schema'=>$schema,'start_iso'=>$start,'end_iso'=>$end,'organizers'=>$organizers,'participants'=>$participants,'program_url'=>$program,'price'=>$price,'direct_token'=>'e'.(int)$row['id'],'direct_category'=>'events'));
         }
     }
 

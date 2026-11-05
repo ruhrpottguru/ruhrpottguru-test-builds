@@ -7,7 +7,7 @@ Ablage auf Wunsch des Nutzers (05.11.2026). Quelle: vom Nutzer hochgeladene, von
 |---|---|---|
 | wordpress/themes/ruhrpott-guru | 353.10.2 | PottFuchs-Theme-v353.10.2-Hintergrund-Fix.zip |
 | wordpress/plugins/pottfuchs-ticketpartners | 0.4.0 | PottFuchs-Ticketpartner-Backend-v0.4.0.zip |
-| wordpress/plugins/ruhrpott-guru-places | 1.10.194 | ruhrpott-guru-places-1.10.194.zip |
+| wordpress/plugins/ruhrpott-guru-places | 1.10.196 | ruhrpott-guru-places-1.10.196.zip (nachgereicht, ersetzt 1.10.194 als Quellstand) |
 Vorher im Repository: Theme 345.0, Places 1.10.169 (über die Git-Historie weiter abrufbar).
 
 ## Installations-ZIPs (archive/installations-zips/), SHA-256
@@ -27,11 +27,20 @@ b23e91f4534a5f5c0aa596eb90e6a208461e1d7cc676a35a9484ae006c8e888c  PottFuchs-Them
 d0c6ee52ba815754405abb7064127533928de6f8f92df8c1d36a2ab890e9498b  PottFuchs-Ticketpartner-Backend-v0.4.0.zip
 9efe484af18a79273211cd087d3db8b7845225ad14e06d6447a17ea2ce27d71f  ruhrpott-guru-places-1.10.194.zip
 
+Nachgereicht (gleicher Tag):
+338ad57303f8133c2dff825e519b0d776edfa505418ee2cb6a537178aa6486b0  PottFuchs-Theme-v353.6-Martinsbegriffe.zip
+f8da2777ddf0c7ac12dd2185677e2c9261bade2d84d87b28987e145f3384f582  ruhrpott-guru-places-1.10.191.zip
+443ff5717a49d40c7d6dc8bfdb38530d61a66032d6c49db9faec81c78dac5582  ruhrpott-guru-places-1.10.192.zip
+03175e8a9516ed13be0f7572ccd8c68ea1a399006956eeeaf97e4397a9483370  ruhrpott-guru-places-1.10.193.zip
+dccd251f36dc4567a88b3493e2bf57c3e7f88fa70d3cb38c28d8284bc3e97795  ruhrpott-guru-places-1.10.195.zip
+02dc34394483887a98fdc436e76f288b41aca843ce22664d62260aba5ede7650  ruhrpott-guru-places-1.10.196.zip
+
 Geprüft: Die Versionsnummer in style.css bzw. Plugin-Kopf stimmt bei allen ZIPs mit dem Dateinamen überein; die Hashes von 353.8, 353.9, 353.9.1 und Ticketpartner 0.4.0 stimmen mit den früheren Lieferdokumenten im Projekt überein.
 
 ## Lücken (nicht archiviert, UNKLAR)
-- Theme 353.2 und 353.6: ZIPs nicht vorhanden.
-- Places 1.10.195 und 1.10.196 (01.11.2026 geliefert) sowie 1.10.191–1.10.193: ZIPs nicht vorhanden.
-- Ob 353.10.2 und Places 1.10.194 live installiert sind, ist hier NICHT belegt.
+- Theme 353.2: ZIP nicht vorhanden.
+- Places 1.10.190 liegt als Release-Metadaten vor (siehe release-registry.json), nicht als ZIP in archive/installations-zips.
+- Ob 353.10.2 und Places 1.10.196 live installiert sind, ist hier NICHT belegt.
 - Ablage der ZIPs als Dateien im Repository statt als Release-Asset (Release-Anlage von hier nicht möglich).
 - docs/release-registry.json wurde nicht angepasst.
+- Places 1.10.191 wurde zweimal hochgeladen (zwei Dateien, identischer SHA-256); einmal abgelegt.
