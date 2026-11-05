@@ -1,0 +1,10 @@
+PottFuchs Theme v351.0 – gezielte Markenreste im aktuellen v350.0
+Stand: 24.10.2026
+
+- Öffentlich angezeigter Theme-Name/Theme-URI/Beschreibung und Version.
+- Bestehende Admin-Menütexte „Bilder“, „Feedback“, „Analytics“.
+- Zwei UGC-Rechtecheckbox-Texte, redaktionelle Medienbezeichnung und Loader.
+- Keine Änderungen an API-Namespace, Datenquellen, Event-Import, GPS, Radius-Fallback, Filter, Backend oder REST.
+- Die bisherigen Domain-Cookie-, Ticketlink- und Rechtslinks-Fixes aus v350 sind unverändert enthalten.
+- Aktive WPCode-Snippets #3343/#4102/#4152 werden durch Theme-Installation NICHT bearbeitet.
+- Keine neue WhatsApp-/Zeitreise-Share-Implementierung.

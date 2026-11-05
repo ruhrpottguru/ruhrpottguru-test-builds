@@ -1,0 +1,7 @@
+PottFuchs Theme 353.10.0 - Bildnachweis auf der Ortsseite
+Basis: installierte Version 353.9.1 (PottFuchs-Theme-v353.9.1-Reservix-Fix.zip, SHA-256 27f3b9eb...1e64).
+Neu: Weiter unten auf jeder Ortsseite (nicht bei Veranstaltungen) steht ein Abschnitt "Bildnachweis". Pro Bild: Urheber/in, Lizenz (mit Link zum Lizenztext bei CC BY, CC BY-SA, CC0), Quelle mit Link zur Wikimedia-Commons-Dateiseite, Hinweis auf Verkleinerung/Zuschnitt.
+Geaendert: src/react-app/api.js (Hilfsfunktionen RPG.imageAttributions), src/react-app/components.js (Komponente ImageAttribution, eingebaut unter "Mehr davon entdecken"), style.css (Version), neuer Test tests/v353-10-image-attribution.cjs.
+Unveraendert: Bilderauswahl, Galerie, Filter, Ranking, Plugin, REST-Vertraege, alle Daten.
+Grenze: Die vom Plugin gerenderten /ort/...-Seiten (Server-Seiten) zeigen den Nachweis noch nicht, das ist ein separater Auftrag.
+Rollback: Theme 353.9.1 erneut installieren.

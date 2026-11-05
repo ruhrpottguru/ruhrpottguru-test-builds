@@ -1,0 +1,6 @@
+PottFuchs Theme 353.9.1 - Korrektur zu 353.9 (Reservix-Karten kamen im Browser nicht an)
+Basis: installierte Version 353.9 (PottFuchs-Theme-v353.9-Reservix-Karten.zip, SHA-256 e1ddddf859901ec9e3ca734ac19a9b2330608e9f2b9fcec4d4e3472d58c655b0).
+Ursache: In views.js stand die neue Option {partnerItems:!home} innerhalb der Klammer der Weihnachts-Bedingung. JavaScript wertete sie dadurch als Zeitraum aus, die Option kam nie bei events() an, der Server lieferte keine Reservix-Karten.
+Geaendert: nur views.js (eine Klammer verschoben) und style.css (Version). Neuer Test wertet den echten Aufruf aus (Hauptliste, Startseite, Martin, Weihnachten).
+Unveraendert: alles andere aus 353.9.
+Rollback: Theme 353.9 oder 353.8 erneut installieren.

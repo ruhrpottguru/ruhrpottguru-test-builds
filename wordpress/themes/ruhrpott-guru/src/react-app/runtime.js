@@ -186,6 +186,8 @@
     const raw=item.raw&&typeof item.raw==='object'?item.raw:{};pushSource(raw.provider_source);pushSource(raw.source_name);pushSource(raw.rpg_sources);
     const weselMarketing=sourceValues.some(value=>{const key=String(value||'').trim().toLocaleLowerCase('de').replace(/[\s.-]+/g,'_');return key==='wesel_marketing_calendar'||/wesel_?marketing/.test(key);});
     if(weselMarketing)add('Wesel Marketing');
+    // V353.9: Ticketpartner-Facette (Reservix). Gilt fuer Events mit Reservix-Angebot; Liste = gleiche Eventliste, gefiltert.
+    if(item.partnerOffer&&/^reservix$/i.test(String(item.partnerOffer.provider||'')))add('Reservix');
 
     const sourceTypes=typeof RPG.eventSourceTypeTags==='function'?RPG.eventSourceTypeTags(item):[];
     sourceTypes.forEach(add);

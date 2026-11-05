@@ -1,0 +1,18 @@
+const fs=require('fs'),assert=require('assert'),path=require('path');
+const comp=fs.readFileSync(path.join(__dirname,'../src/react-app/components.js'),'utf8');
+let checks=0;const ok=(v,m)=>{assert(v,m);checks++;};
+const a=comp.indexOf('function detailNeedsWholeImage('),b=comp.indexOf('RPG.detailNeedsWholeImage=');
+const f=new Function(comp.slice(a,b)+';return detailNeedsWholeImage;')();
+const el=(nw,nh,cw,ch)=>({naturalWidth:nw,naturalHeight:nh,clientWidth:cw,clientHeight:ch});
+ok(f(el(900,1200,670,320),null)===true,'Hochformat im Querstreifen -> ganz zeigen');
+ok(f(el(1500,1000,670,320),null)===true,'3:2 im flachen Streifen -> ganz zeigen (wuerde ca. 29 % abschneiden)');
+ok(f(el(2100,1000,670,320),null)===false,'Bild passt zum Streifen -> cover wie bisher');
+ok(f(el(2000,1000,670,320),null)===false,'knapp passend (ca. 5 % Verlust) -> cover');
+ok(f(el(900,1200,670,320),{mode:'manual',x:50,y:30,zoom:1})===false,'gespeicherter Zuschnitt bleibt unberuehrt');
+ok(f(el(900,1200,670,320),{mode:'auto',x:50,y:50,zoom:1})===false,'auto-Zuschnitt bleibt unberuehrt');
+ok(f(el(0,0,670,320),null)===false,'ohne Masse nichts aendern');
+ok(/mediaCropValues\(crop\);if\(!v\)return \{objectPosition:'50% 38%'\}/.test(comp),'Standard-Fokus leicht oberhalb der Mitte');
+ok(comp.includes("rpgx-gallery-backdrop")&&comp.includes("'object-contain'"),'Hintergrund + contain im Detail');
+ok(comp.includes("onError:onError}),\n      current.credit"),'Fehlerbehandlung der Hauptbilds bleibt');
+ok(comp.includes("rpgx-gallery-backdrop absolute inset-0 overflow-hidden"),'Unschaerfe-Hintergrund ist beschnitten (laeuft nicht aus dem Streifen)');
+console.log('v353.10.2 detail whole image: '+checks+' checks passed');

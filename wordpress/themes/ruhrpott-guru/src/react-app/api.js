@@ -23,7 +23,12 @@
     },
     async addressLocation(payload) {
       const url = RPG.settings.addressLocationUrl || (RPG.settings.root + 'ruhrpottguru/v1/address-location');
-      return jsonFetch(url, { method:'POST', headers:{'Content-Type':'application/json','X-RPG-Address-Token':String(RPG.settings.addressLocationToken||'')}, body:JSON.stringify(payload||{}) });
+      const tokenUrl = RPG.settings.addressLocationTokenUrl || (RPG.settings.root + 'ruhrpottguru/v1/address-location-token');
+      // HTML can be cached longer than a WordPress nonce. Request a fresh
+      // nonce only on address submission; never trust one baked into a page.
+      const fresh = await jsonFetch(tokenUrl, { method:'GET', cache:'no-store' });
+      if (!fresh || !fresh.token) throw new Error('Die Adresssuche konnte nicht gestartet werden. Bitte versuche es erneut.');
+      return jsonFetch(url, { method:'POST', cache:'no-store', headers:{'Content-Type':'application/json','X-RPG-Address-Token':String(fresh.token)}, body:JSON.stringify(payload||{}) });
     },
     async shareItem(token, category) {
       const url = new URL(RPG.settings.shareItemUrl || (RPG.settings.root + 'ruhrpottguru/v1/share-item'), window.location.origin);
@@ -47,9 +52,16 @@
         lat:Number.isFinite(Number(coords.lat))?Number(coords.lat):null, lng:Number.isFinite(Number(coords.lng))?Number(coords.lng):null
       });
     },
-    async events(location, maxRadiusKm) {
+    async events(location, maxRadiusKm, untilDays, options) {
       const url = RPG.settings.eventDataUrl || (RPG.settings.root + 'ruhrpottguru/v1/events');
-      const data = await this.post(url, { lat: location.lat, lng: location.lng, city: location.city || RPG.nearestCity(location.lat, location.lng), maxRadiusKm: maxRadiusKm || 50 });
+      const body = { lat: location.lat, lng: location.lng, city: location.city || RPG.nearestCity(location.lat, location.lng), maxRadiusKm: maxRadiusKm || 50 };
+      // V353.2: optionaler Zeithorizont (Backend ab Places 1.10.191); Specials fragen nur ihre Saison ab.
+      if (Number.isFinite(untilDays) && untilDays > 0) body.untilDays = Math.ceil(untilDays);
+      // V353.8: meldet dem Backend, dass die Seite Ticketpartner-Angebote (partner-v1) darstellen kann. Ohne diese Angabe bleibt die Antwort unveraendert.
+      body.clientCaps = ['partner-v1'];
+      // V353.9: nur die Hauptliste (Veranstaltungen, nicht Startseite/Orte) darf Reservix-Termine ohne eigenen Eintrag als Karten erhalten.
+      if (options && options.partnerItems === true) body.clientCaps.push('partner-items-v1');
+      const data = await this.post(url, body);
       return Array.isArray(data.items) ? data.items : [];
     },
     async eventRelated(item) {
@@ -183,6 +195,46 @@
     if (/^https?:\/\//i.test(s) && !/\/(?:Category|File):/i.test(s)) return s;
     return '';
   }
+  // V353.10: Bildnachweis auf der Ortsseite (Urheber, Lizenz mit Link, Commons-Dateiseite).
+  function licenseLink(value) {
+    const t = String(value || '').replace(/\s+/g, ' ').trim();
+    if (!t) return '';
+    if (/^(?:CC0|CC[ -]?0)(?:\s*1\.0)?$/i.test(t) || /public domain dedication/i.test(t)) return 'https://creativecommons.org/publicdomain/zero/1.0/deed.de';
+    const m = t.match(/^CC[ -]BY(?:[ -](SA))?[ -](\d\.\d)(?:[ -]([a-z]{2,3}))?$/i);
+    if (!m) return '';
+    const kind = m[1] ? 'by-sa' : 'by', ver = m[2], lang = (m[3] || '').toLowerCase();
+    return 'https://creativecommons.org/licenses/' + kind + '/' + ver + '/' + (lang === 'de' ? 'deed.de' : '');
+  }
+  function commonsFilePage(url) {
+    const s = String(url || '').trim();
+    let name = '';
+    let m = s.match(/commons\.wikimedia\.org\/wiki\/Special:FilePath\/([^?#]+)/i);
+    if (m) name = m[1];
+    if (!name) {
+      m = s.match(/(?:upload|thumb)\.wikimedia\.org\/wikipedia\/commons\/(?:thumb\/)?[0-9a-f]\/[0-9a-f]{2}\/([^\/?#]+)/i);
+      if (m) name = m[1];
+    }
+    if (!name) return '';
+    let decoded = name;
+    try { decoded = decodeURIComponent(name); } catch (_) {}
+    return 'https://commons.wikimedia.org/wiki/File:' + encodeURIComponent(decoded.replace(/ /g, '_')).replace(/%2F/g, '/');
+  }
+  function cleanCreditText(value) {
+    return String(value || '').replace(/<[^>]*>/g, ' ').replace(/&amp;/g, '&').replace(/&quot;/g, '"').replace(/&#0?39;/g, "'").replace(/&lt;/g, '<').replace(/&gt;/g, '>').replace(/\s+/g, ' ').trim();
+  }
+  RPG.imageAttributions = function (item, image) {
+    const list = [];
+    (Array.isArray(item && item.galleryImages) ? item.galleryImages : []).forEach(x => { if (x && x.url && !list.some(v => v.url === x.url)) list.push(x); });
+    if (image && !list.some(v => v.url === image)) list.unshift({ url: image, credit: '' });
+    const out = [];
+    list.forEach((x, i) => {
+      const artist = cleanCreditText(x.artist), license = cleanCreditText(x.license), credit = cleanCreditText(x.credit), source = cleanCreditText(x.source);
+      const filePage = commonsFilePage(x.url);
+      if (!artist && !license && !credit && !filePage) return;
+      out.push({ index: i + 1, url: x.url, artist, license, licenseUrl: licenseLink(license), credit, source, filePage, isCommons: !!filePage });
+    });
+    return out;
+  };
   function splitTags(value) {
     return String(value || '').split('|').map(v => v.trim()).filter(Boolean).slice(0, 6);
   }
@@ -450,6 +502,78 @@
     const url=httpUrl(value);
     return url&&!eventIsProviderUrl(url)?url:'';
   }
+  // PottFuchs 2026-10-24: ticket links from ET4 can be HTML-entity encoded
+  // or wrapped in Markdown, e.g. &#x20;[https://ticket.io/x/:](https://ticket.io/x/:).
+  // Only ticket-action URLs use this normalizer; media, source and ranking URLs
+  // continue through their existing validators unchanged.
+  function eventTicketLink(value) {
+    if (Array.isArray(value)) {
+      for (const part of value) { const candidate=eventTicketLink(part); if(candidate)return candidate; }
+      return '';
+    }
+    if (value && typeof value === 'object') {
+      return eventTicketLink(value.url)||eventTicketLink(value.href)||eventTicketLink(value.link)||eventTicketLink(value.contentUrl)||'';
+    }
+    const raw=String(value==null?'':value).trim().replace(/&#x20;|&#0*32;|&#0*160;|&nbsp;/gi,' ').replace(/&amp;/gi,'&');
+    if (!raw) return '';
+    const markdown=raw.match(/\[[^\]]+\]\(\s*(https?:\/\/[^\s)]+)\s*\)/i);
+    const direct=raw.match(/^https?:\/\/[^\s<>'"\[\]()]+/i);
+    let link=markdown?markdown[1]:(direct?direct[0]:'');
+    if(!link)return '';
+    // A colon after the final slash is a copied punctuation artifact, not a
+    // ticket.io path segment. Keep internal colons, query strings and fragments.
+    link=link.replace(/\/:(?=$|[?#])/g,'/').replace(/[.,;:]+$/,'');
+    if(!/^https?:\/\//i.test(link))return '';
+    try {
+      const parsed=new URL(link);
+      if(!/^(?:http:|https:)$/.test(parsed.protocol)||!parsed.hostname||parsed.username||parsed.password)return '';
+    } catch(_) {return '';}
+    return eventPublicUrl(link);
+  }
+  function eventTicketLinkFromText(value) {
+    const text=String(value==null?'':value);
+    // Scan only short fragments after an explicit ticket label. A different
+    // editorial hyperlink elsewhere in the description is not a ticket URL.
+    const labels=/(?:ticket(?:verkauf|link|s)?|karten(?:kauf|verkauf)?|buchung)/gi;
+    let label;
+    while((label=labels.exec(text))!==null){
+      const fragment=text.slice(label.index, label.index+180);
+      const markdown=fragment.match(/\[[^\]]+\]\(\s*(https?:\/\/[^\s)]+)\s*\)/i);
+      if(markdown){const link=eventTicketLink(markdown[0]);if(link)return link;}
+      const context=fragment.match(/https?:\/\/[^\s<>'"\[\]()]+/i);
+      if(context){const link=eventTicketLink(context[0]);if(link)return link;}
+    }
+    return '';
+  }
+  RPG.eventTicketLink=eventTicketLink;
+  // V353.8: Ticketpartner-Angebot (z. B. Reservix) aus dem Backend. Nur https, Kennzeichnung "Anzeige" und rel=sponsored werden hier fest erzwungen.
+  // V353.9: Reservix-Termine ohne eigenen Eintrag: bis zu 20 Termine mit eigenem Link plus "Weitere Termine"-Link zum naechsten Termin. Nur https.
+  function eventPartnerItem(item) {
+    try {
+      const p=item&&item.rpg_partner_item;
+      if(!p||typeof p!=='object'||!Array.isArray(p.dates))return null;
+      const dates=[];
+      p.dates.slice(0,20).forEach(d=>{
+        const url=d&&httpUrl(d.url);const start=d&&new Date(d.start||'');
+        if(url&&/^https:\/\//i.test(url)&&start&&!isNaN(start.getTime()))dates.push({start,url});
+      });
+      if(!dates.length)return null;
+      const moreUrl=httpUrl(p.moreUrl);
+      const total=Math.max(dates.length,Number(p.total)||0);
+      return {provider:String(p.provider||''),dates,total,adLabel:String(p.adLabel||'Anzeige').slice(0,20),
+        moreUrl:(moreUrl&&/^https:\/\//i.test(moreUrl))?moreUrl:'',moreLabel:String(p.moreLabel||'Weitere Termine ansehen und buchen').slice(0,80)};
+    } catch(_) { return null; }
+  }
+  function eventPartnerOffer(item) {
+    try {
+      const list=item&&Array.isArray(item.rpg_partner_offers)?item.rpg_partner_offers:[];
+      const offer=list[0];
+      if(!offer||typeof offer!=='object')return null;
+      const url=httpUrl(offer.url);
+      if(!url||!/^https:\/\//i.test(url))return null;
+      return {provider:String(offer.provider||''),url,label:String(offer.label||'Tickets').slice(0,60),adLabel:String(offer.adLabel||'Anzeige').slice(0,20)};
+    } catch(_) { return null; }
+  }
   function eventMediaRelUrl(item, wantedRel) {
     const wanted=String(wantedRel||'').toLowerCase();
     if(!item||typeof item!=='object'||!wanted)return '';
@@ -642,14 +766,16 @@
     if(!Array.isArray(node)){
       const rel=String(node.rel||node.relation||'').toLowerCase();
       if(/^(booking|ticket|tickets|reservation|registration)$/.test(rel)){
-        const linked=eventPublicUrl(node.url)||eventPublicUrl(node.contentUrl)||eventPublicUrl(node.href)||eventPublicUrl(node.link);
+        const linked=eventTicketLink(node.url)||eventTicketLink(node.contentUrl)||eventTicketLink(node.href)||eventTicketLink(node.link);
         if(linked)return linked;
       }
     }
     for(const [k,v] of Object.entries(node)){
+      // V353.8: Partner-Angebote sind kein eigener Ticketlink des Veranstalters (sonst entstuende ein unmarkierter Zweitbutton).
+      if(k==='rpg_partner_offers'||k==='rpg_partner_item')continue;
       const p=(path+'.'+String(k).toLowerCase()).replace(/^\./,'');
-      if(typeof v==='string'&&/^https?:\/\//i.test(v)&&/ticket|booking|book|order|reserve|reservation|registration|anmeld|karte|shop|sale|offer|admission|eintritt/.test(p)){
-        const linked=eventPublicUrl(v);if(linked)return linked;
+      if(typeof v==='string'&&/ticket|booking|book|order|reserve|reservation|registration|anmeld|karte|shop|sale|offer|admission|eintritt/.test(p)){
+        const linked=eventTicketLink(v);if(linked)return linked;
       }
       if(v&&typeof v==='object'){const found=eventNestedActionUrl(v,depth+1,p);if(found)return found;}
     }
@@ -760,7 +886,8 @@
     const rich=eventPilotRich(item);
     const organizers=eventCanonicalOrganizers(details.organizers,rich.organizers,hasCanonicalEventDetails);
     const priceText=eventCleanRepeatedText(details.priceText||rich.priceText||'');
-    const ticketUrl=eventPublicUrl(details.ticketUrl)||eventPublicUrl(item.ticketUrl)||eventPublicUrl(item.ticket_url)||eventPublicUrl(item.bookingUrl)||eventPublicUrl(item.booking_url)||eventPublicUrl(rich.ticketUrl)||eventNestedActionUrl(item)||'';
+    const rawDescription=item.description || details.shortDescription || rich.description || item.shortDescription || item.text || '';
+    const ticketUrl=eventTicketLink(details.ticketUrl)||eventTicketLink(item.ticketUrl)||eventTicketLink(item.ticket_url)||eventTicketLink(item.bookingUrl)||eventTicketLink(item.booking_url)||eventTicketLink(rich.ticketUrl)||eventNestedActionUrl(item)||eventTicketLinkFromText(rawDescription)||'';
     const canonicalUrl=httpUrl(details.canonicalUrl)||httpUrl(item.canonicalUrl)||'';
     const allDayKnown=Object.prototype.hasOwnProperty.call(details,'allDay')||Object.prototype.hasOwnProperty.call(item,'allDay');
     const boolish=v=>v===true||v===1||String(v||'').trim()==='1'||/^(?:true|yes|ja|on)$/i.test(String(v||'').trim());
@@ -780,7 +907,7 @@
     // image type. Keep the approval in the payload/raw data but do not show a
     // technical "Freigegebenes Veranstaltungsbild" badge on cards or details.
     else if(eventMediaSource==='official-approved'){mediaKind='original';mediaLabel='';}
-    else if(eventMediaSource==='editorial-override'){mediaKind='original';mediaLabel='RuhrpottGuru Redaktion';}
+    else if(eventMediaSource==='editorial-override'){mediaKind='original';mediaLabel='PottFuchs Redaktion';}
     const rawMediaCredit=String(eventMedia.credit||'').trim();
     const rawMediaLicense=String(eventMedia.license||'').trim();
     // V313: WeselMarketing's written third-channel approval remains stored in the
@@ -805,7 +932,7 @@
       address: eventAddress(item), coords, cityScope,
       distanceKm: !cityScope && coords && location ? RPG.distanceKm(location.lat, location.lng, coords.lat, coords.lng) : null,
       start: next && next.start, end: next && next.end, allDay, allDayKnown,
-      description: item.description || details.shortDescription || rich.description || item.shortDescription || item.text || '',
+      description: rawDescription,
       shortDescription:String(details.shortDescription||item.shortDescription||''),
       website: publicWebsite, ticketUrl, canonicalUrl, documents, programUrl:documents.length?documents[0].url:'', programLabel:documents.length?documents[0].label:'Programm', imageUrl, imageCropCard, imageCropDetail, galleryImages, mediaKind, mediaLabel, mediaCredit, mediaLicense, mediaArtist, mediaSemanticVersion, labels:[],
       visitorHours:String(details.visitorHours||item.visitorHours||''), dayHours:String(details.dayHours||item.dayHours||''), visitorHoursSource:httpUrl(details.visitorHoursSource)||'',
@@ -820,6 +947,8 @@
       sources: Array.isArray(item.rpg_sources) ? item.rpg_sources : [],
       participants: eventParticipants(item,true),
       series:item.rpg_event_series&&typeof item.rpg_event_series==='object'?item.rpg_event_series:{count:1,first:'',last:'',identity:''},
+      partnerOffer:eventPartnerOffer(item),
+      partnerItem:eventPartnerItem(item),
       raw:item
     };
   };
@@ -1129,7 +1258,7 @@
     if (item.category === 'events') {
       // DB-backed events are enriched server-side. Never launch one live media
       // resolver request per visible card; that caused request storms and slow pages.
-      if(item.raw && item.raw.rpg_event_db) return '';
+      if(item.raw && (item.raw.rpg_event_db || item.raw.rpg_partner_item)) return '';
       const url = RPG.settings.eventMediaUrl;
       if (!url) return '';
       try {

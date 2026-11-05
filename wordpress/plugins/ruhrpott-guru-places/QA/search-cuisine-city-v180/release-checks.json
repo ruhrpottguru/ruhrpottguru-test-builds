@@ -1,0 +1,35 @@
+{
+  "version": "1.10.180",
+  "base": "1.10.179",
+  "baseZipSha256": "7504680eef01e0d95ccc01c3a9fc95fafa729c7fae2ac085cd5e8d0a4d170495",
+  "changedProductionFiles": [
+    "ruhrpott-guru-places.php"
+  ],
+  "changedMethod": "global_search_place_terms_sql",
+  "productionPhpOutsideMethod": "byte-identical except version metadata",
+  "otherOriginalFiles": "byte-identical",
+  "tests": {
+    "status": "passed",
+    "assertions": 174,
+    "engine": "8.5.10",
+    "fixtureQueries": 4,
+    "fixtureRows": 50,
+    "italianWeselIds": [
+      "place:10377",
+      "place:10382",
+      "place:10386",
+      "place:10521",
+      "place:10587",
+      "test:compact",
+      "test:seq"
+    ],
+    "scope": "production PHP SQL-builder and SQLite fixtures; no claim of live MySQL deployment"
+  },
+  "sqlEngine": "PHP production SQL builder executed on SQLite with REGEXP callback; live MySQL validation still pending",
+  "liveStatus": "not deployed",
+  "sourceLimitation": "WPVibe refuses the 1.9MB live main source due to 64KiB limit; matching-version original v177 archive and public read-only live fixtures used; exact current server file hash not established",
+  "clientContract": "same global-search request q+limit; no Android rebuild needed",
+  "scope": "Cuisine tokens and exact municipality only for cuisine queries; all generic query SQL unchanged; no ranking/admission/category/GPS/SEO changes",
+  "rollback": "Restore previous v177 package through standard plugin update/Bridge backup, keeping DB and all other plugins unchanged.",
+  "mainPhpSha256": "c5d8c8a4b3d2f283c8a354bcec6b6e3ed7dac6a99406bab70b86f01233bea123"
+}

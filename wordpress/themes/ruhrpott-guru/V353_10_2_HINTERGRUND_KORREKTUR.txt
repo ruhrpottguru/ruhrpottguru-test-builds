@@ -1,0 +1,5 @@
+PottFuchs Theme 353.10.2 - Korrektur zu 353.10.1
+Basis: 353.10.1 (SHA-256 9bc3902b8c56c07d3b02b17273d5ee6dfb5e139f3aba75466586d12a7ced6551).
+Ursache: Der unscharfe Hintergrund (vergroessert und weichgezeichnet) lief ueber den Bildstreifen hinaus und verschmierte den Bereich darunter.
+Geaendert: nur src/react-app/components.js (Hintergrund in einen beschnittenen Rahmen gelegt), style.css (Version), Test ergaenzt.
+Rollback: Theme 353.10.1, 353.10.0 oder 353.9.1 erneut installieren.

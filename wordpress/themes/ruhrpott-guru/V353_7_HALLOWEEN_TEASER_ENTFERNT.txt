@@ -1,0 +1,5 @@
+PottFuchs Theme 353.7 - Halloween-Teaser von der Startseite entfernt
+Basis: installierte Version 353.6 (PottFuchs-Theme-v353.6-Martinsbegriffe.zip, SHA-256 338ad57303f8133c2dff825e519b0d776edfa505418ee2cb6a537178aa6486b0).
+Geaendert: nur src/react-app/views.js (HomeView rendert den Halloween-Teaser nicht mehr) und style.css (Version).
+Unveraendert: Halloween-Seite /halloween-im-pott/, Halloween-Filter und -Klassifizierung, alle anderen Startseiten-Bloecke.
+Rollback: Theme 353.6 erneut installieren.

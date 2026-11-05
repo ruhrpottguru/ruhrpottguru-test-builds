@@ -1,0 +1,7 @@
+PottFuchs Theme 353.10.1 - Bilder in der Detailansicht nicht mehr abschneiden
+Basis: 353.10.0 (Bildnachweis), SHA-256 b23e91f4534a5f5c0aa596eb90e6a208461e1d7cc676a35a9484ae006c8e888c.
+Neu: Detailseite zeigt das Bild ganz, wenn der Streifen sonst mehr als ca. 10 % abschneiden wuerde. Der Rand wird mit einer unscharfen Version desselben Bildes gefuellt (keine leeren Balken). Bilder mit gespeichertem Zuschnitt (auto/manual) bleiben unveraendert.
+Kacheln und Listen: Zuschnitt bleibt (gleich grosse Kacheln), der Standard-Fokus liegt aber leicht oberhalb der Mitte (50 % / 38 %) statt exakt mittig. Gespeicherte Zuschnitte haben weiter Vorrang.
+Geaendert: src/react-app/components.js (DetailGallery, mediaCropStyle, Hilfsfunktion detailNeedsWholeImage), style.css (Version), neuer Test tests/v353-10-1-detail-whole-image.cjs.
+Unveraendert: Bilderauswahl, Nachweis, Filter, Ranking, Plugin, REST-Vertraege, Daten.
+Rollback: Theme 353.10.0 (oder 353.9.1) erneut installieren.

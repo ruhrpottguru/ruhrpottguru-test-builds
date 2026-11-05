@@ -1,0 +1,12 @@
+PottFuchs Theme 353.9 - Reservix-Karten in der Veranstaltungsliste (Stufe 2)
+Basis: installierte Version 353.8 (PottFuchs-Theme-v353.8-Ticketpartner-Button.zip, SHA-256 6086ef43d331dadc6b1d909eb470bf5965ad2b960b4a070c5754264967e94061).
+Voraussetzung: Plugin "PottFuchs Ticketpartner (Backend)" 0.4.0. Ohne das Plugin 0.4.0 aendert sich nichts.
+Geaendert:
+- api.js: events() bekommt optionalen 4. Parameter; Hauptliste meldet zusaetzlich partner-items-v1. normalizeEvent liefert partnerItem (max. 20 Termine, nur https). Keine Live-Bildsuche je Reservix-Karte. eventNestedActionUrl ueberspringt rpg_partner_item.
+- views.js: Veranstaltungsliste (nicht Startseite) fragt Reservix-Karten an: {partnerItems:!home}.
+- runtime.js: Chip "Reservix" unter "Mehr davon entdecken" bei Events mit Reservix-Angebot; Klick = gleiche Eventliste gefiltert (bestehender Tag-Filter).
+- components.js: "Anzeige"-Schild auf Karten von Reservix-Terminen ohne eigenen Eintrag (Liste und Startseitenkarte); im Detail Block "Termine bei Reservix" mit bis zu 20 Terminen (je eigener Link, rel=sponsored) und "Weitere Termine bei Reservix ansehen und buchen" (Link zum naechsten Termin) bei mehr als 20 Terminen.
+- style.css: Version, Farbe des Anzeige-Schilds.
+Unveraendert: Klassifikation, Ranking, Radius-Logik, Serienlogik der eigenen Events, SEO/Canonicals, REST-Vertraege, Startseite, Orte, Specials (Halloween/Martin/Weihnachten).
+Bekannte Grenzen: Teilen-Button teilt bei Reservix-Karten die aktuelle Seite (eigene Seite je Reservix-Event folgt mit Stufe 3). Android-App nicht betroffen.
+Rollback: Theme 353.8 erneut installieren (oder Plugin 0.4.0 durch 0.3.0 ersetzen: dann keine Reservix-Karten).

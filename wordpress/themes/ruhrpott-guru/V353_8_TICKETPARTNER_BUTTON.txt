@@ -1,0 +1,7 @@
+PottFuchs Theme 353.8 - Ticketpartner-Button (Stufe 1)
+Basis: installierte Version 353.7 (PottFuchs-Theme-v353.7-Halloween-Teaser-entfernt-2026-10-31.zip, SHA-256 6d1d421fad9f32d86298f6864d61a22b6c42ce7a7e37a2cedff7c6e9c164ad33).
+Geaendert: src/react-app/api.js (sendet clientCaps ["partner-v1"] in der Event-Anfrage; neue Funktion eventPartnerOffer; Feld partnerOffer in normalizeEvent), src/react-app/components.js (zusaetzlicher Button direkt nach "Tickets / Buchung", mit "Anzeige" und rel=sponsored), style.css (Version).
+Unveraendert: eigener Ticketlink und alle anderen Bereiche (Klassifikation, Filter, Ranking, Radius, Serien-Logik, SEO).
+Zusatz: eventNestedActionUrl ueberspringt rpg_partner_offers, damit der Partner-Link nie als unmarkierter eigener Ticketlink erscheint (im Test gefunden).
+Wirkung: Der Button erscheint nur, wenn das Ticketpartner-Plugin ein Angebot liefert; das passiert erst, wenn PFT_TICKETPARTNERS_PUBLIC_APPROVED in der wp-config gesetzt ist. Vorher ist alles unveraendert.
+Rollback: Theme 353.7 erneut installieren.
